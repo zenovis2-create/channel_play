@@ -17,6 +17,7 @@ def _bootstrap() -> None:
 def main() -> int:
     _bootstrap()
     from tools.studio.company.cli import main as company_main
+    from tools.studio.company.agent_runner import main as agent_main
     from tools.studio.company.entrypoints import dispatch_top_level
     from tools.studio.workspace_server import serve
 
@@ -32,6 +33,9 @@ def main() -> int:
 
     if command == "company":
         return company_main(rest)
+
+    if command == "agent":
+        return agent_main(rest)
 
     if command in {"unity", "open", "capture", "feedback", "asset", "gdx"}:
         return dispatch_top_level(command, rest)
@@ -58,6 +62,8 @@ def _print_help() -> int:
                 "  company status            Show Agent Company status",
                 "  company agents            List registered agents",
                 "  company brief             Generate current company brief",
+                "  agent adapters            Show external AI tool adapters",
+                "  agent run/review <task>   Run Codex/Claude/agy/Hermes/OpenClaw",
                 "  unity check               Run Unity project check",
                 "  open dashboard            Open generated dashboard",
                 "  capture screen            Capture screenshot",

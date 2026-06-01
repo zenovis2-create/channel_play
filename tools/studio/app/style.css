@@ -38,6 +38,7 @@ body {
 
 button,
 input,
+select,
 textarea {
   font: inherit;
 }
@@ -68,6 +69,7 @@ textarea:focus-visible {
 }
 
 input,
+select,
 textarea {
   width: 100%;
   border: 1px solid var(--line);
@@ -83,12 +85,27 @@ textarea {
   resize: vertical;
 }
 
+select {
+  min-height: 42px;
+}
+
 label {
   display: block;
   color: var(--muted);
   font-size: 13px;
   font-weight: 800;
   margin: 14px 0;
+}
+
+.inline-check {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.inline-check input {
+  margin: 0;
+  width: 18px;
 }
 
 h1,

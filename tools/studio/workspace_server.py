@@ -14,6 +14,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 from tools.studio.company.errors import CompanyError
+from tools.studio.company.agent_runner import collect_agent_adapter_state
 from tools.studio.company.git_info import git_head, git_short_status
 from tools.studio.company.paths import find_repo_root, rel
 from tools.studio.company.state import CompanyPaths, load_company_state, read_json, read_text
@@ -74,6 +75,7 @@ def collect_workspace_state(root: Path) -> dict:
         "assets": _load_assets(root),
         "sessions": _list_dirs(root / "memory" / "sessions"),
         "runs": _list_runs(root),
+        "adapters": collect_agent_adapter_state(root),
         "commands": sorted(COMMANDS.keys()),
     }
 
@@ -256,6 +258,23 @@ def _required(payload: dict, key: str) -> str:
     return value
 
 
+def _optional(payload: dict, key: str) -> str:
+    return str(payload.get(key, "")).strip()
+
+
+def _agent_args(action: str, payload: dict) -> list[str]:
+    args = ["agent", action, _required(payload, "taskId")]
+    tool = _optional(payload, "tool")
+    if tool:
+        args.extend(["--tool", tool])
+    if payload.get("dryRun"):
+        args.append("--dry-run")
+    message = _optional(payload, "message")
+    if message:
+        args.extend(["--message", message])
+    return args
+
+
 COMMANDS = {
     "company.status": lambda payload: ["company", "status"],
     "company.agents": lambda payload: ["company", "agents"],
@@ -271,6 +290,9 @@ COMMANDS = {
     "company.evidence": lambda payload: ["company", "evidence", _required(payload, "taskId"), _required(payload, "path"), str(payload.get("note", ""))],
     "company.verify": lambda payload: ["company", "verify", _required(payload, "taskId")],
     "company.close": lambda payload: ["company", "close", _required(payload, "taskId")],
+    "agent.adapters": lambda payload: ["agent", "adapters"],
+    "agent.run": lambda payload: _agent_args("run", payload),
+    "agent.review": lambda payload: _agent_args("review", payload),
     "unity.check": lambda payload: ["unity", "check"],
     "capture.screen": lambda payload: ["capture", "screen"],
     "feedback.new": lambda payload: ["feedback", "new"],

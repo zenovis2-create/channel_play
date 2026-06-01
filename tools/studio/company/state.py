@@ -31,6 +31,10 @@ class CompanyPaths:
         return self.memory_dir / "agent_registry.json"
 
     @property
+    def tool_adapters_json(self) -> Path:
+        return self.memory_dir / "tool_adapters.json"
+
+    @property
     def task_board_json(self) -> Path:
         return self.memory_dir / "task_board.json"
 

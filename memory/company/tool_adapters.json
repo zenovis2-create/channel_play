@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "default_tool": "codex",
+  "review_tool": "claude",
+  "default_timeout_seconds": 900,
+  "role_defaults": {
+    "chief_orchestrator": "codex",
+    "game_director": "claude",
+    "unity_architect": "codex",
+    "unity_gameplay": "codex",
+    "multiplayer_server": "codex",
+    "asset_factory": "hermes",
+    "technical_artist_blender": "agy",
+    "sound_designer": "hermes",
+    "qa_playtest": "agy",
+    "performance_build": "codex",
+    "gdx_ops": "openclaw",
+    "librarian": "hermes",
+    "critic_reviewer": "claude"
+  },
+  "tools": {
+    "codex": {
+      "enabled": true,
+      "description": "Codex CLI non-interactive coding worker",
+      "argv": [
+        "codex",
+        "exec",
+        "--cd",
+        "{root}",
+        "--sandbox",
+        "workspace-write",
+        "-"
+      ],
+      "stdin": "{prompt}",
+      "timeout_seconds": 1800
+    },
+    "claude": {
+      "enabled": true,
+      "description": "Claude Code non-interactive reviewer or worker",
+      "argv": [
+        "claude",
+        "--print",
+        "--add-dir",
+        "{root}",
+        "{prompt}"
+      ],
+      "timeout_seconds": 1800
+    },
+    "agy": {
+      "enabled": true,
+      "description": "Antigravity CLI browser/UI worker",
+      "argv": [
+        "agy",
+        "--print",
+        "--print-timeout",
+        "10m",
+        "{prompt}"
+      ],
+      "timeout_seconds": 900
+    },
+    "hermes": {
+      "enabled": true,
+      "description": "Hermes one-shot research and support worker",
+      "argv": [
+        "hermes",
+        "-z",
+        "{prompt}"
+      ],
+      "timeout_seconds": 900
+    },
+    "openclaw": {
+      "enabled": true,
+      "description": "OpenClaw local gateway agent turn",
+      "argv": [
+        "openclaw",
+        "agent",
+        "--local",
+        "--json",
+        "--session-key",
+        "agent:{agent_id}:{task_id}",
+        "--message",
+        "{prompt}"
+      ],
+      "timeout_seconds": 900
+    }
+  }
+}

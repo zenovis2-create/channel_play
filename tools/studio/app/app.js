@@ -7,10 +7,18 @@ const statusText = {
   planned: "계획됨",
   needs_review: "검토 필요",
   needs_evidence: "증거 필요",
+  evidence_attached: "증거 연결됨",
+  blocked: "차단됨",
   closed: "완료",
   closed_blocked: "차단 종료",
   accepted: "승인됨",
   rejected: "반려됨",
+  dry_run: "드라이런",
+  failed: "실패",
+  timeout: "시간 초과",
+  available: "사용 가능",
+  missing: "없음",
+  disabled: "비활성",
   pending: "대기",
   ok: "정상",
   none: "없음",
@@ -20,6 +28,9 @@ const commandText = {
   "company.brief": "브리프 갱신",
   "company.session.end": "세션 종료",
   "company.plan": "작업 주문 생성",
+  "agent.adapters": "AI 어댑터 확인",
+  "agent.run": "AI 에이전트 실행",
+  "agent.review": "AI 리뷰 실행",
   "unity.check": "Unity 점검",
   "capture.screen": "화면 캡처",
   "feedback.new": "새 피드백",
@@ -55,6 +66,7 @@ function render() {
   renderRecommendation();
   renderStats();
   renderSession();
+  renderAdapters();
   renderAgents();
   renderTasks();
   renderFeedback();
@@ -92,6 +104,8 @@ function renderStats() {
   const openTasks = state.company?.openTasks?.length || 0;
   const locks = state.company?.locks?.length || 0;
   const gdx = companyState.gdx1 || {};
+  const adapters = Object.values(state.adapters?.tools || {});
+  const availableAdapters = adapters.filter((tool) => tool.available && tool.enabled).length;
   const activeSession = companyState.active_session || "없음";
   const gitHead = state.git?.head || "알 수 없음";
 
@@ -102,6 +116,7 @@ function renderStats() {
     ["열린 작업", `${openTasks}개`],
     ["파일 잠금", `${locks}개`],
     ["gdx1", gdx.ssh === "ok" ? "SSH 정상" : translate(gdx.ssh || "unknown")],
+    ["AI 도구", `${availableAdapters}/${adapters.length}`],
   ];
 
   $("#stats").innerHTML = stats.map(([label, value]) => `
@@ -117,6 +132,22 @@ function renderStats() {
 function renderSession() {
   const activeSession = state.company?.state?.active_session;
   $("#sessionState").textContent = activeSession ? "진행 중" : "대기 중";
+}
+
+function renderAdapters() {
+  const tools = state.adapters?.tools || {};
+  const names = Object.keys(tools).sort();
+  $("#adapterCount").textContent = `${names.length}개`;
+  $("#agentTool").innerHTML = [
+    `<option value="">역할 기본값</option>`,
+    ...names.map((name) => `<option value="${esc(name)}">${esc(name)}</option>`),
+  ].join("");
+  $("#adaptersList").innerHTML = names.map((name) => {
+    const tool = tools[name];
+    const status = tool.enabled ? (tool.available ? "available" : "missing") : "disabled";
+    const tone = tool.enabled && tool.available ? "good" : "bad";
+    return item(name, tool.description || tool.executable, tool.executable, translate(status), tone);
+  }).join("") || empty("등록된 어댑터가 없습니다.");
 }
 
 function renderAgents() {
@@ -297,6 +328,23 @@ function bind() {
     runCommand("asset.status", { assetId, status: "accepted" });
   });
   $("#loadFile").addEventListener("click", loadFile);
+  $("#runAgent").addEventListener("click", () => runAgentCommand("agent.run"));
+  $("#reviewAgent").addEventListener("click", () => runAgentCommand("agent.review"));
+}
+
+function runAgentCommand(command) {
+  const taskId = $("#agentTaskId").value.trim();
+  if (!taskId) {
+    $("#console").textContent = "실행할 작업 ID를 입력하세요.";
+    $("#agentTaskId").focus();
+    return;
+  }
+  runCommand(command, {
+    taskId,
+    tool: $("#agentTool").value,
+    dryRun: $("#agentDryRun").checked,
+    message: $("#agentMessage").value.trim(),
+  });
 }
 
 function taskWeight(task) {
