@@ -170,7 +170,7 @@ def run_agent_task(
     config = ensure_tool_adapters(root)
     task = find_task(root, task_id)
     agent_id = _task_agent(task, mode)
-    tool = _select_tool(config, agent_id, mode, tool_name)
+    tool = _select_tool(root, config, agent_id, mode, tool_name)
     adapter = _adapter(config, tool)
 
     run_dir = root / "runs" / f"agent-{tool}-{task_id}-{slugify(now_iso())}"
@@ -371,11 +371,15 @@ def _update_task_after_run(root: Path, task: dict[str, Any], tool: str, mode: st
 
 def _build_prompt(root: Path, task: dict[str, Any], agent_id: str, tool: str, mode: str, extra_prompt: str) -> str:
     paths = CompanyPaths(root)
-    profile_path = _profile_path(root, agent_id)
+    agent_entry = _agent_entry(root, agent_id)
+    profile_path = root / str(agent_entry.get("profile") or "agents/orchestrator.agent.md")
     work_order = root / str(task.get("work_order") or "")
     work_order_text = read_text(work_order) if task.get("work_order") else "No work order file assigned yet."
     brief = read_text(paths.current_brief_md, read_text(paths.current_context_md))
     role_profile = read_text(profile_path, "No role profile file found.")
+    state = read_json(paths.state_json)
+    integrated_goal = state.get("integrated_goal", {})
+    agent_setting = agent_entry.get("goal_setting", {})
     allowed_paths = "\n".join(f"- {path}" for path in task.get("allowed_write_paths", [])) or "- none"
     extra = extra_prompt.strip() or "none"
     review_rule = "For review mode, avoid edits unless explicitly necessary; produce findings and risks first."
@@ -389,12 +393,21 @@ def _build_prompt(root: Path, task: dict[str, Any], agent_id: str, tool: str, mo
             f"Role: {agent_id}",
             f"Workspace: {root}",
             "",
+            "## Integrated Goal",
+            "",
+            json.dumps(integrated_goal, ensure_ascii=False, indent=2),
+            "",
+            "## Current Agent Setting",
+            "",
+            json.dumps(agent_setting, ensure_ascii=False, indent=2),
+            "",
             "## Contract",
             "",
             "- Follow AGENTS.md, agents/company.md, and agents/memory_policy.md.",
             "- Write only inside the allowed paths unless the user explicitly expands scope.",
             "- Record changed files, decisions, evidence, and blockers.",
             f"- {review_rule}",
+            "- Keep every output tied to the integrated goal and the current MVP milestone.",
             "",
             "## Task Request",
             "",
@@ -474,9 +487,12 @@ def _adapter(config: dict[str, Any], tool: str) -> dict[str, Any]:
     return adapter
 
 
-def _select_tool(config: dict[str, Any], agent_id: str, mode: str, explicit: str) -> str:
+def _select_tool(root: Path, config: dict[str, Any], agent_id: str, mode: str, explicit: str) -> str:
     if explicit:
         return explicit
+    agent_tool = str(_agent_entry(root, agent_id).get("goal_setting", {}).get("tool") or "")
+    if agent_tool:
+        return agent_tool
     if mode == "review":
         return str(config.get("review_tool") or "claude")
     role_defaults = config.get("role_defaults", {})
@@ -489,12 +505,12 @@ def _task_agent(task: dict[str, Any], mode: str) -> str:
     return str(task.get("assigned_agent") or task.get("suggested_agent") or "chief_orchestrator")
 
 
-def _profile_path(root: Path, agent_id: str) -> Path:
+def _agent_entry(root: Path, agent_id: str) -> dict[str, Any]:
     registry = read_json(CompanyPaths(root).agent_registry_json)
     for agent in registry.get("agents", []):
         if agent.get("id") == agent_id:
-            return root / str(agent.get("profile") or "")
-    return root / "agents" / "orchestrator.agent.md"
+            return agent
+    return {"id": agent_id, "profile": "agents/orchestrator.agent.md"}
 
 
 def _render_arg(template: str, context: dict[str, str]) -> str:

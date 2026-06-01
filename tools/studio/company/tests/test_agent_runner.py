@@ -25,11 +25,32 @@ class AgentRunnerTests(unittest.TestCase):
         memory.mkdir(parents=True)
         (self.root / "memory" / "sessions").mkdir(parents=True)
         (memory / "state.json").write_text(
-            json.dumps({"project": "channel_play", "active_session": None, "current_orchestrator_task": None}),
+            json.dumps(
+                {
+                    "project": "channel_play",
+                    "active_session": None,
+                    "current_orchestrator_task": None,
+                    "integrated_goal": {"id": "mvp_traitor_escape_gameshow", "title": "MVP"},
+                }
+            ),
             encoding="utf-8",
         )
         (memory / "agent_registry.json").write_text(
-            json.dumps({"agents": [{"id": "unity_gameplay", "profile": "agents/roles/unity_gameplay.agent.md"}]}),
+            json.dumps(
+                {
+                    "agents": [
+                        {
+                            "id": "unity_gameplay",
+                            "profile": "agents/roles/unity_gameplay.agent.md",
+                            "goal_setting": {
+                                "goal_id": "mvp_traitor_escape_gameshow",
+                                "tool": "agy",
+                                "focus": "movement",
+                            },
+                        }
+                    ]
+                }
+            ),
             encoding="utf-8",
         )
         (memory / "task_board.json").write_text(json.dumps({"tasks": []}), encoding="utf-8")
@@ -45,13 +66,18 @@ class AgentRunnerTests(unittest.TestCase):
         plan_task(self.root, "fix player movement")
         assign_task(self.root, "task-0001", "unity_gameplay")
 
-        report = run_agent_task(self.root, "task-0001", tool_name="codex", dry_run=True)
+        report = run_agent_task(self.root, "task-0001", dry_run=True)
 
         self.assertTrue(report.exists())
         self.assertTrue((report.parent / "prompt.md").exists())
+        prompt = (report.parent / "prompt.md").read_text(encoding="utf-8")
+        self.assertIn("## Integrated Goal", prompt)
+        self.assertIn("mvp_traitor_escape_gameshow", prompt)
+        self.assertIn("## Current Agent Setting", prompt)
+        self.assertIn("Tool: agy", prompt)
         self.assertIn("Dry run", (report.parent / "stdout.txt").read_text(encoding="utf-8"))
         task = load_task_board(self.root)["tasks"][0]
-        self.assertEqual(task["last_tool"], "codex")
+        self.assertEqual(task["last_tool"], "agy")
         self.assertEqual(task["agent_status"], "dry_run")
         self.assertEqual(task["agent_runs"][0]["mode"], "run")
 

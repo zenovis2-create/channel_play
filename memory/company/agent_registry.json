@@ -3,67 +3,266 @@
     {
       "id": "chief_orchestrator",
       "profile": "agents/orchestrator.agent.md",
-      "writes_by_default": true
+      "writes_by_default": true,
+      "goal_setting": {
+        "goal_id": "mvp_traitor_escape_gameshow",
+        "tool": "codex",
+        "focus": "전체 목표를 작은 검증 가능한 작업 주문으로 분해하고, 세션/잠금/증거/리뷰 흐름을 관리한다.",
+        "default_scope": [
+          "memory/company",
+          "memory/sessions",
+          "agents",
+          "tools/studio"
+        ],
+        "required_outputs": [
+          "work_order",
+          "agent_assignment",
+          "verification_plan",
+          "handoff_summary"
+        ]
+      }
     },
     {
       "id": "game_director",
       "profile": "agents/roles/game_director.agent.md",
-      "writes_by_default": false
+      "writes_by_default": false,
+      "goal_setting": {
+        "goal_id": "mvp_traitor_escape_gameshow",
+        "tool": "claude",
+        "focus": "배신자 탈출게임의 룰, 참가자 재미, 시청자 재미, 운영자 개입 타이밍을 보호한다.",
+        "default_scope": [
+          "docs",
+          "obsidian/channel_play/01_Game_Design",
+          "memory/company"
+        ],
+        "required_outputs": [
+          "gameplay_intent",
+          "rule_decision",
+          "broadcast_moment_notes"
+        ]
+      }
     },
     {
       "id": "unity_architect",
       "profile": "agents/roles/unity_architect.agent.md",
-      "writes_by_default": false
+      "writes_by_default": false,
+      "goal_setting": {
+        "goal_id": "mvp_traitor_escape_gameshow",
+        "tool": "codex",
+        "focus": "Unity 6 기준으로 플레이어, 포인트, 상점, 아이템, 운영자 모드를 확장 가능한 구조로 나눈다.",
+        "default_scope": [
+          "Assets/_Project/Scripts",
+          "Assets/_Project/ScriptableObjects",
+          "docs"
+        ],
+        "required_outputs": [
+          "architecture_note",
+          "script_boundary",
+          "compile_or_test_evidence"
+        ]
+      }
     },
     {
       "id": "unity_gameplay",
       "profile": "agents/roles/unity_gameplay.agent.md",
-      "writes_by_default": false
+      "writes_by_default": false,
+      "goal_setting": {
+        "goal_id": "mvp_traitor_escape_gameshow",
+        "tool": "codex",
+        "focus": "첫 마일스톤인 작은 3D 맵 이동, 포인트 UI, 상점/아이템 사용의 플레이 가능한 구현을 맡는다.",
+        "default_scope": [
+          "Assets/_Project/Scripts/Player",
+          "Assets/_Project/Scripts/Gameplay",
+          "Assets/_Project/Scripts/UI"
+        ],
+        "required_outputs": [
+          "playable_change",
+          "unity_compile_evidence",
+          "playtest_note"
+        ]
+      }
     },
     {
       "id": "multiplayer_server",
       "profile": "agents/roles/multiplayer_server.agent.md",
-      "writes_by_default": false
+      "writes_by_default": false,
+      "goal_setting": {
+        "goal_id": "mvp_traitor_escape_gameshow",
+        "tool": "codex",
+        "focus": "4~8명 접속, 서버 권위 포인트/아이템/타이머/생존 상태를 위한 Netcode 전환 지점을 설계한다.",
+        "default_scope": [
+          "Assets/_Project/Scripts/Multiplayer",
+          "scripts",
+          "docs"
+        ],
+        "required_outputs": [
+          "netcode_plan",
+          "headless_server_note",
+          "gdx_test_plan"
+        ]
+      }
     },
     {
       "id": "asset_factory",
       "profile": "agents/roles/asset_factory.agent.md",
-      "writes_by_default": false
+      "writes_by_default": false,
+      "goal_setting": {
+        "goal_id": "mvp_traitor_escape_gameshow",
+        "tool": "hermes",
+        "focus": "작은 게임쇼 세트장, 폐교/연구소/감옥 계열 프롭, 3개 MVP 아이템 에셋 브리프를 만든다.",
+        "default_scope": [
+          "asset_pipeline",
+          "obsidian/channel_play/03_Assets"
+        ],
+        "required_outputs": [
+          "asset_brief",
+          "license_note",
+          "acceptance_checklist"
+        ]
+      }
     },
     {
       "id": "technical_artist_blender",
       "profile": "agents/roles/technical_artist_blender.agent.md",
-      "writes_by_default": false
+      "writes_by_default": false,
+      "goal_setting": {
+        "goal_id": "mvp_traitor_escape_gameshow",
+        "tool": "agy",
+        "focus": "Blender/2D-to-3D 기반으로 방송에서 읽히는 저비용 3D 프롭과 세트장 블록아웃을 준비한다.",
+        "default_scope": [
+          "asset_pipeline",
+          "Assets/_Project/Art",
+          "docs"
+        ],
+        "required_outputs": [
+          "blockout_asset",
+          "import_note",
+          "visual_readability_check"
+        ]
+      }
     },
     {
       "id": "sound_designer",
       "profile": "agents/roles/sound_designer.agent.md",
-      "writes_by_default": false
+      "writes_by_default": false,
+      "goal_setting": {
+        "goal_id": "mvp_traitor_escape_gameshow",
+        "tool": "hermes",
+        "focus": "포인트 획득, 상점 구매, 아이템 사용, 배신자 이벤트, 운영자 공지의 방송용 사운드 큐를 정의한다.",
+        "default_scope": [
+          "obsidian/channel_play/04_Audio",
+          "asset_pipeline/audio",
+          "docs"
+        ],
+        "required_outputs": [
+          "sound_cue_list",
+          "license_note",
+          "mix_priority"
+        ]
+      }
     },
     {
       "id": "qa_playtest",
       "profile": "agents/roles/qa_playtest.agent.md",
-      "writes_by_default": false
+      "writes_by_default": false,
+      "goal_setting": {
+        "goal_id": "mvp_traitor_escape_gameshow",
+        "tool": "agy",
+        "focus": "플레이어 이동, 포인트 UI, 상점/아이템, 운영자 화면, OBS 캡처 가능 여부를 재현 가능한 피드백으로 만든다.",
+        "default_scope": [
+          "reviews",
+          "runs",
+          "obsidian/channel_play/06_Feedback"
+        ],
+        "required_outputs": [
+          "reproduction_steps",
+          "screenshot_or_log",
+          "severity"
+        ]
+      }
     },
     {
       "id": "performance_build",
       "profile": "agents/roles/performance_build.agent.md",
-      "writes_by_default": false
+      "writes_by_default": false,
+      "goal_setting": {
+        "goal_id": "mvp_traitor_escape_gameshow",
+        "tool": "codex",
+        "focus": "Unity 빌드/컴파일, 패키지 상태, 프레임 안정성, Linux headless 준비 상태를 검증한다.",
+        "default_scope": [
+          "tools",
+          "scripts",
+          "runs",
+          "docs"
+        ],
+        "required_outputs": [
+          "build_evidence",
+          "performance_note",
+          "regression_risk"
+        ]
+      }
     },
     {
       "id": "gdx_ops",
       "profile": "agents/roles/gdx_ops.agent.md",
-      "writes_by_default": false
+      "writes_by_default": false,
+      "goal_setting": {
+        "goal_id": "mvp_traitor_escape_gameshow",
+        "tool": "openclaw",
+        "focus": "gdx1을 서버/봇/소크 테스트/로그 수집 워커로 사용하고 Mac Studio와 동기화한다.",
+        "default_scope": [
+          "runs",
+          "logs",
+          "scripts",
+          "docs"
+        ],
+        "required_outputs": [
+          "gdx_probe",
+          "sync_result",
+          "remote_run_log"
+        ]
+      }
     },
     {
       "id": "librarian",
       "profile": "agents/roles/librarian.agent.md",
-      "writes_by_default": false
+      "writes_by_default": false,
+      "goal_setting": {
+        "goal_id": "mvp_traitor_escape_gameshow",
+        "tool": "hermes",
+        "focus": "목표, 결정, 세션 요약, 에셋/피드백/검증 증거를 공유 기억으로 정리한다.",
+        "default_scope": [
+          "memory/company",
+          "memory/sessions",
+          "obsidian/channel_play",
+          "docs"
+        ],
+        "required_outputs": [
+          "memory_update",
+          "decision_log_entry",
+          "handoff_note"
+        ]
+      }
     },
     {
       "id": "critic_reviewer",
       "profile": "agents/roles/critic_reviewer.agent.md",
-      "writes_by_default": false
+      "writes_by_default": false,
+      "goal_setting": {
+        "goal_id": "mvp_traitor_escape_gameshow",
+        "tool": "claude",
+        "focus": "MVP 목표와 어긋나는 과설계, 검증 누락, 방송/플레이 재미 저하, 위험한 변경을 찾아낸다.",
+        "default_scope": [
+          "reviews",
+          "docs",
+          "memory/company"
+        ],
+        "required_outputs": [
+          "findings_first_review",
+          "risk_level",
+          "blocking_questions"
+        ]
+      }
     }
   ]
 }

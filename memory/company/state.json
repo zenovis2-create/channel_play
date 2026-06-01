@@ -1,8 +1,41 @@
 {
   "project": "channel_play",
-  "updated_at": "2026-06-01T15:08:09+09:00",
+  "updated_at": "2026-06-01T16:31:00+09:00",
   "active_session": null,
-  "current_orchestrator_task": null,
+  "current_orchestrator_task": "mvp_traitor_escape_gameshow",
+  "integrated_goal": {
+    "id": "mvp_traitor_escape_gameshow",
+    "title": "8-player operator-led OBS-ready 3D gameshow MVP",
+    "ko_title": "8명이 접속하고 운영자가 포인트/아이템을 주며 OBS로 촬영 가능한 작은 3D 게임쇼 세트장",
+    "source": "master_plan.md",
+    "current_phase": "MVP foundation",
+    "first_game_mode": "배신자 탈출게임",
+    "success_criterion": "파일럿 영상 1편을 만들 수 있는 플레이 가능한 세션",
+    "first_development_milestone": "Unity에서 플레이어가 작은 3D 맵을 돌아다니고, 화면에 포인트가 표시되는 상태",
+    "mvp_scope": [
+      "참가자 4~8명 접속",
+      "작은 3D 맵 1개",
+      "운영자 1명 접속",
+      "제한시간 30~40분",
+      "팀 구분",
+      "포인트 획득",
+      "상점 이용",
+      "아이템 3개 사용",
+      "운영자 관전 모드",
+      "기본 점수판/상태창",
+      "OBS 녹화 가능"
+    ],
+    "first_mode_rules": [
+      "일반 참가자는 제한시간 안에 열쇠 3개를 찾아 최종 탈출문을 연다.",
+      "배신자는 정체를 숨기고 일반 참가자의 탈출을 방해한다.",
+      "모든 참가자는 미션으로 포인트를 얻고 상점 아이템을 구매한다."
+    ],
+    "mvp_items": [
+      "진실의 펜",
+      "위치 스캐너",
+      "도플갱어 시약"
+    ]
+  },
   "gdx1": {
     "network": "online_via_tailscale",
     "ssh": "ok",
