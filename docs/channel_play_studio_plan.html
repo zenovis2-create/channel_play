@@ -1,0 +1,1099 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Channel Play Studio Plan</title>
+  <style>
+    :root {
+      --bg: #f5f4ee;
+      --paper: #ffffff;
+      --ink: #17212b;
+      --muted: #5d6875;
+      --line: #d9ddd7;
+      --teal: #0f766e;
+      --green: #15803d;
+      --blue: #2563eb;
+      --violet: #6d28d9;
+      --amber: #b45309;
+      --red: #b91c1c;
+      --slate: #253241;
+      --shadow: 0 16px 42px rgba(23, 33, 43, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px 20px;
+      overflow: auto;
+      background: var(--slate);
+      color: #f8fafc;
+    }
+
+    .brand {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .brand strong {
+      font-size: 19px;
+      line-height: 1.2;
+    }
+
+    .brand span {
+      color: #c6d0dc;
+      font-size: 13px;
+    }
+
+    .nav {
+      display: grid;
+      gap: 6px;
+    }
+
+    .nav a {
+      padding: 9px 10px;
+      border-radius: 8px;
+      color: #d7dee7;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      outline: 0;
+    }
+
+    .main {
+      min-width: 0;
+    }
+
+    .wrap {
+      width: min(1220px, calc(100vw - 48px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      background: rgba(245, 244, 238, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 0;
+    }
+
+    .source {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .hero {
+      padding: 44px 0 30px;
+      background: #fbfaf6;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      letter-spacing: 0;
+      line-height: 1.18;
+    }
+
+    h1 {
+      max-width: 980px;
+      font-size: clamp(34px, 5vw, 58px);
+    }
+
+    h2 {
+      margin-bottom: 18px;
+      font-size: 28px;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .lead {
+      max-width: 880px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .status {
+      min-height: 98px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .status b {
+      display: block;
+      font-size: 23px;
+      line-height: 1.1;
+    }
+
+    .status span {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .section {
+      padding: 36px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .section-head p {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card,
+    .node,
+    .lane,
+    .step,
+    .risk {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .card {
+      padding: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .pill.ok {
+      background: #e5f7ea;
+      color: var(--green);
+    }
+
+    .pill.warn {
+      background: #fff3d7;
+      color: var(--amber);
+    }
+
+    .pill.info {
+      background: #e7f0ff;
+      color: var(--blue);
+    }
+
+    .pill.dark {
+      background: #e7edf3;
+      color: var(--slate);
+    }
+
+    .list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      display: grid;
+      grid-template-columns: 10px minmax(0, 1fr);
+      gap: 9px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .list li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      margin-top: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .diagram {
+      display: grid;
+      gap: 14px;
+    }
+
+    .hub-layout {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .node {
+      min-height: 150px;
+      padding: 16px;
+      position: relative;
+    }
+
+    .node.center {
+      display: grid;
+      place-items: center;
+      min-height: 210px;
+      text-align: center;
+      background: #f0f7f5;
+      border-color: #b7d9d1;
+    }
+
+    .node.center h3 {
+      font-size: 25px;
+    }
+
+    .node .tag {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .arrow-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      align-items: center;
+    }
+
+    .flow-card {
+      min-height: 126px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .arrow {
+      display: grid;
+      place-items: center;
+      min-height: 34px;
+      color: var(--muted);
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .pipe-step {
+      position: relative;
+      min-height: 142px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--blue);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .pipe-step:nth-child(2n) {
+      border-top-color: var(--teal);
+    }
+
+    .pipe-step:nth-child(3n) {
+      border-top-color: var(--violet);
+    }
+
+    .pipe-step small,
+    .lane small,
+    .step small,
+    .risk small {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .pipe-step p,
+    .flow-card p,
+    .lane p,
+    .step p,
+    .risk p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .lane {
+      min-height: 170px;
+      padding: 16px;
+      border-left: 4px solid var(--blue);
+    }
+
+    .lane:nth-child(2) {
+      border-left-color: var(--violet);
+    }
+
+    .lane:nth-child(3) {
+      border-left-color: var(--teal);
+    }
+
+    .lane:nth-child(4) {
+      border-left-color: var(--amber);
+    }
+
+    .lane:nth-child(5) {
+      border-left-color: var(--green);
+    }
+
+    .matrix {
+      display: grid;
+      gap: 10px;
+    }
+
+    .matrix-row {
+      display: grid;
+      grid-template-columns: 180px 1fr 120px;
+      gap: 10px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+    }
+
+    .matrix-row b {
+      color: var(--ink);
+    }
+
+    .matrix-row span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+      counter-reset: steps;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      min-height: 74px;
+      padding: 14px;
+    }
+
+    .step::before {
+      counter-increment: steps;
+      content: counter(steps);
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--slate);
+      color: #ffffff;
+      font-weight: 850;
+    }
+
+    .risk {
+      padding: 16px;
+      border-left: 4px solid var(--amber);
+    }
+
+    .risk.high {
+      border-left-color: var(--red);
+    }
+
+    .risk.ok {
+      border-left-color: var(--green);
+    }
+
+    .code {
+      padding: 14px;
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #111827;
+      color: #e5e7eb;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .footer {
+      padding: 28px 0 46px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer a {
+      color: var(--blue);
+      font-weight: 800;
+    }
+
+    @media (max-width: 1100px) {
+      .pipeline,
+      .hub-layout,
+      .grid-4,
+      .grid-3,
+      .status-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .arrow-row {
+        grid-template-columns: 1fr;
+      }
+
+      .arrow {
+        transform: rotate(90deg);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+        padding: 18px;
+      }
+
+      .nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .wrap {
+        width: min(100% - 28px, 1220px);
+      }
+
+      .pipeline,
+      .hub-layout,
+      .grid-4,
+      .grid-3,
+      .grid-2,
+      .status-grid,
+      .matrix-row {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head,
+      .topbar .wrap {
+        align-items: stretch;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 560px) {
+      h1 {
+        font-size: 33px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      .nav {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      .shell {
+        display: block;
+      }
+
+      .sidebar,
+      .topbar {
+        display: none;
+      }
+
+      body {
+        background: #ffffff;
+      }
+
+      .section,
+      .hero {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <strong>Channel Play Studio</strong>
+        <span>Unity + AI + Obsidian production cockpit</span>
+      </div>
+      <nav class="nav" aria-label="문서 목차">
+        <a href="#overview">Overview</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#knowledge">Obsidian</a>
+        <a href="#feedback">Feedback Loop</a>
+        <a href="#assets">Asset Factory</a>
+        <a href="#agents">AI Lanes</a>
+        <a href="#commands">channelctl</a>
+        <a href="#mvp">MVP Build</a>
+        <a href="#risks">Risks</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="wrap">
+          <strong>Studio Plan Diagram</strong>
+          <a class="source" href="./channel_play_studio_plan.md">원문 Markdown</a>
+        </div>
+      </div>
+
+      <header class="hero" id="overview">
+        <div class="wrap">
+          <p class="eyebrow">Channel Play Production OS</p>
+          <h1>AI로 Unity 게임을 만들기 위한 제작 운영툴</h1>
+          <p class="lead">
+            `Channel Play Studio`는 Unity 구현, Obsidian 지식베이스, AI 에이전트,
+            Blender/2D-to-3D 에셋 파이프라인, 캡처 기반 피드백 루프를 하나로 묶는
+            프로젝트 전용 제작 환경이다.
+          </p>
+
+          <div class="status-grid">
+            <div class="status">
+              <b>Mac Studio</b>
+              <span>Unity Editor, OBS, Blender, GitHub, 구현 본진</span>
+            </div>
+            <div class="status">
+              <b>gdx1</b>
+              <span>SSH 인증 복구 후 서버·봇·soak test 워커</span>
+            </div>
+            <div class="status">
+              <b>Obsidian</b>
+              <span>디자인, 세션, 피드백, 에셋 브리프의 기억 저장소</span>
+            </div>
+            <div class="status">
+              <b>channelctl</b>
+              <span>모든 작업의 단일 명령 진입점</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="section" id="architecture">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>전체 아키텍처</h2>
+              <p>중앙은 `channelctl`. 주변 도구는 각각 자기 역할만 수행하고, 결과는 Git/Obsidian/runs에 남긴다.</p>
+            </div>
+          </div>
+
+          <div class="hub-layout">
+            <article class="node">
+              <span class="tag">Knowledge</span>
+              <h3>Obsidian Vault</h3>
+              <ul class="list">
+                <li>게임 디자인 문서</li>
+                <li>에셋/사운드 브리프</li>
+                <li>세션 기록</li>
+                <li>결정사항</li>
+              </ul>
+            </article>
+
+            <article class="node center">
+              <div>
+                <span class="pill info">single entry point</span>
+                <h3>channelctl</h3>
+                <p>상태 확인, 캡처, 피드백 생성, Unity 검증, 에이전트 체크, gdx1 probe</p>
+              </div>
+            </article>
+
+            <article class="node">
+              <span class="tag">Implementation</span>
+              <h3>Unity Project</h3>
+              <ul class="list">
+                <li>School_MVP</li>
+                <li>플레이어/운영자 루프</li>
+                <li>컴파일/씬 검증</li>
+                <li>빌드 산출물</li>
+              </ul>
+            </article>
+
+            <article class="node">
+              <span class="tag">Creative</span>
+              <h3>Blender + 2D-to-3D</h3>
+              <ul class="list">
+                <li>AI 3D 생성</li>
+                <li>메시 정리</li>
+                <li>스케일/피벗 수정</li>
+                <li>Unity-ready export</li>
+              </ul>
+            </article>
+
+            <article class="node">
+              <span class="tag">AI Agents</span>
+              <h3>Codex / Claude / agy / Hermes / OpenClaw</h3>
+              <ul class="list">
+                <li>구현</li>
+                <li>리뷰</li>
+                <li>브라우저/시각 점검</li>
+                <li>장기 작업</li>
+              </ul>
+            </article>
+
+            <article class="node">
+              <span class="tag">Review</span>
+              <h3>Capture + Feedback</h3>
+              <ul class="list">
+                <li>스크린샷</li>
+                <li>주석</li>
+                <li>수정 요청</li>
+                <li>before/after 검증</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="knowledge">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>Obsidian 지식 구조</h2>
+              <p>AI가 매번 새로 추측하지 않도록 디자인/세션/피드백/결정사항을 프로젝트 안에 축적한다.</p>
+            </div>
+            <span class="pill ok">versioned in git</span>
+          </div>
+
+          <div class="grid-3">
+            <article class="card">
+              <h3>Design</h3>
+              <ul class="list">
+                <li>게임 룰</li>
+                <li>미션 설계</li>
+                <li>아이템 효과</li>
+                <li>운영자 패널</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Production</h3>
+              <ul class="list">
+                <li>구현 세션 요약</li>
+                <li>검증 결과</li>
+                <li>다음 액션</li>
+                <li>리스크 기록</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Creative Briefs</h3>
+              <ul class="list">
+                <li>에셋 브리프</li>
+                <li>사운드 브리프</li>
+                <li>효과/연출 노트</li>
+                <li>최적화 노트</li>
+              </ul>
+            </article>
+          </div>
+
+          <pre class="code">obsidian/channel_play/
+  00_Index.md
+  01_Game_Design/
+  02_Implementation/
+  03_Assets/
+  04_Sound/
+  05_AI/
+  06_Feedback/
+  07_Sessions/
+  08_Decisions/
+  templates/</pre>
+        </div>
+      </section>
+
+      <section class="section" id="feedback">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>캡처 기반 피드백 루프</h2>
+              <p>사용자가 Unity에서 직접 보고, 캡처/주석을 남기면 AI가 수정 작업으로 변환한다.</p>
+            </div>
+          </div>
+
+          <div class="arrow-row">
+            <article class="flow-card">
+              <h3>1. Play</h3>
+              <p>Unity에서 `School_MVP` 플레이 또는 씬 확인</p>
+            </article>
+            <div class="arrow">→</div>
+            <article class="flow-card">
+              <h3>2. Capture</h3>
+              <p>`channelctl capture screen`으로 스크린샷 저장</p>
+            </article>
+            <div class="arrow">→</div>
+            <article class="flow-card">
+              <h3>3. Annotate</h3>
+              <p>주석/수정 요청을 feedback record에 기록</p>
+            </article>
+          </div>
+
+          <div class="arrow-row" style="margin-top: 12px;">
+            <article class="flow-card">
+              <h3>4. Interpret</h3>
+              <p>Codex/Claude가 피드백을 작업 단위로 해석</p>
+            </article>
+            <div class="arrow">→</div>
+            <article class="flow-card">
+              <h3>5. Implement</h3>
+              <p>Unity 파일 수정, 컴파일/씬 검증</p>
+            </article>
+            <div class="arrow">→</div>
+            <article class="flow-card">
+              <h3>6. Verify</h3>
+              <p>before/after 캡처와 세션 요약으로 종료</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="assets">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>AI 에셋 파이프라인</h2>
+              <p>2D 이미지, Pixel3D/Meshy류 3D 생성, Blender cleanup, Unity import를 하나의 상태 기계로 관리한다.</p>
+            </div>
+          </div>
+
+          <div class="pipeline">
+            <article class="pipe-step">
+              <small>01</small>
+              <h3>Brief</h3>
+              <p>Obsidian에 용도, 크기, 방송 가시성, 스타일 정의</p>
+            </article>
+            <article class="pipe-step">
+              <small>02</small>
+              <h3>2D Concept</h3>
+              <p>참조 이미지 또는 AI 2D 컨셉 생성</p>
+            </article>
+            <article class="pipe-step">
+              <small>03</small>
+              <h3>3D Generate</h3>
+              <p>Pixel3D/Meshy류 도구로 초안 mesh 생성</p>
+            </article>
+            <article class="pipe-step">
+              <small>04</small>
+              <h3>Blender Cleanup</h3>
+              <p>스케일, 피벗, 메시, 머티리얼, 콜라이더 후보 정리</p>
+            </article>
+            <article class="pipe-step">
+              <small>05</small>
+              <h3>Unity Import</h3>
+              <p>Unity-ready FBX/GLB, prefab, material 생성</p>
+            </article>
+            <article class="pipe-step">
+              <small>06</small>
+              <h3>Scene Test</h3>
+              <p>`School_MVP`에서 배치, 프레임, 가독성 확인</p>
+            </article>
+            <article class="pipe-step">
+              <small>07</small>
+              <h3>Accept</h3>
+              <p>accepted/rework/rejected 상태로 기록</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="agents">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>AI 에이전트 역할 분리</h2>
+              <p>핵심 원칙: 한 브랜치에서는 한 writer만. 나머지는 리뷰/조사/시각 점검/장기 작업으로 분리.</p>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <article class="lane">
+              <small>writer</small>
+              <h3>Codex</h3>
+              <p>Unity 코드, repo ops, channelctl, 검증 스크립트 구현 담당.</p>
+            </article>
+            <article class="lane">
+              <small>reviewer</small>
+              <h3>Claude</h3>
+              <p>아키텍처, 게임 로직, 버그 리스크, 유지보수성 리뷰 담당.</p>
+            </article>
+            <article class="lane">
+              <small>operator</small>
+              <h3>agy / Antigravity</h3>
+              <p>브라우저 흐름, UI 확인, 병렬 조사, 시각 검증 보조.</p>
+            </article>
+            <article class="lane">
+              <small>background</small>
+              <h3>Hermes</h3>
+              <p>장기 작업, 상태 루프, 리서치/요약, 회복 작업 담당.</p>
+            </article>
+            <article class="lane">
+              <small>runtime</small>
+              <h3>OpenClaw</h3>
+              <p>로컬 agent runtime, tool routing, gateway, delegated jobs.</p>
+            </article>
+            <article class="lane">
+              <small>human</small>
+              <h3>Daehan</h3>
+              <p>Unity 체감 확인, 캡처/주석, 최종 디자인 판단, 우선순위 결정.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="commands">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>`channelctl` 명령 체계</h2>
+              <p>처음부터 거대한 앱을 만들지 않고, 반복 작업을 안정적인 CLI로 묶는다.</p>
+            </div>
+          </div>
+
+          <div class="matrix">
+            <div class="matrix-row">
+              <b>status</b>
+              <span>Git, Unity, gdx1, agents, latest run 상태 요약</span>
+              <span class="pill ok">first</span>
+            </div>
+            <div class="matrix-row">
+              <b>open</b>
+              <span>Unity, Obsidian, dashboard 바로 열기</span>
+              <span class="pill ok">first</span>
+            </div>
+            <div class="matrix-row">
+              <b>capture</b>
+              <span>스크린샷/OBS 캡처 후 reviews 폴더에 저장</span>
+              <span class="pill ok">first</span>
+            </div>
+            <div class="matrix-row">
+              <b>feedback</b>
+              <span>캡처 기반 수정 요청 템플릿 생성</span>
+              <span class="pill ok">first</span>
+            </div>
+            <div class="matrix-row">
+              <b>unity</b>
+              <span>compile, scene open, screenshot, build checks</span>
+              <span class="pill info">next</span>
+            </div>
+            <div class="matrix-row">
+              <b>asset</b>
+              <span>brief, generated_3d, blender cleanup, unity_ready 상태 관리</span>
+              <span class="pill info">next</span>
+            </div>
+            <div class="matrix-row">
+              <b>gdx</b>
+              <span>probe, sync, headless server, bot test. SSH 복구 후 활성화</span>
+              <span class="pill warn">blocked</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="mvp">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>최소 유용 버전 빌드 순서</h2>
+              <p>지금 바로 만들 수 있는 것부터. web app이나 DB는 나중.</p>
+            </div>
+          </div>
+
+          <div class="timeline">
+            <article class="step">
+              <div>
+                <h3>Studio Skeleton</h3>
+                <p>`obsidian/`, `reviews/`, `asset_pipeline/`, `runs/`, `tools/channelctl` 생성</p>
+              </div>
+            </article>
+            <article class="step">
+              <div>
+                <h3>Working Commands</h3>
+                <p>`status`, `open`, `capture`, `feedback new`, `unity check`, `agent check`, `gdx probe`</p>
+              </div>
+            </article>
+            <article class="step">
+              <div>
+                <h3>Obsidian Templates</h3>
+                <p>feature spec, asset brief, feedback item, session summary, sound brief, optimization note</p>
+              </div>
+            </article>
+            <article class="step">
+              <div>
+                <h3>Feedback Loop</h3>
+                <p>Unity 확인 → 캡처 → 주석 → 수정 작업 → 검증 → 세션 요약</p>
+              </div>
+            </article>
+            <article class="step">
+              <div>
+                <h3>Asset Factory</h3>
+                <p>2D/3D 생성 결과를 Blender cleanup과 Unity import로 이어붙임</p>
+              </div>
+            </article>
+            <article class="step">
+              <div>
+                <h3>Dashboard</h3>
+                <p>latest status, open feedback, active assets, latest screenshot, next workflow 표시</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="risks">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>현재 차단점과 금지사항</h2>
+              <p>프로젝트를 빠르게 만들기 위해 지금은 운영툴을 작게 유지한다.</p>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <article class="risk high">
+              <small>Blocked</small>
+              <h3>gdx1 SSH 인증</h3>
+              <p>네트워크와 포트는 살아 있음. 계정/키 등록이 필요.</p>
+            </article>
+            <article class="risk">
+              <small>Avoid</small>
+              <h3>멀티 에이전트 동시 수정</h3>
+              <p>한 브랜치 한 writer. 리뷰어는 문서/피드백만 남김.</p>
+            </article>
+            <article class="risk ok">
+              <small>Keep</small>
+              <h3>Unity가 제품</h3>
+              <p>Studio 도구는 마찰을 줄이는 보조 시스템. 제품이 되면 안 됨.</p>
+            </article>
+          </div>
+
+          <footer class="footer">
+            <p>
+              Source: <a href="./channel_play_studio_plan.md">channel_play_studio_plan.md</a>.
+              Repo: <a href="https://github.com/zenovis2-create/channel_play">zenovis2-create/channel_play</a>.
+            </p>
+          </footer>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
