@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,84 +9,116 @@
 </head>
 <body>
   <div class="app">
-    <aside class="rail">
+    <aside class="rail" aria-label="Channel Play Studio navigation">
       <div class="brand">
         <strong>Channel Play Studio</strong>
-        <span>Agent workspace cockpit</span>
+        <span>AI 제작 워크스페이스</span>
       </div>
       <nav>
-        <a href="#overview">Overview</a>
-        <a href="#agents">Agents</a>
-        <a href="#feedback">Feedback</a>
-        <a href="#assets">Assets</a>
+        <a href="#overview">현황</a>
+        <a href="#work">작업</a>
+        <a href="#feedback">피드백</a>
+        <a href="#assets">에셋</a>
         <a href="#gdx">gdx1</a>
-        <a href="#memory">Memory</a>
+        <a href="#memory">기억</a>
       </nav>
+      <div class="rail-note">
+        <span>로컬 Mac Studio</span>
+        <strong>+</strong>
+        <span>ASUS GX10 gdx1</span>
+      </div>
     </aside>
 
     <main>
       <header class="top">
         <div>
-          <h1>Workspace</h1>
-          <p id="subtitle">Loading current state.</p>
+          <p class="eyebrow">Unity 게임 제작 통합 툴</p>
+          <h1>프로젝트 제작실</h1>
+          <p id="subtitle">현재 상태를 불러오는 중입니다.</p>
         </div>
         <div class="top-actions">
-          <button data-command="company.brief">Refresh Brief</button>
-          <button id="reload">Reload</button>
+          <button data-command="company.brief">브리프 갱신</button>
+          <button id="reload">상태 새로고침</button>
         </div>
       </header>
 
-      <section id="overview" class="band">
-        <div class="stats" id="stats"></div>
-      </section>
-
-      <section class="grid two">
-        <article class="panel">
+      <section id="overview" class="overview-grid">
+        <article class="panel priority">
           <div class="panel-head">
-            <h2>Command Console</h2>
-            <span class="tag">local</span>
+            <div>
+              <p class="eyebrow">다음 행동</p>
+              <h2>지금 먼저 할 일</h2>
+            </div>
+            <span class="tag" id="stateStamp">대기 중</span>
           </div>
-          <div class="command-grid">
-            <button data-command="unity.check">Unity Check</button>
-            <button data-command="capture.screen">Capture</button>
-            <button data-command="feedback.new">New Feedback</button>
-            <button data-command="gdx.probe">gdx Probe</button>
-            <button data-command="gdx.sync">gdx Sync</button>
-            <button data-command="gdx.collectLogs">Collect Logs</button>
+          <div id="nextAction" class="next-action">상태를 분석하고 있습니다.</div>
+          <div class="action-row">
+            <button id="startSessionShortcut">세션 시작</button>
+            <button data-command="feedback.new">피드백 등록</button>
+            <button data-command="gdx.sync">gdx1 동기화</button>
           </div>
-          <pre id="console">No command run yet.</pre>
         </article>
 
+        <article class="panel status-panel">
+          <div class="panel-head">
+            <h2>운영 지표</h2>
+            <span class="tag">live</span>
+          </div>
+          <div class="stats" id="stats"></div>
+        </article>
+      </section>
+
+      <section class="grid two" aria-label="workspace command area">
         <article class="panel">
           <div class="panel-head">
-            <h2>Session</h2>
-            <span class="tag">orchestrator</span>
+            <h2>명령 콘솔</h2>
+            <span class="tag">allowlist</span>
           </div>
-          <label>Goal <input id="sessionGoal" placeholder="Implement operator panel pass"></label>
+          <div class="command-grid">
+            <button data-command="unity.check">Unity 점검</button>
+            <button data-command="capture.screen">화면 캡처</button>
+            <button data-command="feedback.new">새 피드백</button>
+            <button data-command="gdx.probe">gdx1 연결 확인</button>
+            <button data-command="gdx.sync">gdx1 동기화</button>
+            <button data-command="gdx.collectLogs">로그 수집</button>
+          </div>
+          <pre id="console">아직 실행한 명령이 없습니다.</pre>
+        </article>
+
+        <article class="panel" id="work">
+          <div class="panel-head">
+            <h2>제작 세션</h2>
+            <span class="tag" id="sessionState">오케스트레이터</span>
+          </div>
+          <label>세션 목표
+            <input id="sessionGoal" placeholder="예: Unity 플레이어 이동감 개선">
+          </label>
           <div class="row-actions">
-            <button id="startSession">Start</button>
-            <button data-command="company.session.end">End</button>
+            <button id="startSession">시작</button>
+            <button data-command="company.session.end">종료</button>
           </div>
-          <label>Plan request <textarea id="planRequest" placeholder="Create a work order for..."></textarea></label>
-          <button id="planTask">Plan Task</button>
+          <label>작업 요청
+            <textarea id="planRequest" placeholder="예: 학교 복도 레벨 블록아웃을 작업 주문으로 나눠줘"></textarea>
+          </label>
+          <button id="planTask">작업 주문 생성</button>
         </article>
       </section>
 
       <section id="agents" class="grid two">
         <article class="panel">
           <div class="panel-head">
-            <h2>Agent Board</h2>
-            <span class="tag" id="agentCount">0 agents</span>
+            <h2>에이전트 팀</h2>
+            <span class="tag" id="agentCount">0명</span>
           </div>
           <div id="agentsList" class="list"></div>
         </article>
         <article class="panel">
           <div class="panel-head">
-            <h2>Tasks And Locks</h2>
-            <span class="tag">state</span>
+            <h2>작업판</h2>
+            <span class="tag" id="taskCount">상태</span>
           </div>
           <div id="tasksList" class="list"></div>
-          <h3>Locks</h3>
+          <h3>파일 잠금</h3>
           <div id="locksList" class="list compact"></div>
         </article>
       </section>
@@ -94,38 +126,42 @@
       <section id="feedback" class="grid two">
         <article class="panel">
           <div class="panel-head">
-            <h2>Feedback Board</h2>
-            <span class="tag">screens</span>
+            <h2>피드백 보드</h2>
+            <span class="tag">캡처 기반</span>
           </div>
           <div id="feedbackList" class="list"></div>
         </article>
         <article class="panel">
           <div class="panel-head">
-            <h2>Feedback Actions</h2>
-            <span class="tag">workflow</span>
+            <h2>피드백 처리</h2>
+            <span class="tag">수정 루프</span>
           </div>
-          <label>Feedback file <input id="feedbackPath" placeholder="reviews/2026-06-01/feedback-0002/feedback.md"></label>
-          <button id="processFeedback">Process Feedback</button>
+          <label>피드백 파일
+            <input id="feedbackPath" placeholder="reviews/2026-06-01/feedback-0002/feedback.md">
+          </label>
+          <button id="processFeedback">작업으로 전환</button>
         </article>
       </section>
 
       <section id="assets" class="grid two">
         <article class="panel">
           <div class="panel-head">
-            <h2>Asset Factory</h2>
-            <span class="tag">pipeline</span>
+            <h2>에셋 팩토리</h2>
+            <span class="tag">Blender / 2D to 3D</span>
           </div>
           <div id="assetList" class="list"></div>
         </article>
         <article class="panel">
           <div class="panel-head">
-            <h2>Asset Actions</h2>
-            <span class="tag">metadata</span>
+            <h2>에셋 등록</h2>
+            <span class="tag">메타데이터</span>
           </div>
-          <label>Asset ID <input id="assetId" placeholder="asset_school_prop_002"></label>
+          <label>에셋 ID
+            <input id="assetId" placeholder="asset_school_prop_002">
+          </label>
           <div class="row-actions">
-            <button id="createAsset">Create</button>
-            <button id="acceptAsset">Mark Accepted</button>
+            <button id="createAsset">브리프 생성</button>
+            <button id="acceptAsset">승인 처리</button>
           </div>
         </article>
       </section>
@@ -133,20 +169,20 @@
       <section id="gdx" class="grid two">
         <article class="panel">
           <div class="panel-head">
-            <h2>gdx1 Worker</h2>
-            <span class="tag">remote</span>
+            <h2>gdx1 워커</h2>
+            <span class="tag" id="gdxSummary">원격</span>
           </div>
           <div class="command-grid">
-            <button data-command="gdx.probe">Probe</button>
-            <button data-command="gdx.sync">Sync</button>
-            <button data-command="gdx.runServer">Run Server</button>
-            <button data-command="gdx.runBots">Run Bots</button>
+            <button data-command="gdx.probe">연결 확인</button>
+            <button data-command="gdx.sync">동기화</button>
+            <button data-command="gdx.runServer">서버 실행</button>
+            <button data-command="gdx.runBots">봇 실행</button>
           </div>
         </article>
         <article class="panel">
           <div class="panel-head">
-            <h2>Recent Runs</h2>
-            <span class="tag">evidence</span>
+            <h2>최근 실행 증거</h2>
+            <span class="tag">검증 로그</span>
           </div>
           <div id="runsList" class="list compact"></div>
         </article>
@@ -155,18 +191,20 @@
       <section id="memory" class="grid two">
         <article class="panel">
           <div class="panel-head">
-            <h2>Shared Memory</h2>
-            <span class="tag">brief</span>
+            <h2>공유 기억</h2>
+            <span class="tag">브리프</span>
           </div>
           <pre id="briefPreview"></pre>
         </article>
         <article class="panel">
           <div class="panel-head">
-            <h2>File Preview</h2>
-            <span class="tag">read only</span>
+            <h2>파일 미리보기</h2>
+            <span class="tag">읽기 전용</span>
           </div>
-          <label>Path <input id="filePath" placeholder="memory/company/current_context.md"></label>
-          <button id="loadFile">Load</button>
+          <label>경로
+            <input id="filePath" placeholder="memory/company/current_context.md">
+          </label>
+          <button id="loadFile">불러오기</button>
           <pre id="filePreview"></pre>
         </article>
       </section>
