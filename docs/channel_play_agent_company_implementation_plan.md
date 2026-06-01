@@ -633,6 +633,17 @@ Implemented:
 - static `tools/studio/dashboard.html`
 - failure-path unit tests
 
-Remaining external blocker:
+### 2026-06-01 gdx1 SSH Recovery
 
-- gdx1 SSH authentication is still blocked, so real remote execution is logged as blocked until the Mac Studio key or Tailscale SSH is configured.
+Verified:
+
+- `ssh -o BatchMode=yes gdx1 hostname` returns `gdx1`
+- gdx1 has `git`, `docker`, and `python3`
+- `./tools/channelctl gdx sync` creates/updates `~/channel_play` on gdx1
+- `./tools/channelctl gdx probe` updates shared state to `online_via_tailscale / ok`
+
+Current remote execution state:
+
+- real SSH transport works
+- remote workspace sync works
+- server and bot run commands execute remotely but report blocked until runner scripts or Linux server builds exist

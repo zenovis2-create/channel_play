@@ -1,10 +1,11 @@
 {
   "project": "channel_play",
-  "updated_at": "2026-06-01T14:57:09+09:00",
+  "updated_at": "2026-06-01T15:08:09+09:00",
   "active_session": null,
   "current_orchestrator_task": null,
   "gdx1": {
     "network": "online_via_tailscale",
-    "ssh": "auth_blocked"
+    "ssh": "ok",
+    "updated_at": "2026-06-01T15:08:09+09:00"
   }
 }

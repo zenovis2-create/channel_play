@@ -1,13 +1,13 @@
 # Current Brief
 
-Generated: 2026-06-01T15:01:51+09:00
+Generated: 2026-06-01T15:08:53+09:00
 Repo: /Volumes/AI2/channel_play
-Git: c0059a2
-Dirty files: 11
+Git: cdc4d05
+Dirty files: 12
 Current session: none
 Open tasks: 0
 Active locks: 0
-gdx1: online_via_tailscale / auth_blocked
+gdx1: online_via_tailscale / ok
 
 ## Current Context
 
@@ -53,17 +53,18 @@ Current constraints:
 
 ## Git Working Tree
 
--  M docs/channel_play_studio_plan.html
--  M docs/channel_play_studio_plan.md
-- ?? agents/
-- ?? asset_pipeline/
-- ?? docs/channel_play_agent_company_checklist.md
-- ?? docs/channel_play_agent_company_implementation_plan.md
-- ?? docs/channel_play_agent_company_plan.md
-- ?? memory/
-- ?? reviews/
-- ?? runs/
-- ?? tools/
+-  M docs/channel_play_agent_company_checklist.md
+-  M docs/channel_play_agent_company_implementation_plan.md
+-  M memory/company/state.json
+-  M tools/studio/company/gdx.py
+- ?? runs/gdx-collect-logs-2026-06-01t15-08-09-09-00/
+- ?? runs/gdx-probe-2026-06-01t15-08-04-09-00/
+- ?? runs/gdx-run-bots-2026-06-01t15-08-08-09-00/
+- ?? runs/gdx-run-server-2026-06-01t15-08-08-09-00/
+- ?? runs/gdx-sync-2026-06-01t15-08-06-09-00/
+- ?? tools/__pycache__/
+- ?? tools/studio/company/__pycache__/
+- ?? tools/studio/company/tests/__pycache__/
 
 ## Latest Session
 

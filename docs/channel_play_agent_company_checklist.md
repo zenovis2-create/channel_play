@@ -330,7 +330,7 @@ Verification:
 
 Goal: use gdx1 after SSH auth is fixed.
 
-- [ ] Fix SSH authentication to `gdx1`
+- [x] Fix SSH authentication to `gdx1`
 - [x] Add `./tools/channelctl gdx probe`
 - [x] Add remote workspace path check
 - [x] Add gdx1 sync command
@@ -382,7 +382,7 @@ Run when HTML/dashboard changes:
 - [x] Commit 8: dashboard
 - [x] Commit 9: first feedback workflow
 - [x] Commit 10: first asset workflow
-- [ ] Commit 11: gdx1 workflow after SSH auth
+- [x] Commit 11: gdx1 workflow after SSH auth
 
 ## 16. Definition Of Done
 
