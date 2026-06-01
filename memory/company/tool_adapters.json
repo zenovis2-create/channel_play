@@ -41,9 +41,9 @@
         "claude",
         "--print",
         "--add-dir",
-        "{root}",
-        "{prompt}"
+        "{root}"
       ],
+      "stdin": "{prompt}",
       "timeout_seconds": 1800
     },
     "agy": {
@@ -51,9 +51,9 @@
       "description": "Antigravity CLI browser/UI worker",
       "argv": [
         "agy",
-        "--print",
         "--print-timeout",
         "10m",
+        "--print",
         "{prompt}"
       ],
       "timeout_seconds": 900

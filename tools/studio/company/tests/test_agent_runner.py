@@ -61,6 +61,11 @@ class AgentRunnerTests(unittest.TestCase):
         self.assertIn("codex", state["tools"])
         self.assertTrue((self.root / "memory" / "company" / "tool_adapters.json").exists())
 
+        config = json.loads((self.root / "memory" / "company" / "tool_adapters.json").read_text(encoding="utf-8"))
+        self.assertEqual(config["tools"]["claude"]["stdin"], "{prompt}")
+        agy_argv = config["tools"]["agy"]["argv"]
+        self.assertLess(agy_argv.index("--print-timeout"), agy_argv.index("--print"))
+
 
 if __name__ == "__main__":
     unittest.main()

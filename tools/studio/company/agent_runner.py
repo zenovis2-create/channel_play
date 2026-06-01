@@ -46,13 +46,14 @@ DEFAULT_ADAPTERS: dict[str, Any] = {
         "claude": {
             "enabled": True,
             "description": "Claude Code non-interactive reviewer or worker",
-            "argv": ["claude", "--print", "--add-dir", "{root}", "{prompt}"],
+            "argv": ["claude", "--print", "--add-dir", "{root}"],
+            "stdin": "{prompt}",
             "timeout_seconds": 1800,
         },
         "agy": {
             "enabled": True,
             "description": "Antigravity CLI browser/UI worker",
-            "argv": ["agy", "--print", "--print-timeout", "10m", "{prompt}"],
+            "argv": ["agy", "--print-timeout", "10m", "--print", "{prompt}"],
             "timeout_seconds": 900,
         },
         "hermes": {
