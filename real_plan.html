@@ -1,0 +1,1039 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Real Plan | Mac Studio + gdx1 Unity MVP</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f5f0;
+      --panel: #ffffff;
+      --panel-2: #f0f7f5;
+      --ink: #18222d;
+      --muted: #5b6877;
+      --line: #d9dedb;
+      --teal: #0f766e;
+      --blue: #2563eb;
+      --amber: #b45309;
+      --red: #b91c1c;
+      --green: #15803d;
+      --violet: #6d28d9;
+      --shadow: 0 12px 32px rgba(24, 34, 45, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px 20px;
+      background: #18222d;
+      color: #f8fafc;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: auto;
+    }
+
+    .brand {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .brand strong {
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .brand span {
+      color: #c5d1dc;
+      font-size: 13px;
+    }
+
+    .nav {
+      display: grid;
+      gap: 6px;
+    }
+
+    .nav a {
+      display: block;
+      padding: 9px 10px;
+      border-radius: 8px;
+      color: #d7dee7;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      outline: none;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .wrap {
+      width: min(1180px, calc(100vw - 48px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      border-bottom: 1px solid var(--line);
+      background: rgba(246, 245, 240, 0.9);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 3;
+    }
+
+    .topbar .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .source-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .hero {
+      padding: 42px 0 26px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfaf6;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      letter-spacing: 0;
+      line-height: 1.18;
+    }
+
+    h1 {
+      max-width: 920px;
+      font-size: clamp(34px, 5vw, 58px);
+    }
+
+    h2 {
+      font-size: 27px;
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .lead {
+      max-width: 860px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .status-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .status {
+      min-height: 92px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .status b {
+      display: block;
+      font-size: 23px;
+      line-height: 1.1;
+    }
+
+    .status span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .section {
+      padding: 34px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .section-head p {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card,
+    .metric,
+    .phase,
+    .risk,
+    .action {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .card {
+      padding: 18px;
+    }
+
+    .metric {
+      padding: 16px;
+      min-height: 108px;
+    }
+
+    .metric .label,
+    .tag,
+    .phase small,
+    .risk small {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .metric .value {
+      margin-top: 8px;
+      font-size: 24px;
+      font-weight: 850;
+      line-height: 1.12;
+    }
+
+    .metric .note {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .asset {
+      display: grid;
+      gap: 14px;
+    }
+
+    .asset-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .pill.ok {
+      background: #e5f7ea;
+      color: var(--green);
+    }
+
+    .pill.warn {
+      background: #fff3d7;
+      color: var(--amber);
+    }
+
+    .pill.info {
+      background: #e7f0ff;
+      color: var(--blue);
+    }
+
+    .list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      display: grid;
+      grid-template-columns: 10px minmax(0, 1fr);
+      gap: 9px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .list li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      margin-top: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .stack-row {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr);
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stack-row:last-child {
+      border-bottom: 0;
+    }
+
+    .stack-row b {
+      color: var(--ink);
+    }
+
+    .stack-row span {
+      color: var(--muted);
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr 44px 1fr 44px 1fr;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    .flow-node {
+      min-height: 156px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .flow-arrow {
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-weight: 900;
+      font-size: 24px;
+    }
+
+    .phase {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      min-height: 180px;
+      border-top: 4px solid var(--blue);
+    }
+
+    .phase:nth-child(2n) {
+      border-top-color: var(--teal);
+    }
+
+    .phase:nth-child(3n) {
+      border-top-color: var(--violet);
+    }
+
+    .phase p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .risk {
+      padding: 16px;
+      min-height: 160px;
+      border-left: 4px solid var(--amber);
+    }
+
+    .risk.high {
+      border-left-color: var(--red);
+    }
+
+    .risk.medium {
+      border-left-color: var(--amber);
+    }
+
+    .risk.low {
+      border-left-color: var(--green);
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      counter-reset: action;
+    }
+
+    .action {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      min-height: 62px;
+      padding: 12px 14px;
+    }
+
+    .action::before {
+      counter-increment: action;
+      content: counter(action);
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #ffffff;
+      font-weight: 850;
+    }
+
+    .action b {
+      display: block;
+      line-height: 1.25;
+    }
+
+    .action span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .criteria {
+      columns: 2;
+      column-gap: 28px;
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .criteria li {
+      break-inside: avoid;
+      margin-bottom: 8px;
+    }
+
+    .footer {
+      padding: 28px 0 42px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer a {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    @media (max-width: 980px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+        padding: 18px;
+      }
+
+      .nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .status-row,
+      .grid-4,
+      .grid-3,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-arrow {
+        min-height: 24px;
+        transform: rotate(90deg);
+      }
+
+      .criteria {
+        columns: 1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .topbar .wrap,
+      .section-head {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      .nav {
+        grid-template-columns: 1fr;
+      }
+
+      .stack-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      .layout {
+        display: block;
+      }
+
+      .sidebar,
+      .topbar {
+        display: none;
+      }
+
+      body {
+        background: #ffffff;
+      }
+
+      .section,
+      .hero {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" aria-label="문서 목차">
+      <div class="brand">
+        <strong>Unity 게임쇼 MVP</strong>
+        <span>Mac Studio + gdx1 실행 계획</span>
+      </div>
+      <nav class="nav">
+        <a href="#summary">요약</a>
+        <a href="#assets">보유 자산</a>
+        <a href="#architecture">역할 구조</a>
+        <a href="#stack">기술 스택</a>
+        <a href="#roadmap">로드맵</a>
+        <a href="#automation">자동화</a>
+        <a href="#risks">리스크</a>
+        <a href="#actions">다음 액션</a>
+        <a href="#done">완료 기준</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <div class="topbar">
+        <div class="wrap">
+          <strong>Real Plan Dashboard</strong>
+          <a class="source-link" href="./real_plan.md">원문 Markdown 열기</a>
+        </div>
+      </div>
+
+      <header class="hero" id="summary">
+        <div class="wrap">
+          <p class="eyebrow">2026-06-01 기준</p>
+          <h1>Mac Studio는 제작 본진, gdx1은 Linux 서버·검증·AI 보조 워커</h1>
+          <p class="lead">
+            목표는 큰 온라인 게임이 아니라 촬영 가능한 작은 3D 게임쇼 세트장이다.
+            4~8명 참가, 운영자 1명, 포인트·상점·아이템·로그·OBS 녹화를 먼저 완성한다.
+          </p>
+
+          <div class="status-row" aria-label="핵심 상태">
+            <div class="status">
+              <b>64GB</b>
+              <span>Mac Studio M2 Ultra 로컬 메모리</span>
+            </div>
+            <div class="status">
+              <b>128GB</b>
+              <span>ASUS GX10 unified memory 공개 스펙</span>
+            </div>
+            <div class="status">
+              <b>4~8명</b>
+              <span>1차 MVP 참가자 목표</span>
+            </div>
+            <div class="status">
+              <b>30분</b>
+              <span>파일럿 세션 유지 목표</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="section" id="assets">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>보유 자산 분석</h2>
+              <p>현재 확인된 장비와 역할을 제작 흐름 기준으로 정리.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <article class="card asset">
+              <div class="asset-title">
+                <h3>Mac Studio M2 Ultra</h3>
+                <span class="pill ok">제작 본진</span>
+              </div>
+              <div class="grid-2">
+                <div class="metric">
+                  <div class="label">OS</div>
+                  <div class="value">macOS 26.4.1</div>
+                  <div class="note">Apple Silicon native workflow</div>
+                </div>
+                <div class="metric">
+                  <div class="label">Memory</div>
+                  <div class="value">64GB</div>
+                  <div class="note">Unity Editor, OBS, 영상 작업 담당</div>
+                </div>
+              </div>
+              <ul class="list">
+                <li>Unity Editor, 씬, 프리팹, ScriptableObject 제작</li>
+                <li>macOS 클라이언트 빌드와 로컬 Host/Client fallback 테스트</li>
+                <li>OBS 녹화, 영상 전처리, Git 저장소 관리</li>
+                <li>작업 볼륨 `/Volumes/AI2`, 여유 공간 약 1.0TiB</li>
+              </ul>
+            </article>
+
+            <article class="card asset">
+              <div class="asset-title">
+                <h3>gdx1 / ASUS Ascent GX10</h3>
+                <span class="pill info">사용 가능 전제</span>
+              </div>
+              <div class="grid-2">
+                <div class="metric">
+                  <div class="label">Platform</div>
+                  <div class="value">Ubuntu ARM</div>
+                  <div class="note">GB10, Blackwell GPU</div>
+                </div>
+                <div class="metric">
+                  <div class="label">Memory</div>
+                  <div class="value">128GB</div>
+                  <div class="note">LPDDR5x unified system memory</div>
+                </div>
+              </div>
+              <ul class="list">
+                <li>Linux headless dedicated server 실행</li>
+                <li>4~8명 bot 접속, soak test, 로그 수집</li>
+                <li>AI 코딩·분석 작업과 반복 테스트 분산</li>
+                <li>10G LAN, ConnectX-7 SmartNIC 기반 확장 여지</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>역할 구조</h2>
+              <p>Editor와 서버를 분리해 제작 안정성을 우선 확보.</p>
+            </div>
+          </div>
+
+          <div class="flow" aria-label="제작과 검증 흐름">
+            <div class="flow-node">
+              <h3>Mac Studio</h3>
+              <ul class="list">
+                <li>Unity Editor</li>
+                <li>클라이언트 빌드</li>
+                <li>OBS 녹화</li>
+                <li>콘텐츠 확인</li>
+              </ul>
+            </div>
+            <div class="flow-arrow" aria-hidden="true">→</div>
+            <div class="flow-node">
+              <h3>Git + 빌드 산출물</h3>
+              <ul class="list">
+                <li>Git LFS</li>
+                <li>Linux server build</li>
+                <li>로그 포맷 고정</li>
+                <li>스크립트 자동화</li>
+              </ul>
+            </div>
+            <div class="flow-arrow" aria-hidden="true">→</div>
+            <div class="flow-node">
+              <h3>gdx1</h3>
+              <ul class="list">
+                <li>Headless server</li>
+                <li>Bot test</li>
+                <li>Soak test</li>
+                <li>로그 회수</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="stack">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>Unity 기술 스택</h2>
+              <p>MVP 단계에서는 단순하고 검증 가능한 구성을 우선.</p>
+            </div>
+          </div>
+
+          <article class="card">
+            <div class="stack">
+              <div class="stack-row">
+                <b>Unity</b>
+                <span>Unity 6 LTS 또는 설치 시점의 최신 LTS, Apple Silicon Editor</span>
+              </div>
+              <div class="stack-row">
+                <b>Rendering</b>
+                <span>URP, 낮은 폴리곤, 높은 가시성, 팀 색상과 이름표 중심</span>
+              </div>
+              <div class="stack-row">
+                <b>Multiplayer</b>
+                <span>Netcode for GameObjects + Unity Transport, Host/Client 검증 후 dedicated server</span>
+              </div>
+              <div class="stack-row">
+                <b>Authority</b>
+                <span>포인트, 아이템, 상점, 미션, 타이머는 서버 기준으로 확정</span>
+              </div>
+              <div class="stack-row">
+                <b>Operator</b>
+                <span>전용 클라이언트 또는 운영자 권한 빌드로 시작, 공개 테스트 전 인증 토큰 검토</span>
+              </div>
+              <div class="stack-row">
+                <b>Logs</b>
+                <span>JSON Lines, 게임 시작/종료, 접속, 포인트, 아이템, 운영자 명령 기록</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="roadmap">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>실행 로드맵</h2>
+              <p>촬영 가능한 MVP까지 가는 단계. 각 단계는 검증 가능한 결과물로 끝남.</p>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <article class="phase">
+              <small>0단계</small>
+              <h3>제작 환경 준비</h3>
+              <p>Git, Git LFS, Unity, 기본 폴더, gdx1 접속 복구. 빈 씬 실행과 commit 가능 상태.</p>
+            </article>
+            <article class="phase">
+              <small>1단계</small>
+              <h3>조작과 폐교 맵</h3>
+              <p>플레이어 이동, 카메라, 이름표, 팀 색상, OBS 5분 녹화 가능 상태.</p>
+            </article>
+            <article class="phase">
+              <small>2단계</small>
+              <h3>포인트·상점·아이템 1개</h3>
+              <p>게임쇼 핵심 루프 첫 구현. 구매, 사용, 로그 기록까지 확인.</p>
+            </article>
+            <article class="phase">
+              <small>3단계</small>
+              <h3>아이템 3종</h3>
+              <p>진실의 펜, 위치 스캐너, 도플갱어 시약으로 심리전 최소 세트 완성.</p>
+            </article>
+            <article class="phase">
+              <small>4단계</small>
+              <h3>2인 멀티플레이</h3>
+              <p>스폰, 위치, 이름표, 포인트, 아이템 동기화를 서버 기준으로 검증.</p>
+            </article>
+            <article class="phase">
+              <small>5단계</small>
+              <h3>4~8인 테스트</h3>
+              <p>로비, 팀 배정, 미션, 타이머, 생존/탈락 상태. 30분 세션 가능성 확인.</p>
+            </article>
+            <article class="phase">
+              <small>6단계</small>
+              <h3>운영자 모드</h3>
+              <p>포인트·아이템·팀·공지·타이머·관전 카메라를 운영자가 제어.</p>
+            </article>
+            <article class="phase">
+              <small>7단계</small>
+              <h3>방송 UI</h3>
+              <p>점수판, 생존자, 남은 시간, 현재 미션, OBS용 화면 구성.</p>
+            </article>
+            <article class="phase">
+              <small>8단계</small>
+              <h3>첫 파일럿 촬영</h3>
+              <p>실제 참가자 4~8명으로 원본 녹화와 게임 로그 확보.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="automation">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>자동화 계획</h2>
+              <p>수동 확인이 아니라 빌드, 실행, 로그 회수를 재현 가능하게 고정.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <article class="card">
+              <h3>Mac Studio scripts</h3>
+              <ul class="list">
+                <li>`scripts/check_local_env.sh`</li>
+                <li>`scripts/build_mac_client.sh`</li>
+                <li>`scripts/build_linux_server.sh`</li>
+                <li>`scripts/run_local_host_test.sh`</li>
+                <li>`scripts/collect_logs.sh`</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>gdx1 scripts</h3>
+              <ul class="list">
+                <li>`scripts/gdx1_sync_build.sh`</li>
+                <li>`scripts/gdx1_run_server.sh`</li>
+                <li>`scripts/gdx1_run_bots.sh`</li>
+                <li>`scripts/gdx1_collect_logs.sh`</li>
+                <li>4~8 bot, 10~30분 유지, 로그 회수</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="risks">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>주요 리스크</h2>
+              <p>차단점은 작게 만들고, Mac Studio fallback을 항상 유지.</p>
+            </div>
+          </div>
+
+          <div class="grid-4">
+            <article class="risk high">
+              <small>High</small>
+              <h3>gdx1 일시 단절</h3>
+              <p>사용 가능 전제로 설계하되, 접속 실패 시 Mac Studio Host/Client fallback으로 진행.</p>
+            </article>
+            <article class="risk medium">
+              <small>Medium</small>
+              <h3>Unity 미설치</h3>
+              <p>Unity Hub와 LTS Editor 설치가 0단계 최우선. 설치 전 개발 착수 불가.</p>
+            </article>
+            <article class="risk medium">
+              <small>Medium</small>
+              <h3>Git 저장소 없음</h3>
+              <p>Unity 프로젝트 생성 전 Git 초기화, Git LFS, Unity gitignore 적용.</p>
+            </article>
+            <article class="risk low">
+              <small>Controlled</small>
+              <h3>멀티플레이 과확장</h3>
+              <p>계정, 매치메이킹, 클라우드는 파일럿 후. 먼저 Host/Client와 운영자 기능 검증.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="actions">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>바로 다음 액션</h2>
+              <p>오늘 처리할 순서. 이 순서가 끝나야 Unity 제작이 실제 작업으로 전환됨.</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="actions">
+              <div class="action">
+                <div>
+                  <b>gdx1 접속 복구</b>
+                  <span>`ssh gdx1 hostname`, Tailscale, SSH, 방화벽 확인</span>
+                </div>
+              </div>
+              <div class="action">
+                <div>
+                  <b>Git 저장소 초기화</b>
+                  <span>Unity 생성 전 버전 관리 기준 확정</span>
+                </div>
+              </div>
+              <div class="action">
+                <div>
+                  <b>Git LFS 설치</b>
+                  <span>대용량 에셋과 바이너리 파일 관리 준비</span>
+                </div>
+              </div>
+              <div class="action">
+                <div>
+                  <b>Unity Hub / Editor 설치</b>
+                  <span>Unity 6 LTS 또는 최신 LTS 기준</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="actions">
+              <div class="action">
+                <div>
+                  <b>Unity 프로젝트 생성</b>
+                  <span>URP 기반, `_Project` 폴더 구조 생성</span>
+                </div>
+              </div>
+              <div class="action">
+                <div>
+                  <b>기본 씬 생성</b>
+                  <span>`Boot`, `School_MVP`, `OperatorView` 우선</span>
+                </div>
+              </div>
+              <div class="action">
+                <div>
+                  <b>gdx1 headless server 목표 확인</b>
+                  <span>Mac Studio client가 gdx1 server에 접속하는 첫 통합 목표</span>
+                </div>
+              </div>
+              <div class="action">
+                <div>
+                  <b>OBS 5분 녹화 목표 고정</b>
+                  <span>첫 개발 목표는 움직임이 아니라 촬영 가능한 장면</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="done">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>1차 MVP 완료 기준</h2>
+              <p>이 항목들이 모두 통과해야 파일럿 촬영으로 이동.</p>
+            </div>
+          </div>
+
+          <article class="card">
+            <ol class="criteria">
+              <li>4~8명 접속</li>
+              <li>운영자 1명 접속</li>
+              <li>포인트 지급/차감 가능</li>
+              <li>상점 구매 가능</li>
+              <li>아이템 3개 사용 가능</li>
+              <li>제한시간 작동</li>
+              <li>생존/탈락 상태 표시</li>
+              <li>운영자 관전 가능</li>
+              <li>방송용 UI 표시</li>
+              <li>30분 플레이 가능</li>
+              <li>게임 로그 저장</li>
+              <li>OBS 녹화본 생성</li>
+            </ol>
+          </article>
+
+          <footer class="footer">
+            <p>
+              기준 문서: <a href="./real_plan.md">real_plan.md</a>.
+              외부 기준: <a href="https://www.asus.com/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/">ASUS Ascent GX10</a>,
+              <a href="https://www.asus.com/networking-iot-servers/desktop-ai-supercomputer/ultra-small-ai-supercomputers/asus-ascent-gx10/techspec/">ASUS Tech Specs</a>,
+              <a href="https://github.com/Unity-Technologies/com.unity.netcode.gameobjects">Unity Netcode for GameObjects</a>.
+            </p>
+          </footer>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
