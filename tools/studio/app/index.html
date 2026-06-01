@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Channel Play Studio</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="rail">
+      <div class="brand">
+        <strong>Channel Play Studio</strong>
+        <span>Agent workspace cockpit</span>
+      </div>
+      <nav>
+        <a href="#overview">Overview</a>
+        <a href="#agents">Agents</a>
+        <a href="#feedback">Feedback</a>
+        <a href="#assets">Assets</a>
+        <a href="#gdx">gdx1</a>
+        <a href="#memory">Memory</a>
+      </nav>
+    </aside>
+
+    <main>
+      <header class="top">
+        <div>
+          <h1>Workspace</h1>
+          <p id="subtitle">Loading current state.</p>
+        </div>
+        <div class="top-actions">
+          <button data-command="company.brief">Refresh Brief</button>
+          <button id="reload">Reload</button>
+        </div>
+      </header>
+
+      <section id="overview" class="band">
+        <div class="stats" id="stats"></div>
+      </section>
+
+      <section class="grid two">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Command Console</h2>
+            <span class="tag">local</span>
+          </div>
+          <div class="command-grid">
+            <button data-command="unity.check">Unity Check</button>
+            <button data-command="capture.screen">Capture</button>
+            <button data-command="feedback.new">New Feedback</button>
+            <button data-command="gdx.probe">gdx Probe</button>
+            <button data-command="gdx.sync">gdx Sync</button>
+            <button data-command="gdx.collectLogs">Collect Logs</button>
+          </div>
+          <pre id="console">No command run yet.</pre>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Session</h2>
+            <span class="tag">orchestrator</span>
+          </div>
+          <label>Goal <input id="sessionGoal" placeholder="Implement operator panel pass"></label>
+          <div class="row-actions">
+            <button id="startSession">Start</button>
+            <button data-command="company.session.end">End</button>
+          </div>
+          <label>Plan request <textarea id="planRequest" placeholder="Create a work order for..."></textarea></label>
+          <button id="planTask">Plan Task</button>
+        </article>
+      </section>
+
+      <section id="agents" class="grid two">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Agent Board</h2>
+            <span class="tag" id="agentCount">0 agents</span>
+          </div>
+          <div id="agentsList" class="list"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Tasks And Locks</h2>
+            <span class="tag">state</span>
+          </div>
+          <div id="tasksList" class="list"></div>
+          <h3>Locks</h3>
+          <div id="locksList" class="list compact"></div>
+        </article>
+      </section>
+
+      <section id="feedback" class="grid two">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Feedback Board</h2>
+            <span class="tag">screens</span>
+          </div>
+          <div id="feedbackList" class="list"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Feedback Actions</h2>
+            <span class="tag">workflow</span>
+          </div>
+          <label>Feedback file <input id="feedbackPath" placeholder="reviews/2026-06-01/feedback-0002/feedback.md"></label>
+          <button id="processFeedback">Process Feedback</button>
+        </article>
+      </section>
+
+      <section id="assets" class="grid two">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Asset Factory</h2>
+            <span class="tag">pipeline</span>
+          </div>
+          <div id="assetList" class="list"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Asset Actions</h2>
+            <span class="tag">metadata</span>
+          </div>
+          <label>Asset ID <input id="assetId" placeholder="asset_school_prop_002"></label>
+          <div class="row-actions">
+            <button id="createAsset">Create</button>
+            <button id="acceptAsset">Mark Accepted</button>
+          </div>
+        </article>
+      </section>
+
+      <section id="gdx" class="grid two">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>gdx1 Worker</h2>
+            <span class="tag">remote</span>
+          </div>
+          <div class="command-grid">
+            <button data-command="gdx.probe">Probe</button>
+            <button data-command="gdx.sync">Sync</button>
+            <button data-command="gdx.runServer">Run Server</button>
+            <button data-command="gdx.runBots">Run Bots</button>
+          </div>
+        </article>
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Recent Runs</h2>
+            <span class="tag">evidence</span>
+          </div>
+          <div id="runsList" class="list compact"></div>
+        </article>
+      </section>
+
+      <section id="memory" class="grid two">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Shared Memory</h2>
+            <span class="tag">brief</span>
+          </div>
+          <pre id="briefPreview"></pre>
+        </article>
+        <article class="panel">
+          <div class="panel-head">
+            <h2>File Preview</h2>
+            <span class="tag">read only</span>
+          </div>
+          <label>Path <input id="filePath" placeholder="memory/company/current_context.md"></label>
+          <button id="loadFile">Load</button>
+          <pre id="filePreview"></pre>
+        </article>
+      </section>
+    </main>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>

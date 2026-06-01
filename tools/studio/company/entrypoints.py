@@ -88,6 +88,8 @@ def _open(root: Path, args: list[str]) -> int:
     target = args[0]
     if target == "dashboard":
         path = generate_dashboard(root)
+    elif target == "studio":
+        path = root / "tools" / "studio" / "app" / "index.html"
     elif target == "unity":
         path = root
     elif target == "obsidian":

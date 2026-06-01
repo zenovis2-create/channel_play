@@ -22,6 +22,8 @@ Module ownership:
 - `assets.py`: asset pipeline records
 - `gdx.py`: gdx1 probe and blocked workflow logs
 - `entrypoints.py`: top-level `unity/open/capture/feedback/asset/gdx` dispatch
+- `tools/studio/workspace_server.py`: local web cockpit API and static app server
+- `tools/studio/app/`: integrated workspace UI
 - `git_info.py`: small git probes
 - `render.py`: terminal formatting helpers
 - `errors.py`: user-facing CLI errors

@@ -647,3 +647,23 @@ Current remote execution state:
 - real SSH transport works
 - remote workspace sync works
 - server and bot run commands execute remotely but report blocked until runner scripts or Linux server builds exist
+
+### 2026-06-01 Integrated Workspace Tool
+
+Implemented:
+
+- `./tools/channelctl studio serve [port]`
+- `./tools/channelctl studio open [port]`
+- `tools/studio/workspace_server.py`
+- `tools/studio/app/index.html`
+- `tools/studio/app/style.css`
+- `tools/studio/app/app.js`
+- workspace API for state, read-only file preview, and allowlisted command execution
+
+The tool is a local web cockpit for Agent Company status, tasks, locks, feedback, assets, gdx1, recent runs, and shared memory.
+
+Run:
+
+```bash
+./tools/channelctl studio open
+```

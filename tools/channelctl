@@ -18,6 +18,7 @@ def main() -> int:
     _bootstrap()
     from tools.studio.company.cli import main as company_main
     from tools.studio.company.entrypoints import dispatch_top_level
+    from tools.studio.workspace_server import serve
 
     args = sys.argv[1:]
     if not args:
@@ -34,6 +35,9 @@ def main() -> int:
 
     if command in {"unity", "open", "capture", "feedback", "asset", "gdx"}:
         return dispatch_top_level(command, rest)
+
+    if command == "studio":
+        return _studio(rest, serve)
 
     if command in {"help", "-h", "--help"}:
         return _print_help()
@@ -64,6 +68,8 @@ def _print_help() -> int:
                 "  asset screenshot <id> <path>",
                 "  gdx probe                 Probe gdx1 worker",
                 "  gdx sync/run-server/run-bots/collect-logs",
+                "  studio serve [port]       Start integrated web cockpit",
+                "  studio open [port]        Start cockpit and open browser",
                 "",
                 "Next:",
                 "  company session start/end",
@@ -73,6 +79,22 @@ def _print_help() -> int:
             ]
         )
     )
+    return 0
+
+
+def _studio(args: list[str], serve_func) -> int:
+    mode = args[0] if args else "serve"
+    if mode not in {"serve", "open"}:
+        print("Usage: tools/channelctl studio serve [port] | open [port]", file=sys.stderr)
+        return 2
+    port = 8766
+    if len(args) > 1:
+        try:
+            port = int(args[1])
+        except ValueError:
+            print(f"Invalid port: {args[1]}", file=sys.stderr)
+            return 2
+    serve_func(port=port, open_browser=(mode == "open"))
     return 0
 
 

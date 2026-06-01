@@ -398,3 +398,31 @@ MVP is done when:
 - [x] Session summary updates shared memory
 - [x] Dashboard shows session/task/lock/report state
 - [x] One real Unity feedback item goes from open to closed
+
+## 17. Integrated Workspace Tool
+
+Goal: provide the actual local cockpit, not only CLI commands.
+
+- [x] Add `./tools/channelctl studio serve [port]`
+- [x] Add `./tools/channelctl studio open [port]`
+- [x] Create `tools/studio/workspace_server.py`
+- [x] Create `tools/studio/app/index.html`
+- [x] Create `tools/studio/app/style.css`
+- [x] Create `tools/studio/app/app.js`
+- [x] Add `/api/state`
+- [x] Add `/api/command`
+- [x] Add read-only `/api/file`
+- [x] Restrict file preview to project-safe folders
+- [x] Restrict command execution to an allowlist
+- [x] Show Agent Company status
+- [x] Show agents
+- [x] Show tasks and locks
+- [x] Show feedback records
+- [x] Show asset pipeline records
+- [x] Show gdx1 worker controls
+- [x] Show recent runs/evidence
+- [x] Show shared memory preview
+- [x] Add command console
+- [x] Verify browser render on desktop width
+- [x] Verify browser render on mobile width
+- [x] Add web server unit tests

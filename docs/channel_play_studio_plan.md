@@ -212,6 +212,39 @@ asset_pipeline/index.json
 obsidian/channel_play/00_Index.md
 ```
 
+### 3.3.1 Integrated Workspace Cockpit
+
+The static dashboard has been upgraded with a local web cockpit.
+
+Run:
+
+```bash
+./tools/channelctl studio open
+```
+
+It serves:
+
+```text
+http://127.0.0.1:8766/
+```
+
+The cockpit provides:
+
+- Agent Company status
+- agents, tasks, locks, sessions
+- feedback board
+- asset factory board
+- gdx1 worker controls
+- recent run/evidence list
+- shared memory preview
+- allowlisted command execution
+
+Implementation:
+
+- `tools/studio/workspace_server.py`
+- `tools/studio/app/`
+- `docs/channel_play_workspace_tool.md`
+
 ### 3.4 Feedback Loop
 
 This is the most important UX feature.
