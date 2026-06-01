@@ -1,6 +1,6 @@
 # channel_play Setup Status
 
-Updated: 2026-06-01 13:12 KST
+Updated: 2026-06-01 13:18 KST
 
 ## Completed
 
@@ -13,6 +13,8 @@ Updated: 2026-06-01 13:12 KST
 - OBS installed
 - Blender installed
 - Unity `_Project` folder structure created
+- GitHub remote connected: `https://github.com/zenovis2-create/channel_play`
+- Local `main` pushed to `origin/main`
 - Initial Unity scenes created:
   - `Boot`
   - `MainMenu`
