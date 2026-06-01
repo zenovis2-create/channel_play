@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using ChannelPlay.Player;
 
 public static class ChannelPlayBootstrap
 {
@@ -41,6 +42,64 @@ public static class ChannelPlayBootstrap
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         Debug.Log("channel_play bootstrap scenes created.");
+    }
+
+    public static void CreateFirstPlayableSlice()
+    {
+        EnsureFolders();
+        CreateMaterials();
+
+        var scenePath = $"{ScenesRoot}/School_MVP.unity";
+        var scene = EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
+
+        DestroyIfExists("Main_Camera");
+        DestroyIfExists("MVP_Player");
+        DestroyIfExists("Gameplay_Camera");
+        DestroyIfExists("Operator_Overview_Camera");
+
+        var player = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        player.name = "MVP_Player";
+        player.transform.position = new Vector3(0f, 1f, -4f);
+        player.transform.localScale = new Vector3(1f, 1f, 1f);
+        ApplyMaterial(player, "Team_Blue");
+
+        var primitiveCollider = player.GetComponent<Collider>();
+        if (primitiveCollider != null)
+        {
+            UnityEngine.Object.DestroyImmediate(primitiveCollider);
+        }
+
+        var controller = player.AddComponent<CharacterController>();
+        controller.height = 2f;
+        controller.radius = 0.45f;
+        controller.center = new Vector3(0f, 1f, 0f);
+        player.AddComponent<ChannelPlayerController>();
+
+        var gameplayCamera = new GameObject("Gameplay_Camera");
+        gameplayCamera.tag = "MainCamera";
+        var camera = gameplayCamera.AddComponent<Camera>();
+        camera.clearFlags = CameraClearFlags.SolidColor;
+        camera.backgroundColor = new Color(0.08f, 0.1f, 0.12f);
+        gameplayCamera.transform.position = new Vector3(0f, 7f, -12f);
+        gameplayCamera.transform.rotation = Quaternion.Euler(35f, 0f, 0f);
+        gameplayCamera.AddComponent<ChannelFollowCamera>().SetTarget(player.transform);
+
+        var operatorCamera = new GameObject("Operator_Overview_Camera");
+        var overviewCamera = operatorCamera.AddComponent<Camera>();
+        overviewCamera.enabled = false;
+        overviewCamera.clearFlags = CameraClearFlags.SolidColor;
+        overviewCamera.backgroundColor = new Color(0.04f, 0.06f, 0.07f);
+        operatorCamera.transform.position = new Vector3(0f, 18f, -3f);
+        operatorCamera.transform.rotation = Quaternion.Euler(70f, 0f, 0f);
+
+        var prefabPath = $"{ProjectRoot}/Prefabs/MVP_Player.prefab";
+        PrefabUtility.SaveAsPrefabAsset(player, prefabPath);
+
+        EditorSceneManager.MarkSceneDirty(scene);
+        EditorSceneManager.SaveScene(scene);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        Debug.Log("channel_play first playable slice created.");
     }
 
     private static void EnsureFolders()
@@ -114,6 +173,15 @@ public static class ChannelPlayBootstrap
         cameraObject.transform.rotation = Quaternion.Euler(sceneName == "School_MVP" ? 38f : 22f, 0f, 0f);
         camera.clearFlags = CameraClearFlags.SolidColor;
         camera.backgroundColor = new Color(0.08f, 0.1f, 0.12f);
+    }
+
+    private static void DestroyIfExists(string objectName)
+    {
+        var existing = GameObject.Find(objectName);
+        if (existing != null)
+        {
+            UnityEngine.Object.DestroyImmediate(existing);
+        }
     }
 
     private static void AddLight()

@@ -1,6 +1,6 @@
 # channel_play Setup Status
 
-Updated: 2026-06-01 13:08 KST
+Updated: 2026-06-01 13:12 KST
 
 ## Completed
 
@@ -22,6 +22,10 @@ Updated: 2026-06-01 13:08 KST
   - `OverlayTest`
 - Initial blockout materials created
 - Build Settings scene list configured
+- First playable slice created in `School_MVP`
+- `MVP_Player` prefab created
+- `ChannelPlayerController` added
+- `ChannelFollowCamera` added
 - `.gitignore` added for Unity/macOS/context-mode generated files
 - `.gitattributes` added for Unity asset LFS tracking
 - Environment scripts added:
@@ -44,8 +48,9 @@ zenovis1@gdx1: Permission denied (publickey,password).
 ## Next Action
 
 1. Register this Mac Studio SSH public key on gdx1, or enable Tailscale SSH.
-2. Add Unity Netcode packages after confirming package versions.
-3. Create first playable player/controller slice in `School_MVP`.
+2. Open `School_MVP` in Unity and verify movement with WASD/arrow keys, Shift, Space.
+3. Add Unity Netcode packages after confirming package versions.
+4. Start point/shop/item core loop.
 
 ## gdx1 Status
 
