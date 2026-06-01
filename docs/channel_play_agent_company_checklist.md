@@ -21,8 +21,8 @@ Updated: 2026-06-01
 - [x] `asset new/status` works
 - [x] `gdx` blocked workflow logs work
 - [x] static dashboard generated
-- [ ] Current Agent Company design committed to Git
-- [ ] GitHub pushed after first implementation milestone
+- [x] Current Agent Company design committed to Git
+- [x] GitHub pushed after first implementation milestone
 
 ## 1. Phase 0: Freeze Design Baseline
 
@@ -39,7 +39,7 @@ Goal: lock current design before adding more automation.
 - [x] Update `docs/channel_play_studio_plan.html`
 - [x] Validate JSON files
 - [x] Run `git diff --check`
-- [ ] Commit design baseline
+- [x] Commit design baseline
 
 Verification:
 
@@ -372,16 +372,16 @@ Run when HTML/dashboard changes:
 
 ## 15. Commit Milestones
 
-- [ ] Commit 1: Agent Company design and memory baseline
-- [ ] Commit 2: `channelctl company status/agents/brief`
-- [ ] Commit 3: session start/end
-- [ ] Commit 4: plan/assign work orders
-- [ ] Commit 5: locks
-- [ ] Commit 6: reports and verification gate
-- [ ] Commit 7: Unity check bridge
-- [ ] Commit 8: dashboard
-- [ ] Commit 9: first feedback workflow
-- [ ] Commit 10: first asset workflow
+- [x] Commit 1: Agent Company design and memory baseline
+- [x] Commit 2: `channelctl company status/agents/brief`
+- [x] Commit 3: session start/end
+- [x] Commit 4: plan/assign work orders
+- [x] Commit 5: locks
+- [x] Commit 6: reports and verification gate
+- [x] Commit 7: Unity check bridge
+- [x] Commit 8: dashboard
+- [x] Commit 9: first feedback workflow
+- [x] Commit 10: first asset workflow
 - [ ] Commit 11: gdx1 workflow after SSH auth
 
 ## 16. Definition Of Done
