@@ -1,6 +1,6 @@
 # channel_play Setup Status
 
-Updated: 2026-06-01 12:55 KST
+Updated: 2026-06-01 13:00 KST
 
 ## Completed
 
@@ -8,6 +8,8 @@ Updated: 2026-06-01 12:55 KST
 - Git LFS installed with local hooks
 - Unity Hub installed
 - Unity Editor `6000.0.76f1` arm64 installed
+- OBS installed
+- Blender installed
 - `.gitignore` added for Unity/macOS/context-mode generated files
 - `.gitattributes` added for Unity asset LFS tracking
 - Environment scripts added:
