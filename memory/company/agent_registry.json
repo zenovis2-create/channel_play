@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "id": "chief_orchestrator",
+      "profile": "agents/orchestrator.agent.md",
+      "writes_by_default": true
+    },
+    {
+      "id": "game_director",
+      "profile": "agents/roles/game_director.agent.md",
+      "writes_by_default": false
+    },
+    {
+      "id": "unity_architect",
+      "profile": "agents/roles/unity_architect.agent.md",
+      "writes_by_default": false
+    },
+    {
+      "id": "unity_gameplay",
+      "profile": "agents/roles/unity_gameplay.agent.md",
+      "writes_by_default": false
+    },
+    {
+      "id": "multiplayer_server",
+      "profile": "agents/roles/multiplayer_server.agent.md",
+      "writes_by_default": false
+    },
+    {
+      "id": "asset_factory",
+      "profile": "agents/roles/asset_factory.agent.md",
+      "writes_by_default": false
+    },
+    {
+      "id": "technical_artist_blender",
+      "profile": "agents/roles/technical_artist_blender.agent.md",
+      "writes_by_default": false
+    },
+    {
+      "id": "sound_designer",
+      "profile": "agents/roles/sound_designer.agent.md",
+      "writes_by_default": false
+    },
+    {
+      "id": "qa_playtest",
+      "profile": "agents/roles/qa_playtest.agent.md",
+      "writes_by_default": false
+    },
+    {
+      "id": "performance_build",
+      "profile": "agents/roles/performance_build.agent.md",
+      "writes_by_default": false
+    },
+    {
+      "id": "gdx_ops",
+      "profile": "agents/roles/gdx_ops.agent.md",
+      "writes_by_default": false
+    },
+    {
+      "id": "librarian",
+      "profile": "agents/roles/librarian.agent.md",
+      "writes_by_default": false
+    },
+    {
+      "id": "critic_reviewer",
+      "profile": "agents/roles/critic_reviewer.agent.md",
+      "writes_by_default": false
+    }
+  ]
+}

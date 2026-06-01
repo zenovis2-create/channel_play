@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Channel Play Studio Plan</title>
+  <link rel="icon" href="data:,">
   <style>
     :root {
       --bg: #f5f4ee;
@@ -646,6 +647,7 @@
         <a href="#feedback">Feedback Loop</a>
         <a href="#assets">Asset Factory</a>
         <a href="#agents">AI Lanes</a>
+        <a href="#agent-company">Agent Company</a>
         <a href="#commands">channelctl</a>
         <a href="#mvp">MVP Build</a>
         <a href="#risks">Risks</a>
@@ -959,6 +961,68 @@
         </div>
       </section>
 
+      <section class="section" id="agent-company">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>Agent Company Layer</h2>
+              <p>역할표를 넘어서, 공통 기억과 작업 계약을 가진 제작 회사 구조로 AI들을 운영한다.</p>
+            </div>
+            <a class="source" href="./channel_play_agent_company_plan.md">상세 계획</a>
+          </div>
+
+          <div class="diagram">
+            <div class="hub-layout">
+              <article class="node">
+                <span class="tag">Memory</span>
+                <h3>Shared Memory</h3>
+                <p>Obsidian, memory/company, runs, reviews, asset_pipeline이 공통 기억과 증거 저장소가 된다.</p>
+              </article>
+              <article class="node center">
+                <div>
+                  <span class="tag">Orchestrator</span>
+                  <h3>Chief Orchestrator AI</h3>
+                  <p>요청을 분해하고, 필요한 에이전트만 호출하며, lock과 검증을 통제한다.</p>
+                </div>
+              </article>
+              <article class="node">
+                <span class="tag">Production Team</span>
+                <h3>Specialist Agents</h3>
+                <p>Unity, 에셋, Blender, 사운드, QA, gdx1, 메모리 관리 역할이 분리된다.</p>
+              </article>
+            </div>
+
+            <div class="matrix">
+              <div class="matrix-row">
+                <b>intake</b>
+                <span>사용자 요청을 목표, 범위, 기대 산출물, 검증 방법으로 변환</span>
+                <span class="pill ok">required</span>
+              </div>
+              <div class="matrix-row">
+                <b>brief</b>
+                <span>공통 기억에서 현재 맥락을 뽑아 모든 에이전트가 같은 출발점에서 작업</span>
+                <span class="pill ok">required</span>
+              </div>
+              <div class="matrix-row">
+                <b>assign</b>
+                <span>작업별 writer/reviewer/specialist를 최소 인원으로 선정</span>
+                <span class="pill info">mvp</span>
+              </div>
+              <div class="matrix-row">
+                <b>lock</b>
+                <span>Unity scene, prefab, script system, asset folder를 path 단위로 충돌 방지</span>
+                <span class="pill info">mvp</span>
+              </div>
+              <div class="matrix-row">
+                <b>verify</b>
+                <span>Unity compile, screenshot, playtest, Blender report, gdx1 log 등 증거 없이는 완료 처리 금지</span>
+                <span class="pill ok">required</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="commands">
         <div class="wrap">
           <div class="section-head">
@@ -997,6 +1061,11 @@
             <div class="matrix-row">
               <b>asset</b>
               <span>brief, generated_3d, blender cleanup, unity_ready 상태 관리</span>
+              <span class="pill info">next</span>
+            </div>
+            <div class="matrix-row">
+              <b>company</b>
+              <span>brief, plan, assign, lock, report, memory sync로 agent company 운영</span>
               <span class="pill info">next</span>
             </div>
             <div class="matrix-row">

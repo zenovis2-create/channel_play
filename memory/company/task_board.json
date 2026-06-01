@@ -1,0 +1,129 @@
+{
+  "tasks": [
+    {
+      "id": "task-0001",
+      "request": "fix player movement feedback",
+      "status": "closed",
+      "suggested_agent": "unity_gameplay",
+      "assigned_agent": "unity_gameplay",
+      "allowed_write_paths": [
+        "Assets/_Project/Scripts/Gameplay"
+      ],
+      "required_evidence": "Unity compile or playtest evidence",
+      "created_at": "2026-06-01T14:48:33+09:00",
+      "updated_at": "2026-06-01T14:50:01+09:00",
+      "work_order": "memory/sessions/20260601-144833-agent-company-smoke/work_orders/task-0001-unity_gameplay.md",
+      "report": "memory/sessions/20260601-144833-agent-company-smoke/agent_reports/task-0001-unity_gameplay.md",
+      "verification": "memory/sessions/20260601-144833-agent-company-smoke/verification/task-0001-verification.md",
+      "verification_status": "passed",
+      "evidence": [
+        {
+          "path": "runs/unity-check-2026-06-01t14-48-34-09-00/unity_check.md",
+          "note": "Unity quick check evidence",
+          "attached_at": "2026-06-01T14:50:01+09:00"
+        }
+      ],
+      "closed_at": "2026-06-01T14:50:01+09:00"
+    },
+    {
+      "id": "task-0002",
+      "request": "multiplayer server architecture review",
+      "status": "closed_blocked",
+      "suggested_agent": "unity_gameplay",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": null,
+      "allowed_write_paths": [
+        "Assets/_Project/Scripts/Gameplay"
+      ],
+      "required_evidence": "Unity compile or playtest evidence",
+      "created_at": "2026-06-01T14:54:16+09:00",
+      "updated_at": "2026-06-01T14:54:32+09:00",
+      "work_order": null,
+      "report": null,
+      "verification": null,
+      "blocked_reason": "planner smoke only",
+      "closed_at": "2026-06-01T14:54:32+09:00"
+    },
+    {
+      "id": "task-0003",
+      "request": "reproduce screenshot feedback /Volumes/AI2/channel_play/reviews/2026-06-01/feedback-0002/feedback.md",
+      "status": "closed",
+      "suggested_agent": "qa_playtest",
+      "suggested_reviewer": null,
+      "assigned_agent": "qa_playtest",
+      "allowed_write_paths": [
+        "reviews"
+      ],
+      "required_evidence": "reproduction note",
+      "created_at": "2026-06-01T14:57:09+09:00",
+      "updated_at": "2026-06-01T14:57:09+09:00",
+      "work_order": "memory/sessions/20260601-145709-process-feedback-md/work_orders/task-0003-qa_playtest.md",
+      "report": "memory/sessions/20260601-145709-process-feedback-md/agent_reports/task-0003-qa_playtest.md",
+      "verification": "memory/sessions/20260601-145709-process-feedback-md/verification/task-0003-verification.md",
+      "session": "20260601-145709-process-feedback-md",
+      "evidence": [
+        {
+          "path": "runs/unity-check-2026-06-01t14-57-09-09-00/unity_check.md",
+          "note": "feedback workflow evidence",
+          "attached_at": "2026-06-01T14:57:09+09:00"
+        }
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-06-01T14:57:09+09:00"
+    },
+    {
+      "id": "task-0004",
+      "request": "fix player movement feedback /Volumes/AI2/channel_play/reviews/2026-06-01/feedback-0002/feedback.md",
+      "status": "closed",
+      "suggested_agent": "unity_gameplay",
+      "suggested_reviewer": null,
+      "assigned_agent": "unity_gameplay",
+      "allowed_write_paths": [
+        "Assets/_Project/Scripts/Gameplay"
+      ],
+      "required_evidence": "Unity compile or playtest evidence",
+      "created_at": "2026-06-01T14:57:09+09:00",
+      "updated_at": "2026-06-01T14:57:09+09:00",
+      "work_order": "memory/sessions/20260601-145709-process-feedback-md/work_orders/task-0004-unity_gameplay.md",
+      "report": "memory/sessions/20260601-145709-process-feedback-md/agent_reports/task-0004-unity_gameplay.md",
+      "verification": "memory/sessions/20260601-145709-process-feedback-md/verification/task-0004-verification.md",
+      "session": "20260601-145709-process-feedback-md",
+      "evidence": [
+        {
+          "path": "runs/unity-check-2026-06-01t14-57-09-09-00/unity_check.md",
+          "note": "feedback workflow evidence",
+          "attached_at": "2026-06-01T14:57:09+09:00"
+        }
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-06-01T14:57:09+09:00"
+    },
+    {
+      "id": "task-0005",
+      "request": "review risk feedback /Volumes/AI2/channel_play/reviews/2026-06-01/feedback-0002/feedback.md",
+      "status": "closed",
+      "suggested_agent": "qa_playtest",
+      "suggested_reviewer": null,
+      "assigned_agent": "critic_reviewer",
+      "allowed_write_paths": [
+        "reviews"
+      ],
+      "required_evidence": "reproduction note",
+      "created_at": "2026-06-01T14:57:09+09:00",
+      "updated_at": "2026-06-01T14:57:09+09:00",
+      "work_order": "memory/sessions/20260601-145709-process-feedback-md/work_orders/task-0005-critic_reviewer.md",
+      "report": "memory/sessions/20260601-145709-process-feedback-md/agent_reports/task-0005-critic_reviewer.md",
+      "verification": "memory/sessions/20260601-145709-process-feedback-md/verification/task-0005-verification.md",
+      "session": "20260601-145709-process-feedback-md",
+      "evidence": [
+        {
+          "path": "runs/unity-check-2026-06-01t14-57-09-09-00/unity_check.md",
+          "note": "feedback workflow evidence",
+          "attached_at": "2026-06-01T14:57:09+09:00"
+        }
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-06-01T14:57:09+09:00"
+    }
+  ]
+}

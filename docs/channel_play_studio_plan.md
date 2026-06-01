@@ -288,6 +288,44 @@ Rule:
 - Codex applies changes unless explicitly delegated
 - all changes go through Git commits
 
+### 3.5.1 Agent Company Layer
+
+The lane table is only the first level.
+`channel_play` also needs a company-style orchestration layer with shared memory and explicit work orders.
+
+Create:
+
+```text
+agents/
+  company.md
+  memory_policy.md
+  orchestrator.agent.md
+  roles/
+
+memory/company/
+  state.json
+  agent_registry.json
+  task_board.json
+  locks.json
+  current_context.md
+  decision_log.md
+  handoff_log.md
+```
+
+Operating rule:
+
+- one orchestrator AI chooses the needed specialists
+- each agent has its own role file, skill/soul assumptions, write scope, and output contract
+- every non-trivial task becomes a work order before implementation
+- all agents read the same current context before working
+- every result returns as an agent report with evidence
+- Unity scenes, prefab folders, and script systems use locks before writes
+- the orchestrator integrates results and updates Obsidian/shared memory
+
+Detailed plan:
+
+- `docs/channel_play_agent_company_plan.md`
+
 ### 3.6 Asset Factory
 
 Asset work needs its own pipeline.
@@ -543,13 +581,14 @@ Avoid:
 Build `Channel Play Studio` in this order:
 
 1. `channelctl`
-2. Obsidian vault structure and templates
-3. screenshot feedback loop
-4. session logging
-5. Unity compile/open checks
-6. asset pipeline folders and metadata
-7. Blender automation scripts
-8. dashboard
-9. gdx1 worker integration after SSH auth is fixed
+2. Agent Company role files and shared memory policy
+3. Obsidian vault structure and templates
+4. screenshot feedback loop
+5. session logging
+6. Unity compile/open checks
+7. asset pipeline folders and metadata
+8. Blender automation scripts
+9. dashboard
+10. gdx1 worker integration after SSH auth is fixed
 
 This gives the project a real production cockpit while keeping Unity game development as the main product.

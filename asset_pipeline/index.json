@@ -1,0 +1,21 @@
+{
+  "assets": [
+    {
+      "id": "asset_smoke_prop",
+      "status": "accepted",
+      "brief": "asset_pipeline/briefs/asset_smoke_prop.md",
+      "created_at": "2026-06-01T14:48:34+09:00",
+      "source_license": "TBD",
+      "updated_at": "2026-06-01T14:51:42+09:00"
+    },
+    {
+      "id": "asset_checklist_prop",
+      "status": "unity_ready",
+      "brief": "asset_pipeline/briefs/asset_checklist_prop.md",
+      "created_at": "2026-06-01T14:54:16+09:00",
+      "source_license": "TBD",
+      "updated_at": "2026-06-01T15:00:24+09:00",
+      "scene_screenshot": "reviews/captures/screen-2026-06-01t14-51-50-09-00.png"
+    }
+  ]
+}

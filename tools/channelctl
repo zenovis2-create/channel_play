@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+"""Channel Play project control entrypoint."""
+
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+
+def _bootstrap() -> None:
+    root = Path(__file__).resolve().parents[1]
+    root_text = str(root)
+    if root_text not in sys.path:
+        sys.path.insert(0, root_text)
+
+
+def main() -> int:
+    _bootstrap()
+    from tools.studio.company.cli import main as company_main
+    from tools.studio.company.entrypoints import dispatch_top_level
+
+    args = sys.argv[1:]
+    if not args:
+        return _print_help()
+
+    command = args[0]
+    rest = args[1:]
+
+    if command == "status":
+        return company_main(["status", *rest])
+
+    if command == "company":
+        return company_main(rest)
+
+    if command in {"unity", "open", "capture", "feedback", "asset", "gdx"}:
+        return dispatch_top_level(command, rest)
+
+    if command in {"help", "-h", "--help"}:
+        return _print_help()
+
+    print(f"Unknown command: {command}", file=sys.stderr)
+    print("Run: tools/channelctl help", file=sys.stderr)
+    return 2
+
+
+def _print_help() -> int:
+    print(
+        "\n".join(
+            [
+                "channelctl",
+                "",
+                "Commands:",
+                "  status                    Show project/company status",
+                "  company status            Show Agent Company status",
+                "  company agents            List registered agents",
+                "  company brief             Generate current company brief",
+                "  unity check               Run Unity project check",
+                "  open dashboard            Open generated dashboard",
+                "  capture screen            Capture screenshot",
+                "  feedback new              Create feedback record",
+                "  feedback process <file>   Run feedback workflow",
+                "  asset new <asset-id>      Create tracked asset",
+                "  asset status <id> <state> Update asset status",
+                "  asset screenshot <id> <path>",
+                "  gdx probe                 Probe gdx1 worker",
+                "  gdx sync/run-server/run-bots/collect-logs",
+                "",
+                "Next:",
+                "  company session start/end",
+                "  company plan/assign",
+                "  company lock/unlock",
+                "  company report/verify",
+            ]
+        )
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
