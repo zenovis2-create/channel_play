@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -96,6 +97,14 @@ def _open(root: Path, args: list[str]) -> int:
         path = root / "obsidian" / "channel_play"
     else:
         raise CompanyError(f"Unknown open target: {target}")
-    subprocess.run(["open", str(path)], cwd=root, check=False)
+    _open_path(path, root)
     print(f"Opened {rel(root, path)}")
     return 0
+
+
+def _open_path(path: Path, root: Path) -> None:
+    if os.name == "nt":
+        os.startfile(path)  # type: ignore[attr-defined]
+        return
+    opener = "open" if sys.platform == "darwin" else "xdg-open"
+    subprocess.run([opener, str(path)], cwd=root, check=False)

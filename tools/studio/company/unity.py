@@ -10,12 +10,51 @@ from .errors import CompanyError
 from .timeutil import now_iso, slugify
 
 
-UNITY_DEFAULT = Path("/Applications/Unity/Hub/Editor/6000.0.76f1/Unity.app/Contents/MacOS/Unity")
+UNITY_VERSION = "6000.0.76f1"
+UNITY_MAC_DEFAULT = Path(f"/Applications/Unity/Hub/Editor/{UNITY_VERSION}/Unity.app/Contents/MacOS/Unity")
+
+
+def resolve_unity_editor() -> Path:
+    configured = os.environ.get("UNITY_EDITOR")
+    if configured:
+        return Path(configured)
+
+    if os.name == "nt":
+        candidates = [
+            Path(os.environ.get("ProgramFiles", r"C:\Program Files"))
+            / "Unity"
+            / "Hub"
+            / "Editor"
+            / UNITY_VERSION
+            / "Editor"
+            / "Unity.exe",
+            Path(os.environ.get("ProgramFiles(x86)", r"C:\Program Files (x86)"))
+            / "Unity"
+            / "Hub"
+            / "Editor"
+            / UNITY_VERSION
+            / "Editor"
+            / "Unity.exe",
+            Path.home()
+            / "Unity"
+            / "Hub"
+            / "Editor"
+            / UNITY_VERSION
+            / "Editor"
+            / "Unity.exe",
+        ]
+    else:
+        candidates = [UNITY_MAC_DEFAULT]
+
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return candidates[0]
 
 
 def unity_check(root: Path, args: list[str]) -> Path:
     run_batch = "--batch" in args
-    unity = Path(os.environ.get("UNITY_EDITOR", str(UNITY_DEFAULT)))
+    unity = resolve_unity_editor()
     if not (root / "ProjectSettings" / "ProjectVersion.txt").exists():
         raise CompanyError("Unity ProjectSettings/ProjectVersion.txt not found.")
     run_dir = root / "runs" / f"unity-check-{slugify(now_iso())}"

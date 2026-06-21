@@ -50,3 +50,10 @@ recordings/
 .env
 .env.*
 !.env.example
+
+# Python local/generated files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
