@@ -1,8 +1,8 @@
 # Khufu V5 Delivery Harness
 
-Updated: 2026-07-10
-Harness state: Fable-reviewed and working-tree validated
-Unity implementation state: not started
+Updated: 2026-07-11
+Harness state: Fable and cold-reader pass; Gate 7 scoped commit and final receipt pending
+Unity implementation state: committed at `81c28f84d61d875a54f39d3fc74b202319103e24`; Gates 0-6 passed
 
 This folder is the operational control surface for `Khufu - The Sealed Circuit`. It turns the
 research contract into traceable work, tests, evidence, and review gates. It does not replace the
@@ -10,13 +10,15 @@ archaeology research or the V4 geometry contract.
 
 ## Cold-Reader Snapshot
 
-- Current decision: accept the six-document harness; keep Gate 0 open until its scoped files are committed.
-- Current phase: `KV5-G-000 Harness Ready`.
-- Next action: obtain user authorization for a scoped harness commit, commit only the freeze set,
-  then run the committed-mode validator.
-- Current blocker: Gate 0 freeze is pending a user-authorized scoped commit; Unity work is not
-  allowed to start before that gate passes.
-- Current proof: [STATUS.md](STATUS.md) is the live ledger.
+- Current decision: hold `KV5-D-011` performance, `KV5-D-012` V5 simulation substitution, and
+  `KV5-D-013` build-input binding; Fable says ship, but committed acceptance is still mandatory.
+- Current phase: `KV5-G-007 Final Acceptance`.
+- Next action: commit only the scoped Gate 7 evidence, then create and verify the final receipt in
+  `--require-committed` mode.
+- Current blocker: no technical implementation blocker; release acceptance is pending the scoped
+  evidence commit and final committed harness receipt.
+- Current proof: [STATUS.md](STATUS.md) is the live ledger; `KV5-E-014` through `KV5-E-022` bind
+  implementation, visual, performance, V4, social, CLI, build inputs, Fable, and cold-reader proof.
 
 ## Document Set
 
@@ -25,7 +27,8 @@ archaeology research or the V4 geometry contract.
 3. [STATUS.md](STATUS.md) is the only live status and evidence ledger.
 4. [TEST_PLAN.md](TEST_PLAN.md) maps every requirement to a matching verification surface.
 5. [DECISIONS.md](DECISIONS.md) records decisions, risks, and supersession.
-6. This file defines navigation, identifiers, precedence, and update protocol.
+6. [RULES.md](RULES.md) defines truth, implementation, evidence, retry, Git, and ship rules.
+7. This file defines navigation, identifiers, precedence, and update protocol.
 
 Supporting contracts:
 
@@ -39,10 +42,11 @@ When documents disagree, use this order:
 
 1. Latest accepted entry in `DECISIONS.md`.
 2. Non-negotiable invariants and requirements in `GOAL.md`.
-3. Current gate contract in `PLAN.md`.
-4. Test definitions in `TEST_PLAN.md`.
-5. Live execution state and evidence in `STATUS.md`.
-6. Supporting research and prior V4/V2 documents.
+3. Operational constraints in `RULES.md`.
+4. Current gate contract in `PLAN.md`.
+5. Test definitions in `TEST_PLAN.md`.
+6. Live execution state and evidence in `STATUS.md`.
+7. Supporting research and prior V4/V2 documents.
 
 `STATUS.md` may report progress but cannot weaken a requirement, test, or gate.
 
@@ -106,5 +110,5 @@ Gate 0 can freeze only after the scoped files and final receipt are committed:
 python tools/validate_khufu_v5_harness.py --root . --receipt runs/khufu-v5-harness-20260710-gate0/final-receipt.md --require-committed
 ```
 
-The validator checks required files, links, ID uniqueness, requirement-to-test coverage,
+The validator checks all seven required files, links, ID uniqueness, requirement-to-test coverage,
 completed-status evidence joins, artifact content, and required Fable verdict tokens.

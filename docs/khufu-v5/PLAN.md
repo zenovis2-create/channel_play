@@ -39,6 +39,32 @@ Missing or invalid required Fable output blocks the gate automatically.
 - Freeze world origin, V4 root, V5 district roots, spawn, keys, mission terminal, shop, and exit.
 - Record target-machine specification and initial performance-capture procedure.
 
+#### Frozen Coordinate Contract
+
+- Unity metres, world origin at the V4 pyramid centre, `+X` east, `-Z` north, and `+Y` up.
+- Preserve `Runtime_Pyramid_Reference_Matched_V4` as an unchanged direct child of
+  `TraitorEscape_Runtime_Map`; create `Runtime_Khufu_Mega_Labyrinth_V5` as its sibling.
+- V5 playable envelope: X `[-100, 160]`, Z `[-95, 95]`, Y `[-28, 38]`.
+- Direct V5 district roots and centres:
+  `Valley_Gate (150,0,0)`, `Covered_Causeway (105,3,0)`,
+  `Pyramid_Temple_Hub (62,1,0)`, `Boat_Pits_Eastern_Court (35,0,42)`,
+  `North_Face_Scan_Court (0,0,-48)`, `Authentic_Interior_Spine (0,8,0)`,
+  `Royal_Chamber_Circuit (-18,12,22)`, `Subterranean_Threshold (0,-5,18)`,
+  `Underworld_Outer_Breach (-38,-12,42)`, `Underworld_False_Door_Loop (-72,-19,2)`, and
+  `Underworld_Deep_Vault (-35,-26,-55)`.
+- Each district root owns exactly one `V5_Evidence_<CLASS>` child using FACT, UNKNOWN,
+  HYPOTHESIS, FICTION, HYBRID, or N/A. UNKNOWN and HYPOTHESIS surfaces are observation-only.
+- Gameplay bindings: spawn `(150,1.2,0)`; Sun key `(34,1.2,45)`; Crown key
+  `(-18,13.2,22)`; Earth key `(-35,-24.8,-55)`; mission terminal `(62,1.2,8)`; shop
+  `(62,1.2,-8)`; scanner `(0,1.2,-42)`; extraction gate `(154,2.0,0)`.
+- V5 operator proof contract: start `(25,135,0)`, X `[-105,165]`, Z `[-100,100]`, height
+  `[12,160]`, vertical top-down rotation, and `75` degree vertical FOV; see `KV5-D-010`.
+- Ordered critical-route markers must measure 700-900 m, form at least six named major loops,
+  expose at least three initially locked far-side shortcuts, and keep unrewarded dead-end return
+  cost at or below 15 seconds at 4.5 m/s.
+- The V5 builder may rebuild V4 first, but it must never parent V5 content below the V4 root or
+  reference V3 implementation details.
+
 ## Phase 1: Authored Graybox
 
 ### KV5-G-002 Authored Graybox

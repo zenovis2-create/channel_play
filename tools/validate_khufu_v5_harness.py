@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 import re
 import subprocess
 import sys
@@ -14,6 +15,13 @@ from pathlib import Path
 
 
 DOC_DIR = Path("docs/khufu-v5")
+BUILD_BINDING_MANIFEST = Path("runs/khufu-mega-labyrinth-v5/build-input-binding.json")
+IMPLEMENTATION_FABLE_REVIEW = Path(
+    "work/fable-harness/khufu-v5-implementation-final-review.fable.md"
+)
+IMPLEMENTATION_FABLE_META = Path(
+    "work/fable-harness/khufu-v5-implementation-final-review.fable.md.meta.json"
+)
 REQUIRED_DOCS = (
     "README.md",
     "GOAL.md",
@@ -21,6 +29,7 @@ REQUIRED_DOCS = (
     "STATUS.md",
     "TEST_PLAN.md",
     "DECISIONS.md",
+    "RULES.md",
 )
 REQUIREMENT_RE = re.compile(r"^\|\s*(KV5-R-\d{3})\s*\|", re.MULTILINE)
 TEST_RE = re.compile(r"^\|\s*(KV5-T-\d{3})\s*\|", re.MULTILINE)
@@ -142,6 +151,184 @@ def _artifact_fingerprint(paths: list[Path], root: Path) -> str:
     return digest.hexdigest()
 
 
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _bound_path(root: Path, raw_path: object, label: str, errors: list[str]) -> Path | None:
+    if not isinstance(raw_path, str) or not raw_path.strip():
+        errors.append(f"build binding {label} has no path")
+        return None
+    candidate = (root / raw_path).resolve()
+    try:
+        candidate.relative_to(root)
+    except ValueError:
+        errors.append(f"build binding {label} escapes project root: {raw_path}")
+        return None
+    return candidate
+
+
+def _check_bound_file(
+    root: Path,
+    entry: object,
+    label: str,
+    errors: list[str],
+    *,
+    check_tokens: bool = False,
+) -> Path | None:
+    if not isinstance(entry, dict):
+        errors.append(f"build binding {label} must be an object")
+        return None
+    path = _bound_path(root, entry.get("path"), label, errors)
+    if path is None:
+        return None
+    if not path.is_file():
+        errors.append(f"build binding {label} file missing: {entry.get('path')}")
+        return None
+    expected = entry.get("sha256")
+    actual = _sha256_file(path)
+    if not isinstance(expected, str) or not re.fullmatch(r"[0-9a-fA-F]{64}", expected):
+        errors.append(f"build binding {label} has invalid sha256")
+    elif actual != expected.lower():
+        errors.append(
+            f"build binding hash mismatch for {entry.get('path')}: expected={expected.lower()} actual={actual}"
+        )
+    if check_tokens:
+        content = path.read_text(encoding="utf-8", errors="replace")
+        tokens = entry.get("required_tokens", [])
+        if not isinstance(tokens, list) or not tokens:
+            errors.append(f"build binding {label} has no required tokens")
+        else:
+            for token in tokens:
+                if not isinstance(token, str) or token not in content:
+                    errors.append(
+                        f"build binding {label} missing required token: {token!r}"
+                    )
+    return path
+
+
+def _check_build_binding(root: Path, errors: list[str]) -> Path:
+    manifest_path = root / BUILD_BINDING_MANIFEST
+    if not manifest_path.is_file():
+        errors.append(f"missing build input binding manifest: {BUILD_BINDING_MANIFEST}")
+        return manifest_path
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        errors.append(f"invalid build input binding manifest: {exc}")
+        return manifest_path
+    if not isinstance(manifest, dict):
+        errors.append("build input binding manifest must contain an object")
+        return manifest_path
+    if manifest.get("schema") != "channel_play.khufu_v5.build_input_binding.v1":
+        errors.append("build input binding manifest has unexpected schema")
+    if not re.fullmatch(r"[0-9a-f]{40}", str(manifest.get("implementation_commit", ""))):
+        errors.append("build input binding manifest has invalid implementation commit")
+
+    scene = manifest.get("scene")
+    _check_bound_file(root, scene, "scene", errors)
+
+    provenance = manifest.get("provenance")
+    if not isinstance(provenance, list) or not provenance:
+        errors.append("build input binding manifest has no provenance files")
+    else:
+        for index, entry in enumerate(provenance):
+            _check_bound_file(
+                root,
+                entry,
+                f"provenance[{index}]",
+                errors,
+                check_tokens=True,
+            )
+
+    inputs = manifest.get("inputs")
+    if not isinstance(inputs, list) or not inputs:
+        errors.append("build input binding manifest has no project inputs")
+    else:
+        seen: set[str] = set()
+        for index, entry in enumerate(inputs):
+            path = _check_bound_file(root, entry, f"inputs[{index}]", errors)
+            if not isinstance(entry, dict):
+                continue
+            raw_path = entry.get("path")
+            if isinstance(raw_path, str):
+                if raw_path in seen:
+                    errors.append(f"duplicate build input binding path: {raw_path}")
+                seen.add(raw_path)
+            override = entry.get("build_override")
+            if override is None or path is None:
+                continue
+            if not isinstance(override, dict):
+                errors.append(f"build binding override for {raw_path} must be an object")
+                continue
+            find = override.get("find")
+            replace = override.get("replace")
+            occurrences = override.get("occurrences")
+            expected_derived = override.get("derived_build_sha256")
+            if not isinstance(find, str) or not isinstance(replace, str):
+                errors.append(f"build binding override for {raw_path} needs string find/replace")
+                continue
+            content = path.read_bytes()
+            find_bytes = find.encode("utf-8")
+            replace_bytes = replace.encode("utf-8")
+            actual_occurrences = content.count(find_bytes)
+            if not isinstance(occurrences, int) or actual_occurrences != occurrences:
+                errors.append(
+                    f"build binding override occurrence mismatch for {raw_path}: expected={occurrences} actual={actual_occurrences}"
+                )
+                continue
+            derived = hashlib.sha256(content.replace(find_bytes, replace_bytes)).hexdigest()
+            if (
+                not isinstance(expected_derived, str)
+                or not re.fullmatch(r"[0-9a-fA-F]{64}", expected_derived)
+                or derived != expected_derived.lower()
+            ):
+                errors.append(
+                    f"build binding derived hash mismatch for {raw_path}: expected={expected_derived} actual={derived}"
+                )
+    return manifest_path
+
+
+def _check_implementation_fable_call(root: Path, errors: list[str]) -> tuple[Path, Path]:
+    review_path = root / IMPLEMENTATION_FABLE_REVIEW
+    meta_path = root / IMPLEMENTATION_FABLE_META
+    if not review_path.is_file():
+        errors.append(f"missing implementation Fable review: {IMPLEMENTATION_FABLE_REVIEW}")
+    if not meta_path.is_file():
+        errors.append(f"missing implementation Fable call metadata: {IMPLEMENTATION_FABLE_META}")
+        return review_path, meta_path
+    try:
+        meta = json.loads(meta_path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError) as exc:
+        errors.append(f"invalid implementation Fable call metadata: {exc}")
+        return review_path, meta_path
+    if not isinstance(meta, dict):
+        errors.append("implementation Fable call metadata must contain an object")
+        return review_path, meta_path
+    expected = {
+        "phase": "final-review",
+        "dryRun": False,
+        "exitCode": 0,
+        "outputValidation": "passed",
+        "timedOut": False,
+    }
+    for key, value in expected.items():
+        if meta.get(key) != value:
+            errors.append(
+                f"implementation Fable call metadata mismatch for {key}: expected={value!r} actual={meta.get(key)!r}"
+            )
+    warnings = meta.get("warnings")
+    if not isinstance(warnings, list) or warnings:
+        errors.append(f"implementation Fable call metadata has warnings: {warnings!r}")
+    if meta.get("model") != "claude-fable-5":
+        errors.append("implementation Fable call did not use claude-fable-5")
+    return review_path, meta_path
+
+
 def _git_head(root: Path) -> str:
     try:
         result = subprocess.run(
@@ -232,6 +419,8 @@ def validate_harness(root: Path, pending_artifact: Path | None = None) -> Valida
     warnings: list[str] = []
     doc_paths = [root / DOC_DIR / name for name in REQUIRED_DOCS]
     texts = {path.name: _read(path, errors) for path in doc_paths}
+    build_binding_path = _check_build_binding(root, errors)
+    fable_review_path, fable_meta_path = _check_implementation_fable_call(root, errors)
 
     requirement_values = REQUIREMENT_RE.findall(texts.get("GOAL.md", ""))
     test_values = TEST_RE.findall(texts.get("TEST_PLAN.md", ""))
@@ -310,6 +499,9 @@ def validate_harness(root: Path, pending_artifact: Path | None = None) -> Valida
     extra_paths = [
         root / "tools/validate_khufu_v5_harness.py",
         root / "tools/tests/test_validate_khufu_v5_harness.py",
+        build_binding_path,
+        fable_review_path,
+        fable_meta_path,
     ]
     artifact_sha = _artifact_fingerprint(doc_paths + extra_paths, root)
     for evidence_id in sorted(referenced_for_completion):
@@ -383,7 +575,9 @@ def _check_committed_freeze(root: Path, receipt: Path | None) -> list[str]:
         "docs/khufu-v5",
         "tools/validate_khufu_v5_harness.py",
         "tools/tests/test_validate_khufu_v5_harness.py",
-        "work/fable-harness/khufu-v5-final-review.ship.fable.md",
+        BUILD_BINDING_MANIFEST.as_posix(),
+        IMPLEMENTATION_FABLE_REVIEW.as_posix(),
+        IMPLEMENTATION_FABLE_META.as_posix(),
     ]
     if receipt is not None:
         try:
@@ -415,7 +609,9 @@ def _check_committed_freeze(root: Path, receipt: Path | None) -> list[str]:
             *(f"docs/khufu-v5/{name}" for name in REQUIRED_DOCS),
             "tools/validate_khufu_v5_harness.py",
             "tools/tests/test_validate_khufu_v5_harness.py",
-            "work/fable-harness/khufu-v5-final-review.ship.fable.md",
+            BUILD_BINDING_MANIFEST.as_posix(),
+            IMPLEMENTATION_FABLE_REVIEW.as_posix(),
+            IMPLEMENTATION_FABLE_META.as_posix(),
         ]
         if receipt is not None:
             required_files.append(receipt.resolve().relative_to(root).as_posix())

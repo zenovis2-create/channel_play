@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import shutil
 import sys
 import tempfile
@@ -22,6 +23,22 @@ class KhufuV5HarnessValidatorTests(unittest.TestCase):
             PROJECT_ROOT / "tools" / "validate_khufu_v5_harness.py",
             destination / "tools" / "validate_khufu_v5_harness.py",
         )
+        binding_source = (
+            PROJECT_ROOT
+            / "runs"
+            / "khufu-mega-labyrinth-v5"
+            / "build-input-binding.json"
+        )
+        binding_target = destination / binding_source.relative_to(PROJECT_ROOT)
+        binding_target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(binding_source, binding_target)
+        binding = json.loads(binding_source.read_text(encoding="utf-8"))
+        bound_entries = [binding["scene"], *binding["provenance"], *binding["inputs"]]
+        for relative in {entry["path"] for entry in bound_entries}:
+            source = PROJECT_ROOT / relative
+            target = destination / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, target)
         shutil.copytree(
             PROJECT_ROOT / "work" / "fable-harness",
             destination / "work" / "fable-harness",
@@ -94,6 +111,43 @@ class KhufuV5HarnessValidatorTests(unittest.TestCase):
     def test_current_harness_passes(self) -> None:
         report = validate_harness(PROJECT_ROOT)
         self.assertTrue(report.passed, "\n".join(report.errors))
+
+    def test_rules_document_is_required(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self._copy_harness(root)
+            (root / "docs" / "khufu-v5" / "RULES.md").unlink()
+            report = validate_harness(root)
+            self.assertTrue(any("RULES.md" in error for error in report.errors))
+
+    def test_build_input_binding_manifest_is_required(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self._copy_harness(root)
+            (
+                root
+                / "runs"
+                / "khufu-mega-labyrinth-v5"
+                / "build-input-binding.json"
+            ).unlink()
+            report = validate_harness(root)
+            self.assertTrue(
+                any("missing build input binding manifest" in error for error in report.errors)
+            )
+
+    def test_build_input_hash_mismatch_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self._copy_harness(root)
+            quality = root / "ProjectSettings" / "QualitySettings.asset"
+            quality.write_text(
+                quality.read_text(encoding="utf-8") + "\nchanged\n",
+                encoding="utf-8",
+            )
+            report = validate_harness(root)
+            self.assertTrue(
+                any("build binding hash mismatch" in error for error in report.errors)
+            )
 
     def test_completed_status_requires_evidence(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
@@ -189,6 +243,27 @@ class KhufuV5HarnessValidatorTests(unittest.TestCase):
             status.write_text(status_text, encoding="utf-8")
             report = validate_harness(root)
             self.assertTrue(any("contains invalid token" in error for error in report.errors))
+
+    def test_implementation_fable_call_warning_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self._copy_harness(root)
+            meta_path = (
+                root
+                / "work"
+                / "fable-harness"
+                / "khufu-v5-implementation-final-review.fable.md.meta.json"
+            )
+            meta = json.loads(meta_path.read_text(encoding="utf-8-sig"))
+            meta["warnings"] = ["mutated warning"]
+            meta_path.write_text(json.dumps(meta), encoding="utf-8")
+            report = validate_harness(root)
+            self.assertTrue(
+                any(
+                    "implementation Fable call metadata has warnings" in error
+                    for error in report.errors
+                )
+            )
 
     def test_document_edit_invalidates_revision_hash(self) -> None:
         with tempfile.TemporaryDirectory() as temp:

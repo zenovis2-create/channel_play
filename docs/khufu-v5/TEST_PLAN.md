@@ -1,6 +1,6 @@
 # Khufu V5 Test Plan and Traceability Matrix
 
-Updated: 2026-07-10
+Updated: 2026-07-11
 
 Tests prove only their named surface. Passing one surface never substitutes for another. All final
 implementation evidence must come from the same accepted commit unless a test explicitly records
@@ -20,12 +20,24 @@ an approved exception.
 | KV5-T-008 | KV5-R-007 | Human social-deduction rehearsal | Each key route exposes one public interaction and one private-risk segment without unavoidable isolation; observations are recorded by two reviewers or one reviewer plus replay evidence. | Review form, replay/captures, issue list. |
 | KV5-T-009 | KV5-R-008 | Operator PlayMode and screenshots | Operator camera reaches all macro districts, shows objective states, and frames the full route without clipping or UI overlap. | Operator traversal receipt and required screenshots. |
 | KV5-T-010 | KV5-R-010 | Unity batch compile/EditMode checks | Unity exits 0; compile errors and unexpected error logs are zero; static validators pass. | `tools/channelctl unity check` receipt and logs. |
-| KV5-T-011 | KV5-R-005, KV5-R-006, KV5-R-010 | Unity PlayMode/simulation smoke | Runtime map spawns; player moves; key/terminal/shop/exit flow and scripted agent route complete; receipt verdict is pass. | Playtest, sim-check, agent-playtest receipts. |
+| KV5-T-011 | KV5-R-005, KV5-R-006, KV5-R-010 | Unity PlayMode/simulation smoke | Runtime map spawns; player moves; key/terminal/shop/exit flow and scripted agent route complete; receipt verdict is pass. | Generic playtest plus V5-specific PlayMode, simulation, and scripted-route receipts; V2-only surfaces follow `KV5-D-012`. |
 | KV5-T-012 | KV5-R-001, KV5-R-011 | Screenshot and manual visual review | Desktop player, operator, top-down, side elevation, landmarks, dense core, UI fit, and truth boundary meet the visual checklist at named resolutions. | PNG set, capture manifest, signed review. |
 | KV5-T-013 | KV5-R-009 | Windows Development Player profiling | Named target machine, scene, route, sample window, budgets, and profiler data are recorded; accepted budgets pass. | Player build receipt, profiler capture, budget decision ID. |
 | KV5-T-014 | KV5-R-012, KV5-R-014 | Fable harness review | Required output is non-empty plain text, contains `FABLE_VERDICT: ship`, and contains no harness error or tool-call warning. | Fable output and wrapper call ledger. |
 | KV5-T-015 | KV5-R-013 | Regression and rollback audit | Unrelated dirty changes are untouched; gate rollback is executable; focused diff contains only intended files; affected prior tests still pass. | Git status/diff summary, rollback procedure, regression receipts. |
 | KV5-T-016 | KV5-R-014 | Cold-reader audit | From README alone, a fresh reviewer identifies current decision, phase, next action, blocker, and proof within five minutes with no incorrect answer. | Timestamped question/answer receipt and reviewer identity/type. |
+
+## Accepted Evidence-Surface Decisions
+
+- `KV5-D-012` records that the repository's legacy `sim-check` and scripted agent command are
+  V2-only and target a root and names intentionally absent from Khufu V5. Their failed/missing-root
+  result cannot pass V5 and cannot be hidden.
+- For `KV5-T-011`, the accepted V5 replacement is the generic 15-check playtest plus the committed
+  Gate 4 and PlayMode probe receipts. Together they assert map spawn, real CharacterController
+  movement, all six named-key orders, terminal/shop/exit behavior, the scripted critical route,
+  collision samples, shortcuts, and zero unexpected Unity errors.
+- The substitution applies only to V5. It does not change V2 tests or turn a V2 failure into a
+  passing result.
 
 ## Gate 0 Validator Scope
 
