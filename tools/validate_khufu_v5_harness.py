@@ -579,12 +579,37 @@ def _check_committed_freeze(root: Path, receipt: Path | None) -> list[str]:
         IMPLEMENTATION_FABLE_REVIEW.as_posix(),
         IMPLEMENTATION_FABLE_META.as_posix(),
     ]
+    errors: list[str] = []
+    status_path = root / DOC_DIR / "STATUS.md"
+    try:
+        status_text = status_path.read_text(encoding="utf-8")
+        parse_errors: list[str] = []
+        evidence = _parse_evidence(status_text, parse_errors)
+        errors.extend(parse_errors)
+        completed_ids = {
+            evidence_id
+            for item in COMPLETED_RE.findall(status_text)
+            for evidence_id in EVIDENCE_REF_RE.findall(item)
+        }
+        for evidence_id in sorted(completed_ids):
+            record = evidence.get(evidence_id)
+            if record is None:
+                continue
+            artifact = (root / DOC_DIR / record.artifact).resolve()
+            try:
+                paths.append(artifact.relative_to(root).as_posix())
+            except ValueError:
+                errors.append(
+                    f"completion evidence escapes project root: {evidence_id} {record.artifact}"
+                )
+    except OSError as exc:
+        errors.append(f"unable to read completion evidence for committed freeze: {exc}")
     if receipt is not None:
         try:
             paths.append(receipt.resolve().relative_to(root).as_posix())
         except ValueError:
             return ["freeze receipt must be inside the project root"]
-    errors: list[str] = []
+    paths = list(dict.fromkeys(paths))
     try:
         status = subprocess.run(
             ["git", "status", "--porcelain", "--", *paths],
@@ -595,7 +620,7 @@ def _check_committed_freeze(root: Path, receipt: Path | None) -> list[str]:
             timeout=15,
         )
         if status.stdout.strip():
-            errors.append("Gate 0 freeze paths are uncommitted or dirty")
+            errors.append("harness freeze paths are uncommitted or dirty")
         tracked = subprocess.run(
             ["git", "ls-files", "--", *paths],
             cwd=root,
@@ -612,14 +637,19 @@ def _check_committed_freeze(root: Path, receipt: Path | None) -> list[str]:
             BUILD_BINDING_MANIFEST.as_posix(),
             IMPLEMENTATION_FABLE_REVIEW.as_posix(),
             IMPLEMENTATION_FABLE_META.as_posix(),
+            *[
+                path
+                for path in paths
+                if path not in {"docs/khufu-v5"}
+            ],
         ]
         if receipt is not None:
             required_files.append(receipt.resolve().relative_to(root).as_posix())
         for path in required_files:
             if path not in tracked_paths:
-                errors.append(f"Gate 0 freeze file is not committed: {path}")
+                errors.append(f"harness freeze file is not committed: {path}")
     except (OSError, subprocess.SubprocessError) as exc:
-        errors.append(f"unable to verify committed Gate 0 freeze: {exc}")
+        errors.append(f"unable to verify committed harness freeze: {exc}")
     return errors
 
 

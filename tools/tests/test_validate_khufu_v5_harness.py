@@ -23,6 +23,9 @@ class KhufuV5HarnessValidatorTests(unittest.TestCase):
             PROJECT_ROOT / "tools" / "validate_khufu_v5_harness.py",
             destination / "tools" / "validate_khufu_v5_harness.py",
         )
+        test_target = destination / "tools" / "tests" / "test_validate_khufu_v5_harness.py"
+        test_target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(Path(__file__), test_target)
         binding_source = (
             PROJECT_ROOT
             / "runs"
@@ -97,14 +100,31 @@ class KhufuV5HarnessValidatorTests(unittest.TestCase):
         )
         status.write_text(status_text, encoding="utf-8")
         artifact_sha = validate_harness(root).artifact_sha256
-        status.write_text(
-            status.read_text(encoding="utf-8").replace(
-                "ARTIFACT:" + placeholder,
-                "ARTIFACT:" + artifact_sha,
-                1,
-            ),
-            encoding="utf-8",
+        rebound_lines = []
+        for line in status.read_text(encoding="utf-8").splitlines():
+            if "current-snapshot" in line:
+                line = re.sub(
+                    r"ARTIFACT:[0-9a-f]{64}",
+                    "ARTIFACT:" + artifact_sha,
+                    line,
+                )
+            rebound_lines.append(line)
+        status.write_text("\n".join(rebound_lines) + "\n", encoding="utf-8")
+        final_receipt = (
+            root
+            / "runs"
+            / "khufu-mega-labyrinth-v5"
+            / "final-harness-receipt.md"
         )
+        if final_receipt.is_file():
+            final_receipt.write_text(
+                re.sub(
+                    r"Artifact SHA256:\s*`[0-9a-f]{64}`",
+                    "Artifact SHA256: `" + artifact_sha + "`",
+                    final_receipt.read_text(encoding="utf-8"),
+                ),
+                encoding="utf-8",
+            )
         report = validate_harness(root)
         self.assertTrue(report.passed, "\n".join(report.errors))
 

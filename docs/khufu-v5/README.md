@@ -1,7 +1,7 @@
 # Khufu V5 Delivery Harness
 
 Updated: 2026-07-11
-Harness state: Fable and cold-reader pass; Gate 7 scoped commit and final receipt pending
+Harness state: Gate 7 accepted; Fable, cold-reader, scoped commit, and final receipt pass
 Unity implementation state: committed at `81c28f84d61d875a54f39d3fc74b202319103e24`; Gates 0-6 passed
 
 This folder is the operational control surface for `Khufu - The Sealed Circuit`. It turns the
@@ -10,15 +10,14 @@ archaeology research or the V4 geometry contract.
 
 ## Cold-Reader Snapshot
 
-- Current decision: hold `KV5-D-011` performance, `KV5-D-012` V5 simulation substitution, and
-  `KV5-D-013` build-input binding; Fable says ship, but committed acceptance is still mandatory.
-- Current phase: `KV5-G-007 Final Acceptance`.
-- Next action: commit only the scoped Gate 7 evidence, then create and verify the final receipt in
-  `--require-committed` mode.
-- Current blocker: no technical implementation blocker; release acceptance is pending the scoped
-  evidence commit and final committed harness receipt.
-- Current proof: [STATUS.md](STATUS.md) is the live ledger; `KV5-E-014` through `KV5-E-022` bind
-  implementation, visual, performance, V4, social, CLI, build inputs, Fable, and cold-reader proof.
+- Current decision: freeze `KV5-D-011` performance, `KV5-D-012` V5 simulation substitution, and
+  `KV5-D-013` build-input binding as the accepted V5 release baseline.
+- Current phase: `KV5-G-007 Final Acceptance` complete.
+- Next action: preserve the accepted commit chain and rerun affected gates after any implementation,
+  scene, build-input, or evidence change.
+- Current blocker: none within the accepted V5 scope.
+- Current proof: [STATUS.md](STATUS.md) is the live ledger; `KV5-E-014` through `KV5-E-024` bind
+  implementation through the final committed harness receipt.
 
 ## Document Set
 

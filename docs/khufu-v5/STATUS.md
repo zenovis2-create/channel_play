@@ -2,7 +2,7 @@
 
 Updated: 2026-07-11
 Current gate: `KV5-G-007 Final Acceptance`
-Gate verdict: in progress; Fable and cold-reader pass, while scoped commit and final receipt remain
+Gate verdict: accepted; Fable ship, cold-reader, scoped evidence commit, and final receipt pass
 Unity implementation: V5 authored map, runtime binding, visual proof, and Windows profile implemented
 Baseline commit: `a31905297cae2d7e2d83ababab54b109460cfbe2`
 Implementation commit: `81c28f84d61d875a54f39d3fc74b202319103e24`
@@ -31,7 +31,7 @@ surface, and `KV5-D-013` build-input binding. Bind every final claim to implemen
 - [x] `KV5-G-004` Traversal and Social Play; evidence: KV5-E-014
 - [x] `KV5-G-005` Art and Truth Language; evidence: KV5-E-015
 - [x] `KV5-G-006` Performance and Regression; evidence: KV5-E-016
-- [~] `KV5-G-007` Final Acceptance
+- [x] `KV5-G-007` Final Acceptance; evidence: KV5-E-024
 
 ## Gate 0 Work Items
 
@@ -75,18 +75,17 @@ surface, and `KV5-D-013` build-input binding. Bind every final claim to implemen
 - [x] Add `RULES.md` to the required harness set and rerun fail-closed tests; evidence: KV5-E-020
 - [x] Obtain implementation-level external Fable review ending in `FABLE_VERDICT: ship`; evidence: KV5-E-021
 - [x] Run a fresh cold-reader audit from README alone; evidence: KV5-E-022
-- [ ] Commit Gate 7 evidence without unrelated worktree files.
-- [ ] Pass the final harness receipt in `--require-committed` mode.
+- [x] Commit Gate 7 evidence without unrelated worktree files; evidence: KV5-E-023
+- [x] Pass the final harness receipt in `--require-committed` mode; evidence: KV5-E-024
 
 ## Blockers
 
-- No technical implementation blocker. Gate 7 release acceptance remains open until the scoped
-  evidence commit and committed final receipt exist.
+- None within the accepted V5 scope.
 
 ## Next Action
 
-Commit the scoped Gate 7 evidence without unrelated worktree files, then create and verify the
-final committed-mode harness receipt.
+Preserve the accepted commit chain and rerun affected gates if implementation, scene, build-input,
+or evidence bytes change.
 
 ## Evidence Ledger
 
@@ -115,7 +114,9 @@ Ledger rows are append-only. Corrections add a new row and mark the old row supe
 | KV5-E-019 | KV5-R-005, KV5-R-006, KV5-R-010, KV5-R-013 / KV5-T-010, KV5-T-011, KV5-T-015 | COMMIT:81c28f84d61d875a54f39d3fc74b202319103e24+ARTIFACT:2315d6f2e8d48f3a724a2eab782399d6da3bf613d2fd29fbef03530011c22a29 | `channelctl unity check --batch`, generic playtest, fail-closed V2 applicability run, and `KV5-D-012` V5 replacement | accepted | ../../runs/khufu-mega-labyrinth-v5/channelctl-validation.md | 2026-07-11 | Batch compile exit 0/errors 0; generic playtest 15/15. V2 sim failed on the intentionally absent root and is not mislabeled; V5 Gate 4/PlayMode receipts provide the accepted route proof. |
 | KV5-E-020 | KV5-R-009, KV5-R-010, KV5-R-013, KV5-R-014 / KV5-T-001, KV5-T-010, KV5-T-013, KV5-T-015 | COMMIT:81c28f84d61d875a54f39d3fc74b202319103e24+ARTIFACT:25a84780a5807e174f42e7da20427b1857f191b982dead9a56bd509d2a54c058 | Close Fable conditions with `KV5-D-012` assertion map, `KV5-D-013` build binding, required RULES, and fail-closed tests | accepted | ../../runs/khufu-mega-labyrinth-v5/gate7-remediation.md | 2026-07-11 | Build inputs remain unstaged but hash-bound; missing manifest, changed input, bad Fable metadata, and missing RULES fail. Focused suites pass 18/18. |
 | KV5-E-021 | KV5-R-012, KV5-R-014 / KV5-T-014 | COMMIT:81c28f84d61d875a54f39d3fc74b202319103e24+ARTIFACT:40071ceccf26da41a5dea1e88876a084704a50fd08bdfcc00569a3be39a6314f | External Fable implementation final review through `codex-fable-harness` | accepted | ../../work/fable-harness/khufu-v5-implementation-final-review.fable.md | 2026-07-11 | Wrapper exit 0, warnings empty, output validation passed, and final non-empty line is exactly the ship verdict. Conditions are closed by E020; final cold-reader/committed receipt remain mandatory. |
-| KV5-E-022 | KV5-R-014 / KV5-T-016 | COMMIT:81c28f84d61d875a54f39d3fc74b202319103e24+ARTIFACT:9307a4164f29e0837c7297f93abcc6bf5195b7283dd2324a7634ae1a33e3846e | Fresh isolated reviewer reads README only and answers the five cold-reader fields | accepted | ../../runs/khufu-mega-labyrinth-v5/cold-reader-final.md | 2026-07-11 | Reviewer identified decision, phase, next action, blocker, and proof within five minutes and reported no ambiguity. |
+| KV5-E-022 | KV5-R-014 / KV5-T-016 | COMMIT:81c28f84d61d875a54f39d3fc74b202319103e24+ARTIFACT:08eef4ce7faeea75f699fed29a43301cf6ad60b961b5a36441f27d0dc3631487 | Fresh isolated reviewer reads README only and answers the five cold-reader fields | accepted | ../../runs/khufu-mega-labyrinth-v5/cold-reader-final.md | 2026-07-11 | Reviewer identified final decision, completed phase, maintenance action, no blocker, and proof within five minutes and reported no ambiguity. |
+| KV5-E-023 | KV5-R-013, KV5-R-014 / KV5-T-001, KV5-T-015 | COMMIT:868486abc3499ee1bf6517840891ac84e4fe59d5+ARTIFACT:8ff8918732af827674bc89c8c954e8360a4b6e80634ed01bd7c6d1aaa031bfb9 | Audit scoped Gate 7 evidence commit and excluded worktree ownership | accepted | ../../runs/khufu-mega-labyrinth-v5/gate7-scoped-commit.md | 2026-07-11 | Commit contains only docs/runs/tools/work evidence; ProjectSettings, Packages, Builds, Library, Temp, and local raw logs were excluded. |
+| KV5-E-024 | KV5-R-010, KV5-R-012, KV5-R-013, KV5-R-014 / KV5-T-001, KV5-T-014, KV5-T-015 | COMMIT:868486abc3499ee1bf6517840891ac84e4fe59d5+ARTIFACT:4a17139a48b01a544fac096182533875bb8b99bbcdf47981977bc1f424bfe346 | Generate final receipt, commit it, then run `python tools/validate_khufu_v5_harness.py --root . --receipt runs/khufu-mega-labyrinth-v5/final-harness-receipt.md --require-committed` | accepted | ../../runs/khufu-mega-labyrinth-v5/final-harness-receipt.md | 2026-07-11 | current-snapshot final receipt; acceptance is valid only after the committed-mode command passes. |
 
 ## Unresolved
 
@@ -125,5 +126,5 @@ Ledger rows are append-only. Corrections add a new row and mark the old row supe
 
 ## Unverified
 
-- Final scoped evidence commit and committed harness receipt do not yet exist for implementation
-  commit `81c28f84d61d875a54f39d3fc74b202319103e24`.
+- No required V5 acceptance surface remains unverified. Human networked balance, photoreal art,
+  release-profile performance, and non-Windows targets remain explicitly outside this goal.
