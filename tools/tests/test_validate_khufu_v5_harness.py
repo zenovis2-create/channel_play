@@ -50,6 +50,46 @@ class KhufuV5HarnessValidatorTests(unittest.TestCase):
             / "TraitorEscapeMvpSpec.md",
             gameplay_spec / "TraitorEscapeMvpSpec.md",
         )
+        status_text = (PROJECT_ROOT / "docs" / "khufu-v5" / "STATUS.md").read_text(encoding="utf-8")
+        for line in status_text.splitlines():
+            if not line.startswith("| KV5-E-"):
+                continue
+            cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+            if len(cells) != 8:
+                continue
+            source = (PROJECT_ROOT / "docs" / "khufu-v5" / cells[5]).resolve()
+            if not source.is_file():
+                continue
+            relative = source.relative_to(PROJECT_ROOT)
+            target = destination / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, target)
+
+    def _add_current_snapshot_fixture(self, root: Path) -> None:
+        status = root / "docs" / "khufu-v5" / "STATUS.md"
+        placeholder = "0" * 64
+        status_text = status.read_text(encoding="utf-8")
+        status_text += "\n- [x] Current snapshot mutation fixture; evidence: KV5-E-099\n"
+        status_text += (
+            "| KV5-E-099 | KV5-R-014 / KV5-T-001 | "
+            "HEAD:0000000000000000000000000000000000000000+ARTIFACT:"
+            + placeholder
+            + " | Mutation fixture | passed | "
+            "../research/KHUFU_MEGA_LABYRINTH_MAP_RESEARCH.md | 2026-07-10 | "
+            "current-snapshot fixture |\n"
+        )
+        status.write_text(status_text, encoding="utf-8")
+        artifact_sha = validate_harness(root).artifact_sha256
+        status.write_text(
+            status.read_text(encoding="utf-8").replace(
+                "ARTIFACT:" + placeholder,
+                "ARTIFACT:" + artifact_sha,
+                1,
+            ),
+            encoding="utf-8",
+        )
+        report = validate_harness(root)
+        self.assertTrue(report.passed, "\n".join(report.errors))
 
     def test_current_harness_passes(self) -> None:
         report = validate_harness(PROJECT_ROOT)
@@ -154,6 +194,7 @@ class KhufuV5HarnessValidatorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             self._copy_harness(root)
+            self._add_current_snapshot_fixture(root)
             readme = root / "docs" / "khufu-v5" / "README.md"
             readme.write_text(readme.read_text(encoding="utf-8") + "\nchanged\n", encoding="utf-8")
             report = validate_harness(root)
@@ -179,6 +220,7 @@ class KhufuV5HarnessValidatorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             self._copy_harness(root)
+            self._add_current_snapshot_fixture(root)
             validator = root / "tools" / "validate_khufu_v5_harness.py"
             validator.write_text(
                 validator.read_text(encoding="utf-8") + "\n# mutation\n",
