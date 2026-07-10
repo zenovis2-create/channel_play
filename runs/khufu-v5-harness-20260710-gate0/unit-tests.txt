@@ -1,0 +1,14 @@
+test_accepted_fable_evidence_requires_ship_token (tools.tests.test_validate_khufu_v5_harness.KhufuV5HarnessValidatorTests.test_accepted_fable_evidence_requires_ship_token) ... ok
+test_completed_status_requires_evidence (tools.tests.test_validate_khufu_v5_harness.KhufuV5HarnessValidatorTests.test_completed_status_requires_evidence) ... ok
+test_current_harness_passes (tools.tests.test_validate_khufu_v5_harness.KhufuV5HarnessValidatorTests.test_current_harness_passes) ... ok
+test_document_edit_invalidates_revision_hash (tools.tests.test_validate_khufu_v5_harness.KhufuV5HarnessValidatorTests.test_document_edit_invalidates_revision_hash) ... ok
+test_quoted_ship_token_with_final_revise_is_rejected (tools.tests.test_validate_khufu_v5_harness.KhufuV5HarnessValidatorTests.test_quoted_ship_token_with_final_revise_is_rejected) ... ok
+test_requirement_without_test_coverage_fails (tools.tests.test_validate_khufu_v5_harness.KhufuV5HarnessValidatorTests.test_requirement_without_test_coverage_fails) ... ok
+test_tampered_receipt_hash_is_rejected (tools.tests.test_validate_khufu_v5_harness.KhufuV5HarnessValidatorTests.test_tampered_receipt_hash_is_rejected) ... ok
+test_validator_edit_invalidates_revision_hash (tools.tests.test_validate_khufu_v5_harness.KhufuV5HarnessValidatorTests.test_validator_edit_invalidates_revision_hash) ... ok
+test_warning_token_with_final_ship_is_rejected (tools.tests.test_validate_khufu_v5_harness.KhufuV5HarnessValidatorTests.test_warning_token_with_final_ship_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 1.983s
+
+OK
