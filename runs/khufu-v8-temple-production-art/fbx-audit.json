@@ -1,0 +1,646 @@
+{
+    "SourceAssetPath": "Assets/_Project/Art/Maps/pyramid_temple_real/pyramid_temple_full_environment.fbx",
+    "SourceBytes": 16090700,
+    "Transforms": 2583,
+    "Renderers": 2565,
+    "EnabledRenderers": 2565,
+    "VisibleCandidateRenderers": 2565,
+    "UniqueMeshes": 2565,
+    "Vertices": 379938,
+    "Triangles": 333700,
+    "Colliders": 0,
+    "Lights": 4,
+    "Cameras": 6,
+    "BoundsCenter": {
+        "x": 0.0,
+        "y": 3.685539960861206,
+        "z": -1.0
+    },
+    "BoundsSize": {
+        "x": 58.0,
+        "y": 7.6910881996154789,
+        "z": 67.99999237060547
+    },
+    "Groups": [
+        {
+            "Path": "Camera_front",
+            "Depth": 1,
+            "Transforms": 1,
+            "Renderers": 0,
+            "EnabledRenderers": 0,
+            "Vertices": 0,
+            "Triangles": 0,
+            "Colliders": 0
+        },
+        {
+            "Path": "Camera_interior_cutaway",
+            "Depth": 1,
+            "Transforms": 1,
+            "Renderers": 0,
+            "EnabledRenderers": 0,
+            "Vertices": 0,
+            "Triangles": 0,
+            "Colliders": 0
+        },
+        {
+            "Path": "Camera_left",
+            "Depth": 1,
+            "Transforms": 1,
+            "Renderers": 0,
+            "EnabledRenderers": 0,
+            "Vertices": 0,
+            "Triangles": 0,
+            "Colliders": 0
+        },
+        {
+            "Path": "Camera_rear",
+            "Depth": 1,
+            "Transforms": 1,
+            "Renderers": 0,
+            "EnabledRenderers": 0,
+            "Vertices": 0,
+            "Triangles": 0,
+            "Colliders": 0
+        },
+        {
+            "Path": "Camera_right",
+            "Depth": 1,
+            "Transforms": 1,
+            "Renderers": 0,
+            "EnabledRenderers": 0,
+            "Vertices": 0,
+            "Triangles": 0,
+            "Colliders": 0
+        },
+        {
+            "Path": "Camera_top_cutaway",
+            "Depth": 1,
+            "Transforms": 1,
+            "Renderers": 0,
+            "EnabledRenderers": 0,
+            "Vertices": 0,
+            "Triangles": 0,
+            "Colliders": 0
+        },
+        {
+            "Path": "Lighting_Burial_Warm_Fill",
+            "Depth": 1,
+            "Transforms": 1,
+            "Renderers": 0,
+            "EnabledRenderers": 0,
+            "Vertices": 0,
+            "Triangles": 0,
+            "Colliders": 0
+        },
+        {
+            "Path": "Lighting_Interior_Warm_Fill",
+            "Depth": 1,
+            "Transforms": 1,
+            "Renderers": 0,
+            "EnabledRenderers": 0,
+            "Vertices": 0,
+            "Triangles": 0,
+            "Colliders": 0
+        },
+        {
+            "Path": "Lighting_Key_Sun",
+            "Depth": 1,
+            "Transforms": 1,
+            "Renderers": 0,
+            "EnabledRenderers": 0,
+            "Vertices": 0,
+            "Triangles": 0,
+            "Colliders": 0
+        },
+        {
+            "Path": "Lighting_Rear_Cool_Fill",
+            "Depth": 1,
+            "Transforms": 1,
+            "Renderers": 0,
+            "EnabledRenderers": 0,
+            "Vertices": 0,
+            "Triangles": 0,
+            "Colliders": 0
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment",
+            "Depth": 1,
+            "Transforms": 2572,
+            "Renderers": 2565,
+            "EnabledRenderers": 2565,
+            "Vertices": 379938,
+            "Triangles": 333700,
+            "Colliders": 0
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Collision",
+            "Depth": 2,
+            "Transforms": 5,
+            "Renderers": 4,
+            "EnabledRenderers": 4,
+            "Vertices": 96,
+            "Triangles": 48,
+            "Colliders": 0
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior",
+            "Depth": 2,
+            "Transforms": 1507,
+            "Renderers": 1506,
+            "EnabledRenderers": 1506,
+            "Vertices": 196274,
+            "Triangles": 168360,
+            "Colliders": 0
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/GameplayMarkers",
+            "Depth": 2,
+            "Transforms": 7,
+            "Renderers": 6,
+            "EnabledRenderers": 6,
+            "Vertices": 1812,
+            "Triangles": 1704,
+            "Colliders": 0
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Interior",
+            "Depth": 2,
+            "Transforms": 713,
+            "Renderers": 712,
+            "EnabledRenderers": 712,
+            "Vertices": 125640,
+            "Triangles": 113408,
+            "Colliders": 0
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/LightingAnchors",
+            "Depth": 2,
+            "Transforms": 7,
+            "Renderers": 6,
+            "EnabledRenderers": 6,
+            "Vertices": 3318,
+            "Triangles": 3168,
+            "Colliders": 0
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Props",
+            "Depth": 2,
+            "Transforms": 332,
+            "Renderers": 331,
+            "EnabledRenderers": 331,
+            "Vertices": 52798,
+            "Triangles": 47012,
+            "Colliders": 0
+        }
+    ],
+    "Materials": [
+        {
+            "Name": "Temple_Faded_Gold_Relief",
+            "RendererSlots": 905,
+            "Vertices": 120152,
+            "Triangles": 100428
+        },
+        {
+            "Name": "Temple_Weathered_Limestone",
+            "RendererSlots": 650,
+            "Vertices": 87417,
+            "Triangles": 76452
+        },
+        {
+            "Name": "Temple_Limestone_Block_Variant",
+            "RendererSlots": 596,
+            "Vertices": 81771,
+            "Triangles": 71908
+        },
+        {
+            "Name": "Temple_Faded_Red_Paint",
+            "RendererSlots": 87,
+            "Vertices": 21001,
+            "Triangles": 20068
+        },
+        {
+            "Name": "Temple_Faded_Blue_Paint",
+            "RendererSlots": 55,
+            "Vertices": 16937,
+            "Triangles": 16612
+        },
+        {
+            "Name": "Temple_Faded_Teal_Paint",
+            "RendererSlots": 54,
+            "Vertices": 16805,
+            "Triangles": 16504
+        },
+        {
+            "Name": "Temple_Door_Shadow",
+            "RendererSlots": 117,
+            "Vertices": 15024,
+            "Triangles": 12636
+        },
+        {
+            "Name": "Temple_Clay_Pottery",
+            "RendererSlots": 24,
+            "Vertices": 8268,
+            "Triangles": 7968
+        },
+        {
+            "Name": "CP_Lighting_Anchor",
+            "RendererSlots": 19,
+            "Vertices": 4933,
+            "Triangles": 4572
+        },
+        {
+            "Name": "Temple_Dark_Interior_Stone",
+            "RendererSlots": 34,
+            "Vertices": 4358,
+            "Triangles": 3672
+        },
+        {
+            "Name": "CP_Gameplay_Marker",
+            "RendererSlots": 9,
+            "Vertices": 1884,
+            "Triangles": 1740
+        },
+        {
+            "Name": "Temple_Sand_Foundation",
+            "RendererSlots": 9,
+            "Vertices": 1042,
+            "Triangles": 876
+        },
+        {
+            "Name": "Temple_Relic_Accent",
+            "RendererSlots": 2,
+            "Vertices": 250,
+            "Triangles": 216
+        },
+        {
+            "Name": "CP_Collision_Proxy",
+            "RendererSlots": 4,
+            "Vertices": 96,
+            "Triangles": 48
+        }
+    ],
+    "Landmarks": [
+        {
+            "Name": "Exterior_Desert_Foundation",
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Desert_Foundation",
+            "Position": {
+                "x": 0.0,
+                "y": -0.08000016212463379,
+                "z": -0.9999999403953552
+            },
+            "LocalScale": {
+                "x": 100.0,
+                "y": 99.99998474121094,
+                "z": 99.99998474121094
+            },
+            "Active": true
+        },
+        {
+            "Name": "Exterior_Main_Door_Shadow",
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Door_Shadow",
+            "Position": {
+                "x": 0.0,
+                "y": 2.250001907348633,
+                "z": 19.64999771118164
+            },
+            "LocalScale": {
+                "x": 100.0,
+                "y": 99.99998474121094,
+                "z": 99.99998474121094
+            },
+            "Active": true
+        },
+        {
+            "Name": "Exterior_Rear_Service_Door_Shadow",
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Rear_Service_Door_Shadow",
+            "Position": {
+                "x": 0.0,
+                "y": 1.4199962615966797,
+                "z": -27.979997634887697
+            },
+            "LocalScale": {
+                "x": 100.0,
+                "y": 99.99998474121094,
+                "z": 99.99998474121094
+            },
+            "Active": true
+        },
+        {
+            "Name": "Exterior_Top_Pyramid_Cap",
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Top_Pyramid_Cap",
+            "Position": {
+                "x": 0.0,
+                "y": 5.549999237060547,
+                "z": -4.5
+            },
+            "LocalScale": {
+                "x": 100.0,
+                "y": 99.99998474121094,
+                "z": 99.99998474121094
+            },
+            "Active": true
+        },
+        {
+            "Name": "Gameplay_BurialChamber_Goal",
+            "Path": "PyramidTemple_FullEnvironment/GameplayMarkers/Gameplay_BurialChamber_Goal",
+            "Position": {
+                "x": 0.0,
+                "y": 0.5999984741210938,
+                "z": -20.999998092651368
+            },
+            "LocalScale": {
+                "x": 100.0,
+                "y": 99.99998474121094,
+                "z": 99.99998474121094
+            },
+            "Active": true
+        },
+        {
+            "Name": "Gameplay_HypostyleHall_Center",
+            "Path": "PyramidTemple_FullEnvironment/GameplayMarkers/Gameplay_HypostyleHall_Center",
+            "Position": {
+                "x": 0.0,
+                "y": 0.6000001430511475,
+                "z": 1.9999998807907105
+            },
+            "LocalScale": {
+                "x": 100.0,
+                "y": 99.99998474121094,
+                "z": 99.99998474121094
+            },
+            "Active": true
+        },
+        {
+            "Name": "Gameplay_PlayerSpawn_FrontCourt",
+            "Path": "PyramidTemple_FullEnvironment/GameplayMarkers/Gameplay_PlayerSpawn_FrontCourt",
+            "Position": {
+                "x": 0.0,
+                "y": 0.6000041961669922,
+                "z": 27.499998092651368
+            },
+            "LocalScale": {
+                "x": 100.0,
+                "y": 99.99998474121094,
+                "z": 99.99998474121094
+            },
+            "Active": true
+        },
+        {
+            "Name": "Gameplay_RearExit",
+            "Path": "PyramidTemple_FullEnvironment/GameplayMarkers/Gameplay_RearExit",
+            "Position": {
+                "x": 0.0,
+                "y": 0.5999946594238281,
+                "z": -33.79999542236328
+            },
+            "LocalScale": {
+                "x": 100.0,
+                "y": 99.99998474121094,
+                "z": 99.99998474121094
+            },
+            "Active": true
+        },
+        {
+            "Name": "Interior_Burial_Chamber_Floor",
+            "Path": "PyramidTemple_FullEnvironment/Interior/Interior_Burial_Chamber_Floor",
+            "Position": {
+                "x": 0.0,
+                "y": 0.12999725341796876,
+                "z": -20.999998092651368
+            },
+            "LocalScale": {
+                "x": 100.0,
+                "y": 99.99998474121094,
+                "z": 99.99998474121094
+            },
+            "Active": true
+        },
+        {
+            "Name": "Interior_Hypostyle_Hall_Floor",
+            "Path": "PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Hall_Floor",
+            "Position": {
+                "x": 0.0,
+                "y": 0.13000011444091798,
+                "z": 1.9999998807907105
+            },
+            "LocalScale": {
+                "x": 100.0,
+                "y": 99.99998474121094,
+                "z": 99.99998474121094
+            },
+            "Active": true
+        }
+    ],
+    "HeaviestRenderers": [
+        {
+            "Path": "PyramidTemple_FullEnvironment/LightingAnchors/Lighting_Torch_Anchor_00",
+            "Enabled": true,
+            "Vertices": 553,
+            "Triangles": 528,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/LightingAnchors/Lighting_Torch_Anchor_01",
+            "Enabled": true,
+            "Vertices": 553,
+            "Triangles": 528,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/LightingAnchors/Lighting_Torch_Anchor_02",
+            "Enabled": true,
+            "Vertices": 553,
+            "Triangles": 528,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/LightingAnchors/Lighting_Torch_Anchor_03",
+            "Enabled": true,
+            "Vertices": 553,
+            "Triangles": 528,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/LightingAnchors/Lighting_Torch_Anchor_04",
+            "Enabled": true,
+            "Vertices": 553,
+            "Triangles": 528,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/LightingAnchors/Lighting_Torch_Anchor_05",
+            "Enabled": true,
+            "Vertices": 553,
+            "Triangles": 528,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Props/Interior_Burial_Alcove_Guardian_0_Head",
+            "Enabled": true,
+            "Vertices": 553,
+            "Triangles": 528,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Props/Interior_Burial_Alcove_Guardian_0_Torso",
+            "Enabled": true,
+            "Vertices": 553,
+            "Triangles": 528,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Props/Interior_Burial_Alcove_Guardian_1_Head",
+            "Enabled": true,
+            "Vertices": 553,
+            "Triangles": 528,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Props/Interior_Burial_Alcove_Guardian_1_Torso",
+            "Enabled": true,
+            "Vertices": 553,
+            "Triangles": 528,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Props/Props_Front_Left_Guardian_Head",
+            "Enabled": true,
+            "Vertices": 553,
+            "Triangles": 528,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Props/Props_Front_Left_Guardian_Torso",
+            "Enabled": true,
+            "Vertices": 553,
+            "Triangles": 528,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Props/Props_Front_Right_Guardian_Head",
+            "Enabled": true,
+            "Vertices": 553,
+            "Triangles": 528,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Props/Props_Front_Right_Guardian_Torso",
+            "Enabled": true,
+            "Vertices": 553,
+            "Triangles": 528,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Facade_Column_1.15_Paint_Band_0.0",
+            "Enabled": true,
+            "Vertices": 470,
+            "Triangles": 476,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Facade_Column_-1.15_Paint_Band_0.0",
+            "Enabled": true,
+            "Vertices": 470,
+            "Triangles": 476,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Facade_Column_1.15_Paint_Band_0.32",
+            "Enabled": true,
+            "Vertices": 470,
+            "Triangles": 476,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Facade_Column_1.15_Paint_Band_-0.32",
+            "Enabled": true,
+            "Vertices": 470,
+            "Triangles": 476,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Facade_Column_-1.15_Paint_Band_0.32",
+            "Enabled": true,
+            "Vertices": 470,
+            "Triangles": 476,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Facade_Column_-1.15_Paint_Band_-0.32",
+            "Enabled": true,
+            "Vertices": 470,
+            "Triangles": 476,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Facade_Column_1.15_Shaft",
+            "Enabled": true,
+            "Vertices": 470,
+            "Triangles": 476,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Facade_Column_-1.15_Shaft",
+            "Enabled": true,
+            "Vertices": 470,
+            "Triangles": 476,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Facade_Column_3.4_Paint_Band_0.0",
+            "Enabled": true,
+            "Vertices": 470,
+            "Triangles": 476,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Facade_Column_-3.4_Paint_Band_0.0",
+            "Enabled": true,
+            "Vertices": 470,
+            "Triangles": 476,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Facade_Column_3.4_Paint_Band_0.32",
+            "Enabled": true,
+            "Vertices": 470,
+            "Triangles": 476,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Facade_Column_3.4_Paint_Band_-0.32",
+            "Enabled": true,
+            "Vertices": 470,
+            "Triangles": 476,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Facade_Column_-3.4_Paint_Band_0.32",
+            "Enabled": true,
+            "Vertices": 470,
+            "Triangles": 476,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Facade_Column_-3.4_Paint_Band_-0.32",
+            "Enabled": true,
+            "Vertices": 470,
+            "Triangles": 476,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Facade_Column_3.4_Shaft",
+            "Enabled": true,
+            "Vertices": 470,
+            "Triangles": 476,
+            "MaterialSlots": 1
+        },
+        {
+            "Path": "PyramidTemple_FullEnvironment/Exterior/Exterior_Facade_Column_-3.4_Shaft",
+            "Enabled": true,
+            "Vertices": 470,
+            "Triangles": 476,
+            "MaterialSlots": 1
+        }
+    ]
+}
