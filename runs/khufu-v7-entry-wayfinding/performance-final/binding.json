@@ -1,0 +1,58 @@
+﻿{
+    "schema":  "khufu-v7-performance-binding-v1",
+    "verdict":  "passed",
+    "scene":  {
+                  "path":  "Assets/_Project/Scenes/School_MVP.unity",
+                  "bytes":  2419880,
+                  "sha256":  "a17075bcf6b21a5231edf32bb0247e3c755925a97c39c25a12dba506e40cf029"
+              },
+    "player":  {
+                   "path":  "Builds/KhufuV7/ChannelPlayKhufuV7.exe",
+                   "bytes":  671744,
+                   "sha256":  "ab5809518c33adf6dad28c9ffe467d2f78f0c00bf78991fef991a7dd04a8fc48"
+               },
+    "built_level":  {
+                        "path":  "Builds/KhufuV7/ChannelPlayKhufuV7_Data/level0",
+                        "bytes":  465788,
+                        "sha256":  "57c9d116c46beef67cc85fcdd9d80fd3c5eb2f09f72f1403c806ab80720a210a"
+                    },
+    "run_contract":  {
+                         "resolution":  "1536x1024",
+                         "quality":  "Ultra",
+                         "graphics_api":  "D3D11",
+                         "rendered_window":  true,
+                         "raw_capture_frames":  30
+                     },
+    "artifacts":  [
+                      {
+                          "path":  "runs/khufu-v7-entry-wayfinding/performance-final/validation.md",
+                          "bytes":  663,
+                          "sha256":  "9376d22130cd897bdf029b89d7e59fff69e2ecb5d19ed7f70734231da4fa4f7a"
+                      },
+                      {
+                          "path":  "runs/khufu-v7-entry-wayfinding/performance-final/v7-final-performance.md",
+                          "bytes":  996,
+                          "sha256":  "202db32d198de04ca5c5a4b18bc4d9558eee93e7765b9a09faa2c6413154de20"
+                      },
+                      {
+                          "path":  "runs/khufu-v7-entry-wayfinding/performance-final/v7-final.raw",
+                          "bytes":  7114043,
+                          "sha256":  "9ec775982fd995388c24904bef9ab1bc4d670b408c9d435218fff76c8a23db2e"
+                      },
+                      {
+                          "path":  "runs/khufu-v7-entry-wayfinding/performance-final/player.log",
+                          "bytes":  7783,
+                          "sha256":  "dd36d4cedeab8fda9b1c4e637e9404addfff6bfc3c51763e8bfc3bc55c59b918"
+                      },
+                      {
+                          "path":  "runs/khufu-v7-entry-wayfinding/performance-final/v7-final-windows-player-initial.png",
+                          "bytes":  1308180,
+                          "sha256":  "e9cd3b0035937cd6e71bd5806293e8982d41c6587c229b9eb66dd738d15626f6"
+                      },
+                      {
+                          "path":  "runs/khufu-v7-entry-wayfinding/performance-final/v7-final-windows-player-operator.png",
+                          "bytes":  803489,
+                          "sha256":  "4154aa272c5fd3e4a4f7d8b2c4cccd9b883e4d93be0df31373b39c00c36cda9a"
+                      }
+                  ]
+}
