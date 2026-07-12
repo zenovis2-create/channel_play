@@ -24,6 +24,11 @@
    target set must have an empty intersection with every V5 Crown route dependency.
 8. Gallery enclosure is measured from fixed route samples by bounded hemisphere rays; feature count
    alone cannot pass the embedded-architecture gate.
+9. A post-write visual-QA amendment may add renderer-only transitions only when an isolated V10
+   comparison proves the integrated obstruction, exact legacy paths and bounds are recorded, collider
+   ownership is unchanged, and every count, idempotence, and mutation gate is rerun.
+10. The HYBRID return may not contain a rise-then-descent crest at its service landing. The Gallery
+    floor must continue beneath the named Great Step wall by at least one controller radius.
 
 ## Evidence
 
@@ -33,8 +38,10 @@
    standard-deviation, and sampled-color checks.
 3. Normal traversal includes fixed anchors and minimum distance. Negative controls must trip a named
    collider and an independently injected error threshold.
-4. Bindings hash the scene, player, assemblies, V10 source/assets, and every runtime build file.
-5. The aggregate validator reads the staged index for commit claims and rejects drift or extra files.
+4. Controller hit evidence records side, ground, and ambiguous contacts separately. A ground callback
+   may not overwrite the side collider used by an exact boundary assertion.
+5. Bindings hash the scene, player, assemblies, V10 source/assets, and every runtime build file.
+6. The aggregate validator reads the staged index for commit claims and rejects drift or extra files.
 
 ## Git
 

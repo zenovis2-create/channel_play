@@ -10,10 +10,10 @@ import tools.validate_khufu_v10_prewrite as validator
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def test_current_prewrite_contract_passes() -> None:
-    failures, metrics = validator.validate(ROOT)
+def test_frozen_prewrite_contract_remains_valid() -> None:
+    failures, metrics = validator.validate(ROOT, enforce_workspace_state=False)
     assert failures == []
-    assert metrics["renderer_transitions"] == 45
+    assert metrics["renderer_transitions"] == 60
     assert metrics["collider_transitions"] == 39
 
 

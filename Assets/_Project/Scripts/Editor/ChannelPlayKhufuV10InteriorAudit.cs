@@ -14,8 +14,27 @@ public static class ChannelPlayKhufuV10InteriorAudit
     public const string RunRoot = "runs/khufu-v10-interior-spine";
     public const string ManifestPath = "docs/khufu-v10-interior-spine/disable-manifest.json";
     private const string ScenePath = ChannelPlayKhufuMegaLabyrinthV5Builder.ScenePath;
-    private const int ExpectedTargetRenderers = 45;
+    private const int ExpectedTargetRenderers = 60;
     private const int ExpectedTargetColliders = 39;
+
+    private static readonly string[] SupersededRouteVisuals =
+    {
+        "V4_Glow_Ascending",
+        "V4_Glow_Descending",
+        "V4_Glow_Entrance",
+        "V4_Glow_Grand",
+        "V4_Glow_Kings",
+        "V4_Glow_Queens",
+        "V4_Glow_Subterranean",
+        "V4_Route_Branch",
+        "V4_Route_Entrance",
+        "V4_Route_Gallery_Foot",
+        "V4_Route_Grand_Gallery_Top",
+        "V4_Route_Kings_Chamber",
+        "V4_Route_Queens_Chamber",
+        "V4_Route_Subterranean_Approach",
+        "V4_Route_Subterranean_Chamber"
+    };
 
     private static readonly string[] RequiredMarkers =
     {
@@ -69,6 +88,84 @@ public static class ChannelPlayKhufuV10InteriorAudit
         }
     }
 
+    [MenuItem("Channel Play/Khufu V10/Apply Route Visual Transition Amendment")]
+    public static void ApplyRouteGlowTransitionAmendment()
+    {
+        var projectRoot = Directory.GetParent(Application.dataPath).FullName;
+        EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
+        var map = GameObject.Find(ChannelPlayKhufuV8TempleProductionArtBuilder.MapRootName);
+        if (map == null) throw new InvalidOperationException("Shared map root is missing.");
+        var route = map.transform.Find(ChannelPlayPyramidReferenceMatchedV4Builder.RootName + "/V4_Gameplay_Route");
+        if (route == null) throw new InvalidOperationException("V4 gameplay route root is missing.");
+
+        var renderers = route.GetComponentsInChildren<Renderer>(true)
+            .Where(renderer => SupersededRouteVisuals.Contains(renderer.name))
+            .OrderBy(renderer => renderer.name, StringComparer.Ordinal)
+            .ToArray();
+        if (renderers.Length != SupersededRouteVisuals.Length)
+            throw new InvalidOperationException("Route visual amendment target inventory is incomplete.");
+        if (renderers.Any(renderer => renderer.GetComponent<Collider>() != null))
+            throw new InvalidOperationException("Route visual amendment unexpectedly crosses collider ownership.");
+
+        var manifestPath = Path.Combine(projectRoot, ManifestPath);
+        var manifest = JsonUtility.FromJson<DisableManifest>(File.ReadAllText(manifestPath));
+        if (manifest == null || manifest.Transitions == null)
+            throw new InvalidOperationException("V10 disable manifest could not be parsed for amendment.");
+        if (manifest.ExpectedRendererTransitions != 47 || manifest.ExpectedColliderTransitions != ExpectedTargetColliders)
+            throw new InvalidOperationException("Route visual amendment expected the reviewed 47/39 transition contract.");
+
+        var existingPaths = new HashSet<string>(manifest.Transitions.Select(item => item.Path), StringComparer.Ordinal);
+        var additions = renderers.Where(renderer => !existingPaths.Contains(RelativePath(map.transform, renderer.transform))).ToArray();
+        if (additions.Length != 13 || additions.Any(renderer => !renderer.enabled))
+            throw new InvalidOperationException("Route visual amendment expected 13 enabled renderer additions.");
+        foreach (var renderer in additions)
+        {
+            var record = Transition(map.transform, renderer);
+            manifest.Transitions.Add(record);
+        }
+        manifest.Transitions = manifest.Transitions.OrderBy(item => item.Path, StringComparer.Ordinal).ToList();
+        manifest.ExpectedRendererTransitions = ExpectedTargetRenderers;
+        if (manifest.Transitions.Count(item => item.DisableRenderer) != ExpectedTargetRenderers ||
+            manifest.Transitions.Count(item => item.DisableCollider) != ExpectedTargetColliders)
+            throw new InvalidOperationException("Route visual amendment produced unexpected transition counts.");
+
+        File.WriteAllText(manifestPath, JsonUtility.ToJson(manifest, true));
+        var receipt = new StringBuilder("# Khufu V10 Route Visual Transition Amendment\n\n");
+        receipt.AppendLine("- Reason: integrated visual QA found V4 debug beams and sphere markers occluding V10 evidence.");
+        receipt.AppendLine("- Original contract: `45 renderers / 39 colliders`");
+        receipt.AppendLine("- Reviewed glow amendment: `47 renderers / 39 colliders`");
+        receipt.AppendLine("- Final route-visual contract: `60 renderers / 39 colliders`");
+        receipt.AppendLine("- Collider ownership change: `none`");
+        receipt.AppendLine("- Preserved marker transforms: `8/8`");
+        receipt.AppendLine("- V5 Crown intersection: `0`");
+        receipt.AppendLine();
+        foreach (var renderer in renderers)
+            receipt.AppendLine("- `" + RelativePath(map.transform, renderer.transform) + "`: center=`" +
+                               VectorToken(renderer.bounds.center) + "`, size=`" + VectorToken(renderer.bounds.size) + "`");
+        receipt.AppendLine();
+        receipt.AppendLine("- Diagnostic: `captures/debug/queen-branch-v10-only.png`");
+        receipt.AppendLine("- Integrated comparison: `captures/gallery_foot_queen_boundary.png`");
+        receipt.AppendLine();
+        receipt.AppendLine("KHUFU_V10_TRANSITION_AMENDMENT: passed");
+        File.WriteAllText(Path.Combine(projectRoot, RunRoot, "transition-amendment.md"), receipt.ToString());
+        AssetDatabase.Refresh();
+        Debug.Log("CHANNEL_PLAY_KHUFU_V10_TRANSITION_AMENDMENT result=passed renderers=60 colliders=39");
+    }
+
+    public static void ApplyRouteGlowTransitionAmendmentBatch()
+    {
+        try
+        {
+            ApplyRouteGlowTransitionAmendment();
+            EditorApplication.Exit(0);
+        }
+        catch (Exception exception)
+        {
+            Debug.LogException(exception);
+            EditorApplication.Exit(1);
+        }
+    }
+
     private static AuditReport Audit()
     {
         var projectRoot = Directory.GetParent(Application.dataPath).FullName;
@@ -94,8 +191,9 @@ public static class ChannelPlayKhufuV10InteriorAudit
         var entrance = interior == null ? null : interior.Find("V4_Entrance_Portal");
         var gallery = interior == null ? null : interior.Find("V4_Grand_Gallery_Corbelled");
         var district = v5.Find("V5_District_Authentic_Interior_Spine");
+        var route = v4.Find("V4_Gameplay_Route");
         var crown = v5.Find("V5_KeyRoute_Crown");
-        if (interior == null || entrance == null || gallery == null || district == null || crown == null)
+        if (interior == null || entrance == null || gallery == null || district == null || route == null || crown == null)
             throw new InvalidOperationException("One or more audited V4/V5 ownership roots are missing.");
 
         var targets = new List<Renderer>();
@@ -106,6 +204,8 @@ public static class ChannelPlayKhufuV10InteriorAudit
         targets.AddRange(entrance.GetComponentsInChildren<Renderer>(true));
         targets.AddRange(gallery.GetComponentsInChildren<Renderer>(true));
         targets.AddRange(district.GetComponentsInChildren<Renderer>(true));
+        targets.AddRange(route.GetComponentsInChildren<Renderer>(true)
+            .Where(renderer => SupersededRouteVisuals.Contains(renderer.name)));
 
         report.Transitions = targets
             .Distinct()

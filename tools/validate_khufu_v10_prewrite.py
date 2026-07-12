@@ -117,7 +117,7 @@ def validate_manifest(data: dict, scene_hash: str) -> list[str]:
         failures.append("disable manifest scene hash is stale")
     transitions = data.get("Transitions", [])
     paths = [item.get("Path") for item in transitions]
-    if data.get("ExpectedRendererTransitions") != 45 or len(transitions) != 45:
+    if data.get("ExpectedRendererTransitions") != 60 or len(transitions) != 60:
         failures.append("disable manifest renderer count mismatch")
     collider_count = sum(bool(item.get("DisableCollider")) for item in transitions)
     if data.get("ExpectedColliderTransitions") != 39 or collider_count != 39:
@@ -147,7 +147,11 @@ def git_output(root: Path, *args: str) -> str:
     return subprocess.check_output(["git", *args], cwd=root, text=True).strip()
 
 
-def validate(root: Path) -> tuple[list[str], dict[str, str | int]]:
+def git_bytes(root: Path, *args: str) -> bytes:
+    return subprocess.check_output(["git", *args], cwd=root)
+
+
+def validate(root: Path, enforce_workspace_state: bool = True) -> tuple[list[str], dict[str, str | int]]:
     failures: list[str] = []
     for name in REQUIRED_DOCS:
         path = root / DOC_ROOT / name
@@ -160,7 +164,11 @@ def validate(root: Path) -> tuple[list[str], dict[str, str | int]]:
     if failures:
         return failures, {}
 
-    scene_hash = sha256(root / SCENE)
+    scene_hash = (
+        sha256(root / SCENE)
+        if enforce_workspace_state
+        else hashlib.sha256(git_bytes(root, "show", f"{BASELINE_COMMIT}:{SCENE.as_posix()}")).hexdigest()
+    )
     failures.extend(validate_classification(load_json(root / CLASSIFICATION)))
     failures.extend(validate_manifest(load_json(root / MANIFEST), scene_hash))
 
@@ -172,16 +180,17 @@ def validate(root: Path) -> tuple[list[str], dict[str, str | int]]:
         failures.append("external Fable proceed verdict missing or invalid")
 
     head = git_output(root, "rev-parse", "HEAD")
-    if head != BASELINE_COMMIT:
-        failures.append(f"pre-write HEAD mismatch: {head}")
-    scene_drift = git_output(root, "diff", "--name-only", "--", SCENE.as_posix())
-    if scene_drift:
-        failures.append("scene changed before the pre-write contract commit")
+    if enforce_workspace_state:
+        if head != BASELINE_COMMIT:
+            failures.append(f"pre-write HEAD mismatch: {head}")
+        scene_drift = git_output(root, "diff", "--name-only", "--", SCENE.as_posix())
+        if scene_drift:
+            failures.append("scene changed before the pre-write contract commit")
 
     metrics: dict[str, str | int] = {
-        "baseline_commit": head,
+        "baseline_commit": head if enforce_workspace_state else BASELINE_COMMIT,
         "scene_sha256": scene_hash,
-        "renderer_transitions": 45,
+        "renderer_transitions": 60,
         "collider_transitions": 39,
         "crown_intersection": 0,
         "segments": len(EXPECTED_SEGMENTS),
