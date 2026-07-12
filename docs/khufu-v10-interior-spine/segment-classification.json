@@ -1,0 +1,78 @@
+{
+  "schema": "khufu-v10-interior-segment-classification-v1",
+  "baseline_commit": "a7ba20fd24034a0c5cf115d21d8d955797abe011",
+  "clearance": {
+    "width_m": 1.8,
+    "height_m": 2.2
+  },
+  "segments": [
+    {
+      "id": "North_Approach",
+      "truth": "HYBRID",
+      "factual_shape": false,
+      "gameplay_scale": true,
+      "linear_ratio": null,
+      "note": "Adapted access to the documented north-face entrance relationship."
+    },
+    {
+      "id": "Entrance_To_Branch",
+      "truth": "HYBRID",
+      "factual_shape": false,
+      "gameplay_scale": true,
+      "linear_ratio": 0.225,
+      "clear_width_ratio": 2.26,
+      "clear_height_ratio": 2.11,
+      "note": "Topology is grounded; V4 length, angle, and standing clearance are adapted."
+    },
+    {
+      "id": "Branch_To_Gallery_Foot",
+      "truth": "HYBRID",
+      "factual_shape": false,
+      "gameplay_scale": true,
+      "linear_ratio": 0.313,
+      "note": "Ascending relationship and plug boundary are grounded; route geometry is adapted."
+    },
+    {
+      "id": "Grand_Gallery",
+      "truth": "HYBRID",
+      "factual_shape": true,
+      "gameplay_scale": true,
+      "linear_ratio": 0.28,
+      "clear_width_ratio": 1.63,
+      "clear_height_ratio": 0.56,
+      "note": "Corbel, bench, slot, groove, and ceiling relationships are retained at compressed scale."
+    },
+    {
+      "id": "Queen_Branch_Threshold",
+      "truth": "HYBRID",
+      "factual_shape": true,
+      "gameplay_scale": true,
+      "linear_ratio": null,
+      "note": "Boundary-only branch; Queen chamber remains outside V10 ownership."
+    },
+    {
+      "id": "Great_Step_Boundary",
+      "truth": "HYBRID",
+      "factual_shape": true,
+      "gameplay_scale": true,
+      "linear_ratio": null,
+      "note": "Visible diegetic boundary before the separately owned royal suite."
+    },
+    {
+      "id": "Historic_Service_Mouth",
+      "truth": "FACT",
+      "factual_shape": true,
+      "gameplay_scale": false,
+      "linear_ratio": null,
+      "note": "Non-traversable aperture boundary, separated from the gameplay return."
+    },
+    {
+      "id": "HYBRID_Service_Return",
+      "truth": "HYBRID",
+      "factual_shape": false,
+      "gameplay_scale": true,
+      "linear_ratio": null,
+      "note": "Entirely adapted, two-way return route."
+    }
+  ]
+}

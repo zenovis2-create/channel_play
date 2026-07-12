@@ -1,0 +1,986 @@
+{
+    "Schema": "khufu-v10-interior-disable-manifest-v1",
+    "BaselineCommit": "a7ba20fd24034a0c5cf115d21d8d955797abe011",
+    "ScenePath": "Assets/_Project/Scenes/School_MVP.unity",
+    "SceneSha256": "0af39f99386da722f228611e0482cee46f9dfba2b57b00e6a791fc7c7fe3e346",
+    "ExpectedRendererTransitions": 45,
+    "ExpectedColliderTransitions": 39,
+    "CrownDependencyCount": 42,
+    "CrownIntersectionCount": 0,
+    "Transitions": [
+        {
+            "Path": "Runtime_Khufu_Mega_Labyrinth_V5/V5_District_Authentic_Interior_Spine/V5_Authentic_Interior_Spine_Floor",
+            "Name": "V5_Authentic_Interior_Spine_Floor",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "",
+            "ColliderEnabled": false,
+            "ColliderIsTrigger": false,
+            "DisableCollider": false,
+            "BoundsCenter": {
+                "x": 0.0,
+                "y": 7.900000095367432,
+                "z": 0.0
+            },
+            "BoundsSize": {
+                "x": 24.0,
+                "y": 0.25,
+                "z": 24.0
+            }
+        },
+        {
+            "Path": "Runtime_Khufu_Mega_Labyrinth_V5/V5_District_Authentic_Interior_Spine/V5_Authentic_Interior_Spine_Lintel",
+            "Name": "V5_Authentic_Interior_Spine_Lintel",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "",
+            "ColliderEnabled": false,
+            "ColliderIsTrigger": false,
+            "DisableCollider": false,
+            "BoundsCenter": {
+                "x": 0.0,
+                "y": 14.0,
+                "z": 0.0
+            },
+            "BoundsSize": {
+                "x": 18.0,
+                "y": 1.2000000476837159,
+                "z": 5.0
+            }
+        },
+        {
+            "Path": "Runtime_Khufu_Mega_Labyrinth_V5/V5_District_Authentic_Interior_Spine/V5_Authentic_Interior_Spine_Pylon_-1",
+            "Name": "V5_Authentic_Interior_Spine_Pylon_-1",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "",
+            "ColliderEnabled": false,
+            "ColliderIsTrigger": false,
+            "DisableCollider": false,
+            "BoundsCenter": {
+                "x": -8.0,
+                "y": 11.0,
+                "z": 0.0
+            },
+            "BoundsSize": {
+                "x": 2.200000047683716,
+                "y": 6.0,
+                "z": 5.0
+            }
+        },
+        {
+            "Path": "Runtime_Khufu_Mega_Labyrinth_V5/V5_District_Authentic_Interior_Spine/V5_Authentic_Interior_Spine_Pylon_1",
+            "Name": "V5_Authentic_Interior_Spine_Pylon_1",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "",
+            "ColliderEnabled": false,
+            "ColliderIsTrigger": false,
+            "DisableCollider": false,
+            "BoundsCenter": {
+                "x": 8.0,
+                "y": 11.0,
+                "z": 0.0
+            },
+            "BoundsSize": {
+                "x": 2.200000047683716,
+                "y": 6.0,
+                "z": 5.0
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Ascending_Passage_East",
+            "Name": "V4_Ascending_Passage_East",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 0.031556613743305209,
+                "y": 4.451517105102539,
+                "z": -13.361527442932129
+            },
+            "BoundsSize": {
+                "x": 3.032042980194092,
+                "y": 6.503033638000488,
+                "z": 12.193816184997559
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Ascending_Passage_Floor",
+            "Name": "V4_Ascending_Passage_Floor",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": -1.25,
+                "y": 3.3000001907348635,
+                "z": -12.649999618530274
+            },
+            "BoundsSize": {
+                "x": 4.908367156982422,
+                "y": 4.406803131103516,
+                "z": 11.902514457702637
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Ascending_Passage_Roof",
+            "Name": "V4_Ascending_Passage_Roof",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": -1.4305424690246583,
+                "y": 5.603034019470215,
+                "z": -13.46605110168457
+            },
+            "BoundsSize": {
+                "x": 5.612842082977295,
+                "y": 4.42560338973999,
+                "z": 12.064706802368164
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Ascending_Passage_West",
+            "Name": "V4_Ascending_Passage_West",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": -2.712099075317383,
+                "y": 4.451517105102539,
+                "z": -12.754523277282715
+            },
+            "BoundsSize": {
+                "x": 3.032042980194092,
+                "y": 6.503033638000488,
+                "z": 12.193816184997559
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Descending_Upper_East",
+            "Name": "V4_Descending_Upper_East",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": -1.5365444421768189,
+                "y": 4.022101879119873,
+                "z": -20.39189338684082
+            },
+            "BoundsSize": {
+                "x": 1.6225465536117554,
+                "y": 5.6442036628723148,
+                "z": 6.4182891845703129
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Descending_Upper_Floor",
+            "Name": "V4_Descending_Upper_Floor",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": -3.0,
+                "y": 3.0999999046325685,
+                "z": -20.799999237060548
+            },
+            "BoundsSize": {
+                "x": 3.330146312713623,
+                "y": 3.9764020442962648,
+                "z": 5.589782238006592
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Descending_Upper_Roof",
+            "Name": "V4_Descending_Upper_Roof",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": -2.7304625511169435,
+                "y": 4.944203853607178,
+                "z": -19.452312469482423
+            },
+            "BoundsSize": {
+                "x": 4.038508415222168,
+                "y": 3.992438554763794,
+                "z": 5.74270486831665
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Descending_Upper_West",
+            "Name": "V4_Descending_Upper_West",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": -4.193917751312256,
+                "y": 4.022101879119873,
+                "z": -19.86041831970215
+            },
+            "BoundsSize": {
+                "x": 1.6225465536117554,
+                "y": 5.6442036628723148,
+                "z": 6.4182891845703129
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Entrance_Portal/V4_Entrance_East_Jamb",
+            "Name": "V4_Entrance_East_Jamb",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": -2.1500000953674318,
+                "y": 5.150000095367432,
+                "z": -23.5
+            },
+            "BoundsSize": {
+                "x": 0.44999998807907107,
+                "y": 2.799999952316284,
+                "z": 0.699999988079071
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Entrance_Portal/V4_Entrance_Lintel",
+            "Name": "V4_Entrance_Lintel",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": -3.5,
+                "y": 6.579999923706055,
+                "z": -23.5
+            },
+            "BoundsSize": {
+                "x": 3.1500000953674318,
+                "y": 0.44999998807907107,
+                "z": 0.7200000286102295
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Entrance_Portal/V4_Entrance_Shadow",
+            "Name": "V4_Entrance_Shadow",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "",
+            "ColliderEnabled": false,
+            "ColliderIsTrigger": false,
+            "DisableCollider": false,
+            "BoundsCenter": {
+                "x": -3.5,
+                "y": 5.0,
+                "z": -23.099998474121095
+            },
+            "BoundsSize": {
+                "x": 2.200000047683716,
+                "y": 2.25,
+                "z": 0.23999999463558198
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Entrance_Portal/V4_Entrance_West_Jamb",
+            "Name": "V4_Entrance_West_Jamb",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": -4.849999904632568,
+                "y": 5.150000095367432,
+                "z": -23.5
+            },
+            "BoundsSize": {
+                "x": 0.44999998807907107,
+                "y": 2.799999952316284,
+                "z": 0.699999988079071
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Ceiling",
+            "Name": "V4_Grand_Ceiling",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 1.386102318763733,
+                "y": 10.895838737487793,
+                "z": -2.4456639289855959
+            },
+            "BoundsSize": {
+                "x": 4.919018268585205,
+                "y": 5.357761383056641,
+                "z": 12.02680492401123
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Center_Trench",
+            "Name": "V4_Grand_Center_Trench",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "",
+            "ColliderEnabled": false,
+            "ColliderIsTrigger": false,
+            "DisableCollider": false,
+            "BoundsCenter": {
+                "x": 1.7340794801712037,
+                "y": 8.078880310058594,
+                "z": -1.3023103475570679
+            },
+            "BoundsSize": {
+                "x": 4.302667617797852,
+                "y": 5.247292518615723,
+                "z": 11.798535346984864
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Corbel_East_00",
+            "Name": "V4_Grand_Corbel_East_00",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 3.4686734676361086,
+                "y": 8.364258766174317,
+                "z": -1.9567891359329224
+            },
+            "BoundsSize": {
+                "x": 3.844799757003784,
+                "y": 5.4129958152771,
+                "z": 11.720211029052735
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Corbel_East_01",
+            "Name": "V4_Grand_Corbel_East_01",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 3.272392988204956,
+                "y": 8.71407699584961,
+                "z": -2.0521883964538576
+            },
+            "BoundsSize": {
+                "x": 3.844799757003784,
+                "y": 5.4129958152771,
+                "z": 11.720211029052735
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Corbel_East_02",
+            "Name": "V4_Grand_Corbel_East_02",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 3.0761122703552248,
+                "y": 9.063895225524903,
+                "z": -2.147587776184082
+            },
+            "BoundsSize": {
+                "x": 3.844799757003784,
+                "y": 5.4129958152771,
+                "z": 11.720211029052735
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Corbel_East_03",
+            "Name": "V4_Grand_Corbel_East_03",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 2.879831552505493,
+                "y": 9.413713455200196,
+                "z": -2.2429869174957277
+            },
+            "BoundsSize": {
+                "x": 3.844799757003784,
+                "y": 5.4129958152771,
+                "z": 11.720211029052735
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Corbel_East_04",
+            "Name": "V4_Grand_Corbel_East_04",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 2.6835508346557619,
+                "y": 9.763531684875489,
+                "z": -2.338386058807373
+            },
+            "BoundsSize": {
+                "x": 3.844799757003784,
+                "y": 5.4129958152771,
+                "z": 11.720211029052735
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Corbel_East_05",
+            "Name": "V4_Grand_Corbel_East_05",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 2.4872701168060304,
+                "y": 10.113349914550782,
+                "z": -2.4337854385375978
+            },
+            "BoundsSize": {
+                "x": 3.844799757003784,
+                "y": 5.4129958152771,
+                "z": 11.720211029052735
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Corbel_East_06",
+            "Name": "V4_Grand_Corbel_East_06",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 2.290989398956299,
+                "y": 10.463168144226075,
+                "z": -2.529184579849243
+            },
+            "BoundsSize": {
+                "x": 3.844799757003784,
+                "y": 5.4129958152771,
+                "z": 11.720211029052735
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Corbel_West_00",
+            "Name": "V4_Grand_Corbel_West_00",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": -0.07101978361606598,
+                "y": 8.364258766174317,
+                "z": -0.8794912695884705
+            },
+            "BoundsSize": {
+                "x": 3.844799757003784,
+                "y": 5.4129958152771,
+                "z": 11.720211029052735
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Corbel_West_01",
+            "Name": "V4_Grand_Corbel_West_01",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 0.03883519023656845,
+                "y": 8.71407699584961,
+                "z": -1.06806218624115
+            },
+            "BoundsSize": {
+                "x": 3.844799757003784,
+                "y": 5.4129958152771,
+                "z": 11.720211029052735
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Corbel_West_02",
+            "Name": "V4_Grand_Corbel_West_02",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 0.14869016408920289,
+                "y": 9.063895225524903,
+                "z": -1.2566331624984742
+            },
+            "BoundsSize": {
+                "x": 3.844799757003784,
+                "y": 5.4129958152771,
+                "z": 11.720211029052735
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Corbel_West_03",
+            "Name": "V4_Grand_Corbel_West_03",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 0.2585451602935791,
+                "y": 9.413713455200196,
+                "z": -1.4452040195465088
+            },
+            "BoundsSize": {
+                "x": 3.844799757003784,
+                "y": 5.4129958152771,
+                "z": 11.720211029052735
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Corbel_West_04",
+            "Name": "V4_Grand_Corbel_West_04",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 0.36840009689331057,
+                "y": 9.763531684875489,
+                "z": -1.633774995803833
+            },
+            "BoundsSize": {
+                "x": 3.844799757003784,
+                "y": 5.4129958152771,
+                "z": 11.720211029052735
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Corbel_West_05",
+            "Name": "V4_Grand_Corbel_West_05",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 0.4782550036907196,
+                "y": 10.113349914550782,
+                "z": -1.8223458528518677
+            },
+            "BoundsSize": {
+                "x": 3.844799757003784,
+                "y": 5.4129958152771,
+                "z": 11.720211029052735
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Corbel_West_06",
+            "Name": "V4_Grand_Corbel_West_06",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 0.5881099700927734,
+                "y": 10.463168144226075,
+                "z": -2.0109169483184816
+            },
+            "BoundsSize": {
+                "x": 3.844799757003784,
+                "y": 5.4129958152771,
+                "z": 11.720211029052735
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Floor_Ramp",
+            "Name": "V4_Grand_Floor_Ramp",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 1.75,
+                "y": 7.949999809265137,
+                "z": -1.25
+            },
+            "BoundsSize": {
+                "x": 6.876788139343262,
+                "y": 5.330143928527832,
+                "z": 12.61247730255127
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Stair_00",
+            "Name": "V4_Grand_Stair_00",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 0.1458333432674408,
+                "y": 5.692500114440918,
+                "z": -6.520833492279053
+            },
+            "BoundsSize": {
+                "x": 3.200000047683716,
+                "y": 0.2199999988079071,
+                "z": 1.350000023841858
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Stair_01",
+            "Name": "V4_Grand_Stair_01",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 0.4375,
+                "y": 6.117499828338623,
+                "z": -5.5625
+            },
+            "BoundsSize": {
+                "x": 3.200000047683716,
+                "y": 0.2199999988079071,
+                "z": 1.350000023841858
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Stair_02",
+            "Name": "V4_Grand_Stair_02",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 0.7291666269302368,
+                "y": 6.542500019073486,
+                "z": -4.604166507720947
+            },
+            "BoundsSize": {
+                "x": 3.200000047683716,
+                "y": 0.2199999988079071,
+                "z": 1.350000023841858
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Stair_03",
+            "Name": "V4_Grand_Stair_03",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 1.0208332538604737,
+                "y": 6.967499732971191,
+                "z": -3.6458334922790529
+            },
+            "BoundsSize": {
+                "x": 3.200000047683716,
+                "y": 0.2199999988079071,
+                "z": 1.350000023841858
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Stair_04",
+            "Name": "V4_Grand_Stair_04",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 1.3125,
+                "y": 7.392499923706055,
+                "z": -2.6875
+            },
+            "BoundsSize": {
+                "x": 3.200000047683716,
+                "y": 0.2199999988079071,
+                "z": 1.350000023841858
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Stair_05",
+            "Name": "V4_Grand_Stair_05",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 1.6041667461395264,
+                "y": 7.817500114440918,
+                "z": -1.7291665077209473
+            },
+            "BoundsSize": {
+                "x": 3.200000047683716,
+                "y": 0.2199999988079071,
+                "z": 1.350000023841858
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Stair_06",
+            "Name": "V4_Grand_Stair_06",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 1.8958333730697632,
+                "y": 8.242500305175782,
+                "z": -0.7708331346511841
+            },
+            "BoundsSize": {
+                "x": 3.200000047683716,
+                "y": 0.2199999988079071,
+                "z": 1.350000023841858
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Stair_07",
+            "Name": "V4_Grand_Stair_07",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 2.1875,
+                "y": 8.667499542236329,
+                "z": 0.1875
+            },
+            "BoundsSize": {
+                "x": 3.200000047683716,
+                "y": 0.2199999988079071,
+                "z": 1.350000023841858
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Stair_08",
+            "Name": "V4_Grand_Stair_08",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 2.4791665077209474,
+                "y": 9.092499732971192,
+                "z": 1.145833134651184
+            },
+            "BoundsSize": {
+                "x": 3.200000047683716,
+                "y": 0.2199999988079071,
+                "z": 1.350000023841858
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Stair_09",
+            "Name": "V4_Grand_Stair_09",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 2.7708334922790529,
+                "y": 9.517499923706055,
+                "z": 2.1041669845581056
+            },
+            "BoundsSize": {
+                "x": 3.200000047683716,
+                "y": 0.2199999988079071,
+                "z": 1.350000023841858
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Stair_10",
+            "Name": "V4_Grand_Stair_10",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 3.0625,
+                "y": 9.942500114440918,
+                "z": 3.0625
+            },
+            "BoundsSize": {
+                "x": 3.200000047683716,
+                "y": 0.2199999988079071,
+                "z": 1.350000023841858
+            }
+        },
+        {
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Grand_Gallery_Corbelled/V4_Grand_Stair_11",
+            "Name": "V4_Grand_Stair_11",
+            "RendererEnabled": true,
+            "DisableRenderer": true,
+            "ColliderType": "BoxCollider",
+            "ColliderEnabled": true,
+            "ColliderIsTrigger": false,
+            "DisableCollider": true,
+            "BoundsCenter": {
+                "x": 3.3541665077209474,
+                "y": 10.367499351501465,
+                "z": 4.0208330154418949
+            },
+            "BoundsSize": {
+                "x": 3.200000047683716,
+                "y": 0.2199999988079071,
+                "z": 1.350000023841858
+            }
+        }
+    ],
+    "Markers": [
+        {
+            "Name": "V4_Route_Branch",
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Route_Branch",
+            "Position": {
+                "x": -2.5,
+                "y": 1.2000000476837159,
+                "z": -18.299999237060548
+            }
+        },
+        {
+            "Name": "V4_Route_Entrance",
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Route_Entrance",
+            "Position": {
+                "x": -3.5,
+                "y": 5.0,
+                "z": -23.299999237060548
+            }
+        },
+        {
+            "Name": "V4_Route_Gallery_Foot",
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Route_Gallery_Foot",
+            "Position": {
+                "x": 0.0,
+                "y": 5.400000095367432,
+                "z": -7.0
+            }
+        },
+        {
+            "Name": "V4_Route_Grand_Gallery_Top",
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Route_Grand_Gallery_Top",
+            "Position": {
+                "x": 3.5,
+                "y": 10.5,
+                "z": 4.5
+            }
+        },
+        {
+            "Name": "V4_Route_Kings_Chamber",
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Route_Kings_Chamber",
+            "Position": {
+                "x": -2.0,
+                "y": 12.449999809265137,
+                "z": 7.5
+            }
+        },
+        {
+            "Name": "V4_Route_Queens_Chamber",
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Route_Queens_Chamber",
+            "Position": {
+                "x": -1.7999999523162842,
+                "y": 5.349999904632568,
+                "z": -2.799999952316284
+            }
+        },
+        {
+            "Name": "V4_Route_Subterranean_Approach",
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Route_Subterranean_Approach",
+            "Position": {
+                "x": 0.0,
+                "y": -3.799999952316284,
+                "z": -5.599999904632568
+            }
+        },
+        {
+            "Name": "V4_Route_Subterranean_Chamber",
+            "Path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Route_Subterranean_Chamber",
+            "Position": {
+                "x": 1.0,
+                "y": -3.5999999046325685,
+                "z": 1.5
+            }
+        }
+    ]
+}
