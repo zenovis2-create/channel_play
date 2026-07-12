@@ -1,0 +1,199 @@
+# Khufu V9 Causeway Source And Scene Audit
+
+- Verdict: **passed**
+- Target renderers: `20`
+- Inherited forward floor colliders: `2`
+- Source candidates: `562`
+
+## Scene Targets
+
+- `V5_Critical_Route_700_900m/V5_Route_Segment_00_East_Wall`: enabled=True, bounds=`45.04, 3.599, 0.25`
+- `V5_Critical_Route_700_900m/V5_Route_Segment_00_Floor`: enabled=True, bounds=`45.015, 3.22, 6`
+- `V5_Critical_Route_700_900m/V5_Route_Segment_00_West_Wall`: enabled=True, bounds=`45.04, 3.599, 0.25`
+- `V5_Critical_Route_700_900m/V5_Route_Segment_01_East_Wall`: enabled=True, bounds=`43.028, 2.599, 0.25`
+- `V5_Critical_Route_700_900m/V5_Route_Segment_01_Floor`: enabled=True, bounds=`43.01, 2.22, 6`
+- `V5_Critical_Route_700_900m/V5_Route_Segment_01_West_Wall`: enabled=True, bounds=`43.028, 2.599, 0.25`
+- `V5_Critical_Route_700_900m/V5_Route_Segment_23_East_Wall`: enabled=True, bounds=`43.028, 2.599, 0.25`
+- `V5_Critical_Route_700_900m/V5_Route_Segment_23_Floor`: enabled=True, bounds=`43.01, 2.22, 6`
+- `V5_Critical_Route_700_900m/V5_Route_Segment_23_West_Wall`: enabled=True, bounds=`43.028, 2.599, 0.25`
+- `V5_Critical_Route_700_900m/V5_Route_Segment_24_East_Wall`: enabled=True, bounds=`45.04, 3.599, 0.25`
+- `V5_Critical_Route_700_900m/V5_Route_Segment_24_Floor`: enabled=True, bounds=`45.015, 3.22, 6`
+- `V5_Critical_Route_700_900m/V5_Route_Segment_24_West_Wall`: enabled=True, bounds=`45.04, 3.599, 0.25`
+- `V5_District_Covered_Causeway/V5_Covered_Causeway_Floor`: enabled=True, bounds=`24, 0.25, 24`
+- `V5_District_Covered_Causeway/V5_Covered_Causeway_Lintel`: enabled=True, bounds=`5, 1.2, 16`
+- `V5_District_Covered_Causeway/V5_Covered_Causeway_Pylon_-1`: enabled=True, bounds=`5, 6, 2`
+- `V5_District_Covered_Causeway/V5_Covered_Causeway_Pylon_1`: enabled=True, bounds=`5, 6, 2`
+- `V5_District_Valley_Gate/V5_Valley_Gate_Floor`: enabled=True, bounds=`24, 0.25, 24`
+- `V5_District_Valley_Gate/V5_Valley_Gate_Lintel`: enabled=True, bounds=`5, 1.2, 16`
+- `V5_District_Valley_Gate/V5_Valley_Gate_Pylon_-1`: enabled=True, bounds=`5, 6, 2`
+- `V5_District_Valley_Gate/V5_Valley_Gate_Pylon_1`: enabled=True, bounds=`5, 6, 2`
+
+## Inherited Floor Colliders
+
+- `V5_Critical_Route_700_900m/V5_Route_Segment_00_Floor`: BoxCollider, center=`127.5, 1.65, 0`, size=`45.015, 3.22, 6`
+- `V5_Critical_Route_700_900m/V5_Route_Segment_01_Floor`: BoxCollider, center=`83.5, 2.15, 0`, size=`43.01, 2.22, 6`
+
+## Source Candidates
+
+- `PyramidTemple_FullEnvironment/Collision/Collision_Hypostyle_Playable_Area`: 24 vertices, 12 triangles, materials=`CP_Collision_Proxy`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Door_Left_Jamb`: 130 vertices, 108 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Door_Lintel`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Door_Right_Jamb`: 130 vertices, 108 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Door_Shadow`: 127 vertices, 108 triangles, materials=`Temple_Door_Shadow`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Left_Jamb_Relief`: 130 vertices, 108 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Left_Jamb_Relief_Glyph_0_0`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Left_Jamb_Relief_Glyph_0_1`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Left_Jamb_Relief_Glyph_1_0`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Left_Jamb_Relief_Glyph_1_1`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Left_Jamb_Relief_Glyph_2_0`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Left_Jamb_Relief_Glyph_2_1`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Left_Jamb_Relief_Glyph_3_0`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Left_Jamb_Relief_Glyph_3_1`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Left_Jamb_Relief_Glyph_4_0`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Left_Jamb_Relief_Glyph_4_1`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Left_Jamb_Relief_Glyph_5_0`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Left_Jamb_Relief_Glyph_5_1`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Podium`: 125 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Right_Jamb_Relief`: 130 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Right_Jamb_Relief_Glyph_0_0`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Right_Jamb_Relief_Glyph_0_1`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Right_Jamb_Relief_Glyph_1_0`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Right_Jamb_Relief_Glyph_1_1`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Right_Jamb_Relief_Glyph_2_0`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Right_Jamb_Relief_Glyph_2_1`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Right_Jamb_Relief_Glyph_3_0`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Right_Jamb_Relief_Glyph_3_1`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Right_Jamb_Relief_Glyph_4_0`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Right_Jamb_Relief_Glyph_4_1`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Right_Jamb_Relief_Glyph_5_0`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Right_Jamb_Relief_Glyph_5_1`: 132 vertices, 108 triangles, materials=`Temple_Faded_Gold_Relief`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Stair_00`: 127 vertices, 108 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Stair_01`: 127 vertices, 108 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Stair_02`: 127 vertices, 108 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Stair_03`: 127 vertices, 108 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Stair_04`: 127 vertices, 108 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Stair_05`: 127 vertices, 108 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Stair_06`: 127 vertices, 108 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Exterior/Exterior_Main_Stair_07`: 127 vertices, 108 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/GameplayMarkers/Gameplay_HypostyleHall_Center`: 302 vertices, 284 triangles, materials=`CP_Gameplay_Marker`
+- `PyramidTemple_FullEnvironment/GameplayMarkers/Gameplay_LeftSideEntrance`: 302 vertices, 284 triangles, materials=`CP_Gameplay_Marker`
+- `PyramidTemple_FullEnvironment/GameplayMarkers/Gameplay_RightSideEntrance`: 302 vertices, 284 triangles, materials=`CP_Gameplay_Marker`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Entrance_Ceiling_Thickness_Left`: 131 vertices, 108 triangles, materials=`Temple_Dark_Interior_Stone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Entrance_Ceiling_Thickness_Right`: 131 vertices, 108 triangles, materials=`Temple_Dark_Interior_Stone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Entrance_Left_Wall`: 131 vertices, 108 triangles, materials=`Temple_Dark_Interior_Stone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Entrance_Passage_Floor`: 132 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Entrance_Right_Wall`: 131 vertices, 108 triangles, materials=`Temple_Dark_Interior_Stone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Back_Wall_Left`: 127 vertices, 108 triangles, materials=`Temple_Dark_Interior_Stone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Back_Wall_Right`: 127 vertices, 108 triangles, materials=`Temple_Dark_Interior_Stone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Ceiling_Beam_0`: 127 vertices, 108 triangles, materials=`Temple_Dark_Interior_Stone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Ceiling_Beam_1`: 127 vertices, 108 triangles, materials=`Temple_Dark_Interior_Stone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Ceiling_Beam_2`: 127 vertices, 108 triangles, materials=`Temple_Dark_Interior_Stone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Ceiling_Beam_3`: 127 vertices, 108 triangles, materials=`Temple_Dark_Interior_Stone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Ceiling_Beam_4`: 127 vertices, 108 triangles, materials=`Temple_Dark_Interior_Stone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Ceiling_Beam_5`: 127 vertices, 108 triangles, materials=`Temple_Dark_Interior_Stone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_0_2_Base`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_0_2_Capital`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_0_2_Paint_Band_-0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Red_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_0_2_Paint_Band_0.0`: 470 vertices, 476 triangles, materials=`Temple_Faded_Teal_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_0_2_Paint_Band_0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Blue_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_0_2_Shaft`: 468 vertices, 476 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_1_2_Base`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_1_2_Capital`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_1_2_Paint_Band_-0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Red_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_1_2_Paint_Band_0.0`: 470 vertices, 476 triangles, materials=`Temple_Faded_Teal_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_1_2_Paint_Band_0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Blue_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_1_2_Shaft`: 468 vertices, 476 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_2_2_Base`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_2_2_Capital`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_2_2_Paint_Band_-0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Red_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_2_2_Paint_Band_0.0`: 470 vertices, 476 triangles, materials=`Temple_Faded_Teal_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_2_2_Paint_Band_0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Blue_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_2_2_Shaft`: 468 vertices, 476 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_3_2_Base`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_3_2_Capital`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_3_2_Paint_Band_-0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Red_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_3_2_Paint_Band_0.0`: 470 vertices, 476 triangles, materials=`Temple_Faded_Teal_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_3_2_Paint_Band_0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Blue_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_3_2_Shaft`: 468 vertices, 476 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_4_2_Base`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_4_2_Capital`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_4_2_Paint_Band_-0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Red_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_4_2_Paint_Band_0.0`: 470 vertices, 476 triangles, materials=`Temple_Faded_Teal_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_4_2_Paint_Band_0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Blue_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Central_Aisle_Column_4_2_Shaft`: 468 vertices, 476 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Clerestory_Glow_Left_0`: 124 vertices, 108 triangles, materials=`CP_Lighting_Anchor`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Clerestory_Glow_Left_1`: 124 vertices, 108 triangles, materials=`CP_Lighting_Anchor`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Clerestory_Glow_Left_2`: 124 vertices, 108 triangles, materials=`CP_Lighting_Anchor`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Clerestory_Glow_Left_3`: 124 vertices, 108 triangles, materials=`CP_Lighting_Anchor`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Clerestory_Glow_Left_4`: 124 vertices, 108 triangles, materials=`CP_Lighting_Anchor`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Clerestory_Glow_Left_5`: 124 vertices, 108 triangles, materials=`CP_Lighting_Anchor`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Clerestory_Glow_Right_0`: 124 vertices, 108 triangles, materials=`CP_Lighting_Anchor`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Clerestory_Glow_Right_1`: 124 vertices, 108 triangles, materials=`CP_Lighting_Anchor`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Clerestory_Glow_Right_2`: 124 vertices, 108 triangles, materials=`CP_Lighting_Anchor`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Clerestory_Glow_Right_3`: 124 vertices, 108 triangles, materials=`CP_Lighting_Anchor`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Clerestory_Glow_Right_4`: 124 vertices, 108 triangles, materials=`CP_Lighting_Anchor`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Clerestory_Glow_Right_5`: 124 vertices, 108 triangles, materials=`CP_Lighting_Anchor`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_0_Base`: 120 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_0_Capital`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_0_Paint_Band_-0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Red_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_0_Paint_Band_0.0`: 470 vertices, 476 triangles, materials=`Temple_Faded_Teal_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_0_Paint_Band_0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Blue_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_0_Shaft`: 470 vertices, 476 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_1_Base`: 120 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_1_Capital`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_1_Paint_Band_-0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Red_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_1_Paint_Band_0.0`: 470 vertices, 476 triangles, materials=`Temple_Faded_Teal_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_1_Paint_Band_0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Blue_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_1_Shaft`: 470 vertices, 476 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_3_Base`: 120 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_3_Capital`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_3_Paint_Band_-0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Red_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_3_Paint_Band_0.0`: 470 vertices, 476 triangles, materials=`Temple_Faded_Teal_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_3_Paint_Band_0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Blue_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_3_Shaft`: 470 vertices, 476 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_4_Base`: 120 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_4_Capital`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_4_Paint_Band_-0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Red_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_4_Paint_Band_0.0`: 470 vertices, 476 triangles, materials=`Temple_Faded_Teal_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_4_Paint_Band_0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Blue_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_0_4_Shaft`: 470 vertices, 476 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_0_Base`: 120 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_0_Capital`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_0_Paint_Band_-0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Red_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_0_Paint_Band_0.0`: 470 vertices, 476 triangles, materials=`Temple_Faded_Teal_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_0_Paint_Band_0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Blue_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_0_Shaft`: 470 vertices, 476 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_1_Base`: 120 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_1_Capital`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_1_Paint_Band_-0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Red_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_1_Paint_Band_0.0`: 470 vertices, 476 triangles, materials=`Temple_Faded_Teal_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_1_Paint_Band_0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Blue_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_1_Shaft`: 470 vertices, 476 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_3_Base`: 120 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_3_Capital`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_3_Paint_Band_-0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Red_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_3_Paint_Band_0.0`: 470 vertices, 476 triangles, materials=`Temple_Faded_Teal_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_3_Paint_Band_0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Blue_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_3_Shaft`: 470 vertices, 476 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_4_Base`: 120 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_4_Capital`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_4_Paint_Band_-0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Red_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_4_Paint_Band_0.0`: 470 vertices, 476 triangles, materials=`Temple_Faded_Teal_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_4_Paint_Band_0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Blue_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_1_4_Shaft`: 470 vertices, 476 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_2_0_Base`: 120 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_2_0_Capital`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_2_0_Paint_Band_-0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Red_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_2_0_Paint_Band_0.0`: 470 vertices, 476 triangles, materials=`Temple_Faded_Teal_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_2_0_Paint_Band_0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Blue_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_2_0_Shaft`: 470 vertices, 476 triangles, materials=`Temple_Weathered_Limestone`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_2_1_Base`: 120 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_2_1_Capital`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_2_1_Paint_Band_-0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Red_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_2_1_Paint_Band_0.0`: 470 vertices, 476 triangles, materials=`Temple_Faded_Teal_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_2_1_Paint_Band_0.32`: 470 vertices, 476 triangles, materials=`Temple_Faded_Blue_Paint`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_2_1_Shaft`: 470 vertices, 476 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_2_3_Base`: 120 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+- `PyramidTemple_FullEnvironment/Interior/Interior_Hypostyle_Column_2_3_Capital`: 122 vertices, 108 triangles, materials=`Temple_Limestone_Block_Variant`
+
+KHUFU_V9_AUDIT: passed
