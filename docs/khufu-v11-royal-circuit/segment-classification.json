@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "segments": [
+    {
+      "id": "Great_Step_Transition",
+      "truth": "FACT/HYBRID",
+      "factual_shape": true,
+      "gameplay_scale": true,
+      "note": "Documented route continuation with adapted opening and clearance."
+    },
+    {
+      "id": "Royal_Entry_Passage",
+      "truth": "FACT/HYBRID",
+      "factual_shape": true,
+      "gameplay_scale": true,
+      "note": "Short low passage relationship retained at standing-player scale."
+    },
+    {
+      "id": "Antechamber_Portcullis",
+      "truth": "FACT/HYBRID",
+      "factual_shape": true,
+      "gameplay_scale": true,
+      "note": "Three portcullis-track positions and granite character retained; open presentation adapted."
+    },
+    {
+      "id": "Kings_Chamber",
+      "truth": "FACT/HYBRID",
+      "factual_shape": true,
+      "gameplay_scale": true,
+      "note": "Granite east-west chamber proportions retained under project compression."
+    },
+    {
+      "id": "Granite_Sarcophagus",
+      "truth": "FACT/HYBRID",
+      "factual_shape": true,
+      "gameplay_scale": true,
+      "note": "Recognizable granite sarcophagus represented without contents or ritual claims."
+    },
+    {
+      "id": "Shaft_Mouth_Boundaries",
+      "truth": "FACT/DISPLAY",
+      "factual_shape": true,
+      "gameplay_scale": false,
+      "note": "Narrow north and south wall recesses are non-traversable evidence."
+    },
+    {
+      "id": "Stacked_Chamber_Display",
+      "truth": "FACT/DISPLAY",
+      "factual_shape": true,
+      "gameplay_scale": true,
+      "note": "Five stacked spaces and gabled cap are compressed, non-traversable section art."
+    },
+    {
+      "id": "HYBRID_Royal_Route_Inlay",
+      "truth": "HYBRID",
+      "factual_shape": false,
+      "gameplay_scale": true,
+      "note": "Amber route accent is a gameplay presentation device."
+    }
+  ]
+}
+

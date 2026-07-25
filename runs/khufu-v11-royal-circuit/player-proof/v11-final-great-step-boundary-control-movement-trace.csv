@@ -1,0 +1,2 @@
+﻿segment,step,before,target,after,error,horizontal_flags,grounding_flags,horizontal_side_hit,horizontal_ground_hit,horizontal_ambiguous_hit,grounding_ground_hit,grounding_ambiguous_hit
+1,1,"6.7449|11.2376|3.6077","6.7966|11.2865|3.7685","7.3207|11.2121|3.3405",0.6807,"7","Below","","","","V10_PROXY_Grand_Gallery_Gallery_Floor_Ramp",""

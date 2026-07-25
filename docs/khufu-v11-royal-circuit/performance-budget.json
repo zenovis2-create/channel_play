@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "root": {
+    "renderers_max": 5,
+    "vertices_max": 50000,
+    "triangles_max": 25000,
+    "colliders_max": 66
+  },
+  "map": {
+    "renderers_max": 829,
+    "colliders_max": 600
+  },
+  "captures": {
+    "required": 6,
+    "width": 1600,
+    "height": 1000
+  }
+}
