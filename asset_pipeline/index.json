@@ -16,6 +16,19 @@
       "source_license": "TBD",
       "updated_at": "2026-06-01T15:00:24+09:00",
       "scene_screenshot": "reviews/captures/screen-2026-06-01t14-51-50-09-00.png"
+    },
+    {
+      "id": "truth_pen",
+      "status": "generated",
+      "brief": "asset_pipeline/briefs/truth_pen.md",
+      "created_at": "2026-07-26T17:51:28+09:00",
+      "source_license": "TBD",
+      "pipeline_receipt": "runs/asset-pipeline-truth_pen/asset_pipeline_receipt.md",
+      "source_intake": "asset_pipeline/incoming_2d/truth_pen/source_drop.md",
+      "generation_handoff": "asset_pipeline/generated_3d/truth_pen/generation_handoff.md",
+      "blender_template": "asset_pipeline/blender_work/truth_pen/blender_batch_template.py",
+      "unity_import_manifest": "asset_pipeline/unity_ready/truth_pen/unity_import_manifest.md",
+      "updated_at": "2026-07-26T17:51:28+09:00"
     }
   ]
 }
