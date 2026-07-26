@@ -1,0 +1,531 @@
+{
+  "base_commit": "1dd7156b064a99eaa2d19ccca0ae605befae54fd",
+  "files": [
+    {
+      "bytes": 1615,
+      "path": ".gitattributes",
+      "sha256": "716a9fd1e1cc08ea3fbce0f223282cc87d546f0b5aca20ff9f923441fff574fa"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Art/Generated/KhufuV12QueenCircuit.meta",
+      "sha256": "000c586a7dc97b6ec2546d957db102336754557f044b9267823a818e601ad5d8"
+    },
+    {
+      "bytes": 23258,
+      "path": "Assets/_Project/Art/Generated/KhufuV12QueenCircuit/KhufuV12_Limestone_Detail.asset",
+      "sha256": "b617f1b2ec968dc21cfb2415a1d441db069bcb0f62365096f9f9b292bdf440aa"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV12QueenCircuit/KhufuV12_Limestone_Detail.asset.meta",
+      "sha256": "dc040777bb836119296b064c0af232421c2539225d1af26bac001a690b0e5640"
+    },
+    {
+      "bytes": 54301,
+      "path": "Assets/_Project/Art/Generated/KhufuV12QueenCircuit/KhufuV12_Limestone_Structure.asset",
+      "sha256": "19b8f37e1883d444e46fda9e95f4ce78097f032775dee1febc3860aa38b89eed"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV12QueenCircuit/KhufuV12_Limestone_Structure.asset.meta",
+      "sha256": "eebf2f97a17e5448342852ee28f1485bde13ebd82977d626d1c9c65c583116b4"
+    },
+    {
+      "bytes": 6860,
+      "path": "Assets/_Project/Art/Generated/KhufuV12QueenCircuit/KhufuV12_Queen_Inspection_Accent.asset",
+      "sha256": "4a51778cfe698c69efc8380e0434063343d0408f308f1e9bde529fd9dfac7f71"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV12QueenCircuit/KhufuV12_Queen_Inspection_Accent.asset.meta",
+      "sha256": "533f7e2339ac295579f650f617b5d39188caeeb3c6851931c1d40dfa249005de"
+    },
+    {
+      "bytes": 12343,
+      "path": "Assets/_Project/Art/Generated/KhufuV12QueenCircuit/KhufuV12_Queen_Route_Inlay.asset",
+      "sha256": "15c9098e3b5354717650cfdb5cbc4c1de94bc1a8f3b75c80a6a2a77b26e8932a"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV12QueenCircuit/KhufuV12_Queen_Route_Inlay.asset.meta",
+      "sha256": "64de4f0f4eed566417ff4b66f74cebbff255dd840c7f18e84cb2fe4e43c251d8"
+    },
+    {
+      "bytes": 8669,
+      "path": "Assets/_Project/Art/Generated/KhufuV12QueenCircuit/KhufuV12_Shadow_Recess.asset",
+      "sha256": "71becbd5f7ec8749e3e7c2c8f70fd14352662bb38cca8aa7ae3f546aadb739b0"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV12QueenCircuit/KhufuV12_Shadow_Recess.asset.meta",
+      "sha256": "c43515ec57f4eeae2685031bcffd7627bed9530bc962ce9d9de83a85c686bd23"
+    },
+    {
+      "bytes": 127258,
+      "path": "Assets/_Project/Art/Generated/KhufuV12QueenCircuit/KhufuV12_V10_Limestone_Open.asset",
+      "sha256": "2709352f37361e83fd4a4495a199d79b91737e24ab66dbadcd549115e3705083"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV12QueenCircuit/KhufuV12_V10_Limestone_Open.asset.meta",
+      "sha256": "2adf35c5f3c88eb878f9f19109f7dfd6965ca5ac560abb540b0978485f23bad7"
+    },
+    {
+      "bytes": 8702,
+      "path": "Assets/_Project/Art/Generated/KhufuV12QueenCircuit/KhufuV12_V10_Red_Granite_Open.asset",
+      "sha256": "73a60cd9f1fde260759165c3e059047eca3f3dddd7a5fac0c45a80fd5cb6b8b8"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV12QueenCircuit/KhufuV12_V10_Red_Granite_Open.asset.meta",
+      "sha256": "ae8e88bb1ff7fc86a33eac7d11becb3613a910d127b51f32cb2492b52a46f8ba"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Materials/KhufuV12QueenCircuit.meta",
+      "sha256": "546bf42c645d8961d3487835e8c66d778fb7f244a82c3a9f8b45d5108edf2fca"
+    },
+    {
+      "bytes": 2348,
+      "path": "Assets/_Project/Materials/KhufuV12QueenCircuit/V12_Queen_Detail.mat",
+      "sha256": "55b77f308187780ef06b4e9efbeeda3ac7e9df27de8ddbfe46a2aab3d8ee7f11"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV12QueenCircuit/V12_Queen_Detail.mat.meta",
+      "sha256": "e4efb0269692d14fcc2d6c3618719b13804cbbad3b69012fe3a7beb08b811e51"
+    },
+    {
+      "bytes": 2352,
+      "path": "Assets/_Project/Materials/KhufuV12QueenCircuit/V12_Queen_Inspection.mat",
+      "sha256": "97e18c9876b8bc1ac7aed8021996770462688edfc0ed67b40c8d8bb38ba86f66"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV12QueenCircuit/V12_Queen_Inspection.mat.meta",
+      "sha256": "b7f6e5c078684d5669a53b3f379b3803d8893d36d5c55d5eef146b19a75d36d0"
+    },
+    {
+      "bytes": 2350,
+      "path": "Assets/_Project/Materials/KhufuV12QueenCircuit/V12_Queen_Limestone.mat",
+      "sha256": "9dbf89c67d4aa471f0f0bc684261e666a5131ce02e18ba53f7c436e41f47ffe6"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV12QueenCircuit/V12_Queen_Limestone.mat.meta",
+      "sha256": "af9a3966e6535b8ab0af733961453b5de27467673e475b2c5b19d3f82ed4f746"
+    },
+    {
+      "bytes": 2374,
+      "path": "Assets/_Project/Materials/KhufuV12QueenCircuit/V12_Queen_Route_Amber.mat",
+      "sha256": "0813d51fa2048ca005162206e40b875b1001b01c9f50ff0f22603d19dbf2027e"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV12QueenCircuit/V12_Queen_Route_Amber.mat.meta",
+      "sha256": "4e067687fd5b247a6a24851aa1cbe0b1eef13b98d8a6c1172e2a87e937e3a2a0"
+    },
+    {
+      "bytes": 2348,
+      "path": "Assets/_Project/Materials/KhufuV12QueenCircuit/V12_Queen_Shadow.mat",
+      "sha256": "98b57632de54d76f1c657b5de24a5f67fd6f825a6fc2a015afcae7b16d7b9b26"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV12QueenCircuit/V12_Queen_Shadow.mat.meta",
+      "sha256": "51e7d2cf22047ca8a02bc1cf8aa8eb7e995b7474fd2158abd7e562a6038e2339"
+    },
+    {
+      "bytes": 3099001,
+      "path": "Assets/_Project/Scenes/School_MVP.unity",
+      "sha256": "eec9cc9c0b52cd75066c20caf1710ab458423de2eea073c7cfe36e88a782ec8c"
+    },
+    {
+      "bytes": 15102,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV12QueenCircuitAudit.cs",
+      "sha256": "865fc1f5e9f4d6e91fc764c96bfcf9ee4d1fcea587a021d944d86b2c9f6eb4f2"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV12QueenCircuitAudit.cs.meta",
+      "sha256": "b3d0dcfafad36ad72241792091dd7ad62d08bd08ca71b0c9ef29492e0c463ac3"
+    },
+    {
+      "bytes": 45752,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV12QueenCircuitBuilder.cs",
+      "sha256": "e945183f3162709a08fca4e33f14bd7795e4faefd3c5194ca3d9ef6f473aa637"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV12QueenCircuitBuilder.cs.meta",
+      "sha256": "3015b596b1b0cee982cfe7d9e82acdff426d933358212ce85c36dff2b31ef5f2"
+    },
+    {
+      "bytes": 16961,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV12QueenCircuitLegacyRegression.cs",
+      "sha256": "7068f20ed4aacaee463869c7fb9eec0420d4db396aacba212090c9069f32122d"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV12QueenCircuitLegacyRegression.cs.meta",
+      "sha256": "b7a680399dc148de096565b816c5bef9b950af4fde10c5872141befbfb000cd0"
+    },
+    {
+      "bytes": 26289,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV12QueenCircuitMeshPipeline.cs",
+      "sha256": "d4d357fa5ce11dad94d2c9102ff66b298a2fcc3d12d7a08fcfb175426d5c018a"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV12QueenCircuitMeshPipeline.cs.meta",
+      "sha256": "d4327ad26e8289a3417bfbcd92e167abb4b5fbb93c4833077eef32c0d188a407"
+    },
+    {
+      "bytes": 16876,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV12QueenCircuitScreenshotExporter.cs",
+      "sha256": "24a462a3ba1b6e71d65caa691f9e4a4360f35eb1787ade02d059a1e4d6484862"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV12QueenCircuitScreenshotExporter.cs.meta",
+      "sha256": "83ddb6053d0044ea6fce0387324b1088e41a9c322a053f0c32bd00632ecaeefe"
+    },
+    {
+      "bytes": 36780,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV12QueenCircuitValidator.cs",
+      "sha256": "ec4df5d403fa59bd2fc5fd138db0f2eb19980a4f6c7eea63cb2b591237d337fc"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV12QueenCircuitValidator.cs.meta",
+      "sha256": "6847d6e3332977e9d0964fda0288852a9811e5006039d5392329e72ff60d0e7e"
+    },
+    {
+      "bytes": 10786,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV12WindowsBuild.cs",
+      "sha256": "d0cac8bb947170f6d1780e5cba82adee175a1fb5f5be42fac78ffbe533bf35b6"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV12WindowsBuild.cs.meta",
+      "sha256": "60f478d7b62175a423595cd2a12e1852a4599564eb37ec85078c22b90263c1cb"
+    },
+    {
+      "bytes": 1510,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV12ControllerHitRecorder.cs",
+      "sha256": "28bdea12adb4fd824cfffbe0e6b0169ac8a3313072fd0c669b17acbb9cc0a1fc"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV12ControllerHitRecorder.cs.meta",
+      "sha256": "fb8ee620829dc5130fed749532e0729e659f1fa1ae86663166026d9968162a09"
+    },
+    {
+      "bytes": 2260,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV12QueenRouteContract.cs",
+      "sha256": "4355c8f4003731578f9e68c529a952c22f487e690c8e2e63631d3a50c1778c19"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV12QueenRouteContract.cs.meta",
+      "sha256": "bd3d7bf50907359533eeda8c8e8ebb5a114ddf24290e67389fdb1aa6c009a54d"
+    },
+    {
+      "bytes": 1162,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV12SegmentTag.cs",
+      "sha256": "22fd85fdfb3a16c59860a39568f34fc8d59c5e38f1687c111bf936b4dd9ff086"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV12SegmentTag.cs.meta",
+      "sha256": "6889a862da95ba2d946a62f416366f4a4871316e72200d700bab88fec81d2495"
+    },
+    {
+      "bytes": 868,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV12TransitionControl.cs",
+      "sha256": "c43784af0ae45fe3482c0f2c571c4be37b1c0499f3f2388980797a889d38a5d6"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV12TransitionControl.cs.meta",
+      "sha256": "cdc9ff1d786604bd0dfac7314a2f103c0788cbe3246b5fa0fb60bd455e323670"
+    },
+    {
+      "bytes": 27018,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV12TraversalProofProbe.cs",
+      "sha256": "eeff3e3fad484fcd70a9474af0d85975d0d85543c7ffd30ba92c9338550cfdb9"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV12TraversalProofProbe.cs.meta",
+      "sha256": "ce3581a5569191fae12a297ea7a54ff2ef0e155d9bd70ca73900bb946612d941"
+    },
+    {
+      "bytes": 2289,
+      "path": "docs/khufu-v12-queen-circuit/GOAL.md",
+      "sha256": "5781f7be5b8bb6cc8ae7ee40a178dbf1eba04f396367a247cb697283cf3c0fae"
+    },
+    {
+      "bytes": 1629,
+      "path": "docs/khufu-v12-queen-circuit/PLAN.md",
+      "sha256": "4252f7b9750d4b9a22521f6dfb562726c5a0fa20ab0ac5388b06fbcab36c4782"
+    },
+    {
+      "bytes": 1536,
+      "path": "docs/khufu-v12-queen-circuit/RESEARCH_BRIEF.md",
+      "sha256": "28377789c94fb5aa5175dec7822444ea76c57738e8452418fcd3715b4d1d20ef"
+    },
+    {
+      "bytes": 3880,
+      "path": "docs/khufu-v12-queen-circuit/RULES.md",
+      "sha256": "880c030c6a0c151993712a0d0666394a85836de038f582ede7433124944fdf3f"
+    },
+    {
+      "bytes": 1990,
+      "path": "docs/khufu-v12-queen-circuit/STATUS.md",
+      "sha256": "6a03b949edaa9027c7c73a34419fedb92d3ac4f66e16b37894087387b3f7caf4"
+    },
+    {
+      "bytes": 1790,
+      "path": "docs/khufu-v12-queen-circuit/TEST_PLAN.md",
+      "sha256": "ed3b6211ef256329442fad80bacb518ddb0429877a9af65cb558230188fc4599"
+    },
+    {
+      "bytes": 376,
+      "path": "docs/khufu-v12-queen-circuit/performance-budget.json",
+      "sha256": "69b6045bf935326b59850ef6aca8e60aee900e7f0f5638ae066210db25bea944"
+    },
+    {
+      "bytes": 1360,
+      "path": "docs/khufu-v12-queen-circuit/segment-classification.json",
+      "sha256": "d0651f8659c4ccad79e8bbc0f948ee2073394c9d2d84ca9e580cb3b35f1b54be"
+    },
+    {
+      "bytes": 7155,
+      "path": "docs/khufu-v12-queen-circuit/staging-allowlist.txt",
+      "sha256": "12dd32a19fdbbf864fdffe5d4c52f3f375e93498ee193b2311922610131ff69f"
+    },
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v12-queen-circuit/captures/chamber_doorway_release.png",
+      "sha256": "1b64e56782e96b24a28fa821a326bb5130e39a63cd5a3e161688b1c43e1ff693"
+    },
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v12-queen-circuit/captures/east_niche_and_narrow_mouths.png",
+      "sha256": "6059cc2ae925c8f57ef53f15bde5c7fc1735b89047c92e877deebb7a6a93a400"
+    },
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v12-queen-circuit/captures/horizontal_passage_low_axis.png",
+      "sha256": "021456f00548ba9ed7fa5bb2a5b575e888364c39c87d358e40b4a668c8caa48e"
+    },
+    {
+      "bytes": 2561,
+      "path": "runs/khufu-v12-queen-circuit/captures/manifest.md",
+      "sha256": "cd8e2b662898745389b5878bd50d944b1f91a7817b441a2008224aaa70a59c31"
+    },
+    {
+      "bytes": 961,
+      "path": "runs/khufu-v12-queen-circuit/captures/manual-semantic-review.md",
+      "sha256": "560c45ccfe2b389bfce8687e884cad632044ab43e15a13dc0357b420e13ea1b5"
+    },
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v12-queen-circuit/captures/queen_circuit_integration.png",
+      "sha256": "9d4f2e3ea92cd079dff1cd80fcdc49ed7e6349214b9532f67dbc44c4d79a681f"
+    },
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v12-queen-circuit/captures/queen_threshold_open_axis.png",
+      "sha256": "e192db48394438876a7ffd9410b20974c0b876c1907ef9c425e3206698e96f6a"
+    },
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v12-queen-circuit/captures/queens_chamber_gabled_wide.png",
+      "sha256": "638f0fceba51bf4e87b592223d1289db5c7134da4fc365d4b645cb170773af09"
+    },
+    {
+      "bytes": 3439,
+      "path": "runs/khufu-v12-queen-circuit/clean-index-import.md",
+      "sha256": "9dc73725547530ca7349dc923a4cb3cdb4a51f2524f7e98277da631b98a57774"
+    },
+    {
+      "bytes": 585,
+      "path": "runs/khufu-v12-queen-circuit/idempotence.md",
+      "sha256": "41d094dabcb46444741d3c81239474b34f52a0547a2622817fb67785ebcf003f"
+    },
+    {
+      "bytes": 3705,
+      "path": "runs/khufu-v12-queen-circuit/legacy-regression.md",
+      "sha256": "c866540380cdd8d0fc2697fedee7852f5af53305d8f02f70eaaf2a05420a90fb"
+    },
+    {
+      "bytes": 665,
+      "path": "runs/khufu-v12-queen-circuit/negative-controls.md",
+      "sha256": "4b507c71f9d436f833868144b992ce633b39401e8a24199efca3e5455367ad47"
+    },
+    {
+      "bytes": 1361,
+      "path": "runs/khufu-v12-queen-circuit/player-proof/v12-final-boundary-control.md",
+      "sha256": "92517c7c5a7ea8360fe5fa72a415d6ef18d7b72302b2226f03a30b3175377522"
+    },
+    {
+      "bytes": 16788,
+      "path": "runs/khufu-v12-queen-circuit/player-proof/v12-final-normal-round-trip-movement-trace.csv",
+      "sha256": "25446f7d9c1a38ae3bb0ff76c364f714e013d6b4284bb400441fdf645524a726"
+    },
+    {
+      "bytes": 1679,
+      "path": "runs/khufu-v12-queen-circuit/player-proof/v12-final-queen-boundary-control-movement-trace.csv",
+      "sha256": "5b173478005fadb4e079e8338276ccfc0d002499d21f683fcf383510bb3f68fd"
+    },
+    {
+      "bytes": 1299,
+      "path": "runs/khufu-v12-queen-circuit/player-proof/v12-final-round-trip.md",
+      "sha256": "3103c515a369905b72eeaf7041801fe0c10683310c7ba8e3bb07f8c99d91fcbb"
+    },
+    {
+      "bytes": 10777,
+      "path": "runs/khufu-v12-queen-circuit/prewrite-audit.json",
+      "sha256": "67961dc19e9e16ae27833a6afbd4030b73ee13dfa38872a37ff37bf2ef665d74"
+    },
+    {
+      "bytes": 893,
+      "path": "runs/khufu-v12-queen-circuit/prewrite-audit.md",
+      "sha256": "f5fe764f0d1f29b4c76caa183374b10930ee6dd7cc3841889d9ecc131a30909e"
+    },
+    {
+      "bytes": 301,
+      "path": "runs/khufu-v12-queen-circuit/prewrite-validation.md",
+      "sha256": "fa4bb45bb2ef2e77b044d37b59be02a51fef291a4d9ea85042189c7539bbfd12"
+    },
+    {
+      "bytes": 2184,
+      "path": "runs/khufu-v12-queen-circuit/python-tests.md",
+      "sha256": "2da5d517b41a6a73d7ec8898c9c250a1e8fb62ec0fbd8402470f75ca9ed8ff46"
+    },
+    {
+      "bytes": 418,
+      "path": "runs/khufu-v12-queen-circuit/release-validation.md",
+      "sha256": "5d81abcd14bf867a5f46d56a4872796ba262943e4388220a14ae62b34cb3a3b2"
+    },
+    {
+      "bytes": 1123,
+      "path": "runs/khufu-v12-queen-circuit/review-resolution.md",
+      "sha256": "5b8d002502673d14de837fcc1abf5882771b498c7f6c434981f69cad30a61136"
+    },
+    {
+      "bytes": 532,
+      "path": "runs/khufu-v12-queen-circuit/static-validation.md",
+      "sha256": "d1e0042ca2c457a3ec3054487fac205632f2643c1dd62384fc3638bef2e7f3b2"
+    },
+    {
+      "bytes": 2211,
+      "path": "runs/khufu-v12-queen-circuit/windows-build.md",
+      "sha256": "e5661bac2eb813810254ec153d8d0bcaf4a1f35f9565e8d3832e2177f61478d8"
+    },
+    {
+      "bytes": 8191,
+      "path": "tools/tests/test_validate_khufu_v12_prewrite.py",
+      "sha256": "0ae4c9a74d2963292b7a42090ca2b4e74a9912adc5b5068cc8ce600d83170743"
+    },
+    {
+      "bytes": 9084,
+      "path": "tools/tests/test_validate_khufu_v12_release.py",
+      "sha256": "f14dc30294d3ee01121ec6ff57aa8e56a67b0f34b3a3724dddff60f1e39a9d29"
+    },
+    {
+      "bytes": 9994,
+      "path": "tools/validate_khufu_v12_prewrite.py",
+      "sha256": "fa21262c5329f4be67e21e8e2a12c236844a81c4f130bd57bf24aa1b065b0cac"
+    },
+    {
+      "bytes": 38152,
+      "path": "tools/validate_khufu_v12_release.py",
+      "sha256": "5ac42c0f83aba30c5b262bf0e7d60be38d62189fc172d5f9225215c553ea2874"
+    },
+    {
+      "bytes": 49753,
+      "path": "work/fable-harness/calls.jsonl",
+      "sha256": "a042e8830180db89e677a9412ee5750fa7ac208f1ec6fc6f2ff949c05658b41a"
+    },
+    {
+      "bytes": 3588,
+      "path": "work/fable-harness/khufu-v12-queen-circuit-adopted-plan.md",
+      "sha256": "284bffe450a90563ccc8a5cccc282cb76c4a5930b8bcc2e5ea613e2d74e2a322"
+    },
+    {
+      "bytes": 536,
+      "path": "work/fable-harness/khufu-v12-queen-circuit-final-review-concise.dry-run.txt",
+      "sha256": "8ed3e01d3f8f001129e7a7a9cfbe4a444c3b54f95c7af01af493880460de7c83"
+    },
+    {
+      "bytes": 3361,
+      "path": "work/fable-harness/khufu-v12-queen-circuit-final-review-concise.md",
+      "sha256": "37da965487e8fa9ba068f60f7f7f0345653034afabf05c4d868959313d816870"
+    },
+    {
+      "bytes": 538,
+      "path": "work/fable-harness/khufu-v12-queen-circuit-final-review-followup.dry-run.txt",
+      "sha256": "a640d8b899e6e3db0f8fc19564fe0045f37b0479c7332fdbc2508c794dc917f3"
+    },
+    {
+      "bytes": 3389,
+      "path": "work/fable-harness/khufu-v12-queen-circuit-final-review-followup.md",
+      "sha256": "9c9b433108c8059e3c4e4975c803e176b44eca236dc52459760f4e4926c9fe16"
+    },
+    {
+      "bytes": 2980,
+      "path": "work/fable-harness/khufu-v12-queen-circuit-final-review-resolution.md",
+      "sha256": "287759c41ac870a779478d8e66084f22c59ad6f0be1054fd9fca0bf7b182b20b"
+    },
+    {
+      "bytes": 546,
+      "path": "work/fable-harness/khufu-v12-queen-circuit-final-review-ultraconcise.dry-run.txt",
+      "sha256": "37e8417a00e6a6fc9350c04a5e1525703a1b10f91736e5bf1fcd65ffd011f98e"
+    },
+    {
+      "bytes": 1848,
+      "path": "work/fable-harness/khufu-v12-queen-circuit-final-review-ultraconcise.md",
+      "sha256": "ea506ea0e9e56d807f75c0622a6e22cfb6e8b4448c1175145a4182821ccbdb6f"
+    },
+    {
+      "bytes": 522,
+      "path": "work/fable-harness/khufu-v12-queen-circuit-final-review.dry-run.txt",
+      "sha256": "96160a53f1a9ec109464ad09fe7495cdb0ebdb81e206632bee5c3725a8f4e8f7"
+    },
+    {
+      "bytes": 5285,
+      "path": "work/fable-harness/khufu-v12-queen-circuit-final-review.md",
+      "sha256": "774ee038b192a3ff5ade06fd084e236085bf4d234d0cfe8ab8129ff5b871e296"
+    },
+    {
+      "bytes": 8647,
+      "path": "work/fable-harness/khufu-v12-queen-circuit-final-review.opus.followup.md",
+      "sha256": "09b39540971b0ced7c70306592d6343061b72c23cd9ef6eb09e06295dddc4449"
+    },
+    {
+      "bytes": 3727,
+      "path": "work/fable-harness/khufu-v12-queen-circuit-final-review.opus.md",
+      "sha256": "cf9e71518314293a70fc00263c706e31f386a2f51fdbdaf3b0e952fc3b577a79"
+    },
+    {
+      "bytes": 523,
+      "path": "work/fable-harness/khufu-v12-queen-circuit-plan-critique.dry-run.txt",
+      "sha256": "269038ee54763dd1666bdbd02df6c9625682d5ddaf5503da026982678f74a683"
+    },
+    {
+      "bytes": 8199,
+      "path": "work/fable-harness/khufu-v12-queen-circuit-plan-critique.md",
+      "sha256": "66946a9e8d6596e2f0e75e938f9869125569cac584d2e89289b26d3f4ebc3473"
+    },
+    {
+      "bytes": 8679,
+      "path": "work/fable-harness/khufu-v12-queen-circuit-plan-critique.opus.md",
+      "sha256": "e22e40fae36a2db10b3aaf012ea4f2f4cac30327cc6c905f2cd4469d38f693af"
+    }
+  ],
+  "schema": "khufu-v12-staged-inventory-v1"
+}

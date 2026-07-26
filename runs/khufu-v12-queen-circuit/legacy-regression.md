@@ -1,0 +1,41 @@
+# Khufu V12 Legacy Regression
+
+- Verdict: **passed**
+- Scope: `V4, V5, V8, V9, V10, V11` original validation logic
+- V11 rule: detach V12, restore V11 mesh/component/proxy context, then require `9994...`.
+- V10 rule: detach V11/V12 and accept only the frozen exact V12 transition failure set.
+- Scene SHA256 before / after: `eec9cc9c0b52cd75066c20caf1710ab458423de2eea073c7cfe36e88a782ec8c / eec9cc9c0b52cd75066c20caf1710ab458423de2eea073c7cfe36e88a782ec8c`
+- Scene bytes unchanged: `True`
+- V4: `passed` / signature `original validator result`
+- V5: `passed` / signature `objective permutations=6; clearance samples=415`
+- V8: `passed` / signature `be64fa8b33e798093d55087fc279377446e6e5556e059ad273aeaf1d87ccdfa4`
+- V9: `passed` / signature `8301ccc17bf1323fb8e9d1a525a778bf9ccdbf2da3dc15412b4bbf790ac85da8`
+- V10: `passed` / signature `903f43ed5cfc00bf8eb3243741901adb503711624b5a68fef71c52f7b2be5241 / classified exact V12 transition deltas=19`
+  - Classified exact V12 transition delta: `Unexpected V10 root metrics: renderers=6_vertices=4848_triangles=2424_colliders=70`
+  - Classified exact V12 transition delta: `Unexpected full-map V10 metrics: renderers=824_vertices=63878_triangles=46964_colliders=534`
+  - Classified exact V12 transition delta: `V10 mesh topology drifted: Limestone_Structure`
+  - Classified exact V12 transition delta: `V10 mesh omits spec corners: Great_Step_Diegetic_Boundary`
+  - Classified exact V12 transition delta: `V10 generated mesh binding drifted: Limestone_Structure`
+  - Classified exact V12 transition delta: `V10 mesh topology drifted: Red_Granite_Boundary`
+  - Classified exact V12 transition delta: `V10 mesh omits spec corners: Queen_Ownership_Gate`
+  - Classified exact V12 transition delta: `V10 mesh omits spec corners: Great_Step_Granite_Bar_00`
+  - Classified exact V12 transition delta: `V10 mesh omits spec corners: Great_Step_Granite_Bar_01`
+  - Classified exact V12 transition delta: `V10 mesh omits spec corners: Great_Step_Granite_Bar_02`
+  - Classified exact V12 transition delta: `V10 mesh omits spec corners: Great_Step_Granite_Bar_03`
+  - Classified exact V12 transition delta: `V10 mesh omits spec corners: Great_Step_Granite_Bar_04`
+  - Classified exact V12 transition delta: `V10 generated mesh binding drifted: Red_Granite_Boundary`
+  - Classified exact V12 transition delta: `V10 proxy collider drifted: Grand_Gallery_Gallery_Floor_Ramp`
+  - Classified exact V12 transition delta: `V10 proxy collider drifted: Great_Step_Boundary_Great_Step_Diegetic_Boundary`
+  - Classified exact V12 transition delta: `V10 proxy collider drifted: Historic_Service_Mouth_Historic_Service_Mouth_East_Frame`
+  - Classified exact V12 transition delta: `V10 proxy collider drifted: Historic_Service_Mouth_Historic_Service_Mouth_Lintel`
+  - Classified exact V12 transition delta: `V10 proxy collider drifted: Historic_Service_Mouth_Historic_Service_Mouth_West_Frame`
+  - Classified exact V12 transition delta: `V10 proxy collider drifted: Queen_Branch_Threshold_Queen_Ownership_Gate`
+- V11: `passed` / signature `9994b06134cf20f3225df94880f7f652e1de66ca00bb24770ad3274b8d2f0ed9`
+- V4 validator SHA256: `b4ec09ed37c8ad1b7597528a3a8ced42ae7a8613436cdc31a9b1e609a6e85c3c`
+- V5 validator SHA256: `405573071d52ef12fa816cf230e51bab11e2f2cda2f7dfe7e708a7b99fbc5ebd`
+- V8 validator SHA256: `87c2fda947d591896d5a1813625be03424f6d79cea482cc6179162eb3bf3e68e`
+- V9 validator SHA256: `b47a170d7736499c04b3e82e2c5ed07cc85937cb3fc6b4671a00fc44b4b14c46`
+- V10 validator SHA256: `b7a6d8603390afc1d95369cf5f287b8eaeadbc831de2d05b929ef50c3a209a14`
+- V11 validator SHA256: `ae2ca420f03e1a53cf07a5ad17a0580f5672fab48a733762c2fe687f7ffe2d48`
+
+KHUFU_V12_LEGACY_REGRESSION: passed

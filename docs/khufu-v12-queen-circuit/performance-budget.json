@@ -1,0 +1,20 @@
+{
+  "schema": "khufu-v12-queen-circuit-budget-v1",
+  "root": {
+    "renderers_exact": 5,
+    "colliders_exact": 22,
+    "colliders_max": 33,
+    "vertices_max": 20000,
+    "triangles_max": 10000
+  },
+  "map": {
+    "renderers_exact": 834,
+    "colliders_exact": 589,
+    "colliders_max": 600
+  },
+  "captures": {
+    "required": 6,
+    "width": 1600,
+    "height": 1000
+  }
+}

@@ -5,6 +5,12 @@
 *.meta text eol=lf
 *.unity text eol=lf
 
+# V12 canonical-signature inputs are byte-bound by Unity receipts.
+docs/khufu-v12-queen-circuit/segment-classification.json -text
+docs/khufu-v12-queen-circuit/performance-budget.json -text
+runs/khufu-v12-queen-circuit/prewrite-audit.json -text
+runs/khufu-v12-queen-circuit/static-validation.md -text
+
 # Unity assets tracked by Git LFS
 *.psd filter=lfs diff=lfs merge=lfs -text
 *.ai filter=lfs diff=lfs merge=lfs -text
