@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import re
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -24,6 +25,10 @@ from validate_khufu_v6_visual_slice import (  # noqa: E402
     WINDOWS_BUILD_SOURCE,
     validate,
 )
+
+V6_BASELINE_REVISION = "9f4158673f9b4cdcdea94c74b71638413c5d77fe"
+V6_PACKAGE_INPUT_REVISION = "10e8ed0d3cc7be82c2ec8e3d69c618da2f160d5a"
+V6_RELEASE_REVISION = "d35070c53b3643f9e6657f9309eb697214f91678"
 
 
 class KhufuV6VisualSliceValidatorTests(unittest.TestCase):
@@ -47,6 +52,32 @@ class KhufuV6VisualSliceValidatorTests(unittest.TestCase):
         else:
             shutil.copy2(source, target)
 
+    def _copy_git_blob(self, revision: str, relative: Path | str) -> None:
+        relative = Path(relative)
+        result = subprocess.run(
+            ["git", "show", f"{revision}:{relative.as_posix()}"],
+            cwd=PROJECT_ROOT,
+            check=True,
+            stdout=subprocess.PIPE,
+        )
+        target = self.root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(result.stdout)
+
+    def _copy_v5_probe_receipt(self) -> None:
+        relative = Path("runs/khufu-mega-labyrinth-v5/playmode-probe.md")
+        result = subprocess.run(
+            ["git", "show", f"{V6_RELEASE_REVISION}:{relative.as_posix()}"],
+            cwd=PROJECT_ROOT,
+            check=True,
+            stdout=subprocess.PIPE,
+        )
+        lines = result.stdout.decode("utf-8").splitlines()
+        content = "\n".join(lines[:2]) + "\n" + "\r\n".join(lines[2:]) + "\r\n"
+        target = self.root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(content.encode("utf-8"))
+
     def _copy_fixture(self) -> None:
         baseline = PROJECT_ROOT / RUN_ROOT / "frozen-inputs-baseline.md"
         self._copy(RUN_ROOT / "frozen-inputs-baseline.md")
@@ -55,12 +86,19 @@ class KhufuV6VisualSliceValidatorTests(unittest.TestCase):
             baseline.read_text(encoding="utf-8"),
             re.MULTILINE,
         ):
-            self._copy(raw_path)
+            revision = (
+                V6_PACKAGE_INPUT_REVISION
+                if raw_path.startswith("Packages/")
+                else V6_BASELINE_REVISION
+            )
+            self._copy_git_blob(revision, raw_path)
+
+        self._copy_git_blob(V6_RELEASE_REVISION, SCENE)
+        for relative in (*V6_SOURCES.values(), WINDOWS_BUILD_SOURCE):
+            self._copy_git_blob(V6_RELEASE_REVISION, relative)
+        self._copy_v5_probe_receipt()
 
         for relative in (
-            SCENE,
-            *V6_SOURCES.values(),
-            WINDOWS_BUILD_SOURCE,
             Path("tools/validate_khufu_v6_visual_slice.py"),
             Path("tools/validate_khufu_v5_performance.py"),
             RUN_ROOT / "validation.md",
@@ -72,7 +110,6 @@ class KhufuV6VisualSliceValidatorTests(unittest.TestCase):
             RUN_ROOT / "performance-final/v6-final-performance.md",
             RUN_ROOT / "performance-final/player.log",
             RUN_ROOT / "performance-final/binding.json",
-            Path("runs/khufu-mega-labyrinth-v5/playmode-probe.md"),
             Path("runs/khufu-mega-labyrinth-v5/gate4-acceptance.md"),
             Path("runs/khufu-mega-labyrinth-v5/performance-budget.json"),
             *(DOC_ROOT / name for name in DOC_TOKENS),
