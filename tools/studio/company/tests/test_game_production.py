@@ -7,7 +7,11 @@ from pathlib import Path
 
 from tools.studio.company.capture import PNG_SIGNATURE
 from tools.studio.company.errors import CompanyError
-from tools.studio.company.game_production import game_production_state, render_game_production_status
+from tools.studio.company.game_production import (
+    _procurement_issue_groups,
+    game_production_state,
+    render_game_production_status,
+)
 from tools.studio.company.procurement import (
     procurement_decision_init,
     procurement_outreach_check,
@@ -285,6 +289,44 @@ class GameProductionTests(unittest.TestCase):
         self.assertFalse(
             any("UNKNOWN" in error for error in procurement["errors"])
         )
+        issue_groups = procurement["issueGroups"]
+        self.assertEqual(
+            [group["id"] for group in issue_groups],
+            [
+                "approval",
+                "owner",
+                "commercial",
+                "schedule",
+                "outreach",
+                "privacy",
+            ],
+        )
+        self.assertEqual(
+            [group["count"] for group in issue_groups],
+            [1, 3, 4, 3, 4, 1],
+        )
+        issues = [
+            issue
+            for group in issue_groups
+            for issue in group["items"]
+        ]
+        self.assertEqual(len(issues), 16)
+        self.assertEqual(
+            {issue["message"] for issue in issues},
+            set(procurement["errors"]),
+        )
+        self.assertTrue(
+            all(
+                issue["field"]
+                and issue["label"]
+                and issue["guidance"]
+                for issue in issues
+            )
+        )
+        self.assertNotIn(
+            "UNKNOWN",
+            json.dumps(issue_groups, ensure_ascii=False),
+        )
         self.assertEqual(
             procurement["intake"],
             "docs/research/truth_pen_owner_decision_intake.md",
@@ -325,6 +367,23 @@ class GameProductionTests(unittest.TestCase):
                 / "asset-procurement-truth_pen"
                 / "outreach_readiness_check.md"
             ).exists()
+        )
+
+    def test_unknown_procurement_error_uses_safe_fallback_guidance(self) -> None:
+        groups = _procurement_issue_groups(
+            ["procurement decision is not valid UTF-8 JSON"]
+        )
+
+        self.assertEqual(len(groups), 1)
+        self.assertEqual(groups[0]["id"], "validation")
+        self.assertEqual(groups[0]["count"], 1)
+        self.assertEqual(
+            groups[0]["items"][0]["label"],
+            "조달 기록 추가 검증",
+        )
+        self.assertIn(
+            "소유자 안내서",
+            groups[0]["items"][0]["guidance"],
         )
 
     def test_current_fail_receipt_routes_to_owner_intake(self) -> None:

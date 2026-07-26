@@ -260,6 +260,24 @@ function renderGameProduction() {
   const procurementErrors = Array.isArray(procurement.errors)
     ? procurement.errors
     : [];
+  const procurementIssueGroups = Array.isArray(procurement.issueGroups)
+    ? procurement.issueGroups
+    : [];
+  const procurementChecklistGroups = procurementIssueGroups.length
+    ? procurementIssueGroups
+    : procurementErrors.length
+      ? [{
+          id: "validation",
+          label: "검증 항목",
+          count: procurementErrors.length,
+          items: procurementErrors.map((message, index) => ({
+            field: `validation-${index + 1}`,
+            label: "조달 결정 확인",
+            guidance: "원본 검증 문구를 확인하고 소유자 안내서에 정의된 필드만 수정합니다.",
+            message,
+          })),
+        }]
+      : [];
   const procurementContactReady = procurement.passed
     && Boolean(procurement.receipt);
   const procurementTone = procurementContactReady
@@ -328,13 +346,35 @@ function renderGameProduction() {
       </div>
       ${procurement.intake ? `<button type="button" data-game-artifact-path="${esc(procurement.intake)}">소유자 결정 안내서 열기</button>` : ""}
     </div>
-    <div class="game-procurement-items" role="list" aria-label="미결정 조달 항목">
-      ${procurementErrors.map((error, index) => `
-        <div class="game-procurement-item" role="listitem">
-          <span>${esc(String(index + 1).padStart(2, "0"))}</span>
-          <p>${esc(error)}</p>
+    <div class="game-procurement-groups">
+      ${procurementChecklistGroups.map((group) => {
+        const items = Array.isArray(group.items) ? group.items : [];
+        return `
+          <div class="game-procurement-group" role="group" aria-label="${esc(group.label || "검증 항목")}">
+            <div class="game-procurement-group-head">
+              <strong>${esc(group.label || "검증 항목")}</strong>
+              <span>${esc(`${items.length}개`)}</span>
+            </div>
+            <div class="game-procurement-items" role="list">
+              ${items.map((item, index) => `
+                <article class="game-procurement-item" role="listitem">
+                  <div class="game-procurement-item-meta">
+                    <span>${esc(String(index + 1).padStart(2, "0"))}</span>
+                    <code>${esc(item.field || "validation")}</code>
+                  </div>
+                  <strong>${esc(item.label || "조달 결정 확인")}</strong>
+                  <p>${esc(item.guidance || item.message || "")}</p>
+                  <small>${esc(item.message || "")}</small>
+                </article>
+              `).join("")}
+            </div>
+          </div>
+        `;
+      }).join("") || `
+        <div class="game-procurement-items" role="list">
+          <div class="game-procurement-empty" role="listitem">${esc(procurementContactReady ? "미결정 항목 없음" : procurement.passed ? "미결정 항목 없음 · 최신 PASS 영수증 대기" : "표시할 조달 항목이 없습니다.")}</div>
         </div>
-      `).join("") || `<div class="game-procurement-empty" role="listitem">${esc(procurementContactReady ? "미결정 항목 없음" : procurement.passed ? "미결정 항목 없음 · 최신 PASS 영수증 대기" : "표시할 조달 항목이 없습니다.")}</div>`}
+      `}
     </div>
   ` : "";
 

@@ -25,19 +25,45 @@ the changed document and is renewing authorization.
 
 Complete these fields only after the owner makes the corresponding decision:
 
-- `owner.secure_record_id`: secure-system identifier in the exact form
-  `vault:<canonical-lowercase-UUID>`; never a person's name, email, tax number,
-  account number, or card number;
+### 승인 상태
+
+- `decision_status`: 소유자가 기존 서면 RFP의 제안 전송만 승인한 뒤
+  `approved_for_proposal_outreach`로 변경합니다.
+
+### 소유자 및 권한
+
+- `owner.secure_record_id`: 개인정보 대신 보안 시스템의
+  `vault:<canonical-lowercase-UUID>` 식별자만 기록합니다.
 - `owner.authorized_signer_role`: `project_owner`,
-  `authorized_company_officer`, or `producer`;
-- `owner.governing_jurisdiction`: short code such as `KR` or `US-CA`;
-- positive budget ceiling, three-letter currency, and payment route
-  (`upwork`, `fiverr`, or `direct`);
-- secure tax/vendor-process confirmation, proposal deadline, delivery date,
-  and revision limit;
-- `outreach.scope`: `one` with one candidate ID, or `all` with all three;
-- explicit authorization and its timezone-aware ISO-8601 timestamp; and
-- confirmation that sensitive records remain outside the repository.
+  `authorized_company_officer`, `producer` 중 하나를 선택합니다.
+- `owner.governing_jurisdiction`: `KR`, `US-CA`처럼 저장소에 공개 가능한
+  짧은 코드를 기록합니다.
+
+### 예산 및 결제
+
+- `commercial.budget_ceiling`: 승인된 0보다 큰 유한 숫자를 기록합니다.
+- `commercial.currency`: `KRW`, `USD`처럼 대문자 3자리 코드를 사용합니다.
+- `commercial.payment_route`: `upwork`, `fiverr`, `direct` 중 선택합니다.
+- `commercial.tax_vendor_process_confirmed_securely`: 민감정보를 저장소
+  밖에서 처리할 절차가 확인된 경우에만 `true`로 설정합니다.
+
+### 일정
+
+- `schedule.proposal_deadline`: 과거가 아닌 `YYYY-MM-DD` 날짜입니다.
+- `schedule.desired_delivery_date`: 제안 마감일보다 뒤인 날짜입니다.
+- `schedule.revision_limit`: 승인된 1~10 사이의 정수입니다.
+
+### 연락 범위 및 승인
+
+- `outreach.authorized`: 제안 전송을 명시적으로 승인한 경우에만 `true`.
+- `outreach.authorized_at`: 실제 승인 시각을 시간대 포함 ISO-8601로 기록.
+- `outreach.scope`: 후보 1명이면 `one`, 전체 후보면 `all`.
+- `outreach.candidate_ids`: 소유자가 승인한 공개 후보 ID만 기록합니다.
+
+### 보안 및 개인정보
+
+- `privacy.sensitive_data_stored_outside_repo`: 신원·세무·결제 자료가 승인된
+  보안 시스템에만 있는 경우 `true`로 설정합니다.
 
 Candidate IDs are `cynthia_ignacio`, `marisol_griffiths`, and
 `natalie_lewis`. Use only the IDs the owner explicitly authorizes.

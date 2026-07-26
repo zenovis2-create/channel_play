@@ -21,6 +21,127 @@ PROCUREMENT_INTAKE_PATHS = {
     "truth_pen": "docs/research/truth_pen_owner_decision_intake.md",
 }
 
+PROCUREMENT_GUIDANCE_GROUPS = (
+    ("approval", "승인 상태"),
+    ("owner", "소유자 및 권한"),
+    ("commercial", "예산 및 결제"),
+    ("schedule", "일정"),
+    ("outreach", "연락 범위 및 승인"),
+    ("privacy", "보안 및 개인정보"),
+    ("validation", "추가 검증"),
+)
+
+PROCUREMENT_FIELD_GUIDANCE = {
+    "decision_status": (
+        "approval",
+        "제안 연락 승인 상태",
+        "소유자가 제안서 전송만 승인한 뒤 approved_for_proposal_outreach로 변경합니다.",
+    ),
+    "owner.secure_record_id": (
+        "owner",
+        "보안 기록 ID",
+        "개인정보 대신 보안 시스템의 vault:<소문자 UUID> 식별자만 기록합니다.",
+    ),
+    "owner.authorized_signer_role": (
+        "owner",
+        "승인자 역할",
+        "project_owner, authorized_company_officer, producer 중 하나를 선택합니다.",
+    ),
+    "owner.governing_jurisdiction": (
+        "owner",
+        "준거 관할 코드",
+        "KR 또는 US-CA처럼 저장소에 공개 가능한 짧은 코드만 기록합니다.",
+    ),
+    "commercial.budget_ceiling": (
+        "commercial",
+        "예산 상한",
+        "소유자가 승인한 0보다 큰 유한 숫자를 기록합니다.",
+    ),
+    "commercial.currency": (
+        "commercial",
+        "통화",
+        "KRW, USD처럼 대문자 3자리 통화 코드를 기록합니다.",
+    ),
+    "commercial.payment_route": (
+        "commercial",
+        "결제 경로",
+        "upwork, fiverr, direct 중 승인된 경로를 선택합니다.",
+    ),
+    "commercial.tax_vendor_process_confirmed_securely": (
+        "commercial",
+        "세무·벤더 절차 확인",
+        "관련 민감정보를 저장소 밖에서 처리할 절차가 확인된 경우에만 true로 설정합니다.",
+    ),
+    "schedule.proposal_deadline": (
+        "schedule",
+        "제안 마감일",
+        "과거가 아닌 날짜를 YYYY-MM-DD 형식으로 기록합니다.",
+    ),
+    "schedule.desired_delivery_date": (
+        "schedule",
+        "희망 납품일",
+        "제안 마감일보다 뒤인 날짜를 YYYY-MM-DD 형식으로 기록합니다.",
+    ),
+    "schedule.revision_limit": (
+        "schedule",
+        "수정 횟수 상한",
+        "소유자가 승인한 1~10 사이의 정수를 기록합니다.",
+    ),
+    "outreach.authorized": (
+        "outreach",
+        "제안 연락 승인",
+        "기존 서면 RFP의 제안 전송을 명시적으로 승인한 경우에만 true로 설정합니다.",
+    ),
+    "outreach.authorized_at": (
+        "outreach",
+        "승인 시각",
+        "실제 승인 시각을 시간대가 포함된 ISO-8601 형식으로 기록합니다.",
+    ),
+    "outreach.scope": (
+        "outreach",
+        "연락 범위",
+        "후보 1명이면 one, 전체 후보면 all을 선택합니다.",
+    ),
+    "outreach.candidate_ids": (
+        "outreach",
+        "승인 후보",
+        "소유자가 승인한 공개 후보 ID만 범위와 일치하도록 기록합니다.",
+    ),
+    "privacy.sensitive_data_stored_outside_repo": (
+        "privacy",
+        "민감정보 외부 보관 확인",
+        "신원·세무·결제 자료가 승인된 보안 시스템에만 있는 경우 true로 설정합니다.",
+    ),
+}
+
+PROCUREMENT_SECTION_GUIDANCE = {
+    "owner": (
+        "owner",
+        "소유자 기록 검증",
+        "지원되는 저장소 안전 필드만 사용하고 개인 식별값은 기록하지 않습니다.",
+    ),
+    "commercial": (
+        "commercial",
+        "상업 조건 검증",
+        "소유자가 승인한 예산·통화·결제 조건만 기록합니다.",
+    ),
+    "schedule": (
+        "schedule",
+        "일정 검증",
+        "제안 마감, 납품일, 수정 횟수의 형식과 순서를 확인합니다.",
+    ),
+    "outreach": (
+        "outreach",
+        "연락 승인 검증",
+        "제안 전송 범위만 승인하며 제작 요청은 계속 차단합니다.",
+    ),
+    "privacy": (
+        "privacy",
+        "개인정보 검증",
+        "민감정보를 저장소에 두지 말고 보안 시스템의 불투명 식별자만 사용합니다.",
+    ),
+}
+
 
 def game_production_state(root: Path) -> dict:
     unity_compile = _latest_run_matching(root, "unity-check-", "unity_check.md", ("Compile errors: 0", "Exit code: 0"))
@@ -385,6 +506,7 @@ def _procurement_state(root: Path) -> dict:
             "passed": passed,
             "errorCount": error_count,
             "errors": result["errors"],
+            "issueGroups": _procurement_issue_groups(result["errors"]),
             "manifest": rel(root, manifest),
             "manifestSha256": result["manifest_sha256"],
             "receipt": receipt_path,
@@ -403,6 +525,44 @@ def _procurement_state(root: Path) -> dict:
             ),
         }
     return {}
+
+
+def _procurement_issue_groups(errors: list[str]) -> list[dict]:
+    grouped: dict[str, list[dict]] = {
+        group_id: [] for group_id, _ in PROCUREMENT_GUIDANCE_GROUPS
+    }
+    for error in errors:
+        field = error.split(" ", 1)[0].rstrip(":")
+        guidance = PROCUREMENT_FIELD_GUIDANCE.get(field)
+        if guidance is None:
+            section = field.split(".", 1)[0]
+            guidance = PROCUREMENT_SECTION_GUIDANCE.get(
+                section,
+                (
+                    "validation",
+                    "조달 기록 추가 검증",
+                    "원본 검증 문구를 확인하고 소유자 안내서에 정의된 필드만 수정합니다.",
+                ),
+            )
+        group_id, label, action = guidance
+        grouped[group_id].append(
+            {
+                "field": field,
+                "label": label,
+                "guidance": action,
+                "message": error,
+            }
+        )
+    return [
+        {
+            "id": group_id,
+            "label": label,
+            "count": len(grouped[group_id]),
+            "items": grouped[group_id],
+        }
+        for group_id, label in PROCUREMENT_GUIDANCE_GROUPS
+        if grouped[group_id]
+    ]
 
 
 def _current_procurement_receipt(

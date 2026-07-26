@@ -55,6 +55,7 @@ class DockerStudioContractTests(unittest.TestCase):
         checklist = self.app[start:end]
 
         self.assertIn("procurement.errors", self.app)
+        self.assertIn("procurement.issueGroups", self.app)
         self.assertIn(
             "procurement.passed\n    && Boolean(procurement.receipt)",
             self.app,
@@ -62,8 +63,14 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn("procurementContactReady", checklist)
         self.assertIn("최신 PASS 영수증 전에는 작가 연락 금지", self.app)
         self.assertIn("의사결정 통과 · 최신 PASS 영수증 대기", self.app)
-        self.assertIn("procurementErrors.map", checklist)
-        self.assertIn("${esc(error)}", checklist)
+        self.assertIn("procurementChecklistGroups.map", checklist)
+        self.assertIn("game-procurement-group", checklist)
+        self.assertIn('role="group"', checklist)
+        self.assertIn("${esc(group.label", checklist)
+        self.assertIn("${esc(item.field", checklist)
+        self.assertIn("${esc(item.label", checklist)
+        self.assertIn("${esc(item.guidance", checklist)
+        self.assertIn("${esc(item.message", checklist)
         self.assertIn("game-procurement-item", checklist)
         self.assertIn('role="listitem"', checklist)
         self.assertIn(
