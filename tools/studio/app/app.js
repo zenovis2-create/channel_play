@@ -134,6 +134,7 @@ const commandText = {
   "feedback.process": "피드백 처리",
   "asset.new": "에셋 브리프 생성",
   "asset.prepare": "에셋 파이프라인 준비",
+  "asset.procurementCheck": "작가 조달 준비 점검",
   "asset.status": "에셋 상태 변경",
   "asset.forge": "Asset Forge 생성",
   "asset.image3d": "Image→Blender 생성",

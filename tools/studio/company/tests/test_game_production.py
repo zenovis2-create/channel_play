@@ -5,7 +5,12 @@ import unittest
 from pathlib import Path
 
 from tools.studio.company.capture import PNG_SIGNATURE
+from tools.studio.company.errors import CompanyError
 from tools.studio.company.game_production import game_production_state, render_game_production_status
+from tools.studio.company.procurement import (
+    procurement_decision_init,
+    procurement_outreach_check,
+)
 
 
 class GameProductionTests(unittest.TestCase):
@@ -244,6 +249,112 @@ class GameProductionTests(unittest.TestCase):
             {"goal": "Truth Pen source research"},
         )
 
+    def test_blocked_procurement_is_visible_and_routes_read_only_check(self) -> None:
+        self._write_ready_receipts()
+        self._write_run(
+            "game-feedback-loop-001",
+            "game_feedback_loop.md",
+            "Status: ready_for_review\n",
+        )
+        self._write_run(
+            "game-server-handoff-001",
+            "server_handoff.md",
+            "Status: waiting_for_x86_64_runner\n",
+        )
+        feedback = (
+            self.root
+            / "reviews"
+            / "2026-06-03"
+            / "feedback-0001"
+            / "feedback.md"
+        )
+        feedback.parent.mkdir(parents=True)
+        feedback.write_text("Status: routed\n", encoding="utf-8")
+        self._write_truth_pen_procurement_decision()
+
+        state = game_production_state(self.root)
+        procurement = state["procurement"]
+        loops = {loop["id"]: loop for loop in state["optimizationLoops"]}
+        text = render_game_production_status(self.root)
+
+        self.assertEqual(procurement["assetId"], "truth_pen")
+        self.assertEqual(procurement["status"], "blocked")
+        self.assertEqual(procurement["errorCount"], 16)
+        self.assertEqual(loops["artist_procurement"]["status"], "blocked")
+        procurement_gate = next(
+            check
+            for check in state["perfectionGate"]["checks"]
+            if check["label"] == "Artist procurement"
+        )
+        self.assertFalse(procurement_gate["passed"])
+        self.assertEqual(state["perfectionGate"]["total"], 7)
+        self.assertEqual(
+            loops["artist_procurement"]["evidence"],
+            "asset_pipeline/manifests/truth_pen_procurement_decision.json",
+        )
+        self.assertEqual(
+            state["nextBestAction"],
+            {
+                "label": "Resolve artist procurement owner decisions",
+                "command": "asset.procurementCheck",
+                "payload": {"assetId": "truth_pen"},
+                "reason": (
+                    "truth_pen has 16 unresolved owner decisions. "
+                    "The check is read-only; artist contact remains blocked."
+                ),
+                "status": "blocked",
+            },
+        )
+        self.assertIn(
+            "Artist procurement: blocked (16 unresolved owner decisions)",
+            text,
+        )
+        self.assertFalse(
+            (
+                self.root
+                / "runs"
+                / "asset-procurement-truth_pen"
+                / "outreach_readiness_check.md"
+            ).exists()
+        )
+
+    def test_procurement_ignores_receipt_for_a_different_manifest(self) -> None:
+        self._write_truth_pen_procurement_decision()
+        receipt = (
+            self.root
+            / "runs"
+            / "asset-procurement-truth_pen"
+            / "outreach_readiness_check.md"
+        )
+        receipt.parent.mkdir(parents=True)
+        receipt.write_text(
+            "Decision SHA-256: stale\nResult: **FAIL**\n",
+            encoding="utf-8",
+        )
+
+        state = game_production_state(self.root)
+        procurement = state["procurement"]
+        loop = next(
+            item
+            for item in state["optimizationLoops"]
+            if item["id"] == "artist_procurement"
+        )
+
+        self.assertEqual(procurement["receipt"], "")
+        self.assertEqual(
+            loop["evidence"],
+            "asset_pipeline/manifests/truth_pen_procurement_decision.json",
+        )
+        with self.assertRaises(CompanyError):
+            procurement_outreach_check(self.root, "truth_pen")
+
+        refreshed = game_production_state(self.root)
+
+        self.assertEqual(
+            refreshed["procurement"]["receipt"],
+            "runs/asset-procurement-truth_pen/outreach_readiness_check.md",
+        )
+
     def test_perfection_gate_passes_when_workstation_workflow_is_actionable(self) -> None:
         self._write_ready_receipts()
         self._write_run("game-feedback-loop-001", "game_feedback_loop.md", "Status: ready_for_review\n")
@@ -291,6 +402,33 @@ class GameProductionTests(unittest.TestCase):
             '{"assets":[{"id":"prop","status":"generated","pipeline_receipt":"runs/asset-pipeline-prop/asset_pipeline_receipt.md"}]}',
             encoding="utf-8",
         )
+
+    def _write_truth_pen_procurement_decision(self) -> None:
+        asset_index = self.root / "asset_pipeline" / "index.json"
+        asset_index.parent.mkdir(parents=True, exist_ok=True)
+        asset_index.write_text(
+            '{"assets":[{"id":"truth_pen","status":"briefed",'
+            '"pipeline_receipt":'
+            '"runs/asset-pipeline-truth_pen/asset_pipeline_receipt.md"}]}',
+            encoding="utf-8",
+        )
+        rfp = (
+            self.root
+            / "asset_pipeline"
+            / "briefs"
+            / "truth_pen_commission_rfp.md"
+        )
+        rfp.parent.mkdir(parents=True, exist_ok=True)
+        rfp.write_text("# RFP\n", encoding="utf-8")
+        packet = (
+            self.root
+            / "docs"
+            / "research"
+            / "truth_pen_artist_procurement_packet.md"
+        )
+        packet.parent.mkdir(parents=True, exist_ok=True)
+        packet.write_text("# Procurement packet\n", encoding="utf-8")
+        procurement_decision_init(self.root, "truth_pen")
 
     def _write_assigned_task(self, task_id: str) -> None:
         board = self.root / "memory" / "company" / "task_board.json"

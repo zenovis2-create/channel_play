@@ -1158,6 +1158,11 @@ COMMANDS = {
     "feedback.process": lambda payload: ["feedback", "process", _required(payload, "path")],
     "asset.new": lambda payload: ["asset", "new", _required(payload, "assetId")],
     "asset.prepare": lambda payload: ["asset", "prepare", _required(payload, "assetId")],
+    "asset.procurementCheck": lambda payload: [
+        "asset",
+        "procurement-check",
+        _required(payload, "assetId"),
+    ],
     "asset.status": lambda payload: ["asset", "status", _required(payload, "assetId"), _required(payload, "status")],
     "asset.screenshot": lambda payload: ["asset", "screenshot", _required(payload, "assetId"), _required(payload, "path")],
     "asset.semanticPack": lambda payload: ["asset", "semantic-pack", _required(payload, "assetId")],
