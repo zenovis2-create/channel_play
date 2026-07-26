@@ -8,6 +8,8 @@ Poly budget: 3,000 triangles maximum
 Texture style: broadcast-readable gold, charcoal, and cyan emissive accents
 Source/license: Blocked; see `asset_pipeline/manifests/truth_pen_source_gate_a.json`
 Commission RFP: `asset_pipeline/briefs/truth_pen_commission_rfp.md`
+Procurement decision:
+`asset_pipeline/manifests/truth_pen_procurement_decision.json`
 
 ## Use
 
@@ -27,7 +29,8 @@ Orthographic three-quarter view on a plain background; show the entire object.
 - Run `python tools/channelctl asset gate-a-check truth_pen`; source creation
   must remain blocked until the Gate A receipt is `PASS`.
 - The RFP permits written proposals and existing portfolio links only. Do not
-  request a sketch, art test, or new source file before Gate A passes.
+  send it until `asset procurement-check truth_pen` passes, and do not request
+  a sketch, art test, or new source file before Gate A passes.
 - After the source exists, bind its path/hash and the selected 3D provider in
   Gate B. Production remains blocked until `asset gate-b-check` passes.
 - Separate the body, clip, and emissive nib for material control.

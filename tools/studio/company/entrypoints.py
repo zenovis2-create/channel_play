@@ -23,6 +23,7 @@ from .game_loops import game_feedback_loop, game_server_handoff
 from .game_production import game_production_check, render_game_production_status
 from .image_to_blender import image3d_generate, image3d_new
 from .paths import find_repo_root, rel
+from .procurement import procurement_decision_init, procurement_outreach_check
 from .simulation_acceptance import sim_acceptance_check, sim_acceptance_handoff, sim_acceptance_proof_refresh
 from .sim_agent_bridge import sim_agent_compare, sim_agent_live_check, sim_agent_packet, sim_agent_run
 from .unity import (
@@ -168,6 +169,18 @@ def dispatch_top_level(command: str, args: list[str]) -> int:
             if len(args) != 2:
                 raise CompanyError("Usage: asset gate-b-check <asset-id>")
             path = asset_gate_b_check(root, args[1])
+            print(f"Wrote {rel(root, path)}")
+            return 0
+        if command == "asset" and args[:1] == ["procurement-init"]:
+            if len(args) != 2:
+                raise CompanyError("Usage: asset procurement-init <asset-id>")
+            path = procurement_decision_init(root, args[1])
+            print(f"Wrote {rel(root, path)}")
+            return 0
+        if command == "asset" and args[:1] == ["procurement-check"]:
+            if len(args) != 2:
+                raise CompanyError("Usage: asset procurement-check <asset-id>")
+            path = procurement_outreach_check(root, args[1])
             print(f"Wrote {rel(root, path)}")
             return 0
         if command == "asset" and args[:1] == ["status"]:

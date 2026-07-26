@@ -615,6 +615,81 @@
       ],
       "verification_status": "passed",
       "closed_at": "2026-07-26T21:49:53+09:00"
+    },
+    {
+      "id": "task-0014",
+      "request": "add a fail-closed Truth Pen owner decision manifest and proposal-outreach readiness check without contacting any artist or storing private identity, tax, banking, or payment data",
+      "status": "closed",
+      "suggested_agent": "coding_specialist",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": "coding_specialist",
+      "allowed_write_paths": [
+        "tools/studio/company",
+        "tools/channelctl",
+        "asset_pipeline",
+        "docs/research",
+        "memory/company",
+        "memory/sessions",
+        "reviews",
+        "runs"
+      ],
+      "required_evidence": "owner-decision schema/template, fail-closed CLI receipt, privacy and authorization regression tests, full Python suite, and critic review",
+      "created_at": "2026-07-26T22:02:10+09:00",
+      "updated_at": "2026-07-26T22:42:22+09:00",
+      "work_order": "memory/sessions/20260726-220203-truth-pen-owner-decision-intake-and-fail/work_orders/task-0014-coding_specialist.md",
+      "report": "runs/agent-codex-task-0014-2026-07-26t22-28-58-09-00/agent_run.md",
+      "verification": "memory/sessions/20260726-220203-truth-pen-owner-decision-intake-and-fail/verification/task-0014-verification.md",
+      "session": "20260726-220203-truth-pen-owner-decision-intake-and-fail",
+      "agent_runs": [
+        {
+          "tool": "codex",
+          "mode": "review",
+          "status": "ok",
+          "path": "runs/agent-codex-task-0014-2026-07-26t22-11-17-09-00/agent_run.md",
+          "created_at": "2026-07-26T22:22:48+09:00"
+        },
+        {
+          "tool": "codex",
+          "mode": "review",
+          "status": "ok",
+          "path": "runs/agent-codex-task-0014-2026-07-26t22-28-58-09-00/agent_run.md",
+          "created_at": "2026-07-26T22:41:38+09:00"
+        }
+      ],
+      "last_tool": "codex",
+      "last_agent_run": "runs/agent-codex-task-0014-2026-07-26t22-28-58-09-00/agent_run.md",
+      "agent_status": "ok",
+      "review_status": "approved",
+      "reviewer": "critic_reviewer",
+      "evidence": [
+        {
+          "path": "asset_pipeline/manifests/truth_pen_procurement_decision.json",
+          "note": "fail-closed repository-safe owner decision template with bound document hashes",
+          "attached_at": "2026-07-26T22:42:20+09:00"
+        },
+        {
+          "path": "docs/research/truth_pen_owner_decision_intake.md",
+          "note": "owner intake, privacy boundary, and authorization instructions",
+          "attached_at": "2026-07-26T22:42:20+09:00"
+        },
+        {
+          "path": "runs/asset-procurement-truth_pen/outreach_readiness_check.md",
+          "note": "current expected FAIL receipt with 16 unresolved decisions",
+          "attached_at": "2026-07-26T22:42:21+09:00"
+        },
+        {
+          "path": "runs/task-0014-verification/verification.md",
+          "note": "focused/full regression and safety verification",
+          "attached_at": "2026-07-26T22:42:21+09:00"
+        },
+        {
+          "path": "runs/agent-codex-task-0014-2026-07-26t22-28-58-09-00/agent_run.md",
+          "note": "final independent critic APPROVED re-review",
+          "attached_at": "2026-07-26T22:42:22+09:00"
+        }
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-07-26T22:42:22+09:00"
     }
   ]
 }

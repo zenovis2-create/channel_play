@@ -75,6 +75,13 @@ Gate A manifest until the project owner actually selects and contracts them.
 - proposal deadline, desired delivery dates, and revision limit; and
 - authorization to contact one prospect or all three.
 
+Keep private owner, identity, tax, banking, and payment records outside the
+repository. Record only repository-safe decisions and an opaque secure-record
+ID in `asset_pipeline/manifests/truth_pen_procurement_decision.json`, following
+`docs/research/truth_pen_owner_decision_intake.md`. Run
+`python tools/channelctl asset procurement-check truth_pen`; do not send the
+message below unless its receipt is `PASS`.
+
 ## Outreach Message
 
 ```text

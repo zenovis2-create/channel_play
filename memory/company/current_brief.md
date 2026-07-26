@@ -1,11 +1,11 @@
 # Current Brief
 
-Generated: 2026-07-26T18:17:44+09:00
+Generated: 2026-07-26T22:44:25+09:00
 Repo: channel_play
-Git: a96c0002
-Dirty files: 0
-Current session: 20260726-181451-truth-pen
-Open tasks: 1
+Git: 1649f4bb
+Dirty files: 19
+Current session: none
+Open tasks: 0
 Active locks: 0
 gdx1: online_via_tailscale / auth_blocked
 
@@ -135,11 +135,29 @@ Generated: 2026-07-26T16:33:49+09:00
 
 ## Git Working Tree
 
-- clean
+-  M asset_pipeline/briefs/truth_pen.md
+-  M asset_pipeline/briefs/truth_pen_commission_rfp.md
+-  M docs/research/truth_pen_artist_procurement_packet.md
+-  M memory/company/current_brief.md
+-  M memory/company/state.json
+-  M memory/company/task_board.json
+-  M memory/sessions/20260726-181451-truth-pen/summary.md
+-  M tools/channelctl
+-  M tools/studio/company/entrypoints.py
+- ?? asset_pipeline/manifests/truth_pen_procurement_decision.json
+- ?? docs/research/truth_pen_owner_decision_intake.md
+- ?? memory/company/task-0014-plan.md
+- ?? memory/sessions/20260726-220203-truth-pen-owner-decision-intake-and-fail/
+- ?? runs/agent-codex-task-0014-2026-07-26t22-11-17-09-00/
+- ?? runs/agent-codex-task-0014-2026-07-26t22-28-58-09-00/
+- ?? runs/asset-procurement-truth_pen/
+- ?? runs/task-0014-verification/
+- ?? tools/studio/company/procurement.py
+- ?? tools/studio/company/tests/test_procurement.py
 
 ## Latest Session
 
-- 20260726-181451-truth-pen: memory/sessions/20260726-181451-truth-pen/summary.md
+- 20260726-220203-truth-pen-owner-decision-intake-and-fail: memory/sessions/20260726-220203-truth-pen-owner-decision-intake-and-fail/summary.md
 
 ## Memory Freshness
 
@@ -154,4 +172,4 @@ Generated: 2026-07-26T16:33:49+09:00
 
 ## Next Recommended Action
 
-- Continue `task-0009` and attach its required evidence before verification.
+- Create the next scoped work order with `tools/channelctl company plan <request>`.

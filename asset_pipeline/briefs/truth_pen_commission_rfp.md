@@ -1,6 +1,7 @@
 # RFP: Truth Pen Stylized Prop Concept
 
-Status: draft for owner approval; do not send or begin art
+Status: draft for owner approval; send only after procurement `PASS`; do not
+begin art
 
 ## Project
 
@@ -30,6 +31,9 @@ and no more than `3,000` triangles.
 
 Portfolio links are sufficient for the proposal. Do not produce a sketch, art
 test, or any deliverable before the signed agreement and written Gate A `PASS`.
+The project must also record a `PASS` from
+`python tools/channelctl asset procurement-check truth_pen` before sending this
+RFP.
 
 ## Proposal Response
 

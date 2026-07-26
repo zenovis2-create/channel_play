@@ -1,8 +1,8 @@
 {
   "project": "channel_play",
-  "updated_at": "2026-07-26T18:14:51+09:00",
-  "active_session": "20260726-181451-truth-pen",
-  "current_orchestrator_task": "mvp_traitor_escape_gameshow",
+  "updated_at": "2026-07-26T22:42:40+09:00",
+  "active_session": null,
+  "current_orchestrator_task": null,
   "integrated_goal": {
     "id": "mvp_traitor_escape_gameshow",
     "title": "8-player operator-led OBS-ready 3D gameshow MVP",

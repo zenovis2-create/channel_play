@@ -1,0 +1,43 @@
+{
+  "schema": "channel_play.asset_procurement_decision.v1",
+  "asset_id": "truth_pen",
+  "task_id": "task-0014",
+  "decision_status": "draft",
+  "owner": {
+    "secure_record_id": "UNKNOWN",
+    "authorized_signer_role": "UNKNOWN",
+    "governing_jurisdiction": "UNKNOWN"
+  },
+  "commercial": {
+    "budget_ceiling": 0,
+    "currency": "UNKNOWN",
+    "payment_route": "unselected",
+    "tax_vendor_process_confirmed_securely": false
+  },
+  "schedule": {
+    "proposal_deadline": "UNKNOWN",
+    "desired_delivery_date": "UNKNOWN",
+    "revision_limit": 0
+  },
+  "outreach": {
+    "authorized": false,
+    "authorized_at": "",
+    "scope": "none",
+    "candidate_ids": [],
+    "proposal_only": true,
+    "source_creation_blocked_until_signed_agreement_and_gate_a_pass": true
+  },
+  "records": {
+    "rfp": "asset_pipeline/briefs/truth_pen_commission_rfp.md",
+    "rfp_sha256": "a57d663ebf36657a3d8cd7eb1131287c8c724b24fbcc66b5f8f710ca93983aa6",
+    "procurement_packet": "docs/research/truth_pen_artist_procurement_packet.md",
+    "procurement_packet_sha256": "be016e6a5f7346f68aff70573ee516b385550de051f789914934ec9413f63919"
+  },
+  "privacy": {
+    "private_identity_documents_in_repo": false,
+    "tax_data_in_repo": false,
+    "banking_data_in_repo": false,
+    "payment_credentials_in_repo": false,
+    "sensitive_data_stored_outside_repo": false
+  }
+}
