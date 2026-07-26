@@ -256,6 +256,25 @@ function renderGameProduction() {
   const mvp = game.mvp || {};
   const next = game.nextBestAction || {};
   const perfection = game.perfectionGate || {};
+  const procurement = game.procurement || {};
+  const procurementErrors = Array.isArray(procurement.errors)
+    ? procurement.errors
+    : [];
+  const procurementContactReady = procurement.passed
+    && Boolean(procurement.receipt);
+  const procurementTone = procurementContactReady
+    ? "good"
+    : toneForStatus(procurement.passed ? "pending" : procurement.status);
+  const procurementSummary = procurementContactReady
+    ? (procurement.summary || "제안 연락 준비 검증 통과")
+    : procurement.passed
+      ? "의사결정 통과 · 최신 PASS 영수증 대기"
+      : (procurement.summary || translate(procurement.status));
+  const procurementGuidance = procurementContactReady
+    ? "현재 PASS 영수증 확인됨"
+    : procurement.passed
+      ? "최신 PASS 영수증 전에는 작가 연락 금지"
+      : "읽기 전용 목록 · 작가 연락 차단 유지";
   const passed = Number(readiness.passed || 0);
   const total = Number(readiness.total || checks.length || 0);
   const ready = total > 0 && passed === total;
@@ -298,6 +317,25 @@ function renderGameProduction() {
     </div>
     ${next.artifact ? `<button type="button" data-game-artifact-path="${esc(next.artifact)}">${esc(next.actionLabel || "안내서 열기")}</button>` : ""}
     ${!next.artifact && next.command && next.command !== "asset.prepare" ? `<button type="button" data-command="${esc(next.command)}" data-command-payload="${esc(JSON.stringify(next.payload || {}))}">${esc(commandText[next.command] || next.command)}</button>` : ""}
+  ` : "";
+
+  $("#gameProcurementChecklist").innerHTML = procurement.assetId ? `
+    <div class="game-procurement-head ${esc(procurementTone)}">
+      <div>
+        <span>작가 조달 결정</span>
+        <strong>${esc(`${procurement.assetId} · ${procurementSummary}`)}</strong>
+        <small>${esc(procurementGuidance)}</small>
+      </div>
+      ${procurement.intake ? `<button type="button" data-game-artifact-path="${esc(procurement.intake)}">소유자 결정 안내서 열기</button>` : ""}
+    </div>
+    <div class="game-procurement-items" role="list" aria-label="미결정 조달 항목">
+      ${procurementErrors.map((error, index) => `
+        <div class="game-procurement-item" role="listitem">
+          <span>${esc(String(index + 1).padStart(2, "0"))}</span>
+          <p>${esc(error)}</p>
+        </div>
+      `).join("") || `<div class="game-procurement-empty" role="listitem">${esc(procurementContactReady ? "미결정 항목 없음" : procurement.passed ? "미결정 항목 없음 · 최신 PASS 영수증 대기" : "표시할 조달 항목이 없습니다.")}</div>`}
+    </div>
   ` : "";
 
   $("#gameProductionChecks").innerHTML = checks.map((check) => `

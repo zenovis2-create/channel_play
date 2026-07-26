@@ -44,6 +44,8 @@ Current constraint: gdx1 is ARM/aarch64 and should be used for AI/ops, repo sync
 - Command: `tools/channelctl asset procurement-check truth_pen`
 - Reads the owner decision manifest without changing it.
 - Shows the unresolved decision count and latest readiness receipt.
+- Renders every unresolved decision as a read-only Studio checklist; the only
+  checklist action opens the tracked owner intake guide.
 - Keeps all artist contact blocked until the check passes.
 - Runs the check when no current receipt exists. When a matching FAIL receipt
   already exists, the next action opens the owner decision intake guide instead

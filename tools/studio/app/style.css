@@ -782,6 +782,92 @@ main {
   min-width: 154px;
 }
 
+.game-procurement-checklist {
+  background: #fbfdff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+}
+
+.game-procurement-checklist:empty {
+  display: none;
+}
+
+.game-procurement-head {
+  align-items: center;
+  border-left: 5px solid var(--line-strong);
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  padding-left: 12px;
+}
+
+.game-procurement-head.good {
+  border-left-color: var(--good);
+}
+
+.game-procurement-head.warn {
+  border-left-color: var(--warn);
+}
+
+.game-procurement-head.bad {
+  border-left-color: var(--bad);
+}
+
+.game-procurement-head > div {
+  display: grid;
+  gap: 4px;
+}
+
+.game-procurement-head span,
+.game-procurement-item span {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.game-procurement-head small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.game-procurement-items {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.game-procurement-item {
+  align-items: start;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 4px);
+  display: grid;
+  gap: 8px;
+  grid-template-columns: auto minmax(0, 1fr);
+  min-height: 58px;
+  padding: 10px;
+}
+
+.game-procurement-item p {
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.4;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.game-procurement-empty {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  grid-column: 1 / -1;
+  padding: 8px;
+}
+
 .game-cockpit-layout {
   display: grid;
   gap: 18px;
@@ -3446,6 +3532,7 @@ pre {
   .game-loop-grid,
   .game-next-action,
   .game-perfect-checks,
+  .game-procurement-items,
   .health-stack,
   .inspector-next,
   .production-card-main,
@@ -3460,6 +3547,11 @@ pre {
   .tracker-summary,
   .tracker-steps {
     grid-template-columns: 1fr;
+  }
+
+  .game-procurement-head {
+    align-items: stretch;
+    display: grid;
   }
 
   .adapter-card-head,
