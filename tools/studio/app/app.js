@@ -306,6 +306,19 @@ function renderGameProduction() {
         (procurementProgressCompleted / procurementProgressTotal) * 100,
       )
     : 0;
+  const procurementWorksheet = procurement.decisionWorksheet || {};
+  const procurementWorksheetText = typeof procurementWorksheet.text === "string"
+    ? procurementWorksheet.text
+    : "";
+  const procurementWorksheetAvailable = Boolean(
+    procurementWorksheet.available
+      && procurementWorksheetText
+      && !procurementProgressIndeterminate,
+  );
+  const procurementWorksheetCount = boundedCount(
+    procurementWorksheet.itemCount,
+    procurementProgressTotal,
+  );
   const procurementContactReady = procurement.passed
     && Boolean(procurement.receipt);
   const procurementTone = procurementContactReady
@@ -372,7 +385,30 @@ function renderGameProduction() {
         <strong>${esc(`${procurement.assetId} · ${procurementSummary}`)}</strong>
         <small>${esc(procurementGuidance)}</small>
       </div>
-      ${procurement.intake ? `<button type="button" data-game-artifact-path="${esc(procurement.intake)}">소유자 결정 안내서 열기</button>` : ""}
+      <div class="game-procurement-actions">
+        ${procurement.intake ? `<button type="button" data-game-artifact-path="${esc(procurement.intake)}">소유자 결정 안내서 열기</button>` : ""}
+        <button
+          type="button"
+          data-procurement-worksheet
+          aria-describedby="gameProcurementCopyStatus"
+          ${procurementWorksheetAvailable ? "" : "disabled"}
+        >${esc(
+          procurementWorksheetAvailable
+            ? `${procurementWorksheetCount}개 답변 양식 복사`
+            : procurementWorksheet.reason === "complete"
+              ? "미결정 항목 없음"
+              : procurementWorksheet.reason === "indeterminate"
+                ? "검증 확인 후 복사"
+                : "답변 양식 없음",
+        )}</button>
+        <span
+          id="gameProcurementCopyStatus"
+          class="game-procurement-copy-status"
+          data-procurement-copy-status
+          role="status"
+          aria-live="polite"
+        ></span>
+      </div>
     </div>
     ${procurementProgressTotal ? `
       <div class="game-procurement-progress ${procurementProgressIndeterminate ? "warn" : procurementProgressCompleted === procurementProgressTotal ? "good" : "active"}">
@@ -2270,6 +2306,38 @@ function viewForHash(hash) {
   return section?.dataset.studioView?.split(/\s+/)[0] || "";
 }
 
+async function copyProcurementWorksheet(button) {
+  const worksheet = state?.gameProduction?.procurement?.decisionWorksheet || {};
+  const text = typeof worksheet.text === "string" ? worksheet.text : "";
+  const statusNode = button
+    .closest(".game-procurement-actions")
+    ?.querySelector("[data-procurement-copy-status]");
+  if (!worksheet.available || !text) {
+    if (statusNode) statusNode.textContent = "복사 가능한 미결정 항목이 없습니다.";
+    return;
+  }
+
+  button.disabled = true;
+  try {
+    if (
+      !navigator.clipboard
+      || typeof navigator.clipboard.writeText !== "function"
+    ) {
+      throw new Error("Clipboard API unavailable");
+    }
+    await navigator.clipboard.writeText(text);
+    if (statusNode) {
+      statusNode.textContent = `${boundedCount(worksheet.itemCount)}개 미결정 항목 양식을 복사했습니다.`;
+    }
+  } catch (_error) {
+    if (statusNode) {
+      statusNode.textContent = "클립보드에 복사하지 못했습니다. 브라우저 권한을 확인하세요.";
+    }
+  } finally {
+    button.disabled = false;
+  }
+}
+
 function bind() {
   document.querySelectorAll("[data-studio-view-button]").forEach((button) => {
     button.addEventListener("click", () => setStudioView(button.dataset.studioViewButton || "focus"));
@@ -2504,6 +2572,13 @@ function bind() {
     renderTaskTracker();
   });
   $("#game-cockpit").addEventListener("click", (event) => {
+    const worksheetButton = event.target.closest(
+      "[data-procurement-worksheet]",
+    );
+    if (worksheetButton) {
+      copyProcurementWorksheet(worksheetButton);
+      return;
+    }
     const button = event.target.closest("[data-game-artifact-path]");
     if (!button) return;
     const path = button.dataset.gameArtifactPath || "";

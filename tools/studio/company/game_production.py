@@ -490,6 +490,7 @@ def _procurement_state(root: Path) -> dict:
         error_count = len(result["errors"])
         passed = bool(result["passed"])
         issue_groups = _procurement_issue_groups(result["errors"])
+        decision_progress = _procurement_decision_progress(issue_groups)
         intake_path = PROCUREMENT_INTAKE_PATHS.get(asset_id, "")
         intake = root / intake_path if intake_path else None
         receipt_path = _current_procurement_receipt(
@@ -508,7 +509,12 @@ def _procurement_state(root: Path) -> dict:
             "errorCount": error_count,
             "errors": result["errors"],
             "issueGroups": issue_groups,
-            "decisionProgress": _procurement_decision_progress(issue_groups),
+            "decisionProgress": decision_progress,
+            "decisionWorksheet": _procurement_owner_worksheet(
+                asset_id,
+                issue_groups,
+                decision_progress,
+            ),
             "manifest": rel(root, manifest),
             "manifestSha256": result["manifest_sha256"],
             "receipt": receipt_path,
@@ -639,6 +645,83 @@ def _procurement_decision_progress(issue_groups: list[dict]) -> dict:
             else "pending"
         ),
         "groups": groups,
+    }
+
+
+def _procurement_owner_worksheet(
+    asset_id: str,
+    issue_groups: list[dict],
+    decision_progress: dict,
+) -> dict:
+    """Build a copy-only worksheet without exposing stored decision values."""
+    has_additional_issue = any(
+        not isinstance(item, dict)
+        or item.get("field") not in PROCUREMENT_FIELD_GUIDANCE
+        for group in issue_groups
+        for item in group.get("items", [])
+    )
+    if decision_progress.get("indeterminate") or has_additional_issue:
+        return {
+            "available": False,
+            "itemCount": 0,
+            "reason": "indeterminate",
+            "text": "",
+        }
+
+    unresolved_fields = {
+        str(item.get("field") or "")
+        for group in issue_groups
+        for item in group.get("items", [])
+        if isinstance(item, dict)
+        and item.get("field") in PROCUREMENT_FIELD_GUIDANCE
+    }
+    if not unresolved_fields:
+        return {
+            "available": False,
+            "itemCount": 0,
+            "reason": "complete",
+            "text": "",
+        }
+
+    lines = [
+        f"# {asset_id} owner decision worksheet",
+        "",
+        "Complete only with owner-approved repository-safe values.",
+        (
+            "This worksheet is not artist-contact authorization and does not "
+            "change the decision record."
+        ),
+        (
+            "Do not include personal names, identity documents, tax or banking "
+            "data, payment credentials, signatures, private addresses, or "
+            "private messages."
+        ),
+    ]
+    for group_id, group_label in PROCUREMENT_GUIDANCE_GROUPS:
+        if group_id == "validation":
+            continue
+        fields = [
+            field
+            for field, guidance in PROCUREMENT_FIELD_GUIDANCE.items()
+            if guidance[0] == group_id and field in unresolved_fields
+        ]
+        if not fields:
+            continue
+        lines.extend(["", f"## {group_label}"])
+        for field in fields:
+            _, label, guidance = PROCUREMENT_FIELD_GUIDANCE[field]
+            lines.extend(
+                [
+                    f"- `{field}`: <owner-approved repository-safe value>",
+                    f"  - {label}: {guidance}",
+                ]
+            )
+
+    return {
+        "available": True,
+        "itemCount": len(unresolved_fields),
+        "reason": "unresolved",
+        "text": "\n".join(lines) + "\n",
     }
 
 

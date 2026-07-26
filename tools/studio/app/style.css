@@ -834,6 +834,27 @@ main {
   font-weight: 800;
 }
 
+.game-procurement-head > .game-procurement-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  justify-content: flex-end;
+}
+
+.game-procurement-actions button {
+  min-height: 34px;
+}
+
+.game-procurement-copy-status {
+  color: var(--muted);
+  flex-basis: 100%;
+  font-size: 11px;
+  font-weight: 800;
+  min-height: 1.35em;
+  text-align: right;
+}
+
 .game-procurement-progress {
   background: #ffffff;
   border: 1px solid var(--line);
@@ -3705,6 +3726,14 @@ pre {
   .game-procurement-head {
     align-items: stretch;
     display: grid;
+  }
+
+  .game-procurement-head > .game-procurement-actions {
+    justify-content: flex-start;
+  }
+
+  .game-procurement-copy-status {
+    text-align: left;
   }
 
   .adapter-card-head,

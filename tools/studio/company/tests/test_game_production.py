@@ -10,6 +10,7 @@ from tools.studio.company.errors import CompanyError
 from tools.studio.company.game_production import (
     _procurement_decision_progress,
     _procurement_issue_groups,
+    _procurement_owner_worksheet,
     game_production_state,
     render_game_production_status,
 )
@@ -346,6 +347,32 @@ class GameProductionTests(unittest.TestCase):
                 for group in progress["groups"]
             )
         )
+        worksheet = procurement["decisionWorksheet"]
+        self.assertTrue(worksheet["available"])
+        self.assertEqual(worksheet["itemCount"], 16)
+        self.assertEqual(worksheet["reason"], "unresolved")
+        self.assertEqual(
+            worksheet["text"].count(
+                "<owner-approved repository-safe value>"
+            ),
+            16,
+        )
+        for issue in issues:
+            self.assertEqual(
+                worksheet["text"].count(f"`{issue['field']}`"),
+                1,
+            )
+            self.assertNotIn(issue["message"], worksheet["text"])
+        for stored_value in ("UNKNOWN", "unselected"):
+            self.assertNotIn(stored_value, worksheet["text"])
+        self.assertIn(
+            "not artist-contact authorization",
+            worksheet["text"],
+        )
+        self.assertIn(
+            "Do not include personal names",
+            worksheet["text"],
+        )
         self.assertEqual(
             procurement["intake"],
             "docs/research/truth_pen_owner_decision_intake.md",
@@ -415,6 +442,23 @@ class GameProductionTests(unittest.TestCase):
                 for group in progress["groups"]
             )
         )
+        self.assertEqual(
+            _procurement_owner_worksheet("truth_pen", groups, progress),
+            {
+                "available": False,
+                "itemCount": 0,
+                "reason": "indeterminate",
+                "text": "",
+            },
+        )
+        self.assertEqual(
+            _procurement_owner_worksheet(
+                "truth_pen",
+                groups,
+                {"indeterminate": False},
+            )["reason"],
+            "indeterminate",
+        )
 
     def test_procurement_progress_deduplicates_known_field_errors(self) -> None:
         groups = _procurement_issue_groups(
@@ -468,6 +512,16 @@ class GameProductionTests(unittest.TestCase):
         self.assertEqual(owner["completed"], 1)
         self.assertEqual(owner["unresolved"], 2)
         self.assertEqual(owner["status"], "in_progress")
+        worksheet = game_production_state(self.root)["procurement"][
+            "decisionWorksheet"
+        ]
+        self.assertTrue(worksheet["available"])
+        self.assertEqual(worksheet["itemCount"], 15)
+        self.assertNotIn(
+            "`owner.governing_jurisdiction`",
+            worksheet["text"],
+        )
+        self.assertIn("`owner.secure_record_id`", worksheet["text"])
 
     def test_current_fail_receipt_routes_to_owner_intake(self) -> None:
         self._write_ready_receipts()
@@ -674,6 +728,15 @@ class GameProductionTests(unittest.TestCase):
                         "status": "complete",
                     },
                 ],
+            },
+        )
+        self.assertEqual(
+            state["procurement"]["decisionWorksheet"],
+            {
+                "available": False,
+                "itemCount": 0,
+                "reason": "complete",
+                "text": "",
             },
         )
         self.assertEqual(
