@@ -1,11 +1,11 @@
 # Current Brief
 
-Generated: 2026-07-26T18:02:50+09:00
+Generated: 2026-07-26T18:11:37+09:00
 Repo: channel_play
-Git: 309dab84
+Git: 20cab31c
 Dirty files: 0
 Current session: none
-Open tasks: 0
+Open tasks: 1
 Active locks: 0
 gdx1: online_via_tailscale / auth_blocked
 
@@ -154,4 +154,4 @@ Generated: 2026-07-26T16:33:49+09:00
 
 ## Next Recommended Action
 
-- Create the next scoped work order with `tools/channelctl company plan <request>`.
+- Assign `task-0009` with `tools/channelctl company assign task-0009 <agent-id>`.
