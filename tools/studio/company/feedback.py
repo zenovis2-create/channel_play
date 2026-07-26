@@ -6,6 +6,7 @@ from datetime import datetime
 from pathlib import Path
 
 from .brief import write_brief
+from .capture import _is_png
 from .errors import CompanyError
 from .paths import rel
 from .planner import assign_task, plan_task
@@ -13,7 +14,10 @@ from .sessions import end_session, start_session
 from .unity import unity_check
 
 
-def feedback_new(root: Path) -> Path:
+def feedback_new(
+    root: Path,
+    capture_path: Path | None = None,
+) -> Path:
     day = datetime.now().strftime("%Y-%m-%d")
     base = root / "reviews" / day
     base.mkdir(parents=True, exist_ok=True)
@@ -21,7 +25,15 @@ def feedback_new(root: Path) -> Path:
     number = len(existing) + 1
     folder = base / f"feedback-{number:04d}"
     folder.mkdir()
-    latest_capture = _latest_capture(root)
+    if capture_path is not None and not _is_png(capture_path):
+        raise CompanyError(
+            f"Feedback capture is not a valid PNG: {capture_path}"
+        )
+    latest_capture = (
+        capture_path
+        if capture_path is not None
+        else _latest_capture(root)
+    )
     latest_run = _latest_agent_run(root)
     latest_frame = _latest_frame(root, latest_run)
     latest_action = _latest_action(root, latest_run)
@@ -87,7 +99,14 @@ def feedback_process(root: Path, feedback_path: str) -> Path:
 
 
 def _latest_capture(root: Path) -> Path | None:
-    captures = sorted((root / "reviews" / "captures").glob("screen-*"), key=lambda p: p.stat().st_mtime if p.exists() else 0)
+    captures = sorted(
+        (
+            path
+            for path in (root / "reviews" / "captures").glob("*.png")
+            if _is_png(path)
+        ),
+        key=lambda path: path.stat().st_mtime,
+    )
     return captures[-1] if captures else None
 
 

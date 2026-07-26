@@ -6,7 +6,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from tools.studio.company.feedback import feedback_process
+from tools.studio.company.errors import CompanyError
+from tools.studio.company.feedback import feedback_new, feedback_process
 
 
 class FeedbackRoutingTests(unittest.TestCase):
@@ -82,6 +83,14 @@ class FeedbackRoutingTests(unittest.TestCase):
         self.assertTrue(all(task["status"] == "assigned" for task in tasks))
         self.assertFalse(any(task.get("closed_at") for task in tasks))
         self.assertTrue((self.feedback.parent / "routing_receipt.md").exists())
+
+    def test_feedback_new_rejects_invalid_explicit_capture(self) -> None:
+        capture = self.root / "reviews" / "captures" / "invalid.png"
+        capture.parent.mkdir(parents=True)
+        capture.write_text("not a PNG\n", encoding="utf-8")
+
+        with self.assertRaisesRegex(CompanyError, "not a valid PNG"):
+            feedback_new(self.root, capture)
 
 
 if __name__ == "__main__":

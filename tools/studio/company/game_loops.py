@@ -4,11 +4,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from .capture import capture_screen
+from .errors import CompanyError
 from .feedback import feedback_new
 from .paths import rel
 from .timeutil import now_iso, slugify
-from .unity import unity_playtest
+from .unity import unity_feedback_capture, unity_playtest
 
 
 def game_feedback_loop(root: Path, args: list[str]) -> Path:
@@ -19,8 +19,13 @@ def game_feedback_loop(root: Path, args: list[str]) -> Path:
     skip_playtest = "--no-playtest" in args
 
     playtest_path = None if skip_playtest else unity_playtest(root, [])
-    capture_path = capture_screen(root)
-    feedback_path = feedback_new(root)
+    if playtest_path and not _playtest_passed(playtest_path):
+        raise CompanyError(
+            "Feedback loop stopped because Unity playtest smoke failed; "
+            f"see {rel(root, playtest_path)}"
+        )
+    capture_receipt, capture_path = unity_feedback_capture(root)
+    feedback_path = feedback_new(root, capture_path)
 
     lines = [
         "# Game Feedback Loop",
@@ -31,7 +36,8 @@ def game_feedback_loop(root: Path, args: list[str]) -> Path:
         "## Artifacts",
         "",
         f"- Playtest: {rel(root, playtest_path) if playtest_path else 'skipped by --no-playtest'}",
-        f"- Capture: {rel(root, capture_path)}",
+        f"- Game capture: {rel(root, capture_path)}",
+        f"- Capture receipt: {rel(root, capture_receipt)}",
         f"- Feedback: {rel(root, feedback_path)}",
         "",
         "## Next Action",
@@ -42,6 +48,15 @@ def game_feedback_loop(root: Path, args: list[str]) -> Path:
     ]
     path.write_text("\n".join(lines), encoding="utf-8")
     return path
+
+
+def _playtest_passed(path: Path) -> bool:
+    text = path.read_text(encoding="utf-8", errors="replace")
+    return (
+        "Exit code: 0" in text
+        and "Compile errors: 0" in text
+        and "Playtest smoke: passed" in text
+    )
 
 
 def game_server_handoff(root: Path) -> Path:
