@@ -7,6 +7,7 @@ namespace ChannelPlay.Gameplay
     {
         public const float PassageClearWidth = 2.50f;
         public const float PassageClearHeight = 2.40f;
+        public const float PassageShellHeight = 2.80f;
         public const float JunctionTransitionEndRelease = 1.45f;
         public const float JunctionInnerWallRelease = 1.80f;
         public const float LandingRoofEndRelease = 1.55f;

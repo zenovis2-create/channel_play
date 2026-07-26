@@ -527,6 +527,7 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
 
         public readonly Transform Map;
         public readonly Transform V4;
+        public readonly Transform V10;
         public readonly LegacyResult Failure;
 
         public ValidationContext(LegacyResult failure)
@@ -538,6 +539,9 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
         {
             Map = map;
             V4 = v4;
+            V10 = map.Find(ChannelPlayKhufuV10InteriorBuilder.RootName);
+            if (V10 == null)
+                throw new InvalidOperationException("Missing V10 root.");
             v13 = root;
             canonicalStates = map.Cast<Transform>().ToDictionary(
                 child => child,
@@ -552,7 +556,7 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
             v13.SetParent(null, true);
             v13.gameObject.SetActive(false);
             ChannelPlayKhufuV13SubterraneanThresholdBuilder
-                .ApplyPredecessorContext(V4);
+                .ApplyPredecessorContext(V4, V10);
             Physics.SyncTransforms();
         }
 
@@ -568,7 +572,7 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
             try
             {
                 ChannelPlayKhufuV13SubterraneanThresholdBuilder
-                    .ApplyV13Context(V4);
+                    .ApplyV13Context(V4, V10);
             }
             finally
             {

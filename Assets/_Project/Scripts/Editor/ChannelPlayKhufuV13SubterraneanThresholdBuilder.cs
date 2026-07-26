@@ -44,6 +44,9 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdBuilder
         "V4_Subterranean_Unfinished_Pit";
     public const string V10BranchAnchorPath =
         "V10_Metadata/V10_Anchor_Ascending_Branch";
+    public const string V10BranchBypassAFloorProxyPath =
+        "V10_Collision_Proxies/" +
+        "V10_PROXY_Branch_To_Gallery_Foot_Plug_Bypass_A_Floor";
     public const string V4SubterraneanLightPath =
         "V4_Lighting/V4_Light_Subterranean";
 
@@ -98,7 +101,7 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdBuilder
         var completed = false;
         try
         {
-            ValidateV12BaselineContext(map, v4, previous);
+            ValidateV12BaselineContext(map, v4, v10, previous);
             var mapWithPrevious = ChannelPlayKhufuV6VisualFidelityBuilder.CollectMetrics(map);
             var baseline = previous == null
                 ? mapWithPrevious
@@ -182,8 +185,9 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdBuilder
 
             var anchors = AddMetadata(metadata, classification, out var metadataNames);
             PruneChildren(metadata, metadataNames);
-            ApplyV13Context(v4);
-            ConfigureThresholdControl(metadata, v4, proxyColliders, anchors, solidPitBacking);
+            ApplyV13Context(v4, v10);
+            ConfigureThresholdControl(metadata, v4, v10, proxyColliders, anchors,
+                solidPitBacking);
             if (InjectFailureAfterSuccessorBindingsForValidation)
                 throw new InvalidOperationException(
                     "Injected V13 failure after successor bindings.");
@@ -267,14 +271,16 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdBuilder
             File.ReadAllText(PrewriteAuditPath));
     }
 
-    public static void ApplyPredecessorContext(Transform v4)
+    public static void ApplyPredecessorContext(Transform v4, Transform v10)
     {
         SetV4SubterraneanComponents(v4, true);
+        SetV10BranchBypassAFloorProxy(v10, true);
     }
 
-    public static void ApplyV13Context(Transform v4)
+    public static void ApplyV13Context(Transform v4, Transform v10)
     {
         SetV4SubterraneanComponents(v4, false);
+        SetV10BranchBypassAFloorProxy(v10, false);
     }
 
     internal static string PairName(
@@ -480,6 +486,8 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdBuilder
              !previous.gameObject.activeSelf || !previous.gameObject.activeInHierarchy))
             throw new InvalidOperationException("Existing V13 root identity drifted.");
         ValidateFrozenTargets(v4, audit, previous == null);
+        ValidateV10BranchBypassAFloorProxy(v10,
+            previous == null ? (bool?)true : null);
         ValidatePreservedObservations(v4, v10, audit);
     }
 
@@ -487,10 +495,13 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdBuilder
         Transform root, PrewriteAuditDocument audit)
     {
         ValidateFrozenTargets(v4, audit, false);
+        ValidateV10BranchBypassAFloorProxy(v10, false);
         ValidatePreservedObservations(v4, v10, audit);
         var control = root.GetComponentInChildren<KhufuV13SubterraneanThresholdControl>(true);
+        var v10BypassProxy = RequireV10BranchBypassAFloorProxy(v10);
         if (control == null ||
-            control.PredecessorTargets.Count != V4SubterraneanTargets.Length ||
+            control.PredecessorTargets.Count != V4SubterraneanTargets.Length + 1 ||
+            !control.PredecessorTargets.Contains(v10BypassProxy.gameObject) ||
             control.CollisionProxies.Count !=
             ChannelPlayKhufuV13SubterraneanThresholdMeshPipeline.ExpectedColliderCount ||
             control.RouteAnchors.Count !=
@@ -504,7 +515,7 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdBuilder
     }
 
     private static void ValidateV12BaselineContext(Transform map, Transform v4,
-        Transform previous)
+        Transform v10, Transform previous)
     {
         var parent = previous == null ? null : previous.parent;
         var sibling = previous == null ? -1 : previous.GetSiblingIndex();
@@ -519,7 +530,7 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdBuilder
                 previous.SetParent(null, true);
                 previous.gameObject.SetActive(false);
             }
-            ApplyPredecessorContext(v4);
+            ApplyPredecessorContext(v4, v10);
             var validation = InvokeV12();
             if (validation.Failures.Count != 0 ||
                 validation.Signature != V12BaselineStaticSignature)
@@ -535,10 +546,10 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdBuilder
         }
         finally
         {
-            if (previous == null) ApplyPredecessorContext(v4);
+            if (previous == null) ApplyPredecessorContext(v4, v10);
             else
             {
-                ApplyV13Context(v4);
+                ApplyV13Context(v4, v10);
                 previous.SetParent(parent, false);
                 previous.SetSiblingIndex(sibling);
                 previous.localPosition = localPosition;
@@ -732,14 +743,16 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdBuilder
     }
 
     private static void ConfigureThresholdControl(Transform metadata, Transform v4,
-        IEnumerable<BoxCollider> proxies, IEnumerable<Transform> anchors,
-        Transform solidPitBacking)
+        Transform v10, IEnumerable<BoxCollider> proxies,
+        IEnumerable<Transform> anchors, Transform solidPitBacking)
     {
         if (solidPitBacking == null)
             throw new InvalidOperationException(
                 "V13 solid unfinished-pit backing is missing.");
         var targets = V4SubterraneanTargets
-            .Select(path => Require(v4.Find(path), path).gameObject).ToArray();
+            .Select(path => Require(v4.Find(path), path).gameObject)
+            .Append(RequireV10BranchBypassAFloorProxy(v10).gameObject)
+            .ToArray();
         var control = metadata.GetComponent<KhufuV13SubterraneanThresholdControl>();
         if (control == null)
             control =
@@ -820,6 +833,35 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdBuilder
                 EditorUtility.SetDirty(collider);
             }
         }
+    }
+
+    internal static void ValidateV10BranchBypassAFloorProxy(Transform v10,
+        bool? enabled)
+    {
+        var collider = RequireV10BranchBypassAFloorProxy(v10);
+        if (!collider.gameObject.activeSelf || !collider.gameObject.activeInHierarchy ||
+            (enabled.HasValue && collider.enabled != enabled.Value) ||
+            collider.isTrigger)
+            throw new InvalidOperationException(
+                "V10 branch-bypass floor proxy context drifted.");
+    }
+
+    private static void SetV10BranchBypassAFloorProxy(Transform v10, bool enabled)
+    {
+        var collider = RequireV10BranchBypassAFloorProxy(v10);
+        collider.enabled = enabled;
+        EditorUtility.SetDirty(collider);
+    }
+
+    private static BoxCollider RequireV10BranchBypassAFloorProxy(Transform v10)
+    {
+        var target = Require(v10.Find(V10BranchBypassAFloorProxyPath),
+            V10BranchBypassAFloorProxyPath);
+        var colliders = target.GetComponents<Collider>();
+        if (colliders.Length != 1 || !(colliders[0] is BoxCollider box))
+            throw new InvalidOperationException(
+                "V10 branch-bypass floor proxy inventory drifted.");
+        return box;
     }
 
     private static void SetTransform(Transform target,

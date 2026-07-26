@@ -196,6 +196,7 @@ def build_complete_fixture(
         "V10-owned marker moved",
         "Inherited light disabled",
         "Junction inner wall trim reverted",
+        "V10 branch bypass floor proxy restored",
         "Injected successor failure -> rollback verified",
     )
     write(

@@ -18,6 +18,7 @@ namespace ChannelPlay.Gameplay
         private const string ExpectedBoundaryCollider = "V13_Proxy_Chamber_East_Wall";
         private const string ExpectedCallback = "OnControllerColliderHit";
         private const float NormalStep = 0.16f;
+        private const float RouteSampleSpacing = 0.12f;
         private const float ControlStep = 0.08f;
         private const double RuntimeResolveTimeoutSeconds = 25d;
         private const double AnchorTimeoutSeconds = 15d;
@@ -131,6 +132,7 @@ namespace ChannelPlay.Gameplay
             {
                 try
                 {
+                    ValidateHarnessContract();
                     SaveAndPrepareRuntime(player);
                     routine = boundaryControl
                         ? RunBoundaryControl(player)
@@ -190,7 +192,9 @@ namespace ChannelPlay.Gameplay
                 var anchorStartedAt = Time.realtimeSinceStartupAsDouble;
                 var start = route[segment - 1];
                 var end = route[segment];
-                var steps = Mathf.Max(1, Mathf.CeilToInt(Vector3.Distance(start, end) / NormalStep));
+                var steps = Mathf.Max(1,
+                    Mathf.CeilToInt(
+                        Vector3.Distance(start, end) / RouteSampleSpacing));
                 for (var step = 1; step <= steps; step++)
                 {
                     if (!WithinDeadline("route anchor " + segment,
@@ -249,13 +253,15 @@ namespace ChannelPlay.Gameplay
         private IEnumerator RunBoundaryControl(Transform player)
         {
             var outward = KhufuV13SubterraneanRouteContract.BoundaryOutward.normalized;
-            var start = KhufuV13SubterraneanRouteContract.BoundaryPoint +
-                        outward * (KhufuV13SubterraneanRouteContract.BoundaryStartDistance + 0.20f);
-            var end = KhufuV13SubterraneanRouteContract.BoundaryPoint - outward * 0.65f;
+            var start = KhufuV13SubterraneanRouteContract.BoundaryPoint -
+                        outward *
+                        (KhufuV13SubterraneanRouteContract.BoundaryStartDistance + 0.20f);
+            var end = KhufuV13SubterraneanRouteContract.BoundaryPoint +
+                      outward * 0.65f;
             boundaryStartDistance =
                 Vector3.Distance(start, KhufuV13SubterraneanRouteContract.BoundaryPoint);
             Teleport(player, PlayerPoint(start));
-            player.rotation = UprightLookRotation(-outward);
+            player.rotation = UprightLookRotation(outward);
             yield return new WaitForSecondsRealtime(0.25f);
             var anchorStartedAt = Time.realtimeSinceStartupAsDouble;
 
@@ -447,6 +453,9 @@ namespace ChannelPlay.Gameplay
             text.AppendLine("- Traversed distance / max error / final error: `" +
                             Float(traversedDistance) + " / " + Float(maximumError) +
                             " / " + Float(finalError) + "`");
+            text.AppendLine("- Route sample spacing / Move cap: `" +
+                            Float(RouteSampleSpacing) + " / " +
+                            Float(NormalStep) + " m`");
             text.AppendLine("- Grounded steps/fraction: `" + groundedSteps + "/" +
                             movementSteps + " / " + Float(groundedFraction) + "`");
             text.AppendLine("- Outbound grounded steps/fraction: `" +
@@ -499,15 +508,30 @@ namespace ChannelPlay.Gameplay
                        .All(item => item);
         }
 
+        private static void ValidateHarnessContract()
+        {
+            if (RouteSampleSpacing <= 0f || NormalStep <= 0f ||
+                RouteSampleSpacing >= NormalStep)
+                throw new InvalidOperationException(
+                    "Route sample spacing must be positive and below the Move cap.");
+        }
+
         private Vector3 PlayerPoint(Vector3 floorPoint)
         {
             if (controller == null)
                 return floorPoint +
                        Vector3.up *
                        KhufuV13SubterraneanRouteContract.TraversalFloorOffset;
-            var scaleY = Mathf.Abs(controller.transform.lossyScale.y);
-            var bottomFromOrigin =
-                (controller.center.y - controller.height * 0.5f) * scaleY;
+            var scale = controller.transform.lossyScale;
+            var radius =
+                controller.radius *
+                Mathf.Max(Mathf.Abs(scale.x), Mathf.Abs(scale.z));
+            var height = Mathf.Max(
+                controller.height * Mathf.Abs(scale.y), radius * 2f);
+            var centerOffset =
+                controller.transform.rotation *
+                Vector3.Scale(controller.center, scale);
+            var bottomFromOrigin = centerOffset.y - height * 0.5f;
             return floorPoint + Vector3.up *
                 (KhufuV13SubterraneanRouteContract.TraversalFloorOffset -
                  bottomFromOrigin);

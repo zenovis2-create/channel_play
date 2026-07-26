@@ -848,6 +848,7 @@ def check_static_idempotence_negative(
         "V10-owned marker moved: `rejected`",
         "Inherited light disabled: `rejected`",
         "Junction inner wall trim reverted: `rejected`",
+        "V10 branch bypass floor proxy restored: `rejected`",
         "Injected successor failure -> rollback verified: `rejected`",
         f"Rollback scene SHA256: `{scene_hash}`",
         f"Rollback generated signature: `{generated_hash}`",

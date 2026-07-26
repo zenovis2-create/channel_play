@@ -182,6 +182,17 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
             target.localScale += new Vector3(0f, 0f, release);
             Physics.SyncTransforms();
         }, cases);
+        RunMutation("V10 branch bypass floor proxy restored",
+            "route clearance blocked", () =>
+        {
+            var context = OpenContext();
+            Require(context.V10.Find(
+                    ChannelPlayKhufuV13SubterraneanThresholdBuilder
+                        .V10BranchBypassAFloorProxyPath),
+                "V10 branch-bypass floor proxy")
+                .GetComponent<BoxCollider>().enabled = true;
+            Physics.SyncTransforms();
+        }, cases);
 
         var beforeScene =
             Sha256File(ChannelPlayKhufuV13SubterraneanThresholdBuilder.ScenePath);
@@ -515,7 +526,11 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
                 ChannelPlayKhufuV13SubterraneanThresholdBuilder
                     .V4SubterraneanTargets
                     .Select(path => Require(context.V4.Find(path), path)
-                        .gameObject));
+                        .gameObject)
+                    .Append(Require(context.V10.Find(
+                            ChannelPlayKhufuV13SubterraneanThresholdBuilder
+                                .V10BranchBypassAFloorProxyPath),
+                        "V10 branch-bypass floor proxy").gameObject));
         if (control.PredecessorTargets.Count != expectedTargets.Count ||
             !expectedTargets.SetEquals(control.PredecessorTargets))
             result.Failures.Add(
@@ -579,6 +594,9 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
                 KhufuV13SubterraneanRouteContract.PassageClearHeight - 2.40f) >
             0.001f ||
             Mathf.Abs(
+                KhufuV13SubterraneanRouteContract.PassageShellHeight - 2.80f) >
+            0.001f ||
+            Mathf.Abs(
                 KhufuV13SubterraneanRouteContract
                     .JunctionTransitionEndRelease - 1.45f) > 0.001f ||
             Mathf.Abs(
@@ -586,7 +604,10 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
                 1.80f) > 0.001f ||
             Mathf.Abs(
                 KhufuV13SubterraneanRouteContract.LandingRoofEndRelease -
-                1.55f) > 0.001f)
+                1.55f) > 0.001f ||
+            Mathf.Abs(
+                KhufuV13SubterraneanRouteContract.TraversalFloorOffset -
+                0.08f) > 0.001f)
             result.Failures.Add("V13 passage clearance dimensions drifted.");
 
         Physics.SyncTransforms();
@@ -606,6 +627,16 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
             ? 2f
             : Mathf.Max(playerController.height * Mathf.Abs(playerScale.y),
                 playerRadius * 2f);
+        if (playerController != null &&
+            (InvalidFinite(playerRadius) || InvalidFinite(playerHeight) ||
+             playerRadius <= 0f || playerHeight < playerRadius * 2f ||
+             InvalidFinite(playerScale.x) || InvalidFinite(playerScale.y) ||
+             InvalidFinite(playerScale.z) ||
+             Mathf.Abs(playerScale.x) < 0.0001f ||
+             Mathf.Abs(playerScale.y) < 0.0001f ||
+             Mathf.Abs(playerScale.z) < 0.0001f))
+            result.Failures.Add(
+                "V13 traversal CharacterController geometry is invalid.");
         foreach (var point in ClearanceSamples(
                      KhufuV13SubterraneanRouteContract.RoundTripRoute(), 0.25f))
         {
@@ -617,7 +648,7 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
                 (KhufuV13SubterraneanRouteContract.TraversalFloorOffset +
                  playerHeight - playerRadius),
                 playerRadius, ~0, QueryTriggerInteraction.Ignore);
-            var owned = hits.Where(hit => hit.transform.IsChildOf(root))
+            var owned = hits.Where(hit => hit != playerController)
                 .Select(hit => hit.name).Distinct(StringComparer.Ordinal)
                 .ToArray();
             if (owned.Length > 0)
@@ -662,7 +693,7 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
             "Chamber_South_East_Jamb", result);
         ValidateRay(root,
             KhufuV13SubterraneanRouteContract.ChamberCenter +
-            Vector3.up * 2.8f, Vector3.back, 4f,
+            Vector3.up * 2.6f, Vector3.back, 4f,
             "Chamber_South_Lintel", result);
 
         var pit = KhufuV13SubterraneanRouteContract.PitInspection;
@@ -726,6 +757,11 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
         }
     }
 
+    private static bool InvalidFinite(float value)
+    {
+        return float.IsNaN(value) || float.IsInfinity(value);
+    }
+
     private static void ValidateRay(Transform root, Vector3 origin,
         Vector3 direction, float distance, string token,
         ValidationResult result, string label = "enclosure ray")
@@ -752,7 +788,7 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
             context.Root.SetParent(null, true);
             context.Root.gameObject.SetActive(false);
             ChannelPlayKhufuV13SubterraneanThresholdBuilder
-                .ApplyPredecessorContext(context.V4);
+                .ApplyPredecessorContext(context.V4, context.V10);
             var restored = InvokeV12();
             if (restored.Failures.Count != 0 ||
                 restored.Signature !=
@@ -789,7 +825,7 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
         finally
         {
             ChannelPlayKhufuV13SubterraneanThresholdBuilder
-                .ApplyV13Context(context.V4);
+                .ApplyV13Context(context.V4, context.V10);
             context.Root.SetParent(parent, false);
             context.Root.SetSiblingIndex(sibling);
             context.Root.localPosition = Vector3.zero;

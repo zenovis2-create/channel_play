@@ -145,7 +145,7 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdMeshPipeline
                 "V13 shell release is outside the passage span: " + shell);
         var frame = Frame(start, end);
         var width = KhufuV13SubterraneanRouteContract.PassageClearWidth;
-        var height = KhufuV13SubterraneanRouteContract.PassageClearHeight;
+        var height = KhufuV13SubterraneanRouteContract.PassageShellHeight;
         var fullLength = frame.Length + WallThickness;
         var floorEnd =
             end - routeDelta.normalized * floorEndRelease;
@@ -243,7 +243,8 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdMeshPipeline
     {
         var frame = Frame(start, end);
         Add(specs, segment, name, DetailBucket,
-            end + frame.Up * (KhufuV13SubterraneanRouteContract.PassageClearHeight - 0.08f),
+            end + frame.Up *
+            (KhufuV13SubterraneanRouteContract.PassageShellHeight - 0.08f),
             frame.Rotation,
             new Vector3(KhufuV13SubterraneanRouteContract.PassageClearWidth, 0.10f, 0.10f),
             string.Empty, false);
