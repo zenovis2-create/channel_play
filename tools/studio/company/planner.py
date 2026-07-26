@@ -153,6 +153,15 @@ def _write_plan(root: Path, task: dict[str, Any]) -> Path:
 
 
 def _work_order_text(root: Path, task: dict[str, Any], agent_id: str) -> str:
+    plan_path = (
+        CompanyPaths(root).memory_dir
+        / f"{task['id']}-plan.md"
+    )
+    plan_ref = (
+        plan_path.relative_to(root).as_posix()
+        if plan_path.exists()
+        else "not recorded"
+    )
     return "\n".join(
         [
             "# Work Order",
@@ -160,11 +169,14 @@ def _work_order_text(root: Path, task: dict[str, Any], agent_id: str) -> str:
             f"Task ID: {task['id']}",
             f"Role: {agent_id}",
             f"Goal: {task['request']}",
-            "Read first: agents/company.md, agents/memory_policy.md, memory/company/current_brief.md",
+            (
+                "Read first: agents/company.md, agents/memory_policy.md, "
+                f"memory/company/current_brief.md, {plan_ref}"
+            ),
             "Allowed write paths:",
             *[f"- {path}" for path in task.get("allowed_write_paths", [])],
             "Forbidden paths: any locked path not assigned to this task",
-            "Inputs: see task request and current brief",
+            f"Inputs: {plan_ref}, task request, and current brief",
             "Expected output: changed files or report matching role contract",
             f"Verification required: {task.get('required_evidence')}",
             f"Suggested reviewer: {task.get('suggested_reviewer') or 'none'}",

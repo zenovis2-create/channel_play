@@ -192,6 +192,11 @@ class GameProductionTests(unittest.TestCase):
             '"updated_at":"2026-07-26T18:07:35+09:00"}]}',
             encoding="utf-8",
         )
+        state_path = self.root / "memory" / "company" / "state.json"
+        state_path.write_text(
+            '{"active_session":"20260726-truth-pen"}',
+            encoding="utf-8",
+        )
 
         state = game_production_state(self.root)
 
@@ -209,6 +214,35 @@ class GameProductionTests(unittest.TestCase):
             if loop["id"] == "game_work_queue"
         )
         self.assertEqual(work_queue["status"], "ready")
+
+    def test_next_action_starts_session_before_assigning_planned_task(self) -> None:
+        self._write_ready_receipts()
+        self._write_run("game-feedback-loop-001", "game_feedback_loop.md", "Status: ready_for_review\n")
+        self._write_run("game-server-handoff-001", "server_handoff.md", "Status: waiting_for_x86_64_runner\n")
+        feedback = self.root / "reviews" / "2026-06-03" / "feedback-0001" / "feedback.md"
+        feedback.parent.mkdir(parents=True)
+        feedback.write_text("Status: routed\n", encoding="utf-8")
+        self._write_asset_index()
+        board = self.root / "memory" / "company" / "task_board.json"
+        board.parent.mkdir(parents=True)
+        board.write_text(
+            '{"tasks":[{"id":"task-0009","status":"planned",'
+            '"request":"Truth Pen source research",'
+            '"suggested_agent":"research_librarian",'
+            '"updated_at":"2026-07-26T18:07:35+09:00"}]}',
+            encoding="utf-8",
+        )
+
+        state = game_production_state(self.root)
+
+        self.assertEqual(
+            state["nextBestAction"]["command"],
+            "company.session.start",
+        )
+        self.assertEqual(
+            state["nextBestAction"]["payload"],
+            {"goal": "Truth Pen source research"},
+        )
 
     def test_perfection_gate_passes_when_workstation_workflow_is_actionable(self) -> None:
         self._write_ready_receipts()

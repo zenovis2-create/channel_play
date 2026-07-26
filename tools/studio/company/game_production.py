@@ -421,9 +421,23 @@ def _next_best_action(passed: int, total: int, loops: list[dict], feedback: dict
 
 
 def _task_flow_state(root: Path) -> dict:
+    active_session = ""
+    state_path = root / "memory" / "company" / "state.json"
+    if state_path.exists():
+        state = json.loads(state_path.read_text(encoding="utf-8"))
+        if isinstance(state, dict):
+            active_session = str(state.get("active_session") or "")
     board = root / "memory" / "company" / "task_board.json"
     if not board.exists():
-        return {"open": 0, "assigned": 0, "needsReview": 0, "needsEvidence": 0, "running": 0, "latest": {}}
+        return {
+            "open": 0,
+            "assigned": 0,
+            "needsReview": 0,
+            "needsEvidence": 0,
+            "running": 0,
+            "activeSession": active_session,
+            "latest": {},
+        }
     data = json.loads(board.read_text(encoding="utf-8"))
     tasks = data.get("tasks", []) if isinstance(data, dict) else []
     open_tasks = [task for task in tasks if task.get("status") not in {"closed", "closed_blocked"}]
@@ -434,6 +448,7 @@ def _task_flow_state(root: Path) -> dict:
         "needsReview": sum(1 for task in open_tasks if task.get("status") == "needs_review"),
         "needsEvidence": sum(1 for task in open_tasks if task.get("status") in {"needs_evidence", "evidence_attached"}),
         "running": sum(1 for task in open_tasks if task.get("agent_status") == "running"),
+        "activeSession": active_session,
         "latest": latest[0] if latest else {},
     }
 
@@ -445,6 +460,19 @@ def _task_next_action(task_flow: dict) -> dict:
         return {}
     status = str(task.get("status") or "")
     if status == "planned":
+        if not task_flow.get("activeSession"):
+            return {
+                "label": "작업 세션 시작",
+                "command": "company.session.start",
+                "payload": {
+                    "goal": str(task.get("request") or task_id),
+                },
+                "reason": (
+                    f"{task_id}를 할당하기 전에 회사 세션을 시작해야 합니다. "
+                    "세션이 작업지시서, 보고서, 검증 증거의 경계를 제공합니다."
+                ),
+                "status": "ready",
+            }
         agent_id = str(task.get("suggested_agent") or "")
         if not agent_id:
             return {}
@@ -525,6 +553,8 @@ def _perfection_gate(checks: list[dict], loops: list[dict], next_action: dict, s
 def _next_action_is_actionable(command: str, payload: dict) -> bool:
     if not command:
         return False
+    if command == "company.session.start":
+        return bool(payload.get("goal"))
     if command == "company.assign":
         return bool(payload.get("taskId")) and bool(payload.get("agentId"))
     if command in {"agent.run", "agent.review", "company.review", "company.verify", "company.advance"}:
