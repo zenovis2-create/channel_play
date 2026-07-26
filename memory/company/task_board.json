@@ -124,6 +124,66 @@
       ],
       "verification_status": "passed",
       "closed_at": "2026-06-01T14:57:09+09:00"
+    },
+    {
+      "id": "task-0006",
+      "request": "캡처 피드백 재현 및 영향 범위 기록: Reframe `Operator_Overview_Camera` to show the playable School MVP route, player start, and primary objective landmarks in one legible overview. Keep the capture deterministic and retain the non-blank PNG validation. (reviews/2026-07-26/feedback-0002/feedback.md)",
+      "status": "assigned",
+      "suggested_agent": "qa_playtest",
+      "suggested_reviewer": null,
+      "assigned_agent": "qa_playtest",
+      "allowed_write_paths": [
+        "reviews",
+        "runs"
+      ],
+      "required_evidence": "reproduction note linked to screenshot or Unity log",
+      "created_at": "2026-07-26T16:33:49+09:00",
+      "updated_at": "2026-07-26T16:33:49+09:00",
+      "work_order": "memory/sessions/20260726-163349-process-feedback-md/work_orders/task-0006-qa_playtest.md",
+      "report": null,
+      "verification": null,
+      "session": "20260726-163349-process-feedback-md"
+    },
+    {
+      "id": "task-0007",
+      "request": "피드백 수정 작업 수행: Reframe `Operator_Overview_Camera` to show the playable School MVP route, player start, and primary objective landmarks in one legible overview. Keep the capture deterministic and retain the non-blank PNG validation. (reviews/2026-07-26/feedback-0002/feedback.md)",
+      "status": "assigned",
+      "suggested_agent": "unity_gameplay",
+      "suggested_reviewer": null,
+      "assigned_agent": "unity_gameplay",
+      "allowed_write_paths": [
+        "Assets/_Project/Scenes",
+        "Assets/_Project/Scripts/Gameplay",
+        "Assets/_Project/Scripts/Player",
+        "Assets/_Project/Scripts/UI",
+        "Assets/_Project/Scripts/Editor"
+      ],
+      "required_evidence": "Unity compile, playtest, and refreshed capture evidence",
+      "created_at": "2026-07-26T16:33:49+09:00",
+      "updated_at": "2026-07-26T16:33:49+09:00",
+      "work_order": "memory/sessions/20260726-163349-process-feedback-md/work_orders/task-0007-unity_gameplay.md",
+      "report": null,
+      "verification": null,
+      "session": "20260726-163349-process-feedback-md"
+    },
+    {
+      "id": "task-0008",
+      "request": "피드백 수정 리스크 리뷰: Reframe `Operator_Overview_Camera` to show the playable School MVP route, player start, and primary objective landmarks in one legible overview. Keep the capture deterministic and retain the non-blank PNG validation. (reviews/2026-07-26/feedback-0002/feedback.md)",
+      "status": "assigned",
+      "suggested_agent": "critic_reviewer",
+      "suggested_reviewer": null,
+      "assigned_agent": "critic_reviewer",
+      "allowed_write_paths": [
+        "reviews",
+        "docs"
+      ],
+      "required_evidence": "findings-first review linked to implementation evidence",
+      "created_at": "2026-07-26T16:33:49+09:00",
+      "updated_at": "2026-07-26T16:33:49+09:00",
+      "work_order": "memory/sessions/20260726-163349-process-feedback-md/work_orders/task-0008-critic_reviewer.md",
+      "report": null,
+      "verification": null,
+      "session": "20260726-163349-process-feedback-md"
     }
   ]
 }
