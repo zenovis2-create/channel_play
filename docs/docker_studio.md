@@ -18,6 +18,7 @@ Do not put every capability inside the Studio container. Unity Editor, Blender G
 - Do not mount `/var/run/docker.sock` into the Studio container.
 - Do not run the Studio container as a privileged container.
 - Keep the bind mount scoped to this repository.
+- Publish the Studio port on host loopback only; do not expose the admin console to the LAN.
 - Use the host-runner token secret file instead of passing the token through the browser.
 - Keep `memory/company/secrets/` out of Git.
 - Treat a Docker/agent control plane as an admin console.
@@ -48,6 +49,10 @@ Then open:
 ```text
 http://127.0.0.1:8776/#runtime
 ```
+
+Docker Compose binds this port to `127.0.0.1` on the host. Use an authenticated
+reverse proxy or tunnel for deliberate remote access; do not widen the Compose
+binding directly.
 
 If `CHANNEL_PLAY_STUDIO_PORT=8778` is used, open:
 
