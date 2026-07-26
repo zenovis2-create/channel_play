@@ -684,3 +684,27 @@ def test_fable_ship_must_be_the_only_final_verdict() -> None:
     assert release.fable_verdict("No blockers.\nVERDICT: ship\n") == "ship"
     assert release.fable_verdict("VERDICT: ship\nTrailing text\n") is None
     assert release.fable_verdict("FABLE_HARNESS_ERROR\nVERDICT: ship\n") is None
+
+
+def test_orchestrator_review_fallback_is_hash_bound(tmp_path: Path) -> None:
+    for relative in release.ORCHESTRATOR_REVIEW_SOURCES:
+        write(tmp_path, relative, f"reviewed {relative.as_posix()}\n")
+    hashes = hash_lines(tmp_path, release.ORCHESTRATOR_REVIEW_SOURCES)
+    write(
+        tmp_path,
+        release.RUN_ROOT / "review-resolution.md",
+        "# Review resolution\n"
+        "- Review mechanism: `activate-agents-orchestrator`\n"
+        "- Blocking findings: `0`\n"
+        + hashes
+        + "\n\nKHUFU_V13_REVIEW_RESOLUTION: passed\n",
+    )
+    passing = ValidationResult()
+    release.check_review_evidence(tmp_path, passing)
+    assert passing.passed, passing.errors
+
+    path = tmp_path / release.ORCHESTRATOR_REVIEW_SOURCES[0]
+    path.write_text("drifted\n", encoding="utf-8")
+    failing = ValidationResult()
+    release.check_review_evidence(tmp_path, failing)
+    assert any("not bound" in error for error in failing.errors)

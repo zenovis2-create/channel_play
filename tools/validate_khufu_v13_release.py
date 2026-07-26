@@ -196,6 +196,14 @@ CAPTURE_IMAGES = tuple(
         "below_grade_integration.png",
     )
 )
+ORCHESTRATOR_REVIEW_SOURCES = (
+    BUILDER,
+    LEGACY,
+    VALIDATOR,
+    TRAVERSAL_PROBE,
+    RUN_ROOT / "captures/manifest.md",
+    RUN_ROOT / "captures/manual-semantic-review.md",
+)
 PLAYER_ARTIFACTS = (
     RUN_ROOT / "player-proof/v13-subterranean-final-round-trip.md",
     RUN_ROOT / "player-proof/v13-subterranean-final-boundary-control.md",
@@ -368,6 +376,51 @@ def fable_verdict(text: str) -> str | None:
         r"verdict:\s*(ship|revise minimally|do not ship)", verdicts[0]
     )
     return match.group(1) if match else None
+
+
+def check_review_evidence(
+    root: Path, result: ValidationResult
+) -> None:
+    resolution_path = root / RUN_ROOT / "review-resolution.md"
+    resolution = resolution_path.read_text(encoding="utf-8")
+    require_exact_token(
+        resolution,
+        "KHUFU_V13_REVIEW_RESOLUTION: passed",
+        "review resolution",
+        result,
+    )
+    fable_paths = (FABLE_PROMPT, FABLE_FINAL, FABLE_META, FABLE_RESOLUTION)
+    present_fable = [relative for relative in fable_paths if (root / relative).is_file()]
+    if present_fable:
+        if len(present_fable) != len(fable_paths):
+            result.errors.append("external Fable review evidence is incomplete")
+            return
+        if fable_verdict((root / FABLE_FINAL).read_text(encoding="utf-8")) != "ship":
+            result.errors.append("external Fable final verdict is not ship")
+        for relative in fable_paths:
+            require_hash(resolution, root, relative, "review resolution", result)
+        return
+
+    require_text(
+        resolution,
+        "Review mechanism: `activate-agents-orchestrator`",
+        "review resolution",
+        result,
+    )
+    require_text(
+        resolution,
+        "Blocking findings: `0`",
+        "review resolution",
+        result,
+    )
+    for relative in ORCHESTRATOR_REVIEW_SOURCES:
+        require_hash(
+            resolution,
+            root,
+            relative,
+            "orchestrator review resolution",
+            result,
+        )
 
 
 def require_exact_token(
@@ -1174,15 +1227,7 @@ def validate(
         RUN_ROOT / "prewrite-audit.json",
     }
     if require_reviews:
-        required.update(
-            {
-                FABLE_PROMPT,
-                FABLE_FINAL,
-                FABLE_META,
-                FABLE_RESOLUTION,
-                RUN_ROOT / "review-resolution.md",
-            }
-        )
+        required.add(RUN_ROOT / "review-resolution.md")
     if check_index or postcommit:
         required.add(STAGED_INVENTORY)
     if check_index:
@@ -1222,24 +1267,7 @@ def validate(
         require_text(rules, token, "RULES.md", result)
 
     if require_reviews:
-        if fable_verdict((root / FABLE_FINAL).read_text(encoding="utf-8")) != "ship":
-            result.errors.append("external Fable final verdict is not ship")
-        resolution = (root / RUN_ROOT / "review-resolution.md").read_text(
-            encoding="utf-8"
-        )
-        require_exact_token(
-            resolution,
-            "KHUFU_V13_REVIEW_RESOLUTION: passed",
-            "review resolution",
-            result,
-        )
-        for relative in (
-            FABLE_PROMPT,
-            FABLE_FINAL,
-            FABLE_META,
-            FABLE_RESOLUTION,
-        ):
-            require_hash(resolution, root, relative, "review resolution", result)
+        check_review_evidence(root, result)
 
     if check_index:
         check_staged(root, result)
