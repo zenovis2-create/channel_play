@@ -91,6 +91,9 @@ tools/tests/test_validate_khufu_v13_prewrite.py
 tools/tests/test_validate_khufu_v13_release.py
 tools/validate_khufu_v13_prewrite.py
 tools/validate_khufu_v13_release.py
+work/agent-reviews/khufu-v13-capture-review.md
+work/agent-reviews/khufu-v13-code-review.md
+work/agent-reviews/khufu-v13-release-review.md
 work/fable-harness/khufu-v13-subterranean-threshold-final-review-resolution.md
 work/fable-harness/khufu-v13-subterranean-threshold-final-review.fable.md
 work/fable-harness/khufu-v13-subterranean-threshold-final-review.fable.md.meta.json

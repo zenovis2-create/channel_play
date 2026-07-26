@@ -50,6 +50,8 @@ public static class ChannelPlayKhufuV13WindowsBuild
     [MenuItem("Channel Play/Khufu V13/Build Windows Development Player")]
     public static void BuildWindowsDevelopmentPlayer()
     {
+        ChannelPlayKhufuV13SubterraneanThresholdBuilder
+            .RestoreCanonicalMaterialKeywords();
         ChannelPlayKhufuV13SubterraneanThresholdValidator.ValidateMenu();
         if (RequiredSources.Any(item => !File.Exists(item.Value)))
             throw new FileNotFoundException("Required V13 build source is missing.",
@@ -92,6 +94,8 @@ public static class ChannelPlayKhufuV13WindowsBuild
                 ImportAssetOptions.ForceSynchronousImport |
                 ImportAssetOptions.ForceUpdate);
             protectedAssets.Restore();
+            ChannelPlayKhufuV13SubterraneanThresholdBuilder
+                .RestoreCanonicalMaterialKeywords();
         }
 
         var settingsAfter = Hash(PlayerSettingsPath);

@@ -3,6 +3,7 @@
 ## Current State
 
 - Phase: final release validation and exact-index handoff.
+- Prewrite baseline: Phase 1 contract and Python gate; Unity scene/assets: unchanged.
 - Baseline commit: `787476b58044e78f0c5164df408680e50fee47a2`.
 - Baseline scene SHA256: `eec9cc9c0b52cd75066c20caf1710ab458423de2eea073c7cfe36e88a782ec8c`.
 - Accepted V12 signature: `6f7faced5cee8f6b199f18c979b5174473d85154c695a93a29f37db4db0059cd`.

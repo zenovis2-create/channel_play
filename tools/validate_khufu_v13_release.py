@@ -69,6 +69,18 @@ FABLE_META = Path(str(FABLE_FINAL) + ".meta.json")
 FABLE_RESOLUTION = Path(
     "work/fable-harness/khufu-v13-subterranean-threshold-final-review-resolution.md"
 )
+CODE_REVIEW_ARTIFACT = Path("work/agent-reviews/khufu-v13-code-review.md")
+CAPTURE_REVIEW_ARTIFACT = Path(
+    "work/agent-reviews/khufu-v13-capture-review.md"
+)
+RELEASE_REVIEW_ARTIFACT = Path(
+    "work/agent-reviews/khufu-v13-release-review.md"
+)
+ORCHESTRATOR_REVIEW_ARTIFACTS = {
+    CODE_REVIEW_ARTIFACT: "v12_code_review",
+    CAPTURE_REVIEW_ARTIFACT: "v12_level_review",
+    RELEASE_REVIEW_ARTIFACT: "v12_release_pattern",
+}
 
 AUDIT = Path(
     "Assets/_Project/Scripts/Editor/"
@@ -204,6 +216,26 @@ ORCHESTRATOR_REVIEW_SOURCES = (
     RUN_ROOT / "captures/manifest.md",
     RUN_ROOT / "captures/manual-semantic-review.md",
 )
+ORCHESTRATOR_REVIEW_SCOPES = {
+    CODE_REVIEW_ARTIFACT: (
+        BUILDER,
+        LEGACY,
+        EXPORTER,
+        VALIDATOR,
+        WINDOWS_BUILD,
+        TRAVERSAL_PROBE,
+    ),
+    CAPTURE_REVIEW_ARTIFACT: (
+        RUN_ROOT / "captures/manifest.md",
+        *CAPTURE_IMAGES,
+    ),
+    RELEASE_REVIEW_ARTIFACT: (
+        PYTHON_SOURCES[1],
+        PYTHON_SOURCES[3],
+        ALLOWLIST,
+        GIT_ATTRIBUTES,
+    ),
+}
 PLAYER_ARTIFACTS = (
     RUN_ROOT / "player-proof/v13-subterranean-final-round-trip.md",
     RUN_ROOT / "player-proof/v13-subterranean-final-boundary-control.md",
@@ -276,13 +308,11 @@ BUILD_BOUND_SOURCES = (SCENE, *UNITY_SOURCES)
 CAPTURE_BOUND_SOURCES = (SCENE, BUILDER, PIPELINE, EXPORTER, VALIDATOR)
 CLEAN_BOUND_SOURCES = (
     SCENE,
-    BUILDER,
-    PIPELINE,
-    EXPORTER,
-    VALIDATOR,
-    LEGACY,
-    WINDOWS_BUILD,
-    PYTHON_SOURCES[1],
+    *UNITY_SOURCES,
+    *PYTHON_SOURCES,
+    DOC_ROOT / "segment-classification.json",
+    DOC_ROOT / "performance-budget.json",
+    RUN_ROOT / "prewrite-audit.json",
     ALLOWLIST,
     GIT_ATTRIBUTES,
 )
@@ -401,6 +431,34 @@ def check_review_evidence(
             require_hash(resolution, root, relative, "review resolution", result)
         return
 
+    for relative, task in ORCHESTRATOR_REVIEW_ARTIFACTS.items():
+        artifact = (root / relative).read_text(encoding="utf-8")
+        require_exact_token(
+            artifact,
+            "ORCHESTRATOR_REVIEW_VERDICT: passed",
+            relative.as_posix(),
+            result,
+        )
+        require_text(
+            artifact,
+            f"Review task: `{task}`",
+            relative.as_posix(),
+            result,
+        )
+        require_text(
+            artifact,
+            "P0 / P1: `0 / 0`",
+            relative.as_posix(),
+            result,
+        )
+        for reviewed in ORCHESTRATOR_REVIEW_SCOPES[relative]:
+            require_hash(
+                artifact,
+                root,
+                reviewed,
+                relative.as_posix(),
+                result,
+            )
     require_text(
         resolution,
         "Review mechanism: `activate-agents-orchestrator`",
@@ -414,6 +472,14 @@ def check_review_evidence(
         result,
     )
     for relative in ORCHESTRATOR_REVIEW_SOURCES:
+        require_hash(
+            resolution,
+            root,
+            relative,
+            "orchestrator review resolution",
+            result,
+        )
+    for relative in ORCHESTRATOR_REVIEW_ARTIFACTS:
         require_hash(
             resolution,
             root,
@@ -516,6 +582,7 @@ def expected_allowlist() -> set[str]:
         FABLE_FINAL,
         FABLE_META,
         FABLE_RESOLUTION,
+        *ORCHESTRATOR_REVIEW_ARTIFACTS,
     )
     return {path.as_posix() for path in paths}
 
@@ -699,6 +766,27 @@ def check_index_record(
         result.errors.append(f"{label} staged hash or size drifted: {path}")
 
 
+def require_inventory_binding(
+    report: bytes,
+    inventory: bytes,
+    label: str,
+    result: ValidationResult,
+) -> None:
+    text = report.decode("utf-8", errors="replace")
+    require_exact_token(
+        text,
+        "KHUFU_V13_RELEASE_VERDICT: passed",
+        label,
+        result,
+    )
+    require_text(
+        text,
+        f"staged_inventory_sha256: `{sha256_bytes(inventory)}`",
+        label,
+        result,
+    )
+
+
 def check_staged(root: Path, result: ValidationResult) -> None:
     try:
         allowlist = read_allowlist(root)
@@ -717,7 +805,7 @@ def check_staged(root: Path, result: ValidationResult) -> None:
         result.errors.append(f"unexpected staged path: {path}")
     for path in sorted(dirty.intersection(permitted) - staged):
         result.errors.append(f"allowlisted release path is not staged: {path}")
-    for path in sorted(helpers - staged):
+    for path in sorted({STAGED_INVENTORY.as_posix()} - staged):
         result.errors.append(f"staged release helper is not staged: {path}")
     for path in sorted(dirty - allowlist):
         if is_unlisted_release_scope(path):
@@ -732,7 +820,14 @@ def check_staged(root: Path, result: ValidationResult) -> None:
         )
     for record in records:
         check_index_record(root, record, "staged inventory", result)
+    if index_bytes(root, STAGED_INVENTORY.as_posix()) is None:
+        result.errors.append("staged inventory helper blob is missing")
     result.facts["staged_files"] = len(staged)
+
+
+def staged_report_matches_output(root: Path, output: Path) -> bool:
+    staged = index_bytes(root, STAGED_REPORT.as_posix())
+    return staged is not None and output.is_file() and staged == output.read_bytes()
 
 
 def check_postcommit(root: Path, result: ValidationResult) -> None:
@@ -763,7 +858,8 @@ def check_postcommit(root: Path, result: ValidationResult) -> None:
         )
     if git_paths(root, "diff", "--cached", "--name-only", "-z"):
         result.errors.append("staged index is not empty after commit")
-    for path in sorted(status_paths(root).intersection(expected)):
+    protected_worktree = allowlist - {POSTCOMMIT_REPORT.as_posix()}
+    for path in sorted(status_paths(root).intersection(protected_worktree)):
         result.errors.append(f"post-commit release path has worktree drift: {path}")
     parent = git_process(root, "rev-parse", "HEAD^", check=False)
     if parent.returncode != 0 or parent.stdout.decode().strip() != base_commit:
@@ -778,6 +874,19 @@ def check_postcommit(root: Path, result: ValidationResult) -> None:
             or record.get("sha256") != sha256_bytes(content)
         ):
             result.errors.append(f"post-commit HEAD blob drifted from inventory: {path}")
+    inventory_content = git_blob_bytes(root, f"HEAD:{STAGED_INVENTORY.as_posix()}")
+    report_content = git_blob_bytes(root, f"HEAD:{STAGED_REPORT.as_posix()}")
+    if inventory_content is None:
+        result.errors.append("post-commit inventory helper blob is missing")
+    if report_content is None:
+        result.errors.append("post-commit validation report blob is missing")
+    if inventory_content is not None and report_content is not None:
+        require_inventory_binding(
+            report_content,
+            inventory_content,
+            "post-commit staged validation report",
+            result,
+        )
     result.facts["committed_files"] = len(committed)
 
 
@@ -1188,13 +1297,80 @@ def check_traversal(root: Path, result: ValidationResult) -> None:
 
 
 def check_clean_index(
-    root: Path, static_signature: str, result: ValidationResult
+    root: Path,
+    static_signature: str,
+    result: ValidationResult,
+    compare_staged_index: bool = False,
 ) -> None:
     clean = (root / RUN_ROOT / "clean-index-import.md").read_text(encoding="utf-8")
-    for token in (static_signature, "Compiler errors: `0`"):
+    for token in (
+        static_signature,
+        "Unity exit code: `0`",
+        "Compiler errors: `0`",
+    ):
         require_text(clean, token, "clean-index receipt", result)
+    source_commit = extract_single(
+        clean,
+        r"^- Source commit: `([0-9a-f]{40})`$",
+        "clean-index source commit",
+        result,
+    )
+    candidate_tree = extract_single(
+        clean,
+        r"^- Candidate tree: `([0-9a-f]{40})`$",
+        "clean-index candidate tree",
+        result,
+    )
+    if not source_commit:
+        return
+    exists = git_process(
+        root, "cat-file", "-e", f"{source_commit}^{{commit}}", check=False
+    )
+    if exists.returncode != 0:
+        result.errors.append("clean-index source commit is unavailable")
+        return
+    ancestor = git_process(
+        root, "merge-base", "--is-ancestor", source_commit, "HEAD", check=False
+    )
+    if ancestor.returncode != 0:
+        result.errors.append("clean-index source commit is not an ancestor of HEAD")
+    actual_tree = git_process(
+        root, "rev-parse", f"{source_commit}^{{tree}}", check=False
+    )
+    if (
+        actual_tree.returncode != 0
+        or actual_tree.stdout.decode().strip() != candidate_tree
+    ):
+        result.errors.append("clean-index candidate tree does not match source commit")
     for relative in CLEAN_BOUND_SOURCES:
-        require_hash(clean, root, relative, "clean-index receipt", result)
+        path = relative.as_posix()
+        source_content = git_blob_bytes(root, f"{source_commit}:{path}")
+        candidate_content = (
+            index_bytes(root, path)
+            if compare_staged_index
+            else git_blob_bytes(root, f"HEAD:{path}")
+        )
+        if source_content is None:
+            result.errors.append(
+                f"clean-index source commit blob is missing: {path}"
+            )
+            continue
+        if candidate_content is None:
+            candidate_label = "staged index" if compare_staged_index else "HEAD"
+            result.errors.append(
+                f"clean-index {candidate_label} blob is missing: {path}"
+            )
+            continue
+        digest = sha256_bytes(source_content)
+        if digest not in clean:
+            result.errors.append(
+                f"clean-index receipt is not bound to source blob: {path}"
+            )
+        if source_content != candidate_content:
+            candidate_label = "staged index" if compare_staged_index else "HEAD"
+            result.errors.append(
+                f"clean-index source blob drifted from {candidate_label}: {path}"
+            )
 
 
 def validate(
@@ -1228,10 +1404,13 @@ def validate(
     }
     if require_reviews:
         required.add(RUN_ROOT / "review-resolution.md")
+        fable_paths = {FABLE_PROMPT, FABLE_FINAL, FABLE_META, FABLE_RESOLUTION}
+        if any((root / relative).is_file() for relative in fable_paths):
+            required.update(fable_paths)
+        else:
+            required.update(ORCHESTRATOR_REVIEW_ARTIFACTS)
     if check_index or postcommit:
         required.add(STAGED_INVENTORY)
-    if check_index:
-        required.add(STAGED_REPORT)
     for relative in sorted(required, key=lambda item: item.as_posix()):
         path = root / relative
         if not path.is_file() or path.stat().st_size == 0:
@@ -1260,7 +1439,7 @@ def validate(
     check_captures(root, scene_hash, result)
     check_build(root, scene_hash, generated_hash, result)
     check_traversal(root, result)
-    check_clean_index(root, static_signature, result)
+    check_clean_index(root, static_signature, result, check_index)
 
     rules = (root / DOC_ROOT / "RULES.md").read_text(encoding="utf-8")
     for token in (BASELINE_COMMIT, BASELINE_SCENE_SHA256, V12_STATIC_SIGNATURE):
@@ -1339,6 +1518,12 @@ def main() -> int:
         args.require_reviews, args.check_staged, args.postcommit
     )
     result = validate(root, require_reviews, args.check_staged, args.postcommit)
+    if args.check_staged:
+        inventory_content = index_bytes(root, STAGED_INVENTORY.as_posix())
+        if inventory_content is not None:
+            result.facts["staged_inventory_sha256"] = sha256_bytes(
+                inventory_content
+            )
     if args.check_staged and output.resolve() != (root / STAGED_REPORT).resolve():
         result.errors.append(
             f"staged validation output must be {STAGED_REPORT.as_posix()}"
@@ -1348,10 +1533,21 @@ def main() -> int:
             f"post-commit validation output must be {POSTCOMMIT_REPORT.as_posix()}"
         )
     write_report(output, result, require_reviews, args.check_staged, args.postcommit)
-    print(f"KHUFU_V13_RELEASE_VERDICT: {'passed' if result.passed else 'failed'}")
+    report_converged = (
+        not args.check_staged
+        or not result.passed
+        or staged_report_matches_output(root, output)
+    )
+    final_passed = result.passed and report_converged
+    print(f"KHUFU_V13_RELEASE_VERDICT: {'passed' if final_passed else 'failed'}")
     for error in result.errors:
         print(f"ERROR: {error}")
-    return 0 if result.passed else 1
+    if result.passed and not report_converged:
+        print(
+            "ERROR: staged validation report differs from the newly generated "
+            "passing report; stage it and rerun"
+        )
+    return 0 if final_passed else 1
 
 
 if __name__ == "__main__":

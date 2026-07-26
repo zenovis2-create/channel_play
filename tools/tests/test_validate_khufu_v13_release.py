@@ -61,6 +61,22 @@ def hash_lines(root: Path, paths: tuple[Path, ...]) -> str:
     )
 
 
+def git_blob_hash_lines(
+    root: Path, revision: str, paths: tuple[Path, ...]
+) -> str:
+    lines: list[str] = []
+    for path in paths:
+        content = release.git_blob_bytes(
+            root, f"{revision}:{path.as_posix()}"
+        )
+        assert content is not None, path
+        lines.append(
+            f"- {path.as_posix()} Git blob SHA256: "
+            f"`{release.sha256_bytes(content)}`"
+        )
+    return "\n".join(lines)
+
+
 def build_complete_fixture(
     root: Path, monkeypatch: pytest.MonkeyPatch
 ) -> dict[str, str]:
@@ -68,7 +84,15 @@ def build_complete_fixture(
     git(root, "config", "user.name", "V13 Test")
     git(root, "config", "user.email", "v13@example.invalid")
     write(root, Path("README.md"), "baseline\n")
-    git(root, "add", "README.md")
+    for relative in release.LEGACY_SOURCES:
+        write(root, relative, f"// legacy dependency {relative.name}\n")
+    git(
+        root,
+        "add",
+        "--",
+        "README.md",
+        *(path.as_posix() for path in release.LEGACY_SOURCES),
+    )
     git(root, "commit", "-q", "-m", "baseline")
     baseline = git(root, "rev-parse", "HEAD")
     monkeypatch.setattr(release, "BASELINE_COMMIT", baseline)
@@ -365,12 +389,26 @@ def build_complete_fixture(
         release.RUN_ROOT / "python-tests.md",
         "KHUFU_V13_PYTHON_TESTS: passed\n",
     )
-    clean_hashes = hash_lines(root, release.CLEAN_BOUND_SOURCES)
+    git(
+        root,
+        "add",
+        "--",
+        *(path.as_posix() for path in release.CLEAN_BOUND_SOURCES),
+    )
+    git(root, "commit", "-q", "-m", "candidate sources")
+    clean_commit = git(root, "rev-parse", "HEAD")
+    clean_tree = git(root, "rev-parse", f"{clean_commit}^{{tree}}")
+    clean_hashes = git_blob_hash_lines(
+        root, clean_commit, release.CLEAN_BOUND_SOURCES
+    )
     write(
         root,
         release.RUN_ROOT / "clean-index-import.md",
         "# Clean index\n"
+        f"- Source commit: `{clean_commit}`\n"
+        f"- Candidate tree: `{clean_tree}`\n"
         f"- Static signature: `{static_signature}`\n"
+        "- Unity exit code: `0`\n"
         "- Compiler errors: `0`\n"
         + clean_hashes
         + "\n\nKHUFU_V13_CLEAN_INDEX_IMPORT: passed\n",
@@ -537,6 +575,23 @@ def test_baseline_ancestry_is_fail_closed(
     assert any("baseline commit is unavailable" in error for error in result.errors)
 
 
+def test_clean_gate_rejects_staged_source_after_clean_import(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    facts = build_complete_fixture(tmp_path, monkeypatch)
+    path = tmp_path / release.BUILDER
+    path.write_text(
+        path.read_text(encoding="utf-8") + "// post-clean drift\n",
+        encoding="utf-8",
+    )
+    git(tmp_path, "add", release.BUILDER.as_posix())
+    result = ValidationResult()
+    release.check_clean_index(
+        tmp_path, facts["static"], result, compare_staged_index=True
+    )
+    assert any("staged index" in error for error in result.errors)
+
+
 def test_pass_token_requires_one_exact_complete_line() -> None:
     passing = ValidationResult()
     release.require_exact_token(
@@ -579,7 +634,8 @@ def configure_gate_repo(root: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     git(root, "config", "user.name", "V13 Gate Test")
     git(root, "config", "user.email", "gate@example.invalid")
     write(root, Path("README.md"), "baseline\n")
-    git(root, "add", "README.md")
+    write(root, Path("scope/stable.md"), "stable\n")
+    git(root, "add", "README.md", "scope/stable.md")
     git(root, "commit", "-q", "-m", "baseline")
     monkeypatch.setattr(release, "ALLOWLIST", Path("allowlist.txt"))
     monkeypatch.setattr(release, "STAGED_INVENTORY", Path("staged-inventory.json"))
@@ -592,6 +648,7 @@ def configure_gate_repo(root: Path, monkeypatch: pytest.MonkeyPatch) -> None:
         "\n".join(
             (
                 "scope/source.cs",
+                "scope/stable.md",
                 "staged-inventory.json",
                 "staged-index-validation.md",
                 "post-commit-validation.md",
@@ -603,9 +660,13 @@ def configure_gate_repo(root: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     git(root, "add", "scope/source.cs")
     release.write_staged_inventory(root)
     git(root, "add", "staged-inventory.json")
+    inventory_content = release.index_bytes(root, "staged-inventory.json")
+    assert inventory_content is not None
+    inventory_hash = release.sha256_bytes(inventory_content)
     write(
         root,
         Path("staged-index-validation.md"),
+        f"- staged_inventory_sha256: `{inventory_hash}`\n\n"
         "KHUFU_V13_RELEASE_VERDICT: passed\n",
     )
     git(root, "add", "staged-index-validation.md")
@@ -649,6 +710,48 @@ def test_postcommit_requires_exact_inventory_and_clean_convergence(
     assert any("worktree drift" in error for error in failing.errors)
 
 
+def test_staged_and_postcommit_helpers_are_hash_bound(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    configure_gate_repo(tmp_path, monkeypatch)
+    inventory = tmp_path / Path("staged-inventory.json")
+    payload = json.loads(inventory.read_text(encoding="utf-8"))
+    payload["base_commit"] = "0" * 40
+    inventory.write_text(json.dumps(payload), encoding="utf-8")
+    git(tmp_path, "add", "staged-inventory.json")
+    staged = ValidationResult()
+    release.check_staged(tmp_path, staged)
+    assert not release.staged_report_matches_output(
+        tmp_path, tmp_path / Path("staged-index-validation.md")
+    )
+
+    post_root = tmp_path / "post"
+    post_root.mkdir()
+    configure_gate_repo(post_root, monkeypatch)
+    git(post_root, "commit", "-q", "-m", "release")
+    report = post_root / Path("staged-index-validation.md")
+    report.write_text(
+        report.read_text(encoding="utf-8").replace("passed", "failed"),
+        encoding="utf-8",
+    )
+    git(post_root, "add", "staged-index-validation.md")
+    git(post_root, "commit", "-q", "-m", "tamper helper")
+    post = ValidationResult()
+    release.check_postcommit(post_root, post)
+    assert any("pass token" in error for error in post.errors)
+
+
+def test_postcommit_rejects_allowlisted_non_inventory_drift(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    configure_gate_repo(tmp_path, monkeypatch)
+    git(tmp_path, "commit", "-q", "-m", "release")
+    write(tmp_path, Path("scope/stable.md"), "drifted\n")
+    result = ValidationResult()
+    release.check_postcommit(tmp_path, result)
+    assert any("scope/stable.md" in error for error in result.errors)
+
+
 def test_staged_inventory_schema_and_records_are_fail_closed(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -687,9 +790,37 @@ def test_fable_ship_must_be_the_only_final_verdict() -> None:
 
 
 def test_orchestrator_review_fallback_is_hash_bound(tmp_path: Path) -> None:
-    for relative in release.ORCHESTRATOR_REVIEW_SOURCES:
+    reviewed_paths = {
+        *release.ORCHESTRATOR_REVIEW_SOURCES,
+        *(
+            path
+            for scope in release.ORCHESTRATOR_REVIEW_SCOPES.values()
+            for path in scope
+        ),
+    }
+    for relative in reviewed_paths:
         write(tmp_path, relative, f"reviewed {relative.as_posix()}\n")
-    hashes = hash_lines(tmp_path, release.ORCHESTRATOR_REVIEW_SOURCES)
+    for relative, task in release.ORCHESTRATOR_REVIEW_ARTIFACTS.items():
+        reviewed_hashes = hash_lines(
+            tmp_path, release.ORCHESTRATOR_REVIEW_SCOPES[relative]
+        )
+        write(
+            tmp_path,
+            relative,
+            "# Independent review\n"
+            f"- Review task: `{task}`\n"
+            "- P0 / P1: `0 / 0`\n"
+            + reviewed_hashes
+            + "\n\n"
+            "ORCHESTRATOR_REVIEW_VERDICT: passed\n",
+        )
+    hashes = hash_lines(
+        tmp_path,
+        (
+            *release.ORCHESTRATOR_REVIEW_SOURCES,
+            *release.ORCHESTRATOR_REVIEW_ARTIFACTS,
+        ),
+    )
     write(
         tmp_path,
         release.RUN_ROOT / "review-resolution.md",
@@ -708,3 +839,14 @@ def test_orchestrator_review_fallback_is_hash_bound(tmp_path: Path) -> None:
     failing = ValidationResult()
     release.check_review_evidence(tmp_path, failing)
     assert any("not bound" in error for error in failing.errors)
+
+    artifact = tmp_path / next(iter(release.ORCHESTRATOR_REVIEW_ARTIFACTS))
+    artifact.write_text(
+        artifact.read_text(encoding="utf-8").replace(
+            "P0 / P1: `0 / 0`", "P0 / P1: `0 / 1`"
+        ),
+        encoding="utf-8",
+    )
+    rejected = ValidationResult()
+    release.check_review_evidence(tmp_path, rejected)
+    assert any("P0 / P1" in error for error in rejected.errors)

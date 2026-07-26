@@ -432,6 +432,12 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
                     "/", StringComparison.Ordinal))
                 result.Failures.Add(
                     "V13 material ownership drifted: " + bucket);
+            if (bucket ==
+                    ChannelPlayKhufuV13SubterraneanThresholdMeshPipeline
+                        .InlayBucket &&
+                !renderers[0].sharedMaterial.IsKeywordEnabled("_EMISSION"))
+                result.Failures.Add(
+                    "V13 route-inlay emission keyword is disabled.");
         }
     }
 

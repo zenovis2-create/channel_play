@@ -657,6 +657,21 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdBuilder
         return result;
     }
 
+    public static void RestoreCanonicalMaterialKeywords()
+    {
+        var path = MaterialRoot + "/V13_Route_Inlay.mat";
+        var routeInlay = AssetDatabase.LoadAssetAtPath<Material>(path);
+        if (routeInlay == null)
+            throw new InvalidOperationException(
+                "V13 route-inlay material is missing: " + path);
+        routeInlay.EnableKeyword("_EMISSION");
+        EditorUtility.SetDirty(routeInlay);
+        AssetDatabase.SaveAssetIfDirty(routeInlay);
+        if (!routeInlay.IsKeywordEnabled("_EMISSION"))
+            throw new InvalidOperationException(
+                "V13 route-inlay emission keyword restore failed.");
+    }
+
     private static Material CreateOrUpdateMaterial(string assetName,
         string sourceName, Color color, float metallic, float smoothness,
         Color? emission = null)

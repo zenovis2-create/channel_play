@@ -20,6 +20,23 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdScreenshotExporter
     [MenuItem("Channel Play/Khufu V13/Export Subterranean Threshold Screenshots")]
     public static void ExportScreenshots()
     {
+        ChannelPlayKhufuV13SubterraneanThresholdBuilder
+            .RestoreCanonicalMaterialKeywords();
+        var protectedAssets = ProtectedAssetSnapshot.Capture();
+        try
+        {
+            ExportScreenshotsCore();
+        }
+        finally
+        {
+            protectedAssets.Restore();
+            ChannelPlayKhufuV13SubterraneanThresholdBuilder
+                .RestoreCanonicalMaterialKeywords();
+        }
+    }
+
+    private static void ExportScreenshotsCore()
+    {
         ChannelPlayKhufuV13SubterraneanThresholdValidator.ValidateMenu();
         EditorSceneManager.OpenScene(
             ChannelPlayKhufuV13SubterraneanThresholdBuilder.ScenePath,
@@ -373,6 +390,59 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdScreenshotExporter
         V13Only,
         Transition,
         Integration
+    }
+
+    private sealed class ProtectedAssetSnapshot
+    {
+        private static readonly string[] Roots =
+        {
+            ChannelPlayKhufuV13SubterraneanThresholdMeshPipeline.GeneratedRoot,
+            ChannelPlayKhufuV13SubterraneanThresholdBuilder.MaterialRoot
+        };
+
+        private readonly Dictionary<string, byte[]> files;
+
+        private ProtectedAssetSnapshot(Dictionary<string, byte[]> files)
+        {
+            this.files = files;
+        }
+
+        public static ProtectedAssetSnapshot Capture()
+        {
+            return new ProtectedAssetSnapshot(ProtectedPaths().ToDictionary(
+                path => path, File.ReadAllBytes, StringComparer.Ordinal));
+        }
+
+        public void Restore()
+        {
+            foreach (var path in ProtectedPaths()
+                         .Where(path => !files.ContainsKey(path)))
+                File.Delete(path);
+            foreach (var item in files)
+            {
+                var parent = Path.GetDirectoryName(item.Key);
+                if (!string.IsNullOrEmpty(parent))
+                    Directory.CreateDirectory(parent);
+                File.WriteAllBytes(item.Key, item.Value);
+            }
+            AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+            foreach (var item in files)
+                if (!File.Exists(item.Key) ||
+                    !File.ReadAllBytes(item.Key).SequenceEqual(item.Value))
+                    throw new InvalidOperationException(
+                        "V13 capture asset snapshot restore failed: " +
+                        item.Key);
+        }
+
+        private static IEnumerable<string> ProtectedPaths()
+        {
+            return Roots.Where(Directory.Exists)
+                .SelectMany(root =>
+                    Directory.GetFiles(root, "*", SearchOption.AllDirectories))
+                .Concat(Roots.Select(root => root + ".meta")
+                    .Where(File.Exists))
+                .OrderBy(path => path, StringComparer.Ordinal);
+        }
     }
 
     private sealed class VisibilityScope
