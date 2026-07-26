@@ -1,0 +1,47 @@
+{
+  "schema": "khufu-v12-queen-circuit-segments-v1",
+  "segments": [
+    {
+      "id": "Queen_Threshold_Transition",
+      "truth": "FACT_HYBRID",
+      "factual_shape": true,
+      "gameplay_scale": true,
+      "note": "Preserves V10 posts/lintel and opens only the declared ownership gate."
+    },
+    {
+      "id": "Horizontal_Passage",
+      "truth": "FACT_HYBRID",
+      "factual_shape": true,
+      "gameplay_scale": true,
+      "note": "Horizontal relationship is factual; standing-player clearance is adapted."
+    },
+    {
+      "id": "Queens_Chamber",
+      "truth": "FACT_HYBRID",
+      "factual_shape": true,
+      "gameplay_scale": true,
+      "note": "Limestone room and gabled form are factual; dimensions are compressed."
+    },
+    {
+      "id": "East_Wall_Niche",
+      "truth": "FACT_HYBRID",
+      "factual_shape": true,
+      "gameplay_scale": true,
+      "note": "East-wall niche is factual; presentation depth is adapted."
+    },
+    {
+      "id": "Narrow_Mouth_Boundaries",
+      "truth": "FACT",
+      "factual_shape": true,
+      "gameplay_scale": false,
+      "note": "Sealed recesses only; no route or purpose claim."
+    },
+    {
+      "id": "HYBRID_Queen_Route_Inlay",
+      "truth": "HYBRID",
+      "factual_shape": false,
+      "gameplay_scale": true,
+      "note": "Navigation and capture device, not archaeology."
+    }
+  ]
+}

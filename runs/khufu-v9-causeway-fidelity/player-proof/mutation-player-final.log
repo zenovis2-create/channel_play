@@ -1,0 +1,96 @@
+Mono path[0] = 'D:/AI2_WIN/channel_play/Builds/KhufuV9/ChannelPlayKhufuV9_Data/Managed'
+Mono config path = 'D:/AI2_WIN/channel_play/Builds/KhufuV9/MonoBleedingEdge/etc'
+Found 4 interfaces on host : 0) [REDACTED_IP] 1) [REDACTED_IP] 2) [REDACTED_IP] 3) [REDACTED_IP]
+Player connection [31032]  Target information:
+
+Player connection [31032]  * "[IP] [REDACTED_IP] [Port] 55000 [Flags] 2 [Guid] 1900165032 [EditorId] 312532390 [Version] 1048832 [Id] WindowsPlayer(2,zenovis) [Debug] 0 [PackageName] WindowsPlayer [ProjectName] channel_play" 
+
+Player connection [31032]  * "[IP] [REDACTED_IP] [Port] 55000 [Flags] 2 [Guid] 1900165032 [EditorId] 312532390 [Version] 1048832 [Id] WindowsPlayer(2,zenovis) [Debug] 0 [PackageName] WindowsPlayer [ProjectName] channel_play" 
+
+Player connection [31032]  * "[IP] [REDACTED_IP] [Port] 55000 [Flags] 2 [Guid] 1900165032 [EditorId] 312532390 [Version] 1048832 [Id] WindowsPlayer(2,zenovis) [Debug] 0 [PackageName] WindowsPlayer [ProjectName] channel_play" 
+
+Player connection [31032]  * "[IP] [REDACTED_IP] [Port] 55000 [Flags] 2 [Guid] 1900165032 [EditorId] 312532390 [Version] 1048832 [Id] WindowsPlayer(2,zenovis) [Debug] 0 [PackageName] WindowsPlayer [ProjectName] channel_play" 
+
+Player connection [31032] Started UDP target info broadcast (1) on [[REDACTED_IP]:54997].
+
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+Initialize engine version: 6000.0.76f1 (6f7f9e1c9e8a)
+[Subsystems] Discovering subsystems at path D:/AI2_WIN/channel_play/Builds/KhufuV9/ChannelPlayKhufuV9_Data/UnitySubsystems
+Forcing GfxDevice: Direct3D 11
+kGfxThreadingModeSplitJobs is not supported on Direct3D 11. Reverting to kGfxThreadingModeClientWorkerJobs instead.
+GfxDevice: creating device client; kGfxThreadingModeClientWorkerJobs
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 5090 Laptop GPU (ID=0x2c58)
+    Vendor:   NVIDIA
+    VRAM:     24137 MB
+    Driver:   32.0.15.9611
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.120 seconds
+- Finished resetting the current domain, in  0.002 seconds
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+<b>[App UI]</b> Unable to find an AppUISettings instance, creating a default one...
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogWarning (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:213)
+Unity.AppUI.Core.AppUI:InitializeInPlayer () (at ./Library/PackageCache/com.unity.dt.app-ui@3bbd9e4c5c92/Runtime/Core/AppUI.cs:282)
+Unity.AppUI.Core.AppUI:.cctor () (at ./Library/PackageCache/com.unity.dt.app-ui@3bbd9e4c5c92/Runtime/Core/AppUI.cs:68)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 213)
+
+<RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
+<RI> Input initialized.
+UnloadTime: 0.608900 ms
+CHANNEL_PLAY_KHUFU_V9_CAUSEWAY_PROOF result=started label=v9-final mode=proxy-mutation-negative-control
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+ChannelPlay.Gameplay.KhufuV9CausewayProofProbe:Start () (at D:/AI2_WIN/channel_play/Assets/_Project/Scripts/Gameplay/KhufuV9CausewayProofProbe.cs:83)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+CHANNEL_PLAY_KHUFU_V7_CAMERA_PROFILE result=applied offset=(3.00, 7.00, -12.00) look_ahead=(-7.00, 0.00, 0.00)
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+ChannelPlay.Player.KhufuV7EntryCameraProfile:Update () (at D:/AI2_WIN/channel_play/Assets/_Project/Scripts/Player/KhufuV7EntryCameraProfile.cs:22)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+CHANNEL_PLAY_KHUFU_V9_CAUSEWAY_PROOF result=passed mode=proxy-mutation-negative-control blocked=True hit=V9_PROXY_Valley_To_Causeway_East_Parapet max_error=1.078
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at C:/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at C:/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at C:/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:123)
+ChannelPlay.Gameplay.KhufuV9CausewayProofProbe:FinishAndQuit () (at D:/AI2_WIN/channel_play/Assets/_Project/Scripts/Gameplay/KhufuV9CausewayProofProbe.cs:252)
+ChannelPlay.Gameplay.KhufuV9CausewayProofProbe/<RunProof>d__38:MoveNext () (at D:/AI2_WIN/channel_play/Assets/_Project/Scripts/Gameplay/KhufuV9CausewayProofProbe.cs:185)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at C:/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: C:/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 123)
+
+[Physics::Module] Cleanup current backned.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+PlayerConnection::Cleanup##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1783838507919,"processId":13076,"allocatedMemory":103492,"memoryLabels":[{"Default":144},{"Thread":11008},{"Manager":19147},{"VFX":-104},{"GfxDevice":72},{"GfxThread":33024},{"Serialization":520},{"JobScheduler":32768},{"String":361},{"HashMap":3584},{"PoolAlloc":816},{"VR":1792},{"Video":144},{"Subsystems":96},{"CoreBusinessMetrics":120}]}

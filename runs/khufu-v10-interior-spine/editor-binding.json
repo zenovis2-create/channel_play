@@ -1,0 +1,841 @@
+{
+  "artifacts": [
+    {
+      "bytes": 40168,
+      "path": "runs/khufu-v10-interior-spine/audit.json",
+      "sha256": "5d02475f8813f70d6015f095514b8df99db44551b67aa38993f7575990c46a6d"
+    },
+    {
+      "bytes": 10060,
+      "path": "runs/khufu-v10-interior-spine/audit.md",
+      "sha256": "a721cddc7aebbaf76c43de45c3b330d3edea849f87c9f2248595b55d85344615"
+    },
+    {
+      "bytes": 36766,
+      "path": "runs/khufu-v10-interior-spine/audit-unity.log",
+      "sha256": "d50ad46a4e888e01cb32cf2d98cd9f215b9b124ee686e4face08f19483a51169"
+    },
+    {
+      "bytes": 256,
+      "path": "runs/khufu-v10-interior-spine/postwrite-audit.md",
+      "sha256": "82fe7432a58fc07521bf9da93f2a43c80752324a49883d0e661d04bb2102e5bb"
+    },
+    {
+      "bytes": 820,
+      "path": "runs/khufu-v10-interior-spine/validation.md",
+      "sha256": "49895ed78148053b725a0d7225685fe1d8d431d89c65e953b625f3e369b672ce"
+    },
+    {
+      "bytes": 480,
+      "path": "runs/khufu-v10-interior-spine/idempotence.md",
+      "sha256": "0c0739f737d80360c0e4e6f920782603aac95416405c453a6c259d6b396c0d2a"
+    },
+    {
+      "bytes": 266,
+      "path": "runs/khufu-v10-interior-spine/pair-mutation.md",
+      "sha256": "5c7148dfb35b514dc114f548bc5f97b2e336cd28cd511dced501784938990107"
+    },
+    {
+      "bytes": 203,
+      "path": "runs/khufu-v10-interior-spine/transition-mutation.md",
+      "sha256": "b1b5672956a1a0978681ca26c5ad85106c84a2fbb98017ef9993ef79fc0a31aa"
+    },
+    {
+      "bytes": 266,
+      "path": "runs/khufu-v10-interior-spine/metric-mutation.md",
+      "sha256": "a0a0c2b0edbefa22cef7901cc07f8f5051057263b7068f0a4e9158fa72dc207d"
+    },
+    {
+      "bytes": 2592,
+      "path": "runs/khufu-v10-interior-spine/transition-amendment.md",
+      "sha256": "7119437b24e08fdabab832f764504b39ccf494154742f5d247a319d8e75607d9"
+    },
+    {
+      "bytes": 51059,
+      "path": "runs/khufu-v10-interior-spine/static-all-gates-hit-classification.log",
+      "sha256": "4f298f034856550b83da0a8343d936c8a037da057e06e29c3af7b484f3df0ee9"
+    },
+    {
+      "bytes": 33711,
+      "path": "runs/khufu-v10-interior-spine/capture-export-geometry-amendment.log",
+      "sha256": "d544692643ce85c1df032e0b97dde4b3525053ba1cda1bb057b9f665be05ad40"
+    },
+    {
+      "bytes": 29416,
+      "path": "runs/khufu-v10-interior-spine/legacy-v4-final.log",
+      "sha256": "dda5a291a555e391bb56b662567dc99314af7f287b40b627dcec07dfb01c159b"
+    },
+    {
+      "bytes": 29345,
+      "path": "runs/khufu-v10-interior-spine/legacy-v5-gate4-final.log",
+      "sha256": "ed907a82819cfdeb811d03672aaba854c21408ad548bc92ca7de51f12eb3b109"
+    },
+    {
+      "bytes": 43306,
+      "path": "runs/khufu-v10-interior-spine/legacy-v5-playmode-final.log",
+      "sha256": "8c50421e466df33c7c340d58fbf49c2b36cb1bbada3282daf61a91407a0f3da6"
+    },
+    {
+      "bytes": 445,
+      "path": "runs/khufu-v10-interior-spine/legacy-regression.md",
+      "sha256": "d250b2a7a4361c0063cf991a27e82973eb5525e04e15f4ee41acd1e2a1d25741"
+    },
+    {
+      "bytes": 265,
+      "path": "runs/khufu-v10-interior-spine/python-tests.md",
+      "sha256": "87ed40aeebcae3508154b1068d2cbce76079e63bc0c2becdf378ee3761640866"
+    },
+    {
+      "bytes": 1044,
+      "path": "runs/khufu-v10-interior-spine/manual-qa.md",
+      "sha256": "56a3275101e788c1e9d87acd80e695b962fb8168996230f9da8f386508ce7086"
+    },
+    {
+      "bytes": 1956,
+      "path": "runs/khufu-v10-interior-spine/debugging-audit.md",
+      "sha256": "61063ffc037e8f51dcb323ef69560bf61d9248424ef1660265c2b10b2c9a6e6a"
+    },
+    {
+      "bytes": 89967,
+      "path": "runs/khufu-v10-interior-spine/clean-index-import.log",
+      "sha256": "d1e860aba43dd6314b17f3fa626b4aa3c81de134ec1874d88b7e70b4b1b5e959"
+    },
+    {
+      "bytes": 1775,
+      "path": "runs/khufu-v10-interior-spine/clean-index-import.md",
+      "sha256": "bf4457bda52d595f02029ad5ea1e3da28387b2e2bce4ec090de756f7e484f25e"
+    },
+    {
+      "bytes": 3388,
+      "path": "runs/khufu-v10-interior-spine/captures/manifest.md",
+      "sha256": "a71bc7516ebfbb026040fe46d8e68eb6256a60cd15160dc6d4985c9353c96e27"
+    },
+    {
+      "bytes": 1624851,
+      "path": "runs/khufu-v10-interior-spine/captures/north_entrance_approach.png",
+      "sha256": "6b5136adfbef70932a212ce8a1fc7058fa0b3736a572476faef3a7c06f06fd35"
+    },
+    {
+      "bytes": 1853589,
+      "path": "runs/khufu-v10-interior-spine/captures/ascending_plug_girdle.png",
+      "sha256": "aa13a55fa4f13efbba88133199d2b991a6895bb52cfdac1572d80570aa10116c"
+    },
+    {
+      "bytes": 1790666,
+      "path": "runs/khufu-v10-interior-spine/captures/gallery_foot_queen_boundary.png",
+      "sha256": "fd4f65d3dd8b7666c068c7a7216772e94ccc385e35094d6b688d6c0c0d93fe16"
+    },
+    {
+      "bytes": 1785031,
+      "path": "runs/khufu-v10-interior-spine/captures/grand_gallery_long_axis.png",
+      "sha256": "8ebe15d35372966766215a6c0eed73caaacd018a32da4650f842c574cba6d093"
+    },
+    {
+      "bytes": 1982968,
+      "path": "runs/khufu-v10-interior-spine/captures/gallery_corbel_slot_detail.png",
+      "sha256": "edd1f1fafbc0d484bacc41520c7779f0037442ea74cd70ac02a94ce4382cdcad"
+    },
+    {
+      "bytes": 1449802,
+      "path": "runs/khufu-v10-interior-spine/captures/great_step_boundary.png",
+      "sha256": "7cc7f8b7c90410699c6624b804cc45931b08527488b8704ac6a4261e146deb45"
+    },
+    {
+      "bytes": 1472224,
+      "path": "runs/khufu-v10-interior-spine/captures/hybrid_service_return.png",
+      "sha256": "627896ad485f0e9567589d2059750349ca9d56d51c96d3acbbaf0d529c651cc9"
+    },
+    {
+      "bytes": 1045045,
+      "path": "runs/khufu-v10-interior-spine/captures/pyramid_cutaway_integration.png",
+      "sha256": "b6b3072599569a72ea182d69d1897e69a3fc5fc1753eb9f4e6d0aa8c58845458"
+    },
+    {
+      "bytes": 1140211,
+      "path": "runs/khufu-v10-interior-spine/captures/mutation_superseded_overlap.png",
+      "sha256": "72f5505ae82af502333e39d20ec36656e94c471af48adb9a7594d90789708685"
+    }
+  ],
+  "built_level": {
+    "bytes": 560172,
+    "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/level0",
+    "sha256": "c186f0fa9b87a66b4e683c9ba3e7e6f6f97c52d13852b34dc22ae3bf2ed175ef"
+  },
+  "generated_utc": "2026-07-12T22:54:54.158169+00:00",
+  "managed_assembly": {
+    "bytes": 156160,
+    "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Assembly-CSharp.dll",
+    "sha256": "2fe263fa573edd5eec9022b1238588df92a6e48f6a86991c0af7228fa46af468"
+  },
+  "player": {
+    "bytes": 671744,
+    "path": "Builds/KhufuV10/ChannelPlayKhufuV10.exe",
+    "sha256": "ab5809518c33adf6dad28c9ffe467d2f78f0c00bf78991fef991a7dd04a8fc48"
+  },
+  "release_inputs": [
+    {
+      "bytes": 1314,
+      "path": ".gitattributes",
+      "sha256": "c19bca1e3522cd22270f96ccc19f8d9fb26ac1dc732c1b24ceee29ccbca0cc09"
+    },
+    {
+      "bytes": 19239,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorAudit.cs",
+      "sha256": "8653ccbcd729c53aa0c9702fa4434e047d1b674b67086962995bc39e38a328c9"
+    },
+    {
+      "bytes": 26207,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorBuilder.cs",
+      "sha256": "187796ae0099ab8029ab0bb0127dc65460028747b4e7101350aaca174d6c6172"
+    },
+    {
+      "bytes": 26229,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorMeshPipeline.cs",
+      "sha256": "ad9f8818ad1c9ff82798b60eb6bf409c7c40d352ea89075c5d666e4c35b8c78a"
+    },
+    {
+      "bytes": 19436,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorScreenshotExporter.cs",
+      "sha256": "3a4ec39356ec83d2f248be140be104c5f8e4a3c461db0c641d0c41d03c2b3bda"
+    },
+    {
+      "bytes": 49994,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs",
+      "sha256": "b7a6d8603390afc1d95369cf5f287b8eaeadbc831de2d05b929ef50c3a209a14"
+    },
+    {
+      "bytes": 7610,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10WindowsBuild.cs",
+      "sha256": "5f38838da8d4047c325fb982e219dafc1865f559306cecc1f8b0ba70985fc328"
+    },
+    {
+      "bytes": 1802,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuControllerHitRecorder.cs",
+      "sha256": "df8480c601c3aeae53b4b3a53351c81ec2aea263afd9e1123e93cdd5edf482f4"
+    },
+    {
+      "bytes": 2755,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10RouteContract.cs",
+      "sha256": "971880c37d14f98cec93420b4aa792ec86dbafe0f05e8c34d05390948a2a568c"
+    },
+    {
+      "bytes": 1150,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10SegmentTag.cs",
+      "sha256": "69f6cbb6a1c5446097bc9410cf1fe80fcef4b3d51363c44a76b0ec7760452326"
+    },
+    {
+      "bytes": 35553,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10TraversalProofProbe.cs",
+      "sha256": "18c3d999d319831ab6dd1cd3235676386c293a515d6f10a536ed425e45e29bff"
+    },
+    {
+      "bytes": 9494,
+      "path": "tools/validate_khufu_v10_prewrite.py",
+      "sha256": "8fe4c215264fdd32d7f233410cf459c0ded510f4c25712ea80c4693084c3f531"
+    },
+    {
+      "bytes": 33483,
+      "path": "tools/validate_khufu_v10_release.py",
+      "sha256": "8abaa4b9929b40d27e9d10d25783f2fdb5bfa5b2af2fecc23b0829f0e01527b5"
+    },
+    {
+      "bytes": 1956,
+      "path": "tools/tests/test_validate_khufu_v10_prewrite.py",
+      "sha256": "ce7a77c117a6f58bf74135509646d00e12f34a30dbe7a6e6076e69698b799e88"
+    },
+    {
+      "bytes": 9587,
+      "path": "tools/tests/test_validate_khufu_v10_release.py",
+      "sha256": "022ebd9def713653b42774186ce1c0e06cfd55a111cf7feee9faa4b6254557c8"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorBuilder.cs.meta",
+      "sha256": "9fc58ef1adb406884a1a8a8aac2a67563f02e8698df4c21e9139acccada8de7f"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorMeshPipeline.cs.meta",
+      "sha256": "c8dff890376e1abe9daf887cc1673dfc1576e23e1bb38eb0a309140ddcb8838a"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorScreenshotExporter.cs.meta",
+      "sha256": "2ba0afe09923bae83661352cc01ce277f106c4979de241097de75e0ab562aad7"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs.meta",
+      "sha256": "a8b62cc4bb38633d1de20118c5c53ad619e86b386903799c9ea70dcc34a278af"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10WindowsBuild.cs.meta",
+      "sha256": "c0a68d1613916e4464103a9184cfb9544109469e88636bd3bfbf7348c96a0d63"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10RouteContract.cs.meta",
+      "sha256": "7fa1e12d602251e81bef8b4b310e66dbf65e7f0376815bf3f08501867c19b186"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10SegmentTag.cs.meta",
+      "sha256": "54f3e92d1cf8d24705240dacf6c958276597307fc46756bf921ae4ff75aeea76"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10TraversalProofProbe.cs.meta",
+      "sha256": "e772fc2c6d3026f1a67fef5c9fb178076ddebed4c195f1085c1891d1d50673f7"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine.meta",
+      "sha256": "c92c75c660aba8981934f84302c805b6af79b2027bf9596a20a3938c026e0a9a"
+    },
+    {
+      "bytes": 43347,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Gallery_Detail.asset",
+      "sha256": "4570952aade906e6b8d53cdfe43448a72569ad7fa2100848470dac8e9d437143"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Gallery_Detail.asset.meta",
+      "sha256": "5b40b6d94c0d5030eb959c765669503e6e1d2c9c1993b5fab293d936108cf871"
+    },
+    {
+      "bytes": 65241,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Hybrid_Service_Return.asset",
+      "sha256": "0526e23ed9563d6e7e9a6c1b7541ae9f507c730d92de2ec14999d0bf0e67cadd"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Hybrid_Service_Return.asset.meta",
+      "sha256": "1b4c985f1561e780717434d8ac9c6c814125b5a544e31a0a5a7c7c6e6784de4d"
+    },
+    {
+      "bytes": 129083,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Limestone_Structure.asset",
+      "sha256": "0d8f1bd4344e3308e2bd6cb881359400796ba8bdd5a2d410665b591ff4d04cd1"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Limestone_Structure.asset.meta",
+      "sha256": "4123715868c6fc596cc57b74227a6ee74a6d458927c0348a31879027a51d2e2f"
+    },
+    {
+      "bytes": 19642,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Red_Granite_Boundary.asset",
+      "sha256": "e75e0101e120748489d756012eeb846588143de8f64552566dc9eb308c4e5916"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Red_Granite_Boundary.asset.meta",
+      "sha256": "492531fbb372dd5ec908a005f50e0b342805aba2abf6efd66147a2cd0fdc6161"
+    },
+    {
+      "bytes": 34218,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Route_Inlay.asset",
+      "sha256": "3ddd989976dd0089dec4caf5dcf91ef7fd609b1b5f3dbf5fc09613e27280ba3d"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Route_Inlay.asset.meta",
+      "sha256": "6b4d4fbbb618feb245139e1df8f408de9be71b9015d440e250eaab1e0ff6b986"
+    },
+    {
+      "bytes": 109015,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Shadow_Recess.asset",
+      "sha256": "bab17283c8337dc6b2d8c5af016507ba82bfd7734168e79b0484d5978e864049"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Shadow_Recess.asset.meta",
+      "sha256": "9ad196485cb1bc3997bff9dcb274258bc0beef40d753ef29d194b30d8415e3e7"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Materials/KhufuV10Interior.meta",
+      "sha256": "3d0eaf51f42e6341aabd30a7e7027ea7ab7fbed86f098063aa36c77d9d3dfa07"
+    },
+    {
+      "bytes": 2350,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Aged_Limestone.mat",
+      "sha256": "3d0e391aacb67e965cfec69fafbf347f65494a4b4ee8c26ee48b4b473fbb4065"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Aged_Limestone.mat.meta",
+      "sha256": "4a4766ef315ee56bb31931819858014e313cb970f85f93ba06969e9da890f2ac"
+    },
+    {
+      "bytes": 2347,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Deep_Shadow.mat",
+      "sha256": "65fe38b4228f2d9f286766c949bdfec562b6e5a18ed398092eb25a61bbbfa7b4"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Deep_Shadow.mat.meta",
+      "sha256": "bf8b812a4ba71d3ee3907613ce39c5b39018adbcf321cb4f542fdb513e1fea75"
+    },
+    {
+      "bytes": 2349,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Gallery_Detail.mat",
+      "sha256": "a19c999841f3c87dab9e824fcfa7d5ea5665ec8e7272fd31d5c1ed50cf0d39ad"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Gallery_Detail.mat.meta",
+      "sha256": "42d55f5c489d51c26a04676f2e3c9d4024f69c7542f4c266b3320d468107d3fc"
+    },
+    {
+      "bytes": 2349,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Hybrid_Service.mat",
+      "sha256": "286163a5e249e004e714abd3c246f5a7572010857d8905fa95adc9c758d5efd2"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Hybrid_Service.mat.meta",
+      "sha256": "28129f3e56aee65e43b0c619ff0d7300840b3445c1f2a40bb41fc7abca8a771f"
+    },
+    {
+      "bytes": 2355,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Red_Granite.mat",
+      "sha256": "94cdbe5fb3d29cf9b2de719ec51a049cee946e40c9d0ff8c2adea5bcbf21e4b9"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Red_Granite.mat.meta",
+      "sha256": "b1538429eba592ac307dc45ad4630f21f05ead25267438dace09f57cd570a69e"
+    },
+    {
+      "bytes": 2352,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Route_Amber.mat",
+      "sha256": "10db75657b73de7173b7e32891bbc7eb60100c0f32802347600a62854fac0f78"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Route_Amber.mat.meta",
+      "sha256": "79f9b1ceb7816856fb233b3d15a894af0ee56d9048763630eba3e2a132abcf03"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4.meta",
+      "sha256": "348424464d35cc28db5b8c012dafce9056aebacddb98b3f282bb395333ebb8dd"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes.meta",
+      "sha256": "3f70697a7f4b1346fe836e9f6bd75559c9242df8c54a1b169f28695bd8198114"
+    },
+    {
+      "bytes": 3563,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_East.asset",
+      "sha256": "31924c61d90279ba750afe537d0aec7c870770d3c43fe0cfbd670ecf227ae068"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_East.asset.meta",
+      "sha256": "af21fbf101d4d08356ffd287012060879e251564c76fb1a41f043c9e933b1068"
+    },
+    {
+      "bytes": 3744,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Left.asset",
+      "sha256": "302964a7e97a666a93608d8dcb59ab7d47b71eb9dc089fe727e737fceefadd90"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Left.asset.meta",
+      "sha256": "1ca2e5f1af168e2f143c1cf326bb176e922880b0991429730042c1c467014ea3"
+    },
+    {
+      "bytes": 3743,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Right.asset",
+      "sha256": "f57572ed0665c484093aa7b490015970f15f90bdb5d0b2c826592963c81e9697"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Right.asset.meta",
+      "sha256": "53de6aa3c9c54f18dead2d203de214d1a9cd855142152cd62795d51cbe6cd398"
+    },
+    {
+      "bytes": 3588,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Upper.asset",
+      "sha256": "657605908ca049a73a7783eba39a573dd9af77d4eb9afab9a5ab500d92141623"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Upper.asset.meta",
+      "sha256": "319734877d12a545a14785c76120f084fbd683f2e30e5e1879ab5c29c1c94cf3"
+    },
+    {
+      "bytes": 3564,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_South.asset",
+      "sha256": "5b29a9ca18711e9102ad8ad89f7537e8464eea59608057d6dea65b217dcc2adf"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_South.asset.meta",
+      "sha256": "fab776ab311681d3dce3aa7f1b131e818a0888a459dc33ab2d66c240574b3b8a"
+    },
+    {
+      "bytes": 3565,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_West.asset",
+      "sha256": "1bd4da3019b45d040ea811d5cb8954edf64c033868c11d357ca9fb456f1dbd16"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_West.asset.meta",
+      "sha256": "59b49119fd1b0c9aedc643005658765796521e09cbde986e9fc8a5fb2e2783e7"
+    },
+    {
+      "bytes": 3723,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Section_Poche_Mesh.asset",
+      "sha256": "d8817e07103aaae5eb3fcfb4b479fa6a26f906a77c749cc891889a3964c111db"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Section_Poche_Mesh.asset.meta",
+      "sha256": "6e9fc71eb31c6d66389df9dc879bc2ca8704fdf7d640a0b3fb65fa611f5a407a"
+    }
+  ],
+  "scene": {
+    "bytes": 2827578,
+    "path": "Assets/_Project/Scenes/School_MVP.unity",
+    "sha256": "d1778ecb2edfb7e83173a893ec82f5acb8959078ec68fc714a5f1a1320e83ad2"
+  },
+  "schema": "khufu-v10-editor-binding-v2",
+  "staged_scene": {
+    "bytes": 2827578,
+    "path": "Assets/_Project/Scenes/School_MVP.unity",
+    "sha256": "d1778ecb2edfb7e83173a893ec82f5acb8959078ec68fc714a5f1a1320e83ad2"
+  },
+  "verdict": "passed",
+  "working_release_inputs": [
+    {
+      "bytes": 1314,
+      "path": ".gitattributes",
+      "sha256": "c19bca1e3522cd22270f96ccc19f8d9fb26ac1dc732c1b24ceee29ccbca0cc09"
+    },
+    {
+      "bytes": 19239,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorAudit.cs",
+      "sha256": "8653ccbcd729c53aa0c9702fa4434e047d1b674b67086962995bc39e38a328c9"
+    },
+    {
+      "bytes": 26207,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorBuilder.cs",
+      "sha256": "187796ae0099ab8029ab0bb0127dc65460028747b4e7101350aaca174d6c6172"
+    },
+    {
+      "bytes": 26229,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorMeshPipeline.cs",
+      "sha256": "ad9f8818ad1c9ff82798b60eb6bf409c7c40d352ea89075c5d666e4c35b8c78a"
+    },
+    {
+      "bytes": 19436,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorScreenshotExporter.cs",
+      "sha256": "3a4ec39356ec83d2f248be140be104c5f8e4a3c461db0c641d0c41d03c2b3bda"
+    },
+    {
+      "bytes": 49994,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs",
+      "sha256": "b7a6d8603390afc1d95369cf5f287b8eaeadbc831de2d05b929ef50c3a209a14"
+    },
+    {
+      "bytes": 7610,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10WindowsBuild.cs",
+      "sha256": "5f38838da8d4047c325fb982e219dafc1865f559306cecc1f8b0ba70985fc328"
+    },
+    {
+      "bytes": 1802,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuControllerHitRecorder.cs",
+      "sha256": "df8480c601c3aeae53b4b3a53351c81ec2aea263afd9e1123e93cdd5edf482f4"
+    },
+    {
+      "bytes": 2755,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10RouteContract.cs",
+      "sha256": "971880c37d14f98cec93420b4aa792ec86dbafe0f05e8c34d05390948a2a568c"
+    },
+    {
+      "bytes": 1150,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10SegmentTag.cs",
+      "sha256": "69f6cbb6a1c5446097bc9410cf1fe80fcef4b3d51363c44a76b0ec7760452326"
+    },
+    {
+      "bytes": 35553,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10TraversalProofProbe.cs",
+      "sha256": "18c3d999d319831ab6dd1cd3235676386c293a515d6f10a536ed425e45e29bff"
+    },
+    {
+      "bytes": 9494,
+      "path": "tools/validate_khufu_v10_prewrite.py",
+      "sha256": "8fe4c215264fdd32d7f233410cf459c0ded510f4c25712ea80c4693084c3f531"
+    },
+    {
+      "bytes": 33483,
+      "path": "tools/validate_khufu_v10_release.py",
+      "sha256": "8abaa4b9929b40d27e9d10d25783f2fdb5bfa5b2af2fecc23b0829f0e01527b5"
+    },
+    {
+      "bytes": 1956,
+      "path": "tools/tests/test_validate_khufu_v10_prewrite.py",
+      "sha256": "ce7a77c117a6f58bf74135509646d00e12f34a30dbe7a6e6076e69698b799e88"
+    },
+    {
+      "bytes": 9587,
+      "path": "tools/tests/test_validate_khufu_v10_release.py",
+      "sha256": "022ebd9def713653b42774186ce1c0e06cfd55a111cf7feee9faa4b6254557c8"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorBuilder.cs.meta",
+      "sha256": "9fc58ef1adb406884a1a8a8aac2a67563f02e8698df4c21e9139acccada8de7f"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorMeshPipeline.cs.meta",
+      "sha256": "c8dff890376e1abe9daf887cc1673dfc1576e23e1bb38eb0a309140ddcb8838a"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorScreenshotExporter.cs.meta",
+      "sha256": "2ba0afe09923bae83661352cc01ce277f106c4979de241097de75e0ab562aad7"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs.meta",
+      "sha256": "a8b62cc4bb38633d1de20118c5c53ad619e86b386903799c9ea70dcc34a278af"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10WindowsBuild.cs.meta",
+      "sha256": "c0a68d1613916e4464103a9184cfb9544109469e88636bd3bfbf7348c96a0d63"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10RouteContract.cs.meta",
+      "sha256": "7fa1e12d602251e81bef8b4b310e66dbf65e7f0376815bf3f08501867c19b186"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10SegmentTag.cs.meta",
+      "sha256": "54f3e92d1cf8d24705240dacf6c958276597307fc46756bf921ae4ff75aeea76"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10TraversalProofProbe.cs.meta",
+      "sha256": "e772fc2c6d3026f1a67fef5c9fb178076ddebed4c195f1085c1891d1d50673f7"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine.meta",
+      "sha256": "c92c75c660aba8981934f84302c805b6af79b2027bf9596a20a3938c026e0a9a"
+    },
+    {
+      "bytes": 43347,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Gallery_Detail.asset",
+      "sha256": "4570952aade906e6b8d53cdfe43448a72569ad7fa2100848470dac8e9d437143"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Gallery_Detail.asset.meta",
+      "sha256": "5b40b6d94c0d5030eb959c765669503e6e1d2c9c1993b5fab293d936108cf871"
+    },
+    {
+      "bytes": 65241,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Hybrid_Service_Return.asset",
+      "sha256": "0526e23ed9563d6e7e9a6c1b7541ae9f507c730d92de2ec14999d0bf0e67cadd"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Hybrid_Service_Return.asset.meta",
+      "sha256": "1b4c985f1561e780717434d8ac9c6c814125b5a544e31a0a5a7c7c6e6784de4d"
+    },
+    {
+      "bytes": 129083,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Limestone_Structure.asset",
+      "sha256": "0d8f1bd4344e3308e2bd6cb881359400796ba8bdd5a2d410665b591ff4d04cd1"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Limestone_Structure.asset.meta",
+      "sha256": "4123715868c6fc596cc57b74227a6ee74a6d458927c0348a31879027a51d2e2f"
+    },
+    {
+      "bytes": 19642,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Red_Granite_Boundary.asset",
+      "sha256": "e75e0101e120748489d756012eeb846588143de8f64552566dc9eb308c4e5916"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Red_Granite_Boundary.asset.meta",
+      "sha256": "492531fbb372dd5ec908a005f50e0b342805aba2abf6efd66147a2cd0fdc6161"
+    },
+    {
+      "bytes": 34218,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Route_Inlay.asset",
+      "sha256": "3ddd989976dd0089dec4caf5dcf91ef7fd609b1b5f3dbf5fc09613e27280ba3d"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Route_Inlay.asset.meta",
+      "sha256": "6b4d4fbbb618feb245139e1df8f408de9be71b9015d440e250eaab1e0ff6b986"
+    },
+    {
+      "bytes": 109015,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Shadow_Recess.asset",
+      "sha256": "bab17283c8337dc6b2d8c5af016507ba82bfd7734168e79b0484d5978e864049"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Shadow_Recess.asset.meta",
+      "sha256": "9ad196485cb1bc3997bff9dcb274258bc0beef40d753ef29d194b30d8415e3e7"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Materials/KhufuV10Interior.meta",
+      "sha256": "3d0eaf51f42e6341aabd30a7e7027ea7ab7fbed86f098063aa36c77d9d3dfa07"
+    },
+    {
+      "bytes": 2350,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Aged_Limestone.mat",
+      "sha256": "3d0e391aacb67e965cfec69fafbf347f65494a4b4ee8c26ee48b4b473fbb4065"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Aged_Limestone.mat.meta",
+      "sha256": "4a4766ef315ee56bb31931819858014e313cb970f85f93ba06969e9da890f2ac"
+    },
+    {
+      "bytes": 2347,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Deep_Shadow.mat",
+      "sha256": "65fe38b4228f2d9f286766c949bdfec562b6e5a18ed398092eb25a61bbbfa7b4"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Deep_Shadow.mat.meta",
+      "sha256": "bf8b812a4ba71d3ee3907613ce39c5b39018adbcf321cb4f542fdb513e1fea75"
+    },
+    {
+      "bytes": 2349,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Gallery_Detail.mat",
+      "sha256": "a19c999841f3c87dab9e824fcfa7d5ea5665ec8e7272fd31d5c1ed50cf0d39ad"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Gallery_Detail.mat.meta",
+      "sha256": "42d55f5c489d51c26a04676f2e3c9d4024f69c7542f4c266b3320d468107d3fc"
+    },
+    {
+      "bytes": 2349,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Hybrid_Service.mat",
+      "sha256": "286163a5e249e004e714abd3c246f5a7572010857d8905fa95adc9c758d5efd2"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Hybrid_Service.mat.meta",
+      "sha256": "28129f3e56aee65e43b0c619ff0d7300840b3445c1f2a40bb41fc7abca8a771f"
+    },
+    {
+      "bytes": 2355,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Red_Granite.mat",
+      "sha256": "94cdbe5fb3d29cf9b2de719ec51a049cee946e40c9d0ff8c2adea5bcbf21e4b9"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Red_Granite.mat.meta",
+      "sha256": "b1538429eba592ac307dc45ad4630f21f05ead25267438dace09f57cd570a69e"
+    },
+    {
+      "bytes": 2352,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Route_Amber.mat",
+      "sha256": "10db75657b73de7173b7e32891bbc7eb60100c0f32802347600a62854fac0f78"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Route_Amber.mat.meta",
+      "sha256": "79f9b1ceb7816856fb233b3d15a894af0ee56d9048763630eba3e2a132abcf03"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4.meta",
+      "sha256": "348424464d35cc28db5b8c012dafce9056aebacddb98b3f282bb395333ebb8dd"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes.meta",
+      "sha256": "3f70697a7f4b1346fe836e9f6bd75559c9242df8c54a1b169f28695bd8198114"
+    },
+    {
+      "bytes": 3563,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_East.asset",
+      "sha256": "31924c61d90279ba750afe537d0aec7c870770d3c43fe0cfbd670ecf227ae068"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_East.asset.meta",
+      "sha256": "af21fbf101d4d08356ffd287012060879e251564c76fb1a41f043c9e933b1068"
+    },
+    {
+      "bytes": 3744,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Left.asset",
+      "sha256": "302964a7e97a666a93608d8dcb59ab7d47b71eb9dc089fe727e737fceefadd90"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Left.asset.meta",
+      "sha256": "1ca2e5f1af168e2f143c1cf326bb176e922880b0991429730042c1c467014ea3"
+    },
+    {
+      "bytes": 3743,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Right.asset",
+      "sha256": "f57572ed0665c484093aa7b490015970f15f90bdb5d0b2c826592963c81e9697"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Right.asset.meta",
+      "sha256": "53de6aa3c9c54f18dead2d203de214d1a9cd855142152cd62795d51cbe6cd398"
+    },
+    {
+      "bytes": 3588,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Upper.asset",
+      "sha256": "657605908ca049a73a7783eba39a573dd9af77d4eb9afab9a5ab500d92141623"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Upper.asset.meta",
+      "sha256": "319734877d12a545a14785c76120f084fbd683f2e30e5e1879ab5c29c1c94cf3"
+    },
+    {
+      "bytes": 3564,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_South.asset",
+      "sha256": "5b29a9ca18711e9102ad8ad89f7537e8464eea59608057d6dea65b217dcc2adf"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_South.asset.meta",
+      "sha256": "fab776ab311681d3dce3aa7f1b131e818a0888a459dc33ab2d66c240574b3b8a"
+    },
+    {
+      "bytes": 3565,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_West.asset",
+      "sha256": "1bd4da3019b45d040ea811d5cb8954edf64c033868c11d357ca9fb456f1dbd16"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_West.asset.meta",
+      "sha256": "59b49119fd1b0c9aedc643005658765796521e09cbde986e9fc8a5fb2e2783e7"
+    },
+    {
+      "bytes": 3723,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Section_Poche_Mesh.asset",
+      "sha256": "d8817e07103aaae5eb3fcfb4b479fa6a26f906a77c749cc891889a3964c111db"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Section_Poche_Mesh.asset.meta",
+      "sha256": "6e9fc71eb31c6d66389df9dc879bc2ca8704fdf7d640a0b3fb65fa611f5a407a"
+    }
+  ]
+}

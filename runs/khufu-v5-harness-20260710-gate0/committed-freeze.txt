@@ -1,0 +1,9 @@
+# Khufu V5 Committed Freeze
+
+HARNESS_VERDICT: passed
+
+- Requirements: 14
+- Tests: 16
+- Evidence records: 8
+- Baseline commit: `a31905297cae2d7e2d83ababab54b109460cfbe2`
+- Artifact SHA256: `26e66cbbdfcfb86750bb7e3554bc39d8006daa3b88ae11c466667f5d3d9edaf3`

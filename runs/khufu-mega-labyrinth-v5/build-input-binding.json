@@ -1,0 +1,93 @@
+{
+  "schema": "channel_play.khufu_v5.build_input_binding.v1",
+  "implementation_commit": "81c28f84d61d875a54f39d3fc74b202319103e24",
+  "unity_version": "6000.0.76f1",
+  "created_at": "2026-07-11T02:30:00+09:00",
+  "scene": {
+    "path": "Assets/_Project/Scenes/School_MVP.unity",
+    "sha256": "7606cfb305d7b0269af5db6f35544583765a56ebee2bb68844b5b239bf5e65ff"
+  },
+  "build": {
+    "target": "StandaloneWindows64",
+    "development": true,
+    "output": "Builds/KhufuV5/ChannelPlayKhufuV5.exe"
+  },
+  "provenance": [
+    {
+      "path": "runs/khufu-mega-labyrinth-v5/build-inputs/Player6481a970-inputdata.json",
+      "sha256": "5f8a648b0220775c3d066539f3693f45cd3f70b04104da789e4ad4639dd3780b",
+      "required_tokens": [
+        "Builds/KhufuV5/ChannelPlayKhufuV5.exe",
+        "\"Development\":true",
+        "6000.0.76f1"
+      ]
+    },
+    {
+      "path": "runs/khufu-mega-labyrinth-v5/build-inputs/buildreport.json",
+      "sha256": "12a7be792d981fb8ce5f097a7ff61199cccbfb4bcf7712812e24841ed72874bc",
+      "source_sha256": "a6deb2684a2701ca33f193d2be82773e28d9827c5db1fa370984f4569d7c4907",
+      "required_tokens": [
+        "Building scene Assets/_Project/Scenes/School_MVP.unity",
+        "win64_player_development_mono"
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "ProjectSettings/ProjectSettings.asset",
+      "sha256": "9f230111f98d29203c5cd40c6f4da2aa53f609dbc1c5abcf776165808c7882e3",
+      "role": "player settings; post-build base state",
+      "build_override": {
+        "find": "  enableFrameTimingStats: 0",
+        "replace": "  enableFrameTimingStats: 1",
+        "occurrences": 1,
+        "derived_build_sha256": "95a70db75f3c5bacde2dd6f66d50b54accb8fa28fadf88935af79df30831afd7",
+        "reason": "Frame timing instrumentation was enabled for the profiled Development Player and restored after build."
+      }
+    },
+    {
+      "path": "ProjectSettings/EditorBuildSettings.asset",
+      "sha256": "007bd863c23fda4cbb8058b5827ce0121ccbda52f1d63446e2391df5edc88659",
+      "role": "enabled scene list and build configuration objects"
+    },
+    {
+      "path": "ProjectSettings/GraphicsSettings.asset",
+      "sha256": "fbf0856b7693639a5388ae693a455baaad354c1d8dc548601de3dc61c4ab12c3",
+      "role": "global rendering settings"
+    },
+    {
+      "path": "ProjectSettings/QualitySettings.asset",
+      "sha256": "bbc1846ac2fa9fdaa62fb1d1425c30ae0a30a98972eb158e8f0bcd9f862f70c4",
+      "role": "quality-level settings"
+    },
+    {
+      "path": "ProjectSettings/ProjectVersion.txt",
+      "sha256": "0ebfae884379f557932c1364f9edef1ea2693297b7b0f615fcdf2090237a9319",
+      "role": "Unity editor revision"
+    },
+    {
+      "path": "Packages/manifest.json",
+      "sha256": "7cd02eaeb95d283e74c459ebc0babca4a936f92158f337b155ec1e5da0eacb38",
+      "role": "declared package dependencies"
+    },
+    {
+      "path": "Packages/packages-lock.json",
+      "sha256": "d9553a688d4afe8a5c95a0aba04b755647b72d90f5956a19b2fae160d2b7ec8e",
+      "role": "resolved package dependency graph"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "Builds/KhufuV5/ChannelPlayKhufuV5.exe",
+      "sha256": "ab5809518c33adf6dad28c9ffe467d2f78f0c00bf78991fef991a7dd04a8fc48"
+    },
+    {
+      "path": "Builds/KhufuV5/UnityPlayer.dll",
+      "sha256": "376ef4d7595a2d0848e9e3a1c4732fcdca9e33cfb844a002b020e5443cedb9b6"
+    },
+    {
+      "path": "Builds/KhufuV5/ChannelPlayKhufuV5_Data/level0",
+      "sha256": "8d345bb9150cb20626588f4623212ecc13c3c6c63c67af998591fd8c785bebbc"
+    }
+  ]
+}

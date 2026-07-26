@@ -1,0 +1,58 @@
+{
+  "artifacts": [
+    {
+      "bytes": 659,
+      "path": "runs/khufu-v6-visual-slice/performance-final/validation.md",
+      "sha256": "37f09260d42758ec2c65a03f6e24fac37baf34b25d1ddf0228adeeaa64b64e56"
+    },
+    {
+      "bytes": 996,
+      "path": "runs/khufu-v6-visual-slice/performance-final/v6-final-performance.md",
+      "sha256": "c496353a4a2fab0802c78e4de4afaeb614b84fa189336b05b90624b41f6cbf51"
+    },
+    {
+      "bytes": 7023964,
+      "path": "runs/khufu-v6-visual-slice/performance-final/v6-final.raw",
+      "sha256": "686db2d113268b2eaae7fa752d5406c53a30a766350bc99683f2ad4ff1c47955"
+    },
+    {
+      "bytes": 6722,
+      "path": "runs/khufu-v6-visual-slice/performance-final/player.log",
+      "sha256": "ab1e0b515cdc0a61927538dcd28defe191ce65e29eaf44fe9ff9e9c6e11910d6"
+    },
+    {
+      "bytes": 1607049,
+      "path": "runs/khufu-v6-visual-slice/performance-final/v6-final-windows-player-initial.png",
+      "sha256": "36ceaa6d946c5b8f9d3385f8ebd3d1b3e55c937290758779aeb1cd27ffece831"
+    },
+    {
+      "bytes": 804653,
+      "path": "runs/khufu-v6-visual-slice/performance-final/v6-final-windows-player-operator.png",
+      "sha256": "2d171dbe57287b5c91c6b62fbd7682706bfebb930672e73c30601a5f5f4a0b92"
+    }
+  ],
+  "built_level": {
+    "bytes": 460032,
+    "path": "Builds/KhufuV6/ChannelPlayKhufuV6_Data/level0",
+    "sha256": "458edbbbdef7b7fc7ba97d31164da790b298e6a25532070e6ffb6cc5f5587169"
+  },
+  "player": {
+    "bytes": 671744,
+    "path": "Builds/KhufuV6/ChannelPlayKhufuV6.exe",
+    "sha256": "ab5809518c33adf6dad28c9ffe467d2f78f0c00bf78991fef991a7dd04a8fc48"
+  },
+  "run_contract": {
+    "graphics_api": "D3D11",
+    "quality": "Ultra",
+    "raw_capture_frames": 30,
+    "rendered_window": true,
+    "resolution": "1536x1024"
+  },
+  "scene": {
+    "bytes": 2391752,
+    "path": "Assets/_Project/Scenes/School_MVP.unity",
+    "sha256": "09c8083647f1476e72acd3c0176496e3b6a2742a66e6c5e39ee5fa7df66bb95b"
+  },
+  "schema": "khufu-v6-performance-binding-v1",
+  "verdict": "passed"
+}

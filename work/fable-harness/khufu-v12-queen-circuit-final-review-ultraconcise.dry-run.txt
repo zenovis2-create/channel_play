@@ -1,0 +1,12 @@
+﻿FABLE_HARNESS_DRY_RUN
+{
+    "phase":  "final-review",
+    "model":  "claude-opus-5",
+    "effort":  "xhigh",
+    "max_budget_usd":  2,
+    "timeout_seconds":  600,
+    "prompt_chars":  1848,
+    "prompt_file":  "C:\\Users\\User\\Documents\\channel play\\work\\fable-harness\\khufu-v12-queen-circuit-final-review-ultraconcise.md",
+    "output_file":  "C:\\Users\\User\\Documents\\channel play\\work\\fable-harness\\khufu-v12-queen-circuit-final-review-ultraconcise.dry-run.txt",
+    "claude_path":  "C:\\Users\\User\\.local\\bin\\claude.exe"
+}

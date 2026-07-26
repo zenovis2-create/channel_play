@@ -1,0 +1,30 @@
+{
+  "schema": "khufu-v9-causeway-fidelity-performance-budget-v1",
+  "baseline": "khufu-v8-temple-production-art",
+  "target": {
+    "machine": "ZENOVIS",
+    "resolution": "1536x1024",
+    "quality": "Ultra",
+    "graphics_api": "Direct3D11",
+    "target_fps": 120,
+    "warmup_seconds": 5,
+    "participant_seconds": 15,
+    "operator_seconds": 15
+  },
+  "limits": {
+    "minimum_samples": 3500,
+    "frame_p95_ms": 9.0,
+    "main_thread_p95_ms": 4.5,
+    "render_thread_p95_ms": 4.5,
+    "gpu_p95_ms": 4.5,
+    "maximum_allocated_mb": 190.0,
+    "maximum_reserved_mb": 340.0,
+    "maximum_managed_mb": 16.0,
+    "maximum_visible_renderers": 819,
+    "maximum_visible_vertices": 100000,
+    "maximum_visible_triangles": 80000,
+    "minimum_profiler_raw_bytes": 1048576,
+    "maximum_profiler_raw_bytes": 104857600,
+    "minimum_screenshot_bytes": 65536
+  }
+}

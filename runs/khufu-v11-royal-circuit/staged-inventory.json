@@ -1,0 +1,485 @@
+{
+  "files": [
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit.meta",
+      "sha256": "5689e228ab468739b50bd14302c35c94e0de6c3d5665f0026ca00ea758f619cd"
+    },
+    {
+      "bytes": 50640,
+      "path": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit/KhufuV11_Limestone_Structure.asset",
+      "sha256": "87349b4350c11aa652587d0c90edb48f1b38095774ba587f4850ed31d024d189"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit/KhufuV11_Limestone_Structure.asset.meta",
+      "sha256": "34e9f7ef2b33b2435bd23825b2cfc558e809dd8014ef298f2b2d4b218e2757fc"
+    },
+    {
+      "bytes": 56091,
+      "path": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit/KhufuV11_Red_Granite_Royal.asset",
+      "sha256": "9802e2791feff506783ae4bb5802b9e26aad5a3db105127ec659069c06d6491f"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit/KhufuV11_Red_Granite_Royal.asset.meta",
+      "sha256": "9852417cd6732e215becd0efff4e33a65003efa65711386a11a8e3824e87df47"
+    },
+    {
+      "bytes": 14169,
+      "path": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit/KhufuV11_Royal_Route_Inlay.asset",
+      "sha256": "45bfa8aa6ffb0483df5405981258ff96095cbdf7c6a88e0f3e28e3234c2ee943"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit/KhufuV11_Royal_Route_Inlay.asset.meta",
+      "sha256": "e8870cec3a0a457e5533e0af96abe78227c866465980f116d973d03124a928c0"
+    },
+    {
+      "bytes": 14143,
+      "path": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit/KhufuV11_Shadow_Recess.asset",
+      "sha256": "d60d0cd8d55a29bee4aeb9768e4911c52a8c404f26488fa3ebf195a5cb1dc0bf"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit/KhufuV11_Shadow_Recess.asset.meta",
+      "sha256": "62dce7b8b7101f234da1a4aaf66b77d480401a22df2cc972ae8f10a9bce2be00"
+    },
+    {
+      "bytes": 34206,
+      "path": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit/KhufuV11_Stacked_Chamber_Display.asset",
+      "sha256": "687706746a2502890ac774154623071c68e09d65b9a548d120998b8bcfc075f0"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit/KhufuV11_Stacked_Chamber_Display.asset.meta",
+      "sha256": "009a7881635f1d43daa2c5c0a10822d827065e39c866957eada401378daa3418"
+    },
+    {
+      "bytes": 127258,
+      "path": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit/KhufuV11_V10_Limestone_Open.asset",
+      "sha256": "1ae211817170a9ae846853b6313c4bdb1277553b7bcd6bc7f30760762a980e67"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit/KhufuV11_V10_Limestone_Open.asset.meta",
+      "sha256": "2a579b2efd062b16370fe7e5a6f1aedc233fbd057b67de7c9a9fb8d3c8d2dd6c"
+    },
+    {
+      "bytes": 10526,
+      "path": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit/KhufuV11_V10_Red_Granite_Open.asset",
+      "sha256": "1c2cca3af61aaf68e003f813274fd5890d9a88078147e2cd8abb5012481f7d02"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit/KhufuV11_V10_Red_Granite_Open.asset.meta",
+      "sha256": "4aa71b58e1cdccdc27409da5149aa936095be87c247fb9c5163205cafe652bda"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Materials/KhufuV11RoyalCircuit.meta",
+      "sha256": "32b1886fd9cb73372b362aeb8d13ff1051cb8b573d91d31fd6ca666ca7c956ab"
+    },
+    {
+      "bytes": 2368,
+      "path": "Assets/_Project/Materials/KhufuV11RoyalCircuit/V11_Royal_Amber.mat",
+      "sha256": "d5ef72bfd74e26af5c4e23066329d9194eb5d9df3763d568e763ff858836c274"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV11RoyalCircuit/V11_Royal_Amber.mat.meta",
+      "sha256": "3d9d3c6c03005058578df3dce87c3b990c075709002b144eaa2fad93fa1d304a"
+    },
+    {
+      "bytes": 2353,
+      "path": "Assets/_Project/Materials/KhufuV11RoyalCircuit/V11_Royal_Deep_Shadow.mat",
+      "sha256": "f2257b65b62c399d19d3bc421aa8164a1f23ed8f174060a2406ba55e58e686a0"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV11RoyalCircuit/V11_Royal_Deep_Shadow.mat.meta",
+      "sha256": "b7a7c4b65646ba211ad01ae7196d57f0fc8d34e33466f83d4a24a56a5121ce53"
+    },
+    {
+      "bytes": 2351,
+      "path": "Assets/_Project/Materials/KhufuV11RoyalCircuit/V11_Royal_Limestone.mat",
+      "sha256": "167720da852917c0cf9e93758b555fe8cdf5c5ec55337533dd58042772c29fa4"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV11RoyalCircuit/V11_Royal_Limestone.mat.meta",
+      "sha256": "b881480c3a98b109a41254304da3f254d794a499e7b13f6aae3b691a36ee3b06"
+    },
+    {
+      "bytes": 2363,
+      "path": "Assets/_Project/Materials/KhufuV11RoyalCircuit/V11_Royal_Red_Granite.mat",
+      "sha256": "4a41f8bba4fc9121d0b8b3c093630f36350dfe895b3563b68f213c5fa40abf48"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV11RoyalCircuit/V11_Royal_Red_Granite.mat.meta",
+      "sha256": "fdb56bf62b6222486803834102967f52ebd4ee4f7affb32b80484bbcd5a7c4e3"
+    },
+    {
+      "bytes": 2350,
+      "path": "Assets/_Project/Materials/KhufuV11RoyalCircuit/V11_Stacked_Display.mat",
+      "sha256": "739a52e8e6e5d1f8d0f6cd5dfc8b66768796abb40b8ef7e83db8e84afa177fff"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV11RoyalCircuit/V11_Stacked_Display.mat.meta",
+      "sha256": "89f79d26e206b0d080acf3cbf5eb831a43f824aa1c6fc6bf4cd21dd2bded81fd"
+    },
+    {
+      "bytes": 2983860,
+      "path": "Assets/_Project/Scenes/School_MVP.unity",
+      "sha256": "dbc0c5e3e4afc10397ed3b95bdb57118993a1ba3631b1952c585eb654eb1297b"
+    },
+    {
+      "bytes": 11744,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV11LegacyRegression.cs",
+      "sha256": "98869691237cf648cce4d367d609de3edb3d58950187657e7a7f12eff6bb20ca"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV11LegacyRegression.cs.meta",
+      "sha256": "c49257d5ed4545d6f19d734bba9f72f811d618428850bfd72d99127fa7cd3ee4"
+    },
+    {
+      "bytes": 31218,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV11RoyalCircuitBuilder.cs",
+      "sha256": "5e28579c06080b273b77a046cc936ca041f0be2e482657e6fd5c44ed258fcddf"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV11RoyalCircuitBuilder.cs.meta",
+      "sha256": "19603d3d7aca9efcb41e8644031dc11e501ca1910a263ae5208c5f85ff180c59"
+    },
+    {
+      "bytes": 30133,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV11RoyalCircuitMeshPipeline.cs",
+      "sha256": "ba68d12cfd619919930ea79899e14d54353119ae5235b9b2f9244d7966b968af"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV11RoyalCircuitMeshPipeline.cs.meta",
+      "sha256": "17d903a4080c8d3dfcd9964996604dd8d661e2db9c0fabace1872a8cee097b86"
+    },
+    {
+      "bytes": 17246,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV11RoyalCircuitScreenshotExporter.cs",
+      "sha256": "3e16a3d9e1cb6741a88f8b1fc4c5931445e66c997d565fefe2673877512b4b34"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV11RoyalCircuitScreenshotExporter.cs.meta",
+      "sha256": "f2d9273985887417742415d51cd6b518c7fc96fa6286048272ad66419ff06b58"
+    },
+    {
+      "bytes": 38276,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV11RoyalCircuitValidator.cs",
+      "sha256": "ae2ca420f03e1a53cf07a5ad17a0580f5672fab48a733762c2fe687f7ffe2d48"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV11RoyalCircuitValidator.cs.meta",
+      "sha256": "11be676907e2a36709f65eb4f2627194b9bc01df5eb9034da79cab3f9ab168ed"
+    },
+    {
+      "bytes": 6839,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV11WindowsBuild.cs",
+      "sha256": "014948dde1af4ecb2404b34d851a6178d3dd8a0ee094bb011a2ee900cf9f87df"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV11WindowsBuild.cs.meta",
+      "sha256": "b9f44d6444d7f9d1ef3dcc10d9e305bb85c5a3de2fff1db137b226d0cdc93820"
+    },
+    {
+      "bytes": 1838,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV11RoyalRouteContract.cs",
+      "sha256": "4a29837d5877c905fd441b325525f16c04825456ea427b54c1881cbb17321800"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV11RoyalRouteContract.cs.meta",
+      "sha256": "283eafc52acb4ac90d6554a059a1a1ed7ce5ea118a8765885387627eafb33804"
+    },
+    {
+      "bytes": 1150,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV11SegmentTag.cs",
+      "sha256": "eedfab4f2e7969395ddae3e9a2edf974b8dc295eab3c2dd8f28e0359c36a2d99"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV11SegmentTag.cs.meta",
+      "sha256": "55ecb1cd3a327626b905cad1a912d7e440b01413ecb7d4148191c20a6b9ea8fd"
+    },
+    {
+      "bytes": 27655,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV11TraversalProofProbe.cs",
+      "sha256": "4874c8ff496a9deecada859191f97a26709d7a9c288a9e403e7fe4ed04cc7ec1"
+    },
+    {
+      "bytes": 60,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV11TraversalProofProbe.cs.meta",
+      "sha256": "c7bf62af78f21b8d121ce5aa21dc3f9ddce2c7bbd4dcb1b0cfc8ab2aed949f8c"
+    },
+    {
+      "bytes": 3044,
+      "path": "docs/khufu-v11-royal-circuit/GOAL.md",
+      "sha256": "2688a8c1983fa2e81eb2ec84a0160cd4c693dfdc4810218acfb222a14e858aa1"
+    },
+    {
+      "bytes": 2172,
+      "path": "docs/khufu-v11-royal-circuit/PLAN.md",
+      "sha256": "3dcdbb443bb9c927808252b377305e53593a5c1e08a6ae0565580b06c14bb1bf"
+    },
+    {
+      "bytes": 1061,
+      "path": "docs/khufu-v11-royal-circuit/README.md",
+      "sha256": "4992cf6b685a418ec1b57964be521f0d31f650c8c90c8d318d4fc567190c61ed"
+    },
+    {
+      "bytes": 2478,
+      "path": "docs/khufu-v11-royal-circuit/RESEARCH_BRIEF.md",
+      "sha256": "43336f0ee36a24ba612627c35a90d2a293cdade07a5ccb2231930bc822f62696"
+    },
+    {
+      "bytes": 1971,
+      "path": "docs/khufu-v11-royal-circuit/RULES.md",
+      "sha256": "b9aca23400c9d786cb2cb1a9a61c28cb918f06ef47ca6b0ea81d4fc230169d86"
+    },
+    {
+      "bytes": 2030,
+      "path": "docs/khufu-v11-royal-circuit/STATUS.md",
+      "sha256": "a62a91c7e44e61654decf5fcd9a85ef6b700c669b18dc5b45e09889c8110123c"
+    },
+    {
+      "bytes": 2236,
+      "path": "docs/khufu-v11-royal-circuit/TEST_PLAN.md",
+      "sha256": "01d0d3d6c6252114aadad52157ea79e8592792e3159d647c0ced9274eb0d1733"
+    },
+    {
+      "bytes": 291,
+      "path": "docs/khufu-v11-royal-circuit/performance-budget.json",
+      "sha256": "05f72b8da9c6aec821163ecce24cf411d62f259864a5346d9d152404d397cd04"
+    },
+    {
+      "bytes": 1860,
+      "path": "docs/khufu-v11-royal-circuit/segment-classification.json",
+      "sha256": "bb7705e35f77acc5d6117bbdce78b185ef67c862d47b49332a04d37f65710bb8"
+    },
+    {
+      "bytes": 6490,
+      "path": "docs/khufu-v11-royal-circuit/staging-allowlist.txt",
+      "sha256": "362d7a11f0fb88b2b3fcf39ef74773f41bb0a3d8b55fb9d4634c4fef3d59f887"
+    },
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v11-royal-circuit/captures/antechamber_portcullis_detail.png",
+      "sha256": "63be03125f5bfbb76c9e40d8dd93f376dfcf294d66ba85a646c692a1bb334d7f"
+    },
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v11-royal-circuit/captures/great_step_open_axis.png",
+      "sha256": "d977e853fe058ea4309721f97a4d8497294554d8c043e6b2720d17a3965a1271"
+    },
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v11-royal-circuit/captures/kings_chamber_wide.png",
+      "sha256": "cc96b477e60af4df90ee6c294aedb06e7af0251ae7219e8ed56d31b05f40656e"
+    },
+    {
+      "bytes": 2564,
+      "path": "runs/khufu-v11-royal-circuit/captures/manifest.md",
+      "sha256": "557fe9507254729fb93e5519464556e469ab6e88e7c44afc5d0990d20159349c"
+    },
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v11-royal-circuit/captures/pyramid_royal_circuit_integration.png",
+      "sha256": "fe1acce4f5dd9966bd16d7037af078d91df7d70c5b71cd7efd6ec332303d7865"
+    },
+    {
+      "bytes": 131,
+      "path": "runs/khufu-v11-royal-circuit/captures/relieving_stack_cutaway.png",
+      "sha256": "7624d0aea5aec95f5d71a211e844ea5bff87ff8ff6ab16f4236882b8cd90d29e"
+    },
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v11-royal-circuit/captures/sarcophagus_and_shaft_boundary.png",
+      "sha256": "4b12774acfc65685f056844d8300d32b22da107e62b183964ee232bd3740f87b"
+    },
+    {
+      "bytes": 588,
+      "path": "runs/khufu-v11-royal-circuit/clean-package-import.md",
+      "sha256": "c80adb44c60810edb66f91d50ba0c87d166d696e0494d944572082d119191664"
+    },
+    {
+      "bytes": 662,
+      "path": "runs/khufu-v11-royal-circuit/idempotence.md",
+      "sha256": "d9ccbd003fa1a18aca9db7a8ed08bb0f30ed480258e68b3c18fe3ac33d6e2117"
+    },
+    {
+      "bytes": 2959,
+      "path": "runs/khufu-v11-royal-circuit/legacy-regression.md",
+      "sha256": "8f474e22f8e80c8cb981642dbc42f9498a05e8b2bc1b123ee47aaa33637df816"
+    },
+    {
+      "bytes": 1659,
+      "path": "runs/khufu-v11-royal-circuit/manual-qa.md",
+      "sha256": "b64482d9157f67d96401c82d0e9b32cda6875e04299970eecbbf0dbf23cc82c6"
+    },
+    {
+      "bytes": 359,
+      "path": "runs/khufu-v11-royal-circuit/negative-controls.md",
+      "sha256": "8579ba76457c7c6bc16772ba767f2b228e53c51f07540736cc8cc3363b3f9b87"
+    },
+    {
+      "bytes": 1458,
+      "path": "runs/khufu-v11-royal-circuit/player-proof/v11-final-boundary-control.md",
+      "sha256": "dc127c8ebb9778d31f8b5f89f0aeb1af409c33cd90ab4cd177074a28a011ce02"
+    },
+    {
+      "bytes": 339,
+      "path": "runs/khufu-v11-royal-circuit/player-proof/v11-final-great-step-boundary-control-movement-trace.csv",
+      "sha256": "b560cfe875986dc9915099184e9578cd784192c9e83b2b85a1b5138f5bdad42f"
+    },
+    {
+      "bytes": 15645,
+      "path": "runs/khufu-v11-royal-circuit/player-proof/v11-final-normal-round-trip-movement-trace.csv",
+      "sha256": "4b13619f3060003904feefac11fe403ec097d79003145a43be02e0af8af5d278"
+    },
+    {
+      "bytes": 1289,
+      "path": "runs/khufu-v11-royal-circuit/player-proof/v11-final-round-trip.md",
+      "sha256": "0dbeabd207813621c05cfbdbf420083cfaf1338f7b113f77ea839868ee7ab3c5"
+    },
+    {
+      "bytes": 181,
+      "path": "runs/khufu-v11-royal-circuit/prewrite-validation.md",
+      "sha256": "fa2ba4d087219f4b2137ac547eea34a12b51c335cb64b34e70a68ccb2e50437f"
+    },
+    {
+      "bytes": 465,
+      "path": "runs/khufu-v11-royal-circuit/python-tests.md",
+      "sha256": "59981e91a25aa3d39153b308e6695ba3d277f71661e6f14b22e444ef92bafb57"
+    },
+    {
+      "bytes": 385,
+      "path": "runs/khufu-v11-royal-circuit/release-validation.md",
+      "sha256": "e0e2eebcc7a73f7bf7076dfeceafed1ceb93900c930685fc8e726cf7b5ea166d"
+    },
+    {
+      "bytes": 2406,
+      "path": "runs/khufu-v11-royal-circuit/review-resolution.md",
+      "sha256": "4d814185dae967706ec2ec09b0eb5aaaab465eb13a31a87b6c48d1cb4e565b71"
+    },
+    {
+      "bytes": 428,
+      "path": "runs/khufu-v11-royal-circuit/validation.md",
+      "sha256": "62a4b2f19b792b26ea791e2d1914e645641dcb71934ab4d5aa3909e0bcbc9690"
+    },
+    {
+      "bytes": 1827,
+      "path": "runs/khufu-v11-royal-circuit/windows-build.md",
+      "sha256": "64036ea5a33f9506dc0595363ee0952f38248d78a8edeeedfad84321e0de48c6"
+    },
+    {
+      "bytes": 2933,
+      "path": "tools/tests/test_validate_khufu_v11_prewrite.py",
+      "sha256": "f1f63d7274bc5f000d31038e6f7bc4f998295db980e2e75794754bfda659b276"
+    },
+    {
+      "bytes": 5501,
+      "path": "tools/tests/test_validate_khufu_v11_release.py",
+      "sha256": "19f91dd8fe3e5077cfce66e4af7cd2341d5f4a98d17031fc4bf36557dff80738"
+    },
+    {
+      "bytes": 10012,
+      "path": "tools/validate_khufu_v11_prewrite.py",
+      "sha256": "e8d03f0ef69068a0a5b91b125382f28f8dbc95ce195f897c4e7f0774c876ffe9"
+    },
+    {
+      "bytes": 19368,
+      "path": "tools/validate_khufu_v11_release.py",
+      "sha256": "f3e044a75e759c004e27a26283e01c919f2ea61932fed80c72f5a739cf0d0ee4"
+    },
+    {
+      "bytes": 48490,
+      "path": "work/fable-harness/calls.jsonl",
+      "sha256": "7479f2d812d94918e0df09e4d2c1cc44791a14b3262a108c858776968f26608a"
+    },
+    {
+      "bytes": 2284,
+      "path": "work/fable-harness/khufu-v11-release-adopted-plan.md",
+      "sha256": "8d8bb89823fbc9f28c3a56b3237599a30d6e184fd0a958fea738e2c52412c121"
+    },
+    {
+      "bytes": 5508,
+      "path": "work/fable-harness/khufu-v11-release-final-review-concise.md",
+      "sha256": "8058543ba4b908a98a540a3fa4f19fb2f221f28e6af5618f5b102f5e7429f45f"
+    },
+    {
+      "bytes": 2899,
+      "path": "work/fable-harness/khufu-v11-release-final-review-resolution.md",
+      "sha256": "9851d74a021eb3119520bb1227f42f701ce82c9289d3be1cb87493cf0da8c2ce"
+    },
+    {
+      "bytes": 516,
+      "path": "work/fable-harness/khufu-v11-release-final-review.dry-run.txt",
+      "sha256": "88bd3128373c8039e6ab57b19b40fdd8d0b2bdaa8eb4c7d15a185ac5fd5b099a"
+    },
+    {
+      "bytes": 528,
+      "path": "work/fable-harness/khufu-v11-release-final-review.followup.dry-run.txt",
+      "sha256": "b9cec06802b4b2a5e5bab713f0a7e90bc7c813f8cdbb9967399d44edc050273e"
+    },
+    {
+      "bytes": 10414,
+      "path": "work/fable-harness/khufu-v11-release-final-review.md",
+      "sha256": "fddf068d5519f2fb2327e292ac3fd1508f46331ff1c451ed8871fd33b4510464"
+    },
+    {
+      "bytes": 104,
+      "path": "work/fable-harness/khufu-v11-release-final-review.opus.budget-failure.md",
+      "sha256": "5b88db284b839c3acf61e3bd78d27fd328ddcc7003faf48d55910d77addea88f"
+    },
+    {
+      "bytes": 5064,
+      "path": "work/fable-harness/khufu-v11-release-final-review.opus.followup.md",
+      "sha256": "7310534b0f88e5e539a707885af7b37532b6ea453a296d6d6cc6f209f8dabe9f"
+    },
+    {
+      "bytes": 5986,
+      "path": "work/fable-harness/khufu-v11-release-final-review.opus.md",
+      "sha256": "fb6a48baf542651295f22b3f78bf533a2d26a74d1a792fd176cc5f2a8d4489a8"
+    },
+    {
+      "bytes": 514,
+      "path": "work/fable-harness/khufu-v11-release-plan-critique.dry-run.txt",
+      "sha256": "2d649169e34992411f3795f08921a0a9713c8bb12f177fdd01fc9d193b9932fe"
+    },
+    {
+      "bytes": 6457,
+      "path": "work/fable-harness/khufu-v11-release-plan-critique.md",
+      "sha256": "9d908101b63e6f8dc53f6f426a257544264ce1464d00cb47bed80cf94d00b589"
+    },
+    {
+      "bytes": 9799,
+      "path": "work/fable-harness/khufu-v11-release-plan-critique.opus.final-attempt.md",
+      "sha256": "33b9131e81b821c9c22614d2c4e09d8a686b49e5a56e3704a22f62dee4c187a9"
+    },
+    {
+      "bytes": 69,
+      "path": "work/fable-harness/khufu-v11-release-plan-critique.opus.md",
+      "sha256": "230d422fd8ad55b3108b07330d3dd4d8e7cb6375685af245d75d0432bcc12e6a"
+    },
+    {
+      "bytes": 111,
+      "path": "work/fable-harness/khufu-v11-release-plan-critique.opus.retry.md",
+      "sha256": "4c3d8b6cc37a0eb5b4bf331235b7fdbb470c4f78e678f06c7fdef1437fcf76c0"
+    }
+  ],
+  "schema": "khufu-v11-staged-inventory-v1"
+}

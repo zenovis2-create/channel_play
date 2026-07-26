@@ -1,0 +1,81 @@
+﻿{
+    "schema":  "khufu-v7-entry-proof-binding-v1",
+    "verdict":  "passed",
+    "scene":  {
+                  "path":  "Assets/_Project/Scenes/School_MVP.unity",
+                  "bytes":  2419880,
+                  "sha256":  "a17075bcf6b21a5231edf32bb0247e3c755925a97c39c25a12dba506e40cf029"
+              },
+    "player":  {
+                   "path":  "Builds/KhufuV7/ChannelPlayKhufuV7.exe",
+                   "bytes":  671744,
+                   "sha256":  "ab5809518c33adf6dad28c9ffe467d2f78f0c00bf78991fef991a7dd04a8fc48"
+               },
+    "built_level":  {
+                        "path":  "Builds/KhufuV7/ChannelPlayKhufuV7_Data/level0",
+                        "bytes":  465788,
+                        "sha256":  "57c9d116c46beef67cc85fcdd9d80fd3c5eb2f09f72f1403c806ab80720a210a"
+                    },
+    "run_contract":  {
+                         "resolution":  "1536x1024",
+                         "graphics_api":  "D3D11",
+                         "rendered_window":  true,
+                         "settle_seconds":  3,
+                         "normal_label":  "v7-final",
+                         "mutation_label":  "v7-pylon-mutation"
+                     },
+    "sources":  [
+                    {
+                        "path":  "Assets/_Project/Scripts/Player/ChannelFollowCamera.cs",
+                        "bytes":  1322,
+                        "sha256":  "f17ed1830737469181444aa93f36be364bc3bdb7c0292a0b2a72d8725617cb19"
+                    },
+                    {
+                        "path":  "Assets/_Project/Scripts/Player/ChannelCameraOccluderCutaway.cs",
+                        "bytes":  10880,
+                        "sha256":  "317d82b00a530b01937c4167b89266ddb25a8ca06e1a957479e6c3441c22d305"
+                    },
+                    {
+                        "path":  "Assets/_Project/Scripts/Player/KhufuV7EntryCameraProfile.cs",
+                        "bytes":  925,
+                        "sha256":  "4d13b8dba84cf50973de92b35897474197d905864aacefe99abfd531761d0e45"
+                    },
+                    {
+                        "path":  "Assets/_Project/Scripts/Gameplay/KhufuV7EntryProofProbe.cs",
+                        "bytes":  12661,
+                        "sha256":  "c60d008f8deeeab390e4eaea89223a90ac77e6a8238777382e4efd52ff237de6"
+                    }
+                ],
+    "artifacts":  [
+                      {
+                          "path":  "runs/khufu-v7-entry-wayfinding/entry-proof/v7-final-entry-proof.md",
+                          "bytes":  1591,
+                          "sha256":  "d2b49ca8985a509d42ea60a60eb03c483afc9b1a6e9108f9563dc7155a387343"
+                      },
+                      {
+                          "path":  "runs/khufu-v7-entry-wayfinding/entry-proof/v7-final-participant-entry.png",
+                          "bytes":  1274108,
+                          "sha256":  "41f1214a87fac26bb31693726564f74abc4d8624292b92e9711f53c282f77bd5"
+                      },
+                      {
+                          "path":  "runs/khufu-v7-entry-wayfinding/entry-proof/player.log",
+                          "bytes":  7690,
+                          "sha256":  "6c37a978c4b811811817258e711a6a18b2ecff916461b3a2bd6d0cb996bdfea7"
+                      },
+                      {
+                          "path":  "runs/khufu-v7-entry-wayfinding/entry-proof/v7-pylon-mutation-blocked-pylon-mutation.md",
+                          "bytes":  1714,
+                          "sha256":  "628221bd3a6e4d1c787156bb4a35c2e56c4f76da630faf73d16d5641f000d1a4"
+                      },
+                      {
+                          "path":  "runs/khufu-v7-entry-wayfinding/entry-proof/v7-pylon-mutation-participant-entry.png",
+                          "bytes":  1658165,
+                          "sha256":  "1dfca8ec3ed7ced251569cc0e46439f780c1c407516a2f5d6784af9b66e776ab"
+                      },
+                      {
+                          "path":  "runs/khufu-v7-entry-wayfinding/entry-proof/mutation-player.log",
+                          "bytes":  7697,
+                          "sha256":  "e39694f320399eb76dc994dfdcb9fe8598c1fd6bea91e52499014f0e4e6245d7"
+                      }
+                  ]
+}

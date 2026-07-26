@@ -1,0 +1,2 @@
+﻿segment,step,before,target,after,error,grounding_requested,grounding_applied,horizontal_flags,grounding_flags,horizontal_side_hit,horizontal_ground_hit,horizontal_ambiguous_hit,grounding_side_hit,grounding_ground_hit,grounding_ambiguous_hit
+-2,1,"-3.500,6.080,-23.300","-3.420,5.984,-22.972","-3.420,5.984,-22.972",0.0000,0.0960,0.0960,"Above","None","V10_PROXY_Entrance_To_Branch_Entrance_Lintel","","","","",""

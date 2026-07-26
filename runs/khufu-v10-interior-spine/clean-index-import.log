@@ -1,0 +1,809 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.0/staging' branch; Version is '6000.0.76f1 (6f7f9e1c9e8a) revision 7307166'; Using compiler version '193933523'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26200) Professional' Language: 'ko' Physical Memory: 97981 MB
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-User" at "2026-07-12T22:07:38.3431869Z"
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-07-12T22:07:38Z
+
+COMMAND LINE ARGUMENTS:
+C:\Users\User\Unity\Hub\Editor\6000.0.76f1\Editor\Unity.exe
+-batchmode
+-nographics
+-noUpm
+-projectPath
+D:/Temp/User/khufu-v10-clean-index-20260713-stable
+-executeMethod
+ChannelPlayKhufuV10InteriorValidator.RunAllStaticGatesBatch
+-logFile
+D:/AI2_WIN/channel_play/runs/khufu-v10-interior-spine/clean-index-import.log
+Successfully changed project path to: D:/Temp/User/khufu-v10-clean-index-20260713-stable
+D:/Temp/User/khufu-v10-clean-index-20260713-stable
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [46772]  Target information:
+
+Player connection [46772]  * "[IP] 172.25.16.1 [Port] 55504 [Flags] 2 [Guid] 100904631 [EditorId] 100904631 [Version] 1048832 [Id] WindowsEditor(7,zenovis) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [46772]  * "[IP] 172.22.48.1 [Port] 55504 [Flags] 2 [Guid] 100904631 [EditorId] 100904631 [Version] 1048832 [Id] WindowsEditor(7,zenovis) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [46772]  * "[IP] 100.84.217.85 [Port] 55504 [Flags] 2 [Guid] 100904631 [EditorId] 100904631 [Version] 1048832 [Id] WindowsEditor(7,zenovis) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [46772]  * "[IP] 192.168.45.69 [Port] 55504 [Flags] 2 [Guid] 100904631 [EditorId] 100904631 [Version] 1048832 [Id] WindowsEditor(7,zenovis) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [46772] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [46772] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+Library Redirect Path: Library/
+Rebuilding Library because the asset database could not be found!
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 6000.0.76f1 (6f7f9e1c9e8a)
+[Subsystems] Discovering subsystems at path C:/Users/User/Unity/Hub/Editor/6000.0.76f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/Temp/User/khufu-v10-clean-index-20260713-stable/Assets
+Forcing GfxDevice: Null
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+NullGfxDevice:
+    Version:  NULL 1.0 [1.0]
+    Renderer: Null Device
+    Vendor:   Unity Technologies
+Initialize mono
+Mono path[0] = 'C:/Users/User/Unity/Hub/Editor/6000.0.76f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Users/User/Unity/Hub/Editor/6000.0.76f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Users/User/Unity/Hub/Editor/6000.0.76f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56212
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Users/User/Unity/Hub/Editor/6000.0.76f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.17.4+4293ba1
+  Session Id:              dd705dd7d4a142e8b455e9209d737dcb
+  Correlation Id:          5f9602bf0b5807bfca48d6f7c1d4b45a
+  External correlation Id: 3666308940316475339
+  Machine Id:              6ojREWUNjUZvp/hyt0f7lFF6YB0=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-User" (connect: 0.00s, validation: 0.00s, handshake: 1.43s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-User-notifications" at "2026-07-12T22:07:39.7805202Z"
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 14569765059201-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.00
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 1.46s
+[Licensing::Module] Licensing is initialized (took 0.46s).
+[Licensing::Client] Successfully resolved entitlement details
+Register platform support module: C:/Users/User/Unity/Hub/Editor/6000.0.76f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Registered in 0.475733 seconds.
+- Loaded All Assemblies, in  1.042 seconds
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+Package Manager log level set to [2]
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.322 seconds
+Domain Reload Profiling: 1349ms
+	BeginReloadAssembly (219ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (39ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (544ms)
+	LoadAllAssembliesAndSetupDomain (214ms)
+		LoadAssemblies (210ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (208ms)
+			TypeCache.Refresh (207ms)
+				TypeCache.ScanAssembly (193ms)
+			BuildScriptInfoCaches (0ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (323ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (293ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (68ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (49ms)
+			ProcessInitializeOnLoadAttributes (117ms)
+			ProcessInitializeOnLoadMethodAttributes (55ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+A meta data file (.meta) exists but its folder 'Assets/_Project/Audio' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+A meta data file (.meta) exists but its folder 'Assets/_Project/ScriptableObjects' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+A meta data file (.meta) exists but its folder 'Assets/_Project/Scripts/Core' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+A meta data file (.meta) exists but its folder 'Assets/_Project/Scripts/Items' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+A meta data file (.meta) exists but its folder 'Assets/_Project/Scripts/Logging' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+A meta data file (.meta) exists but its folder 'Assets/_Project/Scripts/Missions' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+A meta data file (.meta) exists but its folder 'Assets/_Project/Scripts/Networking' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+A meta data file (.meta) exists but its folder 'Assets/_Project/Scripts/Operator' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+A meta data file (.meta) exists but its folder 'Assets/_Project/Scripts/Points' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+A meta data file (.meta) exists but its folder 'Assets/_Project/Scripts/Shop' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+A meta data file (.meta) exists but its folder 'Assets/_Project/Scripts/UI' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+A meta data file (.meta) exists but its folder 'Assets/_Project/Tests/EditMode' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+A meta data file (.meta) exists but its folder 'Assets/_Project/Tests/PlayMode' can't be found, and has been created. Empty directories cannot be stored in version control, so it's assumed that the meta data file is for an empty directory in version control. When moving or deleting folders outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+[ScriptCompilation] Requested script compilation because: Assetdatabase observed changes in script compilation related files
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:80
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: D:\Temp\User\khufu-v10-clean-index-20260713-stable\
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping application/grpc - - 200 - application/grpc 40.3797ms
+Starting: C:\Users\User\Unity\Hub\Editor\6000.0.76f1\Editor\Data\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: D:/Temp/User/khufu-v10-clean-index-20260713-stable
+ExitCode: 4 Duration: 0s443ms
+[             ] Require frontend run.  Library/Bee/1900b0aE.dag couldn't be loaded
+DisplayProgressbar: Compiling Scripts
+Starting: C:\Users\User\Unity\Hub\Editor\6000.0.76f1\Editor\Data\Tools\netcorerun\netcorerun.exe "C:\Users\User\Unity\Hub\Editor\6000.0.76f1\Editor\Data\Tools\BuildPipeline\ScriptCompilationBuildProgram.exe" "Library/Bee/1900b0aE.dag.json" "Library/Bee/1900b0aE-inputdata.json" "Library\Bee\buildprogram0.traceevents"
+WorkingDir: D:/Temp/User/khufu-v10-clean-index-20260713-stable
+ExitCode: 0 Duration: 0s335ms
+Starting: C:\Users\User\Unity\Hub\Editor\6000.0.76f1\Editor\Data\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --dagfilejson="Library\Bee\1900b0aE.dag.json" --profile="Library/Bee/backend2.traceevents" ScriptAssemblies
+WorkingDir: D:/Temp/User/khufu-v10-clean-index-20260713-stable
+ExitCode: 0 Duration: 13s
+Finished compiling graph: 147 nodes, 556 flattened edges (546 ToBuild, 4 ToUse), maximum node priority 18
+[  1/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.CoreBusinessMetricsModule.dll_0D6168238B11F293.mvfrm
+[  2/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Android.Types.dll_5D19A7A4E6A3D920.mvfrm
+[  3/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.EmbreeModule.dll_8F1C00CF79AA1DBD.mvfrm
+[  4/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.GIModule.dll_AAD44D82FF9ABB17.mvfrm
+[  5/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.GraphViewModule.dll_33BF8D672021F292.mvfrm
+[  6/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityWebRequestTextureModule.dll_C54E583F366D190B.mvfrm
+[  7/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.BuildProfileModule.dll_52EC2C72DF8DD290.mvfrm
+[  8/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityWebRequestModule.dll_11241FA62DA27D04.mvfrm
+[  9/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.VFXModule.dll_06A1597304F9C1BC.mvfrm
+[ 10/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.VideoModule.dll_6E98BF015291B5CF.mvfrm
+[ 11/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.AdaptivePerformanceModule.dll_8D766EA964CAC399.mvfrm
+[ 12/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.DeviceSimulatorModule.dll_8DE657DA30CE1D0D.mvfrm
+[ 13/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.XRModule.dll_D20B1DBC56A4DF4A.mvfrm
+[ 14/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityWebRequestWWWModule.dll_2E7A9BFB71583247.mvfrm
+[ 15/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UmbraModule.dll_C463E6AF1D26459D.mvfrm
+[ 16/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.EditorToolbarModule.dll_8E300B99836FAB3D.mvfrm
+[ 17/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.WindModule.dll_B7B6BE2D69757888.mvfrm
+[ 18/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.VRModule.dll_9F4C5AB7CD6A91EC.mvfrm
+[ 19/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.dll_A96EA79E08E9F546.mvfrm
+[ 20/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.DiagnosticsModule.dll_63661B2A3B90C41B.mvfrm
+[ 21/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.VehiclesModule.dll_BDEE358840832797.mvfrm
+[ 22/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.CoreModule.dll_1E470FB230398EF4.mvfrm
+[ 23/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/Unity.Android.Gradle.dll_E38377C10D5D52DC.mvfrm
+[ 24/144    2s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.VirtualTexturingModule.dll_7280D77A7CB1C3FD.mvfrm
+[ 25/144    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityWebRequestAssetBundleModule.dll_C9374567875FA832.mvfrm
+[ 26/144    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityWebRequestAudioModule.dll_14A3383F9AF53876.mvfrm
+[ 27/144    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityTestProtocolModule.dll_BCCDC1947C766013.mvfrm
+[ 28/144    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityConnectModule.dll_3B85BDF7FEF9B855.mvfrm
+[ 29/144    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityConsentModule.dll_0D2B55240C044EA5.mvfrm
+[ 30/144    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityCurlModule.dll_3561AAC16A92B925.mvfrm
+[ 31/144    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityAnalyticsModule.dll_DC25A421218674A1.mvfrm
+[ 32/144    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UnityAnalyticsCommonModule.dll_37E5A1A52E730C3C.mvfrm
+[ 33/144    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.AccessibilityModule.dll_5833F5C709D9F9ED.mvfrm
+[ 34/144    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.TilemapModule.dll_4FDC4A38B7C7B832.mvfrm
+[ 35/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UIModule.dll_4C7A34322BB00C74.mvfrm
+[ 36/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.TextRenderingModule.dll_87B390BA4DB189F3.mvfrm
+[ 37/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.UIElementsModule.dll_1002C89C6067DAFB.mvfrm
+[ 38/144    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.TextCoreTextEngineModule.dll_63B8569F819875DB.mvfrm
+[ 39/144    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.TextCoreFontEngineModule.dll_1BD0202DF214BCBD.mvfrm
+[ 40/144    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.TerrainPhysicsModule.dll_BD00DC2A8EA21D32.mvfrm
+[ 41/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.TerrainModule.dll_B0DFE2B7A00AD729.mvfrm
+[ 42/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.SubstanceModule.dll_93850B2995597C84.mvfrm
+[ 43/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.SubsystemsModule.dll_0BC467345D3B9F04.mvfrm
+[ 44/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.TLSModule.dll_85C2C1042E8C584F.mvfrm
+[ 45/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.SpriteShapeModule.dll_4BBFFC83AC70AD70.mvfrm
+[ 46/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.StreamingModule.dll_B6D9F6E04A067E76.mvfrm
+[ 47/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.SpriteMaskModule.dll_A11700D28EF3B6F1.mvfrm
+[ 48/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ShaderVariantAnalyticsModule.dll_860875EFE2395486.mvfrm
+[ 49/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll_97A6C5E35CEE4996.mvfrm
+[ 50/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ScreenCaptureModule.dll_5E741EAF967A09FE.mvfrm
+[ 51/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.PropertiesModule.dll_E525CD80E06F85B3.mvfrm
+[ 52/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.SharedInternalsModule.dll_839656D199DBDDD5.mvfrm
+[ 53/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.PhysicsModule.dll_96996748CA4C8E3B.mvfrm
+[ 54/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.Physics2DModule.dll_4EEAF9809B7BBECD.mvfrm
+[ 55/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ParticleSystemModule.dll_BC863357755F22A5.mvfrm
+[ 56/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.PerformanceReportingModule.dll_9CA6E461148A6DDE.mvfrm
+[ 57/144    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.InsightsModule.dll_DFF2049950D6A77B.mvfrm
+[ 58/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.LocalizationModule.dll_0C0F79514D757D69.mvfrm
+[ 59/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.MarshallingModule.dll_DAC76DBDDAF6A2B8.mvfrm
+[ 60/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.NVIDIAModule.dll_E72D18B6D747386B.mvfrm
+[ 61/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.JSONSerializeModule.dll_448C712A820DDD9C.mvfrm
+[ 62/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.InputLegacyModule.dll_C3A3EA478EC02B57.mvfrm
+[ 63/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.InputModule.dll_B00502470637BECE.mvfrm
+[ 64/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.MultiplayerModule.dll_B206EBB5AF9602DE.mvfrm
+[ 65/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.InputForUIModule.dll_BA9CE85BCDA4BE33.mvfrm
+[ 66/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ImageConversionModule.dll_FF8517FC22ADE285.mvfrm
+[ 67/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.IdentifiersModule.dll_0AE8571EB947437E.mvfrm
+[ 68/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.HotReloadModule.dll_838DC795D5B1E2BA.mvfrm
+[ 69/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.IMGUIModule.dll_81EED9FD56312E0B.mvfrm
+[ 70/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.HierarchyCoreModule.dll_5B8F84C8F17FD608.mvfrm
+[ 71/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.GridModule.dll_1ED8FEF2F0939016.mvfrm
+[ 72/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.GraphicsStateCollectionSerializerModule.dll_F2A71306AD7285BA.mvfrm
+[ 73/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.GIModule.dll_E942DF126B17EEE2.mvfrm
+[ 74/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.GameCenterModule.dll_B7EA8E426D842177.mvfrm
+[ 75/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.DirectorModule.dll_462B3C08C65957FC.mvfrm
+[ 76/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.DSPGraphModule.dll_4B7C9D7238BA291D.mvfrm
+[ 77/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.CrashReportingModule.dll_6973EA0B074D9717.mvfrm
+[ 78/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ContentLoadModule.dll_CB752869C5511D53.mvfrm
+[ 79/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.CoreModule.dll_4167E304D83EFA1F.mvfrm
+[ 80/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ClusterRendererModule.dll_93931A4BA0892A91.mvfrm
+[ 81/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ClothModule.dll_B07797916A1C790E.mvfrm
+[ 82/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ClusterInputModule.dll_CDC2AEFEB5F98A70.mvfrm
+[ 83/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.AssetBundleModule.dll_325ECF28F6CE7566.mvfrm
+[ 84/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.AudioModule.dll_498F3A968FFF9A2A.mvfrm
+[ 85/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.AndroidJNIModule.dll_8D9D4427A7433086.mvfrm
+[ 86/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.AnimationModule.dll_0245098FFA7EC738.mvfrm
+[ 87/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.ARModule.dll_0A795B082C866591.mvfrm
+[ 88/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.AccessibilityModule.dll_E474E7EE82D27D12.mvfrm
+[ 89/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.dll_76CA60C5AA766861.mvfrm
+[ 90/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.AIModule.dll_51069604CF6906C8.mvfrm
+[ 91/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.XRModule.dll_939C8C2CEB27AB7F.mvfrm
+[ 92/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEngine.AMDModule.dll_8732FD9F075BDCFC.mvfrm
+[ 93/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.VFXModule.dll_FA7FB71F9549B3B7.mvfrm
+[ 94/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.VideoModule.dll_A86C029D2114852A.mvfrm
+[ 95/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.UnityConnectModule.dll_4E2639E90471B7AA.mvfrm
+[ 96/144    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.UmbraModule.dll_FE372A4AEBA914F8.mvfrm
+[ 97/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.UIElementsSamplesModule.dll_010B0BA2227B0ABD.mvfrm
+[ 98/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.UIBuilderModule.dll_88483A8392DA6BC6.mvfrm
+[ 99/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.UIAutomationModule.dll_038D1B637C019B50.mvfrm
+[100/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.UIElementsModule.dll_0F545B545E23C1B0.mvfrm
+[101/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.TilemapModule.dll_5D61918E52B8D0ED.mvfrm
+[102/144    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp2
+[103/144    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.UnityAdditionalFile.txt
+[104/144    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll.mvfrm.rsp
+[105/144    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp
+[106/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.TreeModule.dll_7BF304C0B7FF2433.mvfrm
+[107/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.TextRenderingModule.dll_FB729E92D4B906CE.mvfrm
+[108/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.TextCoreTextEngineModule.dll_E558DB4C6E9AB710.mvfrm
+[109/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.TextCoreFontEngineModule.dll_9D70A4DADF16FDF2.mvfrm
+[110/144    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.rsp2
+[111/144    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.UnityAdditionalFile.txt
+[112/144    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll.mvfrm.rsp
+[113/144    0s] WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.rsp
+[114/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.SubstanceModule.dll_DD9F1A40AFD9CA9F.mvfrm
+[115/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.SpriteShapeModule.dll_45FA2CF49A369CEB.mvfrm
+[116/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.SpriteMaskModule.dll_A068938A8CAF9DA6.mvfrm
+[117/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.SketchUpModule.dll_33295ED88DC01C8C.mvfrm
+[118/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.ShaderFoundryModule.dll_F0AF4C9AA50BD203.mvfrm
+[119/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.TerrainModule.dll_BE652A0D3AFBEFE4.mvfrm
+[120/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.SafeModeModule.dll_4B147988428E8075.mvfrm
+[121/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.SceneViewModule.dll_726F706F1544BFA0.mvfrm
+[122/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.SceneTemplateModule.dll_B1CF7C57825C5575.mvfrm
+[123/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.QuickInstallModule.dll_31CB7AB2211440C3.mvfrm
+[124/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.PropertiesModule.dll_E4776038DE2B6C68.mvfrm
+[125/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.PresetsUIModule.dll_EF25C649227A4A97.mvfrm
+[126/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.PhysicsModule.dll_A41EAE9E653DA6F6.mvfrm
+[127/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.QuickSearchModule.dll_EE759C379467C074.mvfrm
+[128/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.Physics2DModule.dll_99050897B5FC0CE8.mvfrm
+[129/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.MultiplayerModule.dll_AC411C269D5BF259.mvfrm
+[130/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.GridModule.dll_FBB82BA0488E24EB.mvfrm
+[131/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.GraphicsStateCollectionSerializerModule.dll_E9B34616E0733C55.mvfrm
+[132/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.WindowsStandalone.Extensions.dll_9B2C3169543425EC.mvfrm
+[133/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.GridAndSnapModule.dll_6D1F01ABBEF5810A.mvfrm
+[134/144    1s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.Android.Extensions.dll_EFC24ACF3219609C.mvfrm
+[135/144    0s] MovedFromExtractor Library/Bee/artifacts/mvdfrm/UnityEditor.Graphs.dll_33DFF909E2C42526.mvfrm
+[136/144    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll.mvfrm
+[137/144    0s] MovedFromExtractor-Combine Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll.mvfrm
+[138/144    2s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll (+2 others)
+[139/144    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp.pdb
+[140/144    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp.dll
+[141/144    1s] Csc Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
+[142/144    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.pdb
+[143/144    0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+*** Tundra build success (12.77 seconds), 143 items updated, 144 evaluated
+AssetDatabase: script compilation time: 14.497572s
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  1.465 seconds
+Start importing Assets using Guid(00000000000000001000000000000000) (DefaultImporter) -> (artifact id: '4b55c7cb15071bfc086d0e52a7664a41') in 0.0135072 seconds
+Start importing ProjectSettings/InputManager.asset using Guid(00000000000000002000000000000000) (LibraryAssetImporter) -> (artifact id: '3d278bdfa729973ecf92c670ca181c88') in 0.0036978 seconds
+Start importing ProjectSettings/TagManager.asset using Guid(00000000000000003000000000000000) (LibraryAssetImporter) -> (artifact id: '4aa03ef27a83f311e598313a3ec2fbc3') in 0.0021632 seconds
+Start importing ProjectSettings/ProjectSettings.asset using Guid(00000000000000004000000000000000) (LibraryAssetImporter) -> (artifact id: '06a8ea7214f3b2d35e3a671412e99355') in 0.0038702 seconds
+Start importing ProjectSettings/AudioManager.asset using Guid(00000000000000006000000000000000) (LibraryAssetImporter) -> (artifact id: '22ffb3fe371a5950e3f1d63c04f3be40') in 0.0022456 seconds
+Start importing ProjectSettings/TimeManager.asset using Guid(00000000000000007000000000000000) (LibraryAssetImporter) -> (artifact id: '52c307e924e96ceef905bcc2cea85a00') in 0.0024961 seconds
+Start importing ProjectSettings/DynamicsManager.asset using Guid(00000000000000008000000000000000) (LibraryAssetImporter) -> (artifact id: 'be5c3cc4d9346f9e8fa2ddaee90dd709') in 0.0024051 seconds
+Start importing ProjectSettings/QualitySettings.asset using Guid(00000000000000009000000000000000) (LibraryAssetImporter) -> (artifact id: 'f44ba1262e818bbe4262433f49247514') in 0.0026238 seconds
+Start importing ProjectSettings/EditorBuildSettings.asset using Guid(0000000000000000b000000000000000) (LibraryAssetImporter) -> (artifact id: '392bbe7e6b2fb46fa59a824aec2901fb') in 0.0022096 seconds
+Start importing ProjectSettings/EditorSettings.asset using Guid(0000000000000000c000000000000000) (LibraryAssetImporter) -> (artifact id: '88a81b0cd41f2e6791b296dbea0c2761') in 0.0024785 seconds
+Start importing ProjectSettings/NavMeshAreas.asset using Guid(00000000000000004100000000000000) (LibraryAssetImporter) -> (artifact id: '4ba0a6bb5cc18b1619eb3b3f4ce570d1') in 0.0023472 seconds
+Start importing ProjectSettings/Physics2DSettings.asset using Guid(00000000000000005100000000000000) (LibraryAssetImporter) -> (artifact id: 'b9a798d8579cfd14a9d003bd527e0b64') in 0.0027963 seconds
+Start importing ProjectSettings/GraphicsSettings.asset using Guid(00000000000000006100000000000000) (LibraryAssetImporter) -> (artifact id: '73a0d0504a18325c463e244f56ec4944') in 0.0030747 seconds
+Start importing ProjectSettings/ClusterInputManager.asset using Guid(00000000000000007100000000000000) (LibraryAssetImporter) -> (artifact id: '5a028a71a6163b7bc9a46219c48662ec') in 0.0024528 seconds
+Start importing ProjectSettings/UnityConnectSettings.asset using Guid(0000000000000000a100000000000000) (LibraryAssetImporter) -> (artifact id: '5a6e69f8200d884ded3f19f546ea756a') in 0.0030377 seconds
+Start importing ProjectSettings/PresetManager.asset using Guid(0000000000000000b100000000000000) (LibraryAssetImporter) -> (artifact id: '669bd2cb5cdf99ef516d1350fa42393e') in 0.0027462 seconds
+Start importing ProjectSettings/VFXManager.asset using Guid(0000000000000000c100000000000000) (LibraryAssetImporter) -> (artifact id: 'd96b989647555359bde1f89c35e57424') in 0.0027684 seconds
+Start importing ProjectSettings/VersionControlSettings.asset using Guid(0000000000000000d100000000000000) (LibraryAssetImporter) -> (artifact id: 'b89f810c452b248c014f182ae5caa680') in 0.0028826 seconds
+Start importing ProjectSettings/MemorySettings.asset using Guid(0000000000000000f100000000000000) (LibraryAssetImporter) -> (artifact id: '19f032dc933bd79e61da5c81f7ddd1ac') in 0.0028861 seconds
+Start importing ProjectSettings/MultiplayerManager.asset using Guid(00000000000000000200000000000000) (LibraryAssetImporter) -> (artifact id: '2f864bba7a58beddb6fbf79980c9a838') in 0.0023854 seconds
+Start importing Library/BuildInstructions using Guid(00000000000000002300000000000000) (DefaultImporter) -> (artifact id: 'ade3aeda13ad9960ede0e143cb33502a') in 0.0008595 seconds
+Start importing Assets/_Project using Guid(b5060213454c643999265a31e119ef0f) (DefaultImporter) -> (artifact id: '82c5e19fcf23be4bb6a705a89d60592b') in 0.0008447 seconds
+Start importing Assets/_Project/Materials using Guid(b194f113e498c4ccb84aaf0db9d5097b) (DefaultImporter) -> (artifact id: '463d2b0a0e30b4598ae5e1bd8b260edf') in 0.0008203 seconds
+Start importing Assets/_Project/Tests using Guid(b21005edce41946ff8bb1f57daba2ce3) (DefaultImporter) -> (artifact id: '6a3033924d76876642a0c170a82547e9') in 0.0010015 seconds
+Start importing Assets/_Project/Scripts using Guid(f2d77b726b9b84a57b7a4aa3f5ad4681) (DefaultImporter) -> (artifact id: '86a4e1599ae67ac6099260216f2e0889') in 0.0010386 seconds
+Start importing Assets/_Project/Scenes using Guid(a43ae3792fdf0440db43a8af393061d5) (DefaultImporter) -> (artifact id: 'abc781165dd8b601ecb720972eba14e9') in 0.0008347 seconds
+Start importing Assets/_Project/Prefabs using Guid(57e4aed945c4540cca9874c86056757f) (DefaultImporter) -> (artifact id: '843415bdac79ffdeeb336126421bf223') in 0.000817 seconds
+Start importing Assets/_Project/ScriptableObjects using Guid(0c5d4afbcf9c240b99a87e5a19f092a3) (DefaultImporter) -> (artifact id: 'e02b5fb4e1e0bf85e483a246a95da7ab') in 0.0007848 seconds
+Start importing Assets/_Project/Audio using Guid(0f99577d2dbe34e7bbe558d5e4af0cc9) (DefaultImporter) -> (artifact id: '555a894853404f325a5fb57e25eab1a2') in 0.0009901 seconds
+Start importing Assets/_Project/Art using Guid(ffe7614259dbe4745a0c1fd0764d6707) (DefaultImporter) -> (artifact id: 'cfc14d63eab2b918b55476b7558c83ac') in 0.0008522 seconds
+Start importing Assets/_Project/Scripts/Player using Guid(5093817f4a5454265a51661a32acb550) (DefaultImporter) -> (artifact id: 'bb990bbbda636a6dce6ae6ac905f7410') in 0.0007147 seconds
+Start importing Assets/_Project/Art/Generated using Guid(f063ac31befb0664c90ba07b570c6d40) (DefaultImporter) -> (artifact id: '2418ef91e7610ae2a5bf1c5f8f27621a') in 0.0008207 seconds
+Start importing Assets/_Project/Materials/KhufuV6 using Guid(02c0213e619bdfd4181798443a4f143e) (DefaultImporter) -> (artifact id: '1671b7bd4165165d38aa8b8364372b91') in 0.0007783 seconds
+Start importing Assets/_Project/Scripts/Logging using Guid(33e873dc23d244baab3f7fdf3f81f5aa) (DefaultImporter) -> (artifact id: 'b12864237677be74eaa0e2ce9ea0c4a6') in 0.0007161 seconds
+Start importing Assets/_Project/Materials/KhufuV5 using Guid(341cdebd3f28e9147b9360454f623a8f) (DefaultImporter) -> (artifact id: 'c5b128df0d7527f05a20c8985645eb09') in 0.000969 seconds
+Start importing Assets/_Project/Art/Maps using Guid(a4551e8923e364da5932917045722962) (DefaultImporter) -> (artifact id: '1ff5d5b3ec66a67f271c67481d45f972') in 0.0012392 seconds
+Start importing Assets/_Project/Scripts/Core using Guid(c51d9f0c5a74c4bd296d918ee37b159f) (DefaultImporter) -> (artifact id: 'ca7a6caf60200daa84ce15aaa9db0e18') in 0.0007169 seconds
+Start importing Assets/_Project/Scripts/Shop using Guid(663e8617e3ff0410e821fafcb38434c1) (DefaultImporter) -> (artifact id: 'e15a1da88aac297e7fb3a3dcc9e91a9a') in 0.0006569 seconds
+Start importing Assets/_Project/Scripts/Missions using Guid(48cda1062972f45da88711807844e54c) (DefaultImporter) -> (artifact id: '980c1429dd2701fc262f90c4c4ac05ee') in 0.0009888 seconds
+Start importing Assets/_Project/Tests/EditMode using Guid(487e512f72c2e4185a43bd6e01191e86) (DefaultImporter) -> (artifact id: '8bd471c0e9f219f5a61dfbc3ac0777ee') in 0.0011144 seconds
+Start importing Assets/_Project/Scripts/UI using Guid(6a87858dcc4784ff18785e44cd112c08) (DefaultImporter) -> (artifact id: 'f98831e5b680d226d6aecb3bcf079539') in 0.0009333 seconds
+Start importing Assets/_Project/Tests/PlayMode using Guid(7a59205ce8645412ab0dcb14f9e4c36f) (DefaultImporter) -> (artifact id: 'fa37e2e44ead36054d88a7c266f32a1d') in 0.0011322 seconds
+Start importing Assets/_Project/Scripts/Operator using Guid(ba7babac7d3e84e018e68e6cdb5f802c) (DefaultImporter) -> (artifact id: '40e54d6610b92db6652e8687b34e1f5d') in 0.0014515 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior using Guid(ca012ea4b1b993c439e7b8efeb1cb890) (DefaultImporter) -> (artifact id: '1967d53de44835d219d4dfba32a51964') in 0.0011055 seconds
+Start importing Assets/_Project/Scripts/Networking using Guid(7d8d4c069e6f34513ba4c92fb130262d) (DefaultImporter) -> (artifact id: 'a559f5de0d9ed2d405cf596878698d19') in 0.00184 seconds
+Start importing Assets/_Project/Scripts/Items using Guid(ed457deb5fdb3427cb15e793f70f3f54) (DefaultImporter) -> (artifact id: 'e885dfbfd150560ee5eb2e2051546bc5') in 0.0014708 seconds
+Start importing Assets/_Project/Scripts/Editor using Guid(0fe4d6e0b6464483e9beb80e03a6641b) (DefaultImporter) -> (artifact id: 'dfd952d30ebdba4d3bfd2b36e330e14a') in 0.0014461 seconds
+Start importing Assets/_Project/Scripts/Points using Guid(2ff7f08f111e643adba5bc78fa479fe4) (DefaultImporter) -> (artifact id: '721d829decdda1b09226d5db676cb8bc') in 0.0011741 seconds
+Start importing Assets/_Project/Scripts/Gameplay using Guid(3f0e97b92e4d4df8905a0cddfbdd6d64) (DefaultImporter) -> (artifact id: '9396243c5a78e298b33f5528f21a7f6a') in 0.0012098 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine using Guid(f2eb6baf6a8902d499ecd6358a29bd12) (DefaultImporter) -> (artifact id: '388c74097694d1d2cf01118ad2beb67c') in 0.0012446 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV6VisualSlice using Guid(b68d436500ad9594fa504cdabe3686fb) (DefaultImporter) -> (artifact id: '274f55a53b2d18efd35a2f83e5cc42fb') in 0.0011993 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV8TempleHub using Guid(27105fd5c2273f5479af894ff8ef199f) (DefaultImporter) -> (artifact id: '93e07ce858fdf4916901d3edcf5eb635') in 0.0010977 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV9CausewayFidelity using Guid(3922b4c674252654888eb74ae8250796) (DefaultImporter) -> (artifact id: '2b94dab442b44eec76886cc79cec42fa') in 0.0009612 seconds
+Start importing Assets/_Project/Art/Maps/pyramid_temple_real using Guid(eafc100d1b5ec41659b1969aae8f7107) (DefaultImporter) -> (artifact id: '38c207a18d41343795390345538db74f') in 0.001208 seconds
+Start importing Assets/_Project/Art/Generated/PyramidReferenceMatchedV4 using Guid(9ba0a75eced7b4747a4ea19c36622619) (DefaultImporter) -> (artifact id: '7aa39562ea29ba95a2558b974e46a539') in 0.0010378 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV6VisualSlice/Textures using Guid(c2e5a9749054c6b418fd44a30c44a2f1) (DefaultImporter) -> (artifact id: 'cba365a8f00bee6e831bd7ea26fe30db') in 0.0012805 seconds
+Start importing Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes using Guid(2acc3d4b569f77646a5ec6b5f3e124eb) (DefaultImporter) -> (artifact id: 'ac925fb88593c3bd02cbe85a60ae0a68') in 0.0010396 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.538 seconds
+Domain Reload Profiling: 1994ms
+	BeginReloadAssembly (349ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (11ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (144ms)
+	RebuildCommonClasses (36ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (26ms)
+	LoadAllAssembliesAndSetupDomain (1034ms)
+		LoadAssemblies (1158ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (25ms)
+			TypeCache.Refresh (22ms)
+				TypeCache.ScanAssembly (15ms)
+			BuildScriptInfoCaches (1ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (538ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (412ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (63ms)
+			SetLoadedEditorAssemblies (2ms)
+			BeforeProcessingInitializeOnLoad (204ms)
+			ProcessInitializeOnLoadAttributes (97ms)
+			ProcessInitializeOnLoadMethodAttributes (21ms)
+			AfterProcessingInitializeOnLoad (24ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (10ms)
+Start importing Library/BuildPlayer.prefs using Guid(00000000000000005000000000000000) (DefaultImporter) -> (artifact id: '083d37eb6b0e82b8f5c1ec86344d848d') in 0.0210242 seconds
+Start importing Assets/_Project/Scenes/OperatorView.unity using Guid(e4668bcb5199f45f19247e365b9517c5) (DefaultImporter) -> (artifact id: 'a47c66f7eae65fe3e1e3ba6edbb3fa18') in 0.0010958 seconds
+Start importing Assets/_Project/Scenes/Boot.unity using Guid(c5951e58bc8114513a99129bf70653cc) (DefaultImporter) -> (artifact id: 'a072d646be0bbffd799ddc51003d4f54') in 0.0009393 seconds
+Start importing Assets/_Project/Scenes/Lobby.unity using Guid(6a270f6795c2d49f39cfcc60cc61ae6a) (DefaultImporter) -> (artifact id: 'b04c7b1056f781a49c0fd3702bd80602') in 0.0010505 seconds
+Start importing Assets/_Project/Scenes/School_MVP.unity using Guid(de9c8c090c45e4d9eb499823d1fde948) (DefaultImporter) -> (artifact id: '24762b04f98835746e0a5aea0abca805') in 0.0008867 seconds
+Start importing Assets/_Project/Scenes/MainMenu.unity using Guid(8fcd39aa764394c58915793cbf50584a) (DefaultImporter) -> (artifact id: '8afd106f4993e469c21d2b13faddfabe') in 0.0008437 seconds
+Start importing Assets/_Project/Scenes/OverlayTest.unity using Guid(9f87928f6a3694b71a792169ef7cf0e2) (DefaultImporter) -> (artifact id: '675d8e06f16cebba8f7141c87fb8d73a') in 0.0009884 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV6VisualSlice/Textures/V6_TuraCasing_Albedo.png using Guid(234506f50ace8da4d872c96b09e5206e) (TextureImporter) -> (artifact id: 'a12b029bd0b59ff95a3818ec3f8c012a') in 0.0247255 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV6VisualSlice/Textures/V6_Basalt_Albedo.png using Guid(73bed6627e4321c47bedf851753df893) (TextureImporter) -> (artifact id: '094e51c67526bd39670260ff43387086') in 0.0179536 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV6VisualSlice/Textures/V6_RedGranite_Albedo.png using Guid(e48a6617f857a3944992b795ca181a37) (TextureImporter) -> (artifact id: 'ee61700ea13ffdc968860ed17b34d685') in 0.0181051 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV6VisualSlice/Textures/V6_CoreLimestone_Albedo.png using Guid(356717a3d2074b047a63d42f2d9909ab) (TextureImporter) -> (artifact id: '128cae685ea0c422c1f5d03fdeaf0441') in 0.0176313 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV6VisualSlice/Textures/V6_TuraCasing_Normal.png using Guid(36192035cbb24994aa0fa951c744bdb8) (TextureImporter) -> (artifact id: '66011301e9d4db87cd30a16f4a1e30f2') in 0.0345456 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV6VisualSlice/Textures/V6_Basalt_Normal.png using Guid(2a5541945795eba4da96f93e90e53357) (TextureImporter) -> (artifact id: '036dd99d2e0fd301d120b4aa0070dd77') in 0.0321945 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV6VisualSlice/Textures/V6_CoreLimestone_Normal.png using Guid(dc9f038cfbbe3704dabafefd073e993c) (TextureImporter) -> (artifact id: '7da73535426ee6d4fb69e302d57aff10') in 0.0339075 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV6VisualSlice/Textures/V6_RedGranite_Normal.png using Guid(3f884bec0d62ef9439ea3de4f660c822) (TextureImporter) -> (artifact id: '66fb10381ab66d143bc53590069d366b') in 0.0356747 seconds
+Start importing Assets/_Project/Materials/MVP_Floor.mat using Guid(20f7102e517964dbabc049e8fa566c17) (NativeFormatImporter) -> (artifact id: 'ce5e6574004bf001cc6d723581738a43') in 0.0040005 seconds
+Start importing Assets/_Project/Materials/PyramidV4_Core_Shadow.mat using Guid(3039c31328a850a438691b1ba64e1642) (NativeFormatImporter) -> (artifact id: '9adbbb4f3327150c1a908276c83d7949') in 0.003678 seconds
+Start importing Assets/_Project/Materials/PyramidV3_Tura_Casing.mat using Guid(40f0a7d5318843e448069c9fa3a9ff54) (NativeFormatImporter) -> (artifact id: 'c4f7753733b8d3d5ec4795ce33e7ea27') in 0.0029478 seconds
+Start importing Assets/_Project/Materials/KhufuV6/V6_Scan_Inlay.mat using Guid(a045a71be1607084094e6ad3e169a6fd) (NativeFormatImporter) -> (artifact id: '5eb1449ec6d6f46719eafe2fa2ad2ed8') in 0.0036093 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Deep_Shadow.mat using Guid(a08cb62682a5e6540b74db0543877cad) (NativeFormatImporter) -> (artifact id: '0cbd3e0a041f8b079caf6b881801efae') in 0.0029031 seconds
+Start importing Assets/_Project/Materials/PyramidV3_Subterranean_Rock.mat using Guid(e02f355afad34da4689bc24c99b92ac2) (NativeFormatImporter) -> (artifact id: '2b3d70722cecf2c844a708f4d29bc58c') in 0.0026336 seconds
+Start importing Assets/_Project/Materials/KhufuV5/V5_RouteWall.mat using Guid(41b1ad89954f384498a45c0733962702) (NativeFormatImporter) -> (artifact id: '372728210e46b605684ae1f96f6e8fcf') in 0.0023612 seconds
+Start importing Assets/_Project/Materials/Operator_Green.mat using Guid(41831ecc13e424dbf865d4b425f64da7) (NativeFormatImporter) -> (artifact id: '0a97f4f8f3eac46da24b8139c0a81449') in 0.0025086 seconds
+Start importing Assets/_Project/Materials/KhufuV6/V6_Causeway_Limestone.mat using Guid(61fd6791135d2c04986719cf1e2e1aa9) (NativeFormatImporter) -> (artifact id: 'fb15da386a159bfd5332f9738101f22a') in 0.002713 seconds
+Start importing Assets/_Project/Materials/PyramidV3_Desert.mat using Guid(81c6b93151eaf794090a29bb749b3068) (NativeFormatImporter) -> (artifact id: 'a2eefb98ca534d8241ee5969db0b4e9b') in 0.0034464 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Aged_Limestone.mat using Guid(226ae94cba4109848a14a2cd51c9ca4e) (NativeFormatImporter) -> (artifact id: 'c0eca513ea80be91b5d212c33c782f99') in 0.0035139 seconds
+Start importing Assets/_Project/Materials/KhufuV5/V5_Path.mat using Guid(32516492bf4597643923ba5d9937bad1) (NativeFormatImporter) -> (artifact id: '4d35da808af4a5cc052b7efd1285edf0') in 0.0028983 seconds
+Start importing Assets/_Project/Materials/KhufuV6/V6_Tura_Casing.mat using Guid(e244e992d88886843b36bbea053fc4fa) (NativeFormatImporter) -> (artifact id: 'a0c979c780711c91bb59300f06e1381b') in 0.0029106 seconds
+Start importing Assets/_Project/Materials/PyramidV3_Red_Granite.mat using Guid(3325d8dde59d81a4c9fcd33efba34ff3) (NativeFormatImporter) -> (artifact id: 'a39977217c74ceceb00b4ebaf4a46126') in 0.0039605 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Route_Amber.mat using Guid(43578c17893379548959ac627b6f5195) (NativeFormatImporter) -> (artifact id: 'def46ebfb9453b9e3aa627c32356cd04') in 0.0029766 seconds
+Start importing Assets/_Project/Materials/PyramidV4_Core_Limestone.mat using Guid(43dc9ff6ff114c041a80af81d19ecea5) (NativeFormatImporter) -> (artifact id: 'c26209d410ced78e791ccb4852ac03c1') in 0.0028062 seconds
+Start importing Assets/_Project/Materials/PyramidV3_Casing_Trim.mat using Guid(73bf67755f6d0d746a8319fb12a3bf2b) (NativeFormatImporter) -> (artifact id: 'a73978a02cc5fe4888abec7eb495330a') in 0.0023656 seconds
+Start importing Assets/_Project/Materials/KhufuV5/V5_Red.mat using Guid(c367d688a6eb37f42af3a13e52e369d9) (NativeFormatImporter) -> (artifact id: '3364bfd460b24066969c24a96c409142') in 0.0039736 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Red_Granite.mat using Guid(349614b4f49c0a94dab8a31e2d4fd0b5) (NativeFormatImporter) -> (artifact id: '588084e80dc6a730077834412b766882') in 0.0028692 seconds
+Start importing Assets/_Project/Materials/KhufuV5/V5_UnderworldPath.mat using Guid(650a8f77bb280004b868124dea89a76c) (NativeFormatImporter) -> (artifact id: '38cad7c480ddd99f9d563a26404eecc8') in 0.0027029 seconds
+Start importing Assets/_Project/Materials/PyramidV3_Route_Glow.mat using Guid(b52a814a55e3f8d49b5de0257f45c4cc) (NativeFormatImporter) -> (artifact id: '5f182c389813a1e11edea0b12d670191') in 0.0027521 seconds
+Start importing Assets/_Project/Materials/KhufuV5/V5_Underworld.mat using Guid(17918f7490ae82f4e95d5727d7a4a670) (NativeFormatImporter) -> (artifact id: '600880eecb01e9685fb2411e6da6e299') in 0.0027133 seconds
+Start importing Assets/_Project/Materials/PyramidV3_Interior_Limestone.mat using Guid(08a0d8f89923ec541985fcd871359b77) (NativeFormatImporter) -> (artifact id: 'ec5d60cc56f7e4b4f0c3dc33596766c6') in 0.0029604 seconds
+Start importing Assets/_Project/Materials/Team_Blue.mat using Guid(48f0adff8f7b3458f868bb2242de1318) (NativeFormatImporter) -> (artifact id: '4da13b4e0fa3ba78eeb82357c9199bbf') in 0.006589 seconds
+Start importing Assets/_Project/Materials/KhufuV6/V6_Core_Limestone.mat using Guid(48a879273f2d2f647b70cf08a53eabe5) (NativeFormatImporter) -> (artifact id: 'f934c5d8c16463dcac6df633614913db') in 0.0025551 seconds
+Start importing Assets/_Project/Materials/PyramidV4_Tura_Casing.mat using Guid(78c842067f833e84b911eaefdf039a29) (NativeFormatImporter) -> (artifact id: '8e9b4ae6f4223032ebb5d380d760df4f') in 0.0027136 seconds
+Start importing Assets/_Project/Materials/KhufuV6/V6_Basalt_Court.mat using Guid(b81272706cc31aa40a1072eec3b459c6) (NativeFormatImporter) -> (artifact id: '44e77405b46dacbc7ca311538362aba9') in 0.0024164 seconds
+Start importing Assets/_Project/Materials/KhufuV6/V6_Interior_Limestone.mat using Guid(29748870e7f445247adef3750fe3edca) (NativeFormatImporter) -> (artifact id: 'ab415b54f18d2b67f2f5fc386e8a2ea6') in 0.0034154 seconds
+Start importing Assets/_Project/Materials/PyramidV3_Core_Limestone.mat using Guid(89fb19ea707c5704ead06082b1a8e6df) (NativeFormatImporter) -> (artifact id: 'fc304c1e94750e33a261d5654e283a2e') in 0.0028293 seconds
+Start importing Assets/_Project/Materials/PyramidV3_Passage_Floor.mat using Guid(e9932efa433e7964593ccad3ba652e89) (NativeFormatImporter) -> (artifact id: '85e07a5d4f5fccbf586f1d072ca79ad8') in 0.0027953 seconds
+Start importing Assets/_Project/Materials/KhufuV5/V5_Sandstone.mat using Guid(9a15a616d89ff024fac8a761e135e3f6) (NativeFormatImporter) -> (artifact id: '4c5f4072af8fa5ddaa20e56fec91aace') in 0.0030334 seconds
+Start importing Assets/_Project/Materials/PyramidV4_Section_Mass.mat using Guid(bad8943bfe7c6ce40bde1b1d37ec966b) (NativeFormatImporter) -> (artifact id: 'af7180b18af26565e327d5c30a584fae') in 0.004934 seconds
+Start importing Assets/_Project/Materials/PyramidV3_Platform.mat using Guid(bafcac62a01e37043af9f97642d790cb) (NativeFormatImporter) -> (artifact id: 'b20ab40728d406f91d7ca02f06180c04') in 0.0029942 seconds
+Start importing Assets/_Project/Materials/PyramidV4_Casing_Trim.mat using Guid(cae8688ab01e6af4db10f3e8ce6ef389) (NativeFormatImporter) -> (artifact id: '6de82fe00c95f7d88c4c8ef49ad09c36') in 0.0025438 seconds
+Start importing Assets/_Project/Materials/KhufuV5/V5_Gold.mat using Guid(cabfb3d607024bd45a81449f8857ad54) (NativeFormatImporter) -> (artifact id: 'e5381c06cd4185a4ce31b9d99fff5272') in 0.0035167 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Gallery_Detail.mat using Guid(3bc68c9f929d7bf45be1103bd69d2282) (NativeFormatImporter) -> (artifact id: '504977e3c45ca955229b742a25a1d736') in 0.0037347 seconds
+Start importing Assets/_Project/Materials/KhufuV5/V5_Scan.mat using Guid(7ce7614c0a2dce6429c87a7a2ba7b418) (NativeFormatImporter) -> (artifact id: 'bd1bd55e33ef77b9da793533a529905b') in 0.0033451 seconds
+Start importing Assets/_Project/Materials/KhufuV6/V6_Red_Granite.mat using Guid(6d5426e27b3c2bd4d8e803dfbb6ba3aa) (NativeFormatImporter) -> (artifact id: '53bb46248c69e7ff103ff8d54d7396cc') in 0.0031463 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Hybrid_Service.mat using Guid(7d422d5f4c9ab87418e1b909dd4d537b) (NativeFormatImporter) -> (artifact id: '7bbc8d38105d1672fca9e2309e0b581d') in 0.0031959 seconds
+Start importing Assets/_Project/Materials/Point_Gold.mat using Guid(1ec071400414c45c9bf67bb443a1370d) (NativeFormatImporter) -> (artifact id: '2db8089f8a4f31d876303967604ea50f') in 0.0030886 seconds
+Start importing Assets/_Project/Materials/PyramidV3_Dark_Granite.mat using Guid(2e07ca6f9c506c4458d986d9bed60ba8) (NativeFormatImporter) -> (artifact id: 'b2140e941fd552ea58303605f863b8cd') in 0.0030609 seconds
+Start importing Assets/_Project/Materials/KhufuV5/V5_Limestone.mat using Guid(bec4a7b3ce2f3584cb893eaa727cd355) (NativeFormatImporter) -> (artifact id: 'fa831e728720b7b2801ca1b426bf11bd') in 0.0033948 seconds
+Start importing Assets/_Project/Materials/PyramidV3_Interior_Shadow.mat using Guid(3fb37f52f2233c54ebc33aeac86f76fe) (NativeFormatImporter) -> (artifact id: '9f9d9f2f50e817a76e1648c808a53b9f') in 0.0032921 seconds
+Start importing Assets/_Project/Materials/PyramidV4_Interior_Limestone.mat using Guid(5fd54246e51379a42935ce2150d9f0e6) (NativeFormatImporter) -> (artifact id: 'f55bbe659216bb7198f4900914907da4') in 0.0037932 seconds
+Start importing Assets/_Project/Materials/Team_Red.mat using Guid(af6e99b327381401dac816be65df5a2a) (NativeFormatImporter) -> (artifact id: 'd2e85176b5c10bec65a6f3dba6cefbb9') in 0.0033642 seconds
+Start importing Assets/_Project/Materials/PyramidV3_Core_Shadow.mat using Guid(ff60678cd69cc5c448c939c3ae061f07) (NativeFormatImporter) -> (artifact id: 'bbaa3f27c21def0157b3a2197b5cf4bd') in 0.0030514 seconds
+Start importing Assets/_Project/Art/Maps/pyramid_temple_real/pyramid_temple_full_environment.fbx using Guid(fb050d59d84074b25bf9e83ebed8e355) (FBXImporter)Launched and connected shader compiler UnityShaderCompiler.exe after 0.02 seconds
+ -> (artifact id: '587ef28f7e9b06399a2e22fbe0e30247') in 1.8060985 seconds
+Start importing Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Upper.asset using Guid(10914a53b67c7544597ceaaba9340fa6) (NativeFormatImporter) -> (artifact id: 'db655c799ce1ebde298196cf77f6c95b') in 0.0032959 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV9CausewayFidelity/KhufuV9_Basalt_Floor.asset using Guid(90ab1f47dfb978946b5839dbfe20a8cd) (NativeFormatImporter) -> (artifact id: 'ea40383cf0abf9461241d1e400ec0586') in 0.0030682 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV8TempleHub/KhufuV8_Tura_Processional_Aisle.asset using Guid(b09efbe8cbd942c4a979f815359f0bb8) (NativeFormatImporter) -> (artifact id: '1caca79728bc18f35a6caa20215a076a') in 0.003535 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV8TempleHub/KhufuV8_Square_Red_Granite_Pillars.asset using Guid(e04a71cd9c847604c922af4f230e9b42) (NativeFormatImporter) -> (artifact id: '5ef2c39c1e98ded9da9bd0163b613ac9') in 0.0021308 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Limestone_Structure.asset using Guid(32325846bb130c040bb5577573b2ac08) (NativeFormatImporter) -> (artifact id: '2bb7ee97885b85735fe462fe0ee14890') in 0.0027532 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Hybrid_Service_Return.asset using Guid(52d436b5577d02f43b8d74edd8c0d93f) (NativeFormatImporter) -> (artifact id: '53ec884b694a476021cd3089f67d7c6d') in 0.0025887 seconds
+Start importing Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Left.asset using Guid(8276716d6568a6842a90318b80e6372b) (NativeFormatImporter) -> (artifact id: '6ae0103caf677490cc20386c8f4b91a4') in 0.0020771 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV8TempleHub/KhufuV8_Door_Shadow.asset using Guid(a2ddb06b9b0944048b961a8da50d6a6e) (NativeFormatImporter) -> (artifact id: '623b7ddf84c3d2d9b3dfeb0be68928ce') in 0.0032436 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV9CausewayFidelity/KhufuV9_Red_Granite_Rhythm.asset using Guid(23e01409d2f49e64291d1bef00a04532) (NativeFormatImporter) -> (artifact id: '81b9eb100ca66bcbc942610a6706b35b') in 0.0021112 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV8TempleHub/KhufuV8_Paint_Red.asset using Guid(d3101c13a73fd324ca0866f5444528db) (NativeFormatImporter) -> (artifact id: '02d8eefd5006bf5f6296349fd0dcb915') in 0.0031078 seconds
+Start importing Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_East.asset using Guid(d3622f042701ddf4582639d0aef0cec7) (NativeFormatImporter) -> (artifact id: '7b2b099cd4841d30d4afeb132bad0f4e') in 0.0021346 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV8TempleHub/KhufuV8_Tura_Limestone.asset using Guid(d3937e4c362dd6b46b678da492eaedec) (NativeFormatImporter) -> (artifact id: '18647a1d4aa8677df9e4140d70bfc1d4') in 0.0031266 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV8TempleHub/KhufuV8_Paint_Blue.asset using Guid(f3ea70b8e7e55cd47b3f16dc33564cf8) (NativeFormatImporter) -> (artifact id: 'a3c065ec1d37802fb911d4c977277633') in 0.0038024 seconds
+Start importing Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_West.asset using Guid(f699b3b0bf9832d43a94f583aa5ad7e3) (NativeFormatImporter) -> (artifact id: '189b2a7edb6d57d07e495c89c58ffe89') in 0.0030907 seconds
+Start importing Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_South.asset using Guid(370b607845f81d84ea5b535fb9066a0b) (NativeFormatImporter) -> (artifact id: 'aa8d949b2d2cca17442d67670cbd3303') in 0.0045817 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV8TempleHub/KhufuV8_Core_Limestone.asset using Guid(a7d738d79cbd319419eef67d5526eb8d) (NativeFormatImporter) -> (artifact id: 'eac3cd2ce477053a8f38898100fd06df') in 0.003753 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV8TempleHub/KhufuV8_Basalt_Court.asset using Guid(0ac2b08af174f2c4aa19612e27630393) (NativeFormatImporter) -> (artifact id: '1db6c6f35a3c19dcf4e095f6b02cbab8') in 0.0043019 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV9CausewayFidelity/KhufuV9_Tura_Trim.asset using Guid(4ab5fb9c736503d418b2a1e67169dca7) (NativeFormatImporter) -> (artifact id: '8104fa9668f67b56e38d4b0dd27b8dfc') in 0.0035342 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Route_Inlay.asset using Guid(5bb708a99c480fa44ba7868b58ddfc82) (NativeFormatImporter) -> (artifact id: '0c51d52fd1ed4452c263ecc155bd08cc') in 0.0036557 seconds
+Start importing Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Right.asset using Guid(bd14abee83bad6a469f99aea298fad90) (NativeFormatImporter) -> (artifact id: '87933a935b74c7a7c47c36308f45c03b') in 0.004224 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Gallery_Detail.asset using Guid(2e6206519c10d7a4980d94b98ceeb043) (NativeFormatImporter) -> (artifact id: '30bc8926e4f324bc7b06115a7f3428bb') in 0.0027983 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV8TempleHub/KhufuV8_Relief_Gold.asset using Guid(6e9042312b029f540987c51d7db0f6c3) (NativeFormatImporter) -> (artifact id: '76c056ec5334647cf3321f5dba7036da') in 0.0147196 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Shadow_Recess.asset using Guid(7ec6a41084b7ab246a1a16194390aa9a) (NativeFormatImporter) -> (artifact id: 'ae359a4d850b770f46079dac87b31405') in 0.0031499 seconds
+Start importing Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Section_Poche_Mesh.asset using Guid(ae535dd5e36c0e449b1a4a95af4c8ed3) (NativeFormatImporter) -> (artifact id: 'ea510af9a2aa2f792f3b4c9d1f6ec745') in 0.0026182 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV9CausewayFidelity/KhufuV9_Limestone_Structure.asset using Guid(1f857d1ef1fff9f4ca21b82102e76fc3) (NativeFormatImporter) -> (artifact id: '09b4f60b15653e28c1a5f1b9566163c1') in 0.0022421 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV9CausewayFidelity/KhufuV9_Route_Inlay.asset using Guid(3ffdcf96353486c4583345d055c426ba) (NativeFormatImporter) -> (artifact id: 'df276f9cc5159d56d6bbe6752f063069') in 0.0026479 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Red_Granite_Boundary.asset using Guid(4fbdee3c900bfb44b8ffb9ca19363fa4) (NativeFormatImporter) -> (artifact id: '1b89ef2e2f447be544df08c64c4e6a3e') in 0.0024722 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV8TempleHub/KhufuV8_Paint_Teal.asset using Guid(8fa980e6a4e635643af4689b8e86c4bc) (NativeFormatImporter) -> (artifact id: '1c3e252d86d436dc02c88d5845fa6e74') in 0.00254 seconds
+Start importing Assets/_Project/Tests/README.md using Guid(20e215b5e80b14375b6e73dcd51f412e) (TextScriptImporter) -> (artifact id: '21bd90344e65f61dda1d6a8f7ba74593') in 0.0028698 seconds
+Start importing Assets/_Project/Scenes/README.md using Guid(808683eb5b284404cacfd1f3627e9d45) (TextScriptImporter) -> (artifact id: '5d3bf7ba6294c4335915a6fa0cca9d53') in 0.0027671 seconds
+Start importing Assets/_Project/Scripts/Gameplay/TraitorEscapeMvpSpec.md using Guid(4510817c34104ee1ac1179bd7b24c9b7) (TextScriptImporter) -> (artifact id: '28e3ec0accc13332164ce8671410ecfa') in 0.0032315 seconds
+Start importing Assets/_Project/README.md using Guid(5eb612342e12d4fddbdb6884a7d1b597) (TextScriptImporter) -> (artifact id: 'cb627e2af47a0798f627f0085e30390c') in 0.0033154 seconds
+Start importing Assets/_Project/Scripts/README.md using Guid(bfc5fe73fe4e24f05adaf5e727302faa) (TextScriptImporter) -> (artifact id: '9e5b47d0e5170bf124c5260d1bc20712') in 0.0031359 seconds
+Start importing Assets/_Project/Prefabs/MVP_Player.prefab using Guid(58f4f250e5c2148f5ac192e33b8e353e) (PrefabImporter) -> (artifact id: '1eb74c75d4ab14464096016fbc9205d3') in 0.0070383 seconds
+Loading style catalogs (6)
+	StyleSheets/Extensions/base/common.uss
+	UIPackageResources/StyleSheets/Default/Variables/Public/common.uss
+	StyleSheets/Northstar/common.uss
+	StyleSheets/Extensions/fonts/inter.uss
+	StyleSheets/Extensions/base/dark.uss
+	UIPackageResources/StyleSheets/Default/Northstar/Palette/dark.uss
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=4ed05048c3bd7074e83f711c3974d1ca): Total: 19.647 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=153 (actual=153, local cache=0, cache server=0)
+		Asset DB Process Time: managed=40 ms, native=3462 ms
+		Asset DB Callback time: managed=157 ms, native=10 ms
+		Scripting: domain reloads=1, domain reload time=1465 ms, compile time=14499 ms, other=11 ms
+		Project Asset Count: scripts=57, non-scripts=96
+		Asset File Changes: new=210, changed=210, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 0.001ms
+	ApplyChangesToAssetFolders: 0.396ms
+	Scan: 292.378ms
+	OnSourceAssetsModified: 1.346ms
+	CategorizeAssetsWithTransientArtifact: 0.333ms
+	ProcessAssetsWithTransientArtifactChanges: 1.580ms
+	CategorizeAssets: 0.496ms
+	ImportOutOfDateAssets: 3136.242ms (-13905.699ms without children)
+		ImportManagerImport: 2541.845ms (12.081ms without children)
+			ImportInProcess: 2529.371ms
+			UpdateCategorizedAssets: 0.393ms
+		CompileScripts: 14499.460ms
+		ReloadNativeAssets: 0.001ms
+		UnloadImportedAssets: 0.295ms
+		ReloadImportedAssets: 0.017ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.014ms
+		InitializingProgressBar: 0.016ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 0.292ms
+	PostProcessAllAssets: 164.406ms
+	Hotreload: 1.978ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.006ms
+	UnloadStreamsBegin: 0.522ms
+	PersistCurrentRevisions: 0.540ms
+	UnloadStreamsEnd: 0.755ms
+	GenerateScriptTypeHashes: 0.011ms
+	Untracked: 16045.594ms
+
+Application.AssetDatabase Initial Refresh End
+Scanning for USB devices : 1.704ms
+Start importing ProjectSettings/ProjectSettings.asset using Guid(00000000000000004000000000000000) (LibraryAssetImporter) -> (artifact id: 'de8d3fd6018218c1e8b4cbddad6bd10c') in 0.0044696 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=36826824287c47744b4c5184e5eacae4): Total: 0.030 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-channel_play
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 73 unused Assets / (483.3 KB). Loaded Objects now: 584.
+Memory consumption went from 128.7 MB to 128.2 MB.
+Total: 3.727200 ms (FindLiveObjects: 0.040700 ms CreateObjectMapping: 0.004900 ms MarkObjects: 3.457900 ms  DeleteObjects: 0.222800 ms)
+
+Opening scene 'Assets/_Project/Scenes/School_MVP.unity'
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Assets/_Project/Scenes/School_MVP.unity'
+	Deserialize:            43.549 ms
+	Integration:            92.902 ms
+	Integration of assets:  0.005 ms
+	Thread Wait Time:       0.016 ms
+	Total Operation Time:   136.472 ms
+Unloading 1 unused Assets / (0.5 KB). Loaded Objects now: 5478.
+Memory consumption went from 134.4 MB to 134.4 MB.
+Total: 4.047200 ms (FindLiveObjects: 0.309300 ms CreateObjectMapping: 0.021700 ms MarkObjects: 3.688700 ms  DeleteObjects: 0.026900 ms)
+
+CHANNEL_PLAY_KHUFU_V10_VALIDATE result=passed signature=871fab43f392499377b7ca098e5b625b6f0144ccf82ad3228e83423957a9c3dd clearance_samples=220 enclosure_min=0.792
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ChannelPlayKhufuV10InteriorValidator:ValidateMenu () (at Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs:87)
+ChannelPlayKhufuV10InteriorValidator:RunAllStaticGates () (at Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs:55)
+ChannelPlayKhufuV10InteriorValidator:RunAllStaticGatesBatch () (at Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs:67)
+
+(Filename: Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs Line: 87)
+
+Opening scene 'Assets/_Project/Scenes/School_MVP.unity'
+Unloading 43 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Assets/_Project/Scenes/School_MVP.unity'
+	Deserialize:            44.434 ms
+	Integration:            7.679 ms
+	Integration of assets:  0.009 ms
+	Thread Wait Time:       0.027 ms
+	Total Operation Time:   52.150 ms
+Unloading 1 unused Assets / (0.5 KB). Loaded Objects now: 5495.
+Memory consumption went from 132.2 MB to 132.2 MB.
+Total: 3.822800 ms (FindLiveObjects: 0.297700 ms CreateObjectMapping: 0.030700 ms MarkObjects: 3.469400 ms  DeleteObjects: 0.024300 ms)
+
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Limestone_Structure.asset using Guid(32325846bb130c040bb5577573b2ac08) (NativeFormatImporter) -> (artifact id: '2bb7ee97885b85735fe462fe0ee14890') in 0.0020098 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Hybrid_Service_Return.asset using Guid(52d436b5577d02f43b8d74edd8c0d93f) (NativeFormatImporter) -> (artifact id: '53ec884b694a476021cd3089f67d7c6d') in 0.0018095 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Route_Inlay.asset using Guid(5bb708a99c480fa44ba7868b58ddfc82) (NativeFormatImporter) -> (artifact id: '0c51d52fd1ed4452c263ecc155bd08cc') in 0.0017874 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Gallery_Detail.asset using Guid(2e6206519c10d7a4980d94b98ceeb043) (NativeFormatImporter) -> (artifact id: '30bc8926e4f324bc7b06115a7f3428bb') in 0.0018855 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Shadow_Recess.asset using Guid(7ec6a41084b7ab246a1a16194390aa9a) (NativeFormatImporter) -> (artifact id: 'ae359a4d850b770f46079dac87b31405') in 0.0015563 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Red_Granite_Boundary.asset using Guid(4fbdee3c900bfb44b8ffb9ca19363fa4) (NativeFormatImporter) -> (artifact id: '1b89ef2e2f447be544df08c64c4e6a3e') in 0.0015678 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=4c54d7e737bf7fc4d9d1d3b8dc14b034): Total: 0.025 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=52701e49c2f7ca449aea1f033345eb60): Total: 0.012 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Deep_Shadow.mat using Guid(a08cb62682a5e6540b74db0543877cad) (NativeFormatImporter) -> (artifact id: '0cbd3e0a041f8b079caf6b881801efae') in 0.0019133 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Aged_Limestone.mat using Guid(226ae94cba4109848a14a2cd51c9ca4e) (NativeFormatImporter) -> (artifact id: 'c0eca513ea80be91b5d212c33c782f99') in 0.0019145 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Route_Amber.mat using Guid(43578c17893379548959ac627b6f5195) (NativeFormatImporter) -> (artifact id: 'afbebd24a477777b577aabd9fbd018ad') in 0.0021834 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Red_Granite.mat using Guid(349614b4f49c0a94dab8a31e2d4fd0b5) (NativeFormatImporter) -> (artifact id: '588084e80dc6a730077834412b766882') in 0.0018611 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Gallery_Detail.mat using Guid(3bc68c9f929d7bf45be1103bd69d2282) (NativeFormatImporter) -> (artifact id: '504977e3c45ca955229b742a25a1d736') in 0.002253 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Hybrid_Service.mat using Guid(7d422d5f4c9ab87418e1b909dd4d537b) (NativeFormatImporter) -> (artifact id: '7bbc8d38105d1672fca9e2309e0b581d') in 0.0019767 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=4d3a550d928a5804a830dfb620e2c74e): Total: 0.033 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/_Project/Scenes/School_MVP.unity using Guid(de9c8c090c45e4d9eb499823d1fde948) (DefaultImporter) -> (artifact id: '24762b04f98835746e0a5aea0abca805') in 0.0009087 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=7bb9f46ebe40eae4eaba52f3d52c2bd1): Total: 0.020 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=eccae76fcc8f6894c8d6a5d0cea36253): Total: 0.014 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+CHANNEL_PLAY_KHUFU_V10_BUILD result=built renderers=6 vertices=5016 triangles=2508 colliders=70 disabledRenderers=60 disabledColliders=39
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ChannelPlayKhufuV10InteriorBuilder:Rebuild () (at Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorBuilder.cs:139)
+ChannelPlayKhufuV10InteriorValidator:ValidateIdempotence () (at Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs:145)
+ChannelPlayKhufuV10InteriorValidator:RunAllStaticGates () (at Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs:56)
+ChannelPlayKhufuV10InteriorValidator:RunAllStaticGatesBatch () (at Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs:67)
+
+(Filename: Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorBuilder.cs Line: 139)
+
+Opening scene 'Assets/_Project/Scenes/School_MVP.unity'
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Assets/_Project/Scenes/School_MVP.unity'
+	Deserialize:            45.024 ms
+	Integration:            7.197 ms
+	Integration of assets:  0.007 ms
+	Thread Wait Time:       0.015 ms
+	Total Operation Time:   52.243 ms
+Unloading 2 unused Assets / (1.4 KB). Loaded Objects now: 5504.
+Memory consumption went from 136.1 MB to 136.1 MB.
+Total: 3.644900 ms (FindLiveObjects: 0.231800 ms CreateObjectMapping: 0.021300 ms MarkObjects: 3.362000 ms  DeleteObjects: 0.029000 ms)
+
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Limestone_Structure.asset using Guid(32325846bb130c040bb5577573b2ac08) (NativeFormatImporter) -> (artifact id: '2bb7ee97885b85735fe462fe0ee14890') in 0.0018052 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Hybrid_Service_Return.asset using Guid(52d436b5577d02f43b8d74edd8c0d93f) (NativeFormatImporter) -> (artifact id: '53ec884b694a476021cd3089f67d7c6d') in 0.0018382 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Route_Inlay.asset using Guid(5bb708a99c480fa44ba7868b58ddfc82) (NativeFormatImporter) -> (artifact id: '0c51d52fd1ed4452c263ecc155bd08cc') in 0.0017882 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Gallery_Detail.asset using Guid(2e6206519c10d7a4980d94b98ceeb043) (NativeFormatImporter) -> (artifact id: '30bc8926e4f324bc7b06115a7f3428bb') in 0.0014301 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Shadow_Recess.asset using Guid(7ec6a41084b7ab246a1a16194390aa9a) (NativeFormatImporter) -> (artifact id: 'ae359a4d850b770f46079dac87b31405') in 0.001433 seconds
+Start importing Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Red_Granite_Boundary.asset using Guid(4fbdee3c900bfb44b8ffb9ca19363fa4) (NativeFormatImporter) -> (artifact id: '1b89ef2e2f447be544df08c64c4e6a3e') in 0.0015459 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=63a6b88501915c14e9aaed28b2fb206b): Total: 0.024 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=80c0de9c433fc7140bc340c65ad132ec): Total: 0.010 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Deep_Shadow.mat using Guid(a08cb62682a5e6540b74db0543877cad) (NativeFormatImporter) -> (artifact id: '0cbd3e0a041f8b079caf6b881801efae') in 0.0020037 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Aged_Limestone.mat using Guid(226ae94cba4109848a14a2cd51c9ca4e) (NativeFormatImporter) -> (artifact id: 'c0eca513ea80be91b5d212c33c782f99') in 0.0017637 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Route_Amber.mat using Guid(43578c17893379548959ac627b6f5195) (NativeFormatImporter) -> (artifact id: 'afbebd24a477777b577aabd9fbd018ad') in 0.001691 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Red_Granite.mat using Guid(349614b4f49c0a94dab8a31e2d4fd0b5) (NativeFormatImporter) -> (artifact id: '588084e80dc6a730077834412b766882') in 0.0014449 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Gallery_Detail.mat using Guid(3bc68c9f929d7bf45be1103bd69d2282) (NativeFormatImporter) -> (artifact id: '504977e3c45ca955229b742a25a1d736') in 0.0012988 seconds
+Start importing Assets/_Project/Materials/KhufuV10Interior/V10_Hybrid_Service.mat using Guid(7d422d5f4c9ab87418e1b909dd4d537b) (NativeFormatImporter) -> (artifact id: '7bbc8d38105d1672fca9e2309e0b581d') in 0.0013298 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=b4d6d88933239f04b84f5d848c8ce6ec): Total: 0.024 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Start importing Assets/_Project/Scenes/School_MVP.unity using Guid(de9c8c090c45e4d9eb499823d1fde948) (DefaultImporter) -> (artifact id: '24762b04f98835746e0a5aea0abca805') in 0.0007967 seconds
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=d8d91323ec851ae4aae2f978538ea1e3): Total: 0.018 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=2d9dd4e16de1231489eee04e27feea99): Total: 0.010 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+CHANNEL_PLAY_KHUFU_V10_BUILD result=built renderers=6 vertices=5016 triangles=2508 colliders=70 disabledRenderers=60 disabledColliders=39
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ChannelPlayKhufuV10InteriorBuilder:Rebuild () (at Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorBuilder.cs:139)
+ChannelPlayKhufuV10InteriorValidator:ValidateIdempotence () (at Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs:150)
+ChannelPlayKhufuV10InteriorValidator:RunAllStaticGates () (at Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs:56)
+ChannelPlayKhufuV10InteriorValidator:RunAllStaticGatesBatch () (at Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs:67)
+
+(Filename: Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorBuilder.cs Line: 139)
+
+Opening scene 'Assets/_Project/Scenes/School_MVP.unity'
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Assets/_Project/Scenes/School_MVP.unity'
+	Deserialize:            86.373 ms
+	Integration:            20.978 ms
+	Integration of assets:  0.024 ms
+	Thread Wait Time:       0.028 ms
+	Total Operation Time:   107.403 ms
+Unloading 2 unused Assets / (1.4 KB). Loaded Objects now: 5504.
+Memory consumption went from 136.2 MB to 136.2 MB.
+Total: 9.523900 ms (FindLiveObjects: 0.525800 ms CreateObjectMapping: 0.075500 ms MarkObjects: 8.850100 ms  DeleteObjects: 0.069900 ms)
+
+Opening scene 'Assets/_Project/Scenes/School_MVP.unity'
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Assets/_Project/Scenes/School_MVP.unity'
+	Deserialize:            58.688 ms
+	Integration:            19.523 ms
+	Integration of assets:  0.014 ms
+	Thread Wait Time:       0.101 ms
+	Total Operation Time:   78.326 ms
+Unloading 1 unused Assets / (0.5 KB). Loaded Objects now: 5504.
+Memory consumption went from 136.3 MB to 136.3 MB.
+Total: 6.638300 ms (FindLiveObjects: 0.693200 ms CreateObjectMapping: 0.030800 ms MarkObjects: 5.879100 ms  DeleteObjects: 0.033900 ms)
+
+Opening scene 'Assets/_Project/Scenes/School_MVP.unity'
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Assets/_Project/Scenes/School_MVP.unity'
+	Deserialize:            46.250 ms
+	Integration:            7.526 ms
+	Integration of assets:  0.011 ms
+	Thread Wait Time:       0.011 ms
+	Total Operation Time:   53.798 ms
+Unloading 1 unused Assets / (0.5 KB). Loaded Objects now: 5504.
+Memory consumption went from 136.3 MB to 136.3 MB.
+Total: 4.374200 ms (FindLiveObjects: 0.270700 ms CreateObjectMapping: 0.022900 ms MarkObjects: 4.047400 ms  DeleteObjects: 0.032100 ms)
+
+CHANNEL_PLAY_KHUFU_V10_STATIC_GATES result=passed
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ChannelPlayKhufuV10InteriorValidator:RunAllStaticGates () (at Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs:60)
+ChannelPlayKhufuV10InteriorValidator:RunAllStaticGatesBatch () (at Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs:67)
+
+(Filename: Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs Line: 60)
+
+[Physics::Module] Cleanup current backned.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+[Licensing::IpcConnector] LicenseClient-User-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-User channel disconnected successfully.
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+abort_threads: Failed aborting id: 0000000000001384, mono_thread_manage will ignore it
+
+abort_threads: Failed aborting id: 000000000001905C, mono_thread_manage will ignore it
+
+abort_threads: Failed aborting id: 0000000000001384, mono_thread_manage will ignore it
+
+abort_threads: Failed aborting id: 000000000001905C, mono_thread_manage will ignore it
+
+debugger-agent: Unable to listen on 3320
+Checking for leaked weakptr:
+  Found no leaked weakptrs.
+##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1783894085648,"processId":108212,"allocatedMemory":10121815,"memoryLabels":[{"Default":28533},{"Permanent":15348},{"NewDelete":194145},{"Thread":4230344},{"Manager":34618},{"VertexData":8},{"Geometry":816},{"VFX":-104},{"Texture":160},{"Shader":78789},{"Material":24},{"GfxDevice":55784},{"Animation":392},{"Audio":4040},{"FontEngine":256},{"Physics":2081},{"Serialization":816},{"Input":14824},{"JobScheduler":33024},{"TextLib":160},{"Mono":32},{"ScriptingNativeRuntime":155060},{"BaseObject":1620176},{"Resource":1304},{"Renderer":2928},{"Transform":4646},{"File":3941},{"WebCam":616},{"Culling":32},{"Terrain":11394},{"Wind":24},{"STL":40},{"String":22729},{"DynamicArray":86606},{"HashMap":50324},{"Utility":2661710},{"Curl":48},{"PoolAlloc":1768},{"AI":104},{"TypeTree":5005},{"ScriptManager":512},{"RuntimeInitializeOnLoadManager":64},{"SpriteAtlas":112},{"GI":7888},{"Director":8240},{"CloudService":10656},{"WebRequest":808},{"VR":45969},{"SceneManager":496},{"Video":64},{"LazyScriptCache":32},{"Camera":17},{"Secure":265},{"Image":16384},{"SerializationCache":1576},{"APIUpdating":10320},{"Subsystems":336},{"VirtualTexturing":57888},{"StaticSafetyDebugInfo":278528},{"Analytics":256},{"Hierarchy":272},{"CoreStats":12536},{"Identifiers":12384},{"Gui":80},{"EditorUtility":43608},{"VersionControl":4},{"Undo":947},{"AssetDatabase":249575},{"EditorGi":328},{"UnityConnect":24184},{"Upm":1392},{"DrivenProperties":72},{"LocalIPC":210},{"ProfilerEditor":9746},{"CoreBusinessMetrics":2793},{"Licensing":664},{"AssetReference":32},{"IPCStream":32}]}
+~StackAllocator(ALLOC_TEMP_MAIN) m_LastAlloc not NULL. Did you forget to call FreeAllStackAllocations()? To get more information, run app with -diag-temp-memory-leak-validation cmd line argument

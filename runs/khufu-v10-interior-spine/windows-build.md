@@ -1,0 +1,302 @@
+﻿# Khufu V10 Windows Development Player Build
+
+- Verdict: **passed**
+- Build target: `StandaloneWindows64` Development Player
+- Unity: `6000.0.76f1`
+- Scene: `Assets/_Project/Scenes/School_MVP.unity`
+- Output: `Builds/KhufuV10/ChannelPlayKhufuV10.exe`
+- Duration: `10.123 seconds`
+- Total size: `150483753 bytes`
+- Errors / warnings: `0 / 185`
+- BuildReport files: `268`
+- Player executable SHA256: `ab5809518c33adf6dad28c9ffe467d2f78f0c00bf78991fef991a7dd04a8fc48`
+- UnityPlayer SHA256: `376ef4d7595a2d0848e9e3a1c4732fcdca9e33cfb844a002b020e5443cedb9b6`
+- Built level SHA256: `c186f0fa9b87a66b4e683c9ba3e7e6f6f97c52d13852b34dc22ae3bf2ed175ef`
+- Assembly-CSharp SHA256: `2fe263fa573edd5eec9022b1238588df92a6e48f6a86991c0af7228fa46af468`
+- Scene source SHA256: `d1778ecb2edfb7e83173a893ec82f5acb8959078ec68fc714a5f1a1320e83ad2`
+- V10 route contract SHA256: `971880c37d14f98cec93420b4aa792ec86dbafe0f05e8c34d05390948a2a568c`
+- V10 traversal probe SHA256: `18c3d999d319831ab6dd1cd3235676386c293a515d6f10a536ed425e45e29bff`
+- V10 builder SHA256: `187796ae0099ab8029ab0bb0127dc65460028747b4e7101350aaca174d6c6172`
+- V10 mesh pipeline SHA256: `ad9f8818ad1c9ff82798b60eb6bf409c7c40d352ea89075c5d666e4c35b8c78a`
+- V10 validator SHA256: `b7a6d8603390afc1d95369cf5f287b8eaeadbc831de2d05b929ef50c3a209a14`
+- V10 build script SHA256: `5f38838da8d4047c325fb982e219dafc1865f559306cecc1f8b0ba70985fc328`
+- Shared performance probe SHA256: `898c251cbadf36038eacef2af1feb0d7b462e99eccd021a00cf619ac76454155`
+- Generated mesh Limestone_Structure SHA256: `0d8f1bd4344e3308e2bd6cb881359400796ba8bdd5a2d410665b591ff4d04cd1`
+- Generated mesh Gallery_Detail SHA256: `4570952aade906e6b8d53cdfe43448a72569ad7fa2100848470dac8e9d437143`
+- Generated mesh Red_Granite_Boundary SHA256: `e75e0101e120748489d756012eeb846588143de8f64552566dc9eb308c4e5916`
+- Generated mesh Hybrid_Service_Return SHA256: `0526e23ed9563d6e7e9a6c1b7541ae9f507c730d92de2ec14999d0bf0e67cadd`
+- Generated mesh Shadow_Recess SHA256: `bab17283c8337dc6b2d8c5af016507ba82bfd7734168e79b0484d5978e864049`
+- Generated mesh Route_Inlay SHA256: `3ddd989976dd0089dec4caf5dcf91ef7fd609b1b5f3dbf5fc09613e27280ba3d`
+
+## BuildReport Payload
+- `Builds/KhufuV10/ChannelPlayKhufuV10.exe` / role `exe` / bytes `671744` / SHA256 `ab5809518c33adf6dad28c9ffe467d2f78f0c00bf78991fef991a7dd04a8fc48`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Assembly-CSharp.dll` / role `dll` / bytes `156160` / SHA256 `2fe263fa573edd5eec9022b1238588df92a6e48f6a86991c0af7228fa46af468`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Assembly-CSharp.pdb` / role `pdb` / bytes `66232` / SHA256 `c52f41a66470149d3a92702ee32ce7fdd7e0449710fa6d53e44ee49484881e6b`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/MCPForUnity.Runtime.dll` / role `dll` / bytes `33280` / SHA256 `cdfb74ae954ad04b7987d719e41303c6514878ed6e39647c1ee5c095be8e7309`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/MCPForUnity.Runtime.pdb` / role `pdb` / bytes `28684` / SHA256 `b0f4e21fe6f50e898a6063ab9dd40994458dd4d8fd1abe41b71286c49f67f78c`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Mono.Security.dll` / role `dll` / bytes `241152` / SHA256 `4b6569566e48fa584dde7b4f2faa4c3cc0321599942e0898ba1b06838aef7108`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Newtonsoft.Json.dll` / role `dll` / bytes `691712` / SHA256 `a56146202232958f46bd6a28b5a7da166aea123ee0d646735a46e5c341dfbf1f`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Newtonsoft.Json.pdb` / role `pdb` / bytes `2174464` / SHA256 `17cbab4d4207187ed94173c0d59d7a39fabed7c9035b73634c1f02188dd60168`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.ComponentModel.Composition.dll` / role `dll` / bytes `257024` / SHA256 `0076148507a91ae4839320d6afb549eec928596b72dcd95ea6c5ecf73f8c65f2`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Configuration.dll` / role `dll` / bytes `124928` / SHA256 `69686fe46898d9c0077adb973527f3f5eb9c4840fa2f8d90a860b2f5c1e03fa1`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Core.dll` / role `dll` / bytes `1113088` / SHA256 `9493ebe16569f6067beef5281d68e83ee9511db7f55245b1dc2c95e8e189fce3`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Data.DataSetExtensions.dll` / role `dll` / bytes `29696` / SHA256 `1356d8889a0edd5a658f2f942638ebf33269e68c4f72f2775741b821a6c6520b`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Data.dll` / role `dll` / bytes `2125312` / SHA256 `6081ca5f31adb626455939a12d2f99fba9e963bc05e9acaa1f7921c0d84784bb`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Drawing.dll` / role `dll` / bytes `489984` / SHA256 `5218327941712bdebe787e33fe2200a859e4409becb4fb46e6451cece5d2e8e1`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.EnterpriseServices.dll` / role `dll` / bytes `44544` / SHA256 `230bc9bf6611383aa9b3964ca70b1fe72b3662e213331c123265c8c83b5d03d6`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.IO.Compression.FileSystem.dll` / role `dll` / bytes `18432` / SHA256 `bfae12d50f244dda8b9715594bb85be351c63326adcc27dad4f4a6b188d83cbf`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.IO.Compression.dll` / role `dll` / bytes `114688` / SHA256 `39838d5ae350265398321e656eb0b396a67113e278d05d79b2d86e7326a0f196`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.IO.Hashing.dll` / role `dll` / bytes `50488` / SHA256 `ac7ac3e83805b0b621c48b90543dc733c9a89106835278618357d6187e3da74e`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Memory.dll` / role `dll` / bytes `4608` / SHA256 `c4f030a2cba7da7cdcf493257c24560e203d355904aee490d645a935842f834a`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Net.Http.dll` / role `dll` / bytes `122880` / SHA256 `3677239bd08808da011f94a7c41371baac10befa6423098c187471b236d2db38`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Numerics.dll` / role `dll` / bytes `119296` / SHA256 `9b6d5a2d166165a7f1edfea05b4aae4f979f7672f6d50d75ccf8586098ea4de6`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Runtime.CompilerServices.Unsafe.dll` / role `dll` / bytes `18024` / SHA256 `01748200f2400c742aa689f1f5101bd6298efdfd92c00c18f4fa473847235ba9`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Runtime.Serialization.dll` / role `dll` / bytes `934400` / SHA256 `783e6193db3d0e6f137587c5a7fd8d2f4076b8307cd1c481eeab93ed57a81000`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Runtime.dll` / role `dll` / bytes `12288` / SHA256 `e0a7334b7ba419aaab6bd3bb6992d693e689341a9178172c9bf99c2aa6a085bd`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Security.dll` / role `dll` / bytes `320000` / SHA256 `81ffc9fa9b17422a9ef25fe7bccccd154ee277f459a3c62aa67ead0a4feca16d`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.ServiceModel.Internals.dll` / role `dll` / bytes `215040` / SHA256 `289d5cb6d75b81a2c38643a0305f12c908d8c78ffef9f2845f0b22b30dc45a92`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Transactions.dll` / role `dll` / bytes `35328` / SHA256 `1c86ddf61fdf72bd8942f8ac12226b134d4e10ec88d66ef2f31ccbb65b149aca`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Xml.Linq.dll` / role `dll` / bytes `136704` / SHA256 `181938ade3495f679db26fc767585bbd84b10f664d47ef1e3422d667f4954370`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Xml.dll` / role `dll` / bytes `3160064` / SHA256 `f8d4a2af788e679811171031b79f4ac5204e00526efa0f0f3507984c3ee96d0a`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.dll` / role `dll` / bytes `2641920` / SHA256 `439ca04b265472afe66df7802bed26e880b3db35e33c7e0ecf182611f4b9b6d7`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AI.Assistant.Runtime.dll` / role `dll` / bytes `436736` / SHA256 `7f3ab9b44eddcb5d93dab9b0abb9c1463496b877de96a6c3c49f0052c1e01579`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AI.Assistant.Runtime.pdb` / role `pdb` / bytes `171576` / SHA256 `c2cd608335f798a65190c5fe899d980a43f70d232140e6d57a3623e487ad90ed`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AI.MCP.Runtime.dll` / role `dll` / bytes `9728` / SHA256 `ea4d4e3f63fa084e4a2eb80893d4338aaf8b2b405a91f0a788262d967913ed56`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AI.MCP.Runtime.pdb` / role `pdb` / bytes `18264` / SHA256 `e8fcb276e86016c33cdae36e0afc2cdce40be2b18b41e87a5ee9fc59e106b814`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AI.Tracing.dll` / role `dll` / bytes `32256` / SHA256 `d0e7cc418423dbf0124478106d02e6d24ec78036e6571385085deac855a337b7`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AI.Tracing.pdb` / role `pdb` / bytes `26436` / SHA256 `738cc2489d809ad4c88689df5fdfd00141a60e95936592025a1e9b83af185d78`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.InternalAPIBridge.dll` / role `dll` / bytes `9728` / SHA256 `994fe0b86e5e12afc5cbcaa2de1535734b7d4d9518282ed2c01138788090fd9f`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.InternalAPIBridge.pdb` / role `pdb` / bytes `18360` / SHA256 `80b6cd4188c60dd905b61b420374f21d8bc5fb12c8599d0948ca4fcea60d6395`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.MVVM.dll` / role `dll` / bytes `36864` / SHA256 `30282f7f07f15a4910270b93d926177bc75ed077f7e4216d20e39a3ead2b8cb9`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.MVVM.pdb` / role `pdb` / bytes `30356` / SHA256 `f578f4e5d4098d5747c32de50c085babb83107e5f15f87e1f6fe161217fb15e9`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.Navigation.dll` / role `dll` / bytes `33792` / SHA256 `e286815dad9b5911cc22322b2fddbceaf73784b6bd461400783b34f8821d66e4`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.Navigation.pdb` / role `pdb` / bytes `27872` / SHA256 `c114ecc41c62d41cded5cb5809a904129b4af615da2d3cdcaa9cfa426b6d1bdd`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.Undo.dll` / role `dll` / bytes `10240` / SHA256 `6657b90a75889780eaf2e2817225563beed041dc76a8076ac6ed8f72175d4003`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.Undo.pdb` / role `pdb` / bytes `19152` / SHA256 `6c90f67f679a4b44d719aa7495bcc2f4999060c3343783cfb8525dfce780674a`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.dll` / role `dll` / bytes `684032` / SHA256 `cdb68f1675364fdf4a17664aa821556ae2f64813a1d0734f23999609b6a96c62`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.pdb` / role `pdb` / bytes `401048` / SHA256 `b7ccc2c591dfa8fd71929b4514cb084b5e0498db7347a61e19049d5bbad17902`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Burst.Unsafe.dll` / role `dll` / bytes `5632` / SHA256 `9d9c1ff52411decbee5d9f0d1cd61ebeaa222077aa77a52101ea3debafae98e2`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Burst.dll` / role `dll` / bytes `335360` / SHA256 `1b00d5af1da0fd5ebb39798d0883f07f337d936d3aefed5d4281a4e6bbb2a0ad`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Burst.pdb` / role `pdb` / bytes `221372` / SHA256 `69849d17a21c5a2a7065f2f6774dcbd0c7a77be728e67dc5708b1f4a5eda1abc`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Collections.LowLevel.ILSupport.dll` / role `dll` / bytes `5120` / SHA256 `ff50383f807f9692e4913b97e47d86fefcb8faa33d6d48cd3e3fd6fc7ffb448d`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Collections.dll` / role `dll` / bytes `499712` / SHA256 `8f92e4ee8db90fdf2b384ac5882f9d8ec0f7170386d154f6d85f5aa9c0ec7aac`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Collections.pdb` / role `pdb` / bytes `314624` / SHA256 `8c4286294069d6e81bda64d6f2c3543e590b7116f23c6d29e4a46703ad23decd`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.InferenceEngine.Tokenization.dll` / role `dll` / bytes `209408` / SHA256 `5b6f6d2b748c8786e5a75a3a4f0aff1e915130aeef582906161dae385dc723bc`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.InferenceEngine.Tokenization.pdb` / role `pdb` / bytes `122476` / SHA256 `b4109b27cc93e0be0298dc7a10af79dde2dfb6845e800c40abe426d80dd6fe5f`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.InferenceEngine.dll` / role `dll` / bytes `1456640` / SHA256 `290452d834d4c9e3c238dcc297384a9db71b1c5e5a2781f869824bf06a770825`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.InferenceEngine.pdb` / role `pdb` / bytes `843052` / SHA256 `339e344d70e59060cd99a7d205ec3197e628328c0836c1bd3a945812abf5dda5`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Mathematics.dll` / role `dll` / bytes `886784` / SHA256 `bedb5874933f073de0e5c107332d0e9ab9b7fcdf42441c4a1f81c32ebe922c3e`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Mathematics.pdb` / role `pdb` / bytes `515836` / SHA256 `11978571cb9b9e4c06157a0073812363f6ffb3ecbb8480fc3b49a7e78c431c43`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Multiplayer.Center.Common.dll` / role `dll` / bytes `10752` / SHA256 `f35625c517f32ffe80d41ea2ee736543f9c29cf9d5be41688a82fe2fcafe81a6`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Multiplayer.Center.Common.pdb` / role `pdb` / bytes `18160` / SHA256 `a806cc8d34d899c22355785d9723c8ec3fcba018bfbed1a49d052b177fec1198`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AIModule.dll` / role `dll` / bytes `73640` / SHA256 `b83489bc5ff5ad55cdbd81430a34f2b089da07850d4ad4b44b35822b7323cc75`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AIModule.pdb` / role `pdb` / bytes `20536` / SHA256 `230df02d6330ef9ca44af48cbef5162a1caab3390b92999d84bad9ca2648f5c1`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AMDModule.dll` / role `dll` / bytes `21936` / SHA256 `5bba6cad9451d4587762bfbe9c5402b8229b4829abea6a7a8df8eb6d5811c9b1`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AMDModule.pdb` / role `pdb` / bytes `11916` / SHA256 `f7569a71828d09c17fd95332e3be17d99b1afcec7adf068a754c3fcffacaeca4`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ARModule.dll` / role `dll` / bytes `22440` / SHA256 `a5acd3b7d25cc5e7000aaabc52a6e288c70d83a34438f45f21999f6d17580e6d`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ARModule.pdb` / role `pdb` / bytes `9892` / SHA256 `070e6e7245eb15a603897d53cc6b3b02d33d49bf2b3083cc15ef4f09292fbfeb`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AccessibilityModule.dll` / role `dll` / bytes `54704` / SHA256 `c8838a83ef25e7dcf7eadb992f3af5fa3dfcf168df30c76547b04855cf0584ae`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AccessibilityModule.pdb` / role `pdb` / bytes `25612` / SHA256 `4eff4c7544bc63337ab864e90ee89b3aa1011537541f36be9574776dbceffb0a`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AndroidJNIModule.dll` / role `dll` / bytes `116648` / SHA256 `48f292113d993c4f5d7a1202559a20387d800b3a920025d1b15246368489b65d`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AndroidJNIModule.pdb` / role `pdb` / bytes `49824` / SHA256 `483a3277d5b6be4e2bf94fe26ad443a60563a0fcf373a4694d863f03e5c860e5`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AnimationModule.dll` / role `dll` / bytes `214448` / SHA256 `12b221404784d680478052a954c839f6017552e42076a19b61567de6bc35f915`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AnimationModule.pdb` / role `pdb` / bytes `58604` / SHA256 `17e25867fbb229aeb9c16aca3ca3142a2be106a2e6e8e6537287ec3379da8feb`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AssetBundleModule.dll` / role `dll` / bytes `39336` / SHA256 `eeea0e4d0556d0042c485d514f9924c5a636229b52f9a437375dba414826a2ca`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AssetBundleModule.pdb` / role `pdb` / bytes `14036` / SHA256 `6b6eb579a54b07300e277288520f2580862ee5014c3ec994f052a60fc3ec5072`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AudioModule.dll` / role `dll` / bytes `103848` / SHA256 `729cbca8ced5cde8f4065ab47e069edf8ec8a21e74a748e87b867baa08421cef`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AudioModule.pdb` / role `pdb` / bytes `23880` / SHA256 `57df7598241e4382d7c8a96da418f511754391c9a06d0ab5fdd4776db1ea3861`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ClothModule.dll` / role `dll` / bytes `33192` / SHA256 `cd8692e221ca95cb1f23c7b6395375c6432f7b3e74f200852252e46571c0599b`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ClothModule.pdb` / role `pdb` / bytes `10384` / SHA256 `af9bdd432aa805307aae2996738e67d1bd687104ad8aad52be78143bfc9e6afc`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ClusterInputModule.dll` / role `dll` / bytes `25008` / SHA256 `eba1975ad9a8453d0aec750b8f2ee515355d9383473659ad2658f5e21e6eb818`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ClusterInputModule.pdb` / role `pdb` / bytes `9276` / SHA256 `f3293457913fa6fde73fa2aaee8b5de2c067da7f6fb328b1e6134a751cedae5a`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ClusterRendererModule.dll` / role `dll` / bytes `23464` / SHA256 `117123b4344691bed4aa6fa59f8f284d95a8e2e670d8d7f4622885fd62f9ac50`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ClusterRendererModule.pdb` / role `pdb` / bytes `9884` / SHA256 `97f54c5e5f83bc2ed1030e97f109e65c7ec8d48787940889cc890a5ec60c3490`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ContentLoadModule.dll` / role `dll` / bytes `29608` / SHA256 `1a27d8f59cf1395308f3295207fa027c20aa02da041de51c6da7711b68cefe0b`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ContentLoadModule.pdb` / role `pdb` / bytes `11056` / SHA256 `438979c72bde4d8883f807c55c123e43674569dd86bd6ea5eaa9868dbba57a23`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.CoreModule.dll` / role `dll` / bytes `1801128` / SHA256 `b4334bd2a72883dc4ebb6a9417436abb93299253a95777b09325a861add26707`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.CoreModule.pdb` / role `pdb` / bytes `525492` / SHA256 `50da7a67000075c9b4abc0d3400c7aaa466e4ddddfe33d6dd4f9e41f34621c77`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.CrashReportingModule.dll` / role `dll` / bytes `23472` / SHA256 `1466c1d57cea98c6e438dbc0519f3e95086723238f1201063fc6665eddb416c3`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.CrashReportingModule.pdb` / role `pdb` / bytes `9888` / SHA256 `1bd7ed6ab85d685e76db71cb1c2bc6f9c69f6e63b7745b1fbe0aa67774d36af2`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.DSPGraphModule.dll` / role `dll` / bytes `30632` / SHA256 `84d17deab36234a2ab3de9fe01e0bcec4c16e4d9e725e2edaec1613230a97e81`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.DSPGraphModule.pdb` / role `pdb` / bytes `10428` / SHA256 `fd559ebba99e825dd02255e026fd85225efc2fa1406291351cec21294a7a8504`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.DirectorModule.dll` / role `dll` / bytes `38832` / SHA256 `861a0bed4894c82b87d2954e11c67764aa89dd5f8f9fabf57320919de675da0a`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.DirectorModule.pdb` / role `pdb` / bytes `13804` / SHA256 `50b66b436245364c59ac3321af2c7939300a004448570ea0e8d68aa87be6d0b3`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.GIModule.dll` / role `dll` / bytes `21416` / SHA256 `e3b5db2ec84a03031ee9eb877d1cc01e6a686dad2f80ac3c8a4bddac0cdf54fe`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.GIModule.pdb` / role `pdb` / bytes `9156` / SHA256 `c3f999c745a6d97fc761d87a786c427bd2701aef5e45e0873616ee0e520a9970`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.GameCenterModule.dll` / role `dll` / bytes `42920` / SHA256 `0d5c8477ffb1937a1d10a538c82958e4176e89a142a8418dac9f90db334af937`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.GameCenterModule.pdb` / role `pdb` / bytes `17372` / SHA256 `db81c0713f1679d52e5d97b5fee3b41a8f8f62459de92ca347f5cd0507ac2cd0`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.GraphicsStateCollectionSerializerModule.dll` / role `dll` / bytes `14248` / SHA256 `d29767d8124def9e893001b3e3e8224d69b5657ae049eb424b4218313fced35a`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.GraphicsStateCollectionSerializerModule.pdb` / role `pdb` / bytes `9184` / SHA256 `a3a30f3a71b594a51fae11d2d20cc0e7ecc43b786ceb3091166637ae39a13671`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.GridModule.dll` / role `dll` / bytes `27048` / SHA256 `3bbfccf50c5586f9d31a4012efbc3bd4238f58be7cc635c8f6b779f7954b997b`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.GridModule.pdb` / role `pdb` / bytes `9912` / SHA256 `008814aba4a7e92c27c345758c19e73d1df4f43b5c37b1296dcad26b321cb8d0`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.HierarchyCoreModule.dll` / role `dll` / bytes `91568` / SHA256 `097519397f38dbaca8f554009f1afa80efa019bffe9a9f7521e3dcf00f21a771`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.HierarchyCoreModule.pdb` / role `pdb` / bytes `31588` / SHA256 `beb7318153e1cc683ab208006930495fb825ee62e75f4f9b2739ae9209b84669`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.HotReloadModule.dll` / role `dll` / bytes `21424` / SHA256 `8d31d655a26e537222f107f9166986d0333bb232a71f8b91e917704c65785e58`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.HotReloadModule.pdb` / role `pdb` / bytes `9156` / SHA256 `d4f58e5f411e3526aeb042f8ff56b3a7e43f2da1fdb77360a2050297e04a826d`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.IMGUIModule.dll` / role `dll` / bytes `207280` / SHA256 `f14c69936146727de4967e11647aea93029fa6bdb25cc9376e312dd796624d79`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.IMGUIModule.pdb` / role `pdb` / bytes `89580` / SHA256 `3e8a6a89ed825b1c8247f2d5650ac76a1d9ec6aa9ff0cf9be445a874c7705882`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.IdentifiersModule.dll` / role `dll` / bytes `14768` / SHA256 `3f294db762d37093708c7b54119986da8d5f65852dcd006218fb7025782dee57`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.IdentifiersModule.pdb` / role `pdb` / bytes `9420` / SHA256 `3d27f32b06e6d0eddd998a5a0e9d537a6a3459417e7b2ea5bae0757fe320ded8`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ImageConversionModule.dll` / role `dll` / bytes `28080` / SHA256 `218823e9a81f40dba8b2bd3eb1681f89d6ec680880b9d71d47e1034cb850e918`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ImageConversionModule.pdb` / role `pdb` / bytes `10500` / SHA256 `da03f5a8764786dc3f61622a29ff32d7160dd2db19cee8d7515a1b40648786b3`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.InputForUIModule.dll` / role `dll` / bytes `57256` / SHA256 `7b881d3705d9e12948a023873d7069adf1255c4132fdc4e166184c7c429baecc`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.InputForUIModule.pdb` / role `pdb` / bytes `25936` / SHA256 `f2e5fb7c9f73df0558d98e1270ea0533f9d7e0588480e27704f24824120e0aa3`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.InputLegacyModule.dll` / role `dll` / bytes `42408` / SHA256 `8258283149ef02b26c1cfc4022c4613da2e1658d35f54cd6165fc66a16d01e39`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.InputLegacyModule.pdb` / role `pdb` / bytes `15264` / SHA256 `fedc96faf94b9792adabb90daf110a0c42b861d4728003aae006874c3de324e1`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.InputModule.dll` / role `dll` / bytes `25008` / SHA256 `5538fbd1ee0954e5b8b731e8fd3fe2f01f640bc4e0a3a0283ab23b2d68e16bc5`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.InputModule.pdb` / role `pdb` / bytes `10524` / SHA256 `70901fb1a3bf6fcc2c1f4d49cb72378c7e698d0504793e286b5a4c2e3b54c377`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.InsightsModule.dll` / role `dll` / bytes `14256` / SHA256 `62eecbe4fbb2cc0c5edaeb66e497aa509dbdf70326ea48712bff51055dfddbbf`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.InsightsModule.pdb` / role `pdb` / bytes `9484` / SHA256 `4789b83b85622f5e33259745313a7bc6e6e8d36c942e0f438e12c39120ea1f59`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.JSONSerializeModule.dll` / role `dll` / bytes `23984` / SHA256 `91f6e4d9ce6db83fd95721eb47bcb453306a5ebdaeef0d696f32cc7a853e4a79`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.JSONSerializeModule.pdb` / role `pdb` / bytes `9780` / SHA256 `7bab6eae68b242fac592493df6d9d6e5900e1fed93fc65468d0ad24f25fbb9e8`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.LocalizationModule.dll` / role `dll` / bytes `23984` / SHA256 `61a2bf8019874f8f7f7368e0490b7d32f03719d211fef098bedb6d995cad7be1`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.LocalizationModule.pdb` / role `pdb` / bytes `9576` / SHA256 `b665a002bd7388e1506433e022a8ae652caedcf33cf23f39c3e04f9e01010daf`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.MarshallingModule.dll` / role `dll` / bytes `64432` / SHA256 `f78a7df6e179a946e02b8231e8a5164fa518d92fc1ca2a245f249fc30685cc09`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.MarshallingModule.pdb` / role `pdb` / bytes `12608` / SHA256 `a83a622b77c46695391282876ad4bc9baee03762d968c79e9f8827bd889ff99d`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.MultiplayerModule.dll` / role `dll` / bytes `15792` / SHA256 `90731793e586cbced530d9123ef693366a0758f55ba551871c5c9ebc6252b6d0`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.MultiplayerModule.pdb` / role `pdb` / bytes `9184` / SHA256 `59c26ff20745e8db7b0eb9889c5f9c9e05ffaa26da6b117c9c767abec1630690`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.NVIDIAModule.dll` / role `dll` / bytes `35248` / SHA256 `671ea53859f37109c8a220885c1dccd09ae150df47861c2b6d74e5e425e59bf8`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.NVIDIAModule.pdb` / role `pdb` / bytes `15592` / SHA256 `91526a22f80ed090486d7343cd74ffc44e5d9e669fafb7f15c9a56ae803a5b89`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ParticleSystemModule.dll` / role `dll` / bytes `167344` / SHA256 `1045255da0451e46779db3dba2d943c7f9e22874b592c5031b79bf3fa10ad0c7`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ParticleSystemModule.pdb` / role `pdb` / bytes `40108` / SHA256 `2610dbdf96ede9b9d958d2e9d085b3bcfb7ac8b99a16b674bbf0ad11032c6b49`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.PerformanceReportingModule.dll` / role `dll` / bytes `21928` / SHA256 `0f784513450ee6474868ecc0ac6fc8b820f2548528d16e9d1b35f32780032871`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.PerformanceReportingModule.pdb` / role `pdb` / bytes `9364` / SHA256 `b22d666c40cb16542d8d69516c3507201fb731d389d9552c908c9a4c6ebd4385`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.Physics2DModule.dll` / role `dll` / bytes `201136` / SHA256 `ae4d4a179fb609b578fc591ef1efe6a97707e6e5e7d5e8ebd68c562d914bdb6c`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.Physics2DModule.pdb` / role `pdb` / bytes `48440` / SHA256 `874c29f1f64efbb5c933763d79901d0a5577795f95b7d63b261d6548b9400323`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.PhysicsModule.dll` / role `dll` / bytes `182696` / SHA256 `dd641476d9257eaec8946e0873b0eae99877d3edefcf8ee1c5e18be0b7d3742a`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.PhysicsModule.pdb` / role `pdb` / bytes `47412` / SHA256 `eea3703cd48b5e53b6841e46119d115887392748c5d74d7aa16c29d149265d8f`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.PropertiesModule.dll` / role `dll` / bytes `149424` / SHA256 `544b343a9a2b56d363923a558aa98e6e1cde9aca9da99eb44ad368527eb52f83`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.PropertiesModule.pdb` / role `pdb` / bytes `58924` / SHA256 `6644512b5cf8b38ad81b334bc318b0c588b758758bc66c0006093297ecdc0274`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll` / role `dll` / bytes `21416` / SHA256 `b2bb0dcb84397eefd68712ea2513550916c57ba6f039ad6f68f2e5e9f3c9c377`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.pdb` / role `pdb` / bytes `9220` / SHA256 `4ebf40e58b8f131669364ce148a31d4c04a18bacd8a296ec9d4b60bbf0088672`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ScreenCaptureModule.dll` / role `dll` / bytes `22960` / SHA256 `450842fdbcf1cd199b1c7d897f6da881eaed3795e061814f7a326f8f13a4a968`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ScreenCaptureModule.pdb` / role `pdb` / bytes `9760` / SHA256 `d26d2744f88a1b5f2674bc1fa057f2bc52e4b366960cf6b7e26b2a9750b738df`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ShaderVariantAnalyticsModule.dll` / role `dll` / bytes `21416` / SHA256 `ef05342b59bf24cd00e7bcbd2e6ec46ed5ec1ece5bb79c276fe0054830fce88f`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ShaderVariantAnalyticsModule.pdb` / role `pdb` / bytes `9284` / SHA256 `688882a3662dbbae13b19fa7bb2b263b9f2cb63d24f9f31191c1b16a4b4127c2`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SharedInternalsModule.dll` / role `dll` / bytes `32688` / SHA256 `f479f56a962bd11faeef0ad1a6bd3c3ad0bfadc0544d1ebdd282eafe962924b3`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SharedInternalsModule.pdb` / role `pdb` / bytes `13580` / SHA256 `cf3fdc08dc5ba84023110fcb58741903e36bc499cd5a366f95ff75cc3cef87db`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SpriteMaskModule.dll` / role `dll` / bytes `25512` / SHA256 `417a76b4e9917683e583eea8a295f6b115a66b7bd170b44b7e6f0fc31812114d`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SpriteMaskModule.pdb` / role `pdb` / bytes `9488` / SHA256 `90f72aff431fa7171726301d651df650da1910af64a294b0b9076f31ec2a0179`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SpriteShapeModule.dll` / role `dll` / bytes `28592` / SHA256 `66cf04f17da99b392ea6e9942acce7973bb8954f8e959940a86ed5fc85c920c5`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SpriteShapeModule.pdb` / role `pdb` / bytes `10720` / SHA256 `bb40c6dd81b93c938268d3c0730eac3ac5f7dfec803f0961ce76d3d9958b8431`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.StreamingModule.dll` / role `dll` / bytes `22440` / SHA256 `e7c2b66c367649cdaeeda5847513e991606b4750d33953cb37939d73f6fff949`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.StreamingModule.pdb` / role `pdb` / bytes `9232` / SHA256 `328f14384a68582f9acc4ea5f5b91ef26c4bf04b0bb1ac99ad52e2292030a54d`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SubstanceModule.dll` / role `dll` / bytes `26024` / SHA256 `f5f2486d12fd8c943d088c9eef7044b6198f8581b91da9580eded45f400afe6d`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SubstanceModule.pdb` / role `pdb` / bytes `11360` / SHA256 `e5cf162b40183a458d17fac21a8d71026a6e6ba8b8e24f1c82897a7d922087cd`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SubsystemsModule.dll` / role `dll` / bytes `38824` / SHA256 `d16298d12cc65b0cbca874981b6b8d0fa54f95a0a94bbb44b4345a41d2f8f0c1`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SubsystemsModule.pdb` / role `pdb` / bytes `15900` / SHA256 `f43ad75c4a9b664d8acd449711f0f0c97db7fec7a036a4aab5443400ae23e4b8`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TLSModule.dll` / role `dll` / bytes `29096` / SHA256 `a8d69f77175a7140bc3ce87167fb4cfa7631bdd8e1a28b24cf91c87e49ce84e4`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TLSModule.pdb` / role `pdb` / bytes `9176` / SHA256 `affb60d8ccaf2d9ce74041637185f4e945eb51f635f0d6cbaa02be8a20162c80`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TerrainModule.dll` / role `dll` / bytes `130480` / SHA256 `c5655ed3c852a9dafd189df376f18b129794380d65158e9595b81c7f87061f6c`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TerrainModule.pdb` / role `pdb` / bytes `33828` / SHA256 `d82b421573520afba2a1a90de22cf0b08cbf4dc1c28df87d065b2962b61895b0`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TerrainPhysicsModule.dll` / role `dll` / bytes `22440` / SHA256 `0cb780dee2fd3646373a96bd640ea7075899e5d978b4e7e0e7f6754562a0d405`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TerrainPhysicsModule.pdb` / role `pdb` / bytes `9620` / SHA256 `5acab354b0c621253065b142f8dd83a13fffb1550dc448d3e73fcfa0c30bb5ae`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll` / role `dll` / bytes `84904` / SHA256 `c64535ace4ffb2797d53bbe8432edcde979e44508d8ff2fda6a698d0e77c7a6e`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TextCoreFontEngineModule.pdb` / role `pdb` / bytes `28208` / SHA256 `6b2164aea2fa9ddbc509afc6460e6a57d1406b6280b80094cfb6fc2121ce6b84`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll` / role `dll` / bytes `304040` / SHA256 `0e8e0e5c42c39911a6e652719e7739042ba788a0e01394f2fa597ae04dc49ae7`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TextCoreTextEngineModule.pdb` / role `pdb` / bytes `135808` / SHA256 `79b232f9b87ab2e3efd0b05f5764a841e4f50a2490d3a0bb22b0dccb53ea6d36`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TextRenderingModule.dll` / role `dll` / bytes `46000` / SHA256 `d0ac04d2dfec969e236e87c85ba3600f0b83cb7d99c1c32c7d268aec79fd5204`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TextRenderingModule.pdb` / role `pdb` / bytes `15292` / SHA256 `4588b494b74efc2a20e60e33946ed52e3c817d08cb2eacbef019f375a869d4e8`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TilemapModule.dll` / role `dll` / bytes `54696` / SHA256 `7f5cc0e0049a78a8be26bed139e4a5981489165aa1ca34818fad14f423edac29`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TilemapModule.pdb` / role `pdb` / bytes `18900` / SHA256 `c1a208114e2e0853e0f4cca898be1f60ceca4537d4e1d8d25083032cbcf59c23`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UIElementsModule.dll` / role `dll` / bytes `2076584` / SHA256 `dd142247db3a5e173e043d4f534fcaab17df5b9f3c9ebfec962f6d917b85765d`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UIElementsModule.pdb` / role `pdb` / bytes `920988` / SHA256 `d7674fb75ef2a43d86bb2024b3bc615e259b9a9128ad992fbf631ae0aa68cd92`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UIModule.dll` / role `dll` / bytes `45488` / SHA256 `abd48c3e0339ca3772a4bed7eac75f723864b6ee9e66a49f8688d784237b9ca4`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UIModule.pdb` / role `pdb` / bytes `13712` / SHA256 `025a548fabbc9d8346fefcfb62431f08a1404dbefecc777ca4164f93c9545119`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UmbraModule.dll` / role `dll` / bytes `21424` / SHA256 `6c2aa735495d0b0b1e0ca3dc6f70dae4724f57fae90cfa8f84137df0a955c7e2`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UmbraModule.pdb` / role `pdb` / bytes `9156` / SHA256 `832cb4ee920769cc8f540c5ebeba7a132d8d863c9d17718baa2d5971f77a7b5e`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.dll` / role `dll` / bytes `32680` / SHA256 `9e9b3ec59f074caf30063704888bded795dbb9590885469e771930d970621fc3`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.pdb` / role `pdb` / bytes `13636` / SHA256 `3f3b4aa307db19ba3625e2b68f8795d8fd2204419cba615ad0a2ebc35ef69ce4`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityAnalyticsModule.dll` / role `dll` / bytes `57768` / SHA256 `e6b6f9d7ab105fbc6a580daa2b0e728dea95d17e80a00ba03d9fb1c15606ff20`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityAnalyticsModule.pdb` / role `pdb` / bytes `17880` / SHA256 `894a208470b4043783204a725c7bcb9377cf4e2e9f1ab4b3ec907b3f7fefc9fe`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityConnectModule.dll` / role `dll` / bytes `24488` / SHA256 `2387c0445096c17d938aff66cdb2ce255c3e7e9447e7b00783af40c53a034cf0`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityConnectModule.pdb` / role `pdb` / bytes `9752` / SHA256 `34eee3b974acc0e942d61522e67756b0ba31f37127ca270dab6d193a072d30ed`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityConsentModule.dll` / role `dll` / bytes `16296` / SHA256 `be513fc9370ea37d7594cd8aa6663f235a59337fb45da538ed85f0db9e504933`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityConsentModule.pdb` / role `pdb` / bytes `9784` / SHA256 `4791d44c016fa81648651b7a799f5a46150a4932985b1e79a8340c9907393644`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityCurlModule.dll` / role `dll` / bytes `22960` / SHA256 `7bb22dcdf37070a07c7fc33357cf2f5456672e23f9ac9684d1b652f7d93c0ffe`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityCurlModule.pdb` / role `pdb` / bytes `9548` / SHA256 `6740fe785e26788bda2a80f3ea49b1a38ea3b21bd51ea7e34531d065132cfafe`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityTestProtocolModule.dll` / role `dll` / bytes `21416` / SHA256 `8ef6c27d90cbcccec153f00e897203d0879e1d66c695de141f9907fa65d6bf25`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityTestProtocolModule.pdb` / role `pdb` / bytes `9220` / SHA256 `4852469434abfa6ee316f1fedd5f364bee80480e447b8266310d5d6cd1ae3e10`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll` / role `dll` / bytes `25520` / SHA256 `ea5b9610e7e0b69a3c8e2d0724262722cb17670a4c785dbbb5291c57a9ddfa8c`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.pdb` / role `pdb` / bytes `10732` / SHA256 `88a4f3a77c2e8d62137217550da2f684a472b25ddaede3ebd4ac1457f51dc6d9`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll` / role `dll` / bytes `25000` / SHA256 `4f1ef17a1f81782dc3063d36c101a40100de9462ed05bdd668beb99ac073b4fd`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestAudioModule.pdb` / role `pdb` / bytes `10532` / SHA256 `56312d2d75b6fe2ff2abbf85ffa44c727e2227c6e25e365572fd8585cf9d8a45`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestModule.dll` / role `dll` / bytes `65960` / SHA256 `df202906ab8c28eedb9880a4e780fcd2c54cf495eabb8fba25dfc41de4f5aa30`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestModule.pdb` / role `pdb` / bytes `28224` / SHA256 `57a11ba843b131f609ce4ea305540fb34ede06619cba64740267ea7a184ee7eb`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll` / role `dll` / bytes `24488` / SHA256 `4e5ac9ad3d6616e886e50bb41a659e90fb82ef6cca6b96f8dfa61a724bfce6c2`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestTextureModule.pdb` / role `pdb` / bytes `10696` / SHA256 `0fb06df403c6272eacd8bcaf3cd3a668489ee23ea8644d448eaaacaf5010d2ac`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll` / role `dll` / bytes `33192` / SHA256 `b298e525d9c93e6cdb306fa5f1cf1d6e2b17d9507f662c96e8acedd5cacd19ef`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestWWWModule.pdb` / role `pdb` / bytes `13600` / SHA256 `240544886e6f48ce9c13d75c6f6320c9a3a32becb1390cb1440956213926e07f`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VFXModule.dll` / role `dll` / bytes `75176` / SHA256 `398058bc254e01caa6c040cb9525b685731a58acce050237b8bf09c28c1a1456`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VFXModule.pdb` / role `pdb` / bytes `18664` / SHA256 `e62a68c459bb39cd9fcb901eb90e84cee4d03e6b2b8dd7418dc807c7fa3a8758`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VRModule.dll` / role `dll` / bytes `28592` / SHA256 `d94e096a697ccf2b63b20cc87c2932f13104f995dd4cfba98308c8006ec7d0a2`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VRModule.pdb` / role `pdb` / bytes `10280` / SHA256 `6e427f3c16a0bdb8abf30224b4b63a90d6333baa7c28ba8c664eed554546b28a`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VehiclesModule.dll` / role `dll` / bytes `28072` / SHA256 `583e2815499c4784d422b6aec74bcbee670909f1179ff3d533ed335fcd5afb9f`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VehiclesModule.pdb` / role `pdb` / bytes `10400` / SHA256 `7f75517aebf09c8eb6f1d53aa71974c9ec750c1737de69d64ef6a327c122b358`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VideoModule.dll` / role `dll` / bytes `55208` / SHA256 `e56f265f9448432245edc22909124b33df3f6624fa047865a8a52951fed94e5f`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VideoModule.pdb` / role `pdb` / bytes `14072` / SHA256 `70992e5807d62b1f54a86c2ff5ae5de7a74e53ccb802f9fc9887a2f14d517209`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VirtualTexturingModule.dll` / role `dll` / bytes `39848` / SHA256 `5328d94f3cb1b5f631fd069fac7bd308628efe25db6b91539279ce313cd851ed`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VirtualTexturingModule.pdb` / role `pdb` / bytes `13404` / SHA256 `65f7b3b0b76342fdfb1372e23ad417d14434f364b92fb13c62746fbbddf7ebe6`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.WindModule.dll` / role `dll` / bytes `23472` / SHA256 `ff91327ddc936790e67857cf5fd4f3a55a43b03718cf004655d08ff072b707a7`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.WindModule.pdb` / role `pdb` / bytes `9292` / SHA256 `a2798211d24e4da06d213fae121939a51822de961a67618bf56d004cb870bb35`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.XRModule.dll` / role `dll` / bytes `84904` / SHA256 `a39b039618709220f075b11db4a911623cd74ab7b99be6e474cff3059d96c931`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.XRModule.pdb` / role `pdb` / bytes `24148` / SHA256 `b39d7f584c1f250ad5976b3ce9bdc402906da713e7ec4ba58d23efb32c864d6a`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.dll` / role `dll` / bytes `170920` / SHA256 `fb4c3e42c085e3d1d5ae18cb307ce6fa5bca656c8db0c1190f3bed0be03828ed`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.pdb` / role `pdb` / bytes `12300` / SHA256 `eee517a1038a1d710350cd1d94bc352c2140d018e73b1218f576337332727087`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.Documentation.Examples.dll` / role `dll` / bytes `35328` / SHA256 `4fddeac7cb09a5eaf65fd7c115a5a1256aceb0d1fa79a0cd0a5baa906c14da35`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.Documentation.Examples.pdb` / role `pdb` / bytes `25436` / SHA256 `2906f50766fd2b154605642aba2d376bd4bf2aeb8ebf8f0735e528d330c95d03`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.Export.dll` / role `dll` / bytes `108032` / SHA256 `9af2a94a40a1f55305dd4ab079d2d653996466c720ebd5ed809aff7c54148d7d`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.Export.pdb` / role `pdb` / bytes `56424` / SHA256 `30af1cf7e72948e1ceadf6fe69aa1ba240b3b2f9c971fbc8c83e7f60db4de427`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.Newtonsoft.dll` / role `dll` / bytes `19456` / SHA256 `61a3fa39e953cb46bc09bb7d929fb3ce5f0639e8e45d97c860d557a1ab9c4de3`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.Newtonsoft.pdb` / role `pdb` / bytes `24384` / SHA256 `dbb0d783b0a81e8a9e144af3cfd32f2c76ccb48d927160edfad821f8b270afbc`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.dll` / role `dll` / bytes `369152` / SHA256 `05d4e555fda2431ad0f3c483b66be32be365115291e5388fcd3966b59e60d4f5`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.dots.dll` / role `dll` / bytes `4096` / SHA256 `1a11767783f30decb40155dd90acb4d45ec3429925c568665bfdb507f013628e`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.dots.pdb` / role `pdb` / bytes `16516` / SHA256 `b7cbfe2607391721106fd0d5d06731599ae76641a682ccc4396fa6afc4eae96a`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.pdb` / role `pdb` / bytes `169248` / SHA256 `ad30d02d76cf57b3b4eddc6842e2c379e16628272643ac1423fedb134c5ecf4e`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/mscorlib.dll` / role `dll` / bytes `4632064` / SHA256 `5ed1180fc8cb409d57952296c7f573f2b1b3d3d2a2cd37258ef407498a17dd4d`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/netstandard.dll` / role `dll` / bytes `90112` / SHA256 `6ae62e082dc494a2433984177f60ca4db5fae69b1f360a8b33754172b310b8c5`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Plugins/ARM64/AppUINativePlugin.dll` / role `dll` / bytes `21424` / SHA256 `ab72763bf5773b105b3b0dc9781f57c480d7de1ef49cdf3523c7ef6436eb1305`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Plugins/x86_64/AppUINativePlugin.dll` / role `dll` / bytes `21928` / SHA256 `2c0cfcf7b826508ef60039b417e203e0f4c91bec3f75f51bd7c4b0ec47529ffc`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Plugins/x86_64/lib_burst_generated.dll` / role `dll` / bytes `992256` / SHA256 `28933f0ecf82a9f012af7317eb2507597c1c2e39cffd10bb54b94ff5148255e8`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Plugins/x86_64/lib_burst_generated.pdb` / role `pdb` / bytes `5246976` / SHA256 `464201a65bfc5ebedaee450e0dc3d88f3ef8ac1fcb368fa87b874d0735b0dfb9`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Resources/unity default resources` / role `unity default resources` / bytes `5858404` / SHA256 `2fab7b306cbac3d4d98bbfdfe8a9fd503a2013c4b2afbc719358e1613a527972`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/Resources/unity_builtin_extra` / role `unity_builtin_extra` / bytes `365476` / SHA256 `3c872fa25164c415257b3bf1b65bf26ee96bcbb33de0aee97ff334a8e67dfb55`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/RuntimeInitializeOnLoads.json` / role `json` / bytes `3176` / SHA256 `7eca34e47a6b92ed84445ffe329da0d8bf21145d4b71691000123f0f81d3eac4`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/ScriptingAssemblies.json` / role `json` / bytes `3722` / SHA256 `3d8e8d0e6f9a3cdeb85024ed51e7e04a8c129cc92ea260f8aea61fcc6999e586`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/app.info` / role `info` / bytes `27` / SHA256 `969966d6cc254e5c8ddecd1393f388db9da26375dd361f2923faffc3a8aebc74`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/boot.config` / role `config` / bytes `426` / SHA256 `7111b5fef76b63e24e08f8b36f4a2c20b7d1c5efad3b5af215534e1f20bf9054`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/globalgamemanagers` / role `globalgamemanagers` / bytes `88660` / SHA256 `164a022a8789b241515bc5f0d8966bd0e8f8eed79fbc09befd61da2afa70065d`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/globalgamemanagers.assets` / role `assets` / bytes `189204` / SHA256 `51dbe75c6eb7b5655d04c3469e1b45bb0eb49d179ed7af0e8fc1fee7009eed97`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/globalgamemanagers.assets.resS` / role `resS` / bytes `2798288` / SHA256 `ebf0f91664c0aa69e3b92e93d4d4e6feae1a9152529b0efeac047e3c9c3b0fc0`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/level0` / role `level0` / bytes `560172` / SHA256 `c186f0fa9b87a66b4e683c9ba3e7e6f6f97c52d13852b34dc22ae3bf2ed175ef`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/resources.assets` / role `assets` / bytes `4927944` / SHA256 `c9eefab7ab4c3419fe78078398a5077fc37238d26ca5c3205ed1b5d663aec4c0`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/sharedassets0.assets` / role `assets` / bytes `2308128` / SHA256 `41bd1e1a7ba7e379b52f6fd0aefa38f4a52796b12d2e761a932b147deba85854`
+- `Builds/KhufuV10/ChannelPlayKhufuV10_Data/sharedassets0.assets.resS` / role `resS` / bytes `5418048` / SHA256 `1ec084321fd68af6869dd6933551450e7153ec5633db6598d013ca4317540347`
+- `Builds/KhufuV10/D3D12/D3D12Core.dll` / role `dll` / bytes `5908408` / SHA256 `31f364f2b3aa1753e7ba9ff912d0721c8f424be5fa14503efddafbb30c635d3b`
+- `Builds/KhufuV10/D3D12/d3d12SDKLayers.dll` / role `dll` / bytes `9525272` / SHA256 `5dfc320d5ee27190181b1a63e74eb481b07ea727513dbeb38a96db6157969d24`
+- `Builds/KhufuV10/MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll` / role `dll` / bytes `611248` / SHA256 `eb7ca9e2d0fb3ef2f4ef5b3911ddecab05e46616926150ec7ba81ebe6c59bbbe`
+- `Builds/KhufuV10/MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll` / role `dll` / bytes `7831472` / SHA256 `1fee29846581c592a466c781f24b3cbbc07aa36e839108298ff341f51a5ee080`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser` / role `browser` / bytes `1605` / SHA256 `8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx` / role `aspx` / bytes `60575` / SHA256 `751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/2.0/machine.config` / role `config` / bytes `29066` / SHA256 `e91782a27fa39fc6c1d6ee8b08529f5d35052310d0006034b878eb04b8f2af30`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/2.0/settings.map` / role `map` / bytes `2622` / SHA256 `49c6160f9d54af4270a3b4e997fc4a8301f79b9e2070118fa46ddbcbbc44f9a2`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/2.0/web.config` / role `config` / bytes `11635` / SHA256 `cf2b54339e069b9e42f7d6795eecbf562c50c1011f4ca8f65f578fe52d97ff92`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.0/Browsers/Compat.browser` / role `browser` / bytes `1605` / SHA256 `8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.0/DefaultWsdlHelpGenerator.aspx` / role `aspx` / bytes `60575` / SHA256 `751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.0/machine.config` / role `config` / bytes `33598` / SHA256 `e60aec2c5115d65b3acb3c55ea21576dbd770f579166c017125571e46ae560ed`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.0/settings.map` / role `map` / bytes `2622` / SHA256 `ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.0/web.config` / role `config` / bytes `18802` / SHA256 `e38bb8cc68fe5b4edecdfd288d094b9e8ced7629039b2a347682aba0d8bd7492`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.5/Browsers/Compat.browser` / role `browser` / bytes `1605` / SHA256 `8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.5/DefaultWsdlHelpGenerator.aspx` / role `aspx` / bytes `60575` / SHA256 `751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.5/machine.config` / role `config` / bytes `34056` / SHA256 `ee950004b576fb28dc85f4b0435ed04bf96612de2e8b53be84d07afe85a0de6c`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.5/settings.map` / role `map` / bytes `2622` / SHA256 `ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.5/web.config` / role `config` / bytes `18811` / SHA256 `c4cbddd4fd9347b58cc5a72b36dc4ba1ad2bb699e65869d05cd3fb9865f0d824`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/browscap.ini` / role `ini` / bytes `311984` / SHA256 `4ddd50f31fb968f30bedefc253a46dc3f2890192d05cdaa9e0a64a056eee807e`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/config` / role `config` / bytes `3815` / SHA256 `5776169973a26a387b8b3e5c0f2301a7ab9a6dd7c7d3efa22a96abc47fbf8662`
+- `Builds/KhufuV10/MonoBleedingEdge/etc/mono/mconfig/config.xml` / role `xml` / bytes `25817` / SHA256 `0c56e34c69124510fa8c19e7b4c2ca6c1c4ff460ae19f798dd0ca035809e396d`
+- `Builds/KhufuV10/UnityCrashHandler64.exe` / role `exe` / bytes `1674672` / SHA256 `2e78c2a5a985c195e6e3823c1ea2b29137df026e620966603e6b2a17c3c342bd`
+- `Builds/KhufuV10/UnityPlayer.dll` / role `dll` / bytes `55335344` / SHA256 `376ef4d7595a2d0848e9e3a1c4732fcdca9e33cfb844a002b020e5443cedb9b6`
+- `Builds/KhufuV10/WinPixEventRuntime.dll` / role `dll` / bytes `58368` / SHA256 `81adcfd8253c3489be720da7e30f16004dc9a1f02a8b418c6c3aef4993032e6d`
+- Player settings before/build/restored SHA256: `4574d38de5c731b1b0b08bc38a9464f9c882a290bb959c038e9cc68f6f0e1500 / d77fd063696fad92ceff0225b360cb649d7108a511b27d0c21d63c62430ae007 / 4574d38de5c731b1b0b08bc38a9464f9c882a290bb959c038e9cc68f6f0e1500`
+
+V10_WINDOWS_BUILD: passed

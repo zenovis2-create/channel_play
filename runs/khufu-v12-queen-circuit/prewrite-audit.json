@@ -1,0 +1,315 @@
+{
+    "schema": "khufu-v12-prewrite-audit-v1",
+    "scene_sha256": "dbc0c5e3e4afc10397ed3b95bdb57118993a1ba3631b1952c585eb654eb1297b",
+    "scene_unchanged": true,
+    "v4_queen_target_count": 10,
+    "v4_queen_targets": [
+        {
+            "path": "V4_Embedded_Interior_Architecture/V4_Queens_Horizontal_Floor",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": -0.34999996423721316,
+                "y": 5.375,
+                "z": -5.400000095367432
+            },
+            "local_rotation": {
+                "x": 0.007587193977087736,
+                "y": -0.10746773332357407,
+                "z": 0.000820152519736439,
+                "w": 0.9941793084144592
+            },
+            "local_scale": {
+                "x": 2.3499999046325685,
+                "y": 0.2199999988079071,
+                "z": 3.2760493755340578
+            }
+        },
+        {
+            "path": "V4_Embedded_Interior_Architecture/V4_Queens_Horizontal_East",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": 0.9698673486709595,
+                "y": 6.549862861633301,
+                "z": -5.092921733856201
+            },
+            "local_rotation": {
+                "x": 0.007587193977087736,
+                "y": -0.10746773332357407,
+                "z": 0.000820152519736439,
+                "w": 0.9941793084144592
+            },
+            "local_scale": {
+                "x": 0.36000001430511477,
+                "y": 2.3499999046325685,
+                "z": 3.2760493755340578
+            }
+        },
+        {
+            "path": "V4_Embedded_Interior_Architecture/V4_Queens_Horizontal_West",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": -1.6775318384170533,
+                "y": 6.549862861633301,
+                "z": -5.6720404624938969
+            },
+            "local_rotation": {
+                "x": 0.007587193977087736,
+                "y": -0.10746773332357407,
+                "z": 0.000820152519736439,
+                "w": 0.9941793084144592
+            },
+            "local_scale": {
+                "x": 0.36000001430511477,
+                "y": 2.3499999046325685,
+                "z": 3.2760493755340578
+            }
+        },
+        {
+            "path": "V4_Embedded_Interior_Architecture/V4_Queens_Horizontal_Roof",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": -0.3576645255088806,
+                "y": 7.72472620010376,
+                "z": -5.364962100982666
+            },
+            "local_rotation": {
+                "x": 0.007587193977087736,
+                "y": -0.10746773332357407,
+                "z": 0.000820152519736439,
+                "w": 0.9941793084144592
+            },
+            "local_scale": {
+                "x": 3.069999933242798,
+                "y": 0.23999999463558198,
+                "z": 3.2760493755340578
+            }
+        },
+        {
+            "path": "V4_Embedded_Interior_Architecture/V4_Queens_Chamber/V4_Queens_Floor",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": -1.7999999523162842,
+                "y": 5.199999809265137,
+                "z": -2.799999952316284
+            },
+            "local_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "local_scale": {
+                "x": 5.199999809265137,
+                "y": 0.25999999046325686,
+                "z": 4.400000095367432
+            }
+        },
+        {
+            "path": "V4_Embedded_Interior_Architecture/V4_Queens_Chamber/V4_Queens_Back",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": -1.7999999523162842,
+                "y": 6.899999618530273,
+                "z": -0.5999999046325684
+            },
+            "local_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "local_scale": {
+                "x": 5.199999809265137,
+                "y": 3.4000000953674318,
+                "z": 0.36000001430511477
+            }
+        },
+        {
+            "path": "V4_Embedded_Interior_Architecture/V4_Queens_Chamber/V4_Queens_East",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": 0.7999999523162842,
+                "y": 6.899999618530273,
+                "z": -2.799999952316284
+            },
+            "local_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "local_scale": {
+                "x": 0.36000001430511477,
+                "y": 3.4000000953674318,
+                "z": 4.400000095367432
+            }
+        },
+        {
+            "path": "V4_Embedded_Interior_Architecture/V4_Queens_Chamber/V4_Queens_West",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": -4.399999618530273,
+                "y": 6.899999618530273,
+                "z": -2.799999952316284
+            },
+            "local_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "local_scale": {
+                "x": 0.36000001430511477,
+                "y": 3.4000000953674318,
+                "z": 4.400000095367432
+            }
+        },
+        {
+            "path": "V4_Embedded_Interior_Architecture/V4_Queens_Chamber/V4_Queens_Roof_East",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": -0.5499999523162842,
+                "y": 8.75,
+                "z": -2.799999952316284
+            },
+            "local_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -0.2503800094127655,
+                "w": 0.9681476354598999
+            },
+            "local_scale": {
+                "x": 2.9000000953674318,
+                "y": 0.2800000011920929,
+                "z": 4.5
+            }
+        },
+        {
+            "path": "V4_Embedded_Interior_Architecture/V4_Queens_Chamber/V4_Queens_Roof_West",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": -3.049999952316284,
+                "y": 8.75,
+                "z": -2.799999952316284
+            },
+            "local_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.2503800094127655,
+                "w": 0.9681476354598999
+            },
+            "local_scale": {
+                "x": 2.9000000953674318,
+                "y": 0.2800000011920929,
+                "z": 4.5
+            }
+        }
+    ],
+    "v10_queen_gate_spec_count": 1,
+    "v10_queen_gate_proxy_path": "V10_Collision_Proxies/V10_PROXY_Queen_Branch_Threshold_Queen_Ownership_Gate",
+    "threshold_proxies": [
+        {
+            "path": "V10_Collision_Proxies/V10_PROXY_Queen_Branch_Threshold_Queen_Threshold_West_Post",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "collider_count": 1,
+            "collider_enabled": true,
+            "is_trigger": false
+        },
+        {
+            "path": "V10_Collision_Proxies/V10_PROXY_Queen_Branch_Threshold_Queen_Threshold_East_Post",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "collider_count": 1,
+            "collider_enabled": true,
+            "is_trigger": false
+        },
+        {
+            "path": "V10_Collision_Proxies/V10_PROXY_Queen_Branch_Threshold_Queen_Threshold_Lintel",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "collider_count": 1,
+            "collider_enabled": true,
+            "is_trigger": false
+        }
+    ],
+    "v10_queen_gate_proxy_enabled": true,
+    "v10_great_step_proxy_enabled": false,
+    "v10_limestone_binding": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit/KhufuV11_V10_Limestone_Open.asset",
+    "v10_granite_binding": "Assets/_Project/Art/Generated/KhufuV11RoyalCircuit/KhufuV11_V10_Red_Granite_Open.asset",
+    "marker_renderer_enabled": false,
+    "marker_position": {
+        "x": -1.7999999523162842,
+        "y": 5.349999904632568,
+        "z": -2.799999952316284
+    },
+    "glow_renderer_enabled": false,
+    "inherited_light_enabled": true,
+    "map_metrics": {
+        "renderers": 829,
+        "vertices": 65918,
+        "triangles": 47984,
+        "colliders": 567
+    },
+    "v11_signature": "9994b06134cf20f3225df94880f7f652e1de66ca00bb24770ad3274b8d2f0ed9"
+}

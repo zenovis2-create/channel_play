@@ -1,0 +1,2118 @@
+{
+  "artifacts": [
+    {
+      "bytes": 474825,
+      "path": "runs/khufu-v10-interior-spine/windows-build-hit-classification.log",
+      "sha256": "4901d0d955ffd11b7dfab77a39fa64b91eff63cf9a3ca6e3c2a9f01e1150c778"
+    },
+    {
+      "bytes": 52684,
+      "path": "runs/khufu-v10-interior-spine/windows-build.md",
+      "sha256": "7a9748f210f6fd423776bf4ec787730e9b78b731e7b65f24ee308c1b3bf98b2d"
+    },
+    {
+      "bytes": 828,
+      "path": "runs/khufu-v10-interior-spine/windows-player-validation.md",
+      "sha256": "6bcf71a12143874c6727e03ead4b48ddd31c6605b374688fc5d98e70e32c1598"
+    },
+    {
+      "bytes": 7949,
+      "path": "runs/khufu-v10-interior-spine/player-proof/normal-player.log",
+      "sha256": "0d053611e21ee9a52f1adecffb5fe30bc9f2ef0bd816cca7fb5044ef5dc5a207"
+    },
+    {
+      "bytes": 8021,
+      "path": "runs/khufu-v10-interior-spine/player-proof/boundary-player.log",
+      "sha256": "5a4037da4dbec599196fcabc67c934c3fd5ff5c1c4963b2e52af1fc383eba648"
+    },
+    {
+      "bytes": 7989,
+      "path": "runs/khufu-v10-interior-spine/player-proof/error-metric-player.log",
+      "sha256": "9a52b1f758f90f85d9ee7aaea4b29ac2d1d8806019bba3f1a8ba9a5b16967fb4"
+    },
+    {
+      "bytes": 2228,
+      "path": "runs/khufu-v10-interior-spine/player-proof/v10-final-round-trip.md",
+      "sha256": "6b17e839b3667584c836c8dcda4e20daac289cb3ec412d9cdf53a285abadef40"
+    },
+    {
+      "bytes": 2075,
+      "path": "runs/khufu-v10-interior-spine/player-proof/v10-final-boundary-control.md",
+      "sha256": "afd423304304fc1e03d021e1443ebf0356835d4481f882ab3cf1a614b1a10769"
+    },
+    {
+      "bytes": 1355,
+      "path": "runs/khufu-v10-interior-spine/player-proof/v10-final-error-metric-mutation.md",
+      "sha256": "7144a84a7c6f150faae2ae1e67b344b393386982e28efca51ecd7081cfb778ac"
+    },
+    {
+      "bytes": 58493,
+      "path": "runs/khufu-v10-interior-spine/player-proof/v10-final-normal-round-trip-movement-trace.csv",
+      "sha256": "db9f10f5c2fbd6a55f96c5cff1327debd479ae4d3e2455575d0680138c89fa82"
+    },
+    {
+      "bytes": 1767,
+      "path": "runs/khufu-v10-interior-spine/player-proof/v10-final-great-step-boundary-control-movement-trace.csv",
+      "sha256": "a68507071fc9e40dd7e22fd8cacc52030b9b792f93c6348d23674006e4ecff3d"
+    },
+    {
+      "bytes": 418,
+      "path": "runs/khufu-v10-interior-spine/player-proof/v10-final-error-metric-negative-control-movement-trace.csv",
+      "sha256": "d435f8338f06a7a1af9c5e92990e6e88421b285009006a7bce8985f5a8c1a9a1"
+    },
+    {
+      "bytes": 2116582,
+      "path": "runs/khufu-v10-interior-spine/player-proof/v10-final-normal-round-trip-north_entrance_start.png",
+      "sha256": "f646d17ecabcef3e95b3f1a904570b46d74f067ac63b36f02f3d3d3adf68c78f"
+    },
+    {
+      "bytes": 1856291,
+      "path": "runs/khufu-v10-interior-spine/player-proof/v10-final-normal-round-trip-great_step_stop.png",
+      "sha256": "d76815a9e95aa820d5e517cbe81281f594563e71544022a25a6a6e153b0698a1"
+    },
+    {
+      "bytes": 2156564,
+      "path": "runs/khufu-v10-interior-spine/player-proof/v10-final-normal-round-trip-return_to_north_exit.png",
+      "sha256": "b84f48c4ad8b1edba06e8873e31b49b62e09331f20256e807e7cc92c73d3d318"
+    },
+    {
+      "bytes": 1860495,
+      "path": "runs/khufu-v10-interior-spine/player-proof/v10-final-great-step-boundary-control-great_step_control_start.png",
+      "sha256": "ca28e7b71f9f0e42b0b94a687f96484976a56b8d4819cfcc59b1c775158f9122"
+    },
+    {
+      "bytes": 1845401,
+      "path": "runs/khufu-v10-interior-spine/player-proof/v10-final-great-step-boundary-control-great_step_named_blocker.png",
+      "sha256": "d67e5a1823e8eac07ca5ae5ab0d6c6ee7361318f0a41a66755f9d7dee882b3d7"
+    }
+  ],
+  "built_level": {
+    "bytes": 560172,
+    "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/level0",
+    "sha256": "c186f0fa9b87a66b4e683c9ba3e7e6f6f97c52d13852b34dc22ae3bf2ed175ef"
+  },
+  "generated_utc": "2026-07-12T22:55:08.629821+00:00",
+  "managed_assembly": {
+    "bytes": 156160,
+    "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Assembly-CSharp.dll",
+    "sha256": "2fe263fa573edd5eec9022b1238588df92a6e48f6a86991c0af7228fa46af468"
+  },
+  "player": {
+    "bytes": 671744,
+    "path": "Builds/KhufuV10/ChannelPlayKhufuV10.exe",
+    "sha256": "ab5809518c33adf6dad28c9ffe467d2f78f0c00bf78991fef991a7dd04a8fc48"
+  },
+  "release_inputs": [
+    {
+      "bytes": 1314,
+      "path": ".gitattributes",
+      "sha256": "c19bca1e3522cd22270f96ccc19f8d9fb26ac1dc732c1b24ceee29ccbca0cc09"
+    },
+    {
+      "bytes": 19239,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorAudit.cs",
+      "sha256": "8653ccbcd729c53aa0c9702fa4434e047d1b674b67086962995bc39e38a328c9"
+    },
+    {
+      "bytes": 26207,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorBuilder.cs",
+      "sha256": "187796ae0099ab8029ab0bb0127dc65460028747b4e7101350aaca174d6c6172"
+    },
+    {
+      "bytes": 26229,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorMeshPipeline.cs",
+      "sha256": "ad9f8818ad1c9ff82798b60eb6bf409c7c40d352ea89075c5d666e4c35b8c78a"
+    },
+    {
+      "bytes": 19436,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorScreenshotExporter.cs",
+      "sha256": "3a4ec39356ec83d2f248be140be104c5f8e4a3c461db0c641d0c41d03c2b3bda"
+    },
+    {
+      "bytes": 49994,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs",
+      "sha256": "b7a6d8603390afc1d95369cf5f287b8eaeadbc831de2d05b929ef50c3a209a14"
+    },
+    {
+      "bytes": 7610,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10WindowsBuild.cs",
+      "sha256": "5f38838da8d4047c325fb982e219dafc1865f559306cecc1f8b0ba70985fc328"
+    },
+    {
+      "bytes": 1802,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuControllerHitRecorder.cs",
+      "sha256": "df8480c601c3aeae53b4b3a53351c81ec2aea263afd9e1123e93cdd5edf482f4"
+    },
+    {
+      "bytes": 2755,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10RouteContract.cs",
+      "sha256": "971880c37d14f98cec93420b4aa792ec86dbafe0f05e8c34d05390948a2a568c"
+    },
+    {
+      "bytes": 1150,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10SegmentTag.cs",
+      "sha256": "69f6cbb6a1c5446097bc9410cf1fe80fcef4b3d51363c44a76b0ec7760452326"
+    },
+    {
+      "bytes": 35553,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10TraversalProofProbe.cs",
+      "sha256": "18c3d999d319831ab6dd1cd3235676386c293a515d6f10a536ed425e45e29bff"
+    },
+    {
+      "bytes": 9494,
+      "path": "tools/validate_khufu_v10_prewrite.py",
+      "sha256": "8fe4c215264fdd32d7f233410cf459c0ded510f4c25712ea80c4693084c3f531"
+    },
+    {
+      "bytes": 33483,
+      "path": "tools/validate_khufu_v10_release.py",
+      "sha256": "8abaa4b9929b40d27e9d10d25783f2fdb5bfa5b2af2fecc23b0829f0e01527b5"
+    },
+    {
+      "bytes": 1956,
+      "path": "tools/tests/test_validate_khufu_v10_prewrite.py",
+      "sha256": "ce7a77c117a6f58bf74135509646d00e12f34a30dbe7a6e6076e69698b799e88"
+    },
+    {
+      "bytes": 9587,
+      "path": "tools/tests/test_validate_khufu_v10_release.py",
+      "sha256": "022ebd9def713653b42774186ce1c0e06cfd55a111cf7feee9faa4b6254557c8"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorBuilder.cs.meta",
+      "sha256": "9fc58ef1adb406884a1a8a8aac2a67563f02e8698df4c21e9139acccada8de7f"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorMeshPipeline.cs.meta",
+      "sha256": "c8dff890376e1abe9daf887cc1673dfc1576e23e1bb38eb0a309140ddcb8838a"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorScreenshotExporter.cs.meta",
+      "sha256": "2ba0afe09923bae83661352cc01ce277f106c4979de241097de75e0ab562aad7"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs.meta",
+      "sha256": "a8b62cc4bb38633d1de20118c5c53ad619e86b386903799c9ea70dcc34a278af"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10WindowsBuild.cs.meta",
+      "sha256": "c0a68d1613916e4464103a9184cfb9544109469e88636bd3bfbf7348c96a0d63"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10RouteContract.cs.meta",
+      "sha256": "7fa1e12d602251e81bef8b4b310e66dbf65e7f0376815bf3f08501867c19b186"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10SegmentTag.cs.meta",
+      "sha256": "54f3e92d1cf8d24705240dacf6c958276597307fc46756bf921ae4ff75aeea76"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10TraversalProofProbe.cs.meta",
+      "sha256": "e772fc2c6d3026f1a67fef5c9fb178076ddebed4c195f1085c1891d1d50673f7"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine.meta",
+      "sha256": "c92c75c660aba8981934f84302c805b6af79b2027bf9596a20a3938c026e0a9a"
+    },
+    {
+      "bytes": 43347,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Gallery_Detail.asset",
+      "sha256": "4570952aade906e6b8d53cdfe43448a72569ad7fa2100848470dac8e9d437143"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Gallery_Detail.asset.meta",
+      "sha256": "5b40b6d94c0d5030eb959c765669503e6e1d2c9c1993b5fab293d936108cf871"
+    },
+    {
+      "bytes": 65241,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Hybrid_Service_Return.asset",
+      "sha256": "0526e23ed9563d6e7e9a6c1b7541ae9f507c730d92de2ec14999d0bf0e67cadd"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Hybrid_Service_Return.asset.meta",
+      "sha256": "1b4c985f1561e780717434d8ac9c6c814125b5a544e31a0a5a7c7c6e6784de4d"
+    },
+    {
+      "bytes": 129083,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Limestone_Structure.asset",
+      "sha256": "0d8f1bd4344e3308e2bd6cb881359400796ba8bdd5a2d410665b591ff4d04cd1"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Limestone_Structure.asset.meta",
+      "sha256": "4123715868c6fc596cc57b74227a6ee74a6d458927c0348a31879027a51d2e2f"
+    },
+    {
+      "bytes": 19642,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Red_Granite_Boundary.asset",
+      "sha256": "e75e0101e120748489d756012eeb846588143de8f64552566dc9eb308c4e5916"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Red_Granite_Boundary.asset.meta",
+      "sha256": "492531fbb372dd5ec908a005f50e0b342805aba2abf6efd66147a2cd0fdc6161"
+    },
+    {
+      "bytes": 34218,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Route_Inlay.asset",
+      "sha256": "3ddd989976dd0089dec4caf5dcf91ef7fd609b1b5f3dbf5fc09613e27280ba3d"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Route_Inlay.asset.meta",
+      "sha256": "6b4d4fbbb618feb245139e1df8f408de9be71b9015d440e250eaab1e0ff6b986"
+    },
+    {
+      "bytes": 109015,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Shadow_Recess.asset",
+      "sha256": "bab17283c8337dc6b2d8c5af016507ba82bfd7734168e79b0484d5978e864049"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Shadow_Recess.asset.meta",
+      "sha256": "9ad196485cb1bc3997bff9dcb274258bc0beef40d753ef29d194b30d8415e3e7"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Materials/KhufuV10Interior.meta",
+      "sha256": "3d0eaf51f42e6341aabd30a7e7027ea7ab7fbed86f098063aa36c77d9d3dfa07"
+    },
+    {
+      "bytes": 2350,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Aged_Limestone.mat",
+      "sha256": "3d0e391aacb67e965cfec69fafbf347f65494a4b4ee8c26ee48b4b473fbb4065"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Aged_Limestone.mat.meta",
+      "sha256": "4a4766ef315ee56bb31931819858014e313cb970f85f93ba06969e9da890f2ac"
+    },
+    {
+      "bytes": 2347,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Deep_Shadow.mat",
+      "sha256": "65fe38b4228f2d9f286766c949bdfec562b6e5a18ed398092eb25a61bbbfa7b4"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Deep_Shadow.mat.meta",
+      "sha256": "bf8b812a4ba71d3ee3907613ce39c5b39018adbcf321cb4f542fdb513e1fea75"
+    },
+    {
+      "bytes": 2349,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Gallery_Detail.mat",
+      "sha256": "a19c999841f3c87dab9e824fcfa7d5ea5665ec8e7272fd31d5c1ed50cf0d39ad"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Gallery_Detail.mat.meta",
+      "sha256": "42d55f5c489d51c26a04676f2e3c9d4024f69c7542f4c266b3320d468107d3fc"
+    },
+    {
+      "bytes": 2349,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Hybrid_Service.mat",
+      "sha256": "286163a5e249e004e714abd3c246f5a7572010857d8905fa95adc9c758d5efd2"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Hybrid_Service.mat.meta",
+      "sha256": "28129f3e56aee65e43b0c619ff0d7300840b3445c1f2a40bb41fc7abca8a771f"
+    },
+    {
+      "bytes": 2355,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Red_Granite.mat",
+      "sha256": "94cdbe5fb3d29cf9b2de719ec51a049cee946e40c9d0ff8c2adea5bcbf21e4b9"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Red_Granite.mat.meta",
+      "sha256": "b1538429eba592ac307dc45ad4630f21f05ead25267438dace09f57cd570a69e"
+    },
+    {
+      "bytes": 2352,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Route_Amber.mat",
+      "sha256": "10db75657b73de7173b7e32891bbc7eb60100c0f32802347600a62854fac0f78"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Route_Amber.mat.meta",
+      "sha256": "79f9b1ceb7816856fb233b3d15a894af0ee56d9048763630eba3e2a132abcf03"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4.meta",
+      "sha256": "348424464d35cc28db5b8c012dafce9056aebacddb98b3f282bb395333ebb8dd"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes.meta",
+      "sha256": "3f70697a7f4b1346fe836e9f6bd75559c9242df8c54a1b169f28695bd8198114"
+    },
+    {
+      "bytes": 3563,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_East.asset",
+      "sha256": "31924c61d90279ba750afe537d0aec7c870770d3c43fe0cfbd670ecf227ae068"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_East.asset.meta",
+      "sha256": "af21fbf101d4d08356ffd287012060879e251564c76fb1a41f043c9e933b1068"
+    },
+    {
+      "bytes": 3744,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Left.asset",
+      "sha256": "302964a7e97a666a93608d8dcb59ab7d47b71eb9dc089fe727e737fceefadd90"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Left.asset.meta",
+      "sha256": "1ca2e5f1af168e2f143c1cf326bb176e922880b0991429730042c1c467014ea3"
+    },
+    {
+      "bytes": 3743,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Right.asset",
+      "sha256": "f57572ed0665c484093aa7b490015970f15f90bdb5d0b2c826592963c81e9697"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Right.asset.meta",
+      "sha256": "53de6aa3c9c54f18dead2d203de214d1a9cd855142152cd62795d51cbe6cd398"
+    },
+    {
+      "bytes": 3588,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Upper.asset",
+      "sha256": "657605908ca049a73a7783eba39a573dd9af77d4eb9afab9a5ab500d92141623"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Upper.asset.meta",
+      "sha256": "319734877d12a545a14785c76120f084fbd683f2e30e5e1879ab5c29c1c94cf3"
+    },
+    {
+      "bytes": 3564,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_South.asset",
+      "sha256": "5b29a9ca18711e9102ad8ad89f7537e8464eea59608057d6dea65b217dcc2adf"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_South.asset.meta",
+      "sha256": "fab776ab311681d3dce3aa7f1b131e818a0888a459dc33ab2d66c240574b3b8a"
+    },
+    {
+      "bytes": 3565,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_West.asset",
+      "sha256": "1bd4da3019b45d040ea811d5cb8954edf64c033868c11d357ca9fb456f1dbd16"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_West.asset.meta",
+      "sha256": "59b49119fd1b0c9aedc643005658765796521e09cbde986e9fc8a5fb2e2783e7"
+    },
+    {
+      "bytes": 3723,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Section_Poche_Mesh.asset",
+      "sha256": "d8817e07103aaae5eb3fcfb4b479fa6a26f906a77c749cc891889a3964c111db"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Section_Poche_Mesh.asset.meta",
+      "sha256": "6e9fc71eb31c6d66389df9dc879bc2ca8704fdf7d640a0b3fb65fa611f5a407a"
+    }
+  ],
+  "runtime_files": [
+    {
+      "bytes": 580103,
+      "path": "Builds/KhufuV10/channel_play_BurstDebugInformation_DoNotShip/Data/Plugins/x86_64/lib_burst_generated.txt",
+      "sha256": "ded92883699621d309dcd60898c615b60cde7a8d63ac8420a61b56bba009fc0a"
+    },
+    {
+      "bytes": 671744,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10.exe",
+      "sha256": "ab5809518c33adf6dad28c9ffe467d2f78f0c00bf78991fef991a7dd04a8fc48"
+    },
+    {
+      "bytes": 27,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/app.info",
+      "sha256": "969966d6cc254e5c8ddecd1393f388db9da26375dd361f2923faffc3a8aebc74"
+    },
+    {
+      "bytes": 426,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/boot.config",
+      "sha256": "7111b5fef76b63e24e08f8b36f4a2c20b7d1c5efad3b5af215534e1f20bf9054"
+    },
+    {
+      "bytes": 88660,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/globalgamemanagers",
+      "sha256": "164a022a8789b241515bc5f0d8966bd0e8f8eed79fbc09befd61da2afa70065d"
+    },
+    {
+      "bytes": 189204,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/globalgamemanagers.assets",
+      "sha256": "51dbe75c6eb7b5655d04c3469e1b45bb0eb49d179ed7af0e8fc1fee7009eed97"
+    },
+    {
+      "bytes": 2798288,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/globalgamemanagers.assets.resS",
+      "sha256": "ebf0f91664c0aa69e3b92e93d4d4e6feae1a9152529b0efeac047e3c9c3b0fc0"
+    },
+    {
+      "bytes": 560172,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/level0",
+      "sha256": "c186f0fa9b87a66b4e683c9ba3e7e6f6f97c52d13852b34dc22ae3bf2ed175ef"
+    },
+    {
+      "bytes": 156160,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Assembly-CSharp.dll",
+      "sha256": "2fe263fa573edd5eec9022b1238588df92a6e48f6a86991c0af7228fa46af468"
+    },
+    {
+      "bytes": 66232,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Assembly-CSharp.pdb",
+      "sha256": "c52f41a66470149d3a92702ee32ce7fdd7e0449710fa6d53e44ee49484881e6b"
+    },
+    {
+      "bytes": 369152,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.dll",
+      "sha256": "05d4e555fda2431ad0f3c483b66be32be365115291e5388fcd3966b59e60d4f5"
+    },
+    {
+      "bytes": 35328,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.Documentation.Examples.dll",
+      "sha256": "4fddeac7cb09a5eaf65fd7c115a5a1256aceb0d1fa79a0cd0a5baa906c14da35"
+    },
+    {
+      "bytes": 25436,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.Documentation.Examples.pdb",
+      "sha256": "2906f50766fd2b154605642aba2d376bd4bf2aeb8ebf8f0735e528d330c95d03"
+    },
+    {
+      "bytes": 4096,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.dots.dll",
+      "sha256": "1a11767783f30decb40155dd90acb4d45ec3429925c568665bfdb507f013628e"
+    },
+    {
+      "bytes": 16516,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.dots.pdb",
+      "sha256": "b7cbfe2607391721106fd0d5d06731599ae76641a682ccc4396fa6afc4eae96a"
+    },
+    {
+      "bytes": 108032,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.Export.dll",
+      "sha256": "9af2a94a40a1f55305dd4ab079d2d653996466c720ebd5ed809aff7c54148d7d"
+    },
+    {
+      "bytes": 56424,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.Export.pdb",
+      "sha256": "30af1cf7e72948e1ceadf6fe69aa1ba240b3b2f9c971fbc8c83e7f60db4de427"
+    },
+    {
+      "bytes": 19456,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.Newtonsoft.dll",
+      "sha256": "61a3fa39e953cb46bc09bb7d929fb3ce5f0639e8e45d97c860d557a1ab9c4de3"
+    },
+    {
+      "bytes": 24384,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.Newtonsoft.pdb",
+      "sha256": "dbb0d783b0a81e8a9e144af3cfd32f2c76ccb48d927160edfad821f8b270afbc"
+    },
+    {
+      "bytes": 169248,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/glTFast.pdb",
+      "sha256": "ad30d02d76cf57b3b4eddc6842e2c379e16628272643ac1423fedb134c5ecf4e"
+    },
+    {
+      "bytes": 33280,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/MCPForUnity.Runtime.dll",
+      "sha256": "cdfb74ae954ad04b7987d719e41303c6514878ed6e39647c1ee5c095be8e7309"
+    },
+    {
+      "bytes": 28684,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/MCPForUnity.Runtime.pdb",
+      "sha256": "b0f4e21fe6f50e898a6063ab9dd40994458dd4d8fd1abe41b71286c49f67f78c"
+    },
+    {
+      "bytes": 241152,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Mono.Security.dll",
+      "sha256": "4b6569566e48fa584dde7b4f2faa4c3cc0321599942e0898ba1b06838aef7108"
+    },
+    {
+      "bytes": 4632064,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/mscorlib.dll",
+      "sha256": "5ed1180fc8cb409d57952296c7f573f2b1b3d3d2a2cd37258ef407498a17dd4d"
+    },
+    {
+      "bytes": 90112,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/netstandard.dll",
+      "sha256": "6ae62e082dc494a2433984177f60ca4db5fae69b1f360a8b33754172b310b8c5"
+    },
+    {
+      "bytes": 691712,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Newtonsoft.Json.dll",
+      "sha256": "a56146202232958f46bd6a28b5a7da166aea123ee0d646735a46e5c341dfbf1f"
+    },
+    {
+      "bytes": 2174464,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Newtonsoft.Json.pdb",
+      "sha256": "17cbab4d4207187ed94173c0d59d7a39fabed7c9035b73634c1f02188dd60168"
+    },
+    {
+      "bytes": 257024,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.ComponentModel.Composition.dll",
+      "sha256": "0076148507a91ae4839320d6afb549eec928596b72dcd95ea6c5ecf73f8c65f2"
+    },
+    {
+      "bytes": 124928,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Configuration.dll",
+      "sha256": "69686fe46898d9c0077adb973527f3f5eb9c4840fa2f8d90a860b2f5c1e03fa1"
+    },
+    {
+      "bytes": 1113088,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Core.dll",
+      "sha256": "9493ebe16569f6067beef5281d68e83ee9511db7f55245b1dc2c95e8e189fce3"
+    },
+    {
+      "bytes": 29696,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Data.DataSetExtensions.dll",
+      "sha256": "1356d8889a0edd5a658f2f942638ebf33269e68c4f72f2775741b821a6c6520b"
+    },
+    {
+      "bytes": 2125312,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Data.dll",
+      "sha256": "6081ca5f31adb626455939a12d2f99fba9e963bc05e9acaa1f7921c0d84784bb"
+    },
+    {
+      "bytes": 2641920,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.dll",
+      "sha256": "439ca04b265472afe66df7802bed26e880b3db35e33c7e0ecf182611f4b9b6d7"
+    },
+    {
+      "bytes": 489984,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Drawing.dll",
+      "sha256": "5218327941712bdebe787e33fe2200a859e4409becb4fb46e6451cece5d2e8e1"
+    },
+    {
+      "bytes": 44544,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.EnterpriseServices.dll",
+      "sha256": "230bc9bf6611383aa9b3964ca70b1fe72b3662e213331c123265c8c83b5d03d6"
+    },
+    {
+      "bytes": 114688,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.IO.Compression.dll",
+      "sha256": "39838d5ae350265398321e656eb0b396a67113e278d05d79b2d86e7326a0f196"
+    },
+    {
+      "bytes": 18432,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.IO.Compression.FileSystem.dll",
+      "sha256": "bfae12d50f244dda8b9715594bb85be351c63326adcc27dad4f4a6b188d83cbf"
+    },
+    {
+      "bytes": 50488,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.IO.Hashing.dll",
+      "sha256": "ac7ac3e83805b0b621c48b90543dc733c9a89106835278618357d6187e3da74e"
+    },
+    {
+      "bytes": 4608,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Memory.dll",
+      "sha256": "c4f030a2cba7da7cdcf493257c24560e203d355904aee490d645a935842f834a"
+    },
+    {
+      "bytes": 122880,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Net.Http.dll",
+      "sha256": "3677239bd08808da011f94a7c41371baac10befa6423098c187471b236d2db38"
+    },
+    {
+      "bytes": 119296,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Numerics.dll",
+      "sha256": "9b6d5a2d166165a7f1edfea05b4aae4f979f7672f6d50d75ccf8586098ea4de6"
+    },
+    {
+      "bytes": 18024,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Runtime.CompilerServices.Unsafe.dll",
+      "sha256": "01748200f2400c742aa689f1f5101bd6298efdfd92c00c18f4fa473847235ba9"
+    },
+    {
+      "bytes": 12288,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Runtime.dll",
+      "sha256": "e0a7334b7ba419aaab6bd3bb6992d693e689341a9178172c9bf99c2aa6a085bd"
+    },
+    {
+      "bytes": 934400,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Runtime.Serialization.dll",
+      "sha256": "783e6193db3d0e6f137587c5a7fd8d2f4076b8307cd1c481eeab93ed57a81000"
+    },
+    {
+      "bytes": 320000,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Security.dll",
+      "sha256": "81ffc9fa9b17422a9ef25fe7bccccd154ee277f459a3c62aa67ead0a4feca16d"
+    },
+    {
+      "bytes": 215040,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.ServiceModel.Internals.dll",
+      "sha256": "289d5cb6d75b81a2c38643a0305f12c908d8c78ffef9f2845f0b22b30dc45a92"
+    },
+    {
+      "bytes": 35328,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Transactions.dll",
+      "sha256": "1c86ddf61fdf72bd8942f8ac12226b134d4e10ec88d66ef2f31ccbb65b149aca"
+    },
+    {
+      "bytes": 3160064,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Xml.dll",
+      "sha256": "f8d4a2af788e679811171031b79f4ac5204e00526efa0f0f3507984c3ee96d0a"
+    },
+    {
+      "bytes": 136704,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/System.Xml.Linq.dll",
+      "sha256": "181938ade3495f679db26fc767585bbd84b10f664d47ef1e3422d667f4954370"
+    },
+    {
+      "bytes": 436736,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AI.Assistant.Runtime.dll",
+      "sha256": "7f3ab9b44eddcb5d93dab9b0abb9c1463496b877de96a6c3c49f0052c1e01579"
+    },
+    {
+      "bytes": 171576,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AI.Assistant.Runtime.pdb",
+      "sha256": "c2cd608335f798a65190c5fe899d980a43f70d232140e6d57a3623e487ad90ed"
+    },
+    {
+      "bytes": 9728,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AI.MCP.Runtime.dll",
+      "sha256": "ea4d4e3f63fa084e4a2eb80893d4338aaf8b2b405a91f0a788262d967913ed56"
+    },
+    {
+      "bytes": 18264,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AI.MCP.Runtime.pdb",
+      "sha256": "e8fcb276e86016c33cdae36e0afc2cdce40be2b18b41e87a5ee9fc59e106b814"
+    },
+    {
+      "bytes": 32256,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AI.Tracing.dll",
+      "sha256": "d0e7cc418423dbf0124478106d02e6d24ec78036e6571385085deac855a337b7"
+    },
+    {
+      "bytes": 26436,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AI.Tracing.pdb",
+      "sha256": "738cc2489d809ad4c88689df5fdfd00141a60e95936592025a1e9b83af185d78"
+    },
+    {
+      "bytes": 684032,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.dll",
+      "sha256": "cdb68f1675364fdf4a17664aa821556ae2f64813a1d0734f23999609b6a96c62"
+    },
+    {
+      "bytes": 9728,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.InternalAPIBridge.dll",
+      "sha256": "994fe0b86e5e12afc5cbcaa2de1535734b7d4d9518282ed2c01138788090fd9f"
+    },
+    {
+      "bytes": 18360,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.InternalAPIBridge.pdb",
+      "sha256": "80b6cd4188c60dd905b61b420374f21d8bc5fb12c8599d0948ca4fcea60d6395"
+    },
+    {
+      "bytes": 36864,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.MVVM.dll",
+      "sha256": "30282f7f07f15a4910270b93d926177bc75ed077f7e4216d20e39a3ead2b8cb9"
+    },
+    {
+      "bytes": 30356,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.MVVM.pdb",
+      "sha256": "f578f4e5d4098d5747c32de50c085babb83107e5f15f87e1f6fe161217fb15e9"
+    },
+    {
+      "bytes": 33792,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.Navigation.dll",
+      "sha256": "e286815dad9b5911cc22322b2fddbceaf73784b6bd461400783b34f8821d66e4"
+    },
+    {
+      "bytes": 27872,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.Navigation.pdb",
+      "sha256": "c114ecc41c62d41cded5cb5809a904129b4af615da2d3cdcaa9cfa426b6d1bdd"
+    },
+    {
+      "bytes": 401048,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.pdb",
+      "sha256": "b7ccc2c591dfa8fd71929b4514cb084b5e0498db7347a61e19049d5bbad17902"
+    },
+    {
+      "bytes": 10240,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.Undo.dll",
+      "sha256": "6657b90a75889780eaf2e2817225563beed041dc76a8076ac6ed8f72175d4003"
+    },
+    {
+      "bytes": 19152,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.AppUI.Undo.pdb",
+      "sha256": "6c90f67f679a4b44d719aa7495bcc2f4999060c3343783cfb8525dfce780674a"
+    },
+    {
+      "bytes": 335360,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Burst.dll",
+      "sha256": "1b00d5af1da0fd5ebb39798d0883f07f337d936d3aefed5d4281a4e6bbb2a0ad"
+    },
+    {
+      "bytes": 221372,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Burst.pdb",
+      "sha256": "69849d17a21c5a2a7065f2f6774dcbd0c7a77be728e67dc5708b1f4a5eda1abc"
+    },
+    {
+      "bytes": 5632,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Burst.Unsafe.dll",
+      "sha256": "9d9c1ff52411decbee5d9f0d1cd61ebeaa222077aa77a52101ea3debafae98e2"
+    },
+    {
+      "bytes": 499712,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Collections.dll",
+      "sha256": "8f92e4ee8db90fdf2b384ac5882f9d8ec0f7170386d154f6d85f5aa9c0ec7aac"
+    },
+    {
+      "bytes": 5120,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Collections.LowLevel.ILSupport.dll",
+      "sha256": "ff50383f807f9692e4913b97e47d86fefcb8faa33d6d48cd3e3fd6fc7ffb448d"
+    },
+    {
+      "bytes": 314624,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Collections.pdb",
+      "sha256": "8c4286294069d6e81bda64d6f2c3543e590b7116f23c6d29e4a46703ad23decd"
+    },
+    {
+      "bytes": 1456640,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.InferenceEngine.dll",
+      "sha256": "290452d834d4c9e3c238dcc297384a9db71b1c5e5a2781f869824bf06a770825"
+    },
+    {
+      "bytes": 843052,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.InferenceEngine.pdb",
+      "sha256": "339e344d70e59060cd99a7d205ec3197e628328c0836c1bd3a945812abf5dda5"
+    },
+    {
+      "bytes": 209408,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.InferenceEngine.Tokenization.dll",
+      "sha256": "5b6f6d2b748c8786e5a75a3a4f0aff1e915130aeef582906161dae385dc723bc"
+    },
+    {
+      "bytes": 122476,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.InferenceEngine.Tokenization.pdb",
+      "sha256": "b4109b27cc93e0be0298dc7a10af79dde2dfb6845e800c40abe426d80dd6fe5f"
+    },
+    {
+      "bytes": 886784,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Mathematics.dll",
+      "sha256": "bedb5874933f073de0e5c107332d0e9ab9b7fcdf42441c4a1f81c32ebe922c3e"
+    },
+    {
+      "bytes": 515836,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Mathematics.pdb",
+      "sha256": "11978571cb9b9e4c06157a0073812363f6ffb3ecbb8480fc3b49a7e78c431c43"
+    },
+    {
+      "bytes": 10752,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Multiplayer.Center.Common.dll",
+      "sha256": "f35625c517f32ffe80d41ea2ee736543f9c29cf9d5be41688a82fe2fcafe81a6"
+    },
+    {
+      "bytes": 18160,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/Unity.Multiplayer.Center.Common.pdb",
+      "sha256": "a806cc8d34d899c22355785d9723c8ec3fcba018bfbed1a49d052b177fec1198"
+    },
+    {
+      "bytes": 54704,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AccessibilityModule.dll",
+      "sha256": "c8838a83ef25e7dcf7eadb992f3af5fa3dfcf168df30c76547b04855cf0584ae"
+    },
+    {
+      "bytes": 25612,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AccessibilityModule.pdb",
+      "sha256": "4eff4c7544bc63337ab864e90ee89b3aa1011537541f36be9574776dbceffb0a"
+    },
+    {
+      "bytes": 73640,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AIModule.dll",
+      "sha256": "b83489bc5ff5ad55cdbd81430a34f2b089da07850d4ad4b44b35822b7323cc75"
+    },
+    {
+      "bytes": 20536,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AIModule.pdb",
+      "sha256": "230df02d6330ef9ca44af48cbef5162a1caab3390b92999d84bad9ca2648f5c1"
+    },
+    {
+      "bytes": 21936,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AMDModule.dll",
+      "sha256": "5bba6cad9451d4587762bfbe9c5402b8229b4829abea6a7a8df8eb6d5811c9b1"
+    },
+    {
+      "bytes": 11916,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AMDModule.pdb",
+      "sha256": "f7569a71828d09c17fd95332e3be17d99b1afcec7adf068a754c3fcffacaeca4"
+    },
+    {
+      "bytes": 116648,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AndroidJNIModule.dll",
+      "sha256": "48f292113d993c4f5d7a1202559a20387d800b3a920025d1b15246368489b65d"
+    },
+    {
+      "bytes": 49824,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AndroidJNIModule.pdb",
+      "sha256": "483a3277d5b6be4e2bf94fe26ad443a60563a0fcf373a4694d863f03e5c860e5"
+    },
+    {
+      "bytes": 214448,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AnimationModule.dll",
+      "sha256": "12b221404784d680478052a954c839f6017552e42076a19b61567de6bc35f915"
+    },
+    {
+      "bytes": 58604,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AnimationModule.pdb",
+      "sha256": "17e25867fbb229aeb9c16aca3ca3142a2be106a2e6e8e6537287ec3379da8feb"
+    },
+    {
+      "bytes": 22440,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ARModule.dll",
+      "sha256": "a5acd3b7d25cc5e7000aaabc52a6e288c70d83a34438f45f21999f6d17580e6d"
+    },
+    {
+      "bytes": 9892,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ARModule.pdb",
+      "sha256": "070e6e7245eb15a603897d53cc6b3b02d33d49bf2b3083cc15ef4f09292fbfeb"
+    },
+    {
+      "bytes": 39336,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AssetBundleModule.dll",
+      "sha256": "eeea0e4d0556d0042c485d514f9924c5a636229b52f9a437375dba414826a2ca"
+    },
+    {
+      "bytes": 14036,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AssetBundleModule.pdb",
+      "sha256": "6b6eb579a54b07300e277288520f2580862ee5014c3ec994f052a60fc3ec5072"
+    },
+    {
+      "bytes": 103848,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AudioModule.dll",
+      "sha256": "729cbca8ced5cde8f4065ab47e069edf8ec8a21e74a748e87b867baa08421cef"
+    },
+    {
+      "bytes": 23880,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.AudioModule.pdb",
+      "sha256": "57df7598241e4382d7c8a96da418f511754391c9a06d0ab5fdd4776db1ea3861"
+    },
+    {
+      "bytes": 33192,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ClothModule.dll",
+      "sha256": "cd8692e221ca95cb1f23c7b6395375c6432f7b3e74f200852252e46571c0599b"
+    },
+    {
+      "bytes": 10384,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ClothModule.pdb",
+      "sha256": "af9bdd432aa805307aae2996738e67d1bd687104ad8aad52be78143bfc9e6afc"
+    },
+    {
+      "bytes": 25008,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ClusterInputModule.dll",
+      "sha256": "eba1975ad9a8453d0aec750b8f2ee515355d9383473659ad2658f5e21e6eb818"
+    },
+    {
+      "bytes": 9276,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ClusterInputModule.pdb",
+      "sha256": "f3293457913fa6fde73fa2aaee8b5de2c067da7f6fb328b1e6134a751cedae5a"
+    },
+    {
+      "bytes": 23464,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ClusterRendererModule.dll",
+      "sha256": "117123b4344691bed4aa6fa59f8f284d95a8e2e670d8d7f4622885fd62f9ac50"
+    },
+    {
+      "bytes": 9884,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ClusterRendererModule.pdb",
+      "sha256": "97f54c5e5f83bc2ed1030e97f109e65c7ec8d48787940889cc890a5ec60c3490"
+    },
+    {
+      "bytes": 29608,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ContentLoadModule.dll",
+      "sha256": "1a27d8f59cf1395308f3295207fa027c20aa02da041de51c6da7711b68cefe0b"
+    },
+    {
+      "bytes": 11056,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ContentLoadModule.pdb",
+      "sha256": "438979c72bde4d8883f807c55c123e43674569dd86bd6ea5eaa9868dbba57a23"
+    },
+    {
+      "bytes": 1801128,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.CoreModule.dll",
+      "sha256": "b4334bd2a72883dc4ebb6a9417436abb93299253a95777b09325a861add26707"
+    },
+    {
+      "bytes": 525492,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.CoreModule.pdb",
+      "sha256": "50da7a67000075c9b4abc0d3400c7aaa466e4ddddfe33d6dd4f9e41f34621c77"
+    },
+    {
+      "bytes": 23472,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.CrashReportingModule.dll",
+      "sha256": "1466c1d57cea98c6e438dbc0519f3e95086723238f1201063fc6665eddb416c3"
+    },
+    {
+      "bytes": 9888,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.CrashReportingModule.pdb",
+      "sha256": "1bd7ed6ab85d685e76db71cb1c2bc6f9c69f6e63b7745b1fbe0aa67774d36af2"
+    },
+    {
+      "bytes": 38832,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.DirectorModule.dll",
+      "sha256": "861a0bed4894c82b87d2954e11c67764aa89dd5f8f9fabf57320919de675da0a"
+    },
+    {
+      "bytes": 13804,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.DirectorModule.pdb",
+      "sha256": "50b66b436245364c59ac3321af2c7939300a004448570ea0e8d68aa87be6d0b3"
+    },
+    {
+      "bytes": 170920,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.dll",
+      "sha256": "fb4c3e42c085e3d1d5ae18cb307ce6fa5bca656c8db0c1190f3bed0be03828ed"
+    },
+    {
+      "bytes": 30632,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.DSPGraphModule.dll",
+      "sha256": "84d17deab36234a2ab3de9fe01e0bcec4c16e4d9e725e2edaec1613230a97e81"
+    },
+    {
+      "bytes": 10428,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.DSPGraphModule.pdb",
+      "sha256": "fd559ebba99e825dd02255e026fd85225efc2fa1406291351cec21294a7a8504"
+    },
+    {
+      "bytes": 42920,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.GameCenterModule.dll",
+      "sha256": "0d5c8477ffb1937a1d10a538c82958e4176e89a142a8418dac9f90db334af937"
+    },
+    {
+      "bytes": 17372,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.GameCenterModule.pdb",
+      "sha256": "db81c0713f1679d52e5d97b5fee3b41a8f8f62459de92ca347f5cd0507ac2cd0"
+    },
+    {
+      "bytes": 21416,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.GIModule.dll",
+      "sha256": "e3b5db2ec84a03031ee9eb877d1cc01e6a686dad2f80ac3c8a4bddac0cdf54fe"
+    },
+    {
+      "bytes": 9156,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.GIModule.pdb",
+      "sha256": "c3f999c745a6d97fc761d87a786c427bd2701aef5e45e0873616ee0e520a9970"
+    },
+    {
+      "bytes": 14248,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.GraphicsStateCollectionSerializerModule.dll",
+      "sha256": "d29767d8124def9e893001b3e3e8224d69b5657ae049eb424b4218313fced35a"
+    },
+    {
+      "bytes": 9184,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.GraphicsStateCollectionSerializerModule.pdb",
+      "sha256": "a3a30f3a71b594a51fae11d2d20cc0e7ecc43b786ceb3091166637ae39a13671"
+    },
+    {
+      "bytes": 27048,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.GridModule.dll",
+      "sha256": "3bbfccf50c5586f9d31a4012efbc3bd4238f58be7cc635c8f6b779f7954b997b"
+    },
+    {
+      "bytes": 9912,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.GridModule.pdb",
+      "sha256": "008814aba4a7e92c27c345758c19e73d1df4f43b5c37b1296dcad26b321cb8d0"
+    },
+    {
+      "bytes": 91568,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.HierarchyCoreModule.dll",
+      "sha256": "097519397f38dbaca8f554009f1afa80efa019bffe9a9f7521e3dcf00f21a771"
+    },
+    {
+      "bytes": 31588,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.HierarchyCoreModule.pdb",
+      "sha256": "beb7318153e1cc683ab208006930495fb825ee62e75f4f9b2739ae9209b84669"
+    },
+    {
+      "bytes": 21424,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.HotReloadModule.dll",
+      "sha256": "8d31d655a26e537222f107f9166986d0333bb232a71f8b91e917704c65785e58"
+    },
+    {
+      "bytes": 9156,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.HotReloadModule.pdb",
+      "sha256": "d4f58e5f411e3526aeb042f8ff56b3a7e43f2da1fdb77360a2050297e04a826d"
+    },
+    {
+      "bytes": 14768,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.IdentifiersModule.dll",
+      "sha256": "3f294db762d37093708c7b54119986da8d5f65852dcd006218fb7025782dee57"
+    },
+    {
+      "bytes": 9420,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.IdentifiersModule.pdb",
+      "sha256": "3d27f32b06e6d0eddd998a5a0e9d537a6a3459417e7b2ea5bae0757fe320ded8"
+    },
+    {
+      "bytes": 28080,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ImageConversionModule.dll",
+      "sha256": "218823e9a81f40dba8b2bd3eb1681f89d6ec680880b9d71d47e1034cb850e918"
+    },
+    {
+      "bytes": 10500,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ImageConversionModule.pdb",
+      "sha256": "da03f5a8764786dc3f61622a29ff32d7160dd2db19cee8d7515a1b40648786b3"
+    },
+    {
+      "bytes": 207280,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.IMGUIModule.dll",
+      "sha256": "f14c69936146727de4967e11647aea93029fa6bdb25cc9376e312dd796624d79"
+    },
+    {
+      "bytes": 89580,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.IMGUIModule.pdb",
+      "sha256": "3e8a6a89ed825b1c8247f2d5650ac76a1d9ec6aa9ff0cf9be445a874c7705882"
+    },
+    {
+      "bytes": 57256,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.InputForUIModule.dll",
+      "sha256": "7b881d3705d9e12948a023873d7069adf1255c4132fdc4e166184c7c429baecc"
+    },
+    {
+      "bytes": 25936,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.InputForUIModule.pdb",
+      "sha256": "f2e5fb7c9f73df0558d98e1270ea0533f9d7e0588480e27704f24824120e0aa3"
+    },
+    {
+      "bytes": 42408,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.InputLegacyModule.dll",
+      "sha256": "8258283149ef02b26c1cfc4022c4613da2e1658d35f54cd6165fc66a16d01e39"
+    },
+    {
+      "bytes": 15264,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.InputLegacyModule.pdb",
+      "sha256": "fedc96faf94b9792adabb90daf110a0c42b861d4728003aae006874c3de324e1"
+    },
+    {
+      "bytes": 25008,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.InputModule.dll",
+      "sha256": "5538fbd1ee0954e5b8b731e8fd3fe2f01f640bc4e0a3a0283ab23b2d68e16bc5"
+    },
+    {
+      "bytes": 10524,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.InputModule.pdb",
+      "sha256": "70901fb1a3bf6fcc2c1f4d49cb72378c7e698d0504793e286b5a4c2e3b54c377"
+    },
+    {
+      "bytes": 14256,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.InsightsModule.dll",
+      "sha256": "62eecbe4fbb2cc0c5edaeb66e497aa509dbdf70326ea48712bff51055dfddbbf"
+    },
+    {
+      "bytes": 9484,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.InsightsModule.pdb",
+      "sha256": "4789b83b85622f5e33259745313a7bc6e6e8d36c942e0f438e12c39120ea1f59"
+    },
+    {
+      "bytes": 23984,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.JSONSerializeModule.dll",
+      "sha256": "91f6e4d9ce6db83fd95721eb47bcb453306a5ebdaeef0d696f32cc7a853e4a79"
+    },
+    {
+      "bytes": 9780,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.JSONSerializeModule.pdb",
+      "sha256": "7bab6eae68b242fac592493df6d9d6e5900e1fed93fc65468d0ad24f25fbb9e8"
+    },
+    {
+      "bytes": 23984,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.LocalizationModule.dll",
+      "sha256": "61a2bf8019874f8f7f7368e0490b7d32f03719d211fef098bedb6d995cad7be1"
+    },
+    {
+      "bytes": 9576,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.LocalizationModule.pdb",
+      "sha256": "b665a002bd7388e1506433e022a8ae652caedcf33cf23f39c3e04f9e01010daf"
+    },
+    {
+      "bytes": 64432,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.MarshallingModule.dll",
+      "sha256": "f78a7df6e179a946e02b8231e8a5164fa518d92fc1ca2a245f249fc30685cc09"
+    },
+    {
+      "bytes": 12608,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.MarshallingModule.pdb",
+      "sha256": "a83a622b77c46695391282876ad4bc9baee03762d968c79e9f8827bd889ff99d"
+    },
+    {
+      "bytes": 15792,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.MultiplayerModule.dll",
+      "sha256": "90731793e586cbced530d9123ef693366a0758f55ba551871c5c9ebc6252b6d0"
+    },
+    {
+      "bytes": 9184,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.MultiplayerModule.pdb",
+      "sha256": "59c26ff20745e8db7b0eb9889c5f9c9e05ffaa26da6b117c9c767abec1630690"
+    },
+    {
+      "bytes": 35248,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.NVIDIAModule.dll",
+      "sha256": "671ea53859f37109c8a220885c1dccd09ae150df47861c2b6d74e5e425e59bf8"
+    },
+    {
+      "bytes": 15592,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.NVIDIAModule.pdb",
+      "sha256": "91526a22f80ed090486d7343cd74ffc44e5d9e669fafb7f15c9a56ae803a5b89"
+    },
+    {
+      "bytes": 167344,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ParticleSystemModule.dll",
+      "sha256": "1045255da0451e46779db3dba2d943c7f9e22874b592c5031b79bf3fa10ad0c7"
+    },
+    {
+      "bytes": 40108,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ParticleSystemModule.pdb",
+      "sha256": "2610dbdf96ede9b9d958d2e9d085b3bcfb7ac8b99a16b674bbf0ad11032c6b49"
+    },
+    {
+      "bytes": 12300,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.pdb",
+      "sha256": "eee517a1038a1d710350cd1d94bc352c2140d018e73b1218f576337332727087"
+    },
+    {
+      "bytes": 21928,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.PerformanceReportingModule.dll",
+      "sha256": "0f784513450ee6474868ecc0ac6fc8b820f2548528d16e9d1b35f32780032871"
+    },
+    {
+      "bytes": 9364,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.PerformanceReportingModule.pdb",
+      "sha256": "b22d666c40cb16542d8d69516c3507201fb731d389d9552c908c9a4c6ebd4385"
+    },
+    {
+      "bytes": 201136,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.Physics2DModule.dll",
+      "sha256": "ae4d4a179fb609b578fc591ef1efe6a97707e6e5e7d5e8ebd68c562d914bdb6c"
+    },
+    {
+      "bytes": 48440,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.Physics2DModule.pdb",
+      "sha256": "874c29f1f64efbb5c933763d79901d0a5577795f95b7d63b261d6548b9400323"
+    },
+    {
+      "bytes": 182696,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.PhysicsModule.dll",
+      "sha256": "dd641476d9257eaec8946e0873b0eae99877d3edefcf8ee1c5e18be0b7d3742a"
+    },
+    {
+      "bytes": 47412,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.PhysicsModule.pdb",
+      "sha256": "eea3703cd48b5e53b6841e46119d115887392748c5d74d7aa16c29d149265d8f"
+    },
+    {
+      "bytes": 149424,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.PropertiesModule.dll",
+      "sha256": "544b343a9a2b56d363923a558aa98e6e1cde9aca9da99eb44ad368527eb52f83"
+    },
+    {
+      "bytes": 58924,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.PropertiesModule.pdb",
+      "sha256": "6644512b5cf8b38ad81b334bc318b0c588b758758bc66c0006093297ecdc0274"
+    },
+    {
+      "bytes": 21416,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll",
+      "sha256": "b2bb0dcb84397eefd68712ea2513550916c57ba6f039ad6f68f2e5e9f3c9c377"
+    },
+    {
+      "bytes": 9220,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.pdb",
+      "sha256": "4ebf40e58b8f131669364ce148a31d4c04a18bacd8a296ec9d4b60bbf0088672"
+    },
+    {
+      "bytes": 22960,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ScreenCaptureModule.dll",
+      "sha256": "450842fdbcf1cd199b1c7d897f6da881eaed3795e061814f7a326f8f13a4a968"
+    },
+    {
+      "bytes": 9760,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ScreenCaptureModule.pdb",
+      "sha256": "d26d2744f88a1b5f2674bc1fa057f2bc52e4b366960cf6b7e26b2a9750b738df"
+    },
+    {
+      "bytes": 21416,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ShaderVariantAnalyticsModule.dll",
+      "sha256": "ef05342b59bf24cd00e7bcbd2e6ec46ed5ec1ece5bb79c276fe0054830fce88f"
+    },
+    {
+      "bytes": 9284,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.ShaderVariantAnalyticsModule.pdb",
+      "sha256": "688882a3662dbbae13b19fa7bb2b263b9f2cb63d24f9f31191c1b16a4b4127c2"
+    },
+    {
+      "bytes": 32688,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SharedInternalsModule.dll",
+      "sha256": "f479f56a962bd11faeef0ad1a6bd3c3ad0bfadc0544d1ebdd282eafe962924b3"
+    },
+    {
+      "bytes": 13580,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SharedInternalsModule.pdb",
+      "sha256": "cf3fdc08dc5ba84023110fcb58741903e36bc499cd5a366f95ff75cc3cef87db"
+    },
+    {
+      "bytes": 25512,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SpriteMaskModule.dll",
+      "sha256": "417a76b4e9917683e583eea8a295f6b115a66b7bd170b44b7e6f0fc31812114d"
+    },
+    {
+      "bytes": 9488,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SpriteMaskModule.pdb",
+      "sha256": "90f72aff431fa7171726301d651df650da1910af64a294b0b9076f31ec2a0179"
+    },
+    {
+      "bytes": 28592,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SpriteShapeModule.dll",
+      "sha256": "66cf04f17da99b392ea6e9942acce7973bb8954f8e959940a86ed5fc85c920c5"
+    },
+    {
+      "bytes": 10720,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SpriteShapeModule.pdb",
+      "sha256": "bb40c6dd81b93c938268d3c0730eac3ac5f7dfec803f0961ce76d3d9958b8431"
+    },
+    {
+      "bytes": 22440,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.StreamingModule.dll",
+      "sha256": "e7c2b66c367649cdaeeda5847513e991606b4750d33953cb37939d73f6fff949"
+    },
+    {
+      "bytes": 9232,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.StreamingModule.pdb",
+      "sha256": "328f14384a68582f9acc4ea5f5b91ef26c4bf04b0bb1ac99ad52e2292030a54d"
+    },
+    {
+      "bytes": 26024,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SubstanceModule.dll",
+      "sha256": "f5f2486d12fd8c943d088c9eef7044b6198f8581b91da9580eded45f400afe6d"
+    },
+    {
+      "bytes": 11360,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SubstanceModule.pdb",
+      "sha256": "e5cf162b40183a458d17fac21a8d71026a6e6ba8b8e24f1c82897a7d922087cd"
+    },
+    {
+      "bytes": 38824,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SubsystemsModule.dll",
+      "sha256": "d16298d12cc65b0cbca874981b6b8d0fa54f95a0a94bbb44b4345a41d2f8f0c1"
+    },
+    {
+      "bytes": 15900,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.SubsystemsModule.pdb",
+      "sha256": "f43ad75c4a9b664d8acd449711f0f0c97db7fec7a036a4aab5443400ae23e4b8"
+    },
+    {
+      "bytes": 130480,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TerrainModule.dll",
+      "sha256": "c5655ed3c852a9dafd189df376f18b129794380d65158e9595b81c7f87061f6c"
+    },
+    {
+      "bytes": 33828,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TerrainModule.pdb",
+      "sha256": "d82b421573520afba2a1a90de22cf0b08cbf4dc1c28df87d065b2962b61895b0"
+    },
+    {
+      "bytes": 22440,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TerrainPhysicsModule.dll",
+      "sha256": "0cb780dee2fd3646373a96bd640ea7075899e5d978b4e7e0e7f6754562a0d405"
+    },
+    {
+      "bytes": 9620,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TerrainPhysicsModule.pdb",
+      "sha256": "5acab354b0c621253065b142f8dd83a13fffb1550dc448d3e73fcfa0c30bb5ae"
+    },
+    {
+      "bytes": 84904,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll",
+      "sha256": "c64535ace4ffb2797d53bbe8432edcde979e44508d8ff2fda6a698d0e77c7a6e"
+    },
+    {
+      "bytes": 28208,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TextCoreFontEngineModule.pdb",
+      "sha256": "6b2164aea2fa9ddbc509afc6460e6a57d1406b6280b80094cfb6fc2121ce6b84"
+    },
+    {
+      "bytes": 304040,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll",
+      "sha256": "0e8e0e5c42c39911a6e652719e7739042ba788a0e01394f2fa597ae04dc49ae7"
+    },
+    {
+      "bytes": 135808,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TextCoreTextEngineModule.pdb",
+      "sha256": "79b232f9b87ab2e3efd0b05f5764a841e4f50a2490d3a0bb22b0dccb53ea6d36"
+    },
+    {
+      "bytes": 46000,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TextRenderingModule.dll",
+      "sha256": "d0ac04d2dfec969e236e87c85ba3600f0b83cb7d99c1c32c7d268aec79fd5204"
+    },
+    {
+      "bytes": 15292,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TextRenderingModule.pdb",
+      "sha256": "4588b494b74efc2a20e60e33946ed52e3c817d08cb2eacbef019f375a869d4e8"
+    },
+    {
+      "bytes": 54696,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TilemapModule.dll",
+      "sha256": "7f5cc0e0049a78a8be26bed139e4a5981489165aa1ca34818fad14f423edac29"
+    },
+    {
+      "bytes": 18900,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TilemapModule.pdb",
+      "sha256": "c1a208114e2e0853e0f4cca898be1f60ceca4537d4e1d8d25083032cbcf59c23"
+    },
+    {
+      "bytes": 29096,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TLSModule.dll",
+      "sha256": "a8d69f77175a7140bc3ce87167fb4cfa7631bdd8e1a28b24cf91c87e49ce84e4"
+    },
+    {
+      "bytes": 9176,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.TLSModule.pdb",
+      "sha256": "affb60d8ccaf2d9ce74041637185f4e945eb51f635f0d6cbaa02be8a20162c80"
+    },
+    {
+      "bytes": 2076584,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UIElementsModule.dll",
+      "sha256": "dd142247db3a5e173e043d4f534fcaab17df5b9f3c9ebfec962f6d917b85765d"
+    },
+    {
+      "bytes": 920988,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UIElementsModule.pdb",
+      "sha256": "d7674fb75ef2a43d86bb2024b3bc615e259b9a9128ad992fbf631ae0aa68cd92"
+    },
+    {
+      "bytes": 45488,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UIModule.dll",
+      "sha256": "abd48c3e0339ca3772a4bed7eac75f723864b6ee9e66a49f8688d784237b9ca4"
+    },
+    {
+      "bytes": 13712,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UIModule.pdb",
+      "sha256": "025a548fabbc9d8346fefcfb62431f08a1404dbefecc777ca4164f93c9545119"
+    },
+    {
+      "bytes": 21424,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UmbraModule.dll",
+      "sha256": "6c2aa735495d0b0b1e0ca3dc6f70dae4724f57fae90cfa8f84137df0a955c7e2"
+    },
+    {
+      "bytes": 9156,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UmbraModule.pdb",
+      "sha256": "832cb4ee920769cc8f540c5ebeba7a132d8d863c9d17718baa2d5971f77a7b5e"
+    },
+    {
+      "bytes": 32680,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.dll",
+      "sha256": "9e9b3ec59f074caf30063704888bded795dbb9590885469e771930d970621fc3"
+    },
+    {
+      "bytes": 13636,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.pdb",
+      "sha256": "3f3b4aa307db19ba3625e2b68f8795d8fd2204419cba615ad0a2ebc35ef69ce4"
+    },
+    {
+      "bytes": 57768,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityAnalyticsModule.dll",
+      "sha256": "e6b6f9d7ab105fbc6a580daa2b0e728dea95d17e80a00ba03d9fb1c15606ff20"
+    },
+    {
+      "bytes": 17880,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityAnalyticsModule.pdb",
+      "sha256": "894a208470b4043783204a725c7bcb9377cf4e2e9f1ab4b3ec907b3f7fefc9fe"
+    },
+    {
+      "bytes": 24488,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityConnectModule.dll",
+      "sha256": "2387c0445096c17d938aff66cdb2ce255c3e7e9447e7b00783af40c53a034cf0"
+    },
+    {
+      "bytes": 9752,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityConnectModule.pdb",
+      "sha256": "34eee3b974acc0e942d61522e67756b0ba31f37127ca270dab6d193a072d30ed"
+    },
+    {
+      "bytes": 16296,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityConsentModule.dll",
+      "sha256": "be513fc9370ea37d7594cd8aa6663f235a59337fb45da538ed85f0db9e504933"
+    },
+    {
+      "bytes": 9784,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityConsentModule.pdb",
+      "sha256": "4791d44c016fa81648651b7a799f5a46150a4932985b1e79a8340c9907393644"
+    },
+    {
+      "bytes": 22960,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityCurlModule.dll",
+      "sha256": "7bb22dcdf37070a07c7fc33357cf2f5456672e23f9ac9684d1b652f7d93c0ffe"
+    },
+    {
+      "bytes": 9548,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityCurlModule.pdb",
+      "sha256": "6740fe785e26788bda2a80f3ea49b1a38ea3b21bd51ea7e34531d065132cfafe"
+    },
+    {
+      "bytes": 21416,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityTestProtocolModule.dll",
+      "sha256": "8ef6c27d90cbcccec153f00e897203d0879e1d66c695de141f9907fa65d6bf25"
+    },
+    {
+      "bytes": 9220,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityTestProtocolModule.pdb",
+      "sha256": "4852469434abfa6ee316f1fedd5f364bee80480e447b8266310d5d6cd1ae3e10"
+    },
+    {
+      "bytes": 25520,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll",
+      "sha256": "ea5b9610e7e0b69a3c8e2d0724262722cb17670a4c785dbbb5291c57a9ddfa8c"
+    },
+    {
+      "bytes": 10732,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.pdb",
+      "sha256": "88a4f3a77c2e8d62137217550da2f684a472b25ddaede3ebd4ac1457f51dc6d9"
+    },
+    {
+      "bytes": 25000,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll",
+      "sha256": "4f1ef17a1f81782dc3063d36c101a40100de9462ed05bdd668beb99ac073b4fd"
+    },
+    {
+      "bytes": 10532,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestAudioModule.pdb",
+      "sha256": "56312d2d75b6fe2ff2abbf85ffa44c727e2227c6e25e365572fd8585cf9d8a45"
+    },
+    {
+      "bytes": 65960,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestModule.dll",
+      "sha256": "df202906ab8c28eedb9880a4e780fcd2c54cf495eabb8fba25dfc41de4f5aa30"
+    },
+    {
+      "bytes": 28224,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestModule.pdb",
+      "sha256": "57a11ba843b131f609ce4ea305540fb34ede06619cba64740267ea7a184ee7eb"
+    },
+    {
+      "bytes": 24488,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll",
+      "sha256": "4e5ac9ad3d6616e886e50bb41a659e90fb82ef6cca6b96f8dfa61a724bfce6c2"
+    },
+    {
+      "bytes": 10696,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestTextureModule.pdb",
+      "sha256": "0fb06df403c6272eacd8bcaf3cd3a668489ee23ea8644d448eaaacaf5010d2ac"
+    },
+    {
+      "bytes": 33192,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll",
+      "sha256": "b298e525d9c93e6cdb306fa5f1cf1d6e2b17d9507f662c96e8acedd5cacd19ef"
+    },
+    {
+      "bytes": 13600,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.UnityWebRequestWWWModule.pdb",
+      "sha256": "240544886e6f48ce9c13d75c6f6320c9a3a32becb1390cb1440956213926e07f"
+    },
+    {
+      "bytes": 28072,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VehiclesModule.dll",
+      "sha256": "583e2815499c4784d422b6aec74bcbee670909f1179ff3d533ed335fcd5afb9f"
+    },
+    {
+      "bytes": 10400,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VehiclesModule.pdb",
+      "sha256": "7f75517aebf09c8eb6f1d53aa71974c9ec750c1737de69d64ef6a327c122b358"
+    },
+    {
+      "bytes": 75176,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VFXModule.dll",
+      "sha256": "398058bc254e01caa6c040cb9525b685731a58acce050237b8bf09c28c1a1456"
+    },
+    {
+      "bytes": 18664,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VFXModule.pdb",
+      "sha256": "e62a68c459bb39cd9fcb901eb90e84cee4d03e6b2b8dd7418dc807c7fa3a8758"
+    },
+    {
+      "bytes": 55208,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VideoModule.dll",
+      "sha256": "e56f265f9448432245edc22909124b33df3f6624fa047865a8a52951fed94e5f"
+    },
+    {
+      "bytes": 14072,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VideoModule.pdb",
+      "sha256": "70992e5807d62b1f54a86c2ff5ae5de7a74e53ccb802f9fc9887a2f14d517209"
+    },
+    {
+      "bytes": 39848,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VirtualTexturingModule.dll",
+      "sha256": "5328d94f3cb1b5f631fd069fac7bd308628efe25db6b91539279ce313cd851ed"
+    },
+    {
+      "bytes": 13404,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VirtualTexturingModule.pdb",
+      "sha256": "65f7b3b0b76342fdfb1372e23ad417d14434f364b92fb13c62746fbbddf7ebe6"
+    },
+    {
+      "bytes": 28592,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VRModule.dll",
+      "sha256": "d94e096a697ccf2b63b20cc87c2932f13104f995dd4cfba98308c8006ec7d0a2"
+    },
+    {
+      "bytes": 10280,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.VRModule.pdb",
+      "sha256": "6e427f3c16a0bdb8abf30224b4b63a90d6333baa7c28ba8c664eed554546b28a"
+    },
+    {
+      "bytes": 23472,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.WindModule.dll",
+      "sha256": "ff91327ddc936790e67857cf5fd4f3a55a43b03718cf004655d08ff072b707a7"
+    },
+    {
+      "bytes": 9292,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.WindModule.pdb",
+      "sha256": "a2798211d24e4da06d213fae121939a51822de961a67618bf56d004cb870bb35"
+    },
+    {
+      "bytes": 84904,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.XRModule.dll",
+      "sha256": "a39b039618709220f075b11db4a911623cd74ab7b99be6e474cff3059d96c931"
+    },
+    {
+      "bytes": 24148,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Managed/UnityEngine.XRModule.pdb",
+      "sha256": "b39d7f584c1f250ad5976b3ce9bdc402906da713e7ec4ba58d23efb32c864d6a"
+    },
+    {
+      "bytes": 21424,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Plugins/ARM64/AppUINativePlugin.dll",
+      "sha256": "ab72763bf5773b105b3b0dc9781f57c480d7de1ef49cdf3523c7ef6436eb1305"
+    },
+    {
+      "bytes": 21928,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Plugins/x86_64/AppUINativePlugin.dll",
+      "sha256": "2c0cfcf7b826508ef60039b417e203e0f4c91bec3f75f51bd7c4b0ec47529ffc"
+    },
+    {
+      "bytes": 992256,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Plugins/x86_64/lib_burst_generated.dll",
+      "sha256": "28933f0ecf82a9f012af7317eb2507597c1c2e39cffd10bb54b94ff5148255e8"
+    },
+    {
+      "bytes": 5246976,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Plugins/x86_64/lib_burst_generated.pdb",
+      "sha256": "464201a65bfc5ebedaee450e0dc3d88f3ef8ac1fcb368fa87b874d0735b0dfb9"
+    },
+    {
+      "bytes": 5858404,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Resources/unity default resources",
+      "sha256": "2fab7b306cbac3d4d98bbfdfe8a9fd503a2013c4b2afbc719358e1613a527972"
+    },
+    {
+      "bytes": 365476,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/Resources/unity_builtin_extra",
+      "sha256": "3c872fa25164c415257b3bf1b65bf26ee96bcbb33de0aee97ff334a8e67dfb55"
+    },
+    {
+      "bytes": 4927944,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/resources.assets",
+      "sha256": "c9eefab7ab4c3419fe78078398a5077fc37238d26ca5c3205ed1b5d663aec4c0"
+    },
+    {
+      "bytes": 3176,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/RuntimeInitializeOnLoads.json",
+      "sha256": "7eca34e47a6b92ed84445ffe329da0d8bf21145d4b71691000123f0f81d3eac4"
+    },
+    {
+      "bytes": 3722,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/ScriptingAssemblies.json",
+      "sha256": "3d8e8d0e6f9a3cdeb85024ed51e7e04a8c129cc92ea260f8aea61fcc6999e586"
+    },
+    {
+      "bytes": 2308128,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/sharedassets0.assets",
+      "sha256": "41bd1e1a7ba7e379b52f6fd0aefa38f4a52796b12d2e761a932b147deba85854"
+    },
+    {
+      "bytes": 5418048,
+      "path": "Builds/KhufuV10/ChannelPlayKhufuV10_Data/sharedassets0.assets.resS",
+      "sha256": "1ec084321fd68af6869dd6933551450e7153ec5633db6598d013ca4317540347"
+    },
+    {
+      "bytes": 5908408,
+      "path": "Builds/KhufuV10/D3D12/D3D12Core.dll",
+      "sha256": "31f364f2b3aa1753e7ba9ff912d0721c8f424be5fa14503efddafbb30c635d3b"
+    },
+    {
+      "bytes": 9525272,
+      "path": "Builds/KhufuV10/D3D12/d3d12SDKLayers.dll",
+      "sha256": "5dfc320d5ee27190181b1a63e74eb481b07ea727513dbeb38a96db6157969d24"
+    },
+    {
+      "bytes": 7831472,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll",
+      "sha256": "1fee29846581c592a466c781f24b3cbbc07aa36e839108298ff341f51a5ee080"
+    },
+    {
+      "bytes": 611248,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll",
+      "sha256": "eb7ca9e2d0fb3ef2f4ef5b3911ddecab05e46616926150ec7ba81ebe6c59bbbe"
+    },
+    {
+      "bytes": 1605,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser",
+      "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741"
+    },
+    {
+      "bytes": 60575,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx",
+      "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a"
+    },
+    {
+      "bytes": 29066,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/2.0/machine.config",
+      "sha256": "e91782a27fa39fc6c1d6ee8b08529f5d35052310d0006034b878eb04b8f2af30"
+    },
+    {
+      "bytes": 2622,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/2.0/settings.map",
+      "sha256": "49c6160f9d54af4270a3b4e997fc4a8301f79b9e2070118fa46ddbcbbc44f9a2"
+    },
+    {
+      "bytes": 11635,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/2.0/web.config",
+      "sha256": "cf2b54339e069b9e42f7d6795eecbf562c50c1011f4ca8f65f578fe52d97ff92"
+    },
+    {
+      "bytes": 1605,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.0/Browsers/Compat.browser",
+      "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741"
+    },
+    {
+      "bytes": 60575,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.0/DefaultWsdlHelpGenerator.aspx",
+      "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a"
+    },
+    {
+      "bytes": 33598,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.0/machine.config",
+      "sha256": "e60aec2c5115d65b3acb3c55ea21576dbd770f579166c017125571e46ae560ed"
+    },
+    {
+      "bytes": 2622,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.0/settings.map",
+      "sha256": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8"
+    },
+    {
+      "bytes": 18802,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.0/web.config",
+      "sha256": "e38bb8cc68fe5b4edecdfd288d094b9e8ced7629039b2a347682aba0d8bd7492"
+    },
+    {
+      "bytes": 1605,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.5/Browsers/Compat.browser",
+      "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741"
+    },
+    {
+      "bytes": 60575,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.5/DefaultWsdlHelpGenerator.aspx",
+      "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a"
+    },
+    {
+      "bytes": 34056,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.5/machine.config",
+      "sha256": "ee950004b576fb28dc85f4b0435ed04bf96612de2e8b53be84d07afe85a0de6c"
+    },
+    {
+      "bytes": 2622,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.5/settings.map",
+      "sha256": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8"
+    },
+    {
+      "bytes": 18811,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/4.5/web.config",
+      "sha256": "c4cbddd4fd9347b58cc5a72b36dc4ba1ad2bb699e65869d05cd3fb9865f0d824"
+    },
+    {
+      "bytes": 311984,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/browscap.ini",
+      "sha256": "4ddd50f31fb968f30bedefc253a46dc3f2890192d05cdaa9e0a64a056eee807e"
+    },
+    {
+      "bytes": 3815,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/config",
+      "sha256": "5776169973a26a387b8b3e5c0f2301a7ab9a6dd7c7d3efa22a96abc47fbf8662"
+    },
+    {
+      "bytes": 25817,
+      "path": "Builds/KhufuV10/MonoBleedingEdge/etc/mono/mconfig/config.xml",
+      "sha256": "0c56e34c69124510fa8c19e7b4c2ca6c1c4ff460ae19f798dd0ca035809e396d"
+    },
+    {
+      "bytes": 1674672,
+      "path": "Builds/KhufuV10/UnityCrashHandler64.exe",
+      "sha256": "2e78c2a5a985c195e6e3823c1ea2b29137df026e620966603e6b2a17c3c342bd"
+    },
+    {
+      "bytes": 55335344,
+      "path": "Builds/KhufuV10/UnityPlayer.dll",
+      "sha256": "376ef4d7595a2d0848e9e3a1c4732fcdca9e33cfb844a002b020e5443cedb9b6"
+    },
+    {
+      "bytes": 58368,
+      "path": "Builds/KhufuV10/WinPixEventRuntime.dll",
+      "sha256": "81adcfd8253c3489be720da7e30f16004dc9a1f02a8b418c6c3aef4993032e6d"
+    }
+  ],
+  "scene": {
+    "bytes": 2827578,
+    "path": "Assets/_Project/Scenes/School_MVP.unity",
+    "sha256": "d1778ecb2edfb7e83173a893ec82f5acb8959078ec68fc714a5f1a1320e83ad2"
+  },
+  "schema": "khufu-v10-player-binding-v2",
+  "staged_scene": {
+    "bytes": 2827578,
+    "path": "Assets/_Project/Scenes/School_MVP.unity",
+    "sha256": "d1778ecb2edfb7e83173a893ec82f5acb8959078ec68fc714a5f1a1320e83ad2"
+  },
+  "verdict": "passed",
+  "working_release_inputs": [
+    {
+      "bytes": 1314,
+      "path": ".gitattributes",
+      "sha256": "c19bca1e3522cd22270f96ccc19f8d9fb26ac1dc732c1b24ceee29ccbca0cc09"
+    },
+    {
+      "bytes": 19239,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorAudit.cs",
+      "sha256": "8653ccbcd729c53aa0c9702fa4434e047d1b674b67086962995bc39e38a328c9"
+    },
+    {
+      "bytes": 26207,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorBuilder.cs",
+      "sha256": "187796ae0099ab8029ab0bb0127dc65460028747b4e7101350aaca174d6c6172"
+    },
+    {
+      "bytes": 26229,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorMeshPipeline.cs",
+      "sha256": "ad9f8818ad1c9ff82798b60eb6bf409c7c40d352ea89075c5d666e4c35b8c78a"
+    },
+    {
+      "bytes": 19436,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorScreenshotExporter.cs",
+      "sha256": "3a4ec39356ec83d2f248be140be104c5f8e4a3c461db0c641d0c41d03c2b3bda"
+    },
+    {
+      "bytes": 49994,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs",
+      "sha256": "b7a6d8603390afc1d95369cf5f287b8eaeadbc831de2d05b929ef50c3a209a14"
+    },
+    {
+      "bytes": 7610,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10WindowsBuild.cs",
+      "sha256": "5f38838da8d4047c325fb982e219dafc1865f559306cecc1f8b0ba70985fc328"
+    },
+    {
+      "bytes": 1802,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuControllerHitRecorder.cs",
+      "sha256": "df8480c601c3aeae53b4b3a53351c81ec2aea263afd9e1123e93cdd5edf482f4"
+    },
+    {
+      "bytes": 2755,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10RouteContract.cs",
+      "sha256": "971880c37d14f98cec93420b4aa792ec86dbafe0f05e8c34d05390948a2a568c"
+    },
+    {
+      "bytes": 1150,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10SegmentTag.cs",
+      "sha256": "69f6cbb6a1c5446097bc9410cf1fe80fcef4b3d51363c44a76b0ec7760452326"
+    },
+    {
+      "bytes": 35553,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10TraversalProofProbe.cs",
+      "sha256": "18c3d999d319831ab6dd1cd3235676386c293a515d6f10a536ed425e45e29bff"
+    },
+    {
+      "bytes": 9494,
+      "path": "tools/validate_khufu_v10_prewrite.py",
+      "sha256": "8fe4c215264fdd32d7f233410cf459c0ded510f4c25712ea80c4693084c3f531"
+    },
+    {
+      "bytes": 33483,
+      "path": "tools/validate_khufu_v10_release.py",
+      "sha256": "8abaa4b9929b40d27e9d10d25783f2fdb5bfa5b2af2fecc23b0829f0e01527b5"
+    },
+    {
+      "bytes": 1956,
+      "path": "tools/tests/test_validate_khufu_v10_prewrite.py",
+      "sha256": "ce7a77c117a6f58bf74135509646d00e12f34a30dbe7a6e6076e69698b799e88"
+    },
+    {
+      "bytes": 9587,
+      "path": "tools/tests/test_validate_khufu_v10_release.py",
+      "sha256": "022ebd9def713653b42774186ce1c0e06cfd55a111cf7feee9faa4b6254557c8"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorBuilder.cs.meta",
+      "sha256": "9fc58ef1adb406884a1a8a8aac2a67563f02e8698df4c21e9139acccada8de7f"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorMeshPipeline.cs.meta",
+      "sha256": "c8dff890376e1abe9daf887cc1673dfc1576e23e1bb38eb0a309140ddcb8838a"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorScreenshotExporter.cs.meta",
+      "sha256": "2ba0afe09923bae83661352cc01ce277f106c4979de241097de75e0ab562aad7"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10InteriorValidator.cs.meta",
+      "sha256": "a8b62cc4bb38633d1de20118c5c53ad619e86b386903799c9ea70dcc34a278af"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV10WindowsBuild.cs.meta",
+      "sha256": "c0a68d1613916e4464103a9184cfb9544109469e88636bd3bfbf7348c96a0d63"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10RouteContract.cs.meta",
+      "sha256": "7fa1e12d602251e81bef8b4b310e66dbf65e7f0376815bf3f08501867c19b186"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10SegmentTag.cs.meta",
+      "sha256": "54f3e92d1cf8d24705240dacf6c958276597307fc46756bf921ae4ff75aeea76"
+    },
+    {
+      "bytes": 59,
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV10TraversalProofProbe.cs.meta",
+      "sha256": "e772fc2c6d3026f1a67fef5c9fb178076ddebed4c195f1085c1891d1d50673f7"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine.meta",
+      "sha256": "c92c75c660aba8981934f84302c805b6af79b2027bf9596a20a3938c026e0a9a"
+    },
+    {
+      "bytes": 43347,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Gallery_Detail.asset",
+      "sha256": "4570952aade906e6b8d53cdfe43448a72569ad7fa2100848470dac8e9d437143"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Gallery_Detail.asset.meta",
+      "sha256": "5b40b6d94c0d5030eb959c765669503e6e1d2c9c1993b5fab293d936108cf871"
+    },
+    {
+      "bytes": 65241,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Hybrid_Service_Return.asset",
+      "sha256": "0526e23ed9563d6e7e9a6c1b7541ae9f507c730d92de2ec14999d0bf0e67cadd"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Hybrid_Service_Return.asset.meta",
+      "sha256": "1b4c985f1561e780717434d8ac9c6c814125b5a544e31a0a5a7c7c6e6784de4d"
+    },
+    {
+      "bytes": 129083,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Limestone_Structure.asset",
+      "sha256": "0d8f1bd4344e3308e2bd6cb881359400796ba8bdd5a2d410665b591ff4d04cd1"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Limestone_Structure.asset.meta",
+      "sha256": "4123715868c6fc596cc57b74227a6ee74a6d458927c0348a31879027a51d2e2f"
+    },
+    {
+      "bytes": 19642,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Red_Granite_Boundary.asset",
+      "sha256": "e75e0101e120748489d756012eeb846588143de8f64552566dc9eb308c4e5916"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Red_Granite_Boundary.asset.meta",
+      "sha256": "492531fbb372dd5ec908a005f50e0b342805aba2abf6efd66147a2cd0fdc6161"
+    },
+    {
+      "bytes": 34218,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Route_Inlay.asset",
+      "sha256": "3ddd989976dd0089dec4caf5dcf91ef7fd609b1b5f3dbf5fc09613e27280ba3d"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Route_Inlay.asset.meta",
+      "sha256": "6b4d4fbbb618feb245139e1df8f408de9be71b9015d440e250eaab1e0ff6b986"
+    },
+    {
+      "bytes": 109015,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Shadow_Recess.asset",
+      "sha256": "bab17283c8337dc6b2d8c5af016507ba82bfd7734168e79b0484d5978e864049"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/KhufuV10InteriorSpine/KhufuV10_Shadow_Recess.asset.meta",
+      "sha256": "9ad196485cb1bc3997bff9dcb274258bc0beef40d753ef29d194b30d8415e3e7"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Materials/KhufuV10Interior.meta",
+      "sha256": "3d0eaf51f42e6341aabd30a7e7027ea7ab7fbed86f098063aa36c77d9d3dfa07"
+    },
+    {
+      "bytes": 2350,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Aged_Limestone.mat",
+      "sha256": "3d0e391aacb67e965cfec69fafbf347f65494a4b4ee8c26ee48b4b473fbb4065"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Aged_Limestone.mat.meta",
+      "sha256": "4a4766ef315ee56bb31931819858014e313cb970f85f93ba06969e9da890f2ac"
+    },
+    {
+      "bytes": 2347,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Deep_Shadow.mat",
+      "sha256": "65fe38b4228f2d9f286766c949bdfec562b6e5a18ed398092eb25a61bbbfa7b4"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Deep_Shadow.mat.meta",
+      "sha256": "bf8b812a4ba71d3ee3907613ce39c5b39018adbcf321cb4f542fdb513e1fea75"
+    },
+    {
+      "bytes": 2349,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Gallery_Detail.mat",
+      "sha256": "a19c999841f3c87dab9e824fcfa7d5ea5665ec8e7272fd31d5c1ed50cf0d39ad"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Gallery_Detail.mat.meta",
+      "sha256": "42d55f5c489d51c26a04676f2e3c9d4024f69c7542f4c266b3320d468107d3fc"
+    },
+    {
+      "bytes": 2349,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Hybrid_Service.mat",
+      "sha256": "286163a5e249e004e714abd3c246f5a7572010857d8905fa95adc9c758d5efd2"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Hybrid_Service.mat.meta",
+      "sha256": "28129f3e56aee65e43b0c619ff0d7300840b3445c1f2a40bb41fc7abca8a771f"
+    },
+    {
+      "bytes": 2355,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Red_Granite.mat",
+      "sha256": "94cdbe5fb3d29cf9b2de719ec51a049cee946e40c9d0ff8c2adea5bcbf21e4b9"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Red_Granite.mat.meta",
+      "sha256": "b1538429eba592ac307dc45ad4630f21f05ead25267438dace09f57cd570a69e"
+    },
+    {
+      "bytes": 2352,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Route_Amber.mat",
+      "sha256": "10db75657b73de7173b7e32891bbc7eb60100c0f32802347600a62854fac0f78"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Materials/KhufuV10Interior/V10_Route_Amber.mat.meta",
+      "sha256": "79f9b1ceb7816856fb233b3d15a894af0ee56d9048763630eba3e2a132abcf03"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4.meta",
+      "sha256": "348424464d35cc28db5b8c012dafce9056aebacddb98b3f282bb395333ebb8dd"
+    },
+    {
+      "bytes": 172,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes.meta",
+      "sha256": "3f70697a7f4b1346fe836e9f6bd75559c9242df8c54a1b169f28695bd8198114"
+    },
+    {
+      "bytes": 3563,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_East.asset",
+      "sha256": "31924c61d90279ba750afe537d0aec7c870770d3c43fe0cfbd670ecf227ae068"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_East.asset.meta",
+      "sha256": "af21fbf101d4d08356ffd287012060879e251564c76fb1a41f043c9e933b1068"
+    },
+    {
+      "bytes": 3744,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Left.asset",
+      "sha256": "302964a7e97a666a93608d8dcb59ab7d47b71eb9dc089fe727e737fceefadd90"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Left.asset.meta",
+      "sha256": "1ca2e5f1af168e2f143c1cf326bb176e922880b0991429730042c1c467014ea3"
+    },
+    {
+      "bytes": 3743,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Right.asset",
+      "sha256": "f57572ed0665c484093aa7b490015970f15f90bdb5d0b2c826592963c81e9697"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Right.asset.meta",
+      "sha256": "53de6aa3c9c54f18dead2d203de214d1a9cd855142152cd62795d51cbe6cd398"
+    },
+    {
+      "bytes": 3588,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Upper.asset",
+      "sha256": "657605908ca049a73a7783eba39a573dd9af77d4eb9afab9a5ab500d92141623"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_North_Upper.asset.meta",
+      "sha256": "319734877d12a545a14785c76120f084fbd683f2e30e5e1879ab5c29c1c94cf3"
+    },
+    {
+      "bytes": 3564,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_South.asset",
+      "sha256": "5b29a9ca18711e9102ad8ad89f7537e8464eea59608057d6dea65b217dcc2adf"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_South.asset.meta",
+      "sha256": "fab776ab311681d3dce3aa7f1b131e818a0888a459dc33ab2d66c240574b3b8a"
+    },
+    {
+      "bytes": 3565,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_West.asset",
+      "sha256": "1bd4da3019b45d040ea811d5cb8954edf64c033868c11d357ca9fb456f1dbd16"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Casing_West.asset.meta",
+      "sha256": "59b49119fd1b0c9aedc643005658765796521e09cbde986e9fc8a5fb2e2783e7"
+    },
+    {
+      "bytes": 3723,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Section_Poche_Mesh.asset",
+      "sha256": "d8817e07103aaae5eb3fcfb4b479fa6a26f906a77c749cc891889a3964c111db"
+    },
+    {
+      "bytes": 188,
+      "path": "Assets/_Project/Art/Generated/PyramidReferenceMatchedV4/Meshes/PyramidV4_Section_Poche_Mesh.asset.meta",
+      "sha256": "6e9fc71eb31c6d66389df9dc879bc2ca8704fdf7d640a0b3fb65fa611f5a407a"
+    }
+  ]
+}

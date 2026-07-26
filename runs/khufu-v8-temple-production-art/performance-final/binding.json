@@ -1,0 +1,88 @@
+{
+  "schema": "khufu-v8-performance-binding-v1",
+  "verdict": "passed",
+  "scene": {
+    "path": "Assets/_Project/Scenes/School_MVP.unity",
+    "bytes": 2454395,
+    "sha256": "4f15673e1de7eeb9f92dbfa058c40ae263549449c9ee2c5b98b59c7161a5d32f"
+  },
+  "player": {
+    "path": "Builds/KhufuV8/ChannelPlayKhufuV8.exe",
+    "bytes": 671744,
+    "sha256": "ab5809518c33adf6dad28c9ffe467d2f78f0c00bf78991fef991a7dd04a8fc48"
+  },
+  "built_level": {
+    "path": "Builds/KhufuV8/ChannelPlayKhufuV8_Data/level0",
+    "bytes": 473068,
+    "sha256": "41fb446403691ac0f0c93ad5ced4bfbbcb930a6b15ff4038ed20a4e7dd99bf42"
+  },
+  "sources": [
+    {
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV8TempleArtAudit.cs",
+      "bytes": 14192,
+      "sha256": "edb4d318d4118ee61e51023de4fdfaa8976d1feefbfb6b7f65801204df29af68"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV8TempleArtPipeline.cs",
+      "bytes": 17434,
+      "sha256": "4c87062eb1ecc9e3b64580cb5c705dfd952f07fb94961f18cf51058c158ef163"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV8TempleProductionArtBuilder.cs",
+      "bytes": 17325,
+      "sha256": "abf2726a9e7e1730f39bebf4b190b7ed97a7675c3c3af35142cf9044cf53c55b"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV8TempleProductionArtValidator.cs",
+      "bytes": 27495,
+      "sha256": "87c2fda947d591896d5a1813625be03424f6d79cea482cc6179162eb3bf3e68e"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV8TempleProductionArtScreenshotExporter.cs",
+      "bytes": 10018,
+      "sha256": "9fc7854116ba050972418ae246570982a1cd8cd22348f5fbd82a456275e0821f"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV8WindowsBuild.cs",
+      "bytes": 5870,
+      "sha256": "e9985a41b3789a1a687a5be679be149bdc6a5d2a02621bfadcc1b6b20c864c61"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Gameplay/KhufuV8TempleProofProbe.cs",
+      "bytes": 10719,
+      "sha256": "81a7617eed79e0f189af606b7aa0985387ada61ba3e2767d3c1749153e4c0f59"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "runs/khufu-v8-temple-production-art/performance-final/validation.md",
+      "bytes": 676,
+      "sha256": "96c886f54731568d193413a434e9372d95f13ddb268f2d1fe2aa4e2e2123d9e2"
+    },
+    {
+      "path": "runs/khufu-v8-temple-production-art/performance-final/v8-final-performance.md",
+      "bytes": 996,
+      "sha256": "885162ac0d5eaee7c3a525ec6bd6cfbefaef207c61d6de1d2f78f81a7caf3c3a"
+    },
+    {
+      "path": "runs/khufu-v8-temple-production-art/performance-final/v8-final.raw",
+      "bytes": 7200911,
+      "sha256": "2caeef310cc5dd389a9fc7367cb8d0599fd4ae1aac16ef80cbf2a4f243320f80"
+    },
+    {
+      "path": "runs/khufu-v8-temple-production-art/performance-final/player.log",
+      "bytes": 7765,
+      "sha256": "2c4ee777ff71bb489b76e51152b488a6d131fc04400446bfa56429dda974e75a"
+    },
+    {
+      "path": "runs/khufu-v8-temple-production-art/performance-final/v8-final-windows-player-initial.png",
+      "bytes": 1339654,
+      "sha256": "0d9a02965831e9d7e160721746be117ed1a0d9382b370ecc06a4ae36e4d658b1"
+    },
+    {
+      "path": "runs/khufu-v8-temple-production-art/performance-final/v8-final-windows-player-operator.png",
+      "bytes": 817278,
+      "sha256": "3beb6f3bb67a3122f15c779979a1aa7b4a1c8bec18d1ca255e5bcefc9b4a2b11"
+    }
+  ]
+}

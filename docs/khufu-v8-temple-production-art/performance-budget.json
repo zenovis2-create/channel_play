@@ -1,0 +1,28 @@
+{
+  "schema": "khufu-v8-temple-production-art-performance-budget-v1",
+  "target": {
+    "machine": "ZENOVIS",
+    "resolution": "1536x1024",
+    "quality": "Ultra",
+    "target_fps": 120,
+    "warmup_seconds": 5,
+    "participant_seconds": 15,
+    "operator_seconds": 15
+  },
+  "limits": {
+    "minimum_samples": 3000,
+    "frame_p95_ms": 9.0,
+    "main_thread_p95_ms": 4.5,
+    "render_thread_p95_ms": 4.5,
+    "gpu_p95_ms": 4.5,
+    "maximum_allocated_mb": 190.0,
+    "maximum_reserved_mb": 340.0,
+    "maximum_managed_mb": 16.0,
+    "maximum_visible_renderers": 815,
+    "maximum_visible_vertices": 60000,
+    "maximum_visible_triangles": 48000,
+    "minimum_profiler_raw_bytes": 1048576,
+    "maximum_profiler_raw_bytes": 104857600,
+    "minimum_screenshot_bytes": 65536
+  }
+}
