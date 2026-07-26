@@ -47,10 +47,25 @@ def _agent_ids(root: Path) -> set[str]:
     return {str(agent.get("id")) for agent in registry.get("agents", [])}
 
 
-def plan_task(root: Path, request: str) -> Path:
+def plan_task(
+    root: Path,
+    request: str,
+    *,
+    preferred_agent: str | None = None,
+    allowed_write_paths: list[str] | None = None,
+    required_evidence: str | None = None,
+) -> Path:
     if not request:
         raise CompanyError("Plan request is required.")
     agent, paths, evidence = _route(request)
+    if preferred_agent is not None:
+        if preferred_agent not in _agent_ids(root):
+            raise CompanyError(f"Unknown agent: {preferred_agent}")
+        agent = preferred_agent
+    if allowed_write_paths is not None:
+        paths = [str(path) for path in allowed_write_paths]
+    if required_evidence is not None:
+        evidence = required_evidence
     reviewer = _reviewer_for(request)
     scope_status = "needs_scope" if _unclear_scope(request) else "planned"
     board = load_task_board(root)

@@ -6,7 +6,7 @@ Run: runs/unity-feedback-capture-2026-07-26t16-19-14-09-00/unity_feedback_captur
 Frame: Operator_Overview_Camera, 1600x900
 Action: ChannelPlayProductionValidator.CaptureFeedbackFrame
 Priority: P2
-Status: open
+Status: routed
 
 ## Observation
 
@@ -39,3 +39,14 @@ tools/studio/company/feedback.py
 Unity playtest smoke passed with 9 checks and 0 compile errors.
 Unity feedback capture passed at 1600x900; PNG size 1,226,458 bytes and
 luminance range 0.8267.
+
+## Routing Receipt
+
+- reviews/2026-07-26/feedback-0002/routing_receipt.md
+- Baseline evidence: runs/unity-check-2026-07-26t16-33-49-09-00/unity_check.md
+
+## Routed Tasks
+
+- task-0006 -> qa_playtest (memory/sessions/20260726-163349-process-feedback-md/work_orders/task-0006-qa_playtest.md)
+- task-0007 -> unity_gameplay (memory/sessions/20260726-163349-process-feedback-md/work_orders/task-0007-unity_gameplay.md)
+- task-0008 -> critic_reviewer (memory/sessions/20260726-163349-process-feedback-md/work_orders/task-0008-critic_reviewer.md)
