@@ -80,6 +80,7 @@ class WorkspaceServerTests(unittest.TestCase):
         self.assertIn("game.productionCheck", state["commands"])
         self.assertIn("game.feedbackLoop", state["commands"])
         self.assertIn("asset.prepare", state["commands"])
+        self.assertIn("asset.procurementCheck", state["commands"])
         self.assertIn("optimizationLoops", state["gameProduction"])
         self.assertEqual(state["jobs"], [])
 
@@ -410,6 +411,19 @@ class WorkspaceServerTests(unittest.TestCase):
         self.assertEqual(
             build_command(self.root, "asset.prepare", {"assetId": "prop"}),
             [str(self.root / "tools" / "channelctl"), "asset", "prepare", "prop"],
+        )
+        self.assertEqual(
+            build_command(
+                self.root,
+                "asset.procurementCheck",
+                {"assetId": "truth_pen"},
+            ),
+            [
+                str(self.root / "tools" / "channelctl"),
+                "asset",
+                "procurement-check",
+                "truth_pen",
+            ],
         )
 
     def test_orchestrator_run_command_builds_from_payload(self) -> None:

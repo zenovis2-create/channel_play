@@ -39,7 +39,18 @@ Use this for props, level dressings, interactables, and visual assets that move 
 
 Current constraint: gdx1 is ARM/aarch64 and should be used for AI/ops, repo sync, and logs. Real Unity dedicated server soak requires an x86_64 Linux runner or cloud host.
 
-## Loop 4: Agent Progress Visibility
+## Loop 4: Artist Procurement Readiness
+
+- Command: `tools/channelctl asset procurement-check truth_pen`
+- Reads the owner decision manifest without changing it.
+- Shows the unresolved decision count and latest readiness receipt.
+- Keeps all artist contact blocked until the check passes.
+
+This loop never contacts an artist, approves a budget, or authorizes artwork.
+Even after proposal-only outreach passes, artwork remains blocked until a signed
+agreement and source Gate A `PASS` exist.
+
+## Loop 5: Agent Progress Visibility
 
 - Source: `memory/company/jobs/jobs.json`
 - UI surface: Production Cockpit and Task Tracker.
@@ -57,8 +68,10 @@ Priority order:
 2. Create the play/capture/feedback loop.
 3. Route open feedback into QA, implementation, and review work orders.
 4. Run/review/verify assigned game work.
-5. Prepare the first asset pipeline packet.
-6. Create or refresh the x86_64 server handoff only when the handoff receipt is missing.
-7. Inspect job receipts and continue agent implementation work.
+5. Resolve owner-controlled artist procurement decisions and rerun the read-only check.
+6. Prepare the first asset pipeline packet.
+7. Create or refresh the x86_64 server handoff only when the handoff receipt is missing.
+8. Inspect job receipts and continue agent implementation work.
 
 External dependency rule: a missing x86_64 runner must not trap the user in a dead-end next action if local Unity, feedback, or agent work can continue.
+Procurement rule: a blocked readiness check is actionable validation, not authorization to contact an artist or request artwork.

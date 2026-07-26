@@ -8,6 +8,11 @@ from pathlib import Path
 from .capture import _is_png, capture_screen
 from .gdx import gdx_probe
 from .paths import rel
+from .procurement import (
+    SUPPORTED_CANDIDATES,
+    evaluate_procurement_outreach,
+    procurement_manifest_path,
+)
 from .timeutil import now_iso, slugify
 from .unity import unity_build, unity_check, unity_playtest
 from tools.studio.jobs import list_jobs
@@ -26,6 +31,7 @@ def game_production_state(root: Path) -> dict:
     feedback_loop = _latest_run(root, "game-feedback-loop-", "game_feedback_loop.md")
     server_handoff = _latest_run(root, "game-server-handoff-", "server_handoff.md")
     assets = _asset_pipeline_state(root)
+    procurement = _procurement_state(root)
     task_flow = _task_flow_state(root)
     jobs = list_jobs(root, limit=10)
     scenes = sorted((root / "Assets" / "_Project" / "Scenes").glob("*.unity"))
@@ -48,8 +54,26 @@ def game_production_state(root: Path) -> dict:
     ]
     passed = sum(1 for check in checks if check["passed"])
 
-    optimization_loops = _optimization_loops(feedback_loop, capture, feedback, assets, linux_server_build, server_handoff, task_flow, jobs)
-    next_best_action = _next_best_action(passed, len(checks), optimization_loops, feedback, server_handoff, task_flow)
+    optimization_loops = _optimization_loops(
+        feedback_loop,
+        capture,
+        feedback,
+        assets,
+        procurement,
+        linux_server_build,
+        server_handoff,
+        task_flow,
+        jobs,
+    )
+    next_best_action = _next_best_action(
+        passed,
+        len(checks),
+        optimization_loops,
+        feedback,
+        server_handoff,
+        task_flow,
+        procurement,
+    )
     perfection_gate = _perfection_gate(checks, optimization_loops, next_best_action, server_handoff, jobs)
     return {
         "updatedAt": now_iso(),
@@ -77,6 +101,7 @@ def game_production_state(root: Path) -> dict:
             "status": "ready" if _status_passed(gdx_server, ("Status: ok",)) and _status_passed(gdx_bots, ("Status: ok",)) else "server_blocked",
         },
         "capture": capture,
+        "procurement": procurement,
         "optimizationLoops": optimization_loops,
         "nextBestAction": next_best_action,
         "perfectionGate": perfection_gate,
@@ -103,6 +128,17 @@ def render_game_production_status(root: Path) -> str:
     ]
     for check in state["checks"]:
         lines.append(f"  {check['label']:<18} {'passed' if check['passed'] else 'pending':<8} {check['path'] or '-'}")
+    procurement = state.get("procurement", {})
+    if procurement:
+        lines.extend(
+            [
+                "",
+                f"Artist procurement: {procurement['status']} ({procurement['summary']})",
+                f"  Decision: {procurement['manifest']}",
+                f"  Receipt: {procurement.get('receipt') or 'not run'}",
+                "  Contact policy: no artist contact unless the owner decision check passes",
+            ]
+        )
     lines.extend(
         [
             "",
@@ -307,11 +343,105 @@ def _asset_pipeline_state(root: Path) -> dict:
     }
 
 
+def _procurement_state(root: Path) -> dict:
+    """Expose configured procurement decisions without changing authorization."""
+    for asset_id in sorted(SUPPORTED_CANDIDATES):
+        manifest = procurement_manifest_path(root, asset_id)
+        if not manifest.is_file():
+            continue
+        result = evaluate_procurement_outreach(root, asset_id)
+        receipt = (
+            root
+            / "runs"
+            / f"asset-procurement-{asset_id}"
+            / "outreach_readiness_check.md"
+        )
+        error_count = len(result["errors"])
+        passed = bool(result["passed"])
+        receipt_path = _current_procurement_receipt(
+            root,
+            receipt,
+            asset_id,
+            rel(root, manifest),
+            result["manifest_sha256"],
+            passed,
+            result["errors"],
+        )
+        return {
+            "assetId": asset_id,
+            "status": "ready" if passed else "blocked",
+            "passed": passed,
+            "errorCount": error_count,
+            "errors": result["errors"],
+            "manifest": rel(root, manifest),
+            "manifestSha256": result["manifest_sha256"],
+            "receipt": receipt_path,
+            "command": "asset.procurementCheck",
+            "payload": {"assetId": asset_id},
+            "summary": (
+                "proposal-only outreach is owner-authorized"
+                if passed
+                else f"{error_count} unresolved owner decisions"
+            ),
+        }
+    return {}
+
+
+def _current_procurement_receipt(
+    root: Path,
+    receipt: Path,
+    asset_id: str,
+    manifest_path: str,
+    manifest_sha256: str,
+    passed: bool,
+    errors: list[str],
+) -> str:
+    if not receipt.is_file() or not manifest_sha256:
+        return ""
+    try:
+        text = receipt.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        return ""
+    expected_result = "PASS" if passed else "FAIL"
+    required_lines = {
+        f"Asset ID: {asset_id}",
+        f"Decision: {manifest_path}",
+        f"Decision SHA-256: {manifest_sha256}",
+        f"Result: **{expected_result}**",
+    }
+    if not required_lines.issubset(set(text.splitlines())):
+        return ""
+    expected_findings = (
+        [f"- {error}" for error in errors]
+        if errors
+        else ["- Owner decisions and repository privacy controls passed."]
+    )
+    if _receipt_section_lines(text, "## Findings") != expected_findings:
+        return ""
+    return rel(root, receipt)
+
+
+def _receipt_section_lines(text: str, heading: str) -> list[str]:
+    lines = text.splitlines()
+    try:
+        start = lines.index(heading) + 1
+    except ValueError:
+        return []
+    section: list[str] = []
+    for line in lines[start:]:
+        if line.startswith("## "):
+            break
+        if line:
+            section.append(line)
+    return section
+
+
 def _optimization_loops(
     feedback_loop: dict,
     capture: dict,
     feedback: dict,
     assets: dict,
+    procurement: dict,
     linux_server_build: dict,
     server_handoff: dict,
     task_flow: dict,
@@ -319,7 +449,7 @@ def _optimization_loops(
 ) -> list[dict]:
     running_jobs = [job for job in jobs if not job.get("isTerminal")]
     latest_job = jobs[0] if jobs else {}
-    return [
+    loops = [
         {
             "id": "play_feedback",
             "label": "Play → Capture → Feedback",
@@ -366,9 +496,36 @@ def _optimization_loops(
             "command": "company.brief",
         },
     ]
+    if procurement:
+        loops.insert(
+            2,
+            {
+                "id": "artist_procurement",
+                "label": "Artist Procurement",
+                "status": procurement["status"],
+                "summary": procurement["summary"],
+                "evidence": procurement.get("receipt")
+                or procurement["manifest"],
+                "nextAction": (
+                    "Owner may use proposal-only outreach; artwork remains gated"
+                    if procurement["passed"]
+                    else "Complete owner decisions, then rerun the readiness check"
+                ),
+                "command": procurement["command"],
+            },
+        )
+    return loops
 
 
-def _next_best_action(passed: int, total: int, loops: list[dict], feedback: dict, server_handoff: dict, task_flow: dict) -> dict:
+def _next_best_action(
+    passed: int,
+    total: int,
+    loops: list[dict],
+    feedback: dict,
+    server_handoff: dict,
+    task_flow: dict,
+    procurement: dict,
+) -> dict:
     by_id = {loop["id"]: loop for loop in loops}
     if passed < total:
         return {
@@ -396,6 +553,18 @@ def _next_best_action(passed: int, total: int, loops: list[dict], feedback: dict
     task_action = _task_next_action(task_flow)
     if task_action:
         return task_action
+    if procurement and not procurement["passed"]:
+        return {
+            "label": "Resolve artist procurement owner decisions",
+            "command": procurement["command"],
+            "payload": procurement["payload"],
+            "reason": (
+                f"{procurement['assetId']} has "
+                f"{procurement['errorCount']} unresolved owner decisions. "
+                "The check is read-only; artist contact remains blocked."
+            ),
+            "status": "blocked",
+        }
     asset = by_id.get("asset_factory", {})
     if asset.get("status") != "ready":
         return {
@@ -537,6 +706,17 @@ def _perfection_gate(checks: list[dict], loops: list[dict], next_action: dict, s
         ),
         _gate_check("Job ledger healthy", bool(jobs), jobs[0].get("receipt", {}).get("path", "") if jobs else "no jobs"),
     ]
+    procurement = loop_by_id.get("artist_procurement")
+    if procurement:
+        gate_checks.insert(
+            3,
+            _gate_check(
+                "Artist procurement",
+                procurement.get("status") == "ready",
+                procurement.get("evidence")
+                or procurement.get("summary", ""),
+            ),
+        )
     passed = sum(1 for check in gate_checks if check["passed"])
     total = len(gate_checks)
     status = "perfect" if passed == total else "needs_work"
