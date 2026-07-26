@@ -56,6 +56,7 @@ class DockerStudioContractTests(unittest.TestCase):
 
         self.assertIn("procurement.errors", self.app)
         self.assertIn("procurement.issueGroups", self.app)
+        self.assertIn("procurement.decisionProgress", self.app)
         self.assertIn(
             "procurement.passed\n    && Boolean(procurement.receipt)",
             self.app,
@@ -71,6 +72,15 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn("${esc(item.label", checklist)
         self.assertIn("${esc(item.guidance", checklist)
         self.assertIn("${esc(item.message", checklist)
+        self.assertIn('role="progressbar"', checklist)
+        self.assertIn('aria-valuemax="${esc(procurementProgressTotal)}"', checklist)
+        self.assertIn(
+            'procurementProgressIndeterminate ? "" : '
+            '`aria-valuenow="${esc(procurementProgressCompleted)}"`',
+            checklist,
+        )
+        self.assertIn("연락 허가와 별도", checklist)
+        self.assertIn("추가 검증을 먼저 해결", checklist)
         self.assertIn("game-procurement-item", checklist)
         self.assertIn('role="listitem"', checklist)
         self.assertIn(
@@ -80,6 +90,24 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn("data-game-artifact-path", checklist)
         self.assertNotIn("data-command", checklist)
         self.assertIn(".game-procurement-checklist", self.style)
+        self.assertIn(".game-procurement-progress", self.style)
+
+    def test_procurement_progress_counts_are_finite_and_bounded(self) -> None:
+        start = self.app.index("function boundedCount")
+        end = self.app.index(
+            "activeStudioView =",
+            start,
+        )
+        helper = self.app[start:end]
+
+        self.assertIn("Number.isFinite(numeric)", helper)
+        self.assertIn("Number.isFinite(numericMaximum)", helper)
+        self.assertIn("Math.max(0, Math.floor(numericMaximum))", helper)
+        self.assertIn("numeric <= 0", helper)
+        self.assertIn("Math.min(Math.floor(numeric), safeMaximum)", helper)
+        self.assertIn("boundedCount(group.total)", self.app)
+        self.assertIn("boundedCount(group.completed, total)", self.app)
+        self.assertIn("unresolved: total - completed", self.app)
 
 
 if __name__ == "__main__":

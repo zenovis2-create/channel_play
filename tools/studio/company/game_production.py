@@ -489,6 +489,7 @@ def _procurement_state(root: Path) -> dict:
         )
         error_count = len(result["errors"])
         passed = bool(result["passed"])
+        issue_groups = _procurement_issue_groups(result["errors"])
         intake_path = PROCUREMENT_INTAKE_PATHS.get(asset_id, "")
         intake = root / intake_path if intake_path else None
         receipt_path = _current_procurement_receipt(
@@ -506,7 +507,8 @@ def _procurement_state(root: Path) -> dict:
             "passed": passed,
             "errorCount": error_count,
             "errors": result["errors"],
-            "issueGroups": _procurement_issue_groups(result["errors"]),
+            "issueGroups": issue_groups,
+            "decisionProgress": _procurement_decision_progress(issue_groups),
             "manifest": rel(root, manifest),
             "manifestSha256": result["manifest_sha256"],
             "receipt": receipt_path,
@@ -563,6 +565,81 @@ def _procurement_issue_groups(errors: list[str]) -> list[dict]:
         for group_id, label in PROCUREMENT_GUIDANCE_GROUPS
         if grouped[group_id]
     ]
+
+
+def _procurement_decision_progress(issue_groups: list[dict]) -> dict:
+    group_labels = dict(PROCUREMENT_GUIDANCE_GROUPS)
+    fields_by_group: dict[str, list[str]] = {
+        group_id: []
+        for group_id, _ in PROCUREMENT_GUIDANCE_GROUPS
+        if group_id != "validation"
+    }
+    for field, (group_id, _, _) in PROCUREMENT_FIELD_GUIDANCE.items():
+        fields_by_group[group_id].append(field)
+
+    unresolved_fields = {
+        str(item.get("field") or "")
+        for group in issue_groups
+        for item in group.get("items", [])
+        if isinstance(item, dict)
+        and item.get("field") in PROCUREMENT_FIELD_GUIDANCE
+    }
+    additional_issue_count = sum(
+        1
+        for group in issue_groups
+        for item in group.get("items", [])
+        if isinstance(item, dict)
+        and item.get("field") not in PROCUREMENT_FIELD_GUIDANCE
+    )
+    indeterminate = additional_issue_count > 0
+    groups = []
+    for group_id, fields in fields_by_group.items():
+        total = len(fields)
+        if indeterminate:
+            completed = 0
+            unresolved = total
+            status = "indeterminate"
+        else:
+            unresolved = len(set(fields) & unresolved_fields)
+            completed = total - unresolved
+            status = (
+                "complete"
+                if completed == total
+                else "in_progress"
+                if completed > 0
+                else "pending"
+            )
+        groups.append(
+            {
+                "id": group_id,
+                "label": group_labels[group_id],
+                "total": total,
+                "completed": completed,
+                "unresolved": unresolved,
+                "status": status,
+            }
+        )
+
+    total = sum(group["total"] for group in groups)
+    completed = sum(group["completed"] for group in groups)
+    unresolved = total - completed
+    return {
+        "total": total,
+        "completed": completed,
+        "unresolved": unresolved,
+        "additionalIssueCount": additional_issue_count,
+        "indeterminate": indeterminate,
+        "status": (
+            "indeterminate"
+            if indeterminate
+            else "complete"
+            if completed == total
+            else "in_progress"
+            if completed > 0
+            else "pending"
+        ),
+        "groups": groups,
+    }
 
 
 def _current_procurement_receipt(
