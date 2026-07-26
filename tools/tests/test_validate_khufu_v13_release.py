@@ -756,6 +756,20 @@ def test_staged_and_postcommit_helpers_are_hash_bound(
     assert any("pass token" in error for error in post.errors)
 
 
+def test_release_report_uses_platform_independent_lf_bytes(
+    tmp_path: Path,
+) -> None:
+    report = tmp_path / "release-validation.md"
+    result = ValidationResult()
+    result.facts["staged_inventory_sha256"] = "a" * 64
+
+    release.write_report(report, result, True, True, False)
+
+    content = report.read_bytes()
+    assert b"\r\n" not in content
+    assert content.endswith(b"KHUFU_V13_RELEASE_VERDICT: passed\n")
+
+
 def test_postcommit_rejects_allowlisted_non_inventory_drift(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
