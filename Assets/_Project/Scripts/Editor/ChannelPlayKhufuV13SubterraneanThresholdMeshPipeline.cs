@@ -61,10 +61,15 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdMeshPipeline
         var specs = new List<BoxSpec>();
         AddPassageShell(specs, TransitionSegment, TransitionShell,
             KhufuV13SubterraneanRouteContract.V10BranchAnchor,
-            KhufuV13SubterraneanRouteContract.JunctionEnd);
+            KhufuV13SubterraneanRouteContract.JunctionEnd, 0f,
+            KhufuV13SubterraneanRouteContract.JunctionTransitionEndRelease,
+            KhufuV13SubterraneanRouteContract.JunctionTransitionEndRelease);
         AddPassageShell(specs, DescendingSegment, DescendingShell,
             KhufuV13SubterraneanRouteContract.JunctionEnd,
-            KhufuV13SubterraneanRouteContract.SubterraneanLanding);
+            KhufuV13SubterraneanRouteContract.SubterraneanLanding,
+            KhufuV13SubterraneanRouteContract.JunctionInnerWallRelease,
+            0f, 0f,
+            KhufuV13SubterraneanRouteContract.LandingRoofEndRelease);
         AddPassageShell(specs, ApproachSegment, ApproachShell,
             KhufuV13SubterraneanRouteContract.SubterraneanLanding,
             KhufuV13SubterraneanRouteContract.ChamberDoor);
@@ -123,26 +128,59 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdMeshPipeline
     }
 
     private static void AddPassageShell(List<BoxSpec> specs, string segment, string shell,
-        Vector3 start, Vector3 end)
+        Vector3 start, Vector3 end, float innerWallStartRelease = 0f,
+        float floorEndRelease = 0f, float innerWallEndRelease = 0f,
+        float roofEndRelease = 0f)
     {
+        var routeDelta = end - start;
+        var routeLength = routeDelta.magnitude;
+        if (innerWallStartRelease < 0f || floorEndRelease < 0f ||
+            innerWallEndRelease < 0f || roofEndRelease < 0f ||
+            innerWallStartRelease + innerWallEndRelease >=
+            routeLength - WallThickness ||
+            floorEndRelease >= routeLength - WallThickness ||
+            roofEndRelease >=
+            routeLength - WallThickness)
+            throw new InvalidOperationException(
+                "V13 shell release is outside the passage span: " + shell);
         var frame = Frame(start, end);
         var width = KhufuV13SubterraneanRouteContract.PassageClearWidth;
         var height = KhufuV13SubterraneanRouteContract.PassageClearHeight;
         var fullLength = frame.Length + WallThickness;
+        var floorEnd =
+            end - routeDelta.normalized * floorEndRelease;
+        var floorFrame = Frame(start, floorEnd);
+        var floorFullLength = floorFrame.Length + WallThickness;
+        var innerStart =
+            start + routeDelta.normalized * innerWallStartRelease;
+        var innerEnd =
+            end - routeDelta.normalized * innerWallEndRelease;
+        var innerFrame = Frame(innerStart, innerEnd);
+        var innerFullLength = innerFrame.Length + WallThickness;
+        var roofEnd =
+            end - routeDelta.normalized * roofEndRelease;
+        var roofFrame = Frame(start, roofEnd);
+        var roofFullLength = roofFrame.Length + WallThickness;
         AddStructural(specs, segment, shell, shell + "_Floor",
-            frame.Center - frame.Up * (WallThickness * 0.5f), frame.Rotation,
-            new Vector3(width + WallThickness * 2f, WallThickness, fullLength));
+            floorFrame.Center -
+            floorFrame.Up * (WallThickness * 0.5f), floorFrame.Rotation,
+            new Vector3(width + WallThickness * 2f, WallThickness,
+                floorFullLength));
         AddStructural(specs, segment, shell, shell + "_West_Wall",
-            frame.Center - frame.Right * (width * 0.5f + WallThickness * 0.5f) +
-            frame.Up * (height * 0.5f), frame.Rotation,
-            new Vector3(WallThickness, height, fullLength));
+            innerFrame.Center -
+            innerFrame.Right * (width * 0.5f + WallThickness * 0.5f) +
+            innerFrame.Up * (height * 0.5f), innerFrame.Rotation,
+            new Vector3(WallThickness, height, innerFullLength));
         AddStructural(specs, segment, shell, shell + "_East_Wall",
             frame.Center + frame.Right * (width * 0.5f + WallThickness * 0.5f) +
             frame.Up * (height * 0.5f), frame.Rotation,
             new Vector3(WallThickness, height, fullLength));
         AddStructural(specs, segment, shell, shell + "_Roof",
-            frame.Center + frame.Up * (height + WallThickness * 0.5f), frame.Rotation,
-            new Vector3(width + WallThickness * 2f, WallThickness, fullLength));
+            roofFrame.Center +
+            roofFrame.Up * (height + WallThickness * 0.5f),
+            roofFrame.Rotation,
+            new Vector3(width + WallThickness * 2f, WallThickness,
+                roofFullLength));
     }
 
     private static void AddChamberShell(List<BoxSpec> specs)

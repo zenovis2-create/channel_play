@@ -162,6 +162,26 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
                         .V4SubterraneanLightPath), "V4 subterranean light")
                 .GetComponent<Light>().enabled = false;
         }, cases);
+        RunMutation("Junction inner wall trim reverted",
+            "route clearance blocked", () =>
+        {
+            var context = OpenContext();
+            var target = Require(context.Root.Find(
+                    ChannelPlayKhufuV13SubterraneanThresholdBuilder
+                        .CollisionRootName +
+                    "/V13_Proxy_" +
+                    ChannelPlayKhufuV13SubterraneanThresholdMeshPipeline
+                        .DescendingShell +
+                    "_West_Wall"), "descending inner wall proxy");
+            var release =
+                KhufuV13SubterraneanRouteContract.JunctionInnerWallRelease;
+            var forward =
+                (KhufuV13SubterraneanRouteContract.SubterraneanLanding -
+                 KhufuV13SubterraneanRouteContract.JunctionEnd).normalized;
+            target.localPosition -= forward * (release * 0.5f);
+            target.localScale += new Vector3(0f, 0f, release);
+            Physics.SyncTransforms();
+        }, cases);
 
         var beforeScene =
             Sha256File(ChannelPlayKhufuV13SubterraneanThresholdBuilder.ScenePath);
@@ -557,11 +577,21 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
             0.001f ||
             Mathf.Abs(
                 KhufuV13SubterraneanRouteContract.PassageClearHeight - 2.40f) >
-            0.001f)
+            0.001f ||
+            Mathf.Abs(
+                KhufuV13SubterraneanRouteContract
+                    .JunctionTransitionEndRelease - 1.45f) > 0.001f ||
+            Mathf.Abs(
+                KhufuV13SubterraneanRouteContract.JunctionInnerWallRelease -
+                1.80f) > 0.001f ||
+            Mathf.Abs(
+                KhufuV13SubterraneanRouteContract.LandingRoofEndRelease -
+                1.55f) > 0.001f)
             result.Failures.Add("V13 passage clearance dimensions drifted.");
 
         Physics.SyncTransforms();
-        foreach (var point in KhufuV13SubterraneanRouteContract.RoundTripRoute())
+        foreach (var point in ClearanceSamples(
+                     KhufuV13SubterraneanRouteContract.RoundTripRoute(), 0.25f))
         {
             var hits = Physics.OverlapCapsule(
                 point + Vector3.up * 0.35f,
@@ -656,6 +686,24 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
             shell + "_Floor", result);
         ValidateRay(root, center, rotation * Vector3.up, 2f,
             shell + "_Roof", result);
+    }
+
+    private static IEnumerable<Vector3> ClearanceSamples(
+        IReadOnlyList<Vector3> route, float maximumStep)
+    {
+        if (route == null || route.Count == 0 || maximumStep <= 0f)
+            throw new InvalidOperationException(
+                "V13 clearance sampling contract is invalid.");
+        yield return route[0];
+        for (var segment = 1; segment < route.Count; segment++)
+        {
+            var start = route[segment - 1];
+            var end = route[segment];
+            var steps = Mathf.Max(1,
+                Mathf.CeilToInt(Vector3.Distance(start, end) / maximumStep));
+            for (var step = 1; step <= steps; step++)
+                yield return Vector3.Lerp(start, end, (float)step / steps);
+        }
     }
 
     private static void ValidateRay(Transform root, Vector3 origin,

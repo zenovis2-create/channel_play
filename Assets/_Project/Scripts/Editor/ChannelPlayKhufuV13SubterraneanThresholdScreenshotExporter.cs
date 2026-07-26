@@ -87,6 +87,8 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdScreenshotExporter
             manifest.AppendLine("- Required captures: `6`");
             manifest.AppendLine(
                 "- Inherited `V4_Light_Subterranean`: `enabled and disclosed`");
+            manifest.AppendLine(
+                "- Junction cutaway: `V13 structure complete; V10 route inlay only`");
             manifest.AppendLine("- Scene SHA256: `" +
                                 Sha256(
                                     ChannelPlayKhufuV13SubterraneanThresholdBuilder
@@ -169,27 +171,34 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdScreenshotExporter
         var door = KhufuV13SubterraneanRouteContract.ChamberDoor;
         var chamber = KhufuV13SubterraneanRouteContract.ChamberCenter;
         var pit = KhufuV13SubterraneanRouteContract.PitInspection;
+        var descentRotation = Quaternion.LookRotation(
+            (landing - junction).normalized, Vector3.up);
+        var descentForward = (landing - junction).normalized;
+        var descentUp = descentRotation * Vector3.up;
         return new List<View>
         {
             new View("v10_v13_junction",
-                branch + new Vector3(-4.0f, 3.2f, -4.8f),
-                junction + Vector3.up * 0.9f, 64f, CaptureProfile.Transition),
+                Vector3.Lerp(branch, junction, 0.5f) + Vector3.up * 2.0f,
+                Vector3.Lerp(branch, junction, 0.5f),
+                80f, CaptureProfile.Transition, Vector3.forward),
             new View("descending_long_axis",
-                branch + new Vector3(-2.2f, 1.8f, -3.2f),
-                landing + Vector3.up * 0.9f, 62f, CaptureProfile.Transition),
+                junction + descentForward * 1.0f + descentUp * 1.15f,
+                landing - descentForward * 0.5f + descentUp * 1.15f,
+                66f, CaptureProfile.V13Only),
             new View("bedrock_landing",
-                landing + new Vector3(-3.5f, 2.6f, -3.4f),
-                landing + Vector3.up * 0.8f, 66f, CaptureProfile.V13Only),
+                landing + new Vector3(0f, 1.15f, 2.25f),
+                landing + new Vector3(0f, 1.10f, -0.30f),
+                70f, CaptureProfile.V13Only),
             new View("chamber_doorway_release",
-                door + new Vector3(-3.1f, 2.5f, -3.0f),
-                chamber + Vector3.up * 1.0f, 68f, CaptureProfile.V13Only),
+                door + new Vector3(0f, 1.15f, -2.55f),
+                chamber + Vector3.up * 1.15f, 70f, CaptureProfile.V13Only),
             new View("subterranean_chamber_pit",
-                chamber + new Vector3(-3.0f, 2.7f, -2.7f),
-                pit + Vector3.up * 0.35f, 65f, CaptureProfile.V13Only),
+                chamber + new Vector3(0f, 1.55f, -1.55f),
+                pit + Vector3.up * 0.08f, 66f, CaptureProfile.V13Only),
             new View("below_grade_integration",
-                new Vector3(8.5f, 8.8f, -16.0f),
-                Vector3.Lerp(junction, chamber, 0.55f) + Vector3.up * 1.2f,
-                52f, CaptureProfile.Integration)
+                chamber + new Vector3(0f, 1.20f, -0.40f),
+                landing + Vector3.up * 1.10f,
+                74f, CaptureProfile.V13Only)
         };
     }
 
@@ -210,7 +219,7 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdScreenshotExporter
     {
         camera.transform.position = view.Position;
         camera.transform.rotation =
-            Quaternion.LookRotation(view.Target - view.Position, Vector3.up);
+            Quaternion.LookRotation(view.Target - view.Position, view.Up);
         camera.fieldOfView = view.FieldOfView;
         var previous = RenderTexture.active;
         var previousTarget = camera.targetTexture;
@@ -339,15 +348,23 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdScreenshotExporter
         public readonly Vector3 Target;
         public readonly float FieldOfView;
         public readonly CaptureProfile Profile;
+        public readonly Vector3 Up;
 
         public View(string name, Vector3 position, Vector3 target,
             float fieldOfView, CaptureProfile profile)
+            : this(name, position, target, fieldOfView, profile, Vector3.up)
+        {
+        }
+
+        public View(string name, Vector3 position, Vector3 target,
+            float fieldOfView, CaptureProfile profile, Vector3 up)
         {
             Name = name;
             Position = position;
             Target = target;
             FieldOfView = fieldOfView;
             Profile = profile;
+            Up = up;
         }
     }
 
@@ -398,6 +415,18 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdScreenshotExporter
                             child.name ==
                             "V4_Smooth_Casing_With_Tapered_Cutaway");
                 SetActive(child.gameObject, keep);
+            }
+            if (profile == CaptureProfile.Transition)
+            {
+                var v10Visuals = map.Find(
+                    ChannelPlayKhufuV10InteriorBuilder.RootName +
+                    "/V10_Visuals");
+                if (v10Visuals == null)
+                    throw new InvalidOperationException(
+                        "V10 visuals are missing for junction cutaway.");
+                foreach (Transform child in v10Visuals)
+                    SetActive(child.gameObject,
+                        child.name == "V10_Route_Inlay");
             }
         }
 

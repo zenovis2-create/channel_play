@@ -195,6 +195,7 @@ def build_complete_fixture(
         "Pit backing disabled",
         "V10-owned marker moved",
         "Inherited light disabled",
+        "Junction inner wall trim reverted",
         "Injected successor failure -> rollback verified",
     )
     write(
