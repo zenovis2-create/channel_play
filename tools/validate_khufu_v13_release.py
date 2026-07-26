@@ -21,6 +21,27 @@ V12_STATIC_SIGNATURE = (
 V11_RESTORED_SIGNATURE = (
     "9994b06134cf20f3225df94880f7f652e1de66ca00bb24770ad3274b8d2f0ed9"
 )
+LEGACY_HISTORICAL_RESULTS = {
+    "V6": (
+        "b41580ea2636838635ac54cacf2f20f34224b39bb32a506d223bbcfc2476d530",
+        1,
+    ),
+    "V7": (
+        "9730013ededc08da590b99de5d2bd1ae91c485b25d67e6c591117d4431c2d321",
+        2,
+    ),
+    "V8": (
+        "be64fa8b33e798093d55087fc279377446e6e5556e059ad273aeaf1d87ccdfa4",
+        8,
+    ),
+    "V9": (
+        "8301ccc17bf1323fb8e9d1a525a778bf9ccdbf2da3dc15412b4bbf790ac85da8",
+        12,
+    ),
+}
+V10_RESTORED_SIGNATURE = (
+    "903f43ed5cfc00bf8eb3243741901adb503711624b5a68fef71c52f7b2be5241"
+)
 
 RUN_ROOT = Path("runs/khufu-v13-subterranean-threshold")
 DOC_ROOT = Path("docs/khufu-v13-subterranean-threshold")
@@ -219,7 +240,7 @@ LEGACY_SOURCES = (
     Path("Assets/_Project/Scripts/Editor/ChannelPlayKhufuV5AcceptanceValidator.cs"),
     Path(
         "Assets/_Project/Scripts/Editor/"
-        "ChannelPlayKhufuV6VisualFidelityValidator.cs"
+        "ChannelPlayKhufuV6VisualSliceValidator.cs"
     ),
     Path(
         "Assets/_Project/Scripts/Editor/"
@@ -427,6 +448,7 @@ def expected_allowlist() -> set[str]:
         *MATERIAL_METAS,
         *ROOT_METAS,
         RUN_ROOT / "prewrite-audit.json",
+        GIT_ATTRIBUTES,
         *PHASE_RECEIPTS,
         *REQUIRED_TOKENS,
         *EXTRA_REQUIRED_TOKENS,
@@ -861,12 +883,26 @@ def check_legacy(
     root: Path, scene_hash: str, static_signature: str, result: ValidationResult
 ) -> None:
     legacy = (root / RUN_ROOT / "legacy-regression.md").read_text(encoding="utf-8")
-    for label in ("V4", "V5", "V8", "V9", "V10", "V11", "V12"):
+    for label in ("V4", "V5", "V6", "V7", "V8", "V9", "V10", "V11", "V12"):
         require_text(legacy, f"- {label}: `passed`", "legacy regression", result)
+    for label, (signature, count) in LEGACY_HISTORICAL_RESULTS.items():
+        require_text(
+            legacy,
+            (
+                f"- {label}: `passed` / signature `{signature} / "
+                f"classified exact historical source-hash deltas={count}`"
+            ),
+            "legacy regression",
+            result,
+        )
     for token in (
         f"V13 canonical return: `passed` / signature `{static_signature}`",
         f"Scene SHA256 before / after: `{scene_hash} / {scene_hash}`",
         "Scene bytes unchanged: `True`",
+        (
+            f"V10: `passed` / signature `{V10_RESTORED_SIGNATURE} / "
+            "classified exact V12 transition deltas=19`"
+        ),
         f"V11: `passed` / signature `{V11_RESTORED_SIGNATURE}`",
         f"V12: `passed` / signature `{V12_STATIC_SIGNATURE}`",
         "classified exact V12 transition deltas=19",
@@ -874,6 +910,10 @@ def check_legacy(
         require_text(legacy, token, "legacy regression", result)
     if legacy.count("Classified exact V12 transition delta:") != 19:
         result.errors.append("legacy receipt does not contain exactly 19 V10 deltas")
+    if legacy.count("Classified exact historical source-hash delta:") != 23:
+        result.errors.append(
+            "legacy receipt does not contain exactly 23 V6-V9 historical deltas"
+        )
     for relative in (*LEGACY_SOURCES, BUILDER, LEGACY):
         require_hash(legacy, root, relative, "legacy regression receipt", result)
 
@@ -1027,6 +1067,24 @@ def check_traversal(root: Path, result: ValidationResult) -> None:
     )
     if grounded and grounded[0] < 0.90:
         result.errors.append("normal grounded fraction is below 0.90")
+    outbound_grounded = parse_float_field(
+        normal,
+        r"(?m)^- Outbound grounded steps/fraction: "
+        r"`\d+/\d+ / ([0-9.]+)`\r?$",
+        "outbound grounded fraction",
+        result,
+    )
+    if outbound_grounded and outbound_grounded[0] < 0.90:
+        result.errors.append("outbound grounded fraction is below 0.90")
+    return_grounded = parse_float_field(
+        normal,
+        r"(?m)^- Return grounded steps/fraction: "
+        r"`\d+/\d+ / ([0-9.]+)`\r?$",
+        "return grounded fraction",
+        result,
+    )
+    if return_grounded and return_grounded[0] < 0.90:
+        result.errors.append("return grounded fraction is below 0.90")
 
     for token in (
         "Mode: `outside-wall-control`",
@@ -1044,6 +1102,17 @@ def check_traversal(root: Path, result: ValidationResult) -> None:
     )
     if start and start[0] < 1.50:
         result.errors.append("boundary start distance is below 1.50 m")
+    signed = re.search(
+        r"(?m)^- Control boundary signed start / end: "
+        r"`(-?[0-9.]+) / (-?[0-9.]+) m`\r?$",
+        boundary,
+    )
+    if signed is None:
+        result.errors.append("boundary receipt lacks signed crossing direction")
+    elif float(signed.group(1)) > -1.50 or float(signed.group(2)) <= 0.0:
+        result.errors.append(
+            "boundary control does not run from chamber interior to exterior"
+        )
     step = parse_float_field(
         boundary,
         r"(?m)^- Control maximum requested step: `([0-9.]+) m`\r?$",

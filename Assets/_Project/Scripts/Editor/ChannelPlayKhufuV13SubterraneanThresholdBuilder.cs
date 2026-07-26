@@ -549,13 +549,19 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdBuilder
             if (previous == null) ApplyPredecessorContext(v4, v10);
             else
             {
-                ApplyV13Context(v4, v10);
-                previous.SetParent(parent, false);
-                previous.SetSiblingIndex(sibling);
-                previous.localPosition = localPosition;
-                previous.localRotation = localRotation;
-                previous.localScale = localScale;
-                previous.gameObject.SetActive(active);
+                try
+                {
+                    ApplyV13Context(v4, v10);
+                }
+                finally
+                {
+                    previous.SetParent(parent, false);
+                    previous.SetSiblingIndex(sibling);
+                    previous.localPosition = localPosition;
+                    previous.localRotation = localRotation;
+                    previous.localScale = localScale;
+                    previous.gameObject.SetActive(active);
+                }
             }
             Physics.SyncTransforms();
         }

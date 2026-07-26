@@ -15,7 +15,7 @@ from tools.validate_khufu_v13_release import ValidationResult
 def test_legacy_source_binding_covers_v4_through_v12() -> None:
     names = {path.name for path in release.LEGACY_SOURCES}
     assert len(release.LEGACY_SOURCES) == 9
-    assert "ChannelPlayKhufuV6VisualFidelityValidator.cs" in names
+    assert "ChannelPlayKhufuV6VisualSliceValidator.cs" in names
     assert "ChannelPlayKhufuV7EntryWayfindingValidator.cs" in names
 
 
@@ -210,12 +210,24 @@ def build_complete_fixture(
     )
 
     legacy_rows = "\n".join(
-        f"- {label}: `passed` / signature `{'original' if label != 'V11' else release.V11_RESTORED_SIGNATURE}`"
-        for label in ("V4", "V5", "V8", "V9", "V10")
+        f"- {label}: `passed` / signature `original`"
+        for label in ("V4", "V5")
+    )
+    legacy_rows += "\n" + "\n".join(
+        f"- {label}: `passed` / signature `{signature} / "
+        f"classified exact historical source-hash deltas={count}`"
+        for label, (signature, count) in release.LEGACY_HISTORICAL_RESULTS.items()
     )
     legacy_rows += (
+        f"\n- V10: `passed` / signature `{release.V10_RESTORED_SIGNATURE} / "
+        "classified exact V12 transition deltas=19`"
         f"\n- V11: `passed` / signature `{release.V11_RESTORED_SIGNATURE}`"
         f"\n- V12: `passed` / signature `{release.V12_STATIC_SIGNATURE}`"
+    )
+    historical_deltas = "\n".join(
+        f"  - Classified exact historical source-hash delta: "
+        f"`historical-{index:02d}`"
+        for index in range(23)
     )
     deltas = "\n".join(
         f"  - Classified exact V12 transition delta: `delta-{index:02d}`"
@@ -233,6 +245,8 @@ def build_complete_fixture(
         "- Scene bytes unchanged: `True`\n"
         + legacy_rows
         + "\n- Summary: `classified exact V12 transition deltas=19`\n"
+        + historical_deltas
+        + "\n"
         + deltas
         + "\n"
         + legacy_hashes
@@ -319,6 +333,8 @@ def build_complete_fixture(
         "- Serialized anchors match: `True`\n"
         "- Traversed distance / max error / final error: `62.000 / 0.100 / 0.050`\n"
         "- Grounded steps/fraction: `100/100 / 1.000`\n"
+        "- Outbound grounded steps/fraction: `50/50 / 1.000`\n"
+        "- Return grounded steps/fraction: `50/50 / 1.000`\n"
         "- Root renderers / enabled colliders: `5 / 20`\n"
         "- Pit overlap / cast solid backing: `True / True`\n"
         f"- Movement trace: `{release.PLAYER_ARTIFACTS[2].as_posix()}` / "
@@ -333,6 +349,7 @@ def build_complete_fixture(
         "- Mode: `outside-wall-control`\n"
         "- Outside-wall control: `passed`\n"
         "- Control boundary start distance: `1.700 m`\n"
+        "- Control boundary signed start / end: `-1.700 / 0.650 m`\n"
         "- Control pre-Move overlap empty: `True`\n"
         "- Control maximum requested step: `0.080 m`\n"
         "- Control blocked collider / flags: `V13_Proxy_Chamber_East_Wall / Sides`\n"
@@ -393,6 +410,9 @@ def test_complete_synthetic_release_passes(
         ("extra_source", "editor source/meta inventory drifted"),
         ("duplicate_guid", "GUIDs are not unique"),
         ("traversal_error", "anchor error exceeds"),
+        ("outbound_grounded", "outbound grounded fraction is below 0.90"),
+        ("return_grounded", "return grounded fraction is below 0.90"),
+        ("boundary_direction", "does not run from chamber interior to exterior"),
         ("legacy_delta", "exactly 19 V10 deltas"),
         ("allowlist_extra", "unexpected path is present"),
         ("build_hash", "Windows build receipt is not bound"),
@@ -448,6 +468,32 @@ def test_release_mutations_fail_closed(
         path.write_text(
             path.read_text(encoding="utf-8").replace(
                 "62.000 / 0.100 / 0.050", "62.000 / 0.401 / 0.050"
+            ),
+            encoding="utf-8",
+        )
+    elif mutation == "outbound_grounded":
+        path = tmp_path / release.PLAYER_ARTIFACTS[0]
+        path.write_text(
+            path.read_text(encoding="utf-8").replace(
+                "50/50 / 1.000", "44/50 / 0.880", 1
+            ),
+            encoding="utf-8",
+        )
+    elif mutation == "return_grounded":
+        path = tmp_path / release.PLAYER_ARTIFACTS[0]
+        text = path.read_text(encoding="utf-8")
+        path.write_text(
+            text.replace(
+                "- Return grounded steps/fraction: `50/50 / 1.000`",
+                "- Return grounded steps/fraction: `44/50 / 0.880`",
+            ),
+            encoding="utf-8",
+        )
+    elif mutation == "boundary_direction":
+        path = tmp_path / release.PLAYER_ARTIFACTS[1]
+        path.write_text(
+            path.read_text(encoding="utf-8").replace(
+                "-1.700 / 0.650", "1.700 / -0.650"
             ),
             encoding="utf-8",
         )

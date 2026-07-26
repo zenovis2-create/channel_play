@@ -627,9 +627,18 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
             ? 2f
             : Mathf.Max(playerController.height * Mathf.Abs(playerScale.y),
                 playerRadius * 2f);
+        var playerCenterOffset = playerController == null
+            ? Vector3.zero
+            : playerController.transform.rotation *
+              Vector3.Scale(playerController.center, playerScale);
+        var playerLateralCenterOffset =
+            new Vector3(playerCenterOffset.x, 0f, playerCenterOffset.z);
         if (playerController != null &&
             (InvalidFinite(playerRadius) || InvalidFinite(playerHeight) ||
              playerRadius <= 0f || playerHeight < playerRadius * 2f ||
+             InvalidFinite(playerCenterOffset.x) ||
+             InvalidFinite(playerCenterOffset.y) ||
+             InvalidFinite(playerCenterOffset.z) ||
              InvalidFinite(playerScale.x) || InvalidFinite(playerScale.y) ||
              InvalidFinite(playerScale.z) ||
              Mathf.Abs(playerScale.x) < 0.0001f ||
@@ -641,10 +650,10 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
                      KhufuV13SubterraneanRouteContract.RoundTripRoute(), 0.25f))
         {
             var hits = Physics.OverlapCapsule(
-                point + Vector3.up *
+                point + playerLateralCenterOffset + Vector3.up *
                 (KhufuV13SubterraneanRouteContract.TraversalFloorOffset +
                  playerRadius),
-                point + Vector3.up *
+                point + playerLateralCenterOffset + Vector3.up *
                 (KhufuV13SubterraneanRouteContract.TraversalFloorOffset +
                  playerHeight - playerRadius),
                 playerRadius, ~0, QueryTriggerInteraction.Ignore);
@@ -824,15 +833,21 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
         }
         finally
         {
-            ChannelPlayKhufuV13SubterraneanThresholdBuilder
-                .ApplyV13Context(context.V4, context.V10);
-            context.Root.SetParent(parent, false);
-            context.Root.SetSiblingIndex(sibling);
-            context.Root.localPosition = Vector3.zero;
-            context.Root.localRotation = Quaternion.identity;
-            context.Root.localScale = Vector3.one;
-            context.Root.gameObject.SetActive(active);
-            Physics.SyncTransforms();
+            try
+            {
+                ChannelPlayKhufuV13SubterraneanThresholdBuilder
+                    .ApplyV13Context(context.V4, context.V10);
+            }
+            finally
+            {
+                context.Root.SetParent(parent, false);
+                context.Root.SetSiblingIndex(sibling);
+                context.Root.localPosition = Vector3.zero;
+                context.Root.localRotation = Quaternion.identity;
+                context.Root.localScale = Vector3.one;
+                context.Root.gameObject.SetActive(active);
+                Physics.SyncTransforms();
+            }
         }
     }
 

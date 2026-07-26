@@ -53,6 +53,8 @@ namespace ChannelPlay.Gameplay
         private CollisionFlags blockedFlags;
         private bool preMoveOverlapEmpty;
         private float boundaryStartDistance;
+        private float boundaryStartSignedDistance;
+        private float boundaryEndSignedDistance;
         private int boundaryMoveFrame = -1;
         private int boundaryCallbackFrame = -1;
         private bool exactCallback;
@@ -258,6 +260,10 @@ namespace ChannelPlay.Gameplay
                         (KhufuV13SubterraneanRouteContract.BoundaryStartDistance + 0.20f);
             var end = KhufuV13SubterraneanRouteContract.BoundaryPoint +
                       outward * 0.65f;
+            boundaryStartSignedDistance = Vector3.Dot(
+                start - KhufuV13SubterraneanRouteContract.BoundaryPoint, outward);
+            boundaryEndSignedDistance = Vector3.Dot(
+                end - KhufuV13SubterraneanRouteContract.BoundaryPoint, outward);
             boundaryStartDistance =
                 Vector3.Distance(start, KhufuV13SubterraneanRouteContract.BoundaryPoint);
             Teleport(player, PlayerPoint(start));
@@ -374,6 +380,9 @@ namespace ChannelPlay.Gameplay
                     (blockedFlags & CollisionFlags.Sides) != 0 &&
                     boundaryStartDistance >=
                     KhufuV13SubterraneanRouteContract.BoundaryStartDistance &&
+                    boundaryStartSignedDistance <=
+                    -KhufuV13SubterraneanRouteContract.BoundaryStartDistance &&
+                    boundaryEndSignedDistance > 0f &&
                     preMoveOverlapEmpty &&
                     maximumRequestedStep <=
                     KhufuV13SubterraneanRouteContract.MaximumControlStep +
@@ -472,6 +481,9 @@ namespace ChannelPlay.Gameplay
                             " / " + pitCastSolid + "`");
             text.AppendLine("- Control boundary start distance: `" +
                             Float(boundaryStartDistance) + " m`");
+            text.AppendLine("- Control boundary signed start / end: `" +
+                            Float(boundaryStartSignedDistance) + " / " +
+                            Float(boundaryEndSignedDistance) + " m`");
             text.AppendLine("- Control pre-Move overlap empty: `" + preMoveOverlapEmpty + "`");
             text.AppendLine("- Control maximum requested step: `" +
                             Float(maximumRequestedStep) + " m`");

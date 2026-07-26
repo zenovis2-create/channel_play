@@ -262,8 +262,14 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
         }
         finally
         {
-            ChannelPlayKhufuV12QueenCircuitBuilder.ApplyV12Context(v4, v10);
-            context.RestoreCanonicalV13();
+            try
+            {
+                ChannelPlayKhufuV12QueenCircuitBuilder.ApplyV12Context(v4, v10);
+            }
+            finally
+            {
+                context.RestoreCanonicalV13();
+            }
         }
     }
 
