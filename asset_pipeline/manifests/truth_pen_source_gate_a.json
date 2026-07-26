@@ -1,0 +1,32 @@
+{
+  "schema": "channel_play.asset_source_gate_a.v1",
+  "asset_id": "truth_pen",
+  "task_id": "",
+  "source_path": "unselected",
+  "applicable_jurisdiction": "",
+  "provider_or_source": "",
+  "creator_or_affirmer": "",
+  "rights_holder_or_legal_customer": "",
+  "license_or_agreement": "",
+  "source_reference": "",
+  "retrieval_date": "",
+  "controlling_terms_reference": "",
+  "rights": {
+    "commercial_use": "UNKNOWN",
+    "derivatives": "UNKNOWN",
+    "redistribution": "UNKNOWN",
+    "marketing": "UNKNOWN"
+  },
+  "input_clearance": {
+    "project_owned_or_cleared_inputs": null,
+    "unverified_web_references": null,
+    "watermarks_or_logos": null,
+    "copied_franchise_style": null,
+    "tracing_or_image_conditioning": null
+  },
+  "path_details": {},
+  "evidence_paths": [],
+  "critic_review": {
+    "receipt": ""
+  }
+}

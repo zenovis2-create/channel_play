@@ -1,9 +1,11 @@
 # 2D Source Intake
 
 Asset ID: truth_pen
-Status: waiting_for_source
+Status: blocked_by_gate_a
 Accepted inputs: PNG, JPG, SVG, concept sheet, screenshot reference
-License: pending; generation is blocked until provenance is recorded
+License: pending; source creation/download is blocked until provenance is approved
+Gate A manifest: asset_pipeline/manifests/truth_pen_source_gate_a.json
+Gate A receipt: runs/asset-gate-a-truth_pen/gate_a_check.md
 
 ## Required Notes
 

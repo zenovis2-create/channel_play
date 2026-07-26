@@ -19,7 +19,7 @@
     },
     {
       "id": "truth_pen",
-      "status": "generated",
+      "status": "briefed",
       "brief": "asset_pipeline/briefs/truth_pen.md",
       "created_at": "2026-07-26T17:51:28+09:00",
       "source_license": "TBD",
@@ -28,7 +28,34 @@
       "generation_handoff": "asset_pipeline/generated_3d/truth_pen/generation_handoff.md",
       "blender_template": "asset_pipeline/blender_work/truth_pen/blender_batch_template.py",
       "unity_import_manifest": "asset_pipeline/unity_ready/truth_pen/unity_import_manifest.md",
-      "updated_at": "2026-07-26T17:51:28+09:00"
+      "updated_at": "2026-07-26T20:10:53+09:00",
+      "source_gate_required": true,
+      "source_gate_status": "blocked",
+      "source_gate_manifest": "asset_pipeline/manifests/truth_pen_source_gate_a.json",
+      "source_gate_receipt": "runs/asset-gate-a-truth_pen/gate_a_check.md",
+      "source_gate_errors": [
+        "source_path must select commissioned_human, openai, or cc0",
+        "task_id must use task-NNNN format",
+        "applicable_jurisdiction is required",
+        "provider_or_source is required",
+        "creator_or_affirmer is required",
+        "rights_holder_or_legal_customer is required",
+        "license_or_agreement is required",
+        "retrieval_date is required",
+        "source_reference is required",
+        "controlling_terms_reference is required",
+        "rights.commercial_use must be PASS",
+        "rights.derivatives must be PASS",
+        "rights.redistribution must be PASS",
+        "rights.marketing must be PASS",
+        "input_clearance.project_owned_or_cleared_inputs must be true",
+        "input_clearance.unverified_web_references must be false",
+        "input_clearance.watermarks_or_logos must be false",
+        "input_clearance.copied_franchise_style must be false",
+        "input_clearance.tracing_or_image_conditioning must be false",
+        "evidence_paths must include at least one repository evidence path",
+        "critic_review.receipt is required"
+      ]
     }
   ]
 }

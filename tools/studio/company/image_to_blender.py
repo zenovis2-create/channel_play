@@ -10,10 +10,16 @@ import shutil
 import subprocess
 from pathlib import Path
 
+from .asset_gate import (
+    approved_gate_b_source,
+    asset_gate_a_init,
+    evaluate_asset_gate_a,
+    evaluate_asset_gate_b,
+)
 from .errors import CompanyError
 from .timeutil import now_iso
 
-VALID_PROVIDERS = {"rodin25", "pixal3d", "trellis2", "tripo", "both"}
+VALID_PROVIDERS = {"rodin25", "pixal3d", "trellis2", "tripo", "both", "local"}
 GENERATE_PROVIDERS = {"auto", "rodin25", "pixal3d", "trellis2", "tripo", "both", "local"}
 GDX1_TRELLIS2_IMAGE = "channel-play/trellis2:gb10"
 GDX1_TRELLIS2_REPO = "/home/daehan/.openclaw/repos/TRELLIS.2"
@@ -29,6 +35,22 @@ def image3d_new(root: Path, asset_id: str, *, provider: str = "pixal3d", prompt:
     chosen_provider = (provider or "pixal3d").strip().lower()
     if chosen_provider not in VALID_PROVIDERS:
         raise CompanyError(f"Invalid image3d provider: {provider}")
+    asset_gate_a_init(root, clean)
+    gate_a_passed = evaluate_asset_gate_a(root, clean)["passed"]
+    gate_b_result = evaluate_asset_gate_b(root, clean)
+    approved_provider = (
+        gate_b_result["data"].get("production", {}).get("approved_3d_provider")
+        if gate_b_result["passed"]
+        else None
+    )
+    gate_b_passed = gate_b_result["passed"] and chosen_provider == approved_provider
+    production_status = (
+        "waiting_for_generation"
+        if gate_b_passed
+        else "blocked_by_gate_b"
+        if gate_a_passed
+        else "blocked_by_gate_a"
+    )
 
     description = prompt.strip() or _default_prompt(clean)
     base = root / "asset_pipeline" / "image_to_blender" / clean
@@ -46,7 +68,13 @@ def image3d_new(root: Path, asset_id: str, *, provider: str = "pixal3d", prompt:
         "schema": "channel_play.image_to_blender.v1",
         "asset_id": clean,
         "provider": chosen_provider,
-        "status": "image_to_blender_ready",
+        "status": (
+            "image_to_blender_ready"
+            if gate_b_passed
+            else "waiting_for_gate_b"
+            if gate_a_passed
+            else "waiting_for_gate_a"
+        ),
         "created_at": now_iso(),
         "prompt": description,
         "source_image": source_image.strip(),
@@ -57,11 +85,31 @@ def image3d_new(root: Path, asset_id: str, *, provider: str = "pixal3d", prompt:
             "python_venv": ".venv/asset-forge",
         },
         "pipeline": [
-            {"stage": "concept_image", "tool": "gpt_image", "status": "waiting_for_image"},
-            {"stage": "image_to_3d", "tool": chosen_provider, "status": "waiting_for_generation"},
-            {"stage": "blender_cleanup", "tool": "blender", "status": "waiting_for_glb_or_fbx"},
-            {"stage": "unity_import", "tool": "unity", "status": "waiting_for_clean_asset"},
-            {"stage": "scene_binding", "tool": "world_builder", "status": "waiting_for_prefab"},
+            {
+                "stage": "concept_image",
+                "tool": "gpt_image",
+                "status": "waiting_for_image" if gate_a_passed else "blocked_by_gate_a",
+            },
+            {
+                "stage": "image_to_3d",
+                "tool": chosen_provider,
+                "status": production_status,
+            },
+            {
+                "stage": "blender_cleanup",
+                "tool": "blender",
+                "status": "waiting_for_glb_or_fbx" if gate_b_passed else production_status,
+            },
+            {
+                "stage": "unity_import",
+                "tool": "unity",
+                "status": "waiting_for_clean_asset" if gate_b_passed else production_status,
+            },
+            {
+                "stage": "scene_binding",
+                "tool": "world_builder",
+                "status": "waiting_for_prefab" if gate_b_passed else production_status,
+            },
         ],
         "outputs": {
             "gpt_image_prompt": f"asset_pipeline/image_to_blender/{clean}/concept/gpt_image_prompt.md",
@@ -75,19 +123,64 @@ def image3d_new(root: Path, asset_id: str, *, provider: str = "pixal3d", prompt:
     }
 
     (base / "image3d_job.json").write_text(json.dumps(job, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (folders["concept"] / "gpt_image_prompt.md").write_text(_gpt_image_prompt(clean, description), encoding="utf-8")
-    (folders["source"] / "source_image_requirements.md").write_text(_source_requirements(clean, source_image), encoding="utf-8")
-    (folders["providers"] / "trellis2_job.md").write_text(_trellis2_job(clean, description), encoding="utf-8")
-    (folders["providers"] / "tripo_job.md").write_text(_tripo_job(clean, description), encoding="utf-8")
-    (folders["blender"] / "cleanup_plan.md").write_text(_blender_plan(clean), encoding="utf-8")
-    (folders["blender"] / "blender_job_config.json").write_text(json.dumps(_blender_config(clean), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (folders["unity"] / "unity_import_plan.md").write_text(_unity_plan(clean), encoding="utf-8")
+    (folders["concept"] / "gpt_image_prompt.md").write_text(
+        _gpt_image_prompt(clean, description, gate_a_passed),
+        encoding="utf-8",
+    )
+    (folders["source"] / "source_image_requirements.md").write_text(
+        _source_requirements(clean, source_image, gate_a_passed),
+        encoding="utf-8",
+    )
+    (folders["providers"] / "trellis2_job.md").write_text(
+        _trellis2_job(clean, description, production_status),
+        encoding="utf-8",
+    )
+    (folders["providers"] / "tripo_job.md").write_text(
+        _tripo_job(clean, description, production_status),
+        encoding="utf-8",
+    )
+    (folders["blender"] / "cleanup_plan.md").write_text(
+        _blender_plan(clean, production_status),
+        encoding="utf-8",
+    )
+    (folders["blender"] / "blender_job_config.json").write_text(
+        json.dumps(
+            _blender_config(clean, production_status),
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (folders["unity"] / "unity_import_plan.md").write_text(
+        _unity_plan(clean, production_status),
+        encoding="utf-8",
+    )
 
     receipt_dir = root / "runs" / f"image-to-blender-{clean}"
     receipt_dir.mkdir(parents=True, exist_ok=True)
     receipt = receipt_dir / "image_to_blender_receipt.md"
-    receipt.write_text(_receipt(root, clean, chosen_provider, base), encoding="utf-8")
-    _update_asset_index(root, clean, chosen_provider, description, base, receipt)
+    receipt.write_text(
+        _receipt(
+            root,
+            clean,
+            chosen_provider,
+            base,
+            gate_a_passed=gate_a_passed,
+            gate_b_passed=gate_b_passed,
+        ),
+        encoding="utf-8",
+    )
+    _update_asset_index(
+        root,
+        clean,
+        chosen_provider,
+        description,
+        base,
+        receipt,
+        gate_a_passed=gate_a_passed,
+        gate_b_passed=gate_b_passed,
+    )
     return receipt
 
 
@@ -110,6 +203,7 @@ def image3d_generate(root: Path, asset_id: str, *, provider: str = "auto", timeo
     chosen_provider = (provider or "auto").strip().lower()
     if chosen_provider not in GENERATE_PROVIDERS:
         raise CompanyError(f"Invalid image3d generation provider: {provider}")
+    approved_source = approved_gate_b_source(root, clean, provider=chosen_provider)
 
     base = root / "asset_pipeline" / "image_to_blender" / clean
     job_path = base / "image3d_job.json"
@@ -117,12 +211,22 @@ def image3d_generate(root: Path, asset_id: str, *, provider: str = "auto", timeo
         raise CompanyError(f"image3d job not found. Run: tools/channelctl asset image3d {clean} --provider both")
 
     job = json.loads(job_path.read_text(encoding="utf-8"))
+    source_image = _resolve_source_image(root, base, job)
+    if source_image is None or not source_image.is_file():
+        raise CompanyError(
+            f"Gate B source is not available for {clean}: "
+            f"{approved_source.relative_to(root).as_posix()}"
+        )
+    if source_image.resolve() != approved_source:
+        raise CompanyError(
+            "image3d job source_image does not match the exact file approved by Gate B"
+        )
+
     run_dir = root / "runs" / f"image-to-blender-{clean}"
     run_dir.mkdir(parents=True, exist_ok=True)
     provider_dir = base / "providers"
     provider_dir.mkdir(parents=True, exist_ok=True)
 
-    source_image = _resolve_source_image(root, base, job)
     checks = {
         "rodin25_api_key": bool(_rodin25_key()),
         "tripo_api_key": bool(_tripo_key()),
@@ -160,12 +264,21 @@ def image3d_generate(root: Path, asset_id: str, *, provider: str = "auto", timeo
                 generated_model = root / result["model"]
                 break
 
-    if generated_model is None:
+    if generated_model is None and chosen_provider == "local":
         local_result = _generate_local_blender_model(root, clean, job)
         external_attempts.append(local_result)
         generated_model = root / local_result["model"]
         if not checks["source_image"] and local_result.get("source_image"):
             checks["source_image"] = local_result["source_image"]
+    elif generated_model is None:
+        reasons = "; ".join(
+            str(attempt.get("reason") or attempt.get("status") or "unknown failure")
+            for attempt in external_attempts
+        )
+        raise CompanyError(
+            f"Gate B approved provider {chosen_provider}, but it did not produce a model"
+            f"{': ' + reasons if reasons else ''}; unreviewed local fallback is prohibited"
+        )
 
     cleanup_receipt = _run_blender_cleanup(root, clean, generated_model)
     unity_ready = _unity_ready_model(root, clean)
@@ -899,17 +1012,11 @@ def _generate_local_blender_model(root: Path, asset_id: str, job: dict) -> dict:
     preview = output_dir / f"{asset_id}_preview.png"
     if not model.exists():
         raise CompanyError(f"Local Blender generation did not create {model}")
-    source_dir = root / "asset_pipeline" / "image_to_blender" / asset_id / "source"
-    source_dir.mkdir(parents=True, exist_ok=True)
-    source_image = source_dir / "concept.png"
-    if preview.exists() and not source_image.exists():
-        shutil.copy2(preview, source_image)
     return {
         "provider": "local_blender",
         "status": "generated",
         "model": model.relative_to(root).as_posix(),
         "preview": preview.relative_to(root).as_posix(),
-        "source_image": source_image.relative_to(root).as_posix() if source_image.exists() else "",
         "receipt": (output_dir / "local_blender_receipt.json").relative_to(root).as_posix(),
     }
 
@@ -970,7 +1077,8 @@ def _update_generated_asset_index(root: Path, asset_id: str, generated_model: Pa
         assets.append(target)
     target.update(
         {
-            "status": "model_generated",
+            "status": "generated",
+            "image_to_blender_status": "model_generated",
             "generated_model": generated_model.relative_to(root).as_posix(),
             "unity_ready_model": unity_ready.relative_to(root).as_posix(),
             "updated_at": now_iso(),
@@ -1037,10 +1145,20 @@ def _default_prompt(asset_id: str) -> str:
     return f"{asset_id} realistic game-ready pyramid temple asset, ancient limestone blocks, readable silhouette, clean separated parts, no text or logos"
 
 
-def _gpt_image_prompt(asset_id: str, prompt: str) -> str:
+def _gpt_image_prompt(
+    asset_id: str,
+    prompt: str,
+    gate_a_passed: bool,
+) -> str:
     return "\n".join(
         [
             f"# GPT Image Prompt: {asset_id}",
+            "",
+            (
+                "Status: ready_for_source_creation"
+                if gate_a_passed
+                else "Status: blocked_by_gate_a"
+            ),
             "",
             "Create a production concept image for image-to-3D conversion.",
             "",
@@ -1059,12 +1177,21 @@ def _gpt_image_prompt(asset_id: str, prompt: str) -> str:
     )
 
 
-def _source_requirements(asset_id: str, source_image: str) -> str:
+def _source_requirements(
+    asset_id: str,
+    source_image: str,
+    gate_a_passed: bool,
+) -> str:
     return "\n".join(
         [
             "# Source Image Requirements",
             "",
             f"Asset ID: {asset_id}",
+            (
+                "Status: waiting_for_approved_source"
+                if gate_a_passed
+                else "Status: blocked_by_gate_a"
+            ),
             f"Current source image: {source_image or 'not provided'}",
             "",
             "- Save input image as `source/concept.png`.",
@@ -1077,12 +1204,16 @@ def _source_requirements(asset_id: str, source_image: str) -> str:
     )
 
 
-def _trellis2_job(asset_id: str, prompt: str) -> str:
+def _trellis2_job(
+    asset_id: str,
+    prompt: str,
+    production_status: str,
+) -> str:
     return "\n".join(
         [
             f"# TRELLIS.2 Job: {asset_id}",
             "",
-            "Status: waiting_for_generation",
+            f"Status: {production_status}",
             "Runtime target: gdx1 NVIDIA GPU or cloud GPU. Mac Studio is not the preferred runtime for TRELLIS.2 inference.",
             "",
             "## Input",
@@ -1100,12 +1231,16 @@ def _trellis2_job(asset_id: str, prompt: str) -> str:
     )
 
 
-def _tripo_job(asset_id: str, prompt: str) -> str:
+def _tripo_job(
+    asset_id: str,
+    prompt: str,
+    production_status: str,
+) -> str:
     return "\n".join(
         [
             f"# Tripo Job: {asset_id}",
             "",
-            "Status: waiting_for_api_or_blender_plugin",
+            f"Status: {production_status}",
             "Local install: `/Users/daehan/.openclaw/repos/tripo-3d-for-blender` linked into Blender user add-ons.",
             "Python venv: `.venv/asset-forge` with `tripo3d` installed.",
             "",
@@ -1123,10 +1258,12 @@ def _tripo_job(asset_id: str, prompt: str) -> str:
     )
 
 
-def _blender_plan(asset_id: str) -> str:
+def _blender_plan(asset_id: str, production_status: str) -> str:
     return "\n".join(
         [
             f"# Blender Cleanup Plan: {asset_id}",
+            "",
+            f"Status: {production_status}",
             "",
             "Use `tools/asset_forge/blender_image_to_unity_cleanup.py` after TRELLIS.2 or Tripo produces GLB/FBX.",
             "",
@@ -1142,9 +1279,10 @@ def _blender_plan(asset_id: str) -> str:
     )
 
 
-def _blender_config(asset_id: str) -> dict:
+def _blender_config(asset_id: str, production_status: str) -> dict:
     return {
         "asset_id": asset_id,
+        "status": production_status,
         "input_model": f"asset_pipeline/image_to_blender/{asset_id}/providers/INPUT_MODEL.glb",
         "output_dir": f"asset_pipeline/unity_ready/{asset_id}",
         "object_prefix": f"CP_{asset_id}",
@@ -1153,10 +1291,12 @@ def _blender_config(asset_id: str) -> dict:
     }
 
 
-def _unity_plan(asset_id: str) -> str:
+def _unity_plan(asset_id: str, production_status: str) -> str:
     return "\n".join(
         [
             f"# Unity Import Plan: {asset_id}",
+            "",
+            f"Status: {production_status}",
             "",
             f"Target model folder: `Assets/_Project/Art/Maps/{asset_id}`",
             f"Target prefab folder: `Assets/_Project/Prefabs/Maps/{asset_id}`",
@@ -1172,8 +1312,23 @@ def _unity_plan(asset_id: str) -> str:
     )
 
 
-def _receipt(root: Path, asset_id: str, provider: str, base: Path) -> str:
+def _receipt(
+    root: Path,
+    asset_id: str,
+    provider: str,
+    base: Path,
+    *,
+    gate_a_passed: bool,
+    gate_b_passed: bool,
+) -> str:
     rel_base = base.relative_to(root).as_posix()
+    status = (
+        "image_to_blender_ready"
+        if gate_b_passed
+        else "waiting_for_gate_b"
+        if gate_a_passed
+        else "waiting_for_gate_a"
+    )
     return "\n".join(
         [
             "# Image To Blender Receipt",
@@ -1181,7 +1336,7 @@ def _receipt(root: Path, asset_id: str, provider: str, base: Path) -> str:
             f"Asset ID: {asset_id}",
             f"Provider: {provider}",
             f"Updated: {now_iso()}",
-            "Status: image_to_blender_ready",
+            f"Status: {status}",
             "",
             "## Artifacts",
             f"- Job: {rel_base}/image3d_job.json",
@@ -1202,7 +1357,17 @@ def _receipt(root: Path, asset_id: str, provider: str, base: Path) -> str:
     )
 
 
-def _update_asset_index(root: Path, asset_id: str, provider: str, prompt: str, base: Path, receipt: Path) -> None:
+def _update_asset_index(
+    root: Path,
+    asset_id: str,
+    provider: str,
+    prompt: str,
+    base: Path,
+    receipt: Path,
+    *,
+    gate_a_passed: bool,
+    gate_b_passed: bool,
+) -> None:
     index = root / "asset_pipeline" / "index.json"
     data = {"assets": []}
     if index.exists():
@@ -1214,7 +1379,13 @@ def _update_asset_index(root: Path, asset_id: str, provider: str, prompt: str, b
         assets.append(target)
     target.update(
         {
-            "status": "image_to_blender_ready",
+            "image_to_blender_status": (
+                "image_to_blender_ready"
+                if gate_b_passed
+                else "waiting_for_gate_b"
+                if gate_a_passed
+                else "waiting_for_gate_a"
+            ),
             "provider": provider,
             "prompt": prompt,
             "image_to_blender_job": (base / "image3d_job.json").relative_to(root).as_posix(),
