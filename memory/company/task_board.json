@@ -807,6 +807,62 @@
       ],
       "verification_status": "passed",
       "closed_at": "2026-07-26T23:32:05+09:00"
+    },
+    {
+      "id": "task-0017",
+      "request": "Use existing verified task receipts as Agent Progress Visibility evidence when no Studio job ledger entries exist",
+      "status": "closed",
+      "suggested_agent": "coding_specialist",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": "coding_specialist",
+      "allowed_write_paths": [
+        "tools/studio/company",
+        "docs",
+        "memory/company",
+        "memory/sessions",
+        "reviews",
+        "runs"
+      ],
+      "required_evidence": "verified-task visibility regression tests, runtime status receipt, full Python suite, and critic review",
+      "created_at": "2026-07-26T23:35:31+09:00",
+      "updated_at": "2026-07-26T23:48:30+09:00",
+      "work_order": "memory/sessions/20260726-233531-use-verified-task-receipts-for-agent-pro/work_orders/task-0017-coding_specialist.md",
+      "report": "memory/company/reviews/task-0017-review.md",
+      "verification": "memory/sessions/20260726-233531-use-verified-task-receipts-for-agent-pro/verification/task-0017-verification.md",
+      "session": "20260726-233531-use-verified-task-receipts-for-agent-pro",
+      "review_status": "reviewed",
+      "reviewer": "critic_reviewer",
+      "agent_runs": [
+        {
+          "tool": "studio",
+          "mode": "review",
+          "status": "reviewed",
+          "path": "memory/company/reviews/task-0017-review.md",
+          "created_at": "2026-07-26T23:47:45+09:00"
+        }
+      ],
+      "agent_status": "reviewed",
+      "last_tool": "studio",
+      "last_agent_run": "memory/company/reviews/task-0017-review.md",
+      "evidence": [
+        {
+          "path": "runs/task-0017-progress-evidence/runtime_status.md",
+          "note": "Runtime Agent Progress Visibility ready from validated task receipt",
+          "attached_at": "2026-07-26T23:48:30+09:00"
+        },
+        {
+          "path": "memory/sessions/20260726-233531-use-verified-task-receipts-for-agent-pro/agent_reports/task-0017-coding_specialist.md",
+          "note": "Implementation and full regression report",
+          "attached_at": "2026-07-26T23:48:30+09:00"
+        },
+        {
+          "path": "memory/company/reviews/task-0017-review.md",
+          "note": "Studio checkpoint from latest run",
+          "attached_at": "2026-07-26T23:48:30+09:00"
+        }
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-07-26T23:48:30+09:00"
     }
   ]
 }

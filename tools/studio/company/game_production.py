@@ -78,7 +78,12 @@ def game_production_state(root: Path) -> dict:
         task_flow,
         procurement,
     )
-    perfection_gate = _perfection_gate(checks, optimization_loops, next_best_action, server_handoff, jobs)
+    perfection_gate = _perfection_gate(
+        checks,
+        optimization_loops,
+        next_best_action,
+        server_handoff,
+    )
     return {
         "updatedAt": now_iso(),
         "readiness": {
@@ -462,6 +467,29 @@ def _optimization_loops(
 ) -> list[dict]:
     running_jobs = [job for job in jobs if not job.get("isTerminal")]
     latest_job = jobs[0] if jobs else {}
+    verified_task = task_flow.get("latestVerified") or {}
+    visibility_status = (
+        "running"
+        if running_jobs
+        else ("ready" if latest_job or verified_task else "pending")
+    )
+    visibility_summary = (
+        f"active {len(running_jobs)} · latest "
+        f"{latest_job.get('commandName', 'none')} "
+        f"{latest_job.get('status', '')}".strip()
+        if latest_job
+        else (
+            f"verified {verified_task.get('id')} · "
+            f"{verified_task.get('closed_at') or verified_task.get('updated_at')}"
+            if verified_task
+            else "no job or verified task evidence"
+        )
+    )
+    visibility_evidence = (
+        latest_job.get("receipt", {}).get("path", "")
+        if latest_job
+        else verified_task.get("progressEvidence", "")
+    )
     loops = [
         {
             "id": "play_feedback",
@@ -502,9 +530,9 @@ def _optimization_loops(
         {
             "id": "agent_visibility",
             "label": "Agent Progress Visibility",
-            "status": "running" if running_jobs else ("ready" if latest_job else "pending"),
-            "summary": f"active {len(running_jobs)} · latest {latest_job.get('commandName', 'none')} {latest_job.get('status', '')}".strip(),
-            "evidence": latest_job.get("receipt", {}).get("path", ""),
+            "status": visibility_status,
+            "summary": visibility_summary,
+            "evidence": visibility_evidence,
             "nextAction": "작업 추적 카드에서 이벤트, receipt, artifacts 확인",
             "command": "company.brief",
         },
@@ -655,11 +683,32 @@ def _task_flow_state(root: Path) -> dict:
             "running": 0,
             "activeSession": active_session,
             "latest": {},
+            "latestVerified": {},
         }
     data = json.loads(board.read_text(encoding="utf-8"))
     tasks = data.get("tasks", []) if isinstance(data, dict) else []
     open_tasks = [task for task in tasks if task.get("status") not in {"closed", "closed_blocked"}]
     latest = sorted(open_tasks, key=lambda item: item.get("updated_at") or item.get("created_at") or "", reverse=True)
+    verified = []
+    for task in tasks:
+        if (
+            task.get("status") != "closed"
+            or task.get("verification_status") != "passed"
+        ):
+            continue
+        evidence = _verified_task_evidence(root, task)
+        if evidence:
+            verified.append({**task, "progressEvidence": evidence})
+    latest_verified = sorted(
+        verified,
+        key=lambda item: (
+            item.get("closed_at")
+            or item.get("updated_at")
+            or item.get("created_at")
+            or ""
+        ),
+        reverse=True,
+    )
     return {
         "open": len(open_tasks),
         "assigned": sum(1 for task in open_tasks if task.get("status") == "assigned"),
@@ -668,7 +717,42 @@ def _task_flow_state(root: Path) -> dict:
         "running": sum(1 for task in open_tasks if task.get("agent_status") == "running"),
         "activeSession": active_session,
         "latest": latest[0] if latest else {},
+        "latestVerified": latest_verified[0] if latest_verified else {},
     }
+
+
+def _verified_task_evidence(root: Path, task: dict) -> str:
+    task_id = str(task.get("id") or "")
+    relative = str(task.get("verification") or "")
+    candidate = Path(relative)
+    if (
+        not task_id
+        or not relative
+        or candidate.is_absolute()
+        or ".." in candidate.parts
+        or candidate.parts[:2] != ("memory", "sessions")
+        or candidate.parent.name != "verification"
+        or candidate.name != f"{task_id}-verification.md"
+    ):
+        return ""
+    path = (root / candidate).resolve()
+    try:
+        path.relative_to(root.resolve())
+    except ValueError:
+        return ""
+    if not path.is_file():
+        return ""
+    try:
+        text = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        return ""
+    lines = set(text.splitlines())
+    if (
+        f"Task ID: {task_id}" not in lines
+        or "Status: passed" not in lines
+    ):
+        return ""
+    return relative
 
 
 def _task_next_action(task_flow: dict) -> dict:
@@ -731,7 +815,12 @@ def _task_next_action(task_flow: dict) -> dict:
     return {}
 
 
-def _perfection_gate(checks: list[dict], loops: list[dict], next_action: dict, server_handoff: dict, jobs: list[dict]) -> dict:
+def _perfection_gate(
+    checks: list[dict],
+    loops: list[dict],
+    next_action: dict,
+    server_handoff: dict,
+) -> dict:
     loop_by_id = {loop.get("id"): loop for loop in loops}
     next_command = str(next_action.get("command") or "")
     next_artifact = str(next_action.get("artifact") or "")
@@ -762,7 +851,13 @@ def _perfection_gate(checks: list[dict], loops: list[dict], next_action: dict, s
             ).strip()
             or next_artifact,
         ),
-        _gate_check("Job ledger healthy", bool(jobs), jobs[0].get("receipt", {}).get("path", "") if jobs else "no jobs"),
+        _gate_check(
+            "Progress evidence healthy",
+            loop_by_id.get("agent_visibility", {}).get("status")
+            in {"running", "ready"},
+            loop_by_id.get("agent_visibility", {}).get("evidence")
+            or loop_by_id.get("agent_visibility", {}).get("summary", ""),
+        ),
     ]
     procurement = loop_by_id.get("artist_procurement")
     if procurement:

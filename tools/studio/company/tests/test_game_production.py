@@ -492,6 +492,118 @@ class GameProductionTests(unittest.TestCase):
             "asset.procurementCheck",
         )
 
+    def test_verified_task_receipt_keeps_progress_visibility_healthy(
+        self,
+    ) -> None:
+        self._write_ready_procurement_workflow()
+        self._write_asset_index()
+        self._write_verified_task("task-0008")
+
+        state = game_production_state(self.root)
+        visibility = next(
+            loop
+            for loop in state["optimizationLoops"]
+            if loop["id"] == "agent_visibility"
+        )
+        progress_gate = next(
+            check
+            for check in state["perfectionGate"]["checks"]
+            if check["label"] == "Progress evidence healthy"
+        )
+
+        self.assertEqual(visibility["status"], "ready")
+        self.assertIn("verified task-0008", visibility["summary"])
+        self.assertEqual(
+            visibility["evidence"],
+            (
+                "memory/sessions/test/verification/"
+                "task-0008-verification.md"
+            ),
+        )
+        self.assertEqual(
+            state["taskFlow"]["latestVerified"]["id"],
+            "task-0008",
+        )
+        self.assertTrue(progress_gate["passed"])
+        self.assertEqual(state["perfectionGate"]["status"], "perfect")
+
+    def test_invalid_verified_task_receipt_does_not_fake_visibility(
+        self,
+    ) -> None:
+        for (
+            write_evidence,
+            receipt_status,
+            receipt_task_id,
+            verification_relative,
+        ) in (
+            (False, "passed", "task-0008", None),
+            (True, "pending", "task-0008", None),
+            (True, "passed", "task-9999", None),
+            (
+                True,
+                "passed",
+                "task-0008",
+                "docs/fake-verification.md",
+            ),
+        ):
+            with self.subTest(
+                write_evidence=write_evidence,
+                receipt_status=receipt_status,
+                receipt_task_id=receipt_task_id,
+                verification_relative=verification_relative,
+            ):
+                self._write_verified_task(
+                    "task-0008",
+                    write_evidence=write_evidence,
+                    receipt_status=receipt_status,
+                    receipt_task_id=receipt_task_id,
+                    verification_relative=verification_relative,
+                )
+
+                state = game_production_state(self.root)
+                visibility = next(
+                    loop
+                    for loop in state["optimizationLoops"]
+                    if loop["id"] == "agent_visibility"
+                )
+                progress_gate = next(
+                    check
+                    for check in state["perfectionGate"]["checks"]
+                    if check["label"] == "Progress evidence healthy"
+                )
+
+                self.assertEqual(
+                    state["taskFlow"]["latestVerified"],
+                    {},
+                )
+                self.assertEqual(visibility["status"], "pending")
+                self.assertFalse(progress_gate["passed"])
+
+    def test_active_job_does_not_borrow_verified_task_receipt(self) -> None:
+        self._write_verified_task("task-0008")
+        self._write_active_job_without_receipt()
+
+        state = game_production_state(self.root)
+        visibility = next(
+            loop
+            for loop in state["optimizationLoops"]
+            if loop["id"] == "agent_visibility"
+        )
+        progress_gate = next(
+            check
+            for check in state["perfectionGate"]["checks"]
+            if check["label"] == "Progress evidence healthy"
+        )
+
+        self.assertEqual(visibility["status"], "running")
+        self.assertIn("agent.run", visibility["summary"])
+        self.assertEqual(visibility["evidence"], "")
+        self.assertTrue(progress_gate["passed"])
+        self.assertNotIn(
+            "task-0008-verification.md",
+            progress_gate["detail"],
+        )
+
     def test_perfection_gate_passes_when_workstation_workflow_is_actionable(self) -> None:
         self._write_ready_receipts()
         self._write_run("game-feedback-loop-001", "game_feedback_loop.md", "Status: ready_for_review\n")
@@ -645,6 +757,47 @@ class GameProductionTests(unittest.TestCase):
             encoding="utf-8",
         )
 
+    def _write_verified_task(
+        self,
+        task_id: str,
+        *,
+        write_evidence: bool = True,
+        receipt_status: str = "passed",
+        receipt_task_id: str | None = None,
+        verification_relative: str | None = None,
+    ) -> None:
+        relative = verification_relative or (
+            "memory/sessions/test/verification/"
+            f"{task_id}-verification.md"
+        )
+        if write_evidence:
+            verification = self.root / relative
+            verification.parent.mkdir(parents=True, exist_ok=True)
+            verification.write_text(
+                f"# Verification\n\n"
+                f"Task ID: {receipt_task_id or task_id}\n"
+                f"Status: {receipt_status}\n",
+                encoding="utf-8",
+            )
+        board = self.root / "memory" / "company" / "task_board.json"
+        board.parent.mkdir(parents=True, exist_ok=True)
+        board.write_text(
+            json.dumps(
+                {
+                    "tasks": [
+                        {
+                            "id": task_id,
+                            "status": "closed",
+                            "verification_status": "passed",
+                            "verification": relative,
+                            "closed_at": "2026-06-03T00:00:00+09:00",
+                        }
+                    ]
+                }
+            ),
+            encoding="utf-8",
+        )
+
     def _write_job_receipt(self) -> None:
         jobs_dir = self.root / "memory" / "company" / "jobs"
         jobs_dir.mkdir(parents=True)
@@ -652,6 +805,28 @@ class GameProductionTests(unittest.TestCase):
         receipt.write_text("# receipt\n", encoding="utf-8")
         (jobs_dir / "jobs.json").write_text(
             '{"jobs":[{"id":"job-0001","commandName":"company.brief","status":"succeeded","createdAt":"2026-06-03T00:00:00Z","receipt":{"path":"memory/company/jobs/job-0001-receipt.md"},"events":[]}]}\n',
+            encoding="utf-8",
+        )
+
+    def _write_active_job_without_receipt(self) -> None:
+        jobs_dir = self.root / "memory" / "company" / "jobs"
+        jobs_dir.mkdir(parents=True, exist_ok=True)
+        (jobs_dir / "jobs.json").write_text(
+            json.dumps(
+                {
+                    "jobs": [
+                        {
+                            "id": "job-0002",
+                            "commandName": "agent.run",
+                            "status": "running",
+                            "createdAt": "2026-06-04T00:00:00Z",
+                            "receipt": {},
+                            "events": [],
+                        }
+                    ]
+                }
+            )
+            + "\n",
             encoding="utf-8",
         )
 
