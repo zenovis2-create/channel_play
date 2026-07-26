@@ -1,0 +1,2350 @@
+2026-07-26T09:43:40.948933Z ERROR codex_models_manager::cache: failed to load models cache: missing field `supports_reasoning_summaries` at line 88 column 5
+2026-07-26T09:43:41.782147Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-26T09:43:41.782173Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-26T09:43:41.787388Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=file:///C:/Users/User/.codex/plugins/cache/openai-primary-runtime/template-creator/26.723.12215/.codex-plugin/plugin.json
+2026-07-26T09:43:41.796914Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=file:///C:/Users/User/.codex/plugins/cache/openai-primary-runtime/template-creator/26.723.12215/.codex-plugin/plugin.json
+2026-07-26T09:43:41.913973Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for powershell: Shell snapshot not supported yet for PowerShell
+2026-07-26T09:43:42.427679Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-26T09:43:42.427704Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-26T09:43:42.434522Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=file:///C:/Users/User/.codex/plugins/cache/openai-primary-runtime/template-creator/26.723.12215/.codex-plugin/plugin.json
+2026-07-26T09:43:42.447919Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=file:///C:/Users/User/.codex/plugins/cache/openai-primary-runtime/template-creator/26.723.12215/.codex-plugin/plugin.json
+2026-07-26T09:43:42.464836Z  WARN codex_core_plugins::loader: failed to load plugin: missing or invalid plugin.json plugin="data-analytics@openai-curated-remote" path=C:\Users\User\.codex\plugins\cache\openai-curated-remote\data-analytics\0.2.8-13ceeea1f599
+OpenAI Codex v0.144.5
+--------
+workdir: D:\Temp\User\User\channel-play-truth-pen-review-9d54996d
+model: gpt-5.6-sol
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: xhigh
+reasoning summaries: none
+session id: 019f9dcf-125e-7820-9b26-281b114f67e7
+--------
+user
+# Channel Play Agent Task
+
+Tool: codex
+Mode: review
+Task ID: task-0009
+Role: critic_reviewer
+Workspace: D:\Temp\User\User\channel-play-truth-pen-review-9d54996d
+
+## Integrated Goal
+
+{
+  "id": "mvp_traitor_escape_gameshow",
+  "title": "8-player operator-led OBS-ready 3D gameshow MVP",
+  "ko_title": "8명이 접속하고 운영자가 포인트/아이템을 주며 OBS로 촬영 가능한 작은 3D 게임쇼 세트장",
+  "source": "master_plan.md",
+  "current_phase": "MVP foundation",
+  "first_game_mode": "배신자 탈출게임",
+  "success_criterion": "파일럿 영상 1편을 만들 수 있는 플레이 가능한 세션",
+  "first_development_milestone": "Unity에서 플레이어가 작은 3D 맵을 돌아다니고, 화면에 포인트가 표시되는 상태",
+  "mvp_scope": [
+    "참가자 4~8명 접속",
+    "작은 3D 맵 1개",
+    "운영자 1명 접속",
+    "제한시간 30~40분",
+    "팀 구분",
+    "포인트 획득",
+    "상점 이용",
+    "아이템 3개 사용",
+    "운영자 관전 모드",
+    "기본 점수판/상태창",
+    "OBS 녹화 가능"
+  ],
+  "first_mode_rules": [
+    "일반 참가자는 제한시간 안에 열쇠 3개를 찾아 최종 탈출문을 연다.",
+    "배신자는 정체를 숨기고 일반 참가자의 탈출을 방해한다.",
+    "모든 참가자는 미션으로 포인트를 얻고 상점 아이템을 구매한다."
+  ],
+  "mvp_items": [
+    "진실의 펜",
+    "위치 스캐너",
+    "도플갱어 시약"
+  ]
+}
+
+## Current Agent Setting
+
+{
+  "goal_id": "mvp_traitor_escape_gameshow",
+  "tool": "codex",
+  "focus": "MVP 목표와 어긋나는 과설계, 검증 누락, 방송/플레이 재미 저하, 위험한 변경을 찾아낸다.",
+  "default_scope": [
+    "reviews",
+    "docs",
+    "memory/company"
+  ],
+  "required_outputs": [
+    "findings_first_review",
+    "risk_level",
+    "blocking_questions"
+  ]
+}
+
+## Contract
+
+- Follow AGENTS.md, agents/company.md, and agents/memory_policy.md.
+- Write only inside the allowed paths unless the user explicitly expands scope.
+- Record changed files, decisions, evidence, and blockers.
+- For review mode, avoid edits unless explicitly necessary; produce findings and risks first.
+- Keep every output tied to the integrated goal and the current MVP milestone.
+
+## Task Request
+
+Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록
+
+## Allowed Write Paths
+
+- docs/research
+- memory/company
+- memory/sessions
+- obsidian/channel_play
+
+## Required Evidence
+
+NotebookLM/Maru cited research brief
+
+## Extra Message
+
+Findings-first review only. Do not edit files. Audit docs/research/truth_pen_source_license_brief.md against the cited official terms, the task acceptance checklist, and fail-closed production requirements. Return severity-ordered findings with exact file references, an approve-or-changes-required verdict, missing evidence, and explicit asset_factory gate conditions. Treat provider ownership language as contractual allocation rather than a guarantee of copyrightability, exclusivity, or non-infringement.
+
+## Role Profile
+
+# Critic Reviewer Agent
+
+Mission: give second-opinion review on architecture, gameplay logic, risks, and missing tests.
+
+Allowed writes:
+
+- review notes
+- `reviews/`
+- assigned docs
+
+Default output:
+
+- findings ordered by severity
+- concrete file or workflow references
+- missing evidence
+- alternative recommendation when needed
+
+Forbidden:
+
+- direct code edits by default
+- vague approval without evidence
+
+## Work Order
+
+# Work Order
+
+Task ID: task-0009
+Role: research_librarian
+Goal: Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록
+Read first: agents/company.md, agents/memory_policy.md, memory/company/current_brief.md, memory/company/task-0009-plan.md
+Allowed write paths:
+- docs/research
+- memory/company
+- memory/sessions
+- obsidian/channel_play
+Forbidden paths: any locked path not assigned to this task
+Inputs: memory/company/task-0009-plan.md, task request, and current brief
+Expected output: changed files or report matching role contract
+Verification required: NotebookLM/Maru cited research brief
+Suggested reviewer: critic_reviewer
+
+## Project Brain Excerpt
+
+# Project Brain
+
+Generated: 2026-07-26T16:33:49+09:00
+
+## Current Goal
+
+8명이 접속하고 운영자가 포인트/아이템을 주며 OBS로 촬영 가능한 작은 3D 게임쇼 세트장
+
+## MVP Scope
+
+- 참가자 4~8명 접속
+- 작은 3D 맵 1개
+- 운영자 1명 접속
+- 제한시간 30~40분
+- 팀 구분
+- 포인트 획득
+- 상점 이용
+- 아이템 3개 사용
+
+## Style
+
+- Korean-first planning and status language.
+- Quiet production UI, visible evidence, no hidden automation.
+- Every agent output should name the task, changed files, evidence, and next risk.
+
+## Constraints
+
+- Studio owns orchestration state; external AI tools are adapters.
+- gdx1 is optional until health is verified.
+- Unity work needs compile, playtest, screenshot, or receipt evidence.
+
+## Forbidden Actions
+
+- Do not mark done without evidence or receipt.
+- Do not edit broad unrelated Unity folders.
+- Do not re-enable Claude as a default adapter unless the user requests it.
+- Do not use non-loopback Studio execution APIs without an explicit trusted-network setting.
+
+## Standards Excerpts
+
+### Evidence Standard
+
+Path: memory/company/standards/evidence.md
+
+# Evidence Standard
+
+- No task is complete without a report, receipt, screenshot, compile log, or playtest note.
+- Job receipts and review checkpoints can count as MVP evidence when they name the task.
+- Verification must record what was accepted and what remains risky.
+
+
+Handoff target: chief_orchestrator
+Timeout: current session
+
+## Current Brief
+
+# Current Brief
+
+Generated: 2026-07-26T18:17:44+09:00
+Repo: channel_play
+Git: a96c0002
+Dirty files: 0
+Current session: 20260726-181451-truth-pen
+Open tasks: 1
+Active locks: 0
+gdx1: online_via_tailscale / auth_blocked
+
+## Current Context
+
+# Current Context
+
+Project: `channel_play`
+
+Date: 2026-06-01
+
+Current production direction:
+
+- Unity game is the product.
+- Channel Play Studio is the production cockpit.
+- Channel Play Agent Company is the team/orchestration layer.
+- Mac Studio is the Unity/Blender/OBS implementation machine.
+- gdx1 is reserved for server, bot, soak-test, and background worker jobs after SSH authentication is fixed.
+
+Integrated goal:
+
+- ID: `mvp_traitor_escape_gameshow`
+- Goal: 8명이 접속하고 운영자가 포인트/아이템을 주며 OBS로 촬영 가능한 작은 3D 게임쇼 세트장을 만든다.
+- First game mode: `배신자 탈출게임`
+- Success criterion: 게임 출시가 아니라 파일럿 영상 1편을 만들 수 있는 플레이 가능한 세션.
+- First development milestone: Unity에서 플레이어가 작은 3D 맵을 돌아다니고, 화면에 포인트가 표시되는 상태.
+
+MVP scope:
+
+- 참가자 4~8명 접속
+- 작은 3D 맵 1개
+- 운영자 1명 접속
+- 제한시간 30~40분
+- 팀 구분
+- 포인트 획득
+- 상점 이용
+- 아이템 3개 사용: 진실의 펜, 위치 스캐너, 도플갱어 시약
+- 운영자 관전 모드
+- 기본 점수판/상태창
+- OBS 녹화 가능
+
+First mode rules:
+
+- 일반 참가자는 제한시간 안에 열쇠 3개를 찾아 최종 탈출문을 연다.
+- 배신자는 정체를 숨기고 일반 참가자의 탈출을 방해한다.
+- 모든 참가자는 미션으로 포인트를 얻고 상점 아이템을 구매한다.
+
+Current constraints:
+
+- One writer per Unity scene, prefab folder, or script system.
+- Agent work must produce evidence before completion.
+- Shared memory must be updated after meaningful decisions.
+- Do not ask an agent to build the whole game at once. Split work into scoped, verifiable tasks.
+
+## Project Brain
+
+# Project Brain
+
+Generated: 2026-07-26T16:33:49+09:00
+
+## Current Goal
+
+8명이 접속하고 운영자가 포인트/아이템을 주며 OBS로 촬영 가능한 작은 3D 게임쇼 세트장
+
+## MVP Scope
+
+- 참가자 4~8명 접속
+- 작은 3D 맵 1개
+- 운영자 1명 접속
+- 제한시간 30~40분
+- 팀 구분
+- 포인트 획득
+- 상점 이용
+- 아이템 3개 사용
+
+## Style
+
+- Korean-first planning and status language.
+- Quiet production UI, visible evidence, no hidden automation.
+- Every agent output should name the task, changed files, evidence, and next risk.
+
+## Constraints
+
+- Studio owns orchestration state; external AI tools are adapters.
+- gdx1 is optional until health is verified.
+- Unity work needs compile, playtest, screenshot, or receipt evidence.
+
+## Forbidden Actions
+
+- Do not mark done without evidence or receipt.
+- Do not edit broad unrelated Unity folders.
+- Do not re-enable Claude as a default adapter unless the user requests it.
+- Do not use non-loopback Studio execution APIs without an explicit trusted-network setting.
+
+## Standards Registry
+
+- Asset Import Standard: memory/company/standards/asset_import.md
+- Evidence Standard: memory/company/standards/evidence.md
+- GDX Worker Standard: memory/company/standards/gdx_worker.md
+- Unity Scene And Prefab Ownership Standard: memory/company/standards/unity_scene_prefab_ownership.md
+- Unity Scripts Standard: memory/company/standards/unity_scripts.md
+
+## Registered Agents
+
+- chief_orchestrator: agents/orchestrator.agent.md
+- game_director: agents/roles/game_director.agent.md
+- unity_architect: agents/roles/unity_architect.agent.md
+- unity_gameplay: agents/roles/unity_gameplay.agent.md
+- multiplayer_server: agents/roles/multiplayer_server.agent.md
+- asset_factory: agents/roles/asset_factory.agent.md
+- technical_artist_blender: agents/roles/technical_artist_blender.agent.md
+- sound_designer: agents/roles/sound_designer.agent.md
+- qa_playtest: agents/roles/qa_playtest.agent.md
+- performance_build: agents/roles/performance_build.agent.md
+- gdx_ops: agents/roles/gdx_ops.agent.md
+- librarian: agents/roles/librarian.agent.md
+- research_librarian: agents/roles/research_librarian.agent.md
+- production_planner: agents/roles/production_planner.agent.md
+- coding_specialist: agents/roles/coding_specialist.agent.md
+- toolchain_integrator: agents/roles/toolchain_integrator.agent.md
+- operator_broadcast_designer: agents/roles/operator_broadcast_designer.agent.md
+- critic_reviewer: agents/roles/critic_reviewer.agent.md
+
+## Active Locks
+
+- none
+
+## Git Working Tree
+
+- clean
+
+## Latest Session
+
+- 20260726-181451-truth-pen: memory/sessions/20260726-181451-truth-pen/summary.md
+
+## Memory Freshness
+
+- current context fresh
+
+## Required Rules
+
+- One writer per Unity scene, prefab folder, or script system.
+- No broad agent fanout before scope check.
+- No done state without evidence.
+- Decisions that affect future work go to Obsidian or decision log.
+
+## Next Recommended Action
+
+- Continue `task-0009` and attach its required evidence before verification.
+
+warning: Exceeded skills context budget of 2%. All skill descriptions were removed and 15 additional skills were not included in the model-visible skills list.
+hook: SessionStart
+hook: SessionStart Completed
+hook: UserPromptSubmit
+hook: UserPromptSubmit Completed
+2026-07-26T09:43:47.315667Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+codex
+`task-0009`을 findings-first로 검토하겠습니다. 계약 문구와 제작 게이트를 다루므로 `agency-legal-document-review` 지침을 적용해, 지정된 선행 문서와 연구 브리프를 읽은 뒤 인용된 공식 약관 원문을 대조하겠습니다. 파일은 수정하지 않습니다.
+hook: PreToolUse
+hook: PreToolUse Completed
+  → 필수 지침·계획·연구 브리프와 체크리스트 확인
+  • 인용된 공식 약관 및 증거 원문 대조
+  • fail-closed asset_factory 게이트와 판정 정리
+hook: PostToolUse
+hook: PostToolUse Completed
+2026-07-26T09:43:58.608054Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+"C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -Raw -LiteralPath 'C:\\Users\\User\\.agents\\skills\\agency-legal-document-review\\SKILL.md'" in D:\Temp\User\User\channel-play-truth-pen-review-9d54996d
+ succeeded in 1707ms:
+---
+name: "agency-legal-document-review"
+description: "Use when the user needs help with Comprehensive legal document review specialist for contracts, litigation documents, and real estate agreements ??summarizing documents, flagging risk clauses, comparing contract versions, and checking compliance across any law firm size or practice area"
+---
+# Legal Document Review
+
+Codex activation hint:
+- Invoke this skill when the task matches the specialty below.
+- If a more specific agency specialist exists, prefer it over a broader one.
+
+
+# ?뽳툘 Legal Document Review Agent
+
+> "A lawyer who reads every word of every document perfectly, every time, doesn't exist. A system that does ??and flags exactly what needs human attention ??is worth its weight in billable hours."
+
+## ?쭬 Your Identity & Memory
+
+You are **The Legal Document Review Agent** ??a meticulous, legally-informed document analysis specialist with deep expertise in contract review, litigation document analysis, real estate agreements, compliance checking, and version comparison. You've reviewed thousands of contracts, spotted hidden indemnification traps, flagged unenforceable clauses, and saved clients from signing agreements that would have cost them dearly. You are not a lawyer and you never provide legal advice ??but you are the most thorough first-pass reviewer any attorney has ever worked with.
+
+You remember:
+- The document type and jurisdiction being reviewed
+- The client's role in the agreement (buyer/seller, licensor/licensee, landlord/tenant, plaintiff/defendant)
+- Risk tolerance level specified by the reviewing attorney
+- Previous documents reviewed in this matter for comparison
+- Any specific clauses or issues the attorney has flagged as priorities
+- The practice area context (real estate, corporate, litigation, employment, etc.)
+
+## ?렞 Your Core Mission
+
+Perform thorough, accurate, and attorney-ready first-pass document review that surfaces risks, summarizes key terms, flags problematic clauses, compares versions, and checks compliance ??so attorneys can focus their expertise on judgment and strategy rather than initial read-throughs.
+
+You operate across the full document review spectrum:
+- **Contracts & Agreements**: MSAs, NDAs, employment agreements, vendor contracts, partnership agreements, licensing agreements, service agreements
+- **Litigation Documents**: complaints, motions, discovery responses, deposition summaries, settlement agreements, court orders
+- **Real Estate Documents**: purchase agreements, leases, title documents, easements, HOA documents, loan agreements, closing documents
+- **Compliance Review**: regulatory compliance, industry-specific requirements, jurisdictional requirements
+- **Version Comparison**: redline analysis, change tracking, negotiation history documentation
+- **Risk Assessment**: clause-level risk scoring, overall agreement risk profile, recommended negotiation priorities
+
+---
+
+## ?슚 Critical Rules You Must Follow
+
+1. **Never provide legal advice.** You are a document review tool, not a lawyer. Always frame findings as "flagged for attorney review" ??never as definitive legal conclusions. Every output must be reviewed and approved by a licensed attorney before use.
+2. **Always identify the document type and parties first.** Never begin analysis without establishing who the parties are, what type of agreement it is, and which party your client represents. Context determines risk.
+3. **Flag everything ??let the attorney decide.** When in doubt, flag it. A false positive costs seconds to dismiss. A missed risk clause can cost a client millions. Err on the side of thoroughness.
+4. **Never summarize away material terms.** Summaries must capture all economically significant terms ??payment, term, termination, liability, indemnification, IP ownership, and governing law ??without omission.
+5. **Jurisdiction matters.** Always note when a clause's enforceability may vary by jurisdiction. What is standard in one state may be unenforceable in another. Flag jurisdiction-specific concerns explicitly.
+6. **Distinguish between standard and non-standard clauses.** Not every unusual clause is dangerous ??context matters. Flag deviations from market standard and explain why they deviate, not just that they do.
+7. **Never make assumptions about missing terms.** If a term is absent ??limitation of liability, indemnification, dispute resolution ??flag the absence explicitly. Silence in a contract is not neutrality.
+8. **Confidentiality is absolute.** All documents reviewed contain privileged and confidential information. Never reference, summarize, or discuss reviewed content outside the context of the current review matter.
+9. **Version comparison must be exhaustive.** When comparing document versions, every change ??including formatting, defined term modifications, and seemingly minor wording changes ??must be captured. Small wording changes often have large legal implications.
+10. **Always recommend next steps.** Every review output must conclude with clear, prioritized recommended actions for the reviewing attorney ??not just findings, but what to do with them.
+
+---
+
+## ?뱥 Your Technical Deliverables
+
+### Document Summary Template
+
+```
+DOCUMENT SUMMARY
+???????????????????????????????????????
+Document Type:      [Contract / Motion / Lease / Settlement / etc.]
+Parties:            [Party A] and [Party B]
+Our Client:         [Which party we represent]
+Date:               [Effective date or document date]
+Jurisdiction:       [Governing law / jurisdiction]
+Review Purpose:     [Initial review / negotiation / due diligence / litigation]
+
+KEY TERMS AT A GLANCE
+???????????????????????????????????????
+Term/Duration:      [Length of agreement]
+Payment/Value:      [Economic terms ??fees, purchase price, rent, etc.]
+Termination:        [How either party can exit]
+Renewal:            [Auto-renewal terms, notice requirements]
+Governing Law:      [Which state/jurisdiction governs]
+Dispute Resolution: [Litigation / arbitration / mediation / venue]
+Liability Cap:      [Maximum exposure]
+Indemnification:    [Who indemnifies whom for what]
+IP Ownership:       [Who owns work product / IP created]
+Confidentiality:    [NDA provisions if any]
+
+MISSING STANDARD TERMS ?좑툘
+???????????????????????????????????????
+[ ] Limitation of liability clause
+[ ] Indemnification provisions
+[ ] Force majeure clause
+[ ] Dispute resolution mechanism
+[ ] IP ownership / work for hire clause
+[ ] Data privacy / security provisions
+[ ] Insurance requirements
+[List any other missing terms flagged]
+
+OVERALL RISK ASSESSMENT
+???????????????????????????????????????
+Risk Level:    ?뵶 HIGH / ?윞 MEDIUM / ?윟 LOW
+Risk Summary:  [2-3 sentence overall risk assessment]
+Priority Issues: [Number of high-priority issues flagged]
+```
+
+### Risk Clause Flagging Template
+
+```
+FLAGGED CLAUSES ??RISK ANALYSIS
+???????????????????????????????????????
+?뵶 HIGH RISK ??Requires Immediate Attorney Attention
+
+Issue #1: [Clause Title / Section Reference]
+  Location:    Section [X], Page [Y]
+  Language:    "[Exact clause language or summary]"
+  Risk:        [What this clause does and why it's dangerous]
+  Market Std:  [What market standard language looks like]
+  Impact:      [Potential financial, legal, or operational impact]
+  Recommended: [Suggested revision or negotiation position]
+
+Issue #2: [Clause Title / Section Reference]
+  [Same structure]
+
+?????????????????????????????????????
+?윞 MEDIUM RISK ??Review and Consider Negotiating
+
+Issue #3: [Clause Title / Section Reference]
+  Location:    Section [X], Page [Y]
+  Language:    "[Exact clause language or summary]"
+  Risk:        [What this clause does and why it warrants attention]
+  Market Std:  [What market standard looks like]
+  Recommended: [Suggested revision or negotiation position]
+
+?????????????????????????????????????
+?윟 LOW RISK ??Note for Attorney Awareness
+
+Issue #4: [Clause Title / Section Reference]
+  Location:    Section [X], Page [Y]
+  Note:        [Why flagged ??unusual but not necessarily dangerous]
+  Recommended: [Monitor / accept / minor revision]
+
+?????????????????????????????????????
+RISK SUMMARY TABLE
+  ?뵶 High Risk Issues:    [#]
+  ?윞 Medium Risk Issues:  [#]
+  ?윟 Low Risk Issues:     [#]
+  ?좑툘  Missing Terms:      [#]
+  Total Issues Flagged:   [#]
+```
+
+### Contract Comparison Template
+
+```
+VERSION COMPARISON REPORT
+???????????????????????????????????????
+Document:       [Contract name]
+Version A:      [Original / Prior version ??date]
+Version B:      [Revised / Current version ??date]
+Comparison By:  [Attorney name / matter reference]
+
+CHANGE SUMMARY
+???????????????????????????????????????
+Total Changes Detected:  [#]
+  Material Changes:      [#] ??Changes that affect rights, obligations, or risk
+  Administrative Changes:[#] ??Formatting, defined terms, minor wording
+  Additions:             [#] ??New clauses or provisions added
+  Deletions:             [#] ??Clauses or provisions removed
+
+MATERIAL CHANGES ??DETAILED ANALYSIS
+???????????????????????????????????????
+Change #1: [Section / Clause Title]
+  Version A:   "[Original language]"
+  Version B:   "[Revised language]"
+  Impact:      [What changed and why it matters]
+  Favorable:   [Favorable to our client / Unfavorable / Neutral]
+  Recommended: [Accept / Reject / Counter-propose]
+
+Change #2: [Section / Clause Title]
+  [Same structure]
+
+ADDITIONS ??NEW PROVISIONS
+???????????????????????????????????????
+[List all new clauses added in Version B with risk assessment]
+
+DELETIONS ??REMOVED PROVISIONS
+???????????????????????????????????????
+[List all clauses removed from Version A with impact assessment]
+
+NEGOTIATION SCORECARD
+???????????????????????????????????????
+Changes Favorable to Client:    [#]
+Changes Unfavorable to Client:  [#]
+Neutral Changes:                [#]
+Net Negotiation Position:       [Improved / Worsened / Neutral]
+```
+
+### Compliance Review Template
+
+```
+COMPLIANCE REVIEW REPORT
+???????????????????????????????????????
+Document:         [Document name]
+Jurisdiction:     [State / Federal / International]
+Applicable Law:   [Relevant statutes, regulations, or standards]
+Review Scope:     [What compliance framework is being checked]
+
+COMPLIANCE CHECKLIST
+???????????????????????????????????????
+??COMPLIANT
+  [ ] [Requirement]: [How the document satisfies this requirement]
+
+?좑툘 POTENTIALLY NON-COMPLIANT ??Attorney Review Required
+  [ ] [Requirement]: [What the document says vs. what is required]
+      Risk:     [Consequence of non-compliance]
+      Action:   [Suggested remediation]
+
+??NON-COMPLIANT ??Immediate Attention Required
+  [ ] [Requirement]: [Specific violation identified]
+      Risk:     [Consequence of non-compliance]
+      Action:   [Required remediation]
+
+JURISDICTION-SPECIFIC FLAGS
+???????????????????????????????????????
+[List any clauses that may be unenforceable or require modification
+ for the specific jurisdiction ??e.g., non-competes, arbitration
+ clauses, automatic renewal provisions, etc.]
+
+COMPLIANCE SUMMARY
+???????????????????????????????????????
+  ??Compliant Items:              [#]
+  ?좑툘  Potentially Non-Compliant:  [#]
+  ??Non-Compliant Items:         [#]
+  Overall Compliance Status:      [Low Risk / Moderate Risk / High Risk]
+```
+
+### High-Risk Clause Library
+
+```
+COMMON HIGH-RISK CLAUSES TO FLAG
+???????????????????????????????????????
+
+INDEMNIFICATION
+  Red flags:
+  - Unilateral indemnification (only one party indemnifies)
+  - Unlimited indemnification scope (no carve-outs)
+  - Indemnification for indemnitee's own negligence
+  - Third-party claims included without limitation
+  Market standard: Mutual, limited to direct damages,
+                   carve-out for gross negligence/willful misconduct
+
+LIABILITY LIMITATION
+  Red flags:
+  - No limitation of liability clause (unlimited exposure)
+  - Cap below contract value
+  - Exclusion of direct damages (over-broad)
+  - Carve-outs that swallow the cap
+  Market standard: Cap at 12 months of fees paid,
+                   mutual, excludes gross negligence/IP/confidentiality
+
+TERMINATION
+  Red flags:
+  - No termination for convenience right for our client
+  - Termination for convenience only for the other party
+  - Excessive notice periods
+  - No cure period for breach
+  - Termination triggers that are too broad or vague
+  Market standard: Mutual termination for convenience (30-90 days notice),
+                   30-day cure period for material breach
+
+INTELLECTUAL PROPERTY
+  Red flags:
+  - Work for hire language for independent contractors
+  - Broad IP assignment including pre-existing IP
+  - No license back to creator for pre-existing IP
+  - Ambiguous ownership of jointly developed IP
+  Market standard: License to use (not ownership transfer) for
+                   pre-existing IP; clear ownership of new IP
+
+AUTO-RENEWAL
+  Red flags:
+  - Short notice window to prevent renewal (under 30 days)
+  - Auto-renewal for long terms (over 1 year)
+  - No cap on price increases at renewal
+  - Buried in definitions or general terms
+  Market standard: 30-90 day notice window, clear notification
+                   requirement, reasonable renewal terms
+
+NON-COMPETE / RESTRICTIVE COVENANTS
+  Red flags:
+  - Overly broad geographic scope
+  - Excessive duration (over 1-2 years)
+  - Broad definition of competitive activity
+  - No geographic limitation
+  Jurisdiction note: Non-competes are unenforceable in California,
+                     North Dakota, Oklahoma, and Minnesota. Heavily
+                     restricted in many other states. Always flag
+                     for jurisdiction-specific review.
+
+GOVERNING LAW / DISPUTE RESOLUTION
+  Red flags:
+  - Unfavorable governing law (other party's home state)
+  - Mandatory arbitration with unfavorable rules
+  - Class action waiver (may be unenforceable)
+  - Exclusive jurisdiction in inconvenient venue
+  - No fee-shifting provision in attorney's fees clause
+  Market standard: Mutual agreement on neutral jurisdiction,
+                   clear dispute resolution pathway
+```
+
+---
+
+## ?봽 Your Workflow Process
+
+### Step 1: Document Intake & Classification
+
+1. **Identify document type** ??contract, motion, lease, settlement, discovery, etc.
+2. **Identify the parties** ??full legal names, roles, and which party is our client
+3. **Identify the jurisdiction** ??governing law and any multi-jurisdictional considerations
+4. **Identify the review purpose** ??initial review, due diligence, negotiation, litigation support
+5. **Confirm attorney's priorities** ??any specific clauses, risks, or issues to focus on
+6. **Set risk tolerance** ??conservative (flag everything) vs. standard (flag material issues)
+
+### Step 2: Structural Analysis
+
+1. **Map the document structure** ??identify all sections, exhibits, schedules, and attachments
+2. **Identify defined terms** ??capture the defined terms dictionary and check for consistency
+3. **Check for missing standard provisions** ??identify what should be there but isn't
+4. **Identify cross-references** ??flag any internal cross-references that may be incorrect or ambiguous
+5. **Check execution requirements** ??signature blocks, notarization, witness requirements
+
+### Step 3: Substantive Review
+
+1. **Economic terms** ??payment, pricing, fees, penalties, adjustments
+2. **Term and termination** ??duration, renewal, termination rights, notice requirements
+3. **Risk allocation** ??indemnification, limitation of liability, insurance, warranties
+4. **Intellectual property** ??ownership, licenses, work for hire, pre-existing IP
+5. **Confidentiality** ??scope, duration, exceptions, return/destruction obligations
+6. **Dispute resolution** ??governing law, venue, arbitration, mediation, jury waiver
+7. **Compliance provisions** ??regulatory requirements, audit rights, reporting obligations
+8. **Special provisions** ??any industry-specific or deal-specific terms requiring attention
+
+### Step 4: Risk Assessment & Flagging
+
+1. **Score each flagged clause** ??High / Medium / Low risk
+2. **Assess cumulative risk** ??how do individual risks interact to create overall exposure?
+3. **Prioritize negotiation targets** ??which issues are must-fix vs. nice-to-fix
+4. **Draft suggested revisions** ??for high-risk items, provide suggested alternative language
+5. **Note jurisdiction-specific concerns** ??enforceability issues by state or country
+
+### Step 5: Deliverable Preparation
+
+1. **Executive summary** ??one-page overview for partner or client briefing
+2. **Detailed risk report** ??full clause-by-clause analysis
+3. **Negotiation priority list** ??ranked list of issues to address in negotiation
+4. **Suggested redlines** ??recommended language changes for high-priority items
+5. **Next steps** ??clear, prioritized action items for the reviewing attorney
+
+---
+
+## Domain Expertise
+
+### Contract Types
+
+**Commercial Contracts**
+- Master Service Agreements (MSAs): scope, SLAs, payment, IP, indemnification
+- Non-Disclosure Agreements (NDAs): scope, duration, permitted disclosure, remedies
+- Vendor Agreements: deliverables, payment terms, warranties, termination
+- Licensing Agreements: scope of license, royalties, IP ownership, sublicensing rights
+- Employment Agreements: compensation, benefits, non-compete, IP assignment, termination
+
+**Real Estate Documents**
+- Purchase and Sale Agreements: price, contingencies, closing conditions, representations
+- Commercial Leases: rent, CAM charges, use restrictions, improvement allowances, options
+- Residential Leases: rent, security deposit, maintenance, termination, renewal
+- Loan Agreements: interest rate, covenants, events of default, prepayment penalties
+- Title Documents: easements, encumbrances, title exceptions, survey issues
+
+**Corporate Documents**
+- Operating Agreements: member rights, voting, distributions, transfer restrictions
+- Shareholder Agreements: drag-along, tag-along, right of first refusal, anti-dilution
+- Asset Purchase Agreements: assets included/excluded, representations, indemnification
+- Stock Purchase Agreements: reps and warranties, closing conditions, escrow
+
+### Litigation Documents
+
+- **Complaints**: causes of action, damages alleged, jurisdiction, statute of limitations
+- **Motions**: legal standard, argument structure, supporting authority, procedural compliance
+- **Discovery Responses**: completeness, objection basis, privilege claims, responsiveness
+- **Settlement Agreements**: release scope, payment terms, confidentiality, enforcement
+- **Court Orders**: compliance requirements, deadlines, contempt exposure
+
+### Compliance Frameworks
+
+- **Employment Law**: FLSA, FMLA, ADA, Title VII, state wage and hour laws
+- **Data Privacy**: GDPR, CCPA/CPRA, HIPAA, state privacy laws
+- **Real Estate**: Fair Housing Act, RESPA, local zoning and disclosure requirements
+- **Corporate**: Sarbanes-Oxley, securities regulations, state corporate law requirements
+- **Industry-Specific**: financial services (Dodd-Frank), healthcare (HIPAA/HITECH), government contracting (FAR)
+
+---
+
+## ?뮡 Your Communication Style
+
+- **Attorney-ready outputs.** Every deliverable is formatted for immediate use by a reviewing attorney ??structured, precise, and actionable.
+- **Flag first, conclude second.** Always present what you found before drawing conclusions. Let the attorney make the final call.
+- **Plain language summaries alongside legal analysis.** For client-facing summaries, translate legal findings into plain English without losing accuracy.
+- **Prioritized, not exhaustive.** Don't bury attorneys in equal-weight findings. Lead with the highest-risk issues and work down.
+- **Cite specifically.** Always reference the exact section, page, and clause ??never vague references to "somewhere in the document."
+- **Acknowledge uncertainty.** If a clause is ambiguous or its enforceability depends on facts not in the document, say so explicitly rather than guessing.
+- **Never overstate confidence.** Legal analysis involves judgment. Flag findings as findings, not conclusions.
+
+---
+
+## ?봽 Learning & Memory
+
+Remember and build expertise in:
+- **Client-specific risk tolerance** ??some clients want everything flagged, others want only material issues
+- **Practice area patterns** ??recurring issues in real estate vs. employment vs. commercial contracts
+- **Jurisdiction-specific rules** ??which states have unusual rules on non-competes, arbitration, auto-renewal
+- **Opposing party patterns** ??if reviewing multiple contracts from the same counterparty, identify their standard positions
+- **Matter context** ??build on prior document reviews within the same matter
+
+### Pattern Recognition
+
+- Identify when a "standard" clause has been subtly modified in a material way
+- Recognize when missing terms create more risk than present but unfavorable terms
+- Detect internally inconsistent defined terms that create ambiguity
+- Know when a liability cap carve-out effectively eliminates the cap
+- Distinguish between aggressive-but-market and genuinely unusual risk positions
+
+---
+
+## ?렞 Your Success Metrics
+
+| Metric | Target |
+|---|---|
+| Issue identification rate | 100% of material clauses reviewed and assessed |
+| False negative rate | Zero missed high-risk clauses ??thoroughness over speed |
+| Summary accuracy | All key economic terms captured without omission |
+| Risk classification accuracy | High/Medium/Low ratings validated by reviewing attorney |
+| Version comparison completeness | 100% of changes captured including minor wording changes |
+| Jurisdiction flagging | All jurisdiction-specific enforceability issues noted |
+| Missing term identification | All standard provisions checked for presence/absence |
+| Output format | Attorney-ready on first delivery ??no reformatting required |
+| Recommended next steps | Every review concludes with prioritized attorney action items |
+| Confidentiality compliance | 100% ??no document content referenced outside review context |
+
+---
+
+## ?? Advanced Capabilities
+
+- Review entire contract portfolios for due diligence in M&A transactions ??identifying material contracts, change of control provisions, and assignment restrictions
+- Build custom clause libraries for specific clients or practice areas ??tracking a client's standard positions and flagging deviations
+- Analyze discovery document sets for litigation ??identifying key documents, inconsistencies, and evidentiary issues
+- Review franchise disclosure documents (FDDs) ??a highly specialized document type with specific regulatory requirements
+- Perform lease abstraction for commercial real estate portfolios ??extracting key terms from dozens of leases into a standardized format
+- Review government contracts for FAR/DFAR compliance ??identifying flow-down clauses and compliance obligations
+- Analyze employment handbooks and policies for compliance with current federal and state law
+- Review international contracts for cross-border issues ??choice of law conflicts, GDPR compliance, currency and payment terms
+- Support expert witness preparation ??reviewing documents for deposition or trial testimony support
+- Perform privilege review ??identifying potentially privileged documents in discovery sets and flagging for attorney review
+
+
+hook: PostToolUse
+hook: PostToolUse Completed
+2026-07-26T09:44:06.042669Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+"C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command '$targets = @('"'agents/company.md','agents/memory_policy.md','memory/company/current_brief.md','memory/company/task-0009-plan.md','docs/research/truth_pen_source_license_brief.md','memory/company/standards/evidence.md','memory/company/standards/asset_import.md'); foreach ("'$target in $targets) { if (Test-Path -LiteralPath $target) { $lineNumber = 0; Get-Content -LiteralPath $target | ForEach-Object { $lineNumber++; '"'{0}:{1}: {2}' -f "'$target,$lineNumber,$_ } } else { '"'MISSING: ' + "'$target } }' in D:\Temp\User\User\channel-play-truth-pen-review-9d54996d
+ succeeded in 1012ms:
+agents/company.md:1: # Channel Play Agent Company
+agents/company.md:2:
+agents/company.md:3: Purpose: coordinate specialized AI agents for the `channel_play` Unity game without losing memory, scope, or verification.
+agents/company.md:4:
+agents/company.md:5: Operating rules:
+agents/company.md:6:
+agents/company.md:7: - The human producer owns taste, priority, and final acceptance.
+agents/company.md:8: - The chief orchestrator owns task breakdown, role selection, memory briefing, locks, and integration.
+agents/company.md:9: - Only one writer may modify a Unity scene, prefab folder, or script system at a time.
+agents/company.md:10: - Every agent reads the current context before working.
+agents/company.md:11: - Every agent returns a structured report.
+agents/company.md:12: - Work is not done until evidence is attached.
+agents/company.md:13: - Decisions that affect future work must be written to Obsidian or `memory/company/decision_log.md`.
+agents/company.md:14:
+agents/company.md:15: Default company loop:
+agents/company.md:16:
+agents/company.md:17: ```text
+agents/company.md:18: request -> brief -> assign -> execute -> review -> verify -> memory update -> commit
+agents/company.md:19: ```
+agents/memory_policy.md:1: # Agent Memory Policy
+agents/memory_policy.md:2:
+agents/memory_policy.md:3: Shared memory is a production asset. Agents must treat it as the source of continuity, not as optional notes.
+agents/memory_policy.md:4:
+agents/memory_policy.md:5: ## Required Reads
+agents/memory_policy.md:6:
+agents/memory_policy.md:7: Before work, every agent reads:
+agents/memory_policy.md:8:
+agents/memory_policy.md:9: - `agents/company.md`
+agents/memory_policy.md:10: - `agents/memory_policy.md`
+agents/memory_policy.md:11: - its own `agents/roles/*.agent.md`
+agents/memory_policy.md:12: - `memory/company/current_context.md` if present
+agents/memory_policy.md:13: - the relevant Obsidian note or work order
+agents/memory_policy.md:14:
+agents/memory_policy.md:15: ## Memory Types
+agents/memory_policy.md:16:
+agents/memory_policy.md:17: Canonical memory:
+agents/memory_policy.md:18:
+agents/memory_policy.md:19: - `obsidian/channel_play/`
+agents/memory_policy.md:20: - design, decisions, specs, accepted direction
+agents/memory_policy.md:21:
+agents/memory_policy.md:22: Operational memory:
+agents/memory_policy.md:23:
+agents/memory_policy.md:24: - `memory/company/`
+agents/memory_policy.md:25: - active state, locks, task board, current session
+agents/memory_policy.md:26:
+agents/memory_policy.md:27: Evidence memory:
+agents/memory_policy.md:28:
+agents/memory_policy.md:29: - `runs/`
+agents/memory_policy.md:30: - `reviews/`
+agents/memory_policy.md:31: - `artifacts/`
+agents/memory_policy.md:32: - `logs/`
+agents/memory_policy.md:33: - `asset_pipeline/`
+agents/memory_policy.md:34:
+agents/memory_policy.md:35: ## Write Rules
+agents/memory_policy.md:36:
+agents/memory_policy.md:37: - Do not overwrite another agent's report.
+agents/memory_policy.md:38: - Do not edit canonical design decisions silently.
+agents/memory_policy.md:39: - Add new decisions with date, context, reason, and impact.
+agents/memory_policy.md:40: - If memory conflicts with current evidence, flag it in the agent report.
+agents/memory_policy.md:41: - If the target scope is unclear, do scout work only.
+agents/memory_policy.md:42:
+agents/memory_policy.md:43: ## Done Rule
+agents/memory_policy.md:44:
+agents/memory_policy.md:45: An agent report must include:
+agents/memory_policy.md:46:
+agents/memory_policy.md:47: - what changed
+agents/memory_policy.md:48: - what evidence proves it
+agents/memory_policy.md:49: - what still needs review
+agents/memory_policy.md:50: - what memory should be updated
+memory/company/current_brief.md:1: # Current Brief
+memory/company/current_brief.md:2:
+memory/company/current_brief.md:3: Generated: 2026-07-26T18:17:44+09:00
+memory/company/current_brief.md:4: Repo: channel_play
+memory/company/current_brief.md:5: Git: a96c0002
+memory/company/current_brief.md:6: Dirty files: 0
+memory/company/current_brief.md:7: Current session: 20260726-181451-truth-pen
+memory/company/current_brief.md:8: Open tasks: 1
+memory/company/current_brief.md:9: Active locks: 0
+memory/company/current_brief.md:10: gdx1: online_via_tailscale / auth_blocked
+memory/company/current_brief.md:11:
+memory/company/current_brief.md:12: ## Current Context
+memory/company/current_brief.md:13:
+memory/company/current_brief.md:14: # Current Context
+memory/company/current_brief.md:15:
+memory/company/current_brief.md:16: Project: `channel_play`
+memory/company/current_brief.md:17:
+memory/company/current_brief.md:18: Date: 2026-06-01
+memory/company/current_brief.md:19:
+memory/company/current_brief.md:20: Current production direction:
+memory/company/current_brief.md:21:
+memory/company/current_brief.md:22: - Unity game is the product.
+memory/company/current_brief.md:23: - Channel Play Studio is the production cockpit.
+memory/company/current_brief.md:24: - Channel Play Agent Company is the team/orchestration layer.
+memory/company/current_brief.md:25: - Mac Studio is the Unity/Blender/OBS implementation machine.
+memory/company/current_brief.md:26: - gdx1 is reserved for server, bot, soak-test, and background worker jobs after SSH authentication is fixed.
+memory/company/current_brief.md:27:
+memory/company/current_brief.md:28: Integrated goal:
+memory/company/current_brief.md:29:
+memory/company/current_brief.md:30: - ID: `mvp_traitor_escape_gameshow`
+memory/company/current_brief.md:31: - Goal: 8紐낆씠 ?묒냽?섍퀬 ?댁쁺?먭? ?ъ씤???꾩씠?쒖쓣 二쇰ŉ OBS濡?珥ъ쁺 媛?ν븳 ?묒? 3D 寃뚯엫???명듃?μ쓣 留뚮뱺??
+memory/company/current_brief.md:32: - First game mode: `諛곗떊???덉텧寃뚯엫`
+memory/company/current_brief.md:33: - Success criterion: 寃뚯엫 異쒖떆媛 ?꾨땲???뚯씪???곸긽 1?몄쓣 留뚮뱾 ???덈뒗 ?뚮젅??媛?ν븳 ?몄뀡.
+memory/company/current_brief.md:34: - First development milestone: Unity?먯꽌 ?뚮젅?댁뼱媛 ?묒? 3D 留듭쓣 ?뚯븘?ㅻ땲怨? ?붾㈃???ъ씤?멸? ?쒖떆?섎뒗 ?곹깭.
+memory/company/current_brief.md:35:
+memory/company/current_brief.md:36: MVP scope:
+memory/company/current_brief.md:37:
+memory/company/current_brief.md:38: - 李멸???4~8紐??묒냽
+memory/company/current_brief.md:39: - ?묒? 3D 留?1媛?
+memory/company/current_brief.md:40: - ?댁쁺??1紐??묒냽
+memory/company/current_brief.md:41: - ?쒗븳?쒓컙 30~40遺?
+memory/company/current_brief.md:42: - ? 援щ텇
+memory/company/current_brief.md:43: - ?ъ씤???띾뱷
+memory/company/current_brief.md:44: - ?곸젏 ?댁슜
+memory/company/current_brief.md:45: - ?꾩씠??3媛??ъ슜: 吏꾩떎???? ?꾩튂 ?ㅼ틦?? ?꾪뵆媛깆뼱 ?쒖빟
+memory/company/current_brief.md:46: - ?댁쁺??愿??紐⑤뱶
+memory/company/current_brief.md:47: - 湲곕낯 ?먯닔???곹깭李?
+memory/company/current_brief.md:48: - OBS ?뱁솕 媛??
+memory/company/current_brief.md:49:
+memory/company/current_brief.md:50: First mode rules:
+memory/company/current_brief.md:51:
+memory/company/current_brief.md:52: - ?쇰컲 李멸??먮뒗 ?쒗븳?쒓컙 ?덉뿉 ?댁뇿 3媛쒕? 李얠븘 理쒖쥌 ?덉텧臾몄쓣 ?곕떎.
+memory/company/current_brief.md:53: - 諛곗떊?먮뒗 ?뺤껜瑜??④린怨??쇰컲 李멸??먯쓽 ?덉텧??諛⑺빐?쒕떎.
+memory/company/current_brief.md:54: - 紐⑤뱺 李멸??먮뒗 誘몄뀡?쇰줈 ?ъ씤?몃? ?산퀬 ?곸젏 ?꾩씠?쒖쓣 援щℓ?쒕떎.
+memory/company/current_brief.md:55:
+memory/company/current_brief.md:56: Current constraints:
+memory/company/current_brief.md:57:
+memory/company/current_brief.md:58: - One writer per Unity scene, prefab folder, or script system.
+memory/company/current_brief.md:59: - Agent work must produce evidence before completion.
+memory/company/current_brief.md:60: - Shared memory must be updated after meaningful decisions.
+memory/company/current_brief.md:61: - Do not ask an agent to build the whole game at once. Split work into scoped, verifiable tasks.
+memory/company/current_brief.md:62:
+memory/company/current_brief.md:63: ## Project Brain
+memory/company/current_brief.md:64:
+memory/company/current_brief.md:65: # Project Brain
+memory/company/current_brief.md:66:
+memory/company/current_brief.md:67: Generated: 2026-07-26T16:33:49+09:00
+memory/company/current_brief.md:68:
+memory/company/current_brief.md:69: ## Current Goal
+memory/company/current_brief.md:70:
+memory/company/current_brief.md:71: 8紐낆씠 ?묒냽?섍퀬 ?댁쁺?먭? ?ъ씤???꾩씠?쒖쓣 二쇰ŉ OBS濡?珥ъ쁺 媛?ν븳 ?묒? 3D 寃뚯엫???명듃??
+memory/company/current_brief.md:72:
+memory/company/current_brief.md:73: ## MVP Scope
+memory/company/current_brief.md:74:
+memory/company/current_brief.md:75: - 李멸???4~8紐??묒냽
+memory/company/current_brief.md:76: - ?묒? 3D 留?1媛?
+memory/company/current_brief.md:77: - ?댁쁺??1紐??묒냽
+memory/company/current_brief.md:78: - ?쒗븳?쒓컙 30~40遺?
+memory/company/current_brief.md:79: - ? 援щ텇
+memory/company/current_brief.md:80: - ?ъ씤???띾뱷
+memory/company/current_brief.md:81: - ?곸젏 ?댁슜
+memory/company/current_brief.md:82: - ?꾩씠??3媛??ъ슜
+memory/company/current_brief.md:83:
+memory/company/current_brief.md:84: ## Style
+memory/company/current_brief.md:85:
+memory/company/current_brief.md:86: - Korean-first planning and status language.
+memory/company/current_brief.md:87: - Quiet production UI, visible evidence, no hidden automation.
+memory/company/current_brief.md:88: - Every agent output should name the task, changed files, evidence, and next risk.
+memory/company/current_brief.md:89:
+memory/company/current_brief.md:90: ## Constraints
+memory/company/current_brief.md:91:
+memory/company/current_brief.md:92: - Studio owns orchestration state; external AI tools are adapters.
+memory/company/current_brief.md:93: - gdx1 is optional until health is verified.
+memory/company/current_brief.md:94: - Unity work needs compile, playtest, screenshot, or receipt evidence.
+memory/company/current_brief.md:95:
+memory/company/current_brief.md:96: ## Forbidden Actions
+memory/company/current_brief.md:97:
+memory/company/current_brief.md:98: - Do not mark done without evidence or receipt.
+memory/company/current_brief.md:99: - Do not edit broad unrelated Unity folders.
+memory/company/current_brief.md:100: - Do not re-enable Claude as a default adapter unless the user requests it.
+memory/company/current_brief.md:101: - Do not use non-loopback Studio execution APIs without an explicit trusted-network setting.
+memory/company/current_brief.md:102:
+memory/company/current_brief.md:103: ## Standards Registry
+memory/company/current_brief.md:104:
+memory/company/current_brief.md:105: - Asset Import Standard: memory/company/standards/asset_import.md
+memory/company/current_brief.md:106: - Evidence Standard: memory/company/standards/evidence.md
+memory/company/current_brief.md:107: - GDX Worker Standard: memory/company/standards/gdx_worker.md
+memory/company/current_brief.md:108: - Unity Scene And Prefab Ownership Standard: memory/company/standards/unity_scene_prefab_ownership.md
+memory/company/current_brief.md:109: - Unity Scripts Standard: memory/company/standards/unity_scripts.md
+memory/company/current_brief.md:110:
+memory/company/current_brief.md:111: ## Registered Agents
+memory/company/current_brief.md:112:
+memory/company/current_brief.md:113: - chief_orchestrator: agents/orchestrator.agent.md
+memory/company/current_brief.md:114: - game_director: agents/roles/game_director.agent.md
+memory/company/current_brief.md:115: - unity_architect: agents/roles/unity_architect.agent.md
+memory/company/current_brief.md:116: - unity_gameplay: agents/roles/unity_gameplay.agent.md
+memory/company/current_brief.md:117: - multiplayer_server: agents/roles/multiplayer_server.agent.md
+memory/company/current_brief.md:118: - asset_factory: agents/roles/asset_factory.agent.md
+memory/company/current_brief.md:119: - technical_artist_blender: agents/roles/technical_artist_blender.agent.md
+memory/company/current_brief.md:120: - sound_designer: agents/roles/sound_designer.agent.md
+memory/company/current_brief.md:121: - qa_playtest: agents/roles/qa_playtest.agent.md
+memory/company/current_brief.md:122: - performance_build: agents/roles/performance_build.agent.md
+memory/company/current_brief.md:123: - gdx_ops: agents/roles/gdx_ops.agent.md
+memory/company/current_brief.md:124: - librarian: agents/roles/librarian.agent.md
+memory/company/current_brief.md:125: - research_librarian: agents/roles/research_librarian.agent.md
+memory/company/current_brief.md:126: - production_planner: agents/roles/production_planner.agent.md
+memory/company/current_brief.md:127: - coding_specialist: agents/roles/coding_specialist.agent.md
+memory/company/current_brief.md:128: - toolchain_integrator: agents/roles/toolchain_integrator.agent.md
+memory/company/current_brief.md:129: - operator_broadcast_designer: agents/roles/operator_broadcast_designer.agent.md
+memory/company/current_brief.md:130: - critic_reviewer: agents/roles/critic_reviewer.agent.md
+memory/company/current_brief.md:131:
+memory/company/current_brief.md:132: ## Active Locks
+memory/company/current_brief.md:133:
+memory/company/current_brief.md:134: - none
+memory/company/current_brief.md:135:
+memory/company/current_brief.md:136: ## Git Working Tree
+memory/company/current_brief.md:137:
+memory/company/current_brief.md:138: - clean
+memory/company/current_brief.md:139:
+memory/company/current_brief.md:140: ## Latest Session
+memory/company/current_brief.md:141:
+memory/company/current_brief.md:142: - 20260726-181451-truth-pen: memory/sessions/20260726-181451-truth-pen/summary.md
+memory/company/current_brief.md:143:
+memory/company/current_brief.md:144: ## Memory Freshness
+memory/company/current_brief.md:145:
+memory/company/current_brief.md:146: - current context fresh
+memory/company/current_brief.md:147:
+memory/company/current_brief.md:148: ## Required Rules
+memory/company/current_brief.md:149:
+memory/company/current_brief.md:150: - One writer per Unity scene, prefab folder, or script system.
+memory/company/current_brief.md:151: - No broad agent fanout before scope check.
+memory/company/current_brief.md:152: - No done state without evidence.
+memory/company/current_brief.md:153: - Decisions that affect future work go to Obsidian or decision log.
+memory/company/current_brief.md:154:
+memory/company/current_brief.md:155: ## Next Recommended Action
+memory/company/current_brief.md:156:
+memory/company/current_brief.md:157: - Continue `task-0009` and attach its required evidence before verification.
+memory/company/task-0009-plan.md:1: # Task Plan
+memory/company/task-0009-plan.md:2:
+memory/company/task-0009-plan.md:3: Task ID: task-0009
+memory/company/task-0009-plan.md:4: Status: planned
+memory/company/task-0009-plan.md:5: Suggested agent: research_librarian
+memory/company/task-0009-plan.md:6: Suggested reviewer: critic_reviewer
+memory/company/task-0009-plan.md:7: Required evidence: NotebookLM/Maru cited research brief
+memory/company/task-0009-plan.md:8:
+memory/company/task-0009-plan.md:9: ## Request
+memory/company/task-0009-plan.md:10:
+memory/company/task-0009-plan.md:11: Truth Pen ?먮낯 ?먮뒗 紐낆떆???쇱씠?좎뒪 肄섏뀎???뚯뒪 以鍮?諛?異쒖쿂 湲곕줉
+memory/company/task-0009-plan.md:12:
+memory/company/task-0009-plan.md:13: ## Allowed Write Paths
+memory/company/task-0009-plan.md:14:
+memory/company/task-0009-plan.md:15: - docs/research
+memory/company/task-0009-plan.md:16: - memory/company
+memory/company/task-0009-plan.md:17: - memory/sessions
+memory/company/task-0009-plan.md:18: - obsidian/channel_play
+memory/company/task-0009-plan.md:19:
+memory/company/task-0009-plan.md:20: ## Required Deliverable
+memory/company/task-0009-plan.md:21:
+memory/company/task-0009-plan.md:22: - Create `docs/research/truth_pen_source_license_brief.md`.
+memory/company/task-0009-plan.md:23: - Prefer an original Channel Play concept; otherwise document an explicitly
+memory/company/task-0009-plan.md:24:   licensed source suitable for commercial game production and modification.
+memory/company/task-0009-plan.md:25: - Do not download, generate, or import source art until the license decision is
+memory/company/task-0009-plan.md:26:   reviewed.
+memory/company/task-0009-plan.md:27:
+memory/company/task-0009-plan.md:28: ## Acceptance Checklist
+memory/company/task-0009-plan.md:29:
+memory/company/task-0009-plan.md:30: - Record source URL or provider, creator, license name, retrieval date, and a
+memory/company/task-0009-plan.md:31:   citation to the controlling terms.
+memory/company/task-0009-plan.md:32: - State commercial-use, derivative-work, redistribution, attribution, and
+memory/company/task-0009-plan.md:33:   generative-provider restrictions separately.
+memory/company/task-0009-plan.md:34: - Reject sources with unknown provenance, watermarks, trademarked branding, or
+memory/company/task-0009-plan.md:35:   terms that cannot be verified.
+memory/company/task-0009-plan.md:36: - Name one approved source strategy or explicitly report that no safe source
+memory/company/task-0009-plan.md:37:   was found.
+memory/company/task-0009-plan.md:38: - Include a handoff note for `asset_factory`; this task does not write to
+memory/company/task-0009-plan.md:39:   `asset_pipeline`.
+memory/company/task-0009-plan.md:40:
+memory/company/task-0009-plan.md:41: ## Project Brain Excerpt
+memory/company/task-0009-plan.md:42:
+memory/company/task-0009-plan.md:43: # Project Brain
+memory/company/task-0009-plan.md:44:
+memory/company/task-0009-plan.md:45: Generated: 2026-07-26T16:33:49+09:00
+memory/company/task-0009-plan.md:46:
+memory/company/task-0009-plan.md:47: ## Current Goal
+memory/company/task-0009-plan.md:48:
+memory/company/task-0009-plan.md:49: 8紐낆씠 ?묒냽?섍퀬 ?댁쁺?먭? ?ъ씤???꾩씠?쒖쓣 二쇰ŉ OBS濡?珥ъ쁺 媛?ν븳 ?묒? 3D 寃뚯엫???명듃??
+memory/company/task-0009-plan.md:50:
+memory/company/task-0009-plan.md:51: ## MVP Scope
+memory/company/task-0009-plan.md:52:
+memory/company/task-0009-plan.md:53: - 李멸???4~8紐??묒냽
+memory/company/task-0009-plan.md:54: - ?묒? 3D 留?1媛?
+memory/company/task-0009-plan.md:55: - ?댁쁺??1紐??묒냽
+memory/company/task-0009-plan.md:56: - ?쒗븳?쒓컙 30~40遺?
+memory/company/task-0009-plan.md:57: - ? 援щ텇
+memory/company/task-0009-plan.md:58: - ?ъ씤???띾뱷
+memory/company/task-0009-plan.md:59: - ?곸젏 ?댁슜
+memory/company/task-0009-plan.md:60: - ?꾩씠??3媛??ъ슜
+memory/company/task-0009-plan.md:61:
+memory/company/task-0009-plan.md:62: ## Style
+memory/company/task-0009-plan.md:63:
+memory/company/task-0009-plan.md:64: - Korean-first planning and status language.
+memory/company/task-0009-plan.md:65: - Quiet production UI, visible evidence, no hidden automation.
+memory/company/task-0009-plan.md:66: - Every agent output should name the task, changed files, evidence, and next risk.
+memory/company/task-0009-plan.md:67:
+memory/company/task-0009-plan.md:68: ## Constraints
+memory/company/task-0009-plan.md:69:
+memory/company/task-0009-plan.md:70: - Studio owns orchestration state; external AI tools are adapters.
+memory/company/task-0009-plan.md:71: - gdx1 is optional until health is verified.
+memory/company/task-0009-plan.md:72: - Unity work needs compile, playtest, screenshot, or receipt evidence.
+memory/company/task-0009-plan.md:73:
+memory/company/task-0009-plan.md:74: ## Forbidden Actions
+memory/company/task-0009-plan.md:75:
+memory/company/task-0009-plan.md:76: - Do not mark done without evidence or receipt.
+memory/company/task-0009-plan.md:77: - Do not edit broad unrelated Unity folders.
+memory/company/task-0009-plan.md:78: - Do not re-enable Claude as a default adapter unless the user requests it.
+memory/company/task-0009-plan.md:79: - Do not use non-loopback Studio execution APIs without an explicit trusted-network setting.
+memory/company/task-0009-plan.md:80:
+memory/company/task-0009-plan.md:81: ## Standards Excerpts
+memory/company/task-0009-plan.md:82:
+memory/company/task-0009-plan.md:83: ### Evidence Standard
+memory/company/task-0009-plan.md:84:
+memory/company/task-0009-plan.md:85: Path: memory/company/standards/evidence.md
+memory/company/task-0009-plan.md:86:
+memory/company/task-0009-plan.md:87: # Evidence Standard
+memory/company/task-0009-plan.md:88:
+memory/company/task-0009-plan.md:89: - No task is complete without a report, receipt, screenshot, compile log, or playtest note.
+memory/company/task-0009-plan.md:90: - Job receipts and review checkpoints can count as MVP evidence when they name the task.
+memory/company/task-0009-plan.md:91: - Verification must record what was accepted and what remains risky.
+docs/research/truth_pen_source_license_brief.md:1: # Truth Pen Source and License Brief
+docs/research/truth_pen_source_license_brief.md:2:
+docs/research/truth_pen_source_license_brief.md:3: Task: `task-0009`
+docs/research/truth_pen_source_license_brief.md:4:
+docs/research/truth_pen_source_license_brief.md:5: Prepared: 2026-07-26
+docs/research/truth_pen_source_license_brief.md:6:
+docs/research/truth_pen_source_license_brief.md:7: Status: ready for critic review; no source art approved or acquired
+docs/research/truth_pen_source_license_brief.md:8:
+docs/research/truth_pen_source_license_brief.md:9: ## Decision
+docs/research/truth_pen_source_license_brief.md:10:
+docs/research/truth_pen_source_license_brief.md:11: Use an original Channel Play concept derived only from
+docs/research/truth_pen_source_license_brief.md:12: `asset_pipeline/briefs/truth_pen.md`. The preferred production path is a new
+docs/research/truth_pen_source_license_brief.md:13: human-authored design made under the project's contributor/IP agreement. An
+docs/research/truth_pen_source_license_brief.md:14: OpenAI-generated concept from the same project-owned brief is an acceptable
+docs/research/truth_pen_source_license_brief.md:15: conditional alternative after the account type and applicable terms are
+docs/research/truth_pen_source_license_brief.md:16: recorded. Do not use a found web image as a source.
+docs/research/truth_pen_source_license_brief.md:17:
+docs/research/truth_pen_source_license_brief.md:18: This decision approves a **source strategy**, not an asset. Generation, download,
+docs/research/truth_pen_source_license_brief.md:19: and import remain blocked until `critic_reviewer` accepts this brief and the
+docs/research/truth_pen_source_license_brief.md:20: production record below is complete.
+docs/research/truth_pen_source_license_brief.md:21:
+docs/research/truth_pen_source_license_brief.md:22: ## Project-Owned Concept Record
+docs/research/truth_pen_source_license_brief.md:23:
+docs/research/truth_pen_source_license_brief.md:24: | Field | Record |
+docs/research/truth_pen_source_license_brief.md:25: | --- | --- |
+docs/research/truth_pen_source_license_brief.md:26: | Provider/source | Channel Play repository, `asset_pipeline/briefs/truth_pen.md` |
+docs/research/truth_pen_source_license_brief.md:27: | Creator | Channel Play project team; the producing contributor must be named in the final record |
+docs/research/truth_pen_source_license_brief.md:28: | Rights basis | New work created for the project; confirm the contributor agreement or written assignment |
+docs/research/truth_pen_source_license_brief.md:29: | Required form | Chunky gold-and-charcoal pen, cyan emissive nib, asymmetric clip; no text, logos, watermark, hands, or copied franchise styling |
+docs/research/truth_pen_source_license_brief.md:30: | Intended use | Commercial game prop, shop icon, world pickup, marketing capture, and modified derivatives |
+docs/research/truth_pen_source_license_brief.md:31:
+docs/research/truth_pen_source_license_brief.md:32: Because the repository does not contain a contributor agreement, the final art
+docs/research/truth_pen_source_license_brief.md:33: record must not claim project ownership until that agreement or assignment is
+docs/research/truth_pen_source_license_brief.md:34: identified.
+docs/research/truth_pen_source_license_brief.md:35:
+docs/research/truth_pen_source_license_brief.md:36: ## Controlling Sources
+docs/research/truth_pen_source_license_brief.md:37:
+docs/research/truth_pen_source_license_brief.md:38: Sources were retrieved on 2026-07-26.
+docs/research/truth_pen_source_license_brief.md:39:
+docs/research/truth_pen_source_license_brief.md:40: | Source | Controlling point |
+docs/research/truth_pen_source_license_brief.md:41: | --- | --- |
+docs/research/truth_pen_source_license_brief.md:42: | [OpenAI Terms of Use](https://openai.com/policies/terms-of-use/) (effective 2026-01-01) | For individual services, the user retains Input rights and owns Output as between the user and OpenAI, to the extent permitted by law. Input rights, human review, non-uniqueness, and third-party rights remain the user's responsibility. |
+docs/research/truth_pen_source_license_brief.md:43: | [OpenAI Services Agreement](https://openai.com/policies/services-agreement/) (effective 2026-01-01) | For APIs and business services, the customer owns Output as between the parties, but must hold Input rights and evaluate the Output's fitness and accuracy. |
+docs/research/truth_pen_source_license_brief.md:44: | [OpenAI Service Terms](https://openai.com/policies/service-terms/) (updated 2026-06-12) | API IP indemnity has exceptions, including unlicensed Input, ignored safeguards, modified/combined Output, trademark use in commerce, and Third Party Offerings. It is risk allocation, not source clearance. |
+docs/research/truth_pen_source_license_brief.md:45: | [OpenAI Sharing & Publication Policy](https://openai.com/policies/sharing-publication-policy/) (updated 2022-11-14) | Shared generations require manual review, attribution to the person/company, and clear AI disclosure. |
+docs/research/truth_pen_source_license_brief.md:46: | [CC0 1.0 Deed](https://creativecommons.org/publicdomain/zero/1.0/) and [Legal Code](https://creativecommons.org/publicdomain/zero/1.0/legalcode.en) | CC0 permits copying, modification, distribution, and commercial use without permission. It does not clear patent, trademark, publicity, or privacy rights and supplies no warranty. The legal code controls. |
+docs/research/truth_pen_source_license_brief.md:47:
+docs/research/truth_pen_source_license_brief.md:48: ## Rights Matrix
+docs/research/truth_pen_source_license_brief.md:49:
+docs/research/truth_pen_source_license_brief.md:50: | Strategy | Commercial use | Derivatives | Redistribution | Attribution | Restrictions and residual risk |
+docs/research/truth_pen_source_license_brief.md:51: | --- | --- | --- | --- | --- | --- |
+docs/research/truth_pen_source_license_brief.md:52: | New human-authored project work ??**preferred** | Yes, after contributor rights are documented | Yes | Yes | Internal creator credit per project policy | Avoid third-party references; retain drafts and assignment |
+docs/research/truth_pen_source_license_brief.md:53: | OpenAI-generated original ??**conditional** | Not prohibited under the applicable terms, subject to compliance | Allowed as owned Output; modification can narrow API indemnity | Allowed subject to terms | Record AI use; publication policy calls for company/person attribution and AI disclosure | Output may be similar or infringing; no non-infringement warranty; screen trademarks and recognizable designs |
+docs/research/truth_pen_source_license_brief.md:54: | Verified CC0 work ??fallback only | Yes | Yes | Yes | Not legally required by CC0; record source anyway | Verify the uploader controlled the work; separately clear trademark, privacy, publicity, and endorsement concerns |
+docs/research/truth_pen_source_license_brief.md:55: | Generic search/social image | **Rejected** | Unknown | Unknown | Unknown | Unknown provenance, watermark, platform terms, or branding fails the gate |
+docs/research/truth_pen_source_license_brief.md:56:
+docs/research/truth_pen_source_license_brief.md:57: ## Production Provenance Record
+docs/research/truth_pen_source_license_brief.md:58:
+docs/research/truth_pen_source_license_brief.md:59: Before `asset_factory` begins, record:
+docs/research/truth_pen_source_license_brief.md:60:
+docs/research/truth_pen_source_license_brief.md:61: - final creator/provider, source URL or internal file, and retrieval/generation
+docs/research/truth_pen_source_license_brief.md:62:   timestamp;
+docs/research/truth_pen_source_license_brief.md:63: - applicable account type, model/tool version, prompt, seed or job ID when
+docs/research/truth_pen_source_license_brief.md:64:   available, and a snapshot/link to the terms in force;
+docs/research/truth_pen_source_license_brief.md:65: - original and accepted-file SHA-256 hashes, edits, editor, and review date;
+docs/research/truth_pen_source_license_brief.md:66: - contributor agreement/assignment reference or exact external license;
+docs/research/truth_pen_source_license_brief.md:67: - trademark/logo, watermark, recognizable-character, privacy/publicity, and
+docs/research/truth_pen_source_license_brief.md:68:   reverse-image-similarity checks;
+docs/research/truth_pen_source_license_brief.md:69: - required credit and AI disclosure text.
+docs/research/truth_pen_source_license_brief.md:70:
+docs/research/truth_pen_source_license_brief.md:71: ## Handoff and Open Risks
+docs/research/truth_pen_source_license_brief.md:72:
+docs/research/truth_pen_source_license_brief.md:73: `asset_factory` should receive the approved brief plus the completed provenance
+docs/research/truth_pen_source_license_brief.md:74: record, then create the concept from scratch. It must not trace or image-condition
+docs/research/truth_pen_source_license_brief.md:75: on unverified web material. The reviewer should fail closed if creator rights,
+docs/research/truth_pen_source_license_brief.md:76: applicable provider terms, or screening evidence are missing.
+docs/research/truth_pen_source_license_brief.md:77:
+docs/research/truth_pen_source_license_brief.md:78: This is a production risk assessment, not legal advice. Counsel should review
+docs/research/truth_pen_source_license_brief.md:79: material intended for prominent branding, merchandising, or high-value
+docs/research/truth_pen_source_license_brief.md:80: commercial release.
+memory/company/standards/evidence.md:1: # Evidence Standard
+memory/company/standards/evidence.md:2:
+memory/company/standards/evidence.md:3: - No task is complete without a report, receipt, screenshot, compile log, or playtest note.
+memory/company/standards/evidence.md:4: - Job receipts and review checkpoints can count as MVP evidence when they name the task.
+memory/company/standards/evidence.md:5: - Verification must record what was accepted and what remains risky.
+memory/company/standards/asset_import.md:1: # Asset Import Standard
+memory/company/standards/asset_import.md:2:
+memory/company/standards/asset_import.md:3: - Track source, license, import path, preview, and acceptance status for every asset.
+memory/company/standards/asset_import.md:4: - Keep Blender/2D-to-3D outputs in the asset pipeline until accepted.
+memory/company/standards/asset_import.md:5: - Imported assets need a short readability and scale check.
+
+hook: PostToolUse
+hook: PostToolUse Completed
+2026-07-26T09:44:16.143298Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+codex
+선행 문서에서 핵심 상태를 확인했습니다. 브리프는 “소스 전략만 승인”한다고 선언하지만, 실제 승인 대상·증거가 별도로 완결됐는지는 아직 확인이 필요합니다. 이제 역할 규정, 원본 콘셉트 브리프, 세션/NotebookLM·Maru 증거를 추적하고 공식 약관의 효력일·적용 범위를 대조하겠습니다.
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+"C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command '$targets = @('"'agents/roles/critic_reviewer.agent.md','memory/company/current_context.md','asset_pipeline/briefs/truth_pen.md','memory/sessions/20260726-181451-truth-pen/summary.md'); foreach ("'$target in $targets) { if (Test-Path -LiteralPath $target) { $lineNumber = 0; Get-Content -LiteralPath $target -Encoding utf8 | ForEach-Object { $lineNumber++; '"'{0}:{1}: {2}' -f "'$target,$lineNumber,$_ } } else { '"'MISSING: ' + "'$target } }; '"'---MATCHES---'; rg -n -i --hidden --glob '"'!Library/**'"' --glob '"'!Logs/**'"' --glob '"'!UserSettings/**'"' --glob '"'!Builds/**'"' 'NotebookLM|Maru|truth[_ -]?pen|task-0009|acceptance checklist|asset_factory' docs memory obsidian asset_pipeline agents 2>"'$null' in D:\Temp\User\User\channel-play-truth-pen-review-9d54996d
+2026-07-26T09:44:27.862593Z ERROR codex_core::tools::router: error=Exit code: 1
+Wall time: 1.1 seconds
+Output:
+agents/roles/critic_reviewer.agent.md:1: # Critic Reviewer Agent
+agents/roles/critic_reviewer.agent.md:2:
+agents/roles/critic_reviewer.agent.md:3: Mission: give second-opinion review on architecture, gameplay logic, risks, and missing tests.
+agents/roles/critic_reviewer.agent.md:4:
+agents/roles/critic_reviewer.agent.md:5: Allowed writes:
+agents/roles/critic_reviewer.agent.md:6:
+agents/roles/critic_reviewer.agent.md:7: - review notes
+agents/roles/critic_reviewer.agent.md:8: - `reviews/`
+agents/roles/critic_reviewer.agent.md:9: - assigned docs
+agents/roles/critic_reviewer.agent.md:10:
+agents/roles/critic_reviewer.agent.md:11: Default output:
+agents/roles/critic_reviewer.agent.md:12:
+agents/roles/critic_reviewer.agent.md:13: - findings ordered by severity
+agents/roles/critic_reviewer.agent.md:14: - concrete file or workflow references
+agents/roles/critic_reviewer.agent.md:15: - missing evidence
+agents/roles/critic_reviewer.agent.md:16: - alternative recommendation when needed
+agents/roles/critic_reviewer.agent.md:17:
+agents/roles/critic_reviewer.agent.md:18: Forbidden:
+agents/roles/critic_reviewer.agent.md:19:
+agents/roles/critic_reviewer.agent.md:20: - direct code edits by default
+agents/roles/critic_reviewer.agent.md:21: - vague approval without evidence
+memory/company/current_context.md:1: # Current Context
+memory/company/current_context.md:2:
+memory/company/current_context.md:3: Project: `channel_play`
+memory/company/current_context.md:4:
+memory/company/current_context.md:5: Date: 2026-06-01
+memory/company/current_context.md:6:
+memory/company/current_context.md:7: Current production direction:
+memory/company/current_context.md:8:
+memory/company/current_context.md:9: - Unity game is the product.
+memory/company/current_context.md:10: - Channel Play Studio is the production cockpit.
+memory/company/current_context.md:11: - Channel Play Agent Company is the team/orchestration layer.
+memory/company/current_context.md:12: - Mac Studio is the Unity/Blender/OBS implementation machine.
+memory/company/current_context.md:13: - gdx1 is reserved for server, bot, soak-test, and background worker jobs after SSH authentication is fixed.
+memory/company/current_context.md:14:
+memory/company/current_context.md:15: Integrated goal:
+memory/company/current_context.md:16:
+memory/company/current_context.md:17: - ID: `mvp_traitor_escape_gameshow`
+memory/company/current_context.md:18: - Goal: 8명이 접속하고 운영자가 포인트/아이템을 주며 OBS로 촬영 가능한 작은 3D 게임쇼 세트장을 만든다.
+memory/company/current_context.md:19: - First game mode: `배신자 탈출게임`
+memory/company/current_context.md:20: - Success criterion: 게임 출시가 아니라 파일럿 영상 1편을 만들 수 있는 플레이 가능한 세션.
+memory/company/current_context.md:21: - First development milestone: Unity에서 플레이어가 작은 3D 맵을 돌아다니고, 화면에 포인트가 표시되는 상태.
+memory/company/current_context.md:22:
+memory/company/current_context.md:23: MVP scope:
+memory/company/current_context.md:24:
+memory/company/current_context.md:25: - 참가자 4~8명 접속
+memory/company/current_context.md:26: - 작은 3D 맵 1개
+memory/company/current_context.md:27: - 운영자 1명 접속
+memory/company/current_context.md:28: - 제한시간 30~40분
+memory/company/current_context.md:29: - 팀 구분
+memory/company/current_context.md:30: - 포인트 획득
+memory/company/current_context.md:31: - 상점 이용
+memory/company/current_context.md:32: - 아이템 3개 사용: 진실의 펜, 위치 스캐너, 도플갱어 시약
+memory/company/current_context.md:33: - 운영자 관전 모드
+memory/company/current_context.md:34: - 기본 점수판/상태창
+memory/company/current_context.md:35: - OBS 녹화 가능
+memory/company/current_context.md:36:
+memory/company/current_context.md:37: First mode rules:
+memory/company/current_context.md:38:
+memory/company/current_context.md:39: - 일반 참가자는 제한시간 안에 열쇠 3개를 찾아 최종 탈출문을 연다.
+memory/company/current_context.md:40: - 배신자는 정체를 숨기고 일반 참가자의 탈출을 방해한다.
+memory/company/current_context.md:41: - 모든 참가자는 미션으로 포인트를 얻고 상점 아이템을 구매한다.
+memory/company/current_context.md:42:
+memory/company/current_context.md:43: Current constraints:
+memory/company/current_context.md:44:
+memory/company/current_context.md:45: - One writer per Unity scene, prefab folder, or script system.
+memory/company/current_context.md:46: - Agent work must produce evidence before completion.
+memory/company/current_context.md:47: - Shared memory must be updated after meaningful decisions.
+memory/company/current_context.md:48: - Do not ask an agent to build the whole game at once. Split work into scoped, verifiable tasks.
+asset_pipeline/briefs/truth_pen.md:1: # Asset Brief: truth_pen
+asset_pipeline/briefs/truth_pen.md:2:
+asset_pipeline/briefs/truth_pen.md:3: Status: briefed
+asset_pipeline/briefs/truth_pen.md:4: Target: Unity prefab
+asset_pipeline/briefs/truth_pen.md:5: Scale reference: 0.22m handheld prop; player height 2m
+asset_pipeline/briefs/truth_pen.md:6: Poly budget: 3,000 triangles maximum
+asset_pipeline/briefs/truth_pen.md:7: Texture style: broadcast-readable gold, charcoal, and cyan emissive accents
+asset_pipeline/briefs/truth_pen.md:8: Source/license: Pending; use only original or explicitly licensed source art
+asset_pipeline/briefs/truth_pen.md:9:
+asset_pipeline/briefs/truth_pen.md:10: ## Use
+asset_pipeline/briefs/truth_pen.md:11:
+asset_pipeline/briefs/truth_pen.md:12: Shop inventory icon, world pickup, and held prop for the Truth Pen item. The
+asset_pipeline/briefs/truth_pen.md:13: gameplay effect reveals one participant as traitor or clear, so the silhouette
+asset_pipeline/briefs/truth_pen.md:14: must remain recognizable in the shop UI and on an OBS program feed.
+asset_pipeline/briefs/truth_pen.md:15:
+asset_pipeline/briefs/truth_pen.md:16: ## Generation Prompt
+asset_pipeline/briefs/truth_pen.md:17:
+asset_pipeline/briefs/truth_pen.md:18: Create a compact game-ready truth-detection pen for a stylized Egyptian
+asset_pipeline/briefs/truth_pen.md:19: gameshow. Use a chunky gold-and-charcoal body, a cyan glowing nib, a strong
+asset_pipeline/briefs/truth_pen.md:20: asymmetric clip, beveled low-poly forms, and no text, logos, or watermark.
+asset_pipeline/briefs/truth_pen.md:21: Orthographic three-quarter view on a plain background; show the entire object.
+asset_pipeline/briefs/truth_pen.md:22:
+asset_pipeline/briefs/truth_pen.md:23: ## Review Notes
+asset_pipeline/briefs/truth_pen.md:24:
+asset_pipeline/briefs/truth_pen.md:25: - Separate the body, clip, and emissive nib for material control.
+asset_pipeline/briefs/truth_pen.md:26: - Keep a collider-friendly outline with no fragile floating pieces.
+asset_pipeline/briefs/truth_pen.md:27: - Validate readability from the gameplay camera before acceptance.
+memory/sessions/20260726-181451-truth-pen/summary.md:1: # Session Summary
+memory/sessions/20260726-181451-truth-pen/summary.md:2:
+memory/sessions/20260726-181451-truth-pen/summary.md:3: Status: ready_for_critic_review
+memory/sessions/20260726-181451-truth-pen/summary.md:4:
+memory/sessions/20260726-181451-truth-pen/summary.md:5: ## Result
+memory/sessions/20260726-181451-truth-pen/summary.md:6:
+memory/sessions/20260726-181451-truth-pen/summary.md:7: - Prepared `docs/research/truth_pen_source_license_brief.md` from official
+memory/sessions/20260726-181451-truth-pen/summary.md:8:   OpenAI and Creative Commons controlling terms.
+memory/sessions/20260726-181451-truth-pen/summary.md:9: - Approved an original Channel Play concept as the preferred source strategy;
+memory/sessions/20260726-181451-truth-pen/summary.md:10:   generation and import remain blocked until critic review.
+memory/sessions/20260726-181451-truth-pen/summary.md:11: - Preserved failed NotebookLM and `agy` receipts instead of treating empty
+memory/sessions/20260726-181451-truth-pen/summary.md:12:   adapter output as success.
+memory/sessions/20260726-181451-truth-pen/summary.md:13: - Added a regression guard for UTF-8 adapter output and permission-denied,
+memory/sessions/20260726-181451-truth-pen/summary.md:14:   no-output runs.
+memory/sessions/20260726-181451-truth-pen/summary.md:15:
+memory/sessions/20260726-181451-truth-pen/summary.md:16: ## Next Handoff
+memory/sessions/20260726-181451-truth-pen/summary.md:17:
+memory/sessions/20260726-181451-truth-pen/summary.md:18: Run `critic_reviewer` on `task-0009`. If accepted, pass the reviewed brief and
+memory/sessions/20260726-181451-truth-pen/summary.md:19: completed provenance record to `asset_factory`.
+---MATCHES---
+docs\agent_team_structure.md:22:| `research_librarian` | NotebookLM/Maru/project-memory research before implementation | NotebookLM | cited research brief + uncertainty list |
+docs\agent_team_structure.md:30:- Research/source/citation/NotebookLM/latest/benchmark requests route to `research_librarian`.
+memory\company\agent_registry.json:106:      "id": "asset_factory",
+memory\company\agent_registry.json:107:      "profile": "agents/roles/asset_factory.agent.md",
+memory\company\agent_registry.json:254:        "tool": "notebooklm",
+memory\company\agent_registry.json:255:        "focus": "NotebookLM/MCP, Maru deep research, 공유 기억 검색으로 구현 전 필요한 근거와 불확실성을 정리한다.",
+memory\company\agent_registry.json:262:        "notebooklm": {
+memory\company\agent_registry.json:270:            "notebooklm"
+memory\company\current_brief.md:7:Current session: 20260726-181451-truth-pen
+memory\company\current_brief.md:118:- asset_factory: agents/roles/asset_factory.agent.md
+memory\company\current_brief.md:142:- 20260726-181451-truth-pen: memory/sessions/20260726-181451-truth-pen/summary.md
+memory\company\current_brief.md:157:- Continue `task-0009` and attach its required evidence before verification.
+asset_pipeline\index.json:21:      "id": "truth_pen",
+asset_pipeline\index.json:23:      "brief": "asset_pipeline/briefs/truth_pen.md",
+asset_pipeline\index.json:26:      "pipeline_receipt": "runs/asset-pipeline-truth_pen/asset_pipeline_receipt.md",
+asset_pipeline\index.json:27:      "source_intake": "asset_pipeline/incoming_2d/truth_pen/source_drop.md",
+asset_pipeline\index.json:28:      "generation_handoff": "asset_pipeline/generated_3d/truth_pen/generation_handoff.md",
+asset_pipeline\index.json:29:      "blender_template": "asset_pipeline/blender_work/truth_pen/blender_batch_template.py",
+asset_pipeline\index.json:30:      "unity_import_manifest": "asset_pipeline/unity_ready/truth_pen/unity_import_manifest.md",
+asset_pipeline\incoming_2d\truth_pen\source_drop.md:3:Asset ID: truth_pen
+asset_pipeline\incoming_2d\truth_pen\source_drop.md:10:- Intended gameplay use: shop icon, world pickup, and held Truth Pen prop
+asset_pipeline\generated_3d\truth_pen\generation_handoff.md:3:Asset ID: truth_pen
+agents\roles\research_librarian.agent.md:7:- NotebookLM MCP / `nlm` for project notebook queries.
+agents\roles\research_librarian.agent.md:8:- Maru deep research for current web facts and external tools.
+asset_pipeline\briefs\truth_pen.md:1:# Asset Brief: truth_pen
+asset_pipeline\briefs\truth_pen.md:12:Shop inventory icon, world pickup, and held prop for the Truth Pen item. The
+docs\channel_play_agent_company_implementation_plan.md:295:| 2D, 3D generation, asset brief | `asset_factory` |
+docs\channel_play_agent_company_implementation_plan.md:504:-> asset_factory work order
+memory\sessions\20260726-181451-truth-pen\context.md:3:Session ID: 20260726-181451-truth-pen
+memory\sessions\20260726-181451-truth-pen\context.md:4:Goal: Truth Pen 소스 출처 및 라이선스 조사
+memory\sessions\20260726-181451-truth-pen\context.md:14:  source for the Truth Pen.
+memory\sessions\20260726-181451-truth-pen\context.md:19:  `asset_factory`.
+memory\sessions\20260726-181451-truth-pen\context.md:25:- Handoff target: `asset_factory`
+memory\sessions\20260726-181451-truth-pen\context.md:29:- `docs/research/truth_pen_source_license_brief.md`
+asset_pipeline\blender_work\truth_pen\blender_batch_template.py:5:ASSET_ID = 'truth_pen'
+asset_pipeline\unity_ready\truth_pen\import_note.md:3:Asset ID: truth_pen
+asset_pipeline\unity_ready\truth_pen\import_note.md:4:Prefab path: Assets/_Project/Prefabs/Props/TruthPen.prefab
+memory\sessions\20260726-181451-truth-pen\summary.md:7:- Prepared `docs/research/truth_pen_source_license_brief.md` from official
+memory\sessions\20260726-181451-truth-pen\summary.md:11:- Preserved failed NotebookLM and `agy` receipts instead of treating empty
+memory\sessions\20260726-181451-truth-pen\summary.md:18:Run `critic_reviewer` on `task-0009`. If accepted, pass the reviewed brief and
+memory\sessions\20260726-181451-truth-pen\summary.md:19:completed provenance record to `asset_factory`.
+asset_pipeline\blender_work\truth_pen\cleanup_work_order.md:3:Asset ID: truth_pen
+asset_pipeline\blender_work\truth_pen\cleanup_work_order.md:6:Object names: CP_TruthPen_Body, CP_TruthPen_Clip, CP_TruthPen_Nib
+asset_pipeline\blender_work\truth_pen\cleanup_work_order.md:7:Materials: MAT_TruthPen_Body and MAT_TruthPen_Emissive
+asset_pipeline\blender_work\truth_pen\cleanup_work_order.md:11:Export: GLB to asset_pipeline/unity_ready/truth_pen/
+memory\sessions\20260726-181451-truth-pen\work_orders\task-0009-research_librarian.md:3:Task ID: task-0009
+memory\sessions\20260726-181451-truth-pen\work_orders\task-0009-research_librarian.md:5:Goal: Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록
+memory\sessions\20260726-181451-truth-pen\work_orders\task-0009-research_librarian.md:6:Read first: agents/company.md, agents/memory_policy.md, memory/company/current_brief.md, memory/company/task-0009-plan.md
+memory\sessions\20260726-181451-truth-pen\work_orders\task-0009-research_librarian.md:13:Inputs: memory/company/task-0009-plan.md, task request, and current brief
+memory\sessions\20260726-181451-truth-pen\work_orders\task-0009-research_librarian.md:15:Verification required: NotebookLM/Maru cited research brief
+asset_pipeline\unity_ready\truth_pen\unity_import_manifest.md:3:Asset ID: truth_pen
+asset_pipeline\unity_ready\truth_pen\unity_import_manifest.md:5:Target folder: Assets/_Project/Art/Props/TruthPen
+asset_pipeline\unity_ready\truth_pen\unity_import_manifest.md:6:Prefab path: Assets/_Project/Prefabs/Props/TruthPen.prefab
+docs\channel_play_agent_company_plan.md:174:    asset_factory.agent.md
+memory\company\state.json:4:  "active_session": "20260726-181451-truth-pen",
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:3:Task ID: task-0009
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:10:공식 OpenAI 및 Creative Commons 원문을 기준으로 Truth Pen의 안전한
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:17:- `asset_pipeline/briefs/truth_pen.md`
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:18:- `asset_pipeline/incoming_2d/truth_pen/source_drop.md`
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:19:- `memory/company/task-0009-plan.md`
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:25:- `docs/research/truth_pen_source_license_brief.md`
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:39:- `docs/research/truth_pen_source_license_brief.md`
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:40:- `runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md`
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:41:- `runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md`
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:45:- NotebookLM authentication was expired.
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:54:acceptance, hand the reviewed brief to `asset_factory`; keep production blocked
+memory\company\task_board.json:231:      "id": "task-0009",
+memory\company\task_board.json:232:      "request": "Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록",
+memory\company\task_board.json:243:      "required_evidence": "NotebookLM/Maru cited research brief",
+memory\company\task_board.json:246:      "work_order": "memory/sessions/20260726-181451-truth-pen/work_orders/task-0009-research_librarian.md",
+memory\company\task_board.json:247:      "report": "memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md",
+memory\company\task_board.json:249:      "session": "20260726-181451-truth-pen",
+memory\company\task_board.json:252:          "tool": "notebooklm",
+memory\company\task_board.json:255:          "path": "runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md",
+memory\company\task_board.json:262:          "path": "runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md",
+memory\company\task_board.json:267:      "last_agent_run": "runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md",
+memory\company\task_board.json:271:          "path": "docs/research/truth_pen_source_license_brief.md",
+memory\company\task-0009-plan.md:3:Task ID: task-0009
+memory\company\task-0009-plan.md:7:Required evidence: NotebookLM/Maru cited research brief
+memory\company\task-0009-plan.md:11:Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록
+memory\company\task-0009-plan.md:22:- Create `docs/research/truth_pen_source_license_brief.md`.
+memory\company\task-0009-plan.md:28:## Acceptance Checklist
+memory\company\task-0009-plan.md:38:- Include a handoff note for `asset_factory`; this task does not write to
+memory\company\tool_adapters.json:12:    "asset_factory": "hermes",
+memory\company\tool_adapters.json:23:    "research_librarian": "notebooklm",
+memory\company\tool_adapters.json:113:    "notebooklm": {
+memory\company\tool_adapters.json:115:      "description": "NotebookLM project-source research worker through nlm CLI",
+docs\implementation_plan.md:51:- `.maru`, `.DS_Store`, Unity `Library/`, `Temp/`, `Builds/`가 Git에서 제외됨
+docs\research\truth_pen_source_license_brief.md:1:# Truth Pen Source and License Brief
+docs\research\truth_pen_source_license_brief.md:3:Task: `task-0009`
+docs\research\truth_pen_source_license_brief.md:12:`asset_pipeline/briefs/truth_pen.md`. The preferred production path is a new
+docs\research\truth_pen_source_license_brief.md:26:| Provider/source | Channel Play repository, `asset_pipeline/briefs/truth_pen.md` |
+docs\research\truth_pen_source_license_brief.md:59:Before `asset_factory` begins, record:
+docs\research\truth_pen_source_license_brief.md:73:`asset_factory` should receive the approved brief plus the completed provenance
+docs\research\KHUFU_MEGA_LABYRINTH_MAP_RESEARCH.md:6:NotebookLM notebook: https://notebooklm.google.com/notebook/871c7f05-a71d-4b29-85b2-7e398be93ccc
+docs\research\KHUFU_MEGA_LABYRINTH_MAP_RESEARCH.md:38:NotebookLM deep research was used for source discovery and synthesis. Its first discovery set
+docs\research\KHUFU_MEGA_LABYRINTH_MAP_RESEARCH.md:44:NotebookLM output is a synthesis aid, not an authority. Where a synthesis conflicts with a
+docs\khufu-v6-visual-slice\README.md:29:not register an Editor instance. NotebookLM research also remained unavailable because its local
+docs\khufu-v6-visual-slice\STATUS.md:7:- Current blocker: Unity MCP Editor registration and NotebookLM authentication are unavailable, but
+docs\khufu-v6-visual-slice\STATUS.md:33:- [ ] NotebookLM requires a fresh local `nlm login` before it can contribute research evidence.
+docs\khufu-v10-interior-spine\RESEARCH_BRIEF.md:5:The baseline combines project research, NotebookLM synthesis, and direct source verification.
+docs\khufu-v10-interior-spine\RESEARCH_BRIEF.md:6:NotebookLM deep research found 56 candidates, including sensational secondary claims. Only the two
+docs\khufu-v10-interior-spine\RULES.md:5:1. Direct measurements control numeric claims; NotebookLM synthesis never overrides a primary or
+docs\khufu-v8-temple-production-art\STATUS.md:7:- NotebookLM deep research completed with 75 sources and an implementation-focused synthesis.
+
+ exited 1 in 1121ms:
+agents/roles/critic_reviewer.agent.md:1: # Critic Reviewer Agent
+agents/roles/critic_reviewer.agent.md:2:
+agents/roles/critic_reviewer.agent.md:3: Mission: give second-opinion review on architecture, gameplay logic, risks, and missing tests.
+agents/roles/critic_reviewer.agent.md:4:
+agents/roles/critic_reviewer.agent.md:5: Allowed writes:
+agents/roles/critic_reviewer.agent.md:6:
+agents/roles/critic_reviewer.agent.md:7: - review notes
+agents/roles/critic_reviewer.agent.md:8: - `reviews/`
+agents/roles/critic_reviewer.agent.md:9: - assigned docs
+agents/roles/critic_reviewer.agent.md:10:
+agents/roles/critic_reviewer.agent.md:11: Default output:
+agents/roles/critic_reviewer.agent.md:12:
+agents/roles/critic_reviewer.agent.md:13: - findings ordered by severity
+agents/roles/critic_reviewer.agent.md:14: - concrete file or workflow references
+agents/roles/critic_reviewer.agent.md:15: - missing evidence
+agents/roles/critic_reviewer.agent.md:16: - alternative recommendation when needed
+agents/roles/critic_reviewer.agent.md:17:
+agents/roles/critic_reviewer.agent.md:18: Forbidden:
+agents/roles/critic_reviewer.agent.md:19:
+agents/roles/critic_reviewer.agent.md:20: - direct code edits by default
+agents/roles/critic_reviewer.agent.md:21: - vague approval without evidence
+memory/company/current_context.md:1: # Current Context
+memory/company/current_context.md:2:
+memory/company/current_context.md:3: Project: `channel_play`
+memory/company/current_context.md:4:
+memory/company/current_context.md:5: Date: 2026-06-01
+memory/company/current_context.md:6:
+memory/company/current_context.md:7: Current production direction:
+memory/company/current_context.md:8:
+memory/company/current_context.md:9: - Unity game is the product.
+memory/company/current_context.md:10: - Channel Play Studio is the production cockpit.
+memory/company/current_context.md:11: - Channel Play Agent Company is the team/orchestration layer.
+memory/company/current_context.md:12: - Mac Studio is the Unity/Blender/OBS implementation machine.
+memory/company/current_context.md:13: - gdx1 is reserved for server, bot, soak-test, and background worker jobs after SSH authentication is fixed.
+memory/company/current_context.md:14:
+memory/company/current_context.md:15: Integrated goal:
+memory/company/current_context.md:16:
+memory/company/current_context.md:17: - ID: `mvp_traitor_escape_gameshow`
+memory/company/current_context.md:18: - Goal: 8명이 접속하고 운영자가 포인트/아이템을 주며 OBS로 촬영 가능한 작은 3D 게임쇼 세트장을 만든다.
+memory/company/current_context.md:19: - First game mode: `배신자 탈출게임`
+memory/company/current_context.md:20: - Success criterion: 게임 출시가 아니라 파일럿 영상 1편을 만들 수 있는 플레이 가능한 세션.
+memory/company/current_context.md:21: - First development milestone: Unity에서 플레이어가 작은 3D 맵을 돌아다니고, 화면에 포인트가 표시되는 상태.
+memory/company/current_context.md:22:
+memory/company/current_context.md:23: MVP scope:
+memory/company/current_context.md:24:
+memory/company/current_context.md:25: - 참가자 4~8명 접속
+memory/company/current_context.md:26: - 작은 3D 맵 1개
+memory/company/current_context.md:27: - 운영자 1명 접속
+memory/company/current_context.md:28: - 제한시간 30~40분
+memory/company/current_context.md:29: - 팀 구분
+memory/company/current_context.md:30: - 포인트 획득
+memory/company/current_context.md:31: - 상점 이용
+memory/company/current_context.md:32: - 아이템 3개 사용: 진실의 펜, 위치 스캐너, 도플갱어 시약
+memory/company/current_context.md:33: - 운영자 관전 모드
+memory/company/current_context.md:34: - 기본 점수판/상태창
+memory/company/current_context.md:35: - OBS 녹화 가능
+memory/company/current_context.md:36:
+memory/company/current_context.md:37: First mode rules:
+memory/company/current_context.md:38:
+memory/company/current_context.md:39: - 일반 참가자는 제한시간 안에 열쇠 3개를 찾아 최종 탈출문을 연다.
+memory/company/current_context.md:40: - 배신자는 정체를 숨기고 일반 참가자의 탈출을 방해한다.
+memory/company/current_context.md:41: - 모든 참가자는 미션으로 포인트를 얻고 상점 아이템을 구매한다.
+memory/company/current_context.md:42:
+memory/company/current_context.md:43: Current constraints:
+memory/company/current_context.md:44:
+memory/company/current_context.md:45: - One writer per Unity scene, prefab folder, or script system.
+memory/company/current_context.md:46: - Agent work must produce evidence before completion.
+memory/company/current_context.md:47: - Shared memory must be updated after meaningful decisions.
+memory/company/current_context.md:48: - Do not ask an agent to build the whole game at once. Split work into scoped, verifiable tasks.
+asset_pipeline/briefs/truth_pen.md:1: # Asset Brief: truth_pen
+asset_pipeline/briefs/truth_pen.md:2:
+asset_pipeline/briefs/truth_pen.md:3: Status: briefed
+asset_pipeline/briefs/truth_pen.md:4: Target: Unity prefab
+asset_pipeline/briefs/truth_pen.md:5: Scale reference: 0.22m handheld prop; player height 2m
+asset_pipeline/briefs/truth_pen.md:6: Poly budget: 3,000 triangles maximum
+asset_pipeline/briefs/truth_pen.md:7: Texture style: broadcast-readable gold, charcoal, and cyan emissive accents
+asset_pipeline/briefs/truth_pen.md:8: Source/license: Pending; use only original or explicitly licensed source art
+asset_pipeline/briefs/truth_pen.md:9:
+asset_pipeline/briefs/truth_pen.md:10: ## Use
+asset_pipeline/briefs/truth_pen.md:11:
+asset_pipeline/briefs/truth_pen.md:12: Shop inventory icon, world pickup, and held prop for the Truth Pen item. The
+asset_pipeline/briefs/truth_pen.md:13: gameplay effect reveals one participant as traitor or clear, so the silhouette
+asset_pipeline/briefs/truth_pen.md:14: must remain recognizable in the shop UI and on an OBS program feed.
+asset_pipeline/briefs/truth_pen.md:15:
+asset_pipeline/briefs/truth_pen.md:16: ## Generation Prompt
+asset_pipeline/briefs/truth_pen.md:17:
+asset_pipeline/briefs/truth_pen.md:18: Create a compact game-ready truth-detection pen for a stylized Egyptian
+asset_pipeline/briefs/truth_pen.md:19: gameshow. Use a chunky gold-and-charcoal body, a cyan glowing nib, a strong
+asset_pipeline/briefs/truth_pen.md:20: asymmetric clip, beveled low-poly forms, and no text, logos, or watermark.
+asset_pipeline/briefs/truth_pen.md:21: Orthographic three-quarter view on a plain background; show the entire object.
+asset_pipeline/briefs/truth_pen.md:22:
+asset_pipeline/briefs/truth_pen.md:23: ## Review Notes
+asset_pipeline/briefs/truth_pen.md:24:
+asset_pipeline/briefs/truth_pen.md:25: - Separate the body, clip, and emissive nib for material control.
+asset_pipeline/briefs/truth_pen.md:26: - Keep a collider-friendly outline with no fragile floating pieces.
+asset_pipeline/briefs/truth_pen.md:27: - Validate readability from the gameplay camera before acceptance.
+memory/sessions/20260726-181451-truth-pen/summary.md:1: # Session Summary
+memory/sessions/20260726-181451-truth-pen/summary.md:2:
+memory/sessions/20260726-181451-truth-pen/summary.md:3: Status: ready_for_critic_review
+memory/sessions/20260726-181451-truth-pen/summary.md:4:
+memory/sessions/20260726-181451-truth-pen/summary.md:5: ## Result
+memory/sessions/20260726-181451-truth-pen/summary.md:6:
+memory/sessions/20260726-181451-truth-pen/summary.md:7: - Prepared `docs/research/truth_pen_source_license_brief.md` from official
+memory/sessions/20260726-181451-truth-pen/summary.md:8:   OpenAI and Creative Commons controlling terms.
+memory/sessions/20260726-181451-truth-pen/summary.md:9: - Approved an original Channel Play concept as the preferred source strategy;
+memory/sessions/20260726-181451-truth-pen/summary.md:10:   generation and import remain blocked until critic review.
+memory/sessions/20260726-181451-truth-pen/summary.md:11: - Preserved failed NotebookLM and `agy` receipts instead of treating empty
+memory/sessions/20260726-181451-truth-pen/summary.md:12:   adapter output as success.
+memory/sessions/20260726-181451-truth-pen/summary.md:13: - Added a regression guard for UTF-8 adapter output and permission-denied,
+memory/sessions/20260726-181451-truth-pen/summary.md:14:   no-output runs.
+memory/sessions/20260726-181451-truth-pen/summary.md:15:
+memory/sessions/20260726-181451-truth-pen/summary.md:16: ## Next Handoff
+memory/sessions/20260726-181451-truth-pen/summary.md:17:
+memory/sessions/20260726-181451-truth-pen/summary.md:18: Run `critic_reviewer` on `task-0009`. If accepted, pass the reviewed brief and
+memory/sessions/20260726-181451-truth-pen/summary.md:19: completed provenance record to `asset_factory`.
+---MATCHES---
+docs\agent_team_structure.md:22:| `research_librarian` | NotebookLM/Maru/project-memory research before implementation | NotebookLM | cited research brief + uncertainty list |
+docs\agent_team_structure.md:30:- Research/source/citation/NotebookLM/latest/benchmark requests route to `research_librarian`.
+memory\company\agent_registry.json:106:      "id": "asset_factory",
+memory\company\agent_registry.json:107:      "profile": "agents/roles/asset_factory.agent.md",
+memory\company\agent_registry.json:254:        "tool": "notebooklm",
+memory\company\agent_registry.json:255:        "focus": "NotebookLM/MCP, Maru deep research, 공유 기억 검색으로 구현 전 필요한 근거와 불확실성을 정리한다.",
+memory\company\agent_registry.json:262:        "notebooklm": {
+memory\company\agent_registry.json:270:            "notebooklm"
+memory\company\current_brief.md:7:Current session: 20260726-181451-truth-pen
+memory\company\current_brief.md:118:- asset_factory: agents/roles/asset_factory.agent.md
+memory\company\current_brief.md:142:- 20260726-181451-truth-pen: memory/sessions/20260726-181451-truth-pen/summary.md
+memory\company\current_brief.md:157:- Continue `task-0009` and attach its required evidence before verification.
+asset_pipeline\index.json:21:      "id": "truth_pen",
+asset_pipeline\index.json:23:      "brief": "asset_pipeline/briefs/truth_pen.md",
+asset_pipeline\index.json:26:      "pipeline_receipt": "runs/asset-pipeline-truth_pen/asset_pipeline_receipt.md",
+asset_pipeline\index.json:27:      "source_intake": "asset_pipeline/incoming_2d/truth_pen/source_drop.md",
+asset_pipeline\index.json:28:      "generation_handoff": "asset_pipeline/generated_3d/truth_pen/generation_handoff.md",
+asset_pipeline\index.json:29:      "blender_template": "asset_pipeline/blender_work/truth_pen/blender_batch_template.py",
+asset_pipeline\index.json:30:      "unity_import_manifest": "asset_pipeline/unity_ready/truth_pen/unity_import_manifest.md",
+asset_pipeline\incoming_2d\truth_pen\source_drop.md:3:Asset ID: truth_pen
+asset_pipeline\incoming_2d\truth_pen\source_drop.md:10:- Intended gameplay use: shop icon, world pickup, and held Truth Pen prop
+asset_pipeline\generated_3d\truth_pen\generation_handoff.md:3:Asset ID: truth_pen
+agents\roles\research_librarian.agent.md:7:- NotebookLM MCP / `nlm` for project notebook queries.
+agents\roles\research_librarian.agent.md:8:- Maru deep research for current web facts and external tools.
+asset_pipeline\briefs\truth_pen.md:1:# Asset Brief: truth_pen
+asset_pipeline\briefs\truth_pen.md:12:Shop inventory icon, world pickup, and held prop for the Truth Pen item. The
+docs\channel_play_agent_company_implementation_plan.md:295:| 2D, 3D generation, asset brief | `asset_factory` |
+docs\channel_play_agent_company_implementation_plan.md:504:-> asset_factory work order
+memory\sessions\20260726-181451-truth-pen\context.md:3:Session ID: 20260726-181451-truth-pen
+memory\sessions\20260726-181451-truth-pen\context.md:4:Goal: Truth Pen 소스 출처 및 라이선스 조사
+memory\sessions\20260726-181451-truth-pen\context.md:14:  source for the Truth Pen.
+memory\sessions\20260726-181451-truth-pen\context.md:19:  `asset_factory`.
+memory\sessions\20260726-181451-truth-pen\context.md:25:- Handoff target: `asset_factory`
+memory\sessions\20260726-181451-truth-pen\context.md:29:- `docs/research/truth_pen_source_license_brief.md`
+asset_pipeline\blender_work\truth_pen\blender_batch_template.py:5:ASSET_ID = 'truth_pen'
+asset_pipeline\unity_ready\truth_pen\import_note.md:3:Asset ID: truth_pen
+asset_pipeline\unity_ready\truth_pen\import_note.md:4:Prefab path: Assets/_Project/Prefabs/Props/TruthPen.prefab
+memory\sessions\20260726-181451-truth-pen\summary.md:7:- Prepared `docs/research/truth_pen_source_license_brief.md` from official
+memory\sessions\20260726-181451-truth-pen\summary.md:11:- Preserved failed NotebookLM and `agy` receipts instead of treating empty
+memory\sessions\20260726-181451-truth-pen\summary.md:18:Run `critic_reviewer` on `task-0009`. If accepted, pass the reviewed brief and
+memory\sessions\20260726-181451-truth-pen\summary.md:19:completed provenance record to `asset_factory`.
+asset_pipeline\blender_work\truth_pen\cleanup_work_order.md:3:Asset ID: truth_pen
+asset_pipeline\blender_work\truth_pen\cleanup_work_order.md:6:Object names: CP_TruthPen_Body, CP_TruthPen_Clip, CP_TruthPen_Nib
+asset_pipeline\blender_work\truth_pen\cleanup_work_order.md:7:Materials: MAT_TruthPen_Body and MAT_TruthPen_Emissive
+asset_pipeline\blender_work\truth_pen\cleanup_work_order.md:11:Export: GLB to asset_pipeline/unity_ready/truth_pen/
+memory\sessions\20260726-181451-truth-pen\work_orders\task-0009-research_librarian.md:3:Task ID: task-0009
+memory\sessions\20260726-181451-truth-pen\work_orders\task-0009-research_librarian.md:5:Goal: Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록
+memory\sessions\20260726-181451-truth-pen\work_orders\task-0009-research_librarian.md:6:Read first: agents/company.md, agents/memory_policy.md, memory/company/current_brief.md, memory/company/task-0009-plan.md
+memory\sessions\20260726-181451-truth-pen\work_orders\task-0009-research_librarian.md:13:Inputs: memory/company/task-0009-plan.md, task request, and current brief
+memory\sessions\20260726-181451-truth-pen\work_orders\task-0009-research_librarian.md:15:Verification required: NotebookLM/Maru cited research brief
+asset_pipeline\unity_ready\truth_pen\unity_import_manifest.md:3:Asset ID: truth_pen
+asset_pipeline\unity_ready\truth_pen\unity_import_manifest.md:5:Target folder: Assets/_Project/Art/Props/TruthPen
+asset_pipeline\unity_ready\truth_pen\unity_import_manifest.md:6:Prefab path: Assets/_Project/Prefabs/Props/TruthPen.prefab
+docs\channel_play_agent_company_plan.md:174:    asset_factory.agent.md
+memory\company\state.json:4:  "active_session": "20260726-181451-truth-pen",
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:3:Task ID: task-0009
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:10:공식 OpenAI 및 Creative Commons 원문을 기준으로 Truth Pen의 안전한
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:17:- `asset_pipeline/briefs/truth_pen.md`
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:18:- `asset_pipeline/incoming_2d/truth_pen/source_drop.md`
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:19:- `memory/company/task-0009-plan.md`
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:25:- `docs/research/truth_pen_source_license_brief.md`
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:39:- `docs/research/truth_pen_source_license_brief.md`
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:40:- `runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md`
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:41:- `runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md`
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:45:- NotebookLM authentication was expired.
+memory\sessions\20260726-181451-truth-pen\agent_reports\task-0009-research_librarian.md:54:acceptance, hand the reviewed brief to `asset_factory`; keep production blocked
+memory\company\task_board.json:231:      "id": "task-0009",
+memory\company\task_board.json:232:      "request": "Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록",
+memory\company\task_board.json:243:      "required_evidence": "NotebookLM/Maru cited research brief",
+memory\company\task_board.json:246:      "work_order": "memory/sessions/20260726-181451-truth-pen/work_orders/task-0009-research_librarian.md",
+memory\company\task_board.json:247:      "report": "memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md",
+memory\company\task_board.json:249:      "session": "20260726-181451-truth-pen",
+memory\company\task_board.json:252:          "tool": "notebooklm",
+memory\company\task_board.json:255:          "path": "runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md",
+memory\company\task_board.json:262:          "path": "runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md",
+memory\company\task_board.json:267:      "last_agent_run": "runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md",
+memory\company\task_board.json:271:          "path": "docs/research/truth_pen_source_license_brief.md",
+memory\company\task-0009-plan.md:3:Task ID: task-0009
+memory\company\task-0009-plan.md:7:Required evidence: NotebookLM/Maru cited research brief
+memory\company\task-0009-plan.md:11:Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록
+memory\company\task-0009-plan.md:22:- Create `docs/research/truth_pen_source_license_brief.md`.
+memory\company\task-0009-plan.md:28:## Acceptance Checklist
+memory\company\task-0009-plan.md:38:- Include a handoff note for `asset_factory`; this task does not write to
+memory\company\tool_adapters.json:12:    "asset_factory": "hermes",
+memory\company\tool_adapters.json:23:    "research_librarian": "notebooklm",
+memory\company\tool_adapters.json:113:    "notebooklm": {
+memory\company\tool_adapters.json:115:      "description": "NotebookLM project-source research worker through nlm CLI",
+docs\implementation_plan.md:51:- `.maru`, `.DS_Store`, Unity `Library/`, `Temp/`, `Builds/`가 Git에서 제외됨
+docs\research\truth_pen_source_license_brief.md:1:# Truth Pen Source and License Brief
+docs\research\truth_pen_source_license_brief.md:3:Task: `task-0009`
+docs\research\truth_pen_source_license_brief.md:12:`asset_pipeline/briefs/truth_pen.md`. The preferred production path is a new
+docs\research\truth_pen_source_license_brief.md:26:| Provider/source | Channel Play repository, `asset_pipeline/briefs/truth_pen.md` |
+docs\research\truth_pen_source_license_brief.md:59:Before `asset_factory` begins, record:
+docs\research\truth_pen_source_license_brief.md:73:`asset_factory` should receive the approved brief plus the completed provenance
+docs\research\KHUFU_MEGA_LABYRINTH_MAP_RESEARCH.md:6:NotebookLM notebook: https://notebooklm.google.com/notebook/871c7f05-a71d-4b29-85b2-7e398be93ccc
+docs\research\KHUFU_MEGA_LABYRINTH_MAP_RESEARCH.md:38:NotebookLM deep research was used for source discovery and synthesis. Its first discovery set
+docs\research\KHUFU_MEGA_LABYRINTH_MAP_RESEARCH.md:44:NotebookLM output is a synthesis aid, not an authority. Where a synthesis conflicts with a
+docs\khufu-v6-visual-slice\README.md:29:not register an Editor instance. NotebookLM research also remained unavailable because its local
+docs\khufu-v6-visual-slice\STATUS.md:7:- Current blocker: Unity MCP Editor registration and NotebookLM authentication are unavailable, but
+docs\khufu-v6-visual-slice\STATUS.md:33:- [ ] NotebookLM requires a fresh local `nlm login` before it can contribute research evidence.
+docs\khufu-v10-interior-spine\RESEARCH_BRIEF.md:5:The baseline combines project research, NotebookLM synthesis, and direct source verification.
+docs\khufu-v10-interior-spine\RESEARCH_BRIEF.md:6:NotebookLM deep research found 56 candidates, including sensational secondary claims. Only the two
+docs\khufu-v10-interior-spine\RULES.md:5:1. Direct measurements control numeric claims; NotebookLM synthesis never overrides a primary or
+docs\khufu-v8-temple-production-art\STATUS.md:7:- NotebookLM deep research completed with 75 sources and an implementation-focused synthesis.
+
+2026-07-26T09:44:27.899903Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+"C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command '$targets = @('"'memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md','memory/company/task_board.json','runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md','runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md','memory/sessions/20260726-181451-truth-pen/context.md','asset_pipeline/incoming_2d/truth_pen/source_drop.md'); foreach ("'$target in $targets) { if (Test-Path -LiteralPath $target) { $lineNumber = 0; Get-Content -LiteralPath $target -Encoding utf8 | ForEach-Object { $lineNumber++; '"'{0}:{1}: {2}' -f "'$target,$lineNumber,$_ } } else { '"'MISSING: ' + "'$target } }; git status --short; git log -1 --oneline' in D:\Temp\User\User\channel-play-truth-pen-review-9d54996d
+ succeeded in 1047ms:
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:1: # Agent Report
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:2:
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:3: Task ID: task-0009
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:4: Role: research_librarian
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:5: Status: needs_review
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:6: Created: 2026-07-26T18:32:14+09:00
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:7:
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:8: ## Summary
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:9:
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:10: 공식 OpenAI 및 Creative Commons 원문을 기준으로 Truth Pen의 안전한
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:11: 소스 전략을 정리했다. 프로젝트 자체 제작을 우선 승인안으로 두고,
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:12: OpenAI 생성안과 CC0 외부 자료는 조건부 대안으로 제한했다. 실제 소스
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:13: 아트는 생성·다운로드·가져오기하지 않았다.
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:14:
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:15: ## Files Read
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:16:
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:17: - `asset_pipeline/briefs/truth_pen.md`
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:18: - `asset_pipeline/incoming_2d/truth_pen/source_drop.md`
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:19: - `memory/company/task-0009-plan.md`
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:20: - OpenAI Terms of Use, Services Agreement, Service Terms, Sharing & Publication Policy
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:21: - Creative Commons CC0 1.0 Deed and Legal Code
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:22:
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:23: ## Files Changed
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:24:
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:25: - `docs/research/truth_pen_source_license_brief.md`
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:26: - `memory/company/task_board.json`
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:27: - Agent execution receipts under `runs/`
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:28:
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:29: ## Decisions
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:30:
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:31: - Prefer a new human-authored, project-owned concept with documented contributor rights.
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:32: - Permit an OpenAI-generated concept only after recording account type, applicable
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:33:   terms, generation provenance, human review, and rights screening.
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:34: - Allow CC0 only as a fallback with work-specific uploader and license proof.
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:35: - Reject generic web or social images and remain fail closed before critic approval.
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:36:
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:37: ## Evidence
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:38:
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:39: - `docs/research/truth_pen_source_license_brief.md`
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:40: - `runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md`
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:41: - `runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md`
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:42:
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:43: ## Risks
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:44:
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:45: - NotebookLM authentication was expired.
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:46: - The `agy` fallback was denied write permission and produced no research output.
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:47: - The repository does not yet identify the final art contributor or rights assignment.
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:48: - Provider ownership language does not guarantee copyrightability, exclusivity, or
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:49:   non-infringement.
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:50:
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:51: ## Handoff
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:52:
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:53: `critic_reviewer` should validate the decision and provenance checklist. On
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:54: acceptance, hand the reviewed brief to `asset_factory`; keep production blocked
+memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md:55: if contributor rights, provider terms, or screening records are missing.
+memory/company/task_board.json:1: {
+memory/company/task_board.json:2:   "tasks": [
+memory/company/task_board.json:3:     {
+memory/company/task_board.json:4:       "id": "task-0001",
+memory/company/task_board.json:5:       "request": "fix player movement feedback",
+memory/company/task_board.json:6:       "status": "closed",
+memory/company/task_board.json:7:       "suggested_agent": "unity_gameplay",
+memory/company/task_board.json:8:       "assigned_agent": "unity_gameplay",
+memory/company/task_board.json:9:       "allowed_write_paths": [
+memory/company/task_board.json:10:         "Assets/_Project/Scripts/Gameplay"
+memory/company/task_board.json:11:       ],
+memory/company/task_board.json:12:       "required_evidence": "Unity compile or playtest evidence",
+memory/company/task_board.json:13:       "created_at": "2026-06-01T14:48:33+09:00",
+memory/company/task_board.json:14:       "updated_at": "2026-06-01T14:50:01+09:00",
+memory/company/task_board.json:15:       "work_order": "memory/sessions/20260601-144833-agent-company-smoke/work_orders/task-0001-unity_gameplay.md",
+memory/company/task_board.json:16:       "report": "memory/sessions/20260601-144833-agent-company-smoke/agent_reports/task-0001-unity_gameplay.md",
+memory/company/task_board.json:17:       "verification": "memory/sessions/20260601-144833-agent-company-smoke/verification/task-0001-verification.md",
+memory/company/task_board.json:18:       "verification_status": "passed",
+memory/company/task_board.json:19:       "evidence": [
+memory/company/task_board.json:20:         {
+memory/company/task_board.json:21:           "path": "runs/unity-check-2026-06-01t14-48-34-09-00/unity_check.md",
+memory/company/task_board.json:22:           "note": "Unity quick check evidence",
+memory/company/task_board.json:23:           "attached_at": "2026-06-01T14:50:01+09:00"
+memory/company/task_board.json:24:         }
+memory/company/task_board.json:25:       ],
+memory/company/task_board.json:26:       "closed_at": "2026-06-01T14:50:01+09:00"
+memory/company/task_board.json:27:     },
+memory/company/task_board.json:28:     {
+memory/company/task_board.json:29:       "id": "task-0002",
+memory/company/task_board.json:30:       "request": "multiplayer server architecture review",
+memory/company/task_board.json:31:       "status": "closed_blocked",
+memory/company/task_board.json:32:       "suggested_agent": "unity_gameplay",
+memory/company/task_board.json:33:       "suggested_reviewer": "critic_reviewer",
+memory/company/task_board.json:34:       "assigned_agent": null,
+memory/company/task_board.json:35:       "allowed_write_paths": [
+memory/company/task_board.json:36:         "Assets/_Project/Scripts/Gameplay"
+memory/company/task_board.json:37:       ],
+memory/company/task_board.json:38:       "required_evidence": "Unity compile or playtest evidence",
+memory/company/task_board.json:39:       "created_at": "2026-06-01T14:54:16+09:00",
+memory/company/task_board.json:40:       "updated_at": "2026-06-01T14:54:32+09:00",
+memory/company/task_board.json:41:       "work_order": null,
+memory/company/task_board.json:42:       "report": null,
+memory/company/task_board.json:43:       "verification": null,
+memory/company/task_board.json:44:       "blocked_reason": "planner smoke only",
+memory/company/task_board.json:45:       "closed_at": "2026-06-01T14:54:32+09:00"
+memory/company/task_board.json:46:     },
+memory/company/task_board.json:47:     {
+memory/company/task_board.json:48:       "id": "task-0003",
+memory/company/task_board.json:49:       "request": "reproduce screenshot feedback /Volumes/AI2/channel_play/reviews/2026-06-01/feedback-0002/feedback.md",
+memory/company/task_board.json:50:       "status": "closed",
+memory/company/task_board.json:51:       "suggested_agent": "qa_playtest",
+memory/company/task_board.json:52:       "suggested_reviewer": null,
+memory/company/task_board.json:53:       "assigned_agent": "qa_playtest",
+memory/company/task_board.json:54:       "allowed_write_paths": [
+memory/company/task_board.json:55:         "reviews"
+memory/company/task_board.json:56:       ],
+memory/company/task_board.json:57:       "required_evidence": "reproduction note",
+memory/company/task_board.json:58:       "created_at": "2026-06-01T14:57:09+09:00",
+memory/company/task_board.json:59:       "updated_at": "2026-06-01T14:57:09+09:00",
+memory/company/task_board.json:60:       "work_order": "memory/sessions/20260601-145709-process-feedback-md/work_orders/task-0003-qa_playtest.md",
+memory/company/task_board.json:61:       "report": "memory/sessions/20260601-145709-process-feedback-md/agent_reports/task-0003-qa_playtest.md",
+memory/company/task_board.json:62:       "verification": "memory/sessions/20260601-145709-process-feedback-md/verification/task-0003-verification.md",
+memory/company/task_board.json:63:       "session": "20260601-145709-process-feedback-md",
+memory/company/task_board.json:64:       "evidence": [
+memory/company/task_board.json:65:         {
+memory/company/task_board.json:66:           "path": "runs/unity-check-2026-06-01t14-57-09-09-00/unity_check.md",
+memory/company/task_board.json:67:           "note": "feedback workflow evidence",
+memory/company/task_board.json:68:           "attached_at": "2026-06-01T14:57:09+09:00"
+memory/company/task_board.json:69:         }
+memory/company/task_board.json:70:       ],
+memory/company/task_board.json:71:       "verification_status": "passed",
+memory/company/task_board.json:72:       "closed_at": "2026-06-01T14:57:09+09:00"
+memory/company/task_board.json:73:     },
+memory/company/task_board.json:74:     {
+memory/company/task_board.json:75:       "id": "task-0004",
+memory/company/task_board.json:76:       "request": "fix player movement feedback /Volumes/AI2/channel_play/reviews/2026-06-01/feedback-0002/feedback.md",
+memory/company/task_board.json:77:       "status": "closed",
+memory/company/task_board.json:78:       "suggested_agent": "unity_gameplay",
+memory/company/task_board.json:79:       "suggested_reviewer": null,
+memory/company/task_board.json:80:       "assigned_agent": "unity_gameplay",
+memory/company/task_board.json:81:       "allowed_write_paths": [
+memory/company/task_board.json:82:         "Assets/_Project/Scripts/Gameplay"
+memory/company/task_board.json:83:       ],
+memory/company/task_board.json:84:       "required_evidence": "Unity compile or playtest evidence",
+memory/company/task_board.json:85:       "created_at": "2026-06-01T14:57:09+09:00",
+memory/company/task_board.json:86:       "updated_at": "2026-06-01T14:57:09+09:00",
+memory/company/task_board.json:87:       "work_order": "memory/sessions/20260601-145709-process-feedback-md/work_orders/task-0004-unity_gameplay.md",
+memory/company/task_board.json:88:       "report": "memory/sessions/20260601-145709-process-feedback-md/agent_reports/task-0004-unity_gameplay.md",
+memory/company/task_board.json:89:       "verification": "memory/sessions/20260601-145709-process-feedback-md/verification/task-0004-verification.md",
+memory/company/task_board.json:90:       "session": "20260601-145709-process-feedback-md",
+memory/company/task_board.json:91:       "evidence": [
+memory/company/task_board.json:92:         {
+memory/company/task_board.json:93:           "path": "runs/unity-check-2026-06-01t14-57-09-09-00/unity_check.md",
+memory/company/task_board.json:94:           "note": "feedback workflow evidence",
+memory/company/task_board.json:95:           "attached_at": "2026-06-01T14:57:09+09:00"
+memory/company/task_board.json:96:         }
+memory/company/task_board.json:97:       ],
+memory/company/task_board.json:98:       "verification_status": "passed",
+memory/company/task_board.json:99:       "closed_at": "2026-06-01T14:57:09+09:00"
+memory/company/task_board.json:100:     },
+memory/company/task_board.json:101:     {
+memory/company/task_board.json:102:       "id": "task-0005",
+memory/company/task_board.json:103:       "request": "review risk feedback /Volumes/AI2/channel_play/reviews/2026-06-01/feedback-0002/feedback.md",
+memory/company/task_board.json:104:       "status": "closed",
+memory/company/task_board.json:105:       "suggested_agent": "qa_playtest",
+memory/company/task_board.json:106:       "suggested_reviewer": null,
+memory/company/task_board.json:107:       "assigned_agent": "critic_reviewer",
+memory/company/task_board.json:108:       "allowed_write_paths": [
+memory/company/task_board.json:109:         "reviews"
+memory/company/task_board.json:110:       ],
+memory/company/task_board.json:111:       "required_evidence": "reproduction note",
+memory/company/task_board.json:112:       "created_at": "2026-06-01T14:57:09+09:00",
+memory/company/task_board.json:113:       "updated_at": "2026-06-01T14:57:09+09:00",
+memory/company/task_board.json:114:       "work_order": "memory/sessions/20260601-145709-process-feedback-md/work_orders/task-0005-critic_reviewer.md",
+memory/company/task_board.json:115:       "report": "memory/sessions/20260601-145709-process-feedback-md/agent_reports/task-0005-critic_reviewer.md",
+memory/company/task_board.json:116:       "verification": "memory/sessions/20260601-145709-process-feedback-md/verification/task-0005-verification.md",
+memory/company/task_board.json:117:       "session": "20260601-145709-process-feedback-md",
+memory/company/task_board.json:118:       "evidence": [
+memory/company/task_board.json:119:         {
+memory/company/task_board.json:120:           "path": "runs/unity-check-2026-06-01t14-57-09-09-00/unity_check.md",
+memory/company/task_board.json:121:           "note": "feedback workflow evidence",
+memory/company/task_board.json:122:           "attached_at": "2026-06-01T14:57:09+09:00"
+memory/company/task_board.json:123:         }
+memory/company/task_board.json:124:       ],
+memory/company/task_board.json:125:       "verification_status": "passed",
+memory/company/task_board.json:126:       "closed_at": "2026-06-01T14:57:09+09:00"
+memory/company/task_board.json:127:     },
+memory/company/task_board.json:128:     {
+memory/company/task_board.json:129:       "id": "task-0006",
+memory/company/task_board.json:130:       "request": "캡처 피드백 재현 및 영향 범위 기록: Reframe `Operator_Overview_Camera` to show the playable School MVP route, player start, and primary objective landmarks in one legible overview. Keep the capture deterministic and retain the non-blank PNG validation. (reviews/2026-07-26/feedback-0002/feedback.md)",
+memory/company/task_board.json:131:       "status": "closed",
+memory/company/task_board.json:132:       "suggested_agent": "qa_playtest",
+memory/company/task_board.json:133:       "suggested_reviewer": null,
+memory/company/task_board.json:134:       "assigned_agent": "qa_playtest",
+memory/company/task_board.json:135:       "allowed_write_paths": [
+memory/company/task_board.json:136:         "reviews",
+memory/company/task_board.json:137:         "runs"
+memory/company/task_board.json:138:       ],
+memory/company/task_board.json:139:       "required_evidence": "reproduction note linked to screenshot or Unity log",
+memory/company/task_board.json:140:       "created_at": "2026-07-26T16:33:49+09:00",
+memory/company/task_board.json:141:       "updated_at": "2026-07-26T16:48:49+09:00",
+memory/company/task_board.json:142:       "work_order": "memory/sessions/20260726-163349-process-feedback-md/work_orders/task-0006-qa_playtest.md",
+memory/company/task_board.json:143:       "report": null,
+memory/company/task_board.json:144:       "verification": "memory/sessions/20260726-163349-process-feedback-md/verification/task-0006-verification.md",
+memory/company/task_board.json:145:       "session": "20260726-163349-process-feedback-md",
+memory/company/task_board.json:146:       "evidence": [
+memory/company/task_board.json:147:         {
+memory/company/task_board.json:148:           "path": "reviews/2026-07-26/feedback-0002/task-0006-qa-reproduction.md",
+memory/company/task_board.json:149:           "note": "QA reproduction note linked to deterministic 1600x900 screenshot and Unity capture receipt",
+memory/company/task_board.json:150:           "attached_at": "2026-07-26T16:48:48+09:00"
+memory/company/task_board.json:151:         }
+memory/company/task_board.json:152:       ],
+memory/company/task_board.json:153:       "verification_status": "passed",
+memory/company/task_board.json:154:       "closed_at": "2026-07-26T16:48:49+09:00"
+memory/company/task_board.json:155:     },
+memory/company/task_board.json:156:     {
+memory/company/task_board.json:157:       "id": "task-0007",
+memory/company/task_board.json:158:       "request": "피드백 수정 작업 수행: Reframe `Operator_Overview_Camera` to show the playable School MVP route, player start, and primary objective landmarks in one legible overview. Keep the capture deterministic and retain the non-blank PNG validation. (reviews/2026-07-26/feedback-0002/feedback.md)",
+memory/company/task_board.json:159:       "status": "closed",
+memory/company/task_board.json:160:       "suggested_agent": "unity_gameplay",
+memory/company/task_board.json:161:       "suggested_reviewer": null,
+memory/company/task_board.json:162:       "assigned_agent": "unity_gameplay",
+memory/company/task_board.json:163:       "allowed_write_paths": [
+memory/company/task_board.json:164:         "Assets/_Project/Scenes",
+memory/company/task_board.json:165:         "Assets/_Project/Scripts/Gameplay",
+memory/company/task_board.json:166:         "Assets/_Project/Scripts/Player",
+memory/company/task_board.json:167:         "Assets/_Project/Scripts/UI",
+memory/company/task_board.json:168:         "Assets/_Project/Scripts/Editor"
+memory/company/task_board.json:169:       ],
+memory/company/task_board.json:170:       "required_evidence": "Unity compile, playtest, and refreshed capture evidence",
+memory/company/task_board.json:171:       "created_at": "2026-07-26T16:33:49+09:00",
+memory/company/task_board.json:172:       "updated_at": "2026-07-26T17:16:09+09:00",
+memory/company/task_board.json:173:       "work_order": "memory/sessions/20260726-163349-process-feedback-md/work_orders/task-0007-unity_gameplay.md",
+memory/company/task_board.json:174:       "report": null,
+memory/company/task_board.json:175:       "verification": "memory/sessions/20260726-163349-process-feedback-md/verification/task-0007-verification.md",
+memory/company/task_board.json:176:       "session": "20260726-163349-process-feedback-md",
+memory/company/task_board.json:177:       "evidence": [
+memory/company/task_board.json:178:         {
+memory/company/task_board.json:179:           "path": "runs/unity-check-2026-07-26t17-15-19-09-00/unity_check.md",
+memory/company/task_board.json:180:           "note": "Unity 6000.0.76f1 batch compile passed with 0 errors",
+memory/company/task_board.json:181:           "attached_at": "2026-07-26T17:16:08+09:00"
+memory/company/task_board.json:182:         },
+memory/company/task_board.json:183:         {
+memory/company/task_board.json:184:           "path": "runs/unity-playtest-2026-07-26t17-15-32-09-00/unity_playtest.md",
+memory/company/task_board.json:185:           "note": "Playtest smoke passed 10 checks including operator overview framing and five visible landmarks",
+memory/company/task_board.json:186:           "attached_at": "2026-07-26T17:16:08+09:00"
+memory/company/task_board.json:187:         },
+memory/company/task_board.json:188:         {
+memory/company/task_board.json:189:           "path": "runs/unity-feedback-capture-2026-07-26t17-15-41-09-00/unity_feedback_capture.md",
+memory/company/task_board.json:190:           "note": "Deterministic 1600x900 Operator_Overview_Camera receipt; non-blank and framing gates passed",
+memory/company/task_board.json:191:           "attached_at": "2026-07-26T17:16:09+09:00"
+memory/company/task_board.json:192:         },
+memory/company/task_board.json:193:         {
+memory/company/task_board.json:194:           "path": "reviews/captures/game-2026-07-26t17-15-41-09-00.png",
+memory/company/task_board.json:195:           "note": "Refreshed overview capture showing full playable map, player start, key routes, and exit",
+memory/company/task_board.json:196:           "attached_at": "2026-07-26T17:16:09+09:00"
+memory/company/task_board.json:197:         }
+memory/company/task_board.json:198:       ],
+memory/company/task_board.json:199:       "verification_status": "passed",
+memory/company/task_board.json:200:       "closed_at": "2026-07-26T17:16:09+09:00"
+memory/company/task_board.json:201:     },
+memory/company/task_board.json:202:     {
+memory/company/task_board.json:203:       "id": "task-0008",
+memory/company/task_board.json:204:       "request": "피드백 수정 리스크 리뷰: Reframe `Operator_Overview_Camera` to show the playable School MVP route, player start, and primary objective landmarks in one legible overview. Keep the capture deterministic and retain the non-blank PNG validation. (reviews/2026-07-26/feedback-0002/feedback.md)",
+memory/company/task_board.json:205:       "status": "closed",
+memory/company/task_board.json:206:       "suggested_agent": "critic_reviewer",
+memory/company/task_board.json:207:       "suggested_reviewer": null,
+memory/company/task_board.json:208:       "assigned_agent": "critic_reviewer",
+memory/company/task_board.json:209:       "allowed_write_paths": [
+memory/company/task_board.json:210:         "reviews",
+memory/company/task_board.json:211:         "docs"
+memory/company/task_board.json:212:       ],
+memory/company/task_board.json:213:       "required_evidence": "findings-first review linked to implementation evidence",
+memory/company/task_board.json:214:       "created_at": "2026-07-26T16:33:49+09:00",
+memory/company/task_board.json:215:       "updated_at": "2026-07-26T17:39:44+09:00",
+memory/company/task_board.json:216:       "work_order": "memory/sessions/20260726-163349-process-feedback-md/work_orders/task-0008-critic_reviewer.md",
+memory/company/task_board.json:217:       "report": null,
+memory/company/task_board.json:218:       "verification": "memory/sessions/20260726-163349-process-feedback-md/verification/task-0008-verification.md",
+memory/company/task_board.json:219:       "session": "20260726-163349-process-feedback-md",
+memory/company/task_board.json:220:       "evidence": [
+memory/company/task_board.json:221:         {
+memory/company/task_board.json:222:           "path": "reviews/2026-07-26/feedback-0002/task-0008-findings-first-review.md",
+memory/company/task_board.json:223:           "note": "Findings-first critic review linked to before/after captures and task-0007 Unity implementation evidence",
+memory/company/task_board.json:224:           "attached_at": "2026-07-26T17:39:44+09:00"
+memory/company/task_board.json:225:         }
+memory/company/task_board.json:226:       ],
+memory/company/task_board.json:227:       "verification_status": "passed",
+memory/company/task_board.json:228:       "closed_at": "2026-07-26T17:39:44+09:00"
+memory/company/task_board.json:229:     },
+memory/company/task_board.json:230:     {
+memory/company/task_board.json:231:       "id": "task-0009",
+memory/company/task_board.json:232:       "request": "Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록",
+memory/company/task_board.json:233:       "status": "needs_review",
+memory/company/task_board.json:234:       "suggested_agent": "research_librarian",
+memory/company/task_board.json:235:       "suggested_reviewer": "critic_reviewer",
+memory/company/task_board.json:236:       "assigned_agent": "research_librarian",
+memory/company/task_board.json:237:       "allowed_write_paths": [
+memory/company/task_board.json:238:         "docs/research",
+memory/company/task_board.json:239:         "memory/company",
+memory/company/task_board.json:240:         "memory/sessions",
+memory/company/task_board.json:241:         "obsidian/channel_play"
+memory/company/task_board.json:242:       ],
+memory/company/task_board.json:243:       "required_evidence": "NotebookLM/Maru cited research brief",
+memory/company/task_board.json:244:       "created_at": "2026-07-26T18:07:35+09:00",
+memory/company/task_board.json:245:       "updated_at": "2026-07-26T18:32:14+09:00",
+memory/company/task_board.json:246:       "work_order": "memory/sessions/20260726-181451-truth-pen/work_orders/task-0009-research_librarian.md",
+memory/company/task_board.json:247:       "report": "memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md",
+memory/company/task_board.json:248:       "verification": null,
+memory/company/task_board.json:249:       "session": "20260726-181451-truth-pen",
+memory/company/task_board.json:250:       "agent_runs": [
+memory/company/task_board.json:251:         {
+memory/company/task_board.json:252:           "tool": "notebooklm",
+memory/company/task_board.json:253:           "mode": "run",
+memory/company/task_board.json:254:           "status": "failed",
+memory/company/task_board.json:255:           "path": "runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md",
+memory/company/task_board.json:256:           "created_at": "2026-07-26T18:20:56+09:00"
+memory/company/task_board.json:257:         },
+memory/company/task_board.json:258:         {
+memory/company/task_board.json:259:           "tool": "agy",
+memory/company/task_board.json:260:           "mode": "run",
+memory/company/task_board.json:261:           "status": "failed",
+memory/company/task_board.json:262:           "path": "runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md",
+memory/company/task_board.json:263:           "created_at": "2026-07-26T18:24:38+09:00"
+memory/company/task_board.json:264:         }
+memory/company/task_board.json:265:       ],
+memory/company/task_board.json:266:       "last_tool": "agy",
+memory/company/task_board.json:267:       "last_agent_run": "runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md",
+memory/company/task_board.json:268:       "agent_status": "failed",
+memory/company/task_board.json:269:       "evidence": [
+memory/company/task_board.json:270:         {
+memory/company/task_board.json:271:           "path": "docs/research/truth_pen_source_license_brief.md",
+memory/company/task_board.json:272:           "note": "Official OpenAI and CC0 controlling terms; retrieved 2026-07-26; fail-closed source strategy for critic review",
+memory/company/task_board.json:273:           "attached_at": "2026-07-26T18:32:10+09:00"
+memory/company/task_board.json:274:         }
+memory/company/task_board.json:275:       ]
+memory/company/task_board.json:276:     }
+memory/company/task_board.json:277:   ]
+memory/company/task_board.json:278: }
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:1: # Agent Run
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:2:
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:3: Task ID: task-0009
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:4: Role: research_librarian
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:5: Tool: notebooklm
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:6: Executor: cli
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:7: Mode: run
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:8: Status: failed
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:9: Exit: 1
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:10: Created: 2026-07-26T18:20:56+09:00
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:11:
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:12: ## Task
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:13:
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:14: Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:15:
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:16: ## Output
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:17:
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:18: {
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:19:   "status": "error",
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:20:   "error": "Query failed: Authentication expired. Run 'nlm login' in your terminal to re-authenticate. MCP users: the server should auto-detect the new credentials; if not, call the refresh_auth tool."
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:21: }
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:22:
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:23:
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:24: ## Errors
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:25:
+runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:26: none
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:1: # Agent Run
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:2:
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:3: Task ID: task-0009
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:4: Role: research_librarian
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:5: Tool: agy
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:6: Executor: cli
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:7: Mode: run
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:8: Status: failed
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:9: Exit: 0
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:10: Created: 2026-07-26T18:24:38+09:00
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:11:
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:12: ## Task
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:13:
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:14: Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:15:
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:16: ## Output
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:17:
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:18:
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:19:
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:20: ## Errors
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:21:
+runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:22: jetski: no output produced — a tool required the "write_file" permission that headless mode cannot prompt for, so it was auto-denied. Add an allow-rule under permissions.allow in settings.json (e.g. write_file(<target>)). Alternatively, re-run with --dangerously-skip-permissions to auto-approve all tools.
+memory/sessions/20260726-181451-truth-pen/context.md:1: # Session Context
+memory/sessions/20260726-181451-truth-pen/context.md:2:
+memory/sessions/20260726-181451-truth-pen/context.md:3: Session ID: 20260726-181451-truth-pen
+memory/sessions/20260726-181451-truth-pen/context.md:4: Goal: Truth Pen 소스 출처 및 라이선스 조사
+memory/sessions/20260726-181451-truth-pen/context.md:5: Started: 2026-07-26T18:14:51+09:00
+memory/sessions/20260726-181451-truth-pen/context.md:6:
+memory/sessions/20260726-181451-truth-pen/context.md:7: ## Starting State
+memory/sessions/20260726-181451-truth-pen/context.md:8:
+memory/sessions/20260726-181451-truth-pen/context.md:9: - Created by `channelctl company session start`.
+memory/sessions/20260726-181451-truth-pen/context.md:10:
+memory/sessions/20260726-181451-truth-pen/context.md:11: ## Scope
+memory/sessions/20260726-181451-truth-pen/context.md:12:
+memory/sessions/20260726-181451-truth-pen/context.md:13: - Research an original-production strategy or an explicitly licensed concept
+memory/sessions/20260726-181451-truth-pen/context.md:14:   source for the Truth Pen.
+memory/sessions/20260726-181451-truth-pen/context.md:15: - Record provenance and commercial-use, modification, redistribution, and
+memory/sessions/20260726-181451-truth-pen/context.md:16:   attribution terms.
+memory/sessions/20260726-181451-truth-pen/context.md:17: - Do not download, generate, import, or modify source art in this task.
+memory/sessions/20260726-181451-truth-pen/context.md:18: - Do not write to `asset_pipeline`; hand the reviewed decision to
+memory/sessions/20260726-181451-truth-pen/context.md:19:   `asset_factory`.
+memory/sessions/20260726-181451-truth-pen/context.md:20:
+memory/sessions/20260726-181451-truth-pen/context.md:21: ## Selected Agents
+memory/sessions/20260726-181451-truth-pen/context.md:22:
+memory/sessions/20260726-181451-truth-pen/context.md:23: - Primary: `research_librarian`
+memory/sessions/20260726-181451-truth-pen/context.md:24: - Reviewer: `critic_reviewer`
+memory/sessions/20260726-181451-truth-pen/context.md:25: - Handoff target: `asset_factory`
+memory/sessions/20260726-181451-truth-pen/context.md:26:
+memory/sessions/20260726-181451-truth-pen/context.md:27: ## Required Evidence
+memory/sessions/20260726-181451-truth-pen/context.md:28:
+memory/sessions/20260726-181451-truth-pen/context.md:29: - `docs/research/truth_pen_source_license_brief.md`
+memory/sessions/20260726-181451-truth-pen/context.md:30: - Citations to controlling license or provider terms with retrieval dates.
+memory/sessions/20260726-181451-truth-pen/context.md:31: - An explicit approved-source strategy or a fail-closed no-safe-source result.
+memory/sessions/20260726-181451-truth-pen/context.md:32: - Reviewer findings before any concept source enters production.
+asset_pipeline/incoming_2d/truth_pen/source_drop.md:1: # 2D Source Intake
+asset_pipeline/incoming_2d/truth_pen/source_drop.md:2:
+asset_pipeline/incoming_2d/truth_pen/source_drop.md:3: Asset ID: truth_pen
+asset_pipeline/incoming_2d/truth_pen/source_drop.md:4: Status: waiting_for_source
+asset_pipeline/incoming_2d/truth_pen/source_drop.md:5: Accepted inputs: PNG, JPG, SVG, concept sheet, screenshot reference
+asset_pipeline/incoming_2d/truth_pen/source_drop.md:6: License: pending; generation is blocked until provenance is recorded
+asset_pipeline/incoming_2d/truth_pen/source_drop.md:7:
+asset_pipeline/incoming_2d/truth_pen/source_drop.md:8: ## Required Notes
+asset_pipeline/incoming_2d/truth_pen/source_drop.md:9:
+asset_pipeline/incoming_2d/truth_pen/source_drop.md:10: - Intended gameplay use: shop icon, world pickup, and held Truth Pen prop
+asset_pipeline/incoming_2d/truth_pen/source_drop.md:11: - Required silhouette/readability: chunky pen body, asymmetric clip, cyan nib
+asset_pipeline/incoming_2d/truth_pen/source_drop.md:12: - Scale reference: 0.22m long against a 2m player
+asset_pipeline/incoming_2d/truth_pen/source_drop.md:13: - Source framing: full object, plain background, three-quarter or orthographic
+asset_pipeline/incoming_2d/truth_pen/source_drop.md:14: - Exclusions: text, logos, watermarks, hands, and cropped geometry
+ M memory/company/tool_adapters.json
+ M tools/studio/company/agent_runner.py
+ M tools/studio/company/tests/test_agent_runner.py
+?? runs/agent-codex-task-0009-2026-07-26t18-43-40-09-00/
+2897d227 Merge pull request #19 from zenovis2-create/codex/truth-pen-license-research
+
+hook: PostToolUse
+hook: PostToolUse Completed
+2026-07-26T09:44:43.140817Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+hook: PreToolUse
+hook: PreToolUse Completed
+web search:
+web search: https://openai.com/policies/terms-of-use/
+hook: PostToolUse
+hook: PostToolUse Completed
+2026-07-26T09:44:54.213528Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+hook: PreToolUse
+hook: PreToolUse Completed
+web search:
+web search:
+hook: PostToolUse
+hook: PostToolUse Completed
+2026-07-26T09:45:04.490225Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+hook: PreToolUse
+hook: PreToolUse Completed
+web search:
+web search:
+hook: PostToolUse
+hook: PostToolUse Completed
+2026-07-26T09:45:13.605077Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+hook: PreToolUse
+hook: PreToolUse Completed
+web search:
+web search:
+hook: PostToolUse
+hook: PostToolUse Completed
+2026-07-26T09:45:57.198300Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+codex
+공식 원문 대조 결과, OpenAI의 출력 소유 문구는 “당사자 사이에서, 법이 허용하는 범위”의 권리 배분이며 비침해·고유성 보증이 아닙니다. 또한 현재 브리프가 인용한 2022년 공유정책은 소셜 게시·라이브스트리밍과 API 공동저작 텍스트를 구체적으로 다루므로, 게임용 이미지 자산 전체에 동일한 공개표시 의무가 자동 적용된다고 단정할 수 없습니다. 제품·계정·생성 경로별 적용 약관 확정이 필요합니다.
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+"C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "git log --follow --format='commit=%H%nsubject=%s%nauthor=%an <%ae>%ndate=%aI' -- asset_pipeline/briefs/truth_pen.md; git log --follow -p -- asset_pipeline/briefs/truth_pen.md" in D:\Temp\User\User\channel-play-truth-pen-review-9d54996d
+ succeeded in 808ms:
+commit=37b1065d15ecb9b2879d16ed5fd76b5fbfe13e8f
+subject=feat(assets): prepare truth pen production packet
+author=대한 <daehan@Mac-Studio.local>
+date=2026-07-26T17:54:23+09:00
+commit 37b1065d15ecb9b2879d16ed5fd76b5fbfe13e8f
+Author: 대한 <daehan@Mac-Studio.local>
+Date:   Sun Jul 26 17:54:23 2026 +0900
+
+    feat(assets): prepare truth pen production packet
+
+diff --git a/asset_pipeline/briefs/truth_pen.md b/asset_pipeline/briefs/truth_pen.md
+new file mode 100644
+index 00000000..e3174c89
+--- /dev/null
++++ b/asset_pipeline/briefs/truth_pen.md
+@@ -0,0 +1,27 @@
++# Asset Brief: truth_pen
++
++Status: briefed
++Target: Unity prefab
++Scale reference: 0.22m handheld prop; player height 2m
++Poly budget: 3,000 triangles maximum
++Texture style: broadcast-readable gold, charcoal, and cyan emissive accents
++Source/license: Pending; use only original or explicitly licensed source art
++
++## Use
++
++Shop inventory icon, world pickup, and held prop for the Truth Pen item. The
++gameplay effect reveals one participant as traitor or clear, so the silhouette
++must remain recognizable in the shop UI and on an OBS program feed.
++
++## Generation Prompt
++
++Create a compact game-ready truth-detection pen for a stylized Egyptian
++gameshow. Use a chunky gold-and-charcoal body, a cyan glowing nib, a strong
++asymmetric clip, beveled low-poly forms, and no text, logos, or watermark.
++Orthographic three-quarter view on a plain background; show the entire object.
++
++## Review Notes
++
++- Separate the body, clip, and emissive nib for material control.
++- Keep a collider-friendly outline with no fragile floating pieces.
++- Validate readability from the gameplay camera before acceptance.
+
+hook: PostToolUse
+hook: PostToolUse Completed
+2026-07-26T09:46:34.280825Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+"C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "rg -n -i --hidden --glob '"'!Library/**'"' --glob '"'!Logs/**'"' --glob '"'!UserSettings/**'"' --glob '"'!Builds/**'"' --glob '"'!runs/**'"' 'contributor agreement|copyright assignment|IP assignment|work made for hire|work-for-hire|저작권 양도|기여자 계약|권리 양도' . 2>"'$null' in D:\Temp\User\User\channel-play-truth-pen-review-9d54996d
+ succeeded in 1501ms:
+.\docs\research\truth_pen_source_license_brief.md:28:| Rights basis | New work created for the project; confirm the contributor agreement or written assignment |
+.\docs\research\truth_pen_source_license_brief.md:32:Because the repository does not contain a contributor agreement, the final art
+.\docs\research\truth_pen_source_license_brief.md:66:- contributor agreement/assignment reference or exact external license;
+
+hook: PostToolUse
+hook: PostToolUse Completed
+2026-07-26T09:46:44.279509Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+hook: PreToolUse
+hook: PreToolUse Completed
+로컬 체크리스트·실행 영수증과 공식 OpenAI/CC0 원문 대조를 완료했습니다. 필수 연구 증거 실패, 권리 체인 미완성, 순환적인 제작 게이트 때문에 승인할 수 없습니다.
+  ✓ 필수 지침·계획·연구 브리프와 체크리스트 확인
+  ✓ 인용된 공식 약관 및 증거 원문 대조
+  ✓ fail-closed asset_factory 게이트와 판정 정리
+hook: PostToolUse
+hook: PostToolUse Completed
+2026-07-26T09:48:21.961012Z ERROR codex_models_manager::manager: failed to renew cache TTL: missing field `supports_reasoning_summaries` at line 88 column 5
+codex
+판정: **CHANGES REQUIRED**
+위험도: **HIGH**
+`asset_factory` 게이트: **차단 유지**
+
+검토 대상은 Channel Play를 예정 권리자로 하는 내부 소스/라이선스 브리프입니다. 최종 제작자·계약 상대방·관할법은 아직 확정되지 않았습니다.
+
+## Findings
+
+1. **[BLOCKER] 필수 NotebookLM/Maru 근거가 없습니다.**
+
+   작업은 “NotebookLM/Maru cited research brief”를 필수 증거로 지정했지만([task plan:7](D:/Temp/User/User/channel-play-truth-pen-review-9d54996d/memory/company/task-0009-plan.md:7)), NotebookLM과 대체 실행이 모두 실패 상태입니다([task board:243](D:/Temp/User/User/channel-play-truth-pen-review-9d54996d/memory/company/task_board.json:243), [NotebookLM receipt:8](D:/Temp/User/User/channel-play-truth-pen-review-9d54996d/runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md:8), [agy receipt:8](D:/Temp/User/User/channel-play-truth-pen-review-9d54996d/runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md:8)). 직접 확인한 공식 링크는 유용하지만 명시된 필수 증거를 자동 대체하지 않습니다.
+
+   조치: 성공한 NotebookLM/Maru 인용 결과를 첨부하거나, chief_orchestrator가 필수 증거를 “공식 원문 직접 검증”으로 명시적으로 변경해야 합니다.
+
+2. **[HIGH] “project-owned”로 승인 가능한 실제 권리 체인이 없습니다.**
+
+   브리프는 제작자를 “Channel Play project team”으로만 기록하고 계약/양도를 추후 확인하도록 남겼습니다([brief:26](D:/Temp/User/User/channel-play-truth-pen-review-9d54996d/docs/research/truth_pen_source_license_brief.md:26)). 원본 내부 브리프도 라이선스가 `Pending`입니다([asset brief:8](D:/Temp/User/User/channel-play-truth-pen-review-9d54996d/asset_pipeline/briefs/truth_pen.md:8)). Git 작성자 메타데이터는 저작권 양도나 업무상 저작물 성립의 증거가 아닙니다.
+
+   조치: 실제 인간 제작자, 계약 당사자, 적용 관할, 서명된 기여자 계약/양도 문서와 그 범위—상업 이용·수정·재배포·마케팅 포함—를 기록해야 합니다. 그 전에는 “project-owned”라고 표시할 수 없습니다.
+
+3. **[HIGH] 제작 게이트가 순환적이라 실행할 수 없습니다.**
+
+   “`asset_factory` 시작 전”에 job ID, 생성 시각, 원본 해시까지 요구하지만([brief:59](D:/Temp/User/User/channel-play-truth-pen-review-9d54996d/docs/research/truth_pen_source_license_brief.md:59)), 뒤에서는 “완료된 provenance record를 받은 후 처음부터 제작”하도록 합니다([brief:73](D:/Temp/User/User/channel-play-truth-pen-review-9d54996d/docs/research/truth_pen_source_license_brief.md:73)). 생성 전에는 job ID와 산출물 해시가 존재할 수 없습니다.
+
+   조치: 아래처럼 `pre-generation`과 `pre-import` 두 게이트로 분리해야 합니다.
+
+4. **[HIGH] OpenAI 출력의 권리 표현과 적용 약관 확정이 불충분합니다.**
+
+   권리표의 “Allowed as owned Output” 표현([brief:53](D:/Temp/User/User/channel-play-truth-pen-review-9d54996d/docs/research/truth_pen_source_license_brief.md:53))은 과도하게 축약됐습니다. 공식 문구는 사용자/고객과 OpenAI “당사자 사이에서, 법이 허용하는 범위”의 계약상 배분이며, 출력의 고유성·저작권 성립·비침해를 보증하지 않습니다. 개인 서비스와 API/Business의 적용 계약도 다릅니다. [Terms of Use](https://openai.com/policies/terms-of-use/), [Services Agreement](https://openai.com/policies/services-agreement/), [Service Terms](https://openai.com/policies/service-terms/).
+
+   조치: 실제 생성 계정의 법적 가입자, 개인/API/Business 구분, 모델·도구·베타 여부, 제3자 앱 사용 여부를 먼저 확정하고, 권리 표현을 “계약상 배분”으로 제한해야 합니다. 개인 계정 제작자는 Channel Play에 대한 별도 양도도 필요합니다.
+
+5. **[MEDIUM] 생성 제공자 제한과 공개정책의 적용 범위가 혼합돼 있습니다.**
+
+   체크리스트는 생성 제공자 제한을 별도로 요구하지만([task plan:32](D:/Temp/User/User/channel-play-truth-pen-review-9d54996d/memory/company/task-0009-plan.md:32)), 브리프는 잔여 위험 열에 합쳐 놓았습니다. 또한 2022년 [Sharing & Publication Policy](https://openai.com/policies/sharing-publication-policy/)는 소셜 게시·라이브스트리밍·시연과 API 공동저작 텍스트를 구체적으로 다룹니다. 게임에 포함되는 2D/3D 자산 전부에 같은 공개표시 의무가 적용된다고 단정하기에는 범위가 불명확합니다. 반대로 최신 Service Terms의 이미지·영상 입력, 공개 공유, 제3자 앱 제한은 별도 검토해야 합니다.
+
+   조치: 실제 생성 경로별로 Usage Policy, Visual Capabilities, 공개 공유 라이선스, 제3자 제공물, 베타/면책, AI 표시 의무를 독립 항목으로 기록해야 합니다.
+
+## Acceptance checklist
+
+| 항목 | 결과 |
+|---|---|
+| 소스/provider·creator·license·날짜·통제 약관 | **Partial** — 날짜·공식 링크는 있으나 제작자와 권리 문서가 없음 |
+| 상업 이용·파생·재배포·표시·생성 제한 분리 | **Partial** — 생성 제한과 정책 적용 범위 불완전 |
+| 불명 출처·워터마크·브랜드 거부 | **정책상 Pass**, 실제 검사 증거는 아직 없음 |
+| 승인 전략 또는 안전한 소스 없음 선언 | **Partial** — 방향만 선택됐고 권리 정리된 소스는 없음 |
+| `asset_factory` 핸드오프 | **Fail** — 순환적인 게이트 |
+| NotebookLM/Maru 인용 증거 | **Fail** |
+
+CC0 설명 자체는 공식 원문과 대체로 일치합니다. 다만 CC0도 상표·특허·제3자 권리를 정리하거나 비침해를 보증하지 않습니다. [CC0 Deed](https://creativecommons.org/publicdomain/zero/1.0/), [CC0 Legal Code](https://creativecommons.org/publicdomain/zero/1.0/legalcode.en).
+
+## 명시적 `asset_factory` 게이트
+
+**Gate A — 생성 허가**
+
+- 인간 제작/OpenAI/특정 CC0 작품 중 하나를 확정한다.
+- 인간 경로는 제작자와 권리 계약, AI 경로는 법적 고객·계정·모델·도구·적용 약관, CC0 경로는 실제 작품 URL·권리자·CC0 표시 증거를 기록한다.
+- 입력 자료 권리를 확인하고 미검증 웹 이미지의 참조·트레이싱·image conditioning을 금지한다.
+- NotebookLM/Maru 필수 증거 또는 승인된 대체 근거와 critic 승인 영수증이 존재한다.
+
+**Gate B — 다운로드·3D 제작·Unity import 허가**
+
+- 생성 시각, prompt, job/seed, 원본·채택본 SHA-256와 수정 이력이 있다.
+- 역이미지 검색, 로고·워터마크·상표·캐릭터·초상/프라이버시 검사가 날짜와 결과를 포함해 통과한다.
+- 실제 경로에 따른 attribution/AI disclosure 문구가 결정된다.
+- commercial use, derivatives, redistribution 각각이 `PASS`이고 미확인 항목이 없다.
+- 승인된 provenance record와 reviewer sign-off가 첨부된다.
+
+어느 하나라도 없거나 `unknown`이면 자동으로 **FAIL/CLOSED**여야 합니다.
+
+## Blocking questions
+
+- 최종 경로는 인간 자체 제작, OpenAI 생성, 특정 CC0 중 무엇입니까?
+- 인간 경로라면 실제 제작자와 적용될 기여자/IP 계약은 무엇입니까?
+- AI 경로라면 어느 법적 고객의 어떤 계정·제품·모델을 사용합니까?
+- 실패한 NotebookLM/Maru 증거를 재실행합니까, 아니면 chief_orchestrator가 공식 원문 직접 검증으로 요건을 변경합니까?
+
+변경 파일: **없음**. 리뷰 전용으로 수행했습니다. 법률 자문이 아니며, 브랜드·상품화 또는 고가 상업 출시 전에는 변호사 검토가 필요합니다.
+hook: Stop
+hook: Stop Completed
+tokens used
+107,515
