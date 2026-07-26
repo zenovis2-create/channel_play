@@ -1,7 +1,7 @@
 # Asset Procurement Outreach Readiness
 
 Asset ID: truth_pen
-Checked: 2026-07-26T22:25:19+09:00
+Checked: 2026-07-26T23:16:01+09:00
 Decision: asset_pipeline/manifests/truth_pen_procurement_decision.json
 Decision SHA-256: ebd90c2d28c3bc2e7b763b323ba5da71a3067fcd51a8612facfff451bdff9a2f
 Result: **FAIL**

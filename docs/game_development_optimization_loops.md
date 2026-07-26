@@ -45,6 +45,13 @@ Current constraint: gdx1 is ARM/aarch64 and should be used for AI/ops, repo sync
 - Reads the owner decision manifest without changing it.
 - Shows the unresolved decision count and latest readiness receipt.
 - Keeps all artist contact blocked until the check passes.
+- Runs the check when no current receipt exists. When a matching FAIL receipt
+  already exists, the next action opens the owner decision intake guide instead
+  of regenerating the same receipt.
+- A decision that evaluates ready still requires a matching PASS receipt before
+  the workflow advances beyond procurement.
+- If a current FAIL receipt exists but the owner intake guide is missing, the
+  next action remains explicitly blocked until the tracked guide is restored.
 
 This loop never contacts an artist, approves a budget, or authorizes artwork.
 Even after proposal-only outreach passes, artwork remains blocked until a signed
