@@ -1,0 +1,23 @@
+{
+  "command": [
+    "codex",
+    "exec",
+    "--cd",
+    "D:\\Temp\\User\\User\\channel-play-truth-pen-gate-a-1fadc5bf",
+    "--sandbox",
+    "workspace-write",
+    "-"
+  ],
+  "dry_run": false,
+  "timeout_seconds": 1800,
+  "executor": "cli_fallback",
+  "sdk": {
+    "available": false,
+    "status": "missing",
+    "package": "openai_codex",
+    "version": "",
+    "origin": "",
+    "last_error": "Python package not installed: openai_codex",
+    "search_paths": []
+  }
+}

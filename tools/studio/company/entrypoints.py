@@ -7,6 +7,12 @@ import sys
 from pathlib import Path
 
 from .asset_forge import asset_forge_new, asset_semantic_pack
+from .asset_gate import (
+    asset_gate_a_check,
+    asset_gate_a_init,
+    asset_gate_b_check,
+    asset_gate_b_init,
+)
 from .assets import asset_new, asset_prepare, asset_screenshot, asset_status
 from .capture import capture_screen
 from .dashboard import generate_dashboard
@@ -136,6 +142,34 @@ def dispatch_top_level(command: str, args: list[str]) -> int:
             path = asset_new(root, args[1])
             print(f"Wrote {rel(root, path)}")
             return 0
+        if command == "asset" and args[:1] == ["gate-a-init"]:
+            if len(args) < 2:
+                raise CompanyError(
+                    "Usage: asset gate-a-init <asset-id> "
+                    "[--path unselected|commissioned_human|openai|cc0]"
+                )
+            source_path = _option(args[2:], "--path", "unselected")
+            path = asset_gate_a_init(root, args[1], source_path=source_path)
+            print(f"Wrote {rel(root, path)}")
+            return 0
+        if command == "asset" and args[:1] == ["gate-a-check"]:
+            if len(args) != 2:
+                raise CompanyError("Usage: asset gate-a-check <asset-id>")
+            path = asset_gate_a_check(root, args[1])
+            print(f"Wrote {rel(root, path)}")
+            return 0
+        if command == "asset" and args[:1] == ["gate-b-init"]:
+            if len(args) != 2:
+                raise CompanyError("Usage: asset gate-b-init <asset-id>")
+            path = asset_gate_b_init(root, args[1])
+            print(f"Wrote {rel(root, path)}")
+            return 0
+        if command == "asset" and args[:1] == ["gate-b-check"]:
+            if len(args) != 2:
+                raise CompanyError("Usage: asset gate-b-check <asset-id>")
+            path = asset_gate_b_check(root, args[1])
+            print(f"Wrote {rel(root, path)}")
+            return 0
         if command == "asset" and args[:1] == ["status"]:
             if len(args) < 3:
                 raise CompanyError("Usage: asset status <asset-id> <status>")
@@ -170,7 +204,7 @@ def dispatch_top_level(command: str, args: list[str]) -> int:
             return 0
         if command == "asset" and args[:1] == ["image3d"]:
             if len(args) < 2:
-                raise CompanyError("Usage: asset image3d <asset-id> [--provider rodin25|pixal3d|trellis2|tripo|both] [--prompt TEXT] [--source-image PATH]")
+                raise CompanyError("Usage: asset image3d <asset-id> [--provider rodin25|pixal3d|trellis2|tripo|both|local] [--prompt TEXT] [--source-image PATH]")
             provider = _option(args[2:], "--provider", "pixal3d")
             prompt = _option(args[2:], "--prompt", "")
             source_image = _option(args[2:], "--source-image", "")

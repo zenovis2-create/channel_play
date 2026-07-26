@@ -1,0 +1,23 @@
+Verdict: CHANGES REQUIRED
+
+Risk level: **HIGH**
+
+1. **`asset_new`가 4개 산출물을 모두 재생성하지 않습니다.** [`asset_new`](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/tools/studio/company/assets.py:30)는 `_write_asset_scaffolds`만 호출하며, 이 함수는 cleanup work order와 import note만 작성합니다. Blender 템플릿과 Unity manifest는 [`asset_prepare`](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/tools/studio/company/assets.py:130)에서만 작성됩니다. 런타임 재현 결과:
+
+   - `asset_new`: `[cleanup=True, blender_template=False, import_note=True, unity_manifest=False]`
+   - 기존 두 파일을 stale 상태로 만든 뒤 `asset_new`: stale 상태 유지
+   - `asset_prepare`: 4개 모두 `blocked_by_gate_a`
+
+   회귀 테스트는 4개 파일을 열거하지만 [`asset_prepare`만 실행](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/tools/studio/company/tests/test_asset_gate.py:261)하며 `asset_new`는 가져오거나 검증하지 않습니다. 공통 생성기를 두 경로에서 호출하고, stale 파일을 준비한 뒤 각각의 경로가 4개 모두를 갱신하는 회귀 테스트가 필요합니다.
+
+확인된 정상 항목:
+
+- 체크인된 [cleanup work order](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/asset_pipeline/blender_work/truth_pen/cleanup_work_order.md:4), [Blender template](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/asset_pipeline/blender_work/truth_pen/blender_batch_template.py:9), [import note](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/asset_pipeline/unity_ready/truth_pen/import_note.md:4), [Unity manifest](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/asset_pipeline/unity_ready/truth_pen/unity_import_manifest.md:4)은 모두 `blocked_by_gate_a`입니다.
+- Blender 템플릿은 실행 시 [`require_asset_gate_b`](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/asset_pipeline/blender_work/truth_pen/blender_batch_template.py:12)를 재호출합니다.
+- 이전에 해결된 Gate A/B 분리, critic JSON 결합, 필수 권리 필드, lifecycle 직교성, malformed 입력의 fail-closed 처리와 정확한 source/provider 및 fallback 금지에는 회귀가 없습니다.
+- 현재 [Gate A 영수증](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/runs/asset-gate-a-truth_pen/gate_a_check.md:6)의 SHA-256은 현재 manifest와 일치하며 결과는 `FAIL`입니다. Gate B manifest와 Truth Pen PNG/GLB/FBX/Blend도 없습니다.
+- 집중 테스트: `15 passed, 3 subtests passed`
+- 회사 전체 테스트: `86 passed, 14 subtests passed`
+- `git diff --check`: 통과
+- 변경 파일: 없음
+- Blocking questions: 없음

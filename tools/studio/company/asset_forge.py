@@ -6,6 +6,7 @@ import json
 import re
 from pathlib import Path
 
+from .asset_gate import asset_gate_a_init, evaluate_asset_gate_a, evaluate_asset_gate_b
 from .errors import CompanyError
 from .timeutil import now_iso
 
@@ -17,6 +18,16 @@ def asset_forge_new(root: Path, asset_id: str, *, kind: str = "prop", prompt: st
     asset_kind = (kind or "prop").strip().lower()
     if asset_kind not in VALID_FORGE_KINDS:
         raise CompanyError(f"Invalid forge kind: {kind}")
+    asset_gate_a_init(root, clean)
+    gate_a_passed = evaluate_asset_gate_a(root, clean)["passed"]
+    gate_b_passed = evaluate_asset_gate_b(root, clean)["passed"]
+    production_status = (
+        "waiting_for_model_runtime"
+        if gate_b_passed
+        else "blocked_by_gate_b"
+        if gate_a_passed
+        else "blocked_by_gate_a"
+    )
     description = prompt.strip() or _default_prompt(clean, asset_kind)
 
     forge_root = root / "asset_pipeline" / "forge" / clean
@@ -32,18 +43,28 @@ def asset_forge_new(root: Path, asset_id: str, *, kind: str = "prop", prompt: st
     job = {
         "asset_id": clean,
         "kind": asset_kind,
-        "status": "forge_ready",
+        "status": (
+            "forge_ready"
+            if gate_b_passed
+            else "waiting_for_source_creation"
+            if gate_a_passed
+            else "waiting_for_gate_a"
+        ),
         "created_at": now_iso(),
         "prompt": description,
         "pipeline": [
             {"stage": "concept", "owner": "image_prompt_engineer", "status": "ready"},
-            {"stage": "image_generation", "owner": "asset_factory", "status": "waiting_for_gpt_image"},
+            {
+                "stage": "image_generation",
+                "owner": "asset_factory",
+                "status": "waiting_for_gpt_image" if gate_a_passed else "blocked_by_gate_a",
+            },
             {"stage": "part_schema", "owner": "technical_artist_blender", "status": "ready"},
-            {"stage": "cubepart", "owner": "gdx_ops", "status": "waiting_for_model_runtime"},
-            {"stage": "blender_cleanup", "owner": "technical_artist_blender", "status": "waiting_for_mesh"},
-            {"stage": "unity_import", "owner": "unity_architect", "status": "waiting_for_clean_fbx"},
-            {"stage": "gameplay_binding", "owner": "unity_gameplay", "status": "waiting_for_prefab"},
-            {"stage": "qa", "owner": "qa_playtest", "status": "waiting_for_scene_evidence"},
+            {"stage": "cubepart", "owner": "gdx_ops", "status": production_status},
+            {"stage": "blender_cleanup", "owner": "technical_artist_blender", "status": production_status},
+            {"stage": "unity_import", "owner": "unity_architect", "status": production_status},
+            {"stage": "gameplay_binding", "owner": "unity_gameplay", "status": production_status},
+            {"stage": "qa", "owner": "qa_playtest", "status": production_status},
         ],
         "outputs": {
             "concept_prompt": f"asset_pipeline/forge/{clean}/concept/gpt_image_prompt.md",
@@ -56,18 +77,45 @@ def asset_forge_new(root: Path, asset_id: str, *, kind: str = "prop", prompt: st
     }
 
     (forge_root / "forge_job.json").write_text(json.dumps(job, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (concept_dir / "gpt_image_prompt.md").write_text(_concept_prompt(clean, asset_kind, description), encoding="utf-8")
-    (concept_dir / "source_intake.md").write_text(_source_intake(clean), encoding="utf-8")
+    (concept_dir / "gpt_image_prompt.md").write_text(
+        _concept_prompt(clean, asset_kind, description, gate_a_passed),
+        encoding="utf-8",
+    )
+    (concept_dir / "source_intake.md").write_text(
+        _source_intake(clean, gate_a_passed),
+        encoding="utf-8",
+    )
     (schema_dir / "part_schema.json").write_text(json.dumps(schema, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (cube_dir / "cubepart_job.md").write_text(_cubepart_job(clean, asset_kind, description, schema), encoding="utf-8")
-    (blender_dir / "cleanup_plan.md").write_text(_blender_cleanup(clean, asset_kind), encoding="utf-8")
-    (unity_dir / "unity_import_plan.md").write_text(_unity_import(clean, asset_kind), encoding="utf-8")
+    (cube_dir / "cubepart_job.md").write_text(
+        _cubepart_job(clean, asset_kind, description, schema, production_status),
+        encoding="utf-8",
+    )
+    (blender_dir / "cleanup_plan.md").write_text(
+        _blender_cleanup(clean, asset_kind, production_status),
+        encoding="utf-8",
+    )
+    (unity_dir / "unity_import_plan.md").write_text(
+        _unity_import(clean, asset_kind, production_status),
+        encoding="utf-8",
+    )
 
     receipt_dir = root / "runs" / f"asset-forge-{clean}"
     receipt_dir.mkdir(parents=True, exist_ok=True)
     receipt = receipt_dir / "asset_forge_receipt.md"
-    receipt.write_text(_receipt(root, clean, asset_kind, forge_root), encoding="utf-8")
-    _update_index(root, clean, asset_kind, description, forge_root, receipt)
+    receipt.write_text(
+        _receipt(root, clean, asset_kind, forge_root, gate_a_passed, gate_b_passed),
+        encoding="utf-8",
+    )
+    _update_index(
+        root,
+        clean,
+        asset_kind,
+        description,
+        forge_root,
+        receipt,
+        gate_a_passed,
+        gate_b_passed,
+    )
     return receipt
 
 
@@ -213,13 +261,17 @@ def _part_role(part: str) -> str:
     return "visual mesh"
 
 
-def _concept_prompt(asset_id: str, kind: str, prompt: str) -> str:
+def _concept_prompt(asset_id: str, kind: str, prompt: str, gate_a_passed: bool) -> str:
     return "\n".join(
         [
             f"# GPT Image Prompt: {asset_id}",
             "",
             f"Kind: {kind}",
-            "Status: ready_for_image_generation",
+            (
+                "Status: ready_for_image_generation"
+                if gate_a_passed
+                else "Status: blocked_by_gate_a"
+            ),
             "",
             "## Prompt",
             "",
@@ -242,13 +294,17 @@ def _concept_prompt(asset_id: str, kind: str, prompt: str) -> str:
     )
 
 
-def _source_intake(asset_id: str) -> str:
+def _source_intake(asset_id: str, gate_a_passed: bool) -> str:
     return "\n".join(
         [
             "# Source Intake",
             "",
             f"Asset ID: {asset_id}",
-            "Status: waiting_for_concept_image",
+            (
+                "Status: waiting_for_concept_image"
+                if gate_a_passed
+                else "Status: blocked_by_gate_a"
+            ),
             "",
             "## Required Files",
             "",
@@ -260,13 +316,19 @@ def _source_intake(asset_id: str) -> str:
     )
 
 
-def _cubepart_job(asset_id: str, kind: str, prompt: str, schema: dict) -> str:
+def _cubepart_job(
+    asset_id: str,
+    kind: str,
+    prompt: str,
+    schema: dict,
+    production_status: str,
+) -> str:
     return "\n".join(
         [
             f"# CubePart Job: {asset_id}",
             "",
             f"Kind: {kind}",
-            "Status: waiting_for_model_runtime",
+            f"Status: {production_status}",
             "Target runtime: gdx1 or cloud GPU if local runtime is unavailable.",
             "",
             "## CubePart Prompt",
@@ -293,13 +355,17 @@ def _cubepart_job(asset_id: str, kind: str, prompt: str, schema: dict) -> str:
     )
 
 
-def _blender_cleanup(asset_id: str, kind: str) -> str:
+def _blender_cleanup(
+    asset_id: str,
+    kind: str,
+    production_status: str,
+) -> str:
     return "\n".join(
         [
             f"# Blender Cleanup Plan: {asset_id}",
             "",
             f"Kind: {kind}",
-            "Status: waiting_for_cubepart_output",
+            f"Status: {production_status}",
             "",
             "## Cleanup Rules",
             "",
@@ -315,14 +381,18 @@ def _blender_cleanup(asset_id: str, kind: str) -> str:
     )
 
 
-def _unity_import(asset_id: str, kind: str) -> str:
+def _unity_import(
+    asset_id: str,
+    kind: str,
+    production_status: str,
+) -> str:
     target = "Maps" if kind in {"zone", "background"} else "Characters" if kind == "character" else "Props"
     return "\n".join(
         [
             f"# Unity Import Plan: {asset_id}",
             "",
             f"Kind: {kind}",
-            "Status: waiting_for_clean_fbx",
+            f"Status: {production_status}",
             f"Target folder: Assets/_Project/Art/{target}",
             f"Prefab folder: Assets/_Project/Prefabs/{target}",
             "",
@@ -338,7 +408,14 @@ def _unity_import(asset_id: str, kind: str) -> str:
     )
 
 
-def _receipt(root: Path, asset_id: str, kind: str, forge_root: Path) -> str:
+def _receipt(
+    root: Path,
+    asset_id: str,
+    kind: str,
+    forge_root: Path,
+    gate_a_passed: bool,
+    gate_b_passed: bool,
+) -> str:
     rel_root = forge_root.relative_to(root).as_posix()
     return "\n".join(
         [
@@ -347,7 +424,13 @@ def _receipt(root: Path, asset_id: str, kind: str, forge_root: Path) -> str:
             f"Asset ID: {asset_id}",
             f"Kind: {kind}",
             f"Updated: {now_iso()}",
-            "Status: forge_ready",
+            (
+                "Status: forge_ready"
+                if gate_b_passed
+                else "Status: waiting_for_source_creation"
+                if gate_a_passed
+                else "Status: waiting_for_gate_a"
+            ),
             "",
             "## Artifacts",
             "",
@@ -363,7 +446,16 @@ def _receipt(root: Path, asset_id: str, kind: str, forge_root: Path) -> str:
     )
 
 
-def _update_index(root: Path, asset_id: str, kind: str, prompt: str, forge_root: Path, receipt: Path) -> None:
+def _update_index(
+    root: Path,
+    asset_id: str,
+    kind: str,
+    prompt: str,
+    forge_root: Path,
+    receipt: Path,
+    gate_a_passed: bool,
+    gate_b_passed: bool,
+) -> None:
     index = root / "asset_pipeline" / "index.json"
     data = {"assets": []}
     if index.exists():
@@ -375,7 +467,14 @@ def _update_index(root: Path, asset_id: str, kind: str, prompt: str, forge_root:
         assets.append(target)
     target.update(
         {
-            "status": "forge_ready",
+            "status": target.get("status", "briefed"),
+            "forge_status": (
+                "forge_ready"
+                if gate_b_passed
+                else "waiting_for_source_creation"
+                if gate_a_passed
+                else "blocked_by_gate_a"
+            ),
             "kind": kind,
             "prompt": prompt,
             "source_license": "pending_generated_or_project_owned",

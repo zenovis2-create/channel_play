@@ -1,11 +1,12 @@
 # Asset Brief: truth_pen
 
 Status: briefed
+Source Gate A: blocked
 Target: Unity prefab
 Scale reference: 0.22m handheld prop; player height 2m
 Poly budget: 3,000 triangles maximum
 Texture style: broadcast-readable gold, charcoal, and cyan emissive accents
-Source/license: Pending; use only original or explicitly licensed source art
+Source/license: Blocked; see `asset_pipeline/manifests/truth_pen_source_gate_a.json`
 
 ## Use
 
@@ -22,6 +23,10 @@ Orthographic three-quarter view on a plain background; show the entire object.
 
 ## Review Notes
 
+- Run `python tools/channelctl asset gate-a-check truth_pen`; source creation
+  must remain blocked until the Gate A receipt is `PASS`.
+- After the source exists, bind its path/hash and the selected 3D provider in
+  Gate B. Production remains blocked until `asset gate-b-check` passes.
 - Separate the body, clip, and emissive nib for material control.
 - Keep a collider-friendly outline with no fragile floating pieces.
 - Validate readability from the gameplay camera before acceptance.

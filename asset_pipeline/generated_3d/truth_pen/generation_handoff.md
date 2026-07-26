@@ -1,7 +1,7 @@
 # 2D to 3D Generation Handoff
 
 Asset ID: truth_pen
-Status: waiting_for_generation
+Status: blocked_by_gate_a
 Tool: Pixel3D or equivalent image-to-3D service
 Output: GLB preferred, FBX accepted
 
@@ -14,6 +14,9 @@ Output: GLB preferred, FBX accepted
 
 ## Quality Gate
 
+- Gate A must authorize source creation/download.
+- Gate B must bind the exact source hash and one approved 3D provider before
+  generation, Blender cleanup, or Unity import.
 - Shape readable from gameplay camera
 - Source license and generation-provider terms recorded
 - Clean manifold silhouette with no severe texture projection artifacts

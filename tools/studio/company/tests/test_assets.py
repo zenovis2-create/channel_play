@@ -29,7 +29,14 @@ class AssetPipelineTests(unittest.TestCase):
         index = json.loads((self.root / "asset_pipeline/index.json").read_text(encoding="utf-8"))
         asset = index["assets"][0]
         self.assertEqual(asset["id"], "prop_school_desk")
-        self.assertEqual(asset["status"], "generated")
+        self.assertEqual(asset["status"], "briefed")
+        self.assertTrue(asset["source_gate_required"])
+        self.assertEqual(asset["source_gate_status"], "pending")
+        self.assertEqual(asset["pipeline_scaffold_status"], "blocked_by_gate_a")
+        self.assertEqual(
+            asset["source_gate_manifest"],
+            "asset_pipeline/manifests/prop_school_desk_source_gate_a.json",
+        )
         self.assertEqual(asset["pipeline_receipt"], "runs/asset-pipeline-prop_school_desk/asset_pipeline_receipt.md")
 
 

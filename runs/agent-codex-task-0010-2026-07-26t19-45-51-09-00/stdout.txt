@@ -1,0 +1,65 @@
+Verdict: CHANGES REQUIRED
+
+Risk level: **HIGH** — Truth Pen is currently blocked, but a future Gate A approval could bypass required production controls.
+
+## Findings
+
+1. **BLOCKER — Gate A incorrectly unlocks full 3D production without Gate B.**
+   The brief requires Gate B provenance and reviewer sign-off before 3D production or Unity import ([source brief](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/docs/research/truth_pen_source_license_brief.md:101)). However, `generate3d` checks only Gate A, then generates/falls back to a local model, performs Blender cleanup, copies into Unity, and advances the index ([image_to_blender.py](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/tools/studio/company/image_to_blender.py:119), [Unity copy](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/tools/studio/company/image_to_blender.py:962)). Gate A must authorize only source creation/download; `generate3d`, cleanup, Unity copy, and production statuses require Gate B.
+
+2. **BLOCKER — An unrelated or explicitly non-production `APPROVED` receipt can approve Gate A.**
+   Receipt validation only searches any repository file for an `APPROVED` line; it does not bind the review to the asset, task, Gate A, manifest revision/hash, reviewer role, date, or production scope ([asset_gate.py](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/tools/studio/company/asset_gate.py:318)). The existing task-0009 review contains `APPROVED` while explicitly stating production remains high risk and unauthorized ([task-0009 review](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/reviews/2026-07-26/truth-pen/task-0009-license-rereview.md:7)); the validator accepts an equivalent receipt. An isolated probe returned `non_authorizing_approved_receipt_passed=True`. Require a structured, fresh critic receipt bound to `asset_id`, Gate A, task, manifest SHA-256, reviewer role, date, and an affirmative production-source authorization.
+
+3. **HIGH — Records can pass while omitting mandatory brief requirements.**
+   The schema/validators ([asset_gate.py](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/tools/studio/company/asset_gate.py:194)) omit:
+
+   - Applicable jurisdiction, required by the brief.
+   - OpenAI non-uniqueness/human review, output-allocation disclaimer, indemnity limits, and AI provenance/disclosure decisions.
+   - A dedicated CC0 retrieval snapshot.
+   - An explicit commissioned-human downstream asset-creation grant.
+
+   Existing success tests intentionally pass human, OpenAI, and CC0 records without these fields ([test_asset_gate.py](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/tools/studio/company/tests/test_asset_gate.py:127)). This conflicts with the controlling requirements ([source brief](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/docs/research/truth_pen_source_license_brief.md:70)).
+
+4. **HIGH — Blocked scaffolds can advertise production readiness.**
+   `asset_prepare` writes `Status: waiting_for_generation` and a `pipeline_ready` receipt regardless of Gate A ([assets.py](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/tools/studio/company/assets.py:164)). Image-to-Blender receipts similarly hard-code `image_to_blender_ready` ([image_to_blender.py](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/tools/studio/company/image_to_blender.py:1187)). A probe confirmed all three misleading states. Re-running `asset prepare truth_pen` would undo the manually corrected `blocked_by_gate_a` handoff, contrary to the workflow contract.
+
+5. **HIGH — Gate operations overwrite lifecycle state and permit contradictory manual status.**
+   Gate init/check writes `source_gate_*` into the general asset `status`, destroying an independent lifecycle state ([asset_gate.py](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/tools/studio/company/asset_gate.py:466)). Probes showed:
+
+   - Legacy `accepted` → `source_gate_pending` after `asset_prepare`.
+   - Approved `accepted` → `source_gate_approved` after rechecking Gate A.
+
+   Additionally, `asset status <id> source_gate_approved` is allowed without validation because gate-owned statuses are accepted but not protected ([assets.py](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/tools/studio/company/assets.py:12)). Keep lifecycle `status` and `source_gate_status` orthogonal, and make gate status writable only by Gate A evaluation.
+
+6. **MEDIUM — Invalid manifest handling is neither deterministic nor side-effect-safe.**
+   A valid JSON array causes an uncaught `AttributeError` before a fail receipt is produced because the evaluator assumes a top-level object ([asset_gate.py](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/tools/studio/company/asset_gate.py:133)). Conversely, checking a missing/typo manifest creates a receipt and new index entry before failing. Neither behavior has regression coverage.
+
+## Verified evidence
+
+- Focused tests: `12 passed, 2 subtests passed`.
+- Company suite: `83 passed, 13 subtests passed`.
+- `asset generate3d truth_pen --provider local`: exit 1 before generation.
+- `asset status truth_pen generated`: exit 1.
+- Current manifest remains unselected with no source or output invented.
+- Current receipt records `FAIL` and keeps `asset_factory` blocked ([receipt](/D:/Temp/User/User/channel-play-truth-pen-gate-a-1fadc5bf/runs/asset-gate-a-truth_pen/gate_a_check.md:7)).
+- Gate A manifest contains no Gate B-only timestamp/hash/seed/edit-history fields.
+- Repository evidence paths reject absolute/`..` paths and resolved escapes.
+- No Truth Pen PNG, GLB, FBX, or generated model was found—only scaffolding.
+- Changed files from this review: **none**.
+
+## Production-gate conditions
+
+Approval requires:
+
+1. Complete the missing common and path-specific Gate A requirements.
+2. Bind a fresh critic approval to the exact manifest revision and production scope.
+3. Restrict actual generator inputs to the approved source record; prohibit unbound absolute paths and unauthorized local fallback.
+4. Add and require Gate B before 3D generation, cleanup, Unity copy/import, or acceptance.
+5. Preserve legacy lifecycle status and make every blocked scaffold/receipt visibly `blocked_by_gate_a`.
+6. Add regressions for every issue above.
+
+## Blocking questions
+
+- Is Gate A definitively source-creation authorization only, with Gate B mandatory before `generate3d` and Unity import, as the source brief states?
+- What structured identity, freshness, manifest-hash, and scope fields must a critic approval receipt carry?
+- Are legacy accepted/unity-ready assets grandfathered, migrated through Gate A, or blocked without altering their existing lifecycle status?

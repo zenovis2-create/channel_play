@@ -1,7 +1,7 @@
 # Unity Import Manifest
 
 Asset ID: truth_pen
-Status: waiting_for_unity_import
+Status: blocked_by_gate_a
 Target folder: Assets/_Project/Art/Props/TruthPen
 Prefab path: Assets/_Project/Prefabs/Props/TruthPen.prefab
 Scale: 0.22m total length; tip points along local +Z
