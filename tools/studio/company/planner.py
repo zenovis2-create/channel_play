@@ -204,7 +204,20 @@ def _format_standards(standards: list[dict[str, str]]) -> list[str]:
 
 def _reviewer_for(request: str) -> str | None:
     haystack = request.lower()
-    risky = ("architecture", "server", "multiplayer", "gdx1", "performance", "refactor", "security")
+    risky = (
+        "architecture",
+        "server",
+        "multiplayer",
+        "gdx1",
+        "performance",
+        "refactor",
+        "security",
+        "license",
+        "licensing",
+        "copyright",
+        "라이선스",
+        "저작권",
+    )
     return "critic_reviewer" if any(word in haystack for word in risky) else None
 
 

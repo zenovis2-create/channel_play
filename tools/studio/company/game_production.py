@@ -444,6 +444,20 @@ def _task_next_action(task_flow: dict) -> dict:
     if not task_id:
         return {}
     status = str(task.get("status") or "")
+    if status == "planned":
+        agent_id = str(task.get("suggested_agent") or "")
+        if not agent_id:
+            return {}
+        return {
+            "label": "계획 작업 할당",
+            "command": "company.assign",
+            "payload": {"taskId": task_id, "agentId": agent_id},
+            "reason": (
+                f"{task_id} 계획이 준비됐습니다. 제안 역할 {agent_id}에게 "
+                "할당해 실행 가능한 작업지시서를 생성합니다."
+            ),
+            "status": "ready",
+        }
     if status == "assigned":
         return {
             "label": "할당 작업 실행",
@@ -511,6 +525,8 @@ def _perfection_gate(checks: list[dict], loops: list[dict], next_action: dict, s
 def _next_action_is_actionable(command: str, payload: dict) -> bool:
     if not command:
         return False
+    if command == "company.assign":
+        return bool(payload.get("taskId")) and bool(payload.get("agentId"))
     if command in {"agent.run", "agent.review", "company.review", "company.verify", "company.advance"}:
         return bool(payload.get("taskId"))
     if command == "feedback.process":
