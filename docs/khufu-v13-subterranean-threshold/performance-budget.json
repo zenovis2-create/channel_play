@@ -1,0 +1,35 @@
+{
+  "schema": "khufu-v13-subterranean-threshold-budget-v1",
+  "baseline_v12": {
+    "static_signature": "6f7faced5cee8f6b199f18c979b5174473d85154c695a93a29f37db4db0059cd",
+    "root": {
+      "renderers": 5,
+      "vertices": 1176,
+      "triangles": 588,
+      "colliders": 22
+    },
+    "map": {
+      "renderers": 834,
+      "vertices": 67070,
+      "triangles": 48560,
+      "colliders": 589
+    }
+  },
+  "root": {
+    "renderers_exact": 5,
+    "colliders_exact": 20,
+    "colliders_max": 20,
+    "vertices_max": 20000,
+    "triangles_max": 10000
+  },
+  "map": {
+    "renderers_exact": 839,
+    "colliders_exact": 609,
+    "colliders_max": 612
+  },
+  "captures": {
+    "required": 6,
+    "width": 1600,
+    "height": 1000
+  }
+}

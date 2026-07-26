@@ -1,0 +1,274 @@
+{
+  "schema": "khufu-v13-subterranean-threshold-segments-v1",
+  "baseline": {
+    "commit": "787476b58044e78f0c5164df408680e50fee47a2",
+    "scene_sha256": "eec9cc9c0b52cd75066c20caf1710ab458423de2eea073c7cfe36e88a782ec8c",
+    "v12_static_signature": "6f7faced5cee8f6b199f18c979b5174473d85154c695a93a29f37db4db0059cd",
+    "v12_root_metrics": {
+      "renderers": 5,
+      "vertices": 1176,
+      "triangles": 588,
+      "colliders": 22
+    },
+    "v12_map_metrics": {
+      "renderers": 834,
+      "vertices": 67070,
+      "triangles": 48560,
+      "colliders": 589
+    }
+  },
+  "segments": [
+    {
+      "id": "V10_Branch_Transition",
+      "truth": "FACT/HYBRID",
+      "factual_shape": false,
+      "gameplay_scale": true,
+      "note": "Engineering transition from the accepted V10 branch; it makes no survey claim."
+    },
+    {
+      "id": "Descending_Bedrock_Passage",
+      "truth": "FACT/HYBRID",
+      "factual_shape": true,
+      "gameplay_scale": true,
+      "note": "Below-grade descent is factual; width, height, and exact slope are project adaptations."
+    },
+    {
+      "id": "Subterranean_Level_Approach",
+      "truth": "FACT/HYBRID",
+      "factual_shape": true,
+      "gameplay_scale": true,
+      "note": "Horizontal approach relationship is factual; clearance and length are compressed."
+    },
+    {
+      "id": "Subterranean_Chamber",
+      "truth": "FACT/HYBRID",
+      "factual_shape": true,
+      "gameplay_scale": true,
+      "note": "Unfinished bedrock chamber identity is factual; dimensions and enclosure are adapted."
+    },
+    {
+      "id": "Unfinished_Pit_Boundary",
+      "truth": "FACT/DISPLAY",
+      "factual_shape": true,
+      "gameplay_scale": false,
+      "note": "Visual evidence limit only; the pit is solid-backed and non-traversable."
+    },
+    {
+      "id": "HYBRID_Subterranean_Route_Inlay",
+      "truth": "HYBRID",
+      "factual_shape": false,
+      "gameplay_scale": true,
+      "note": "Navigation and capture device, not archaeological evidence."
+    }
+  ],
+  "ownership": {
+    "transition_policy": "component-disable-only",
+    "targets": [
+      {
+        "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Descending_Bedrock_Floor",
+        "renderer_count": 1,
+        "collider_count": 1,
+        "active_self_before": true,
+        "active_self_after": true,
+        "renderer_enabled_before": true,
+        "renderer_enabled_after": false,
+        "collider_enabled_before": true,
+        "collider_enabled_after": false
+      },
+      {
+        "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Descending_Bedrock_East",
+        "renderer_count": 1,
+        "collider_count": 1,
+        "active_self_before": true,
+        "active_self_after": true,
+        "renderer_enabled_before": true,
+        "renderer_enabled_after": false,
+        "collider_enabled_before": true,
+        "collider_enabled_after": false
+      },
+      {
+        "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Descending_Bedrock_West",
+        "renderer_count": 1,
+        "collider_count": 1,
+        "active_self_before": true,
+        "active_self_after": true,
+        "renderer_enabled_before": true,
+        "renderer_enabled_after": false,
+        "collider_enabled_before": true,
+        "collider_enabled_after": false
+      },
+      {
+        "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Descending_Bedrock_Roof",
+        "renderer_count": 1,
+        "collider_count": 1,
+        "active_self_before": true,
+        "active_self_after": true,
+        "renderer_enabled_before": true,
+        "renderer_enabled_after": false,
+        "collider_enabled_before": true,
+        "collider_enabled_after": false
+      },
+      {
+        "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Level_Floor",
+        "renderer_count": 1,
+        "collider_count": 1,
+        "active_self_before": true,
+        "active_self_after": true,
+        "renderer_enabled_before": true,
+        "renderer_enabled_after": false,
+        "collider_enabled_before": true,
+        "collider_enabled_after": false
+      },
+      {
+        "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Level_East",
+        "renderer_count": 1,
+        "collider_count": 1,
+        "active_self_before": true,
+        "active_self_after": true,
+        "renderer_enabled_before": true,
+        "renderer_enabled_after": false,
+        "collider_enabled_before": true,
+        "collider_enabled_after": false
+      },
+      {
+        "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Level_West",
+        "renderer_count": 1,
+        "collider_count": 1,
+        "active_self_before": true,
+        "active_self_after": true,
+        "renderer_enabled_before": true,
+        "renderer_enabled_after": false,
+        "collider_enabled_before": true,
+        "collider_enabled_after": false
+      },
+      {
+        "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Level_Roof",
+        "renderer_count": 1,
+        "collider_count": 1,
+        "active_self_before": true,
+        "active_self_after": true,
+        "renderer_enabled_before": true,
+        "renderer_enabled_after": false,
+        "collider_enabled_before": true,
+        "collider_enabled_after": false
+      },
+      {
+        "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Chamber/V4_Subterranean_Floor",
+        "renderer_count": 1,
+        "collider_count": 1,
+        "active_self_before": true,
+        "active_self_after": true,
+        "renderer_enabled_before": true,
+        "renderer_enabled_after": false,
+        "collider_enabled_before": true,
+        "collider_enabled_after": false
+      },
+      {
+        "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Chamber/V4_Subterranean_Back",
+        "renderer_count": 1,
+        "collider_count": 1,
+        "active_self_before": true,
+        "active_self_after": true,
+        "renderer_enabled_before": true,
+        "renderer_enabled_after": false,
+        "collider_enabled_before": true,
+        "collider_enabled_after": false
+      },
+      {
+        "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Chamber/V4_Subterranean_West",
+        "renderer_count": 1,
+        "collider_count": 1,
+        "active_self_before": true,
+        "active_self_after": true,
+        "renderer_enabled_before": true,
+        "renderer_enabled_after": false,
+        "collider_enabled_before": true,
+        "collider_enabled_after": false
+      },
+      {
+        "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Chamber/V4_Subterranean_East",
+        "renderer_count": 1,
+        "collider_count": 1,
+        "active_self_before": true,
+        "active_self_after": true,
+        "renderer_enabled_before": true,
+        "renderer_enabled_after": false,
+        "collider_enabled_before": true,
+        "collider_enabled_after": false
+      },
+      {
+        "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Chamber/V4_Subterranean_Unfinished_Pit",
+        "renderer_count": 1,
+        "collider_count": 0,
+        "active_self_before": true,
+        "active_self_after": true,
+        "renderer_enabled_before": true,
+        "renderer_enabled_after": false,
+        "collider_enabled_before": null,
+        "collider_enabled_after": null
+      }
+    ]
+  },
+  "preserved_observations": [
+    {
+      "path": "Runtime_Khufu_V10_Interior_Spine/V10_Metadata/V10_Anchor_Ascending_Branch",
+      "kind": "anchor",
+      "owner": "V10",
+      "position": [-2.5, 3.8, -19.2]
+    },
+    {
+      "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Route_Branch",
+      "kind": "marker",
+      "owner": "V10",
+      "position": [-2.5, 1.2, -18.3],
+      "renderer_enabled": false
+    },
+    {
+      "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Route_Subterranean_Approach",
+      "kind": "marker",
+      "owner": "V10",
+      "position": [0.0, -3.8, -5.6],
+      "renderer_enabled": false
+    },
+    {
+      "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Route_Subterranean_Chamber",
+      "kind": "marker",
+      "owner": "V10",
+      "position": [1.0, -3.6, 1.5],
+      "renderer_enabled": false
+    },
+    {
+      "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Glow_Descending",
+      "kind": "glow",
+      "owner": "V10",
+      "renderer_enabled": false
+    },
+    {
+      "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Glow_Subterranean",
+      "kind": "glow",
+      "owner": "V10",
+      "renderer_enabled": false
+    },
+    {
+      "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Lighting/V4_Light_Subterranean",
+      "kind": "light",
+      "owner": "V4-inherited",
+      "light_enabled": true
+    }
+  ],
+  "excluded_scope": [
+    "SCANPYRAMIDS_ANOMALIES",
+    "SP_BV",
+    "SP_NFC",
+    "QUEEN_AND_ROYAL_CIRCUITS",
+    "WELL_SHAFT_CLAIMS",
+    "UNDERWORLD_FICTION",
+    "EARTH_KEY_ROUTE",
+    "GLOBAL_LIGHTING",
+    "VFX",
+    "PRODUCTION_AUDIO",
+    "ENEMIES",
+    "OBJECTIVES",
+    "FRESH_PLAYER_USABILITY"
+  ]
+}
