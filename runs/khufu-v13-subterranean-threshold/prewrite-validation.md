@@ -2,7 +2,6 @@
 
 - Verdict: **passed**
 - baseline_commit: `787476b58044e78f0c5164df408680e50fee47a2`
-- head_commit: `fd87a876f6ad9c5d45d008de92b619303c216ac9`
 - scene_sha256: `eec9cc9c0b52cd75066c20caf1710ab458423de2eea073c7cfe36e88a782ec8c`
 - v12_map_colliders: `589`
 - v12_map_renderers: `834`

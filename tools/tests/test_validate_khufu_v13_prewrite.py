@@ -98,7 +98,6 @@ def test_complete_v13_prewrite_contract_passes(
     assert result.errors == []
     assert result.facts == {
         "baseline_commit": prewrite.BASELINE_COMMIT,
-        "head_commit": DESCENDANT_HEAD,
         "scene_sha256": prewrite.SCENE_SHA256,
         "v12_static_signature": prewrite.V12_STATIC_SIGNATURE,
         "v12_map_renderers": 834,

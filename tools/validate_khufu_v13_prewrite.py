@@ -547,13 +547,12 @@ def validate_documents(root: Path) -> list[str]:
 def validate(root: Path) -> Result:
     result = Result()
     try:
-        head = git_head(root)
+        git_head(root)
         ancestor_ok = baseline_is_ancestor(root)
         baseline_scene_hash = git_blob_sha256(root, BASELINE_COMMIT, SCENE)
         committed_paths = committed_paths_since_baseline(root)
         unity_paths = unity_worktree_paths(root)
     except (OSError, subprocess.CalledProcessError) as exception:
-        head = ""
         ancestor_ok = False
         baseline_scene_hash = ""
         committed_paths = set()
@@ -596,7 +595,6 @@ def validate(root: Path) -> Result:
     result.facts.update(
         {
             "baseline_commit": BASELINE_COMMIT,
-            "head_commit": head,
             "scene_sha256": scene_hash,
             "v12_static_signature": V12_STATIC_SIGNATURE,
             "v12_map_renderers": V12_MAP_METRICS["renderers"],
