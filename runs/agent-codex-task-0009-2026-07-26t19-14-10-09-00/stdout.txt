@@ -1,0 +1,38 @@
+Verdict: APPROVED
+
+Risk level: **HIGH for production; LOW for the research decision.**
+
+## Findings
+
+No open findings. Both remaining issues are resolved:
+
+- Gate A now records only the intended OpenAI product/account, model/tool, and beta status; the actual generation/acquisition timestamp appears exclusively in Gate B ([brief](/D:/Temp/User/User/channel-play-truth-pen-remediation-7b725ae2/docs/research/truth_pen_source_license_brief.md:70), [Gate B](/D:/Temp/User/User/channel-play-truth-pen-remediation-7b725ae2/docs/research/truth_pen_source_license_brief.md:101)).
+- The linked work order now uses the chief-orchestrator-approved, task-scoped official-primary-source substitution ([work order](/D:/Temp/User/User/channel-play-truth-pen-remediation-7b725ae2/memory/sessions/20260726-181451-truth-pen/work_orders/task-0009-research_librarian.md:15), [decision](/D:/Temp/User/User/channel-play-truth-pen-remediation-7b725ae2/memory/company/task-0009-evidence-decision.md:9)).
+
+All earlier findings are resolved:
+
+- “No safe source found” is explicitly and correctly fail-closed.
+- No creator, affirmer, contract, provider account, output, or project rights chain is inferred.
+- OpenAI individual and business/API paths are distinguished; output allocation is not presented as copyrightability, exclusivity, title, or non-infringement assurance.
+- Provider restrictions are separately recorded for inputs, similarity review, likeness, public sharing, third-party Apps/GPTs, indemnity, beta status, and disclosure.
+- CC0 remains conditional on an exact work and authorized affirmer.
+
+The summaries match the current official [Terms of Use](https://openai.com/policies/terms-of-use/), [Services Agreement](https://openai.com/policies/services-agreement/), [Service Terms](https://openai.com/policies/service-terms/), [Usage Policies](https://openai.com/policies/usage-policies/), scope-limited [Sharing & Publication Policy](https://openai.com/policies/sharing-publication-policy/), and the CC0 [Deed](https://creativecommons.org/publicdomain/zero/1.0/) and [Legal Code](https://creativecommons.org/publicdomain/zero/1.0/legalcode.en).
+
+Missing research evidence: **None.** This review is the required critic receipt. The task’s current `needs_review` / `pending_re_review` state is appropriate until this receipt is recorded; afterward the research task may close with “no safe source found.” Production must not be marked approved.
+
+## Exact `asset_factory` conditions
+
+`asset_factory` remains **BLOCKED** because Gate A is **FAIL**.
+
+1. Select one source path: commissioned human, actual OpenAI generation route, or a specific CC0 work.
+2. Complete every source-specific Gate A field, including actual creator/affirmer, contracting party or legal customer, applicable agreement/license, rights scope, retrieval date, and controlling terms.
+3. For OpenAI, record product/account/workspace, intended model/tool, beta status, contributor transfer authority, and cleared inputs.
+4. Exclude unverified web references, watermarks, logos, copied franchise styling, tracing, and image conditioning.
+5. Obtain fresh critic approval for that completed Gate A record.
+6. Only then may source creation or download occur.
+7. After an output exists, Gate B must record timestamp, prompt/model/tool, job/seed, hashes, edits, clearance checks, attribution/disclosure, and `PASS` results for commercial use, derivatives, and redistribution before 3D production or Unity import.
+
+Blocking questions for research approval: **None.** The future production source choice remains intentionally unresolved.
+
+Changed files: **None.**
