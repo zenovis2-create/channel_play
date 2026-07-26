@@ -92,6 +92,67 @@ class FeedbackRoutingTests(unittest.TestCase):
         with self.assertRaisesRegex(CompanyError, "not a valid PNG"):
             feedback_new(self.root, capture)
 
+    def test_camera_feedback_routes_to_unity_with_scene_write_scope(self) -> None:
+        self.feedback.write_text(
+            "\n".join(
+                [
+                    "# Feedback 0001",
+                    "",
+                    "Status: open",
+                    "",
+                    "## Observation",
+                    "",
+                    "The overview camera framing hides the player route.",
+                    "",
+                    "## Requested Change",
+                    "",
+                    "Reframe Operator_Overview_Camera for a legible composition.",
+                    "",
+                ]
+            ),
+            encoding="utf-8",
+        )
+
+        with patch(
+            "tools.studio.company.feedback.unity_check",
+            return_value=self.baseline,
+        ):
+            feedback_process(
+                self.root,
+                self.feedback.relative_to(self.root).as_posix(),
+            )
+
+        board = json.loads(
+            (
+                self.root / "memory/company/task_board.json"
+            ).read_text(encoding="utf-8")
+        )
+        tasks = {
+            task["assigned_agent"]: task
+            for task in board["tasks"]
+        }
+        implementation = tasks["unity_gameplay"]
+        self.assertEqual(
+            set(tasks),
+            {"qa_playtest", "unity_gameplay", "critic_reviewer"},
+        )
+        self.assertIn(
+            "Assets/_Project/Scenes",
+            implementation["allowed_write_paths"],
+        )
+        self.assertIn(
+            "Assets/_Project/Scripts/Editor",
+            implementation["allowed_write_paths"],
+        )
+        self.assertIn(
+            "Unity compile, playtest, and refreshed capture evidence",
+            implementation["required_evidence"],
+        )
+        receipt = (
+            self.feedback.parent / "routing_receipt.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("Kind: camera", receipt)
+
 
 if __name__ == "__main__":
     unittest.main()

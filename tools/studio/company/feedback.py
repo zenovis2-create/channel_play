@@ -149,6 +149,21 @@ def _feedback_profile(text: str) -> dict[str, str]:
         return {"kind": "asset", "agent": "asset_factory", "summary": summary}
     if any(term in haystack for term in ("server", "multiplayer", "netcode", "bot", "join", "sync", "서버", "멀티", "접속", "봇", "동기화")):
         return {"kind": "multiplayer", "agent": "multiplayer_server", "summary": summary}
+    if any(
+        term in haystack
+        for term in (
+            "camera",
+            "framing",
+            "composition",
+            "overview",
+            "field of view",
+        )
+    ):
+        return {
+            "kind": "camera",
+            "agent": "unity_gameplay",
+            "summary": summary,
+        }
     if any(term in haystack for term in ("frame", "fps", "build", "compile", "lag", "performance", "프레임", "성능", "빌드", "컴파일", "렉")):
         return {"kind": "performance", "agent": "performance_build", "summary": summary}
     if any(term in haystack for term in ("ui", "hud", "score", "point", "button", "text", "점수", "포인트", "버튼", "텍스트")):
@@ -170,7 +185,14 @@ def _route_feedback(root: Path, feedback: Path, profile: dict[str, str]) -> list
         if agent in seen_agents:
             continue
         seen_agents.add(agent)
-        plan = plan_task(root, request)
+        paths, evidence = _feedback_route_contract(agent)
+        plan = plan_task(
+            root,
+            request,
+            preferred_agent=agent,
+            allowed_write_paths=paths,
+            required_evidence=evidence,
+        )
         task_id = _task_id_from_plan(plan)
         work_order = assign_task(root, task_id, agent)
         tasks.append(
@@ -182,6 +204,55 @@ def _route_feedback(root: Path, feedback: Path, profile: dict[str, str]) -> list
             }
         )
     return tasks
+
+
+def _feedback_route_contract(
+    agent: str,
+) -> tuple[list[str], str]:
+    contracts = {
+        "qa_playtest": (
+            ["reviews", "runs"],
+            "reproduction note linked to screenshot or Unity log",
+        ),
+        "unity_gameplay": (
+            [
+                "Assets/_Project/Scenes",
+                "Assets/_Project/Scripts/Gameplay",
+                "Assets/_Project/Scripts/Player",
+                "Assets/_Project/Scripts/UI",
+                "Assets/_Project/Scripts/Editor",
+            ],
+            "Unity compile, playtest, and refreshed capture evidence",
+        ),
+        "asset_factory": (
+            [
+                "asset_pipeline",
+                "Assets/_Project/Art",
+                "Assets/_Project/Materials",
+                "Assets/_Project/Prefabs",
+            ],
+            "asset receipt, Unity import evidence, and screenshot",
+        ),
+        "multiplayer_server": (
+            ["Assets/_Project/Scripts/Multiplayer", "scripts", "runs"],
+            "server test or architecture evidence",
+        ),
+        "performance_build": (
+            ["tools", "scripts", "runs"],
+            "compile, build, or performance evidence",
+        ),
+        "critic_reviewer": (
+            ["reviews", "docs"],
+            "findings-first review linked to implementation evidence",
+        ),
+    }
+    return contracts.get(
+        agent,
+        (
+            ["reviews", "docs"],
+            "changed files and explicit verification evidence",
+        ),
+    )
 
 
 def _write_routing_receipt(root: Path, feedback: Path, profile: dict[str, str], tasks: list[dict[str, str]], baseline: Path) -> Path:
