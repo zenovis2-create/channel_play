@@ -53,6 +53,11 @@ def _resolve_unity_editor(root: Path) -> Path:
     return UNITY_FALLBACK
 
 
+def resolve_unity_editor(root: Path | None = None) -> Path:
+    """Resolve Unity while preserving the original public helper contract."""
+    return _resolve_unity_editor(root or Path.cwd())
+
+
 def _project_unity_version(root: Path) -> str | None:
     version_file = root / "ProjectSettings" / "ProjectVersion.txt"
     if not version_file.exists():

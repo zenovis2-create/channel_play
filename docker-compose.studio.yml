@@ -1,0 +1,27 @@
+services:
+  channel-play-studio:
+    build:
+      context: .
+      dockerfile: docker/studio/Dockerfile
+    image: channel-play-studio:local
+    working_dir: /workspace
+    environment:
+      CHANNEL_PLAY_STUDIO_DOCKER: "1"
+      CHANNEL_PLAY_STUDIO_ALLOW_REMOTE: "1"
+      CHANNEL_PLAY_STUDIO_HOST: "0.0.0.0"
+      CHANNEL_PLAY_STUDIO_PORT: "8776"
+      CHANNEL_PLAY_HOST_RUNNER_URL: "${CHANNEL_PLAY_HOST_RUNNER_URL:-http://host.docker.internal:8788}"
+      CHANNEL_PLAY_RUNNER_TOKEN_FILE: "/run/secrets/channel_play_host_runner_token"
+    ports:
+      - "${CHANNEL_PLAY_STUDIO_PORT:-8776}:8776"
+    secrets:
+      - channel_play_host_runner_token
+    volumes:
+      - .:/workspace
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+secrets:
+  channel_play_host_runner_token:
+    file: ./memory/company/secrets/host_runner.token

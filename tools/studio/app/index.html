@@ -11,16 +11,16 @@
   <div class="app">
     <aside class="rail" aria-label="Channel Play Studio navigation">
       <div class="brand">
-        <strong>Channel Play Studio</strong>
-        <span>AI 제작 워크스페이스</span>
+        <strong>Channel Play</strong>
+        <span>Studio Console</span>
       </div>
       <nav>
-        <a href="#overview">현황</a>
-        <a href="#work">작업</a>
-        <a href="#feedback">피드백</a>
-        <a href="#assets">에셋</a>
-        <a href="#gdx">gdx1</a>
-        <a href="#memory">기억</a>
+        <a href="#command-center" data-studio-nav="focus">작업</a>
+        <a href="#task-tracker" data-studio-nav="focus">진행</a>
+        <a href="#asset-forge" data-studio-nav="board">에셋</a>
+        <a href="#agents" data-studio-nav="board">팀</a>
+        <a href="#search" data-studio-nav="library">기억</a>
+        <a href="#runtime" data-studio-nav="system">시스템</a>
       </nav>
       <div class="rail-note">
         <span>로컬 Mac Studio</span>
@@ -32,17 +32,220 @@
     <main>
       <header class="top">
         <div>
-          <p class="eyebrow">Unity 게임 제작 통합 툴</p>
-          <h1>프로젝트 제작실</h1>
+          <p class="eyebrow">Channel Play Studio</p>
+          <h1>작업 콘솔</h1>
           <p id="subtitle">현재 상태를 불러오는 중입니다.</p>
         </div>
         <div class="top-actions">
-          <button data-command="company.brief">브리프 갱신</button>
           <button id="reload">상태 새로고침</button>
         </div>
       </header>
 
-      <section id="overview" class="overview-grid">
+      <div class="mode-switcher" role="tablist" aria-label="Studio mode">
+        <button type="button" data-studio-view-button="focus">작업</button>
+        <button type="button" data-studio-view-button="board">팀</button>
+        <button type="button" data-studio-view-button="library">기억</button>
+        <button type="button" data-studio-view-button="system">시스템</button>
+      </div>
+
+      <section id="mission-dock" class="mission-dock" data-studio-view="system">
+        <article class="mission-card primary">
+          <span>현재 초점</span>
+          <strong id="focusMissionTitle">상태를 분석하고 있습니다.</strong>
+          <small id="focusMissionMeta">작업, 실행, 결과물을 불러오는 중입니다.</small>
+        </article>
+        <article class="mission-card">
+          <span>팀 상태</span>
+          <strong id="focusAgentSummary">대기</strong>
+          <small id="focusAgentMeta">에이전트와 adapter 상태를 확인합니다.</small>
+        </article>
+        <article class="mission-card">
+          <span>시스템</span>
+          <strong id="focusSystemSummary">대기</strong>
+          <small id="focusSystemMeta">Docker, host-runner, gdx1 상태</small>
+        </article>
+        <article class="mission-card">
+          <span>최근 결과</span>
+          <strong id="focusResultSummary">없음</strong>
+          <small id="focusResultMeta">마지막 receipt와 산출물</small>
+        </article>
+      </section>
+
+      <section id="game-cockpit" class="panel game-cockpit" data-studio-view="system">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Production Cockpit</p>
+            <h2>Unity 게임 제작 루프</h2>
+          </div>
+          <span class="tag" id="gameReadinessState">대기</span>
+        </div>
+        <div id="gameReadinessSummary" class="game-readiness-summary"></div>
+        <div id="gamePerfectionGate" class="game-perfection-gate"></div>
+        <div id="gameNextAction" class="game-next-action"></div>
+        <div class="game-cockpit-layout">
+          <div>
+            <h3>실행</h3>
+            <div class="game-action-grid">
+              <button data-command="unity.compile">Unity 컴파일</button>
+              <button data-command="unity.playtest">플레이테스트 스모크</button>
+              <button data-command="unity.build.mac">Mac 개발 빌드</button>
+              <button data-command="unity.build.linuxServer">Linux 서버 빌드</button>
+              <button data-command="game.feedbackLoop">피드백 루프</button>
+              <button data-command="game.productionCheck">전체 점검</button>
+              <button data-command="capture.screen">화면 캡처</button>
+              <button data-command="feedback.new">피드백 등록</button>
+              <button data-command="gdx.probe">gdx1 연결 확인</button>
+              <button data-command="gdx.sync">gdx1 동기화</button>
+              <button data-command="gdx.collectLogs">로그 수집</button>
+              <button data-command="game.serverHandoff">서버 핸드오프</button>
+            </div>
+            <div class="game-asset-quick">
+              <label>에셋 ID
+                <input id="gameAssetId" placeholder="asset_school_prop_001">
+              </label>
+              <div class="row-actions">
+                <button id="gameCreateAsset">에셋 브리프</button>
+                <button id="gamePrepareAsset">파이프라인</button>
+                <button id="gameAcceptAsset">승인</button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3>최적화 루프</h3>
+            <div id="gameOptimizationLoops" class="game-loop-grid"></div>
+            <h3>검증 체인</h3>
+            <div id="gameProductionChecks" class="game-check-grid"></div>
+          </div>
+        </div>
+        <div id="gameProductionArtifacts" class="game-artifact-strip"></div>
+      </section>
+
+      <section id="command-center" class="command-center" data-studio-view="focus board">
+        <article class="panel command-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">오케스트레이터</p>
+              <h2>작업을 맡기세요</h2>
+            </div>
+            <span class="tag good">자동 진행</span>
+          </div>
+          <textarea id="orchestratorRequest" placeholder="예: MVP 플레이어 이동과 포인트 UI를 실제 Unity 작업으로 진행해줘"></textarea>
+          <div class="prompt-presets" aria-label="빠른 요청">
+            <button type="button" data-request-preset="Unity에서 플레이어 이동, 포인트 획득, 기본 UI를 실제로 구현하고 컴파일/플레이테스트 증거까지 남겨줘">Unity MVP 진행</button>
+            <button type="button" data-request-preset="현재 작업이 어디까지 진행됐는지 요약하고, 완료 산출물과 다음 행동만 보여줘">진행상황 확인</button>
+            <button type="button" data-request-preset="최근 실행 결과를 검토해서 막힌 작업이 있으면 자동으로 다음 단계까지 진행해줘">막힘 해소</button>
+          </div>
+          <div class="command-submit-row">
+            <label class="inline-check">
+              <input id="orchestratorQuick" type="checkbox">
+              빠른 확인 모드
+            </label>
+            <button id="orchestratorRun" class="primary-command">오케스트레이터에게 맡기기</button>
+          </div>
+        </article>
+        <article class="panel command-status">
+          <div class="panel-head">
+            <h2>진행 로그</h2>
+            <span class="tag" id="commandCenterState">대기</span>
+          </div>
+          <div id="commandCenterSummary" class="command-summary">요청을 입력하면 작업 생성, 실행, 리뷰, 완료 처리가 자동으로 이어집니다.</div>
+          <div class="job-ledger-head">
+            <h3>최근 실행</h3>
+            <span class="tag" id="jobLedgerState">기록 없음</span>
+          </div>
+          <div id="jobLedger" class="job-ledger"></div>
+        </article>
+        <article id="simulation-run" class="panel simulation-run-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Unity Agent Proof</p>
+              <h2>에이전트 실행 결과</h2>
+            </div>
+            <span class="tag good">증거 기반</span>
+          </div>
+          <div id="simulationRunPanel"></div>
+        </article>
+        <article class="panel conversation-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">작업 대화</p>
+              <h2>요청과 답변</h2>
+            </div>
+            <span class="tag" id="conversationState">대기</span>
+          </div>
+          <div id="conversationStream" class="conversation-stream"></div>
+        </article>
+        <article id="goalEnginePanel" class="goal-engine">
+          <div class="goal-engine-head">
+            <div>
+              <span>Goal Engine</span>
+              <strong id="goalEngineTitle">목표 없음</strong>
+              <small id="goalEngineMeta">목표를 설정하면 오케스트라가 필요한 에이전트를 지휘하며 반복 진행합니다.</small>
+            </div>
+            <em id="goalEngineState">대기</em>
+          </div>
+          <div id="goalEngineChecks" class="goal-engine-checks"></div>
+          <label>통합 목표
+            <textarea id="goalObjective" placeholder="예: Unity에서 플레이어 이동과 포인트 UI를 실제로 구현하고 검증해줘"></textarea>
+          </label>
+          <div class="goal-engine-actions">
+            <button id="setGoal">목표 설정</button>
+            <button id="runGoal">오케스트라 실행</button>
+            <label class="inline-check">
+              <input id="goalDryRun" type="checkbox">
+              빠른 확인 모드
+            </label>
+          </div>
+          <small id="goalEngineReceipt">receipt 없음</small>
+        </article>
+      </section>
+
+      <section id="task-tracker" class="panel tracker-panel" data-studio-view="focus board">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">작업 추적</p>
+            <h2>진행과 결과</h2>
+          </div>
+          <span class="tag" id="trackerState">대기</span>
+        </div>
+        <div id="trackerSummary" class="tracker-summary"></div>
+        <div id="productionCard" class="production-card"></div>
+        <div id="trackerSteps" class="tracker-steps"></div>
+        <div class="tracker-grid">
+          <div>
+            <h3>처리 기록</h3>
+            <div id="trackerTimeline" class="tracker-timeline"></div>
+          </div>
+          <div>
+            <h3>결과물</h3>
+            <div id="trackerArtifacts" class="tracker-artifacts"></div>
+          </div>
+        </div>
+        <div class="tracker-preview-head">
+          <h3>결과 보기</h3>
+          <span id="trackerPreviewTitle">선택된 파일 없음</span>
+        </div>
+        <pre id="trackerPreview">작업을 선택하면 결과 파일을 보여줍니다.</pre>
+      </section>
+
+      <section id="search" class="panel search-panel" data-studio-view="library">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">세션 검색</p>
+            <h2>작업, 실행, 리뷰, 문서 찾기</h2>
+          </div>
+          <span class="tag" id="searchState">대기</span>
+        </div>
+        <div class="search-bar">
+          <input id="searchQuery" placeholder="예: task-0019, unity_gameplay, screenshot, error, Unity compile">
+          <button id="runSearch">검색</button>
+          <button id="rebuildSearch">인덱스 재생성</button>
+        </div>
+        <div id="searchSummary" class="search-summary">검색어를 입력하면 세션, 실행, 리뷰, 작업판, 문서를 찾아줍니다.</div>
+        <div id="searchResults" class="search-results"></div>
+      </section>
+
+      <section id="overview" class="overview-grid" data-studio-view="system">
         <article class="panel priority">
           <div class="panel-head">
             <div>
@@ -52,6 +255,12 @@
             <span class="tag" id="stateStamp">대기 중</span>
           </div>
           <div id="nextAction" class="next-action">상태를 분석하고 있습니다.</div>
+          <div id="goalSummary" class="goal-summary" hidden>
+            <span>통합 목표</span>
+            <strong id="goalTitle"></strong>
+            <small id="goalMeta"></small>
+            <div id="goalScope" class="goal-scope"></div>
+          </div>
           <div class="action-row">
             <button id="startSessionShortcut">세션 시작</button>
             <button data-command="feedback.new">피드백 등록</button>
@@ -68,7 +277,54 @@
         </article>
       </section>
 
-      <section class="grid two" aria-label="workspace command area">
+      <section id="orchestration" class="panel orchestration-panel" data-studio-view="board">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">오케스트레이션 맵</p>
+            <h2>명령 처리와 에이전트 협업 흐름</h2>
+          </div>
+          <span class="tag" id="orchestrationState">대기 중</span>
+        </div>
+        <div id="orchestrationFlow" class="orchestration-flow"></div>
+        <div class="orchestration-grid">
+          <div>
+            <h3>에이전트 임무 현황</h3>
+            <div id="agentLanes" class="agent-lanes"></div>
+          </div>
+          <div>
+            <h3>협업 링크</h3>
+            <div id="collaborationLinks" class="collaboration-links"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="agentos" class="panel absorption-panel" data-studio-view="library">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">AgentOS Benchmark</p>
+            <h2>흡수한 기능과 다음 UI 작업</h2>
+          </div>
+          <span class="tag" id="agentosAbsorptionState">대기</span>
+        </div>
+        <div id="agentosAbsorptionSummary" class="absorption-summary"></div>
+        <div class="absorption-grid">
+          <div>
+            <h3>핵심 패턴</h3>
+            <div id="agentosPatternList" class="absorption-list"></div>
+          </div>
+          <div>
+            <h3>다음 구현 큐</h3>
+            <div id="agentosQueueList" class="absorption-list compact"></div>
+          </div>
+        </div>
+        <div class="visual-rule-head">
+          <h3>비주얼/UX 규칙</h3>
+          <span id="agentosSourceCount">source 0</span>
+        </div>
+        <div id="agentosVisualRules" class="visual-rule-list"></div>
+      </section>
+
+      <section id="operations" class="grid two" aria-label="workspace command area" data-studio-view="system">
         <article class="panel">
           <div class="panel-head">
             <h2>명령 콘솔</h2>
@@ -104,11 +360,11 @@
         </article>
       </section>
 
-      <section id="agent-runner" class="grid two">
+      <section id="agent-runner" class="grid two" data-studio-view="board">
         <article class="panel">
           <div class="panel-head">
             <h2>AI 에이전트 실행</h2>
-            <span class="tag">Codex / Claude / agy / Hermes / OpenClaw</span>
+            <span class="tag">Codex / agy / Hermes / OpenClaw</span>
           </div>
           <label>작업 ID
             <input id="agentTaskId" placeholder="task-0001">
@@ -123,7 +379,7 @@
           </label>
           <label class="inline-check">
             <input id="agentDryRun" type="checkbox">
-            드라이런으로 명령만 검증
+            빠른 확인 모드
           </label>
           <div class="row-actions">
             <button id="runAgent">작업 실행</button>
@@ -136,11 +392,13 @@
             <h2>어댑터 상태</h2>
             <span class="tag" id="adapterCount">0개</span>
           </div>
-          <div id="adaptersList" class="list compact"></div>
+          <div id="adaptersList" class="adapter-matrix"></div>
+          <h3>제외된 어댑터</h3>
+          <div id="excludedAdaptersList" class="adapter-matrix compact"></div>
         </article>
       </section>
 
-      <section id="agents" class="grid two">
+      <section id="agents" class="grid two" data-studio-view="board">
         <article class="panel">
           <div class="panel-head">
             <h2>에이전트 팀</h2>
@@ -159,7 +417,7 @@
         </article>
       </section>
 
-      <section id="feedback" class="grid two">
+      <section id="feedback" class="grid two" data-studio-view="board">
         <article class="panel">
           <div class="panel-head">
             <h2>피드백 보드</h2>
@@ -179,7 +437,73 @@
         </article>
       </section>
 
-      <section id="assets" class="grid two">
+      <section id="asset-forge" class="panel asset-forge-panel" data-studio-view="board">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Asset Forge</p>
+            <h2>AI 에셋 제작소</h2>
+          </div>
+          <span class="tag" id="assetForgeState">대기</span>
+        </div>
+        <div class="asset-forge-layout">
+          <div class="forge-composer">
+            <div class="forge-presets" aria-label="Forge presets">
+              <button type="button" data-forge-preset='{"assetId":"pyramid_temple_zone","kind":"zone","prompt":"ancient pyramid temple gameplay zone with outer pyramid shell, sandstone corridors, underground chambers, staircases, trap doors, pressure plates, columns, hieroglyph wall panels, treasure altar, movable stone blocks, spawn markers, collider proxy parts, third-person camera readability"}'>피라미드 지역</button>
+              <button type="button" data-forge-preset='{"assetId":"traitor_escape_guard","kind":"character","prompt":"stylized stealth game guard character with clear silhouette, modular head torso arms legs, simple uniform, flashlight accessory, rig markers, collider proxy, readable from third-person camera"}'>경비 캐릭터</button>
+              <button type="button" data-forge-preset='{"assetId":"pressure_plate_trap","kind":"prop","prompt":"interactive ancient stone pressure plate trap prop with main body, base, moving plate, trigger handle, material slots, collider proxy, readable gameplay silhouette"}'>트랩 오브젝트</button>
+            </div>
+            <div class="forge-form-grid">
+              <label>에셋 ID
+                <input id="forgeAssetId" placeholder="pyramid_temple_zone">
+              </label>
+              <label>종류
+                <select id="forgeKind">
+                  <option value="zone">지역/맵</option>
+                  <option value="background">배경</option>
+                  <option value="prop" selected>오브젝트</option>
+                  <option value="character">캐릭터</option>
+                </select>
+              </label>
+            </div>
+            <label>제작 프롬프트
+              <textarea id="forgePrompt" placeholder="예: 실제 피라미드 지역처럼 보이는 플레이 가능한 사원 구조. 외부 피라미드, 내부 복도, 함정, 계단, 방, 콜라이더 프록시, 스폰 마커를 분리 가능한 파트로 구성."></textarea>
+            </label>
+            <button id="forgeCreate" class="primary-action">Forge job 생성</button>
+            <div class="image3d-composer">
+              <h3>Image→Blender Forge</h3>
+              <div class="forge-form-grid">
+                <label>에셋 ID
+                  <input id="image3dAssetId" placeholder="pyramid_temple_real">
+                </label>
+                <label>Provider
+                  <select id="image3dProvider">
+                    <option value="both" selected>TRELLIS.2 + Tripo</option>
+                    <option value="trellis2">TRELLIS.2</option>
+                    <option value="tripo">Tripo</option>
+                  </select>
+                </label>
+              </div>
+              <label>Source image path
+                <input id="image3dSourceImage" placeholder="asset_pipeline/image_to_blender/pyramid_temple_real/source/concept.png">
+              </label>
+              <label>이미지→3D 프롬프트
+                <textarea id="image3dPrompt" placeholder="실제 피라미드처럼 보이는 게임용 3D 에셋. 석회암 블록, 입구 램프, 내부 매장실, 유물, 함정, 명확한 실루엣."></textarea>
+              </label>
+              <button id="image3dCreate" class="primary-action">Image→Blender job 생성</button>
+            </div>
+          </div>
+          <div class="forge-status">
+            <h3>제작 단계</h3>
+            <div id="assetForgeStageList" class="forge-stage-strip"></div>
+            <h3>최근 Forge job</h3>
+            <div id="assetForgeJobList" class="forge-job-list"></div>
+            <h3>Image→Blender job</h3>
+            <div id="imageToBlenderJobList" class="forge-job-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="assets" class="grid two" data-studio-view="board">
         <article class="panel">
           <div class="panel-head">
             <h2>에셋 팩토리</h2>
@@ -202,17 +526,19 @@
         </article>
       </section>
 
-      <section id="gdx" class="grid two">
-        <article class="panel">
+      <section id="gdx" class="grid two" data-studio-view="system">
+        <article class="panel worker-panel">
           <div class="panel-head">
-            <h2>gdx1 워커</h2>
-            <span class="tag" id="gdxSummary">원격</span>
+            <h2>Worker Fleet</h2>
+            <span class="tag" id="workerFleetState">대기</span>
           </div>
+          <div id="workerFleetList" class="worker-fleet-list"></div>
           <div class="command-grid">
+            <button data-command="company.workers.probe">워커 전체 점검</button>
             <button data-command="gdx.probe">연결 확인</button>
             <button data-command="gdx.sync">동기화</button>
-            <button data-command="gdx.runServer">서버 실행</button>
-            <button data-command="gdx.runBots">봇 실행</button>
+            <button data-command="gdx.runServer">서버 실행 검증</button>
+            <button data-command="gdx.runBots">봇 실행 검증</button>
           </div>
         </article>
         <article class="panel">
@@ -224,19 +550,55 @@
         </article>
       </section>
 
-      <section id="memory" class="grid two">
+      <section id="runtime" class="panel runtime-panel" data-studio-view="system">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Docker Studio</p>
+            <h2>Studio 컨테이너와 host-runner 상태</h2>
+          </div>
+          <span class="tag" id="runtimeState">대기</span>
+        </div>
+        <div id="runtimeSummary" class="runtime-summary"></div>
+        <div class="runtime-note">
+          <strong>운영 원칙</strong>
+          <span>Studio 컨테이너는 관제 서버입니다. Unity, Blender, Codex, Hermes, OpenClaw 실행은 host-runner 또는 worker가 담당합니다.</span>
+        </div>
+      </section>
+
+      <section id="models" class="panel model-panel" data-studio-view="library system">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Model Cookbook</p>
+            <h2>용도별 모델과 런타임 추천</h2>
+          </div>
+          <span class="tag" id="modelCookbookState">대기</span>
+        </div>
+        <div id="modelCookbookSummary" class="model-summary"></div>
+        <div class="row-actions">
+          <button data-command="company.models.refresh">모델 추천 갱신</button>
+        </div>
+        <div id="modelCookbookList" class="model-cookbook-list"></div>
+      </section>
+
+      <section id="memory" class="grid two" data-studio-view="library">
         <article class="panel">
           <div class="panel-head">
             <h2>공유 기억</h2>
-            <span class="tag">브리프</span>
+            <span class="tag">Project Brain</span>
           </div>
+          <div id="brainMeta" class="brain-meta"></div>
+          <h3>Project Brain</h3>
+          <pre id="projectBrainPreview"></pre>
+          <h3>Current Brief</h3>
           <pre id="briefPreview"></pre>
         </article>
         <article class="panel">
           <div class="panel-head">
-            <h2>파일 미리보기</h2>
-            <span class="tag">읽기 전용</span>
+            <h2>작업 기준</h2>
+            <span class="tag">Standards</span>
           </div>
+          <div id="standardsList" class="standards-list"></div>
+          <h3>파일 미리보기</h3>
           <label>경로
             <input id="filePath" placeholder="memory/company/current_context.md">
           </label>
@@ -245,6 +607,46 @@
         </article>
       </section>
     </main>
+
+    <aside class="inspector" aria-label="Channel Play Studio inspector">
+      <div class="inspector-head">
+        <div>
+          <p class="eyebrow">Companion</p>
+          <h2>작업 컨텍스트</h2>
+        </div>
+        <span id="inspectorMode" class="tag">미션</span>
+      </div>
+
+      <section class="inspector-card thread-card">
+        <span>현재 스레드</span>
+        <strong id="inspectorThreadTitle">불러오는 중</strong>
+        <small id="inspectorThreadMeta">작업 상태를 확인합니다.</small>
+        <div id="inspectorNextAction" class="inspector-next"></div>
+      </section>
+
+      <section class="inspector-card">
+        <div class="inspector-card-head">
+          <span>상태</span>
+          <button type="button" data-command="company.brief">갱신</button>
+        </div>
+        <div id="inspectorHealth" class="health-stack"></div>
+      </section>
+
+      <section class="inspector-card">
+        <span>최근 실행</span>
+        <div id="inspectorActivity" class="mini-stream"></div>
+      </section>
+
+      <section class="inspector-card">
+        <span>결과물</span>
+        <div id="inspectorArtifacts" class="mini-artifacts"></div>
+      </section>
+
+      <section class="inspector-card inspector-memory-card">
+        <span>공유 기억</span>
+        <div id="inspectorMemory" class="memory-stack"></div>
+      </section>
+    </aside>
   </div>
   <script src="/app.js"></script>
 </body>
