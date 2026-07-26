@@ -186,7 +186,12 @@ def build_complete_fixture(
     write(
         root,
         release.RUN_ROOT / "prewrite-validation.md",
-        prewrite_tokens + "\n\nV13_PREWRITE_VERDICT: passed\n",
+        prewrite_tokens
+        + "\n- v12_map_colliders: `589`"
+        + "\n- v12_map_renderers: `834`"
+        + "\n- v13_root_colliders: `20`"
+        + "\n- v13_root_renderers: `5`"
+        + "\n\nV13_PREWRITE_VERDICT: passed\n",
     )
 
     static_signature = "a" * 64
@@ -451,6 +456,7 @@ def test_complete_synthetic_release_passes(
         ("outbound_grounded", "outbound grounded fraction is below 0.90"),
         ("return_grounded", "return grounded fraction is below 0.90"),
         ("boundary_direction", "does not run from chamber interior to exterior"),
+        ("trace_path", "movement trace path drifted"),
         ("legacy_delta", "exactly 19 V10 deltas"),
         ("allowlist_extra", "unexpected path is present"),
         ("build_hash", "Windows build receipt is not bound"),
@@ -532,6 +538,15 @@ def test_release_mutations_fail_closed(
         path.write_text(
             path.read_text(encoding="utf-8").replace(
                 "-1.700 / 0.650", "1.700 / -0.650"
+            ),
+            encoding="utf-8",
+        )
+    elif mutation == "trace_path":
+        path = tmp_path / release.PLAYER_ARTIFACTS[0]
+        path.write_text(
+            path.read_text(encoding="utf-8").replace(
+                release.PLAYER_ARTIFACTS[2].as_posix(),
+                "D:/outside/v13-trace.csv",
             ),
             encoding="utf-8",
         )

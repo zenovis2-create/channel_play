@@ -986,13 +986,20 @@ def check_prewrite(root: Path, result: ValidationResult) -> None:
         encoding="utf-8"
     )
     for text, label in ((audit, "prewrite audit"), (prewrite, "prewrite gate")):
-        for token in (
-            BASELINE_SCENE_SHA256,
-            V12_STATIC_SIGNATURE,
-            "renderers=5_vertices=1176_triangles=588_colliders=22",
-            "renderers=834_vertices=67070_triangles=48560_colliders=589",
-        ):
+        for token in (BASELINE_SCENE_SHA256, V12_STATIC_SIGNATURE):
             require_text(text, token, label, result)
+    for token in (
+        "renderers=5_vertices=1176_triangles=588_colliders=22",
+        "renderers=834_vertices=67070_triangles=48560_colliders=589",
+    ):
+        require_text(audit, token, "prewrite audit", result)
+    for token in (
+        "v12_map_colliders: `589`",
+        "v12_map_renderers: `834`",
+        "v13_root_colliders: `20`",
+        "v13_root_renderers: `5`",
+    ):
+        require_text(prewrite, token, "prewrite gate", result)
     for token in ("Exact V4 ownership targets: `13/13`", "Exact preserved observations: `7/7`"):
         require_text(audit, token, "prewrite audit", result)
 
@@ -1181,7 +1188,14 @@ def check_trace(
         result.errors.append(f"{label} movement trace binding is missing")
         return
     path, records, digest = match.groups()
-    if path != expected_path.as_posix():
+    receipt_path = Path(path)
+    expected_absolute = (root / expected_path).resolve()
+    observed_absolute = (
+        receipt_path.resolve()
+        if receipt_path.is_absolute()
+        else (root / receipt_path).resolve()
+    )
+    if observed_absolute != expected_absolute:
         result.errors.append(f"{label} movement trace path drifted")
     lines = (root / expected_path).read_text(encoding="utf-8-sig").splitlines()
     if not lines or not lines[0].startswith("segment,step,move_frame,"):
