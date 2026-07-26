@@ -1,8 +1,8 @@
 # Current Brief
 
-Generated: 2026-07-26T18:00:28+09:00
-Repo: D:\Temp\User\channel-play-project-brief-d87abf94
-Git: d87abf94
+Generated: 2026-07-26T18:02:50+09:00
+Repo: channel_play
+Git: 309dab84
 Dirty files: 0
 Current session: none
 Open tasks: 0
@@ -154,4 +154,4 @@ Generated: 2026-07-26T16:33:49+09:00
 
 ## Next Recommended Action
 
-- Implement `company session start/end`, then work orders and locks.
+- Create the next scoped work order with `tools/channelctl company plan <request>`.
