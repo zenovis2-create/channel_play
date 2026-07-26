@@ -105,6 +105,22 @@ class CompanyCoreTests(unittest.TestCase):
         self.assertIn("docs/research", task["allowed_write_paths"])
         self.assertIn("cited research", task["required_evidence"])
 
+    def test_license_source_request_requires_critic_review(self) -> None:
+        plan_task(
+            self.root,
+            "Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록",
+        )
+
+        task = json.loads(
+            (
+                self.root / "memory" / "company" / "task_board.json"
+            ).read_text(encoding="utf-8")
+        )["tasks"][0]
+        self.assertEqual(task["suggested_agent"], "research_librarian")
+        self.assertEqual(task["suggested_reviewer"], "critic_reviewer")
+        self.assertIn("docs/research", task["allowed_write_paths"])
+        self.assertIn("cited research", task["required_evidence"])
+
     def test_broadcast_request_routes_to_operator_broadcast_designer(self) -> None:
         plan_task(self.root, "OBS 방송용 운영자 화면과 파일럿 촬영 흐름 설계해줘")
 
