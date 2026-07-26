@@ -28,7 +28,7 @@
       "generation_handoff": "asset_pipeline/generated_3d/truth_pen/generation_handoff.md",
       "blender_template": "asset_pipeline/blender_work/truth_pen/blender_batch_template.py",
       "unity_import_manifest": "asset_pipeline/unity_ready/truth_pen/unity_import_manifest.md",
-      "updated_at": "2026-07-26T21:01:08+09:00",
+      "updated_at": "2026-07-26T21:33:26+09:00",
       "source_gate_required": true,
       "source_gate_status": "blocked",
       "source_gate_manifest": "asset_pipeline/manifests/truth_pen_source_gate_a.json",

@@ -116,7 +116,7 @@ def asset_gate_b_init(root: Path, asset_id: str) -> Path:
                 clean,
                 str(gate_a_data.get("task_id") or ""),
                 gate_a_manifest.relative_to(root).as_posix(),
-                sha256_file(gate_a_manifest),
+                sha256_gate_manifest(gate_a_manifest),
             ),
         )
     result = evaluate_asset_gate_b(root, clean)
@@ -277,7 +277,7 @@ def evaluate_asset_gate_b(root: Path, asset_id: str) -> dict:
     if gate_a_ref is not None and gate_a_ref.resolve() != expected_gate_a:
         errors.append("gate_a_manifest must reference this asset's canonical Gate A manifest")
     if gate_a_ref is not None:
-        expected_hash = sha256_file(gate_a_ref)
+        expected_hash = sha256_gate_manifest(gate_a_ref)
         if data.get("gate_a_manifest_sha256") != expected_hash:
             errors.append("gate_a_manifest_sha256 does not match the current Gate A manifest")
 
@@ -346,6 +346,13 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def sha256_gate_manifest(path: Path) -> str:
+    """Hash a UTF-8 gate record without platform-specific line endings."""
+    text = path.read_text(encoding="utf-8")
+    normalized = text.replace("\r\n", "\n").replace("\r", "\n")
+    return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
 
 
 def clean_asset_id(asset_id: str) -> str:
@@ -567,7 +574,7 @@ def _validate_gate_approval(
         "asset_id": asset_id,
         "task_id": task_id,
         "gate": gate,
-        "manifest_sha256": sha256_file(manifest),
+        "manifest_sha256": sha256_gate_manifest(manifest),
         "reviewer_role": "critic_reviewer",
         "verdict": "APPROVED",
     }
@@ -772,7 +779,9 @@ def _result(
         "gate": gate,
         "source_path": source_path,
         "manifest": manifest,
-        "manifest_sha256": sha256_file(manifest) if manifest.is_file() else "",
+        "manifest_sha256": (
+            sha256_gate_manifest(manifest) if manifest.is_file() else ""
+        ),
         "data": data or {},
         "errors": errors,
     }

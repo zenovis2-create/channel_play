@@ -34,8 +34,9 @@ authority evidence.
 
 The critic receipt must be structured JSON. It is accepted only when it names
 the `critic_reviewer` role, asset, task, gate, review time, authorization scope,
-and the exact current manifest SHA-256. An unrelated `APPROVED` document cannot
-unlock a gate.
+and the exact current manifest SHA-256. Gate-record CRLF/CR line endings are
+normalized to LF before hashing, while approved binary source files retain
+exact byte hashes. An unrelated `APPROVED` document cannot unlock a gate.
 
 ## Gate B Record
 

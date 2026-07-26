@@ -18,6 +18,7 @@ from tools.studio.company.asset_gate import (
     evaluate_asset_gate_b,
     gate_a_manifest_path,
     sha256_file,
+    sha256_gate_manifest,
 )
 from tools.studio.company.assets import asset_new, asset_prepare, asset_status
 from tools.studio.company.errors import CompanyError
@@ -104,6 +105,27 @@ class AssetGateTests(unittest.TestCase):
         self.assertTrue(
             any("manifest_sha256" in error for error in result["errors"])
         )
+
+    def test_gate_manifest_hash_ignores_line_endings_only(self) -> None:
+        manifest = self._complete_gate_a("truth_pen", "openai")
+        lf_bytes = (
+            manifest.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+        )
+        manifest.write_bytes(lf_bytes)
+        canonical_hash = sha256_gate_manifest(manifest)
+        raw_lf_hash = sha256_file(manifest)
+
+        manifest.write_bytes(lf_bytes.replace(b"\n", b"\r\n"))
+
+        self.assertEqual(sha256_gate_manifest(manifest), canonical_hash)
+        self.assertNotEqual(sha256_file(manifest), raw_lf_hash)
+        self.assertTrue(evaluate_asset_gate_a(self.root, "truth_pen")["passed"])
+
+        source = self.root / "source.bin"
+        source.write_bytes(b"line-one\r\nline-two")
+        source_hash = sha256_file(source)
+        source.write_bytes(b"line-one\nline-two")
+        self.assertNotEqual(sha256_file(source), source_hash)
 
     def test_complete_source_paths_pass(self) -> None:
         for source_path in ("commissioned_human", "openai", "cc0"):
@@ -501,7 +523,7 @@ class AssetGateTests(unittest.TestCase):
                 "asset_id": asset_id,
                 "task_id": task_id,
                 "gate": gate,
-                "manifest_sha256": sha256_file(manifest),
+                "manifest_sha256": sha256_gate_manifest(manifest),
                 "reviewer_role": "critic_reviewer",
                 "reviewed_at": datetime.now(timezone.utc).isoformat(),
                 "verdict": "APPROVED",
