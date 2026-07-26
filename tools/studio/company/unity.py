@@ -16,6 +16,7 @@ except ImportError:  # pragma: no cover - macOS/Linux path is the supported loca
     fcntl = None
 
 from .errors import CompanyError
+from .capture import _is_png
 from .timeutil import now_iso, slugify
 
 
@@ -23,6 +24,7 @@ UNITY_HUB_EDITOR_ROOT = Path("/Applications/Unity/Hub/Editor")
 UNITY_FALLBACK = Path("/Applications/Unity/Hub/Editor/6000.4.9f1/Unity.app/Contents/MacOS/Unity")
 PLAYTEST_MARKER = "CHANNEL_PLAY_PLAYTEST_SMOKE"
 BUILD_MARKER = "CHANNEL_PLAY_BUILD_RESULT"
+FEEDBACK_CAPTURE_MARKER = "CHANNEL_PLAY_FEEDBACK_CAPTURE"
 MANUAL_RECORDER_MARKER = "CHANNEL_PLAY_MANUAL_TRAVERSAL_RECORDER"
 MANUAL_REVIEW_MARKER = "CHANNEL_PLAY_MANUAL_TRAVERSAL_REVIEW"
 MANUAL_CAPTURE_SETUP_MARKER = "CHANNEL_PLAY_MANUAL_TRAVERSAL_CAPTURE_SETUP"
@@ -169,6 +171,79 @@ def unity_playtest(root: Path, args: list[str]) -> Path:
     log_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"Wrote {log_path.relative_to(root)}")
     return log_path
+
+
+def unity_feedback_capture(root: Path) -> tuple[Path, Path]:
+    unity = _resolve_unity_editor(root)
+    run_dir = root / "runs" / f"unity-feedback-capture-{slugify(now_iso())}"
+    run_dir.mkdir(parents=True, exist_ok=True)
+    log_path = run_dir / "unity_feedback_capture.md"
+    capture_path = (
+        root
+        / "reviews"
+        / "captures"
+        / f"game-{slugify(now_iso())}.png"
+    )
+    capture_path.parent.mkdir(parents=True, exist_ok=True)
+    lines = _unity_header("Unity Feedback Capture", root, unity)
+
+    if not unity.exists():
+        raise CompanyError(f"Unity editor not found: {unity}")
+
+    editor_log = run_dir / "Editor.log"
+    env = os.environ.copy()
+    env["CHANNEL_PLAY_FEEDBACK_CAPTURE_PATH"] = str(capture_path)
+    result = _run_unity_batch(
+        root,
+        unity,
+        editor_log,
+        execute_method=(
+            "ChannelPlayProductionValidator.CaptureFeedbackFrame"
+        ),
+        timeout=240,
+        env=env,
+    )
+    errors = _summarize_unity_errors(editor_log)
+    markers = _matching_lines(editor_log, FEEDBACK_CAPTURE_MARKER)
+    output_exists = _is_png(capture_path)
+    passed = (
+        result.returncode == 0
+        and not errors
+        and output_exists
+        and any("result=passed" in marker for marker in markers)
+    )
+    lines.extend(
+        [
+            f"Exit code: {result.returncode}",
+            f"Editor log: {editor_log.relative_to(root)}",
+            f"Compile errors: {len(errors)}",
+            f"Feedback capture: {'passed' if passed else 'failed'}",
+            f"Capture: {capture_path.relative_to(root)}",
+            f"Capture exists: {output_exists}",
+            "",
+            "## Capture Markers",
+            "",
+            *(markers or ["none"]),
+        ]
+    )
+    if errors:
+        lines.extend(
+            [
+                "",
+                "## Error Summary",
+                "",
+                *[f"- {error}" for error in errors[:20]],
+            ]
+        )
+    log_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"Wrote {log_path.relative_to(root)}")
+    if not passed:
+        capture_path.unlink(missing_ok=True)
+        raise CompanyError(
+            "Unity feedback capture failed; see "
+            f"{log_path.relative_to(root)}"
+        )
+    return log_path, capture_path
 
 
 def unity_build(root: Path, args: list[str]) -> Path:

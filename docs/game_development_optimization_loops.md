@@ -10,11 +10,13 @@ This document defines the production loops used by Channel Play Studio after the
 
 - Command: `tools/channelctl game feedback-loop`
 - Runs Unity playtest smoke.
-- Captures the current screen.
+- Renders `School_MVP` from `Operator_Overview_Camera` inside Unity.
 - Creates a feedback note linked to the latest capture.
 - Next command: `tools/channelctl feedback process <feedback.md>`
 
 Use this when the user reviews the game visually and wants a captured issue turned into agent work.
+The loop fails closed if the playtest fails or Unity cannot produce a valid,
+non-blank PNG. It never captures unrelated desktop applications.
 
 `feedback process` is a routing step, not a fake completion step. It creates QA, implementation, and review work orders and leaves them assigned until an agent run, review, and Unity evidence exist.
 
