@@ -62,6 +62,10 @@ agreement and source Gate A `PASS` exist.
 - Source: `memory/company/jobs/jobs.json`
 - UI surface: Production Cockpit and Task Tracker.
 - Shows active jobs, latest command, receipts, artifacts, and recent events.
+- When no Studio job entry exists, the latest closed task counts only if its
+  board status is verification-passed and its repository-relative verification
+  receipt still exists and records `Status: passed`. This preserves progress
+  visibility without inventing a job.
 
 Use this when the user needs to see whether a task is running, blocked, failed, or completed with evidence.
 
