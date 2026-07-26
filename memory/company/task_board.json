@@ -1037,6 +1037,64 @@
       ],
       "verification_status": "passed",
       "closed_at": "2026-07-27T07:36:34+09:00"
+    },
+    {
+      "id": "task-0021",
+      "request": "Add a read-only Studio action that copies a repository-safe response worksheet containing only unresolved canonical Truth Pen owner decision field names and guidance. Omit current values and validation messages, disable the action for indeterminate or complete states, keep contact authorization and manifests unchanged, and add tests, docs, runtime evidence, and critic review.",
+      "status": "closed",
+      "suggested_agent": "coding_specialist",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": "coding_specialist",
+      "allowed_write_paths": [
+        "tools/studio/company",
+        "tools/studio/app",
+        "tools/studio/tests",
+        "docs",
+        "memory/company",
+        "memory/sessions",
+        "reviews",
+        "runs"
+      ],
+      "required_evidence": "worksheet safety tests, partial/complete/indeterminate state tests, Studio UI contract tests, JavaScript syntax check, runtime receipt, full Python suite, and critic review",
+      "created_at": "2026-07-27T07:42:17+09:00",
+      "updated_at": "2026-07-27T07:54:15+09:00",
+      "work_order": "memory/sessions/20260727-074217-add-a-repository-safe-owner-response-wor/work_orders/task-0021-coding_specialist.md",
+      "report": "memory/company/reviews/task-0021-review.md",
+      "verification": "memory/sessions/20260727-074217-add-a-repository-safe-owner-response-wor/verification/task-0021-verification.md",
+      "session": "20260727-074217-add-a-repository-safe-owner-response-wor",
+      "review_status": "reviewed",
+      "reviewer": "critic_reviewer",
+      "agent_runs": [
+        {
+          "tool": "studio",
+          "mode": "review",
+          "status": "reviewed",
+          "path": "memory/company/reviews/task-0021-review.md",
+          "created_at": "2026-07-27T07:53:33+09:00"
+        }
+      ],
+      "agent_status": "reviewed",
+      "last_tool": "studio",
+      "last_agent_run": "memory/company/reviews/task-0021-review.md",
+      "evidence": [
+        {
+          "path": "runs/task-0021-procurement-owner-worksheet/runtime_status.md",
+          "note": "Runtime worksheet state, safety boundaries, unchanged hashes, and test results",
+          "attached_at": "2026-07-27T07:54:14+09:00"
+        },
+        {
+          "path": "memory/sessions/20260727-074217-add-a-repository-safe-owner-response-wor/agent_reports/task-0021-coding_specialist.md",
+          "note": "Implementation report and verification summary",
+          "attached_at": "2026-07-27T07:54:15+09:00"
+        },
+        {
+          "path": "memory/company/reviews/task-0021-review.md",
+          "note": "Findings-first critic review",
+          "attached_at": "2026-07-27T07:54:15+09:00"
+        }
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-07-27T07:54:15+09:00"
     }
   ]
 }

@@ -73,6 +73,13 @@ without a current PASS receipt. If malformed JSON, unsupported fields, or other
 unmapped validation errors exist, Studio shows `확인 필요` instead of guessing
 completion.
 
+Studio can copy a response worksheet for the currently unresolved canonical
+fields. The worksheet contains field names, repository-safe guidance, and
+blank placeholders only; it deliberately omits stored values and validator
+messages. The copy action is disabled when progress is complete or when
+malformed or unsupported data makes progress indeterminate. Copying the
+worksheet does not edit the manifest, authorize contact, or create a receipt.
+
 Candidate IDs are `cynthia_ignacio`, `marisol_griffiths`, and
 `natalie_lewis`. Use only the IDs the owner explicitly authorizes.
 

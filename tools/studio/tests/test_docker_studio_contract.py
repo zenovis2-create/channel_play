@@ -57,6 +57,7 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn("procurement.errors", self.app)
         self.assertIn("procurement.issueGroups", self.app)
         self.assertIn("procurement.decisionProgress", self.app)
+        self.assertIn("procurement.decisionWorksheet", self.app)
         self.assertIn(
             "procurement.passed\n    && Boolean(procurement.receipt)",
             self.app,
@@ -82,6 +83,21 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn("연락 허가와 별도", checklist)
         self.assertIn("추가 검증을 먼저 해결", checklist)
         self.assertIn("game-procurement-item", checklist)
+        self.assertIn("data-procurement-worksheet", checklist)
+        self.assertIn(
+            'procurementWorksheetAvailable ? "" : "disabled"',
+            checklist,
+        )
+        self.assertIn(
+            'procurementWorksheet.reason === "complete"',
+            checklist,
+        )
+        self.assertIn(
+            'procurementWorksheet.reason === "indeterminate"',
+            checklist,
+        )
+        self.assertIn('role="status"', checklist)
+        self.assertIn('aria-live="polite"', checklist)
         self.assertIn('role="listitem"', checklist)
         self.assertIn(
             'class="game-procurement-empty" role="listitem"',
@@ -91,6 +107,8 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertNotIn("data-command", checklist)
         self.assertIn(".game-procurement-checklist", self.style)
         self.assertIn(".game-procurement-progress", self.style)
+        self.assertIn(".game-procurement-actions", self.style)
+        self.assertIn(".game-procurement-copy-status", self.style)
 
     def test_procurement_progress_counts_are_finite_and_bounded(self) -> None:
         start = self.app.index("function boundedCount")
@@ -108,6 +126,26 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn("boundedCount(group.total)", self.app)
         self.assertIn("boundedCount(group.completed, total)", self.app)
         self.assertIn("unresolved: total - completed", self.app)
+
+    def test_procurement_worksheet_copy_is_local_and_read_only(self) -> None:
+        start = self.app.index("async function copyProcurementWorksheet")
+        end = self.app.index("function bind()", start)
+        helper = self.app[start:end]
+
+        self.assertIn(
+            "state?.gameProduction?.procurement?.decisionWorksheet",
+            helper,
+        )
+        self.assertIn("navigator.clipboard.writeText(text)", helper)
+        self.assertIn("if (!worksheet.available || !text)", helper)
+        self.assertNotIn("runCommand(", helper)
+        self.assertNotIn("fetch(", helper)
+        self.assertNotIn("procurement.errors", helper)
+        self.assertNotIn("item.message", helper)
+        self.assertIn(
+            'event.target.closest(\n      "[data-procurement-worksheet]"',
+            self.app,
+        )
 
 
 if __name__ == "__main__":
