@@ -6,7 +6,7 @@ Run: runs/unity-feedback-capture-2026-07-26t16-19-14-09-00/unity_feedback_captur
 Frame: Operator_Overview_Camera, 1600x900
 Action: ChannelPlayProductionValidator.CaptureFeedbackFrame
 Priority: P2
-Status: routed
+Status: resolved
 
 ## Observation
 
@@ -50,3 +50,10 @@ luminance range 0.8267.
 - task-0006 -> qa_playtest (memory/sessions/20260726-163349-process-feedback-md/work_orders/task-0006-qa_playtest.md)
 - task-0007 -> unity_gameplay (memory/sessions/20260726-163349-process-feedback-md/work_orders/task-0007-unity_gameplay.md)
 - task-0008 -> critic_reviewer (memory/sessions/20260726-163349-process-feedback-md/work_orders/task-0008-critic_reviewer.md)
+
+## Final Review
+
+- Disposition: accepted with one non-blocking P3 hardening note.
+- Review: reviews/2026-07-26/feedback-0002/task-0008-findings-first-review.md
+- Refreshed capture: reviews/captures/game-2026-07-26t17-15-41-09-00.png
+- Capture receipt: runs/unity-feedback-capture-2026-07-26t17-15-41-09-00/unity_feedback_capture.md
