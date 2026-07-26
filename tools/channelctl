@@ -102,6 +102,8 @@ def _print_help() -> int:
                 "  asset gate-a-check <id>   Validate source rights before generation",
                 "  asset gate-b-init <id>    Create production authorization record",
                 "  asset gate-b-check <id>   Validate exact source/provider before production",
+                "  asset procurement-init <id> Create owner outreach decision record",
+                "  asset procurement-check <id> Validate proposal-only outreach readiness",
                 "  asset prepare <asset-id>  Create gated asset pipeline scaffolds",
                 "  asset forge <asset-id>    Create Asset Forge concept/schema/CubePart job",
                 "  asset semantic-pack <id>  Create semantic/nav/interactable agent eval pack",

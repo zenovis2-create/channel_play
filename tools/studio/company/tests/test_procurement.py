@@ -1,0 +1,333 @@
+from __future__ import annotations
+
+import json
+import tempfile
+import unittest
+from datetime import date, datetime, timedelta, timezone
+from pathlib import Path
+
+from tools.studio.company.errors import CompanyError
+from tools.studio.company.procurement import (
+    PROCUREMENT_DECISION_SCHEMA,
+    TRUTH_PEN_CANDIDATES,
+    evaluate_procurement_outreach,
+    procurement_decision_init,
+    procurement_outreach_check,
+)
+
+
+class ProcurementTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name)
+        (self.root / ".git").mkdir()
+        self._write(
+            self.root / "asset_pipeline/index.json",
+            {"assets": [{"id": "truth_pen", "status": "briefed"}]},
+        )
+        self._write_text(
+            self.root / "asset_pipeline/briefs/truth_pen_commission_rfp.md",
+            "# RFP\n",
+        )
+        self._write_text(
+            self.root / "docs/research/truth_pen_artist_procurement_packet.md",
+            "# Procurement Packet\n",
+        )
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+
+    def test_init_is_fail_closed_and_preserves_existing_decision(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        data = self._read(manifest)
+
+        self.assertEqual(data["schema"], PROCUREMENT_DECISION_SCHEMA)
+        self.assertFalse(data["outreach"]["authorized"])
+        self.assertFalse(evaluate_procurement_outreach(self.root, "truth_pen")["passed"])
+
+        data["task_id"] = "task-0099"
+        self._write(manifest, data)
+        self.assertEqual(procurement_decision_init(self.root, "truth_pen"), manifest)
+        self.assertEqual(self._read(manifest)["task_id"], "task-0099")
+
+    def test_default_check_writes_fail_receipt_and_blocks_contact(self) -> None:
+        procurement_decision_init(self.root, "truth_pen")
+
+        with self.assertRaisesRegex(CompanyError, "Proposal outreach blocked"):
+            procurement_outreach_check(self.root, "truth_pen")
+
+        receipt = (
+            self.root
+            / "runs/asset-procurement-truth_pen/outreach_readiness_check.md"
+        )
+        text = receipt.read_text(encoding="utf-8")
+        self.assertIn("Result: **FAIL**", text)
+        self.assertIn("All artist contact remains blocked", text)
+        self.assertIn("Gate A `PASS`", text)
+
+    def test_complete_decision_authorizes_proposal_only(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        self._write(manifest, self._complete_decision(manifest))
+
+        result = evaluate_procurement_outreach(self.root, "truth_pen")
+        self.assertTrue(result["passed"], result["errors"])
+
+        receipt = procurement_outreach_check(self.root, "truth_pen")
+        text = receipt.read_text(encoding="utf-8")
+        self.assertIn("Result: **PASS**", text)
+        self.assertIn("Proposal-only outreach is authorized", text)
+        self.assertIn("Artwork and source-file requests remain blocked", text)
+
+    def test_sensitive_fields_and_privacy_flags_fail(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        data = self._complete_decision(manifest)
+        data["owner"]["secure_record_id"] = "UNKNOWN"
+        data["owner"]["bank_account"] = "must-not-be-here"
+        data["privacy"]["banking_data_in_repo"] = True
+        self._write(manifest, data)
+
+        result = evaluate_procurement_outreach(self.root, "truth_pen")
+
+        self.assertFalse(result["passed"])
+        self.assertIn(
+            "owner contains unsupported field: bank_account",
+            result["errors"],
+        )
+        self.assertIn(
+            "owner.secure_record_id must use vault:<canonical-lowercase-UUID>",
+            result["errors"],
+        )
+        self.assertIn(
+            "privacy.banking_data_in_repo must be false",
+            result["errors"],
+        )
+
+    def test_sensitive_payload_fields_are_rejected(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        for field in (
+            "identity_document",
+            "tax_id",
+            "bank_account",
+            "payment_credential",
+            "signature",
+            "private_message",
+            "email",
+        ):
+            with self.subTest(field=field):
+                data = self._complete_decision(manifest)
+                data["owner"][field] = "must-not-be-here"
+                self._write(manifest, data)
+                errors = evaluate_procurement_outreach(
+                    self.root,
+                    "truth_pen",
+                )["errors"]
+                self.assertIn(
+                    f"owner contains unsupported field: {field}",
+                    errors,
+                )
+
+    def test_scope_candidate_and_schedule_validation(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        data = self._complete_decision(manifest)
+        data["outreach"]["scope"] = "one"
+        data["outreach"]["candidate_ids"] = [
+            "cynthia_ignacio",
+            "unknown_artist",
+        ]
+        data["schedule"]["desired_delivery_date"] = data["schedule"][
+            "proposal_deadline"
+        ]
+        self._write(manifest, data)
+
+        errors = evaluate_procurement_outreach(self.root, "truth_pen")["errors"]
+
+        self.assertTrue(any("unknown candidates" in error for error in errors))
+        self.assertIn(
+            "outreach.scope one requires exactly one candidate",
+            errors,
+        )
+        self.assertIn(
+            "schedule.desired_delivery_date must be after proposal_deadline",
+            errors,
+        )
+
+    def test_non_string_candidate_entry_fails_closed(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        data = self._complete_decision(manifest)
+        data["outreach"]["candidate_ids"] = [{"id": "cynthia_ignacio"}]
+        self._write(manifest, data)
+
+        result = evaluate_procurement_outreach(self.root, "truth_pen")
+
+        self.assertFalse(result["passed"])
+        self.assertIn(
+            "outreach.candidate_ids entries must be strings",
+            result["errors"],
+        )
+
+    def test_sensitive_secure_record_values_are_rejected(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        for value in (
+            "Jane-Doe",
+            "123-45-6789",
+            "4111111111111111",
+            "vault:NOT-A-UUID",
+            "vault:550E8400-E29B-41D4-A716-446655440000",
+        ):
+            with self.subTest(value=value):
+                data = self._complete_decision(manifest)
+                data["owner"]["secure_record_id"] = value
+                self._write(manifest, data)
+                result = evaluate_procurement_outreach(
+                    self.root,
+                    "truth_pen",
+                )
+                self.assertFalse(result["passed"])
+                self.assertIn(
+                    "owner.secure_record_id must use "
+                    "vault:<canonical-lowercase-UUID>",
+                    result["errors"],
+                )
+
+    def test_nonfinite_budget_values_are_rejected(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        for value in (float("nan"), float("inf"), float("-inf")):
+            with self.subTest(value=value):
+                data = self._complete_decision(manifest)
+                data["commercial"]["budget_ceiling"] = value
+                self._write(manifest, data)
+                result = evaluate_procurement_outreach(
+                    self.root,
+                    "truth_pen",
+                )
+                self.assertFalse(result["passed"])
+                self.assertTrue(
+                    any(
+                        "non-standard numeric constant is prohibited" in error
+                        for error in result["errors"]
+                    )
+                )
+
+    def test_authorization_flags_and_all_scope_fail_closed(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        data = self._complete_decision(manifest)
+        data["outreach"]["proposal_only"] = False
+        data["outreach"][
+            "source_creation_blocked_until_signed_agreement_and_gate_a_pass"
+        ] = False
+        data["outreach"]["candidate_ids"] = ["cynthia_ignacio"]
+        self._write(manifest, data)
+
+        errors = evaluate_procurement_outreach(self.root, "truth_pen")["errors"]
+
+        self.assertIn("outreach.proposal_only must be true", errors)
+        self.assertTrue(
+            any("keep source creation blocked" in error for error in errors)
+        )
+        self.assertIn(
+            "outreach.scope all requires every shortlisted candidate",
+            errors,
+        )
+
+    def test_bound_rfp_drift_invalidates_authorization(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        self._write(manifest, self._complete_decision(manifest))
+        rfp = self.root / "asset_pipeline/briefs/truth_pen_commission_rfp.md"
+        rfp.write_text("# RFP\nRequest artwork immediately.\n", encoding="utf-8")
+
+        result = evaluate_procurement_outreach(self.root, "truth_pen")
+
+        self.assertFalse(result["passed"])
+        self.assertTrue(
+            any("records.rfp_sha256 must match" in error for error in result["errors"])
+        )
+
+    def test_malformed_json_writes_fail_receipt(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        manifest.write_text("{broken", encoding="utf-8")
+
+        with self.assertRaisesRegex(CompanyError, "Proposal outreach blocked"):
+            procurement_outreach_check(self.root, "truth_pen")
+
+        receipt = (
+            self.root
+            / "runs/asset-procurement-truth_pen/outreach_readiness_check.md"
+        )
+        self.assertIn(
+            "Result: **FAIL**",
+            receipt.read_text(encoding="utf-8"),
+        )
+
+    def test_unknown_asset_check_is_side_effect_free(self) -> None:
+        with self.assertRaisesRegex(
+            CompanyError,
+            "Procurement workflow is not configured",
+        ):
+            procurement_outreach_check(self.root, "unknown")
+
+        self.assertFalse((self.root / "runs").exists())
+
+    def _complete_decision(self, manifest: Path) -> dict:
+        data = self._read(manifest)
+        proposal_deadline = date.today() + timedelta(days=14)
+        desired_delivery = proposal_deadline + timedelta(days=21)
+        data.update(
+            {
+                "decision_status": "approved_for_proposal_outreach",
+                "owner": {
+                    "secure_record_id": (
+                        "vault:550e8400-e29b-41d4-a716-446655440000"
+                    ),
+                    "authorized_signer_role": "project_owner",
+                    "governing_jurisdiction": "KR",
+                },
+                "commercial": {
+                    "budget_ceiling": 1500,
+                    "currency": "USD",
+                    "payment_route": "upwork",
+                    "tax_vendor_process_confirmed_securely": True,
+                },
+                "schedule": {
+                    "proposal_deadline": proposal_deadline.isoformat(),
+                    "desired_delivery_date": desired_delivery.isoformat(),
+                    "revision_limit": 2,
+                },
+                "outreach": {
+                    "authorized": True,
+                    "authorized_at": datetime.now(timezone.utc).isoformat(),
+                    "scope": "all",
+                    "candidate_ids": sorted(TRUTH_PEN_CANDIDATES),
+                    "proposal_only": True,
+                    "source_creation_blocked_until_signed_agreement_and_gate_a_pass": True,
+                },
+                "privacy": {
+                    "private_identity_documents_in_repo": False,
+                    "tax_data_in_repo": False,
+                    "banking_data_in_repo": False,
+                    "payment_credentials_in_repo": False,
+                    "sensitive_data_stored_outside_repo": True,
+                },
+            }
+        )
+        return data
+
+    @staticmethod
+    def _read(path: Path) -> dict:
+        return json.loads(path.read_text(encoding="utf-8"))
+
+    @staticmethod
+    def _write(path: Path, data: dict) -> None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+
+    @staticmethod
+    def _write_text(path: Path, text: str) -> None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+
+
+if __name__ == "__main__":
+    unittest.main()
