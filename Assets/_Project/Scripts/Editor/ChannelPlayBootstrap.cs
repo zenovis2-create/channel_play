@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
@@ -11,6 +12,11 @@ public static class ChannelPlayBootstrap
     private const string ProjectRoot = "Assets/_Project";
     private const string ScenesRoot = ProjectRoot + "/Scenes";
     private const string MaterialsRoot = ProjectRoot + "/Materials";
+    public const float OperatorOverviewFieldOfView = 42f;
+    public static readonly Vector3 OperatorOverviewPosition =
+        new Vector3(220f, 158f, -170f);
+    public static readonly Vector3 OperatorOverviewTarget =
+        new Vector3(20f, -3f, 0f);
 
     private static readonly string[] SceneNames =
     {
@@ -86,11 +92,9 @@ public static class ChannelPlayBootstrap
 
         var operatorCamera = new GameObject("Operator_Overview_Camera");
         var overviewCamera = operatorCamera.AddComponent<Camera>();
-        overviewCamera.enabled = false;
         overviewCamera.clearFlags = CameraClearFlags.SolidColor;
         overviewCamera.backgroundColor = new Color(0.04f, 0.06f, 0.07f);
-        operatorCamera.transform.position = new Vector3(0f, 18f, -3f);
-        operatorCamera.transform.rotation = Quaternion.Euler(70f, 0f, 0f);
+        ConfigureOperatorOverviewCamera(overviewCamera);
 
         var prefabPath = $"{ProjectRoot}/Prefabs/MVP_Player.prefab";
         PrefabUtility.SaveAsPrefabAsset(player, prefabPath);
@@ -100,6 +104,24 @@ public static class ChannelPlayBootstrap
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         Debug.Log("channel_play first playable slice created.");
+    }
+
+    public static void ConfigureOperatorOverviewCamera(Camera camera)
+    {
+        if (camera == null)
+        {
+            throw new ArgumentNullException(nameof(camera));
+        }
+
+        camera.enabled = false;
+        camera.orthographic = false;
+        camera.fieldOfView = OperatorOverviewFieldOfView;
+        camera.nearClipPlane = 0.3f;
+        camera.farClipPlane = 600f;
+        camera.transform.position = OperatorOverviewPosition;
+        camera.transform.rotation = Quaternion.LookRotation(
+            OperatorOverviewTarget - OperatorOverviewPosition,
+            Vector3.up);
     }
 
     private static void EnsureFolders()

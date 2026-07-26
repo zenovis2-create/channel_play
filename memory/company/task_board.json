@@ -156,7 +156,7 @@
     {
       "id": "task-0007",
       "request": "피드백 수정 작업 수행: Reframe `Operator_Overview_Camera` to show the playable School MVP route, player start, and primary objective landmarks in one legible overview. Keep the capture deterministic and retain the non-blank PNG validation. (reviews/2026-07-26/feedback-0002/feedback.md)",
-      "status": "assigned",
+      "status": "closed",
       "suggested_agent": "unity_gameplay",
       "suggested_reviewer": null,
       "assigned_agent": "unity_gameplay",
@@ -169,11 +169,35 @@
       ],
       "required_evidence": "Unity compile, playtest, and refreshed capture evidence",
       "created_at": "2026-07-26T16:33:49+09:00",
-      "updated_at": "2026-07-26T16:33:49+09:00",
+      "updated_at": "2026-07-26T17:16:09+09:00",
       "work_order": "memory/sessions/20260726-163349-process-feedback-md/work_orders/task-0007-unity_gameplay.md",
       "report": null,
-      "verification": null,
-      "session": "20260726-163349-process-feedback-md"
+      "verification": "memory/sessions/20260726-163349-process-feedback-md/verification/task-0007-verification.md",
+      "session": "20260726-163349-process-feedback-md",
+      "evidence": [
+        {
+          "path": "runs/unity-check-2026-07-26t17-15-19-09-00/unity_check.md",
+          "note": "Unity 6000.0.76f1 batch compile passed with 0 errors",
+          "attached_at": "2026-07-26T17:16:08+09:00"
+        },
+        {
+          "path": "runs/unity-playtest-2026-07-26t17-15-32-09-00/unity_playtest.md",
+          "note": "Playtest smoke passed 10 checks including operator overview framing and five visible landmarks",
+          "attached_at": "2026-07-26T17:16:08+09:00"
+        },
+        {
+          "path": "runs/unity-feedback-capture-2026-07-26t17-15-41-09-00/unity_feedback_capture.md",
+          "note": "Deterministic 1600x900 Operator_Overview_Camera receipt; non-blank and framing gates passed",
+          "attached_at": "2026-07-26T17:16:09+09:00"
+        },
+        {
+          "path": "reviews/captures/game-2026-07-26t17-15-41-09-00.png",
+          "note": "Refreshed overview capture showing full playable map, player start, key routes, and exit",
+          "attached_at": "2026-07-26T17:16:09+09:00"
+        }
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-07-26T17:16:09+09:00"
     },
     {
       "id": "task-0008",
