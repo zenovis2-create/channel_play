@@ -60,6 +60,7 @@ public static class ChannelPlayKhufuV13WindowsBuild
         Directory.CreateDirectory(
             ChannelPlayKhufuV13SubterraneanThresholdBuilder.RunRoot);
         var originalFrameTiming = PlayerSettings.enableFrameTimingStats;
+        var settingsSnapshot = File.ReadAllBytes(PlayerSettingsPath);
         var settingsBefore = Hash(PlayerSettingsPath);
         var protectedAssets = ProtectedAssetSnapshot.Capture();
         var protectedAssetsBefore = protectedAssets.Signature();
@@ -86,6 +87,10 @@ public static class ChannelPlayKhufuV13WindowsBuild
         {
             PlayerSettings.enableFrameTimingStats = originalFrameTiming;
             AssetDatabase.SaveAssets();
+            File.WriteAllBytes(PlayerSettingsPath, settingsSnapshot);
+            AssetDatabase.ImportAsset(PlayerSettingsPath,
+                ImportAssetOptions.ForceSynchronousImport |
+                ImportAssetOptions.ForceUpdate);
             protectedAssets.Restore();
         }
 
