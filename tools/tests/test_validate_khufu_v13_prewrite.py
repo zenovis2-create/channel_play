@@ -151,6 +151,18 @@ def test_disallowed_committed_path_fails(
     assert any("exceed the prewrite allowlist" in error for error in result.errors)
 
 
+def test_source_gate_paths_are_committed_prewrite_inputs() -> None:
+    assert prewrite.SOURCE_GATE_ALLOWED_PATHS
+    assert prewrite.SOURCE_GATE_ALLOWED_PATHS <= (
+        prewrite.PREWRITE_COMMITTED_ALLOWED_PATHS
+    )
+    assert prewrite.SCENE.as_posix() not in prewrite.PREWRITE_COMMITTED_ALLOWED_PATHS
+    assert not any(
+        path.startswith("Assets/_Project/Art/Generated/")
+        for path in prewrite.PREWRITE_COMMITTED_ALLOWED_PATHS
+    )
+
+
 def test_disallowed_uncommitted_unity_path_fails(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,

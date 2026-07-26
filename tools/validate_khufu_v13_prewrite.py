@@ -66,10 +66,82 @@ PREWRITE_EVIDENCE_ALLOWED_PATHS = frozenset(
         "runs/khufu-v13-subterranean-threshold/prewrite-validation.md",
     }
 )
+SOURCE_GATE_ALLOWED_PATHS = frozenset(
+    {
+        (
+            "Assets/_Project/Scripts/Editor/"
+            "ChannelPlayKhufuV13SubterraneanThresholdMeshPipeline.cs"
+        ),
+        (
+            "Assets/_Project/Scripts/Editor/"
+            "ChannelPlayKhufuV13SubterraneanThresholdMeshPipeline.cs.meta"
+        ),
+        (
+            "Assets/_Project/Scripts/Editor/"
+            "ChannelPlayKhufuV13SubterraneanThresholdBuilder.cs"
+        ),
+        (
+            "Assets/_Project/Scripts/Editor/"
+            "ChannelPlayKhufuV13SubterraneanThresholdBuilder.cs.meta"
+        ),
+        (
+            "Assets/_Project/Scripts/Editor/"
+            "ChannelPlayKhufuV13SubterraneanThresholdValidator.cs"
+        ),
+        (
+            "Assets/_Project/Scripts/Editor/"
+            "ChannelPlayKhufuV13SubterraneanThresholdValidator.cs.meta"
+        ),
+        (
+            "Assets/_Project/Scripts/Editor/"
+            "ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression.cs"
+        ),
+        (
+            "Assets/_Project/Scripts/Editor/"
+            "ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression.cs.meta"
+        ),
+        (
+            "Assets/_Project/Scripts/Editor/"
+            "ChannelPlayKhufuV13SubterraneanThresholdScreenshotExporter.cs"
+        ),
+        (
+            "Assets/_Project/Scripts/Editor/"
+            "ChannelPlayKhufuV13SubterraneanThresholdScreenshotExporter.cs.meta"
+        ),
+        "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV13WindowsBuild.cs",
+        "Assets/_Project/Scripts/Editor/ChannelPlayKhufuV13WindowsBuild.cs.meta",
+        "Assets/_Project/Scripts/Gameplay/KhufuV13ControllerHitRecorder.cs",
+        "Assets/_Project/Scripts/Gameplay/KhufuV13ControllerHitRecorder.cs.meta",
+        "Assets/_Project/Scripts/Gameplay/KhufuV13SegmentTag.cs",
+        "Assets/_Project/Scripts/Gameplay/KhufuV13SegmentTag.cs.meta",
+        (
+            "Assets/_Project/Scripts/Gameplay/"
+            "KhufuV13SubterraneanRouteContract.cs"
+        ),
+        (
+            "Assets/_Project/Scripts/Gameplay/"
+            "KhufuV13SubterraneanRouteContract.cs.meta"
+        ),
+        (
+            "Assets/_Project/Scripts/Gameplay/"
+            "KhufuV13SubterraneanThresholdControl.cs"
+        ),
+        (
+            "Assets/_Project/Scripts/Gameplay/"
+            "KhufuV13SubterraneanThresholdControl.cs.meta"
+        ),
+        "Assets/_Project/Scripts/Gameplay/KhufuV13TraversalProofProbe.cs",
+        "Assets/_Project/Scripts/Gameplay/KhufuV13TraversalProofProbe.cs.meta",
+        "runs/khufu-v13-subterranean-threshold/phase3-source-validation.md",
+        "runs/khufu-v13-subterranean-threshold/phase4-source-validation.md",
+        "runs/khufu-v13-subterranean-threshold/phase5-source-validation.md",
+    }
+)
 PREWRITE_COMMITTED_ALLOWED_PATHS = (
     PHASE1_ALLOWED_PATHS
     | PREWRITE_AUDIT_ALLOWED_PATHS
     | PREWRITE_EVIDENCE_ALLOWED_PATHS
+    | SOURCE_GATE_ALLOWED_PATHS
 )
 
 EXPECTED_SEGMENTS = (
