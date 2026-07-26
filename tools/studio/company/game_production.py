@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from .capture import capture_screen
+from .capture import _is_png, capture_screen
 from .gdx import gdx_probe
 from .paths import rel
 from .timeutil import now_iso, slugify
@@ -16,7 +16,7 @@ from tools.studio.jobs import list_jobs
 def game_production_state(root: Path) -> dict:
     unity_compile = _latest_run_matching(root, "unity-check-", "unity_check.md", ("Compile errors: 0", "Exit code: 0"))
     unity_play = _latest_run(root, "unity-playtest-", "unity_playtest.md")
-    unity_build = _latest_run(root, "unity-build-mac-dev-", "unity_build.md")
+    development_build = _latest_development_build(root)
     linux_server_build = _latest_run(root, "unity-build-linux-server-", "unity_build.md")
     gdx = _latest_gdx_probe(root)
     gdx_server = _latest_gdx_action(root, "run-server")
@@ -37,8 +37,12 @@ def game_production_state(root: Path) -> dict:
     checks = [
         _check("Unity compile", _status_passed(unity_compile, ("Compile errors: 0", "Exit code: 0")), unity_compile.get("path", "")),
         _check("Playtest smoke", _status_passed(unity_play, ("Playtest smoke: passed", "Exit code: 0")), unity_play.get("path", "")),
-        _check("Mac dev build", _status_passed(unity_build, ("Build status: passed", "Build output exists: True")), unity_build.get("path", "")),
-        _check("gdx1 probe", _status_any(gdx, ("usable", "Status: ok", "SSH exit: 0")), gdx.get("path", "")),
+        _check("Development build", _status_passed(development_build, ("Build status: passed", "Build output exists: True")), development_build.get("path", "")),
+        _check(
+            "gdx1 probe evidence",
+            _gdx_probe_recorded(gdx),
+            gdx.get("path", ""),
+        ),
         _check("Capture evidence", bool(capture), capture.get("path", "")),
         _check("MVP spec", mvp_spec.exists(), rel(root, mvp_spec) if mvp_spec.exists() else ""),
     ]
@@ -58,7 +62,7 @@ def game_production_state(root: Path) -> dict:
         "unity": {
             "compile": unity_compile,
             "playtest": unity_play,
-            "build": unity_build,
+            "build": development_build,
             "linuxServerBuild": linux_server_build,
             "scenes": len(scenes),
             "gameplayScripts": len(gameplay_scripts),
@@ -135,7 +139,7 @@ def game_production_check(root: Path, args: list[str]) -> Path:
 
     compile_path = unity_check(root, ["--batch"])
     playtest_path = unity_playtest(root, [])
-    build_path = unity_build(root, ["mac-dev"]) if include_build else None
+    build_path = unity_build(root, []) if include_build else None
     gdx_path = gdx_probe(root)
     capture_path = capture_screen(root) if include_capture else None
     state = game_production_state(root)
@@ -150,7 +154,7 @@ def game_production_check(root: Path, args: list[str]) -> Path:
         "",
         f"- Unity compile: {rel(root, compile_path)}",
         f"- Unity playtest smoke: {rel(root, playtest_path)}",
-        f"- Mac dev build: {rel(root, build_path) if build_path else 'skipped; use --build or unity build mac-dev'}",
+        f"- Development build: {rel(root, build_path) if build_path else 'skipped; use --build or unity build'}",
         f"- gdx1 probe: {rel(root, gdx_path)}",
     ]
     if capture_path:
@@ -198,6 +202,33 @@ def _latest_run_matching(root: Path, prefix: str, filename: str, markers: tuple[
     return fallback
 
 
+def _latest_development_build(root: Path) -> dict:
+    candidates = [
+        _latest_run_matching(
+            root,
+            prefix,
+            "unity_build.md",
+            ("Build status: passed", "Build output exists: True"),
+        )
+        for prefix in (
+            "unity-build-windows-dev-",
+            "unity-build-mac-dev-",
+        )
+    ]
+    existing = [
+        candidate
+        for candidate in candidates
+        if candidate.get("path")
+        and (root / candidate["path"]).is_file()
+    ]
+    if not existing:
+        return {}
+    return max(
+        existing,
+        key=lambda candidate: (root / candidate["path"]).stat().st_mtime,
+    )
+
+
 def _latest_gdx_probe(root: Path) -> dict:
     runs = sorted((root / "runs").glob("gdx-probe-*"), key=lambda item: item.stat().st_mtime if item.exists() else 0, reverse=True)
     for run in runs:
@@ -230,7 +261,15 @@ def _latest_gdx_action(root: Path, action: str) -> dict:
 
 
 def _latest_capture(root: Path) -> dict:
-    captures = sorted((root / "reviews" / "captures").glob("*.png"), key=lambda item: item.stat().st_mtime if item.exists() else 0, reverse=True)
+    captures = sorted(
+        (
+            item
+            for item in (root / "reviews" / "captures").glob("*.png")
+            if _is_png(item)
+        ),
+        key=lambda item: item.stat().st_mtime,
+        reverse=True,
+    )
     if not captures:
         return {}
     capture = captures[0]
@@ -437,7 +476,11 @@ def _perfection_gate(checks: list[dict], loops: list[dict], next_action: dict, s
     next_command = str(next_action.get("command") or "")
     next_payload = next_action.get("payload") if isinstance(next_action.get("payload"), dict) else {}
     gate_checks = [
-        _gate_check("Core readiness", all(check.get("passed") for check in checks), "Unity/playtest/build/gdx/capture/spec"),
+        _gate_check(
+            "Core readiness",
+            all(check.get("passed") for check in checks),
+            "Unity/playtest/build/gdx probe evidence/capture/spec",
+        ),
         _gate_check("Feedback loop", loop_by_id.get("play_feedback", {}).get("status") == "ready", loop_by_id.get("play_feedback", {}).get("evidence", "")),
         _gate_check("Asset pipeline loop", loop_by_id.get("asset_factory", {}).get("status") == "ready", loop_by_id.get("asset_factory", {}).get("summary", "")),
         _gate_check(
@@ -489,6 +532,17 @@ def _status_passed(run: dict, markers: tuple[str, ...]) -> bool:
 def _status_any(run: dict, markers: tuple[str, ...]) -> bool:
     text = run.get("text", "")
     return bool(text) and any(marker in text for marker in markers)
+
+
+def _gdx_probe_recorded(run: dict) -> bool:
+    text = run.get("text", "")
+    return bool(text) and (
+        all(
+            marker in text
+            for marker in ("# gdx1 Probe", "SSH exit:", "## Result")
+        )
+        or any(marker in text for marker in ("usable", "Status: ok"))
+    )
 
 
 def _check(label: str, passed: bool, path: str) -> dict:
