@@ -402,6 +402,89 @@
       ],
       "verification_status": "passed",
       "closed_at": "2026-07-26T20:41:56+09:00"
+    },
+    {
+      "id": "task-0011",
+      "request": "prepare a fail-closed Truth Pen Gate A source decision and evidence intake packet without inventing rights evidence",
+      "status": "closed",
+      "suggested_agent": "research_librarian",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": "research_librarian",
+      "allowed_write_paths": [
+        "docs/research",
+        "asset_pipeline",
+        "runs",
+        "reviews",
+        "memory/company",
+        "memory/sessions",
+        "obsidian/channel_play"
+      ],
+      "required_evidence": "source decision packet, unchanged fail-closed Gate A result, and critic review",
+      "created_at": "2026-07-26T20:50:38+09:00",
+      "updated_at": "2026-07-26T21:08:16+09:00",
+      "work_order": "memory/sessions/20260726-181451-truth-pen/work_orders/task-0011-research_librarian.md",
+      "report": "runs/agent-codex-task-0011-2026-07-26t21-05-52-09-00/agent_run.md",
+      "verification": "memory/sessions/20260726-181451-truth-pen/verification/task-0011-verification.md",
+      "session": "20260726-181451-truth-pen",
+      "review_status": "approved",
+      "reviewer": "critic_reviewer",
+      "agent_runs": [
+        {
+          "tool": "studio",
+          "mode": "review",
+          "status": "reviewed",
+          "path": "memory/company/reviews/task-0011-review.md",
+          "created_at": "2026-07-26T20:54:49+09:00"
+        },
+        {
+          "tool": "codex",
+          "mode": "review",
+          "status": "ok",
+          "path": "runs/agent-codex-task-0011-2026-07-26t20-55-30-09-00/agent_run.md",
+          "created_at": "2026-07-26T20:59:52+09:00"
+        },
+        {
+          "tool": "codex",
+          "mode": "review",
+          "status": "ok",
+          "path": "runs/agent-codex-task-0011-2026-07-26t21-01-21-09-00/agent_run.md",
+          "created_at": "2026-07-26T21:05:27+09:00"
+        },
+        {
+          "tool": "codex",
+          "mode": "review",
+          "status": "ok",
+          "path": "runs/agent-codex-task-0011-2026-07-26t21-05-52-09-00/agent_run.md",
+          "created_at": "2026-07-26T21:08:01+09:00"
+        }
+      ],
+      "agent_status": "ok",
+      "last_tool": "codex",
+      "last_agent_run": "runs/agent-codex-task-0011-2026-07-26t21-05-52-09-00/agent_run.md",
+      "evidence": [
+        {
+          "path": "docs/research/truth_pen_gate_a_commissioning_packet.md",
+          "note": "selected commissioned-human strategy and exact Gate A evidence intake checklist",
+          "attached_at": "2026-07-26T21:08:16+09:00"
+        },
+        {
+          "path": "runs/asset-gate-a-truth_pen/gate_a_check.md",
+          "note": "current expected FAIL receipt; source creation remains blocked",
+          "attached_at": "2026-07-26T21:08:16+09:00"
+        },
+        {
+          "path": "runs/task-0011-verification/verification.md",
+          "note": "focused validator tests and fail-closed runtime verification",
+          "attached_at": "2026-07-26T21:08:16+09:00"
+        },
+        {
+          "path": "runs/agent-codex-task-0011-2026-07-26t21-05-52-09-00/agent_run.md",
+          "note": "final independent critic APPROVED packet review; not Gate A source authorization",
+          "attached_at": "2026-07-26T21:08:16+09:00"
+        }
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-07-26T21:08:16+09:00"
     }
   ]
 }

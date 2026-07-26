@@ -1,8 +1,8 @@
 {
   "schema": "channel_play.asset_source_gate_a.v1",
   "asset_id": "truth_pen",
-  "task_id": "",
-  "source_path": "unselected",
+  "task_id": "task-0011",
+  "source_path": "commissioned_human",
   "applicable_jurisdiction": "",
   "provider_or_source": "",
   "creator_or_affirmer": "",
@@ -24,7 +24,11 @@
     "copied_franchise_style": null,
     "tracing_or_image_conditioning": null
   },
-  "path_details": {},
+  "path_details": {
+    "contracting_parties": "",
+    "signed_rights_instrument": "",
+    "downstream_asset_creation_grant": null
+  },
   "evidence_paths": [],
   "critic_review": {
     "receipt": ""

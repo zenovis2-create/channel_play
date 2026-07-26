@@ -53,6 +53,9 @@ execution time, so a stale template cannot bypass a revoked or changed record.
 
 ## Current Truth Pen Result
 
-`runs/asset-gate-a-truth_pen/gate_a_check.md` records `FAIL`. No source path,
-jurisdiction, rights evidence, or bound critic approval has been supplied, so
-source creation and all downstream production remain blocked.
+Task `task-0011` selected `commissioned_human` as the procurement path and
+created `docs/research/truth_pen_gate_a_commissioning_packet.md`. This selection
+is not an authorization. `runs/asset-gate-a-truth_pen/gate_a_check.md` still
+records `FAIL` because no named creator, signed rights instrument, jurisdiction,
+input-clearance evidence, or bound critic approval has been supplied. Source
+creation and all downstream production remain blocked.
