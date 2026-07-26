@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-import os
+import hashlib
+import json
 import re
 import shutil
 import subprocess
@@ -42,15 +43,12 @@ class KhufuV6VisualSliceValidatorTests(unittest.TestCase):
     def tearDown(self) -> None:
         self.temp.cleanup()
 
-    def _copy(self, relative: Path | str, *, hardlink: bool = False) -> None:
+    def _copy(self, relative: Path | str) -> None:
         relative = Path(relative)
         source = PROJECT_ROOT / relative
         target = self.root / relative
         target.parent.mkdir(parents=True, exist_ok=True)
-        if hardlink:
-            os.link(source, target)
-        else:
-            shutil.copy2(source, target)
+        shutil.copy2(source, target)
 
     def _copy_git_blob(self, revision: str, relative: Path | str) -> None:
         relative = Path(relative)
@@ -77,6 +75,49 @@ class KhufuV6VisualSliceValidatorTests(unittest.TestCase):
         target = self.root / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(content.encode("utf-8"))
+
+    def _write_synthetic_build_outputs(self) -> None:
+        outputs = {
+            "Player executable": (
+                Path("Builds/KhufuV6/ChannelPlayKhufuV6.exe"),
+                b"synthetic Khufu V6 player fixture\n",
+            ),
+            "UnityPlayer": (
+                Path("Builds/KhufuV6/UnityPlayer.dll"),
+                b"synthetic Khufu V6 UnityPlayer fixture\n",
+            ),
+            "Built level": (
+                Path("Builds/KhufuV6/ChannelPlayKhufuV6_Data/level0"),
+                b"synthetic Khufu V6 level fixture\n",
+            ),
+        }
+        for _, (relative, content) in outputs.items():
+            target = self.root / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(content)
+
+        receipt = self.root / RUN_ROOT / "windows-build.md"
+        receipt_text = receipt.read_text(encoding="utf-8")
+        for label, (_, content) in outputs.items():
+            digest = hashlib.sha256(content).hexdigest()
+            receipt_text = re.sub(
+                rf"({re.escape(label)} SHA256: `)[0-9a-f]{{64}}(`)",
+                rf"\g<1>{digest}\g<2>",
+                receipt_text,
+            )
+        receipt.write_text(receipt_text, encoding="utf-8")
+
+        binding_path = self.root / RUN_ROOT / "performance-final/binding.json"
+        binding = json.loads(binding_path.read_text(encoding="utf-8"))
+        for key, label in (("player", "Player executable"), ("built_level", "Built level")):
+            relative, content = outputs[label]
+            binding[key]["path"] = relative.as_posix()
+            binding[key]["bytes"] = len(content)
+            binding[key]["sha256"] = hashlib.sha256(content).hexdigest()
+        binding_path.write_text(
+            json.dumps(binding, indent=2) + "\n",
+            encoding="utf-8",
+        )
 
     def _copy_fixture(self) -> None:
         baseline = PROJECT_ROOT / RUN_ROOT / "frozen-inputs-baseline.md"
@@ -134,13 +175,8 @@ class KhufuV6VisualSliceValidatorTests(unittest.TestCase):
         for name in ("initial", "operator"):
             self._copy(RUN_ROOT / "performance-final" / f"v6-final-windows-player-{name}.png")
 
-        for relative in (
-            Path("Builds/KhufuV6/ChannelPlayKhufuV6.exe"),
-            Path("Builds/KhufuV6/UnityPlayer.dll"),
-            Path("Builds/KhufuV6/ChannelPlayKhufuV6_Data/level0"),
-            RUN_ROOT / "performance-final/v6-final.raw",
-        ):
-            self._copy(relative, hardlink=True)
+        self._copy(RUN_ROOT / "performance-final/v6-final.raw")
+        self._write_synthetic_build_outputs()
 
         fable = self.root / "work/fable-harness/khufu-v6-visual-slice-final-review.fable.md"
         fable.parent.mkdir(parents=True, exist_ok=True)
