@@ -1,0 +1,16 @@
+{
+  "command": [
+    "nlm",
+    "notebook",
+    "query",
+    "--json",
+    "--timeout",
+    "120",
+    "39e71010-ed96-496a-9395-a7fa7901fece",
+    "Channel Play research request: Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록\nReturn a cited brief, source coverage, uncertainties, implementation implications, and next handoff."
+  ],
+  "dry_run": false,
+  "timeout_seconds": 180,
+  "executor": "cli",
+  "sdk": {}
+}

@@ -5,7 +5,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import tools.studio.company.agent_runner as agent_runner_module
 from tools.studio.company.agent_runner import collect_agent_adapter_state, run_agent_task, run_agent_task_full_approval
@@ -298,6 +298,71 @@ class AgentRunnerTests(unittest.TestCase):
         self.assertEqual(fake_state["defaultRoles"], ["unity_gameplay"])
         self.assertEqual(state["tools"]["disabled_tool"]["status"], "disabled")
         self.assertGreaterEqual(state["summary"]["available"], 1)
+
+    def test_external_adapter_output_is_decoded_as_utf8(self) -> None:
+        completed = Mock(
+            returncode=0,
+            stdout="research complete ✓\n",
+            stderr="",
+        )
+
+        with (
+            patch.object(
+                agent_runner_module.shutil,
+                "which",
+                return_value="fake-agent",
+            ),
+            patch.object(
+                agent_runner_module.subprocess,
+                "run",
+                return_value=completed,
+            ) as run,
+        ):
+            result = agent_runner_module._execute(
+                ["fake-agent"],
+                self.root,
+                None,
+                30,
+                False,
+            )
+
+        self.assertEqual(result["status"], "ok")
+        self.assertIn("✓", result["stdout"])
+        self.assertEqual(run.call_args.kwargs["encoding"], "utf-8")
+        self.assertEqual(run.call_args.kwargs["errors"], "replace")
+
+    def test_external_adapter_permission_denial_is_failed(self) -> None:
+        completed = Mock(
+            returncode=0,
+            stdout="",
+            stderr=(
+                "jetski: no output produced because write_file permission "
+                "was auto-denied."
+            ),
+        )
+
+        with (
+            patch.object(
+                agent_runner_module.shutil,
+                "which",
+                return_value="fake-agent",
+            ),
+            patch.object(
+                agent_runner_module.subprocess,
+                "run",
+                return_value=completed,
+            ),
+        ):
+            result = agent_runner_module._execute(
+                ["fake-agent"],
+                self.root,
+                None,
+                30,
+                False,
+            )
+
+        self.assertEqual(result["status"], "failed")
+        self.assertEqual(result["exit"], 0)
 
 
 if __name__ == "__main__":
