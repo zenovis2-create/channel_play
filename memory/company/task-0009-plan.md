@@ -1,10 +1,10 @@
 # Task Plan
 
 Task ID: task-0009
-Status: review_changes_required
+Status: closed_fail_closed
 Suggested agent: research_librarian
 Suggested reviewer: critic_reviewer
-Required evidence: NotebookLM/Maru cited research brief
+Required evidence: Official primary-source brief, evidence decision, and critic receipt
 
 ## Request
 
@@ -37,6 +37,22 @@ Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출�
   was found.
 - Include a handoff note for `asset_factory`; this task does not write to
   `asset_pipeline`.
+
+## Remediation Decision
+
+- The task-scoped evidence substitution is recorded in
+  `memory/company/task-0009-evidence-decision.md`.
+- No production source or project rights chain is currently approved.
+- The brief separates pre-generation authorization from post-output production
+  and import checks.
+- `asset_factory` remains blocked even if this research task closes with the
+  documented fail-closed result.
+
+## Verification Result
+
+The final findings-first re-review returned `APPROVED`, and Studio verification
+passed on 2026-07-26. This closes only the research decision. Production still
+requires a new source-specific Gate A record and fresh critic approval.
 
 ## Project Brain Excerpt
 

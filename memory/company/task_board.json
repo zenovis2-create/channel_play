@@ -230,7 +230,7 @@
     {
       "id": "task-0009",
       "request": "Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록",
-      "status": "blocked",
+      "status": "closed",
       "suggested_agent": "research_librarian",
       "suggested_reviewer": "critic_reviewer",
       "assigned_agent": "research_librarian",
@@ -240,12 +240,12 @@
         "memory/sessions",
         "obsidian/channel_play"
       ],
-      "required_evidence": "NotebookLM/Maru cited research brief",
+      "required_evidence": "Official primary-source brief, evidence decision, and critic receipt",
       "created_at": "2026-07-26T18:07:35+09:00",
-      "updated_at": "2026-07-26T18:52:38+09:00",
+      "updated_at": "2026-07-26T19:18:29+09:00",
       "work_order": "memory/sessions/20260726-181451-truth-pen/work_orders/task-0009-research_librarian.md",
-      "report": "reviews/2026-07-26/truth-pen/task-0009-license-review.md",
-      "verification": null,
+      "report": "runs/agent-codex-task-0009-2026-07-26t19-14-10-09-00/agent_run.md",
+      "verification": "memory/sessions/20260726-181451-truth-pen/verification/task-0009-verification.md",
       "session": "20260726-181451-truth-pen",
       "agent_runs": [
         {
@@ -268,14 +268,27 @@
           "status": "ok",
           "path": "runs/agent-codex-task-0009-2026-07-26t18-43-40-09-00/agent_run.md",
           "created_at": "2026-07-26T18:49:31+09:00"
+        },
+        {
+          "tool": "codex",
+          "mode": "review",
+          "status": "ok",
+          "path": "runs/agent-codex-task-0009-2026-07-26t19-08-38-09-00/agent_run.md",
+          "created_at": "2026-07-26T19:13:01+09:00"
+        },
+        {
+          "tool": "codex",
+          "mode": "review",
+          "status": "ok",
+          "path": "runs/agent-codex-task-0009-2026-07-26t19-14-10-09-00/agent_run.md",
+          "created_at": "2026-07-26T19:17:41+09:00"
         }
       ],
       "last_tool": "codex",
-      "last_agent_run": "runs/agent-codex-task-0009-2026-07-26t18-43-40-09-00/agent_run.md",
+      "last_agent_run": "runs/agent-codex-task-0009-2026-07-26t19-14-10-09-00/agent_run.md",
       "agent_status": "ok",
-      "review_status": "changes_required",
+      "review_status": "approved",
       "reviewer": "critic_reviewer",
-      "blocked_reason": "Critic review requires evidence and gate corrections; asset_factory remains blocked.",
       "evidence": [
         {
           "path": "docs/research/truth_pen_source_license_brief.md",
@@ -286,8 +299,30 @@
           "path": "reviews/2026-07-26/truth-pen/task-0009-license-review.md",
           "note": "Findings-first critic review; CHANGES REQUIRED / HIGH; asset_factory gate blocked",
           "attached_at": "2026-07-26T18:52:38+09:00"
+        },
+        {
+          "path": "memory/company/task-0009-evidence-decision.md",
+          "note": "Chief-orchestrator task-scoped substitution of current official primary sources for failed NotebookLM and agy adapter runs",
+          "attached_at": "2026-07-26T19:07:42+09:00"
+        },
+        {
+          "path": "memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research-remediation.md",
+          "note": "Remediation report: no safe production source approved, two-stage gates, and asset_factory remains blocked",
+          "attached_at": "2026-07-26T19:07:42+09:00"
+        },
+        {
+          "path": "reviews/2026-07-26/truth-pen/task-0009-license-rereview.md",
+          "note": "Final critic approval; research may close fail-closed while asset_factory remains blocked",
+          "attached_at": "2026-07-26T19:18:29+09:00"
+        },
+        {
+          "path": "runs/agent-codex-task-0009-2026-07-26t19-14-10-09-00/agent_run.md",
+          "note": "Studio checkpoint from latest run",
+          "attached_at": "2026-07-26T19:18:29+09:00"
         }
-      ]
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-07-26T19:18:29+09:00"
     }
   ]
 }

@@ -1,4 +1,4 @@
-# Agent Report
+# Agent Run
 
 Task ID: task-0009
 Role: critic_reviewer
@@ -7,15 +7,12 @@ Executor: cli_fallback
 Mode: review
 Status: ok
 Review outcome: approved
+Exit: 0
 Created: 2026-07-26T19:17:41+09:00
 
-## Summary
+## Task
 
-External agent `codex` completed with status `ok`.
-
-## Evidence
-
-runs/agent-codex-task-0009-2026-07-26t19-14-10-09-00/agent_run.md
+Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록
 
 ## Output
 

@@ -12,7 +12,7 @@ Allowed write paths:
 Forbidden paths: any locked path not assigned to this task
 Inputs: memory/company/task-0009-plan.md, task request, and current brief
 Expected output: changed files or report matching role contract
-Verification required: NotebookLM/Maru cited research brief
+Verification required: Official primary-source brief, evidence decision, and critic receipt (see `memory/company/task-0009-evidence-decision.md`)
 Suggested reviewer: critic_reviewer
 
 ## Project Brain Excerpt
