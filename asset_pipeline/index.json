@@ -28,14 +28,12 @@
       "generation_handoff": "asset_pipeline/generated_3d/truth_pen/generation_handoff.md",
       "blender_template": "asset_pipeline/blender_work/truth_pen/blender_batch_template.py",
       "unity_import_manifest": "asset_pipeline/unity_ready/truth_pen/unity_import_manifest.md",
-      "updated_at": "2026-07-26T20:10:53+09:00",
+      "updated_at": "2026-07-26T21:01:08+09:00",
       "source_gate_required": true,
       "source_gate_status": "blocked",
       "source_gate_manifest": "asset_pipeline/manifests/truth_pen_source_gate_a.json",
       "source_gate_receipt": "runs/asset-gate-a-truth_pen/gate_a_check.md",
       "source_gate_errors": [
-        "source_path must select commissioned_human, openai, or cc0",
-        "task_id must use task-NNNN format",
         "applicable_jurisdiction is required",
         "provider_or_source is required",
         "creator_or_affirmer is required",
@@ -54,6 +52,9 @@
         "input_clearance.copied_franchise_style must be false",
         "input_clearance.tracing_or_image_conditioning must be false",
         "evidence_paths must include at least one repository evidence path",
+        "path_details.contracting_parties is required",
+        "path_details.signed_rights_instrument is required",
+        "path_details.downstream_asset_creation_grant must be true",
         "critic_review.receipt is required"
       ]
     }

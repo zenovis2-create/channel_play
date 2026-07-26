@@ -1,15 +1,13 @@
 # Asset Gate A Check
 
 Asset ID: truth_pen
-Checked: 2026-07-26T20:10:53+09:00
+Checked: 2026-07-26T21:01:08+09:00
 Manifest: asset_pipeline/manifests/truth_pen_source_gate_a.json
-Manifest SHA-256: 3f164868efef5d487d83b21f9521a0a2cd8468235adec8453f5fa59bcedb435f
+Manifest SHA-256: 6b34e1457bb38f3527f1e22e39487a54e4cb16f0bf492edc3255eb034996677c
 Result: **FAIL**
 
 ## Findings
 
-- source_path must select commissioned_human, openai, or cc0
-- task_id must use task-NNNN format
 - applicable_jurisdiction is required
 - provider_or_source is required
 - creator_or_affirmer is required
@@ -28,6 +26,9 @@ Result: **FAIL**
 - input_clearance.copied_franchise_style must be false
 - input_clearance.tracing_or_image_conditioning must be false
 - evidence_paths must include at least one repository evidence path
+- path_details.contracting_parties is required
+- path_details.signed_rights_instrument is required
+- path_details.downstream_asset_creation_grant must be true
 - critic_review.receipt is required
 
 ## Production Decision
