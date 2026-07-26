@@ -163,6 +163,10 @@ class CompanyCoreTests(unittest.TestCase):
         self.assertIn("Unity Scripts Standard", text)
         self.assertIn("Evidence Standard", text)
         self.assertIn("Project Brain", text)
+        self.assertIn(
+            "memory/company/task-0001-plan.md",
+            text,
+        )
 
     def test_review_checkpoint_moves_task_to_evidence(self) -> None:
         plan_task(self.root, "mvp구현 레벨로 게임 제작해보자")

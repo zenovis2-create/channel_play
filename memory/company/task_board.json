@@ -230,10 +230,10 @@
     {
       "id": "task-0009",
       "request": "Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록",
-      "status": "planned",
+      "status": "assigned",
       "suggested_agent": "research_librarian",
       "suggested_reviewer": "critic_reviewer",
-      "assigned_agent": null,
+      "assigned_agent": "research_librarian",
       "allowed_write_paths": [
         "docs/research",
         "memory/company",
@@ -242,10 +242,11 @@
       ],
       "required_evidence": "NotebookLM/Maru cited research brief",
       "created_at": "2026-07-26T18:07:35+09:00",
-      "updated_at": "2026-07-26T18:07:35+09:00",
-      "work_order": null,
+      "updated_at": "2026-07-26T18:16:09+09:00",
+      "work_order": "memory/sessions/20260726-181451-truth-pen/work_orders/task-0009-research_librarian.md",
       "report": null,
-      "verification": null
+      "verification": null,
+      "session": "20260726-181451-truth-pen"
     }
   ]
 }

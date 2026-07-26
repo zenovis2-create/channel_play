@@ -1,7 +1,7 @@
 {
   "project": "channel_play",
-  "updated_at": "2026-07-26T17:43:51+09:00",
-  "active_session": null,
+  "updated_at": "2026-07-26T18:14:51+09:00",
+  "active_session": "20260726-181451-truth-pen",
   "current_orchestrator_task": "mvp_traitor_escape_gameshow",
   "integrated_goal": {
     "id": "mvp_traitor_escape_gameshow",
