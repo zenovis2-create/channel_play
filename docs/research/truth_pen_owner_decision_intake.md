@@ -65,6 +65,14 @@ Complete these fields only after the owner makes the corresponding decision:
 - `privacy.sensitive_data_stored_outside_repo`: 신원·세무·결제 자료가 승인된
   보안 시스템에만 있는 경우 `true`로 설정합니다.
 
+## Studio Progress Meaning
+
+Production Cockpit calculates completion from the 16 canonical fields above.
+This is structural field progress only; even `16/16` does not authorize contact
+without a current PASS receipt. If malformed JSON, unsupported fields, or other
+unmapped validation errors exist, Studio shows `확인 필요` instead of guessing
+completion.
+
 Candidate IDs are `cynthia_ignacio`, `marisol_griffiths`, and
 `natalie_lewis`. Use only the IDs the owner explicitly authorizes.
 

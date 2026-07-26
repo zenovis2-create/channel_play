@@ -8,6 +8,7 @@ from pathlib import Path
 from tools.studio.company.capture import PNG_SIGNATURE
 from tools.studio.company.errors import CompanyError
 from tools.studio.company.game_production import (
+    _procurement_decision_progress,
     _procurement_issue_groups,
     game_production_state,
     render_game_production_status,
@@ -327,6 +328,24 @@ class GameProductionTests(unittest.TestCase):
             "UNKNOWN",
             json.dumps(issue_groups, ensure_ascii=False),
         )
+        progress = procurement["decisionProgress"]
+        self.assertEqual(progress["total"], 16)
+        self.assertEqual(progress["completed"], 0)
+        self.assertEqual(progress["unresolved"], 16)
+        self.assertEqual(progress["additionalIssueCount"], 0)
+        self.assertFalse(progress["indeterminate"])
+        self.assertEqual(progress["status"], "pending")
+        self.assertEqual(
+            [group["total"] for group in progress["groups"]],
+            [1, 3, 4, 3, 4, 1],
+        )
+        self.assertTrue(
+            all(
+                group["completed"] == 0
+                and group["status"] == "pending"
+                for group in progress["groups"]
+            )
+        )
         self.assertEqual(
             procurement["intake"],
             "docs/research/truth_pen_owner_decision_intake.md",
@@ -385,6 +404,70 @@ class GameProductionTests(unittest.TestCase):
             "소유자 안내서",
             groups[0]["items"][0]["guidance"],
         )
+        progress = _procurement_decision_progress(groups)
+        self.assertTrue(progress["indeterminate"])
+        self.assertEqual(progress["completed"], 0)
+        self.assertEqual(progress["unresolved"], 16)
+        self.assertEqual(progress["additionalIssueCount"], 1)
+        self.assertTrue(
+            all(
+                group["status"] == "indeterminate"
+                for group in progress["groups"]
+            )
+        )
+
+    def test_procurement_progress_deduplicates_known_field_errors(self) -> None:
+        groups = _procurement_issue_groups(
+            [
+                "schedule.proposal_deadline must use YYYY-MM-DD",
+                "schedule.proposal_deadline must not be in the past",
+            ]
+        )
+
+        progress = _procurement_decision_progress(groups)
+        schedule = next(
+            group
+            for group in progress["groups"]
+            if group["id"] == "schedule"
+        )
+
+        self.assertFalse(progress["indeterminate"])
+        self.assertEqual(progress["completed"], 15)
+        self.assertEqual(progress["unresolved"], 1)
+        self.assertEqual(progress["additionalIssueCount"], 0)
+        self.assertEqual(schedule["completed"], 2)
+        self.assertEqual(schedule["unresolved"], 1)
+
+    def test_partial_procurement_decision_reports_field_progress(self) -> None:
+        self._write_truth_pen_procurement_decision()
+        manifest = (
+            self.root
+            / "asset_pipeline"
+            / "manifests"
+            / "truth_pen_procurement_decision.json"
+        )
+        decision = json.loads(manifest.read_text(encoding="utf-8"))
+        decision["owner"]["governing_jurisdiction"] = "KR"
+        manifest.write_text(
+            json.dumps(decision, indent=2) + "\n",
+            encoding="utf-8",
+        )
+
+        progress = game_production_state(self.root)["procurement"][
+            "decisionProgress"
+        ]
+        owner = next(
+            group
+            for group in progress["groups"]
+            if group["id"] == "owner"
+        )
+
+        self.assertEqual(progress["completed"], 1)
+        self.assertEqual(progress["unresolved"], 15)
+        self.assertEqual(progress["status"], "in_progress")
+        self.assertEqual(owner["completed"], 1)
+        self.assertEqual(owner["unresolved"], 2)
+        self.assertEqual(owner["status"], "in_progress")
 
     def test_current_fail_receipt_routes_to_owner_intake(self) -> None:
         self._write_ready_receipts()
@@ -532,6 +615,67 @@ class GameProductionTests(unittest.TestCase):
 
         self.assertTrue(state["procurement"]["passed"])
         self.assertEqual(state["procurement"]["receipt"], "")
+        self.assertEqual(
+            state["procurement"]["decisionProgress"],
+            {
+                "total": 16,
+                "completed": 16,
+                "unresolved": 0,
+                "additionalIssueCount": 0,
+                "indeterminate": False,
+                "status": "complete",
+                "groups": [
+                    {
+                        "id": "approval",
+                        "label": "승인 상태",
+                        "total": 1,
+                        "completed": 1,
+                        "unresolved": 0,
+                        "status": "complete",
+                    },
+                    {
+                        "id": "owner",
+                        "label": "소유자 및 권한",
+                        "total": 3,
+                        "completed": 3,
+                        "unresolved": 0,
+                        "status": "complete",
+                    },
+                    {
+                        "id": "commercial",
+                        "label": "예산 및 결제",
+                        "total": 4,
+                        "completed": 4,
+                        "unresolved": 0,
+                        "status": "complete",
+                    },
+                    {
+                        "id": "schedule",
+                        "label": "일정",
+                        "total": 3,
+                        "completed": 3,
+                        "unresolved": 0,
+                        "status": "complete",
+                    },
+                    {
+                        "id": "outreach",
+                        "label": "연락 범위 및 승인",
+                        "total": 4,
+                        "completed": 4,
+                        "unresolved": 0,
+                        "status": "complete",
+                    },
+                    {
+                        "id": "privacy",
+                        "label": "보안 및 개인정보",
+                        "total": 1,
+                        "completed": 1,
+                        "unresolved": 0,
+                        "status": "complete",
+                    },
+                ],
+            },
+        )
         self.assertEqual(
             state["nextBestAction"],
             {

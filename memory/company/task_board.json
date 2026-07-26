@@ -979,6 +979,64 @@
       ],
       "verification_status": "passed",
       "closed_at": "2026-07-27T07:21:20+09:00"
+    },
+    {
+      "id": "task-0020",
+      "request": "Python and JavaScript code: add read-only total and per-category completion progress for the 16 Truth Pen owner decisions in Studio, with fail-closed indeterminate handling and no value, authorization, or contact mutation",
+      "status": "closed",
+      "suggested_agent": "coding_specialist",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": "coding_specialist",
+      "allowed_write_paths": [
+        "tools/studio/company",
+        "tools/studio/app",
+        "tools/studio/tests",
+        "docs",
+        "memory/company",
+        "memory/sessions",
+        "reviews",
+        "runs"
+      ],
+      "required_evidence": "completion-progress state tests, indeterminate fallback tests, Studio UI contract tests, JavaScript syntax check, runtime receipt, full Python suite, and critic review",
+      "created_at": "2026-07-27T07:25:44+09:00",
+      "updated_at": "2026-07-27T07:36:34+09:00",
+      "work_order": "memory/sessions/20260727-072544-show-truth-pen-owner-decision-completion/work_orders/task-0020-coding_specialist.md",
+      "report": "memory/company/reviews/task-0020-review.md",
+      "verification": "memory/sessions/20260727-072544-show-truth-pen-owner-decision-completion/verification/task-0020-verification.md",
+      "session": "20260727-072544-show-truth-pen-owner-decision-completion",
+      "review_status": "reviewed",
+      "reviewer": "critic_reviewer",
+      "agent_runs": [
+        {
+          "tool": "studio",
+          "mode": "review",
+          "status": "reviewed",
+          "path": "memory/company/reviews/task-0020-review.md",
+          "created_at": "2026-07-27T07:36:09+09:00"
+        }
+      ],
+      "agent_status": "reviewed",
+      "last_tool": "studio",
+      "last_agent_run": "memory/company/reviews/task-0020-review.md",
+      "evidence": [
+        {
+          "path": "runs/task-0020-procurement-progress/runtime_status.md",
+          "note": "Runtime 0/16 progress, category totals, safety boundaries, and tests",
+          "attached_at": "2026-07-27T07:36:26+09:00"
+        },
+        {
+          "path": "memory/sessions/20260727-072544-show-truth-pen-owner-decision-completion/agent_reports/task-0020-coding_specialist.md",
+          "note": "Implementation report and verification summary",
+          "attached_at": "2026-07-27T07:36:27+09:00"
+        },
+        {
+          "path": "memory/company/reviews/task-0020-review.md",
+          "note": "Independent findings-first critic approval",
+          "attached_at": "2026-07-27T07:36:28+09:00"
+        }
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-07-27T07:36:34+09:00"
     }
   ]
 }

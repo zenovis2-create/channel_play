@@ -834,6 +834,99 @@ main {
   font-weight: 800;
 }
 
+.game-procurement-progress {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--line-strong);
+  border-radius: calc(var(--radius) - 2px);
+  display: grid;
+  gap: 10px;
+  padding: 11px;
+}
+
+.game-procurement-progress.good {
+  border-left-color: var(--good);
+}
+
+.game-procurement-progress.active {
+  border-left-color: var(--accent);
+}
+
+.game-procurement-progress.warn {
+  border-left-color: var(--warn);
+}
+
+.game-procurement-progress-copy {
+  display: grid;
+  gap: 3px;
+}
+
+.game-procurement-progress-copy span {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.game-procurement-progress-copy small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.game-procurement-progress-bar {
+  background: #e8eef4;
+  border-radius: 999px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.game-procurement-progress-bar > span {
+  background: var(--accent);
+  display: block;
+  height: 100%;
+}
+
+.game-procurement-progress.good .game-procurement-progress-bar > span {
+  background: var(--good);
+}
+
+.game-procurement-progress-groups {
+  display: grid;
+  gap: 7px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.game-procurement-progress-group {
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 4px);
+  display: grid;
+  gap: 2px;
+  padding: 8px;
+}
+
+.game-procurement-progress-group.good {
+  border-color: var(--good);
+}
+
+.game-procurement-progress-group.active {
+  border-color: var(--accent);
+}
+
+.game-procurement-progress-group.warn {
+  border-color: var(--warn);
+}
+
+.game-procurement-progress-group span,
+.game-procurement-progress-group small {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.game-procurement-progress-group strong {
+  font-size: 12px;
+}
+
 .game-procurement-groups {
   display: grid;
   gap: 12px;
@@ -3591,6 +3684,7 @@ pre {
   .game-loop-grid,
   .game-next-action,
   .game-perfect-checks,
+  .game-procurement-progress-groups,
   .game-procurement-items,
   .health-stack,
   .inspector-next,

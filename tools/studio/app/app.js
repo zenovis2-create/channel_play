@@ -278,6 +278,34 @@ function renderGameProduction() {
           })),
         }]
       : [];
+  const procurementProgress = procurement.decisionProgress || {};
+  const procurementProgressGroups = (
+    Array.isArray(procurementProgress.groups)
+      ? procurementProgress.groups
+      : []
+  ).map((group) => {
+    const total = boundedCount(group.total);
+    const completed = boundedCount(group.completed, total);
+    return {
+      ...group,
+      total,
+      completed,
+      unresolved: total - completed,
+    };
+  });
+  const procurementProgressTotal = boundedCount(procurementProgress.total);
+  const procurementProgressCompleted = boundedCount(
+    procurementProgress.completed,
+    procurementProgressTotal,
+  );
+  const procurementProgressIndeterminate = Boolean(
+    procurementProgress.indeterminate,
+  );
+  const procurementProgressPercent = procurementProgressTotal
+    ? Math.round(
+        (procurementProgressCompleted / procurementProgressTotal) * 100,
+      )
+    : 0;
   const procurementContactReady = procurement.passed
     && Boolean(procurement.receipt);
   const procurementTone = procurementContactReady
@@ -346,6 +374,35 @@ function renderGameProduction() {
       </div>
       ${procurement.intake ? `<button type="button" data-game-artifact-path="${esc(procurement.intake)}">소유자 결정 안내서 열기</button>` : ""}
     </div>
+    ${procurementProgressTotal ? `
+      <div class="game-procurement-progress ${procurementProgressIndeterminate ? "warn" : procurementProgressCompleted === procurementProgressTotal ? "good" : "active"}">
+        <div class="game-procurement-progress-copy">
+          <span>소유자 결정 필드 완료도</span>
+          <strong>${esc(procurementProgressIndeterminate ? "확인 필요" : `${procurementProgressCompleted}/${procurementProgressTotal} 완료`)}</strong>
+          <small>${esc(procurementProgressIndeterminate ? "추가 검증을 먼저 해결해야 완료도를 계산할 수 있습니다." : `${procurementProgressTotal - procurementProgressCompleted}개 필드 검증 대기 · 연락 허가와 별도`)}</small>
+        </div>
+        <div
+          class="game-procurement-progress-bar"
+          role="progressbar"
+          aria-label="소유자 결정 필드 완료도"
+          aria-valuemin="0"
+          aria-valuemax="${esc(procurementProgressTotal)}"
+          ${procurementProgressIndeterminate ? "" : `aria-valuenow="${esc(procurementProgressCompleted)}"`}
+          aria-valuetext="${esc(procurementProgressIndeterminate ? "추가 검증 필요" : `${procurementProgressCompleted}/${procurementProgressTotal} 완료`)}"
+        >
+          <span style="width: ${esc(`${procurementProgressPercent}%`)}"></span>
+        </div>
+        <div class="game-procurement-progress-groups">
+          ${procurementProgressGroups.map((group) => `
+            <div class="game-procurement-progress-group ${esc(group.status === "complete" ? "good" : group.status === "in_progress" ? "active" : "warn")}">
+              <span>${esc(group.label || group.id || "결정 분야")}</span>
+              <strong>${esc(procurementProgressIndeterminate ? "확인 필요" : `${group.completed || 0}/${group.total || 0}`)}</strong>
+              <small>${esc(procurementProgressIndeterminate ? "추가 검증 대기" : `${group.unresolved || 0}개 남음`)}</small>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    ` : ""}
     <div class="game-procurement-groups">
       ${procurementChecklistGroups.map((group) => {
         const items = Array.isArray(group.items) ? group.items : [];
@@ -3035,6 +3092,16 @@ function esc(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
+}
+
+function boundedCount(value, maximum = Number.MAX_SAFE_INTEGER) {
+  const numeric = Number(value);
+  const numericMaximum = Number(maximum);
+  const safeMaximum = Number.isFinite(numericMaximum)
+    ? Math.max(0, Math.floor(numericMaximum))
+    : Number.MAX_SAFE_INTEGER;
+  if (!Number.isFinite(numeric) || numeric <= 0) return 0;
+  return Math.min(Math.floor(numeric), safeMaximum);
 }
 
 activeStudioView = viewForHash(window.location.hash) || activeStudioView;
