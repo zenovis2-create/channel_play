@@ -485,6 +485,136 @@
       ],
       "verification_status": "passed",
       "closed_at": "2026-07-26T21:08:16+09:00"
+    },
+    {
+      "id": "task-0012",
+      "request": "prepare a Truth Pen commissioned-artist shortlist, fixed-price RFP, evaluation scorecard, and rights-first owner handoff without contacting or hiring anyone",
+      "status": "closed",
+      "suggested_agent": "production_planner",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": "production_planner",
+      "allowed_write_paths": [
+        "docs/research",
+        "asset_pipeline/briefs",
+        "memory/company",
+        "memory/sessions",
+        "reviews",
+        "runs"
+      ],
+      "required_evidence": "current public-source shortlist, rights-first RFP, fail-closed receipt, and critic review",
+      "created_at": "2026-07-26T21:19:04+09:00",
+      "updated_at": "2026-07-26T21:56:13+09:00",
+      "work_order": "memory/sessions/20260726-181451-truth-pen/work_orders/task-0012-production_planner.md",
+      "report": "runs/agent-codex-task-0012-2026-07-26t21-50-21-09-00/agent_run.md",
+      "verification": "memory/sessions/20260726-181451-truth-pen/verification/task-0012-verification.md",
+      "session": "20260726-181451-truth-pen",
+      "agent_runs": [
+        {
+          "tool": "codex",
+          "mode": "review",
+          "status": "ok",
+          "path": "runs/agent-codex-task-0012-2026-07-26t21-23-26-09-00/agent_run.md",
+          "created_at": "2026-07-26T21:29:24+09:00"
+        },
+        {
+          "tool": "codex",
+          "mode": "review",
+          "status": "ok",
+          "path": "runs/agent-codex-task-0012-2026-07-26t21-50-21-09-00/agent_run.md",
+          "created_at": "2026-07-26T21:55:56+09:00"
+        }
+      ],
+      "last_tool": "codex",
+      "last_agent_run": "runs/agent-codex-task-0012-2026-07-26t21-50-21-09-00/agent_run.md",
+      "agent_status": "ok",
+      "review_status": "approved",
+      "reviewer": "critic_reviewer",
+      "evidence": [
+        {
+          "path": "docs/research/truth_pen_artist_procurement_packet.md",
+          "note": "current public-source shortlist, scorecard, and owner handoff",
+          "attached_at": "2026-07-26T21:56:12+09:00"
+        },
+        {
+          "path": "asset_pipeline/briefs/truth_pen_commission_rfp.md",
+          "note": "rights-first fixed-price RFP and milestone acceptance rules",
+          "attached_at": "2026-07-26T21:56:12+09:00"
+        },
+        {
+          "path": "runs/asset-gate-a-truth_pen/gate_a_check.md",
+          "note": "current expected FAIL receipt; source creation remains blocked",
+          "attached_at": "2026-07-26T21:56:12+09:00"
+        },
+        {
+          "path": "runs/task-0012-verification/verification.md",
+          "note": "focused/full tests and no-contact scope verification",
+          "attached_at": "2026-07-26T21:56:12+09:00"
+        },
+        {
+          "path": "runs/agent-codex-task-0012-2026-07-26t21-50-21-09-00/agent_run.md",
+          "note": "final independent critic APPROVED review",
+          "attached_at": "2026-07-26T21:56:13+09:00"
+        }
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-07-26T21:56:13+09:00"
+    },
+    {
+      "id": "task-0013",
+      "request": "fix asset gate manifest SHA-256 line-ending instability while preserving exact binary source hashes",
+      "status": "closed",
+      "suggested_agent": "coding_specialist",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": "coding_specialist",
+      "allowed_write_paths": [
+        "tools/studio/company",
+        "asset_pipeline",
+        "docs/research",
+        "memory/company",
+        "memory/sessions",
+        "reviews",
+        "runs"
+      ],
+      "required_evidence": "CRLF/LF regression test, unchanged binary hash test, refreshed fail-closed receipt, full Python suite, and critic review",
+      "created_at": "2026-07-26T21:30:32+09:00",
+      "updated_at": "2026-07-26T21:49:53+09:00",
+      "work_order": "memory/sessions/20260726-181451-truth-pen/work_orders/task-0013-coding_specialist.md",
+      "report": "runs/agent-codex-task-0013-2026-07-26t21-38-32-09-00/agent_run.md",
+      "verification": "memory/sessions/20260726-181451-truth-pen/verification/task-0013-verification.md",
+      "session": "20260726-181451-truth-pen",
+      "agent_runs": [
+        {
+          "tool": "codex",
+          "mode": "review",
+          "status": "ok",
+          "path": "runs/agent-codex-task-0013-2026-07-26t21-38-32-09-00/agent_run.md",
+          "created_at": "2026-07-26T21:49:35+09:00"
+        }
+      ],
+      "last_tool": "codex",
+      "last_agent_run": "runs/agent-codex-task-0013-2026-07-26t21-38-32-09-00/agent_run.md",
+      "agent_status": "ok",
+      "review_status": "approved",
+      "reviewer": "critic_reviewer",
+      "evidence": [
+        {
+          "path": "runs/task-0013-verification/verification.md",
+          "note": "focused/full tests and hash-boundary verification",
+          "attached_at": "2026-07-26T21:49:52+09:00"
+        },
+        {
+          "path": "runs/asset-gate-a-truth_pen/gate_a_check.md",
+          "note": "refreshed expected FAIL receipt with canonical manifest hash",
+          "attached_at": "2026-07-26T21:49:53+09:00"
+        },
+        {
+          "path": "runs/agent-codex-task-0013-2026-07-26t21-38-32-09-00/agent_run.md",
+          "note": "independent critic APPROVED review",
+          "attached_at": "2026-07-26T21:49:53+09:00"
+        }
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-07-26T21:49:53+09:00"
     }
   ]
 }

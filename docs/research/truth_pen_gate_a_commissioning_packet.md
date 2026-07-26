@@ -8,6 +8,10 @@ Decision owner: project orchestration
 
 Status: `commissioned_human` selected; source creation remains blocked
 
+Procurement follow-up:
+`docs/research/truth_pen_artist_procurement_packet.md` and
+`asset_pipeline/briefs/truth_pen_commission_rfp.md`
+
 ## Decision
 
 Use a newly commissioned human work as the Truth Pen source strategy. This
@@ -91,7 +95,8 @@ docs/research/truth_pen_gate_a_evidence/signed_instrument_redacted.pdf
    - `asset_id`: `truth_pen`
    - `task_id`: the exact `task_id` in the manifest
    - `gate`: `A`
-   - `manifest_sha256`: SHA-256 of the complete current manifest
+   - `manifest_sha256`: SHA-256 shown by `asset gate-a-check`; gate-record
+     CRLF/CR line endings are normalized to LF before hashing
    - `reviewer_role`: `critic_reviewer`
    - `verdict`: `APPROVED`
    - `source_creation_authorized`: `true`

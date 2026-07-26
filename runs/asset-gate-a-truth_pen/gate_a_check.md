@@ -1,9 +1,9 @@
 # Asset Gate A Check
 
 Asset ID: truth_pen
-Checked: 2026-07-26T21:01:08+09:00
+Checked: 2026-07-26T21:33:26+09:00
 Manifest: asset_pipeline/manifests/truth_pen_source_gate_a.json
-Manifest SHA-256: 6b34e1457bb38f3527f1e22e39487a54e4cb16f0bf492edc3255eb034996677c
+Manifest SHA-256: 0595bc27b1274e73d271b713cc50b0d3f581bdcad5d530448eeb4c810c7620f2
 Result: **FAIL**
 
 ## Findings
