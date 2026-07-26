@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
-from datetime import date, datetime, timezone
+from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import patch
 
@@ -386,7 +386,7 @@ class AssetGateTests(unittest.TestCase):
                 "rights_holder_or_legal_customer": "Channel Play Test Organization",
                 "license_or_agreement": "Test commercial rights instrument",
                 "source_reference": relative_evidence,
-                "retrieval_date": date.today().isoformat(),
+                "retrieval_date": datetime.now(timezone.utc).date().isoformat(),
                 "controlling_terms_reference": relative_evidence,
                 "rights": {field: "PASS" for field in data["rights"]},
                 "input_clearance": {

@@ -281,6 +281,10 @@ class GameProductionTests(unittest.TestCase):
         self.assertEqual(procurement["assetId"], "truth_pen")
         self.assertEqual(procurement["status"], "blocked")
         self.assertEqual(procurement["errorCount"], 16)
+        self.assertEqual(len(procurement["errors"]), 16)
+        self.assertFalse(
+            any("UNKNOWN" in error for error in procurement["errors"])
+        )
         self.assertEqual(
             procurement["intake"],
             "docs/research/truth_pen_owner_decision_intake.md",
