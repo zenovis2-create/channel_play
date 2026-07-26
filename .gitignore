@@ -50,6 +50,8 @@ recordings/
 .env
 .env.*
 !.env.example
+.venv/
+memory/company/secrets/
 
 # Python local/generated files
 .venv/

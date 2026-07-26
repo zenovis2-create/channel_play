@@ -1,0 +1,97 @@
+"""Game development loop receipts for the Studio cockpit."""
+
+from __future__ import annotations
+
+from pathlib import Path
+
+from .capture import capture_screen
+from .feedback import feedback_new
+from .paths import rel
+from .timeutil import now_iso, slugify
+from .unity import unity_playtest
+
+
+def game_feedback_loop(root: Path, args: list[str]) -> Path:
+    """Run the playtest/capture/feedback loop and write a single receipt."""
+    run_dir = root / "runs" / f"game-feedback-loop-{slugify(now_iso())}"
+    run_dir.mkdir(parents=True, exist_ok=True)
+    path = run_dir / "game_feedback_loop.md"
+    skip_playtest = "--no-playtest" in args
+
+    playtest_path = None if skip_playtest else unity_playtest(root, [])
+    capture_path = capture_screen(root)
+    feedback_path = feedback_new(root)
+
+    lines = [
+        "# Game Feedback Loop",
+        "",
+        f"Checked: {now_iso()}",
+        "Status: ready_for_review",
+        "",
+        "## Artifacts",
+        "",
+        f"- Playtest: {rel(root, playtest_path) if playtest_path else 'skipped by --no-playtest'}",
+        f"- Capture: {rel(root, capture_path)}",
+        f"- Feedback: {rel(root, feedback_path)}",
+        "",
+        "## Next Action",
+        "",
+        f"- Fill observation/requested change in {rel(root, feedback_path)}",
+        f"- Then run: tools/channelctl feedback process {rel(root, feedback_path)}",
+        "",
+    ]
+    path.write_text("\n".join(lines), encoding="utf-8")
+    return path
+
+
+def game_server_handoff(root: Path) -> Path:
+    """Write a handoff receipt for the future x86_64 Linux server runner."""
+    run_dir = root / "runs" / f"game-server-handoff-{slugify(now_iso())}"
+    run_dir.mkdir(parents=True, exist_ok=True)
+    path = run_dir / "server_handoff.md"
+    linux_build = _latest_linux_build(root)
+    build_line = rel(root, linux_build) if linux_build else "missing; run tools/channelctl unity build linux-server"
+
+    lines = [
+        "# x86_64 Server Soak Handoff",
+        "",
+        f"Checked: {now_iso()}",
+        "Status: waiting_for_x86_64_runner",
+        "",
+        "## Current Topology",
+        "",
+        "- Mac Studio: Unity editor, local playtest, capture, Mac/Linux build authority.",
+        "- gdx1: ARM/aarch64 AI/ops worker, repo sync, log collection.",
+        "- x86_64 Linux runner: required for real Unity dedicated server soak.",
+        "",
+        "## Required Runner Contract",
+        "",
+        "- Architecture: x86_64 Linux.",
+        "- Access: SSH or host-runner endpoint.",
+        "- Inputs: repo checkout, Linux dedicated server build, bot runner script.",
+        "- Outputs: server log, bot log, soak receipt, captured failure reasons.",
+        "",
+        "## Current Build Evidence",
+        "",
+        f"- Linux server build receipt: {build_line}",
+        "",
+        "## Next Action",
+        "",
+        "- Attach an x86_64 Linux runner or cloud host, then map gdx.runServer/gdx.runBots to that runner.",
+        "",
+    ]
+    path.write_text("\n".join(lines), encoding="utf-8")
+    return path
+
+
+def _latest_linux_build(root: Path) -> Path | None:
+    runs = sorted(
+        (root / "runs").glob("unity-build-linux-server-*"),
+        key=lambda item: item.stat().st_mtime if item.exists() else 0,
+        reverse=True,
+    )
+    for run in runs:
+        path = run / "unity_build.md"
+        if path.exists():
+            return path
+    return None

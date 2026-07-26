@@ -1,0 +1,8 @@
+**
+!docker/
+!docker/studio/
+!docker/studio/Dockerfile
+!tools/
+!tools/studio/
+!tools/studio/docker/
+!tools/studio/docker/entrypoint.sh

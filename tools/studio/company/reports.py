@@ -66,3 +66,57 @@ def create_report(root: Path, task_id: str, agent_id: str, status: str) -> Path:
     next_status = "needs_evidence" if status == "done" and evidence == "TBD" else status
     update_task(root, task_id, {"status": next_status, "report": path.relative_to(root).as_posix()})
     return path
+
+
+def create_review_checkpoint(root: Path, task_id: str, reviewer_id: str = "critic_reviewer") -> Path:
+    task = find_task(root, task_id)
+    review_dir = root / "memory" / "company" / "reviews"
+    review_dir.mkdir(parents=True, exist_ok=True)
+    path = review_dir / f"{task_id}-review.md"
+    path.write_text(
+        "\n".join(
+            [
+                "# Review Checkpoint",
+                "",
+                f"Task ID: {task_id}",
+                f"Reviewer: {reviewer_id}",
+                f"Status: reviewed",
+                f"Created: {now_iso()}",
+                "",
+                "## Summary",
+                "",
+                "Studio review checkpoint accepted. Move the task to evidence collection.",
+                "",
+                "## Task",
+                "",
+                str(task.get("request") or ""),
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    runs = list(task.get("agent_runs") or [])
+    runs.append(
+        {
+            "tool": "studio",
+            "mode": "review",
+            "status": "reviewed",
+            "path": path.relative_to(root).as_posix(),
+            "created_at": now_iso(),
+        }
+    )
+    update_task(
+        root,
+        task_id,
+        {
+            "status": "needs_evidence",
+            "review_status": "reviewed",
+            "reviewer": reviewer_id,
+            "report": path.relative_to(root).as_posix(),
+            "agent_runs": runs,
+            "agent_status": "reviewed",
+            "last_tool": "studio",
+            "last_agent_run": path.relative_to(root).as_posix(),
+        },
+    )
+    return path

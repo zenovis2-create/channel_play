@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import sys
+import os
 from pathlib import Path
 
 
@@ -19,6 +20,8 @@ def main() -> int:
     from tools.studio.company.cli import main as company_main
     from tools.studio.company.agent_runner import main as agent_main
     from tools.studio.company.entrypoints import dispatch_top_level
+    from tools.studio.host_runner import ensure_token as ensure_host_runner_token
+    from tools.studio.host_runner import serve as serve_host_runner
     from tools.studio.workspace_server import serve
 
     args = sys.argv[1:]
@@ -37,11 +40,14 @@ def main() -> int:
     if command == "agent":
         return agent_main(rest)
 
-    if command in {"unity", "open", "capture", "feedback", "asset", "gdx"}:
+    if command in {"unity", "game", "open", "capture", "feedback", "asset", "world", "gdx", "simworld", "sim-agent", "sim-acceptance"}:
         return dispatch_top_level(command, rest)
 
     if command == "studio":
         return _studio(rest, serve)
+
+    if command == "host-runner":
+        return _host_runner(rest, serve_host_runner, ensure_host_runner_token)
 
     if command in {"help", "-h", "--help"}:
         return _print_help()
@@ -62,20 +68,61 @@ def _print_help() -> int:
                 "  company status            Show Agent Company status",
                 "  company agents            List registered agents",
                 "  company brief             Generate current company brief",
+                "  company workers [--probe] Show or probe Worker Fleet",
+                "  company models [--refresh] Show or refresh Model Cookbook",
+                "  company goal set/run/status Goal Engine orchestration",
                 "  agent adapters            Show external AI tool adapters",
-                "  agent run/review <task>   Run Codex/Claude/agy/Hermes/OpenClaw",
-                "  unity check               Run Unity project check",
+                "  agent run/review <task>   Run Codex/agy/Hermes/OpenClaw",
+                "  unity check [--batch]     Run Unity project check",
+                "  unity playtest            Run Unity MVP smoke validation",
+                "  unity pyramid-maze-v2     Build and validate Pyramid Maze V2",
+                "  unity sim-check           Validate Channel Sim runtime scene contract",
+                "  unity semantic-check <id> Validate Asset Forge semantic pack against Unity scene",
+                "  unity agent-playtest pyramid-maze-v2 --agent scripted",
+                "                             Run scripted agent proof with observations/actions/metrics",
+                "  unity sim-review <run-dir> Review an agent playtest run",
+                "  unity sim-replay <run-dir> Build replay index for an agent run",
+                "  unity sim-compare <a> <b> Compare two agent playtest runs",
+                "  unity manual-capture-setup Validate manual traversal capture readiness",
+                "  unity manual-auto-capture  Capture V2 rehearsal frames and run review gate",
+                "  unity manual-recorder-smoke Validate manual traversal recorder tooling",
+                "  unity manual-review-smoke Validate manual traversal review tooling",
+                "  unity manual-review [md]  Validate latest or supplied traversal receipt",
+                "  unity manual-finish [md]  Auto-detect/review final manual traversal session",
+                "  unity build [mac-dev]     Build local Mac development player",
+                "  game status               Show production cockpit readiness",
+                "  game production-check     Run compile/playtest/gdx/capture check",
                 "  open dashboard            Open generated dashboard",
                 "  capture screen            Capture screenshot",
                 "  feedback new              Create feedback record",
                 "  feedback process <file>   Run feedback workflow",
                 "  asset new <asset-id>      Create tracked asset",
+                "  asset forge <asset-id>    Create Asset Forge concept/schema/CubePart job",
+                "  asset semantic-pack <id>  Create semantic/nav/interactable agent eval pack",
+                "  asset image3d <asset-id>  Create GPT Image -> Rodin/Pixal3D/TRELLIS.2 -> Blender -> Unity job",
+                "  asset generate3d <id>     Generate/check model with Rodin/Pixal3D/TRELLIS.2/Blender",
                 "  asset status <id> <state> Update asset status",
                 "  asset screenshot <id> <path>",
+                "  world build <world-id>    Create editable WorldGraph scene",
                 "  gdx probe                 Probe gdx1 worker",
                 "  gdx sync/run-server/run-bots/collect-logs",
+                "  simworld probe            Probe gdx1 Docker/GPU/SimWorld readiness",
+                "  simworld doctor           Diagnose gdx1 SimWorld Docker/binary blockers",
+                "  simworld install-base [--dry-run]  Install official SimWorld Base Linux package on gdx1",
+                "  simworld route-plan       Route Unity/gdx1/SimWorld work by worker capability",
+                "  simworld start-server     Start SimWorld only when route-plan marks worker compatible",
+                "  simworld worker-guide     Create x86_64 SimWorld worker onboarding packet",
+                "  sim-agent packet <run>    Build read-only external agent packet",
+                "  sim-agent run <agent> <run> [--live]",
+                "  sim-agent compare <a> <b> Compare external agent bridge runs",
+                "  sim-agent live-check <agent|all> <run> [--timeout seconds]",
+                "  sim-acceptance check      Run final simulation acceptance gate",
+                "  sim-acceptance proof-refresh [--collect-only]  Refresh Unity proof bundle",
+                "  sim-acceptance handoff    Generate final simulation handoff pack",
                 "  studio serve [port]       Start integrated web cockpit",
                 "  studio open [port]        Start cockpit and open browser",
+                "  host-runner token         Create local host-runner token",
+                "  host-runner serve [port]  Run local execution bridge",
                 "",
                 "Next:",
                 "  company session start/end",
@@ -89,18 +136,54 @@ def _print_help() -> int:
 
 
 def _studio(args: list[str], serve_func) -> int:
+    if any(arg in {"help", "-h", "--help"} for arg in args):
+        print("Usage: tools/channelctl studio serve [port] [--host HOST] | open [port] [--host HOST]")
+        return 0
     mode = args[0] if args else "serve"
     if mode not in {"serve", "open"}:
-        print("Usage: tools/channelctl studio serve [port] | open [port]", file=sys.stderr)
+        print("Usage: tools/channelctl studio serve [port] [--host HOST] | open [port] [--host HOST]", file=sys.stderr)
         return 2
     port = 8766
+    host = "127.0.0.1"
+    if "--host" in args:
+        idx = args.index("--host")
+        if idx + 1 >= len(args):
+            print("Missing value for --host", file=sys.stderr)
+            return 2
+        host = args[idx + 1]
+    elif os.environ.get("CHANNEL_PLAY_STUDIO_HOST"):
+        host = os.environ["CHANNEL_PLAY_STUDIO_HOST"]
+    positional = [arg for index, arg in enumerate(args[1:], start=1) if arg != "--host" and args[index - 1] != "--host"]
+    if positional:
+        try:
+            port = int(positional[0])
+        except ValueError:
+            print(f"Invalid port: {positional[0]}", file=sys.stderr)
+            return 2
+    serve_func(host=host, port=port, open_browser=(mode == "open"))
+    return 0
+
+
+def _host_runner(args: list[str], serve_func, token_func) -> int:
+    if any(arg in {"help", "-h", "--help"} for arg in args):
+        print("Usage: tools/channelctl host-runner token | serve [port]")
+        return 0
+    mode = args[0] if args else "serve"
+    if mode == "token":
+        path = token_func()
+        print(f"Host runner token ready: {path}")
+        return 0
+    if mode != "serve":
+        print("Usage: tools/channelctl host-runner token | serve [port]", file=sys.stderr)
+        return 2
+    port = 8788
     if len(args) > 1:
         try:
             port = int(args[1])
         except ValueError:
             print(f"Invalid port: {args[1]}", file=sys.stderr)
             return 2
-    serve_func(port=port, open_browser=(mode == "open"))
+    serve_func(port=port)
     return 0
 
 

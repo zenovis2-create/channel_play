@@ -212,6 +212,16 @@ asset_pipeline/index.json
 obsidian/channel_play/00_Index.md
 ```
 
+Simulation/agent-run integration now uses:
+
+```text
+docs/simulation/channel_sim_runtime_spec.md
+docs/simulation/agent_observation_action_schema.md
+docs/simulation/agent_run_artifact_schema.md
+```
+
+The first visible Studio proof should surface the latest `tools/channelctl unity agent-playtest pyramid-maze-v2 --agent scripted` run with observations, actions, metrics, replay, review, and receipt links.
+
 ### 3.3.1 Integrated Workspace Cockpit
 
 The static dashboard has been upgraded with a local web cockpit.
