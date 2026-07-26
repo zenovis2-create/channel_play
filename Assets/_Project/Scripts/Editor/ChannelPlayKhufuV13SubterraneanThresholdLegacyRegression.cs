@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -15,6 +16,53 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
         "runs/khufu-v13-subterranean-threshold/legacy-regression.md";
     private const string ExpectedV12Signature =
         "6f7faced5cee8f6b199f18c979b5174473d85154c695a93a29f37db4db0059cd";
+    private const string ExpectedV6Signature =
+        "b41580ea2636838635ac54cacf2f20f34224b39bb32a506d223bbcfc2476d530";
+    private const string ExpectedV7Signature =
+        "9730013ededc08da590b99de5d2bd1ae91c485b25d67e6c591117d4431c2d321";
+    private const string ExpectedV8Signature =
+        "be64fa8b33e798093d55087fc279377446e6e5556e059ad273aeaf1d87ccdfa4";
+    private const string ExpectedV9Signature =
+        "8301ccc17bf1323fb8e9d1a525a778bf9ccdbf2da3dc15412b4bbf790ac85da8";
+
+    private static readonly string[] ExpectedV6HistoricalHashDeltas =
+    {
+        "V5 builder hash binding mismatch"
+    };
+
+    private static readonly string[] ExpectedV7HistoricalHashDeltas =
+    {
+        "Frozen source hash changed: Assets/_Project/Scripts/Editor/ChannelPlayKhufuV6VisualFidelityBuilder.cs actual=0709f3ce4ec49836fd5f64a816f52832895f74ffd4434b7a107b848c40e2817c",
+        "Frozen source hash changed: Assets/_Project/Scripts/Editor/ChannelPlayKhufuV6VisualSliceValidator.cs actual=cb02282f0a424a5c849c564a5f4af50f9503266932535e62e8a9aa9f1881a5a7"
+    };
+
+    private static readonly string[] ExpectedV8HistoricalHashDeltas =
+    {
+        "Frozen V5 builder hash drifted",
+        "Frozen V5 validator hash drifted",
+        "Frozen V6 builder hash drifted",
+        "Frozen V6 validator hash drifted",
+        "Frozen V7 builder hash drifted",
+        "Frozen V7 validator hash drifted",
+        "Frozen package manifest hash drifted",
+        "Frozen package lock hash drifted"
+    };
+
+    private static readonly string[] ExpectedV9HistoricalHashDeltas =
+    {
+        "Frozen V5 builder hash drifted",
+        "Frozen V5 validator hash drifted",
+        "Frozen V6 builder hash drifted",
+        "Frozen V6 validator hash drifted",
+        "Frozen V7 builder hash drifted",
+        "Frozen V7 validator hash drifted",
+        "Frozen V8 pipeline hash drifted",
+        "Frozen V8 builder hash drifted",
+        "Frozen V8 validator hash drifted",
+        "Frozen V8 proof probe hash drifted",
+        "Frozen package manifest hash drifted",
+        "Frozen package lock hash drifted"
+    };
 
     private static readonly string[] ExpectedV10Deltas =
     {
@@ -51,36 +99,44 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
                 typeof(ChannelPlayPyramidReferenceMatchedV4Builder),
                 "ValidateScene", Array.Empty<object>()),
             ValidateV5(),
-            ValidateScoped("V6",
-                typeof(ChannelPlayKhufuV6VisualSliceValidator),
-                "ValidateScene", Array.Empty<object>(),
-                ChannelPlayKhufuV7EntryWayfindingBuilder.RootName,
-                ChannelPlayKhufuV8TempleProductionArtBuilder.RootName,
-                ChannelPlayKhufuV9CausewayFidelityBuilder.RootName,
-                ChannelPlayKhufuV10InteriorBuilder.RootName,
-                ChannelPlayKhufuV11RoyalCircuitBuilder.RootName,
-                ChannelPlayKhufuV12QueenCircuitBuilder.RootName),
-            ValidateScoped("V7",
-                typeof(ChannelPlayKhufuV7EntryWayfindingValidator),
-                "ValidateScene", Array.Empty<object>(),
-                ChannelPlayKhufuV8TempleProductionArtBuilder.RootName,
-                ChannelPlayKhufuV9CausewayFidelityBuilder.RootName,
-                ChannelPlayKhufuV10InteriorBuilder.RootName,
-                ChannelPlayKhufuV11RoyalCircuitBuilder.RootName,
-                ChannelPlayKhufuV12QueenCircuitBuilder.RootName),
-            ValidateScoped("V8",
-                typeof(ChannelPlayKhufuV8TempleProductionArtValidator),
-                "ValidateScene", new object[] { true },
-                ChannelPlayKhufuV9CausewayFidelityBuilder.RootName,
-                ChannelPlayKhufuV10InteriorBuilder.RootName,
-                ChannelPlayKhufuV11RoyalCircuitBuilder.RootName,
-                ChannelPlayKhufuV12QueenCircuitBuilder.RootName),
-            ValidateScoped("V9",
-                typeof(ChannelPlayKhufuV9CausewayFidelityValidator),
-                "ValidateScene", new object[] { true },
-                ChannelPlayKhufuV10InteriorBuilder.RootName,
-                ChannelPlayKhufuV11RoyalCircuitBuilder.RootName,
-                ChannelPlayKhufuV12QueenCircuitBuilder.RootName),
+            ClassifyHistoricalSourceHashDeltas(
+                ValidateScoped("V6",
+                    typeof(ChannelPlayKhufuV6VisualSliceValidator),
+                    "ValidateScene", Array.Empty<object>(),
+                    ChannelPlayKhufuV7EntryWayfindingBuilder.RootName,
+                    ChannelPlayKhufuV8TempleProductionArtBuilder.RootName,
+                    ChannelPlayKhufuV9CausewayFidelityBuilder.RootName,
+                    ChannelPlayKhufuV10InteriorBuilder.RootName,
+                    ChannelPlayKhufuV11RoyalCircuitBuilder.RootName,
+                    ChannelPlayKhufuV12QueenCircuitBuilder.RootName),
+                ExpectedV6Signature, ExpectedV6HistoricalHashDeltas),
+            ClassifyHistoricalSourceHashDeltas(
+                ValidateScoped("V7",
+                    typeof(ChannelPlayKhufuV7EntryWayfindingValidator),
+                    "ValidateScene", Array.Empty<object>(),
+                    ChannelPlayKhufuV8TempleProductionArtBuilder.RootName,
+                    ChannelPlayKhufuV9CausewayFidelityBuilder.RootName,
+                    ChannelPlayKhufuV10InteriorBuilder.RootName,
+                    ChannelPlayKhufuV11RoyalCircuitBuilder.RootName,
+                    ChannelPlayKhufuV12QueenCircuitBuilder.RootName),
+                ExpectedV7Signature, ExpectedV7HistoricalHashDeltas),
+            ClassifyHistoricalSourceHashDeltas(
+                ValidateScoped("V8",
+                    typeof(ChannelPlayKhufuV8TempleProductionArtValidator),
+                    "ValidateScene", new object[] { true },
+                    ChannelPlayKhufuV9CausewayFidelityBuilder.RootName,
+                    ChannelPlayKhufuV10InteriorBuilder.RootName,
+                    ChannelPlayKhufuV11RoyalCircuitBuilder.RootName,
+                    ChannelPlayKhufuV12QueenCircuitBuilder.RootName),
+                ExpectedV8Signature, ExpectedV8HistoricalHashDeltas),
+            ClassifyHistoricalSourceHashDeltas(
+                ValidateScoped("V9",
+                    typeof(ChannelPlayKhufuV9CausewayFidelityValidator),
+                    "ValidateScene", new object[] { true },
+                    ChannelPlayKhufuV10InteriorBuilder.RootName,
+                    ChannelPlayKhufuV11RoyalCircuitBuilder.RootName,
+                    ChannelPlayKhufuV12QueenCircuitBuilder.RootName),
+                ExpectedV9Signature, ExpectedV9HistoricalHashDeltas),
             ClassifyV10Transition(ValidateScoped("V10",
                 typeof(ChannelPlayKhufuV10InteriorValidator),
                 "ValidateScene", new object[] { true },
@@ -249,6 +305,24 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
             "ValidateScene", new object[] { false });
     }
 
+    private static LegacyResult ClassifyHistoricalSourceHashDeltas(
+        LegacyResult raw, string expectedSignature,
+        IReadOnlyCollection<string> expectedFailures)
+    {
+        if (raw.Passed) return raw;
+        var exactFailures = raw.Failures.Count == expectedFailures.Count &&
+                            new HashSet<string>(raw.Failures,
+                                    StringComparer.Ordinal)
+                                .SetEquals(expectedFailures);
+        var exactSignature = raw.Signature == expectedSignature;
+        return exactFailures && exactSignature
+            ? new LegacyResult(raw.Label, true,
+                raw.Signature +
+                " / classified exact historical source-hash deltas=" +
+                raw.Failures.Count, Array.Empty<string>(), raw.Failures)
+            : raw;
+    }
+
     private static LegacyResult ClassifyV10Transition(LegacyResult raw)
     {
         if (raw.Passed) return raw;
@@ -287,6 +361,8 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
             type.GetField("Passed", BindingFlags.Instance | BindingFlags.Public);
         var signatureField =
             type.GetField("Signature",
+                BindingFlags.Instance | BindingFlags.Public) ??
+            type.GetField("VisualSignature",
                 BindingFlags.Instance | BindingFlags.Public);
         var failuresField =
             type.GetField("Failures", BindingFlags.Instance | BindingFlags.Public);
@@ -376,9 +452,11 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
             foreach (var failure in row.Failures)
                 text.AppendLine("  - Failure: `" + failure + "`");
             foreach (var delta in row.ClassifiedDeltas)
-                text.AppendLine(
-                    "  - Classified exact V12 transition delta: `" +
-                    delta + "`");
+                text.AppendLine(row.Label == "V10"
+                    ? "  - Classified exact V12 transition delta: `" +
+                      delta + "`"
+                    : "  - Classified exact historical source-hash delta: `" +
+                      delta + "`");
         }
         foreach (var failure in canonical.Failures)
             text.AppendLine("  - Canonical V13 failure: `" + failure + "`");
@@ -444,6 +522,7 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
     {
         private readonly Transform v13;
         private readonly List<RootState> states = new List<RootState>();
+        private readonly Dictionary<Transform, RootState> canonicalStates;
         private bool v13Detached;
 
         public readonly Transform Map;
@@ -460,12 +539,15 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
             Map = map;
             V4 = v4;
             v13 = root;
+            canonicalStates = map.Cast<Transform>().ToDictionary(
+                child => child,
+                child => new RootState(child));
         }
 
         public void DetachV13AndRestorePredecessor()
         {
             if (v13Detached) return;
-            states.Add(new RootState(v13));
+            states.Add(CanonicalState(v13));
             v13Detached = true;
             v13.SetParent(null, true);
             v13.gameObject.SetActive(false);
@@ -476,7 +558,7 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
 
         public void Detach(Transform root)
         {
-            states.Add(new RootState(root));
+            states.Add(CanonicalState(root));
             root.SetParent(null, true);
         }
 
@@ -492,11 +574,19 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
             {
                 for (var index = states.Count - 1; index >= 0; index--)
                     states[index].Restore();
+                foreach (var state in states.OrderBy(
+                             item => item.OriginalSiblingIndex))
+                    state.RestoreSiblingIndex();
                 Physics.SyncTransforms();
             }
-            if (states.Any(state => !state.Matches()))
+            var mismatches = states
+                .Select(state => state.DiagnosticToken())
+                .Where(token => !string.IsNullOrEmpty(token))
+                .ToArray();
+            if (mismatches.Length > 0)
                 throw new InvalidOperationException(
-                    "Legacy context failed to restore an exact root state.");
+                    "Legacy context failed to restore an exact root state: " +
+                    string.Join(" | ", mismatches));
             if (Map.Find(
                     ChannelPlayKhufuV13SubterraneanThresholdBuilder.RootName) !=
                 v13)
@@ -508,6 +598,16 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
                     ChannelPlayKhufuV13SubterraneanThresholdBuilder
                         .LoadPrewriteAudit(),
                     false);
+        }
+
+        private RootState CanonicalState(Transform root)
+        {
+            if (root != null &&
+                canonicalStates.TryGetValue(root, out var state))
+                return state;
+            throw new InvalidOperationException(
+                "Legacy detach target was not a canonical map root: " +
+                (root == null ? "null" : root.name));
         }
     }
 
@@ -544,6 +644,9 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
         private readonly Quaternion localRotation;
         private readonly Vector3 localScale;
         private readonly bool activeSelf;
+        private readonly string rootName;
+
+        public int OriginalSiblingIndex => siblingIndex;
 
         public RootState(Transform target)
         {
@@ -554,17 +657,23 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
             localRotation = target.localRotation;
             localScale = target.localScale;
             activeSelf = target.gameObject.activeSelf;
+            rootName = target.name;
         }
 
         public void Restore()
         {
             if (root == null || parent == null) return;
             root.SetParent(parent, false);
-            root.SetSiblingIndex(siblingIndex);
             root.localPosition = localPosition;
             root.localRotation = localRotation;
             root.localScale = localScale;
             root.gameObject.SetActive(activeSelf);
+        }
+
+        public void RestoreSiblingIndex()
+        {
+            if (root != null && parent != null && root.parent == parent)
+                root.SetSiblingIndex(siblingIndex);
         }
 
         public bool Matches()
@@ -575,6 +684,52 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdLegacyRegression
                    root.localRotation == localRotation &&
                    root.localScale == localScale &&
                    root.gameObject.activeSelf == activeSelf;
+        }
+
+        public string DiagnosticToken()
+        {
+            if (Matches()) return string.Empty;
+            if (root == null) return rootName + "[root=destroyed]";
+            var deltas = new List<string>();
+            if (root.parent != parent)
+                deltas.Add("parent=" + TransformName(parent) + "->" +
+                           TransformName(root.parent));
+            if (root.GetSiblingIndex() != siblingIndex)
+                deltas.Add("sibling=" + siblingIndex + "->" +
+                           root.GetSiblingIndex());
+            if (root.localPosition != localPosition)
+                deltas.Add("position=" + VectorToken(localPosition) + "->" +
+                           VectorToken(root.localPosition));
+            if (root.localRotation != localRotation)
+                deltas.Add("rotation=" + QuaternionToken(localRotation) +
+                           "->" + QuaternionToken(root.localRotation));
+            if (root.localScale != localScale)
+                deltas.Add("scale=" + VectorToken(localScale) + "->" +
+                           VectorToken(root.localScale));
+            if (root.gameObject.activeSelf != activeSelf)
+                deltas.Add("active=" + activeSelf + "->" +
+                           root.gameObject.activeSelf);
+            return rootName + "[" + string.Join(",", deltas) + "]";
+        }
+
+        private static string TransformName(Transform value)
+        {
+            return value == null ? "null" : value.name;
+        }
+
+        private static string VectorToken(Vector3 value)
+        {
+            return value.x.ToString("R", CultureInfo.InvariantCulture) + "/" +
+                   value.y.ToString("R", CultureInfo.InvariantCulture) + "/" +
+                   value.z.ToString("R", CultureInfo.InvariantCulture);
+        }
+
+        private static string QuaternionToken(Quaternion value)
+        {
+            return value.x.ToString("R", CultureInfo.InvariantCulture) + "/" +
+                   value.y.ToString("R", CultureInfo.InvariantCulture) + "/" +
+                   value.z.ToString("R", CultureInfo.InvariantCulture) + "/" +
+                   value.w.ToString("R", CultureInfo.InvariantCulture);
         }
     }
 }
