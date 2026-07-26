@@ -1,0 +1,126 @@
+{
+  "base_commit": "cb7f17468e6d5a9c3068200f720a86b6ff4b7672",
+  "files": [
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v13-subterranean-threshold/captures/bedrock_landing.png",
+      "sha256": "0cabd0b2ec4f85b617f81a27b39eac90115935cba1ddc597766e1ab403ebbdb6"
+    },
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v13-subterranean-threshold/captures/below_grade_integration.png",
+      "sha256": "91425a996b9da4f50cb3930c6519d63101b7a0d1996243e018d4c2d7f389ede4"
+    },
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v13-subterranean-threshold/captures/chamber_doorway_release.png",
+      "sha256": "fd970f15c02464ac847a187500dd96cac91f7bfeb0262586e14c6366da913b1a"
+    },
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v13-subterranean-threshold/captures/descending_long_axis.png",
+      "sha256": "d84f61cacd26aa164b064fd3032b90935f6bbb67846b3e03a9b476742801bd89"
+    },
+    {
+      "bytes": 2615,
+      "path": "runs/khufu-v13-subterranean-threshold/captures/manifest.md",
+      "sha256": "300f13e8dd86e43475d8c9ae402fdb6c4c84275c4d34e663cbb649cb6bfaed00"
+    },
+    {
+      "bytes": 1949,
+      "path": "runs/khufu-v13-subterranean-threshold/captures/manual-semantic-review.md",
+      "sha256": "4f7158f8831fa3f223a66b1c201f07d3cae21151f059f9b2664754822d774d13"
+    },
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v13-subterranean-threshold/captures/subterranean_chamber_pit.png",
+      "sha256": "bd9790fe123573a51dba6c4cbb3191e3bf3e21e4a758a935324a59c08240acde"
+    },
+    {
+      "bytes": 132,
+      "path": "runs/khufu-v13-subterranean-threshold/captures/v10_v13_junction.png",
+      "sha256": "f99735033bfe9150d9c2c133aa4c1bb3ff837701d100aa569088c1ff26a26624"
+    },
+    {
+      "bytes": 4010,
+      "path": "runs/khufu-v13-subterranean-threshold/clean-index-import.md",
+      "sha256": "622fd76315e00e08e06364e23e6a8c2c18dd4388008e2a30011d3611c821d7da"
+    },
+    {
+      "bytes": 585,
+      "path": "runs/khufu-v13-subterranean-threshold/idempotence.md",
+      "sha256": "6b98e5b19ef4283d625ad76eca70a9ce1d4b869c6c902ea18efe8d3d9597c422"
+    },
+    {
+      "bytes": 6969,
+      "path": "runs/khufu-v13-subterranean-threshold/legacy-regression.md",
+      "sha256": "3b480d4f3c3604c82c647926c40ee674ac36dfaa9a86e25cdd061562b86cbfab"
+    },
+    {
+      "bytes": 720,
+      "path": "runs/khufu-v13-subterranean-threshold/negative-controls.md",
+      "sha256": "9a8bdad0f3dc1f6cd852a73c76d776e79037f077ea1fefcc4a56a5f59038a748"
+    },
+    {
+      "bytes": 1440,
+      "path": "runs/khufu-v13-subterranean-threshold/player-proof/v13-subterranean-final-boundary-control.md",
+      "sha256": "f2e118498c93886483f620f0d202f294a4271fe4f79ea84c4efa84e0c92f3fc6"
+    },
+    {
+      "bytes": 52828,
+      "path": "runs/khufu-v13-subterranean-threshold/player-proof/v13-subterranean-final-normal-round-trip-movement-trace.csv",
+      "sha256": "7cb0db9ffe6dd209f5c65d65f2c72881a3a82d29b3c288e7eabef229ddc33f6e"
+    },
+    {
+      "bytes": 1747,
+      "path": "runs/khufu-v13-subterranean-threshold/player-proof/v13-subterranean-final-outside-wall-control-movement-trace.csv",
+      "sha256": "0d517eb207a9e369e2fa632193a53e97e321ef2b139571f666fe95f2f45c7b64"
+    },
+    {
+      "bytes": 1415,
+      "path": "runs/khufu-v13-subterranean-threshold/player-proof/v13-subterranean-final-round-trip.md",
+      "sha256": "da0999e208b6323d0709bf3e5a76283c8966b83b0a46b43bb7e8ecc0e1746cf1"
+    },
+    {
+      "bytes": 746,
+      "path": "runs/khufu-v13-subterranean-threshold/python-tests.md",
+      "sha256": "c5517d975af78eb3d5f1a70e3ecc1c1d4f5d55b9cf2454b3d018512f56aa31ef"
+    },
+    {
+      "bytes": 690,
+      "path": "runs/khufu-v13-subterranean-threshold/release-validation.md",
+      "sha256": "79c937df365f1f3c491b52473306f0e7add2e2e045554358ff1de6d0b33fa5d1"
+    },
+    {
+      "bytes": 1789,
+      "path": "runs/khufu-v13-subterranean-threshold/review-resolution.md",
+      "sha256": "b64c2ce21c158eff23f424855614e5e14aac7a5f9d3fdf4a01b69ab4f7251242"
+    },
+    {
+      "bytes": 421,
+      "path": "runs/khufu-v13-subterranean-threshold/static-validation.md",
+      "sha256": "a743d0ce1a3d89b5974d7b5140bccc765df54d702d5c4354db36855b48449a59"
+    },
+    {
+      "bytes": 2590,
+      "path": "runs/khufu-v13-subterranean-threshold/windows-build.md",
+      "sha256": "655e4333a9062ff211ab775b285cae2417407355c05d04d94498ca919abdbde8"
+    },
+    {
+      "bytes": 2701,
+      "path": "work/agent-reviews/khufu-v13-capture-review.md",
+      "sha256": "b8a2aa2a5fa513c458939c8753dd3fa5756a3a53df4deddbf0207012cbcb5dfd"
+    },
+    {
+      "bytes": 1913,
+      "path": "work/agent-reviews/khufu-v13-code-review.md",
+      "sha256": "c8dcec94370f89f0dea06feedde0e1d188e4f8ce3e1b5992234d164c1548a794"
+    },
+    {
+      "bytes": 1332,
+      "path": "work/agent-reviews/khufu-v13-release-review.md",
+      "sha256": "00127500c8d80778d05a34848cc7bef7607f07d06889d7263ca6ec36541e35fa"
+    }
+  ],
+  "schema": "khufu-v13-staged-inventory-v1"
+}

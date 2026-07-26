@@ -1,0 +1,670 @@
+{
+    "schema": "khufu-v13-prewrite-audit-v1",
+    "passed": true,
+    "canonical_scene_sha256": "eec9cc9c0b52cd75066c20caf1710ab458423de2eea073c7cfe36e88a782ec8c",
+    "scene_sha256": "eec9cc9c0b52cd75066c20caf1710ab458423de2eea073c7cfe36e88a782ec8c",
+    "scene_sha256_after": "eec9cc9c0b52cd75066c20caf1710ab458423de2eea073c7cfe36e88a782ec8c",
+    "scene_unchanged": true,
+    "asset_tree_signature_before": "f7fa6e227292f94aebc9abb668c774564169e14f89885f4c600270b603893e1c",
+    "asset_tree_signature_after": "f7fa6e227292f94aebc9abb668c774564169e14f89885f4c600270b603893e1c",
+    "asset_file_count_before": 435,
+    "asset_file_count_after": 435,
+    "asset_tree_unchanged": true,
+    "no_scene_or_asset_writes": true,
+    "v4_subterranean_target_count": 13,
+    "v4_subterranean_targets": [
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Descending_Bedrock_Floor",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "box_collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": -1.25,
+                "y": -1.2999999523162842,
+                "z": -11.949999809265137
+            },
+            "local_rotation": {
+                "x": 0.18240827322006226,
+                "y": 0.09538624435663223,
+                "z": -0.017782937735319139,
+                "w": 0.9784234762191773
+            },
+            "local_scale": {
+                "x": 2.3499999046325685,
+                "y": 0.2199999988079071,
+                "z": 13.875877380371094
+            },
+            "component_state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Descending_Bedrock_East",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "box_collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": 0.15952253341674806,
+                "y": -0.22725462913513184,
+                "z": -11.805124282836914
+            },
+            "local_rotation": {
+                "x": 0.18240827322006226,
+                "y": 0.09538624435663223,
+                "z": -0.017782937735319139,
+                "w": 0.9784234762191773
+            },
+            "local_scale": {
+                "x": 0.36000001430511477,
+                "y": 2.299999952316284,
+                "z": 13.875877380371094
+            },
+            "component_state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Descending_Bedrock_West",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "box_collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": -2.4994494915008547,
+                "y": -0.22725462913513184,
+                "z": -11.28170394897461
+            },
+            "local_rotation": {
+                "x": 0.18240827322006226,
+                "y": 0.09538624435663223,
+                "z": -0.017782937735319139,
+                "w": 0.9784234762191773
+            },
+            "local_scale": {
+                "x": 0.36000001430511477,
+                "y": 2.299999952316284,
+                "z": 13.875877380371094
+            },
+            "component_state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Descending_Bedrock_Roof",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "box_collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": -1.0899269580841065,
+                "y": 0.8454906940460205,
+                "z": -11.136829376220704
+            },
+            "local_rotation": {
+                "x": 0.18240827322006226,
+                "y": 0.09538624435663223,
+                "z": -0.017782937735319139,
+                "w": 0.9784234762191773
+            },
+            "local_scale": {
+                "x": 3.069999933242798,
+                "y": 0.23999999463558198,
+                "z": 13.875877380371094
+            },
+            "component_state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Level_Floor",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "box_collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": 0.5,
+                "y": -3.6999998092651369,
+                "z": -3.5999999046325685
+            },
+            "local_rotation": {
+                "x": -0.024050641804933549,
+                "y": 0.12214738130569458,
+                "z": 0.002960769459605217,
+                "w": 0.9922161102294922
+            },
+            "local_scale": {
+                "x": 2.3499999046325685,
+                "y": 0.2199999988079071,
+                "z": 4.12795352935791
+            },
+            "component_state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Level_East",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "box_collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": 1.8010295629501343,
+                "y": -2.5513503551483156,
+                "z": -3.982689619064331
+            },
+            "local_rotation": {
+                "x": -0.024050641804933549,
+                "y": 0.12214738130569458,
+                "z": 0.002960769459605217,
+                "w": 0.9922161102294922
+            },
+            "local_scale": {
+                "x": 0.36000001430511477,
+                "y": 2.299999952316284,
+                "z": 4.12795352935791
+            },
+            "component_state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Level_West",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "box_collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": -0.8280566334724426,
+                "y": -2.5513503551483156,
+                "z": -3.32541823387146
+            },
+            "local_rotation": {
+                "x": -0.024050641804933549,
+                "y": 0.12214738130569458,
+                "z": 0.002960769459605217,
+                "w": 0.9922161102294922
+            },
+            "local_scale": {
+                "x": 0.36000001430511477,
+                "y": 2.299999952316284,
+                "z": 4.12795352935791
+            },
+            "component_state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Level_Roof",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "box_collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": 0.47297295928001406,
+                "y": -1.4027009010314942,
+                "z": -3.7081081867218019
+            },
+            "local_rotation": {
+                "x": -0.024050641804933549,
+                "y": 0.12214738130569458,
+                "z": 0.002960769459605217,
+                "w": 0.9922161102294922
+            },
+            "local_scale": {
+                "x": 3.069999933242798,
+                "y": 0.23999999463558198,
+                "z": 4.12795352935791
+            },
+            "component_state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Chamber/V4_Subterranean_Floor",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "box_collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": 1.0,
+                "y": -4.150000095367432,
+                "z": 1.5
+            },
+            "local_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "local_scale": {
+                "x": 8.0,
+                "y": 0.2800000011920929,
+                "z": 6.800000190734863
+            },
+            "component_state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Chamber/V4_Subterranean_Back",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "box_collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": 1.0,
+                "y": -2.25,
+                "z": 4.900000095367432
+            },
+            "local_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "local_scale": {
+                "x": 8.0,
+                "y": 3.799999952316284,
+                "z": 0.3799999952316284
+            },
+            "component_state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Chamber/V4_Subterranean_West",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "box_collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": -3.0,
+                "y": -2.25,
+                "z": 1.5
+            },
+            "local_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "local_scale": {
+                "x": 0.3799999952316284,
+                "y": 3.799999952316284,
+                "z": 6.800000190734863
+            },
+            "component_state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Chamber/V4_Subterranean_East",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 1,
+            "box_collider_count": 1,
+            "renderer_enabled": true,
+            "collider_enabled": true,
+            "is_trigger": false,
+            "local_position": {
+                "x": 5.0,
+                "y": -2.25,
+                "z": 1.5
+            },
+            "local_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "local_scale": {
+                "x": 0.3799999952316284,
+                "y": 3.799999952316284,
+                "z": 6.800000190734863
+            },
+            "component_state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Embedded_Interior_Architecture/V4_Subterranean_Chamber/V4_Subterranean_Unfinished_Pit",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "collider_count": 0,
+            "box_collider_count": 0,
+            "renderer_enabled": true,
+            "collider_enabled": false,
+            "is_trigger": false,
+            "local_position": {
+                "x": 2.5999999046325685,
+                "y": -4.75,
+                "z": 2.200000047683716
+            },
+            "local_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "local_scale": {
+                "x": 2.200000047683716,
+                "y": 1.0,
+                "z": 2.0999999046325685
+            },
+            "component_state_exact": true,
+            "transform_exact": true
+        }
+    ],
+    "preserved_observation_count": 7,
+    "preserved_observations": [
+        {
+            "path": "Runtime_Khufu_V10_Interior_Spine/V10_Metadata/V10_Anchor_Ascending_Branch",
+            "kind": "anchor",
+            "owner": "V10",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 0,
+            "renderer_enabled": false,
+            "light_count": 0,
+            "light_enabled": false,
+            "collider_count": 0,
+            "local_position": {
+                "x": -2.5,
+                "y": 3.799999952316284,
+                "z": -19.200000762939454
+            },
+            "local_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "local_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "world_position": {
+                "x": -2.5,
+                "y": 3.799999952316284,
+                "z": -19.200000762939454
+            },
+            "state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Route_Branch",
+            "kind": "marker",
+            "owner": "V10",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "renderer_enabled": false,
+            "light_count": 0,
+            "light_enabled": false,
+            "collider_count": 0,
+            "local_position": {
+                "x": -2.5,
+                "y": 1.2000000476837159,
+                "z": -18.299999237060548
+            },
+            "local_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "local_scale": {
+                "x": 0.3400000035762787,
+                "y": 0.3400000035762787,
+                "z": 0.3400000035762787
+            },
+            "world_position": {
+                "x": -2.5,
+                "y": 1.2000000476837159,
+                "z": -18.299999237060548
+            },
+            "state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Route_Subterranean_Approach",
+            "kind": "marker",
+            "owner": "V10",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "renderer_enabled": false,
+            "light_count": 0,
+            "light_enabled": false,
+            "collider_count": 0,
+            "local_position": {
+                "x": 0.0,
+                "y": -3.799999952316284,
+                "z": -5.599999904632568
+            },
+            "local_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "local_scale": {
+                "x": 0.3400000035762787,
+                "y": 0.3400000035762787,
+                "z": 0.3400000035762787
+            },
+            "world_position": {
+                "x": 0.0,
+                "y": -3.799999952316284,
+                "z": -5.599999904632568
+            },
+            "state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Route_Subterranean_Chamber",
+            "kind": "marker",
+            "owner": "V10",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "renderer_enabled": false,
+            "light_count": 0,
+            "light_enabled": false,
+            "collider_count": 0,
+            "local_position": {
+                "x": 1.0,
+                "y": -3.5999999046325685,
+                "z": 1.5
+            },
+            "local_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "local_scale": {
+                "x": 0.3400000035762787,
+                "y": 0.3400000035762787,
+                "z": 0.3400000035762787
+            },
+            "world_position": {
+                "x": 1.0,
+                "y": -3.5999999046325685,
+                "z": 1.5
+            },
+            "state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Glow_Descending",
+            "kind": "glow",
+            "owner": "V10",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "renderer_enabled": false,
+            "light_count": 0,
+            "light_enabled": false,
+            "collider_count": 0,
+            "local_position": {
+                "x": -1.25,
+                "y": -1.0799999237060547,
+                "z": -14.949999809265137
+            },
+            "local_rotation": {
+                "x": 0.18240827322006226,
+                "y": 0.09538624435663223,
+                "z": -0.017782937735319139,
+                "w": 0.9784234762191773
+            },
+            "local_scale": {
+                "x": 0.14000000059604646,
+                "y": 0.14000000059604646,
+                "z": 13.875877380371094
+            },
+            "world_position": {
+                "x": -1.25,
+                "y": -1.0799999237060547,
+                "z": -14.949999809265137
+            },
+            "state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Gameplay_Route/V4_Glow_Subterranean",
+            "kind": "glow",
+            "owner": "V10",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 1,
+            "renderer_enabled": false,
+            "light_count": 0,
+            "light_enabled": false,
+            "collider_count": 0,
+            "local_position": {
+                "x": 0.5,
+                "y": -3.4800000190734865,
+                "z": -5.050000190734863
+            },
+            "local_rotation": {
+                "x": -0.013908677734434605,
+                "y": 0.06989847123622894,
+                "z": 0.0009746743598952889,
+                "w": 0.9974566698074341
+            },
+            "local_scale": {
+                "x": 0.14000000059604646,
+                "y": 0.14000000059604646,
+                "z": 7.172865867614746
+            },
+            "world_position": {
+                "x": 0.5,
+                "y": -3.4800000190734865,
+                "z": -5.050000190734863
+            },
+            "state_exact": true,
+            "transform_exact": true
+        },
+        {
+            "path": "Runtime_Pyramid_Reference_Matched_V4/V4_Lighting/V4_Light_Subterranean",
+            "kind": "light",
+            "owner": "V4-inherited",
+            "active_self": true,
+            "active_in_hierarchy": true,
+            "renderer_count": 0,
+            "renderer_enabled": false,
+            "light_count": 1,
+            "light_enabled": true,
+            "collider_count": 0,
+            "local_position": {
+                "x": 1.0,
+                "y": -2.4000000953674318,
+                "z": 1.5
+            },
+            "local_rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "local_scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "world_position": {
+                "x": 1.0,
+                "y": -2.4000000953674318,
+                "z": 1.5
+            },
+            "state_exact": true,
+            "transform_exact": true
+        }
+    ],
+    "v12_root_active_self": true,
+    "v12_root_active_in_hierarchy": true,
+    "v12_root_metrics": {
+        "renderers": 5,
+        "vertices": 1176,
+        "triangles": 588,
+        "colliders": 22
+    },
+    "v12_map_metrics": {
+        "renderers": 834,
+        "vertices": 67070,
+        "triangles": 48560,
+        "colliders": 589
+    },
+    "v12_validator_root_metrics": {
+        "renderers": 5,
+        "vertices": 1176,
+        "triangles": 588,
+        "colliders": 22
+    },
+    "v12_validator_map_metrics": {
+        "renderers": 834,
+        "vertices": 67070,
+        "triangles": 48560,
+        "colliders": 589
+    },
+    "v12_static_signature": "6f7faced5cee8f6b199f18c979b5174473d85154c695a93a29f37db4db0059cd",
+    "v12_validator_failures": []
+}

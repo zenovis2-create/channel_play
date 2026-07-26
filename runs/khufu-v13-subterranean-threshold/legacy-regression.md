@@ -1,0 +1,72 @@
+# Khufu V13 Legacy Regression
+
+- Verdict: **passed**
+- Scope: `V4, V5, V6, V7, V8, V9, V10, V11, V12` original validation logic
+- Context rule: detach V13, restore exact predecessor bindings, validate, reapply V13, then restore the exact V13 root.
+- V13 canonical return: `passed` / signature `39b768e4885d8c9a6b7048786287ecd135492fa90bddd3e25a37ee32ed16493f`
+- Scene SHA256 before / after: `7f0396967cbe809e6ba2c59d0fe237907a01bb79085cbcf9c569876bb5383046 / 7f0396967cbe809e6ba2c59d0fe237907a01bb79085cbcf9c569876bb5383046`
+- Scene bytes unchanged: `True`
+- V4: `passed` / signature `original validator result`
+- V5: `passed` / signature `objective permutations=6; clearance samples=415`
+- V6: `passed` / signature `b41580ea2636838635ac54cacf2f20f34224b39bb32a506d223bbcfc2476d530 / classified exact historical source-hash deltas=1`
+  - Classified exact historical source-hash delta: `V5 builder hash binding mismatch`
+- V7: `passed` / signature `9730013ededc08da590b99de5d2bd1ae91c485b25d67e6c591117d4431c2d321 / classified exact historical source-hash deltas=2`
+  - Classified exact historical source-hash delta: `Frozen source hash changed: Assets/_Project/Scripts/Editor/ChannelPlayKhufuV6VisualFidelityBuilder.cs actual=0709f3ce4ec49836fd5f64a816f52832895f74ffd4434b7a107b848c40e2817c`
+  - Classified exact historical source-hash delta: `Frozen source hash changed: Assets/_Project/Scripts/Editor/ChannelPlayKhufuV6VisualSliceValidator.cs actual=cb02282f0a424a5c849c564a5f4af50f9503266932535e62e8a9aa9f1881a5a7`
+- V8: `passed` / signature `be64fa8b33e798093d55087fc279377446e6e5556e059ad273aeaf1d87ccdfa4 / classified exact historical source-hash deltas=8`
+  - Classified exact historical source-hash delta: `Frozen V5 builder hash drifted`
+  - Classified exact historical source-hash delta: `Frozen V5 validator hash drifted`
+  - Classified exact historical source-hash delta: `Frozen V6 builder hash drifted`
+  - Classified exact historical source-hash delta: `Frozen V6 validator hash drifted`
+  - Classified exact historical source-hash delta: `Frozen V7 builder hash drifted`
+  - Classified exact historical source-hash delta: `Frozen V7 validator hash drifted`
+  - Classified exact historical source-hash delta: `Frozen package manifest hash drifted`
+  - Classified exact historical source-hash delta: `Frozen package lock hash drifted`
+- V9: `passed` / signature `8301ccc17bf1323fb8e9d1a525a778bf9ccdbf2da3dc15412b4bbf790ac85da8 / classified exact historical source-hash deltas=12`
+  - Classified exact historical source-hash delta: `Frozen V5 builder hash drifted`
+  - Classified exact historical source-hash delta: `Frozen V5 validator hash drifted`
+  - Classified exact historical source-hash delta: `Frozen V6 builder hash drifted`
+  - Classified exact historical source-hash delta: `Frozen V6 validator hash drifted`
+  - Classified exact historical source-hash delta: `Frozen V7 builder hash drifted`
+  - Classified exact historical source-hash delta: `Frozen V7 validator hash drifted`
+  - Classified exact historical source-hash delta: `Frozen V8 pipeline hash drifted`
+  - Classified exact historical source-hash delta: `Frozen V8 builder hash drifted`
+  - Classified exact historical source-hash delta: `Frozen V8 validator hash drifted`
+  - Classified exact historical source-hash delta: `Frozen V8 proof probe hash drifted`
+  - Classified exact historical source-hash delta: `Frozen package manifest hash drifted`
+  - Classified exact historical source-hash delta: `Frozen package lock hash drifted`
+- V10: `passed` / signature `903f43ed5cfc00bf8eb3243741901adb503711624b5a68fef71c52f7b2be5241 / classified exact V12 transition deltas=19`
+  - Classified exact V12 transition delta: `Unexpected V10 root metrics: renderers=6_vertices=4848_triangles=2424_colliders=70`
+  - Classified exact V12 transition delta: `Unexpected full-map V10 metrics: renderers=824_vertices=63878_triangles=46964_colliders=534`
+  - Classified exact V12 transition delta: `V10 mesh topology drifted: Limestone_Structure`
+  - Classified exact V12 transition delta: `V10 mesh omits spec corners: Great_Step_Diegetic_Boundary`
+  - Classified exact V12 transition delta: `V10 generated mesh binding drifted: Limestone_Structure`
+  - Classified exact V12 transition delta: `V10 mesh topology drifted: Red_Granite_Boundary`
+  - Classified exact V12 transition delta: `V10 mesh omits spec corners: Queen_Ownership_Gate`
+  - Classified exact V12 transition delta: `V10 mesh omits spec corners: Great_Step_Granite_Bar_00`
+  - Classified exact V12 transition delta: `V10 mesh omits spec corners: Great_Step_Granite_Bar_01`
+  - Classified exact V12 transition delta: `V10 mesh omits spec corners: Great_Step_Granite_Bar_02`
+  - Classified exact V12 transition delta: `V10 mesh omits spec corners: Great_Step_Granite_Bar_03`
+  - Classified exact V12 transition delta: `V10 mesh omits spec corners: Great_Step_Granite_Bar_04`
+  - Classified exact V12 transition delta: `V10 generated mesh binding drifted: Red_Granite_Boundary`
+  - Classified exact V12 transition delta: `V10 proxy collider drifted: Grand_Gallery_Gallery_Floor_Ramp`
+  - Classified exact V12 transition delta: `V10 proxy collider drifted: Great_Step_Boundary_Great_Step_Diegetic_Boundary`
+  - Classified exact V12 transition delta: `V10 proxy collider drifted: Historic_Service_Mouth_Historic_Service_Mouth_East_Frame`
+  - Classified exact V12 transition delta: `V10 proxy collider drifted: Historic_Service_Mouth_Historic_Service_Mouth_Lintel`
+  - Classified exact V12 transition delta: `V10 proxy collider drifted: Historic_Service_Mouth_Historic_Service_Mouth_West_Frame`
+  - Classified exact V12 transition delta: `V10 proxy collider drifted: Queen_Branch_Threshold_Queen_Ownership_Gate`
+- V11: `passed` / signature `9994b06134cf20f3225df94880f7f652e1de66ca00bb24770ad3274b8d2f0ed9`
+- V12: `passed` / signature `6f7faced5cee8f6b199f18c979b5174473d85154c695a93a29f37db4db0059cd`
+- V4 validator SHA256: `1b32b6dc2a7af8af837dfbbcc52db79d458b5d96d6ac9bfa9a347ef54492e37c`
+- V5 validator SHA256: `bc2837fb5a10a8fe1b7f50cdefe58530925c4b63ec3fa4aed3738d2b2933136e`
+- V6 validator SHA256: `cb02282f0a424a5c849c564a5f4af50f9503266932535e62e8a9aa9f1881a5a7`
+- V7 validator SHA256: `120dc5f112febe11795db1a859467f45f51a8f682f63c2d4f53a977504f13310`
+- V8 validator SHA256: `35f26d2b91ee97cf4a9116cfbbdfcc7db520c58b61e4830db78984bcc136adee`
+- V9 validator SHA256: `f0688c8dbf32a48d4a05ed568b8ba7db4681845a6e1383964c28aec041f283d9`
+- V10 validator SHA256: `bd2a417895d042991e72d6bddd31e0c53a68579ffde256983320bf1030e28dc6`
+- V11 validator SHA256: `93d0d384ec97b6c02f1eca2707dfa53cceae189a7a71f6e9c115be3a5604d677`
+- V12 validator SHA256: `47fc4412f7fd765abe3410bc2521b09b9e85de5ec5982e932addda3a44826f3c`
+- V13 builder SHA256: `65cbf6f9262f85c28cca911a8afaa049b0afeaf20f9faf70a7109ba4f01ef62a`
+- V13 legacy runner SHA256: `17737cde4c28467be5c0f5f8dfb85670ba1d6c350f27d1b49352ddc6e8529c9f`
+
+KHUFU_V13_LEGACY_REGRESSION: passed
