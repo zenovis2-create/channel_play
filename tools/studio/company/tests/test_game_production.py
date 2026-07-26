@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -280,6 +281,10 @@ class GameProductionTests(unittest.TestCase):
         self.assertEqual(procurement["assetId"], "truth_pen")
         self.assertEqual(procurement["status"], "blocked")
         self.assertEqual(procurement["errorCount"], 16)
+        self.assertEqual(
+            procurement["intake"],
+            "docs/research/truth_pen_owner_decision_intake.md",
+        )
         self.assertEqual(loops["artist_procurement"]["status"], "blocked")
         procurement_gate = next(
             check
@@ -318,6 +323,67 @@ class GameProductionTests(unittest.TestCase):
             ).exists()
         )
 
+    def test_current_fail_receipt_routes_to_owner_intake(self) -> None:
+        self._write_ready_receipts()
+        self._write_run(
+            "game-feedback-loop-001",
+            "game_feedback_loop.md",
+            "Status: ready_for_review\n",
+        )
+        self._write_run(
+            "game-server-handoff-001",
+            "server_handoff.md",
+            "Status: waiting_for_x86_64_runner\n",
+        )
+        feedback = (
+            self.root
+            / "reviews"
+            / "2026-06-03"
+            / "feedback-0001"
+            / "feedback.md"
+        )
+        feedback.parent.mkdir(parents=True)
+        feedback.write_text("Status: routed\n", encoding="utf-8")
+        self._write_truth_pen_procurement_decision()
+        with self.assertRaises(CompanyError):
+            procurement_outreach_check(self.root, "truth_pen")
+
+        state = game_production_state(self.root)
+        text = render_game_production_status(self.root)
+        actionability = next(
+            check
+            for check in state["perfectionGate"]["checks"]
+            if check["label"] == "Work queue actionable"
+        )
+
+        self.assertEqual(
+            state["nextBestAction"],
+            {
+                "label": "Complete artist procurement owner decisions",
+                "artifact": (
+                    "docs/research/truth_pen_owner_decision_intake.md"
+                ),
+                "actionLabel": "Open owner decision intake",
+                "reason": (
+                    "The current FAIL receipt already covers truth_pen and "
+                    "lists 16 unresolved owner decisions. Complete only "
+                    "owner-approved fields, then rerun the check; artist "
+                    "contact remains blocked."
+                ),
+                "status": "blocked",
+            },
+        )
+        self.assertTrue(actionability["passed"])
+        self.assertEqual(
+            actionability["detail"],
+            "docs/research/truth_pen_owner_decision_intake.md",
+        )
+        self.assertIn(
+            "Complete artist procurement owner decisions -> "
+            "docs/research/truth_pen_owner_decision_intake.md",
+            text,
+        )
+
     def test_procurement_ignores_receipt_for_a_different_manifest(self) -> None:
         self._write_truth_pen_procurement_decision()
         receipt = (
@@ -353,6 +419,77 @@ class GameProductionTests(unittest.TestCase):
         self.assertEqual(
             refreshed["procurement"]["receipt"],
             "runs/asset-procurement-truth_pen/outreach_readiness_check.md",
+        )
+
+    def test_missing_owner_intake_with_current_fail_receipt_stays_blocked(
+        self,
+    ) -> None:
+        self._write_ready_procurement_workflow()
+        self._write_truth_pen_procurement_decision()
+        with self.assertRaises(CompanyError):
+            procurement_outreach_check(self.root, "truth_pen")
+        (
+            self.root
+            / "docs"
+            / "research"
+            / "truth_pen_owner_decision_intake.md"
+        ).unlink()
+
+        state = game_production_state(self.root)
+        actionability = next(
+            check
+            for check in state["perfectionGate"]["checks"]
+            if check["label"] == "Work queue actionable"
+        )
+
+        self.assertEqual(
+            state["nextBestAction"],
+            {
+                "label": "Restore owner decision intake guidance",
+                "reason": (
+                    "The current procurement result is FAIL, but the required "
+                    "guide is missing: "
+                    "docs/research/truth_pen_owner_decision_intake.md. "
+                    "Procurement cannot advance and artist contact remains "
+                    "blocked."
+                ),
+                "status": "blocked",
+            },
+        )
+        self.assertFalse(actionability["passed"])
+        self.assertNotIn("command", state["nextBestAction"])
+        self.assertNotIn("artifact", state["nextBestAction"])
+
+    def test_ready_decision_requires_current_pass_receipt(self) -> None:
+        self._write_ready_procurement_workflow()
+        self._write_truth_pen_procurement_decision()
+        self._approve_truth_pen_procurement_decision()
+
+        state = game_production_state(self.root)
+
+        self.assertTrue(state["procurement"]["passed"])
+        self.assertEqual(state["procurement"]["receipt"], "")
+        self.assertEqual(
+            state["nextBestAction"],
+            {
+                "label": "Record proposal outreach readiness",
+                "command": "asset.procurementCheck",
+                "payload": {"assetId": "truth_pen"},
+                "reason": (
+                    "The owner decision evaluates ready, but no current PASS "
+                    "receipt exists. Run the read-only check before outreach."
+                ),
+                "status": "ready",
+            },
+        )
+
+        procurement_outreach_check(self.root, "truth_pen")
+        refreshed = game_production_state(self.root)
+
+        self.assertTrue(refreshed["procurement"]["receipt"])
+        self.assertNotEqual(
+            refreshed["nextBestAction"].get("command"),
+            "asset.procurementCheck",
         )
 
     def test_perfection_gate_passes_when_workstation_workflow_is_actionable(self) -> None:
@@ -403,6 +540,28 @@ class GameProductionTests(unittest.TestCase):
             encoding="utf-8",
         )
 
+    def _write_ready_procurement_workflow(self) -> None:
+        self._write_ready_receipts()
+        self._write_run(
+            "game-feedback-loop-001",
+            "game_feedback_loop.md",
+            "Status: ready_for_review\n",
+        )
+        self._write_run(
+            "game-server-handoff-001",
+            "server_handoff.md",
+            "Status: waiting_for_x86_64_runner\n",
+        )
+        feedback = (
+            self.root
+            / "reviews"
+            / "2026-06-03"
+            / "feedback-0001"
+            / "feedback.md"
+        )
+        feedback.parent.mkdir(parents=True)
+        feedback.write_text("Status: routed\n", encoding="utf-8")
+
     def _write_truth_pen_procurement_decision(self) -> None:
         asset_index = self.root / "asset_pipeline" / "index.json"
         asset_index.parent.mkdir(parents=True, exist_ok=True)
@@ -428,7 +587,55 @@ class GameProductionTests(unittest.TestCase):
         )
         packet.parent.mkdir(parents=True, exist_ok=True)
         packet.write_text("# Procurement packet\n", encoding="utf-8")
+        intake = (
+            self.root
+            / "docs"
+            / "research"
+            / "truth_pen_owner_decision_intake.md"
+        )
+        intake.write_text("# Owner decision intake\n", encoding="utf-8")
         procurement_decision_init(self.root, "truth_pen")
+
+    def _approve_truth_pen_procurement_decision(self) -> None:
+        manifest = (
+            self.root
+            / "asset_pipeline"
+            / "manifests"
+            / "truth_pen_procurement_decision.json"
+        )
+        decision = json.loads(manifest.read_text(encoding="utf-8"))
+        decision["decision_status"] = "approved_for_proposal_outreach"
+        decision["owner"] = {
+            "secure_record_id": (
+                "vault:12345678-1234-4234-8234-123456789abc"
+            ),
+            "authorized_signer_role": "project_owner",
+            "governing_jurisdiction": "KR",
+        }
+        decision["commercial"] = {
+            "budget_ceiling": 1000,
+            "currency": "USD",
+            "payment_route": "upwork",
+            "tax_vendor_process_confirmed_securely": True,
+        }
+        decision["schedule"] = {
+            "proposal_deadline": "2099-01-01",
+            "desired_delivery_date": "2099-02-01",
+            "revision_limit": 2,
+        }
+        decision["outreach"].update(
+            {
+                "authorized": True,
+                "authorized_at": "2026-01-01T00:00:00+09:00",
+                "scope": "one",
+                "candidate_ids": ["cynthia_ignacio"],
+            }
+        )
+        decision["privacy"]["sensitive_data_stored_outside_repo"] = True
+        manifest.write_text(
+            json.dumps(decision, indent=2) + "\n",
+            encoding="utf-8",
+        )
 
     def _write_assigned_task(self, task_id: str) -> None:
         board = self.root / "memory" / "company" / "task_board.json"

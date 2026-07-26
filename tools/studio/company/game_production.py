@@ -17,6 +17,10 @@ from .timeutil import now_iso, slugify
 from .unity import unity_build, unity_check, unity_playtest
 from tools.studio.jobs import list_jobs
 
+PROCUREMENT_INTAKE_PATHS = {
+    "truth_pen": "docs/research/truth_pen_owner_decision_intake.md",
+}
+
 
 def game_production_state(root: Path) -> dict:
     unity_compile = _latest_run_matching(root, "unity-check-", "unity_check.md", ("Compile errors: 0", "Exit code: 0"))
@@ -152,7 +156,8 @@ def render_game_production_status(root: Path) -> str:
             f"Linux server build: {state['remote']['linuxServerBuild'].get('summary', 'not run')} {state['remote']['linuxServerBuild'].get('path', '')}",
             "",
             "Next best action:",
-            f"  {state['nextBestAction'].get('label', 'none')} -> {state['nextBestAction'].get('command', 'none')}",
+            f"  {state['nextBestAction'].get('label', 'none')} -> "
+            f"{state['nextBestAction'].get('command') or state['nextBestAction'].get('artifact') or 'none'}",
             f"  {state['nextBestAction'].get('reason', '')}",
             "",
             "Optimization loops:",
@@ -358,6 +363,8 @@ def _procurement_state(root: Path) -> dict:
         )
         error_count = len(result["errors"])
         passed = bool(result["passed"])
+        intake_path = PROCUREMENT_INTAKE_PATHS.get(asset_id, "")
+        intake = root / intake_path if intake_path else None
         receipt_path = _current_procurement_receipt(
             root,
             receipt,
@@ -376,6 +383,12 @@ def _procurement_state(root: Path) -> dict:
             "manifest": rel(root, manifest),
             "manifestSha256": result["manifest_sha256"],
             "receipt": receipt_path,
+            "intakeExpected": intake_path,
+            "intake": (
+                rel(root, intake)
+                if intake is not None and intake.is_file()
+                else ""
+            ),
             "command": "asset.procurementCheck",
             "payload": {"assetId": asset_id},
             "summary": (
@@ -553,18 +566,54 @@ def _next_best_action(
     task_action = _task_next_action(task_flow)
     if task_action:
         return task_action
-    if procurement and not procurement["passed"]:
-        return {
-            "label": "Resolve artist procurement owner decisions",
-            "command": procurement["command"],
-            "payload": procurement["payload"],
-            "reason": (
-                f"{procurement['assetId']} has "
-                f"{procurement['errorCount']} unresolved owner decisions. "
-                "The check is read-only; artist contact remains blocked."
-            ),
-            "status": "blocked",
-        }
+    if procurement:
+        if not procurement["passed"] and procurement.get("receipt"):
+            if procurement.get("intake"):
+                return {
+                    "label": "Complete artist procurement owner decisions",
+                    "artifact": procurement["intake"],
+                    "actionLabel": "Open owner decision intake",
+                    "reason": (
+                        f"The current FAIL receipt already covers "
+                        f"{procurement['assetId']} and lists "
+                        f"{procurement['errorCount']} unresolved owner "
+                        "decisions. Complete only owner-approved fields, then "
+                        "rerun the check; artist contact remains blocked."
+                    ),
+                    "status": "blocked",
+                }
+            return {
+                "label": "Restore owner decision intake guidance",
+                "reason": (
+                    "The current procurement result is FAIL, but the required "
+                    f"guide is missing: {procurement['intakeExpected']}. "
+                    "Procurement cannot advance and artist contact remains "
+                    "blocked."
+                ),
+                "status": "blocked",
+            }
+        if not procurement.get("receipt"):
+            return {
+                "label": (
+                    "Record proposal outreach readiness"
+                    if procurement["passed"]
+                    else "Resolve artist procurement owner decisions"
+                ),
+                "command": procurement["command"],
+                "payload": procurement["payload"],
+                "reason": (
+                    "The owner decision evaluates ready, but no current PASS "
+                    "receipt exists. Run the read-only check before outreach."
+                    if procurement["passed"]
+                    else (
+                        f"{procurement['assetId']} has "
+                        f"{procurement['errorCount']} unresolved owner "
+                        "decisions. The check is read-only; artist contact "
+                        "remains blocked."
+                    )
+                ),
+                "status": "ready" if procurement["passed"] else "blocked",
+            }
     asset = by_id.get("asset_factory", {})
     if asset.get("status") != "ready":
         return {
@@ -685,6 +734,7 @@ def _task_next_action(task_flow: dict) -> dict:
 def _perfection_gate(checks: list[dict], loops: list[dict], next_action: dict, server_handoff: dict, jobs: list[dict]) -> dict:
     loop_by_id = {loop.get("id"): loop for loop in loops}
     next_command = str(next_action.get("command") or "")
+    next_artifact = str(next_action.get("artifact") or "")
     next_payload = next_action.get("payload") if isinstance(next_action.get("payload"), dict) else {}
     gate_checks = [
         _gate_check(
@@ -701,8 +751,16 @@ def _perfection_gate(checks: list[dict], loops: list[dict], next_action: dict, s
         ),
         _gate_check(
             "Work queue actionable",
-            _next_action_is_actionable(next_command, next_payload),
-            f"{next_command} {json.dumps(next_payload, ensure_ascii=False) if next_payload else ''}".strip(),
+            _next_action_is_actionable(
+                next_command,
+                next_payload,
+                next_artifact,
+            ),
+            (
+                f"{next_command} "
+                f"{json.dumps(next_payload, ensure_ascii=False) if next_payload else ''}"
+            ).strip()
+            or next_artifact,
         ),
         _gate_check("Job ledger healthy", bool(jobs), jobs[0].get("receipt", {}).get("path", "") if jobs else "no jobs"),
     ]
@@ -730,7 +788,13 @@ def _perfection_gate(checks: list[dict], loops: list[dict], next_action: dict, s
     }
 
 
-def _next_action_is_actionable(command: str, payload: dict) -> bool:
+def _next_action_is_actionable(
+    command: str,
+    payload: dict,
+    artifact: str = "",
+) -> bool:
+    if artifact:
+        return True
     if not command:
         return False
     if command == "company.session.start":

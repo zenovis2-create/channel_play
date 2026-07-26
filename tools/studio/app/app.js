@@ -296,7 +296,8 @@ function renderGameProduction() {
       <strong>${esc(next.label)}</strong>
       <small>${esc(next.reason || "")}</small>
     </div>
-    ${next.command && next.command !== "asset.prepare" ? `<button type="button" data-command="${esc(next.command)}" data-command-payload="${esc(JSON.stringify(next.payload || {}))}">${esc(commandText[next.command] || next.command)}</button>` : ""}
+    ${next.artifact ? `<button type="button" data-game-artifact-path="${esc(next.artifact)}">${esc(next.actionLabel || "안내서 열기")}</button>` : ""}
+    ${!next.artifact && next.command && next.command !== "asset.prepare" ? `<button type="button" data-command="${esc(next.command)}" data-command-payload="${esc(JSON.stringify(next.payload || {}))}">${esc(commandText[next.command] || next.command)}</button>` : ""}
   ` : "";
 
   $("#gameProductionChecks").innerHTML = checks.map((check) => `

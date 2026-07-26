@@ -749,6 +749,64 @@
       ],
       "verification_status": "passed",
       "closed_at": "2026-07-26T23:12:19+09:00"
+    },
+    {
+      "id": "task-0016",
+      "request": "Replace redundant Truth Pen procurement rechecks with owner decision intake guidance when the current fail receipt is already valid",
+      "status": "closed",
+      "suggested_agent": "coding_specialist",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": "coding_specialist",
+      "allowed_write_paths": [
+        "tools/studio/company",
+        "tools/studio/app",
+        "tools/studio/tests",
+        "docs",
+        "memory/company",
+        "memory/sessions",
+        "reviews",
+        "runs"
+      ],
+      "required_evidence": "current-vs-stale receipt routing tests, Studio intake artifact test, runtime status receipt, full Python suite, and critic review",
+      "created_at": "2026-07-26T23:17:03+09:00",
+      "updated_at": "2026-07-26T23:32:05+09:00",
+      "work_order": "memory/sessions/20260726-231702-route-current-truth-pen-blockers-to-owne/work_orders/task-0016-coding_specialist.md",
+      "report": "memory/company/reviews/task-0016-review.md",
+      "verification": "memory/sessions/20260726-231702-route-current-truth-pen-blockers-to-owne/verification/task-0016-verification.md",
+      "session": "20260726-231702-route-current-truth-pen-blockers-to-owne",
+      "review_status": "reviewed",
+      "reviewer": "critic_reviewer",
+      "agent_runs": [
+        {
+          "tool": "studio",
+          "mode": "review",
+          "status": "reviewed",
+          "path": "memory/company/reviews/task-0016-review.md",
+          "created_at": "2026-07-26T23:30:31+09:00"
+        }
+      ],
+      "agent_status": "reviewed",
+      "last_tool": "studio",
+      "last_agent_run": "memory/company/reviews/task-0016-review.md",
+      "evidence": [
+        {
+          "path": "runs/task-0016-owner-intake-routing/runtime_status.md",
+          "note": "Runtime receipt: current FAIL routes to owner guide; missing guide stays blocked",
+          "attached_at": "2026-07-26T23:30:32+09:00"
+        },
+        {
+          "path": "memory/sessions/20260726-231702-route-current-truth-pen-blockers-to-owne/agent_reports/task-0016-coding_specialist.md",
+          "note": "Implementation report and focused/full regression evidence",
+          "attached_at": "2026-07-26T23:30:32+09:00"
+        },
+        {
+          "path": "memory/company/reviews/task-0016-review.md",
+          "note": "Studio checkpoint from latest run",
+          "attached_at": "2026-07-26T23:30:57+09:00"
+        }
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-07-26T23:32:05+09:00"
     }
   ]
 }
