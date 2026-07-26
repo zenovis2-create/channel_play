@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-This is a Unity 6 project (`6000.0.76f1`) with a Python control plane. Project-owned Unity content lives in `Assets/_Project/`: gameplay and editor C# in `Scripts/`, scenes in `Scenes/`, reusable objects in `Prefabs/`, and art, audio, and materials in their named folders. Keep Unity tests under `Assets/_Project/Tests/EditMode` or `PlayMode`, and commit each asset's `.meta` file. `tools/channelctl` is the main CLI; supporting Python modules are in `tools/studio/`, with validator tests in `tools/tests/`. Specifications belong in `docs/`; pipeline inputs and handoffs belong in `asset_pipeline/`. Do not commit Unity-generated `Library/`, `Logs/`, `UserSettings/`, or `builds/` content.
+This is a Unity 6 project (`6000.0.76f1`) with a Python control plane. Project-owned Unity content lives in `Assets/_Project/`: gameplay and editor C# in `Scripts/`, scenes in `Scenes/`, reusable objects in `Prefabs/`, and art, audio, and materials in their named folders. Keep Unity tests under `Assets/_Project/Tests/EditMode` or `PlayMode`, and commit each asset's `.meta` file. `tools/channelctl` is the main CLI; supporting Python modules are in `tools/studio/`, with validator tests in `tools/tests/`. Specifications belong in `docs/`; pipeline inputs and handoffs belong in `asset_pipeline/`. Do not commit Unity-generated `Library/`, `Logs/`, `UserSettings/`, or `Builds/` content.
 
 ## Build, Test, and Development Commands
 
@@ -10,8 +10,6 @@ This is a Unity 6 project (`6000.0.76f1`) with a Python control plane. Project-o
 - `python tools/channelctl unity check --batch` - run the headless Unity import/compile gate.
 - `python tools/channelctl unity playtest` - run the MVP smoke validation.
 - `python -m pytest tools/tests tools/studio` - run Python validator and control-plane tests.
-- `scripts/start_docker_studio.sh` - start the Docker Studio UI and host runner; see `docs/docker_studio.md`.
-
 Use Unity Editor `6000.0.76f1` for scene or asset work. Run focused checks first, then the full relevant gate before review.
 
 ## Coding Style & Naming Conventions
