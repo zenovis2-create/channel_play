@@ -834,6 +834,40 @@ main {
   font-weight: 800;
 }
 
+.game-procurement-groups {
+  display: grid;
+  gap: 12px;
+}
+
+.game-procurement-group {
+  background: #f7fafc;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 2px);
+  display: grid;
+  gap: 9px;
+  padding: 10px;
+}
+
+.game-procurement-group-head {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.game-procurement-group-head strong {
+  font-size: 13px;
+}
+
+.game-procurement-group-head span {
+  background: #e8f0f7;
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 900;
+  padding: 3px 8px;
+}
+
 .game-procurement-items {
   display: grid;
   gap: 8px;
@@ -847,9 +881,27 @@ main {
   border-radius: calc(var(--radius) - 4px);
   display: grid;
   gap: 8px;
-  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   min-height: 58px;
   padding: 10px;
+}
+
+.game-procurement-item-meta {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.game-procurement-item-meta code {
+  color: var(--muted);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.game-procurement-item > strong {
+  font-size: 13px;
 }
 
 .game-procurement-item p {
@@ -857,6 +909,13 @@ main {
   font-weight: 800;
   line-height: 1.4;
   margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.game-procurement-item > small {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.35;
   overflow-wrap: anywhere;
 }
 

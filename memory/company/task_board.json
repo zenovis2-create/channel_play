@@ -921,6 +921,64 @@
       ],
       "verification_status": "passed",
       "closed_at": "2026-07-27T00:10:35+09:00"
+    },
+    {
+      "id": "task-0019",
+      "request": "Structure every unresolved Truth Pen procurement decision into owner-friendly Korean categories and guidance in Production Cockpit without changing values, authorization, or contact state",
+      "status": "closed",
+      "suggested_agent": "coding_specialist",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": "coding_specialist",
+      "allowed_write_paths": [
+        "tools/studio/company",
+        "tools/studio/app",
+        "tools/studio/tests",
+        "docs",
+        "memory/company",
+        "memory/sessions",
+        "reviews",
+        "runs"
+      ],
+      "required_evidence": "structured guidance state tests, Studio UI contract tests, JavaScript syntax check, runtime receipt, full Python suite, and critic review",
+      "created_at": "2026-07-27T07:13:36+09:00",
+      "updated_at": "2026-07-27T07:21:20+09:00",
+      "work_order": "memory/sessions/20260727-071335-group-truth-pen-owner-decisions-into-act/work_orders/task-0019-coding_specialist.md",
+      "report": "memory/company/reviews/task-0019-review.md",
+      "verification": "memory/sessions/20260727-071335-group-truth-pen-owner-decisions-into-act/verification/task-0019-verification.md",
+      "session": "20260727-071335-group-truth-pen-owner-decisions-into-act",
+      "review_status": "reviewed",
+      "reviewer": "critic_reviewer",
+      "agent_runs": [
+        {
+          "tool": "studio",
+          "mode": "review",
+          "status": "reviewed",
+          "path": "memory/company/reviews/task-0019-review.md",
+          "created_at": "2026-07-27T07:20:55+09:00"
+        }
+      ],
+      "agent_status": "reviewed",
+      "last_tool": "studio",
+      "last_agent_run": "memory/company/reviews/task-0019-review.md",
+      "evidence": [
+        {
+          "path": "runs/task-0019-procurement-guidance/runtime_status.md",
+          "note": "Runtime six-group structure, 16/16 coverage, safety boundaries, and tests",
+          "attached_at": "2026-07-27T07:21:14+09:00"
+        },
+        {
+          "path": "memory/sessions/20260727-071335-group-truth-pen-owner-decisions-into-act/agent_reports/task-0019-coding_specialist.md",
+          "note": "Implementation report and verification summary",
+          "attached_at": "2026-07-27T07:21:14+09:00"
+        },
+        {
+          "path": "memory/company/reviews/task-0019-review.md",
+          "note": "Independent findings-first critic approval",
+          "attached_at": "2026-07-27T07:21:15+09:00"
+        }
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-07-27T07:21:20+09:00"
     }
   ]
 }
