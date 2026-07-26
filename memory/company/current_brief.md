@@ -1,13 +1,13 @@
 # Current Brief
 
-Generated: 2026-06-01T16:36:11+09:00
-Repo: /Volumes/AI2/channel_play
-Git: 3bfe68c
-Dirty files: 8
+Generated: 2026-07-26T18:00:28+09:00
+Repo: D:\Temp\User\channel-play-project-brief-d87abf94
+Git: d87abf94
+Dirty files: 0
 Current session: none
 Open tasks: 0
 Active locks: 0
-gdx1: online_via_tailscale / ok
+gdx1: online_via_tailscale / auth_blocked
 
 ## Current Context
 
@@ -60,6 +60,54 @@ Current constraints:
 - Shared memory must be updated after meaningful decisions.
 - Do not ask an agent to build the whole game at once. Split work into scoped, verifiable tasks.
 
+## Project Brain
+
+# Project Brain
+
+Generated: 2026-07-26T16:33:49+09:00
+
+## Current Goal
+
+8명이 접속하고 운영자가 포인트/아이템을 주며 OBS로 촬영 가능한 작은 3D 게임쇼 세트장
+
+## MVP Scope
+
+- 참가자 4~8명 접속
+- 작은 3D 맵 1개
+- 운영자 1명 접속
+- 제한시간 30~40분
+- 팀 구분
+- 포인트 획득
+- 상점 이용
+- 아이템 3개 사용
+
+## Style
+
+- Korean-first planning and status language.
+- Quiet production UI, visible evidence, no hidden automation.
+- Every agent output should name the task, changed files, evidence, and next risk.
+
+## Constraints
+
+- Studio owns orchestration state; external AI tools are adapters.
+- gdx1 is optional until health is verified.
+- Unity work needs compile, playtest, screenshot, or receipt evidence.
+
+## Forbidden Actions
+
+- Do not mark done without evidence or receipt.
+- Do not edit broad unrelated Unity folders.
+- Do not re-enable Claude as a default adapter unless the user requests it.
+- Do not use non-loopback Studio execution APIs without an explicit trusted-network setting.
+
+## Standards Registry
+
+- Asset Import Standard: memory/company/standards/asset_import.md
+- Evidence Standard: memory/company/standards/evidence.md
+- GDX Worker Standard: memory/company/standards/gdx_worker.md
+- Unity Scene And Prefab Ownership Standard: memory/company/standards/unity_scene_prefab_ownership.md
+- Unity Scripts Standard: memory/company/standards/unity_scripts.md
+
 ## Registered Agents
 
 - chief_orchestrator: agents/orchestrator.agent.md
@@ -74,6 +122,11 @@ Current constraints:
 - performance_build: agents/roles/performance_build.agent.md
 - gdx_ops: agents/roles/gdx_ops.agent.md
 - librarian: agents/roles/librarian.agent.md
+- research_librarian: agents/roles/research_librarian.agent.md
+- production_planner: agents/roles/production_planner.agent.md
+- coding_specialist: agents/roles/coding_specialist.agent.md
+- toolchain_integrator: agents/roles/toolchain_integrator.agent.md
+- operator_broadcast_designer: agents/roles/operator_broadcast_designer.agent.md
 - critic_reviewer: agents/roles/critic_reviewer.agent.md
 
 ## Active Locks
@@ -82,18 +135,11 @@ Current constraints:
 
 ## Git Working Tree
 
--  M memory/company/agent_registry.json
--  M memory/company/current_brief.md
--  M memory/company/current_context.md
--  M memory/company/state.json
--  M tools/studio/company/agent_runner.py
--  M tools/studio/company/tests/test_agent_runner.py
-- ?? reviews/captures/screen-2026-06-01t16-09-49-09-00.png
-- ?? runs/unity-check-2026-06-01t16-09-45-09-00/
+- clean
 
 ## Latest Session
 
-- 20260601-145709-process-feedback-md: memory/sessions/20260601-145709-process-feedback-md/summary.md
+- 20260726-163349-process-feedback-md: memory/sessions/20260726-163349-process-feedback-md/summary.md
 
 ## Memory Freshness
 

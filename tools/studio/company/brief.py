@@ -19,12 +19,14 @@ def build_brief(root: Path) -> str:
     open_tasks = [task for task in data["tasks"] if task.get("status") not in {"closed", "closed_blocked"}]
     generated = datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
     brain = ensure_brain_files(root)
+    project_name = str(state.get("project") or root.name)
+    next_action = _next_recommended_action(state, open_tasks)
 
     lines = [
         "# Current Brief",
         "",
         f"Generated: {generated}",
-        f"Repo: {root}",
+        f"Repo: {project_name}",
         f"Git: {git_head(root)}",
         f"Dirty files: {len(dirty)}",
         f"Current session: {state.get('active_session') or 'none'}",
@@ -96,7 +98,7 @@ def build_brief(root: Path) -> str:
             "",
             "## Next Recommended Action",
             "",
-            "- Implement `company session start/end`, then work orders and locks.",
+            f"- {next_action}",
             "",
         ]
     )
@@ -142,3 +144,30 @@ def _excerpt(text: str, limit: int) -> str:
     if len(clean) <= limit:
         return clean
     return clean[:limit].rstrip() + "\n\n[truncated]"
+
+
+def _next_recommended_action(state: dict, open_tasks: list[dict]) -> str:
+    if open_tasks:
+        task = sorted(
+            open_tasks,
+            key=lambda item: item.get("created_at") or item.get("id") or "",
+        )[0]
+        task_id = task.get("id") or "unknown-task"
+        if not task.get("assigned_agent"):
+            return (
+                f"Assign `{task_id}` with "
+                f"`tools/channelctl company assign {task_id} <agent-id>`."
+            )
+        return (
+            f"Continue `{task_id}` and attach its required evidence before "
+            "verification."
+        )
+    if state.get("active_session"):
+        return (
+            "No open tasks remain; close the active session with "
+            "`tools/channelctl company session end`."
+        )
+    return (
+        "Create the next scoped work order with "
+        "`tools/channelctl company plan <request>`."
+    )
