@@ -6,6 +6,7 @@ import os
 import re
 import json
 import subprocess
+import sys
 from contextlib import contextmanager
 from pathlib import Path
 
@@ -38,6 +39,36 @@ def _resolve_unity_editor(root: Path) -> Path:
         return Path(env_value)
 
     project_version = _project_unity_version(root)
+    if sys.platform == "win32":
+        editor_roots = [
+            Path.home() / "Unity" / "Hub" / "Editor",
+            Path(os.environ.get("PROGRAMFILES", "C:/Program Files"))
+            / "Unity"
+            / "Hub"
+            / "Editor",
+        ]
+        if project_version:
+            for editor_root in editor_roots:
+                candidate = (
+                    editor_root / project_version / "Editor" / "Unity.exe"
+                )
+                if candidate.exists():
+                    return candidate
+        for editor_root in editor_roots:
+            installed = sorted(
+                editor_root.glob("*/Editor/Unity.exe"),
+                reverse=True,
+            )
+            if installed:
+                return installed[0]
+        fallback_version = project_version or "6000.0.76f1"
+        return (
+            editor_roots[0]
+            / fallback_version
+            / "Editor"
+            / "Unity.exe"
+        )
+
     if project_version:
         project_editor = UNITY_HUB_EDITOR_ROOT / project_version / "Unity.app" / "Contents" / "MacOS" / "Unity"
         if project_editor.exists():
@@ -141,9 +172,13 @@ def unity_playtest(root: Path, args: list[str]) -> Path:
 
 
 def unity_build(root: Path, args: list[str]) -> Path:
-    target = args[0] if args else "mac-dev"
-    if target not in {"mac-dev", "linux-server"}:
-        raise CompanyError("Usage: unity build [mac-dev|linux-server]")
+    target = args[0] if args else (
+        "windows-dev" if sys.platform == "win32" else "mac-dev"
+    )
+    if target not in {"windows-dev", "mac-dev", "linux-server"}:
+        raise CompanyError(
+            "Usage: unity build [windows-dev|mac-dev|linux-server]"
+        )
 
     unity = _resolve_unity_editor(root)
     run_dir = root / "runs" / f"unity-build-{target}-{slugify(now_iso())}"
@@ -200,12 +235,38 @@ def unity_build(root: Path, args: list[str]) -> Path:
     if not unity.exists():
         raise CompanyError(f"Unity editor not found: {unity}")
 
+    development_builds = {
+        "windows-dev": (
+            "ChannelPlayProductionValidator.BuildWindowsDev",
+            Path("builds/windows-dev/ChannelPlay.exe"),
+        ),
+        "mac-dev": (
+            "ChannelPlayProductionValidator.BuildMacDev",
+            Path("builds/mac-dev/ChannelPlay.app"),
+        ),
+    }
+    execute_method, relative_output = development_builds[target]
     editor_log = run_dir / "Editor.log"
-    result = _run_unity_batch(root, unity, editor_log, execute_method="ChannelPlayProductionValidator.BuildMacDev", timeout=420)
+    result = _run_unity_batch(
+        root,
+        unity,
+        editor_log,
+        execute_method=execute_method,
+        timeout=420,
+    )
     errors = _summarize_unity_errors(editor_log)
     markers = _matching_lines(editor_log, BUILD_MARKER)
-    output_exists = (root / "builds" / "mac-dev" / "ChannelPlay.app").exists()
-    passed = result.returncode == 0 and not errors and output_exists and any("result=Succeeded" in marker for marker in markers)
+    output_exists = (root / relative_output).exists()
+    passed = (
+        result.returncode == 0
+        and not errors
+        and output_exists
+        and any(
+            f"target={target}" in marker
+            and "result=Succeeded" in marker
+            for marker in markers
+        )
+    )
 
     lines.extend(
         [
@@ -213,7 +274,7 @@ def unity_build(root: Path, args: list[str]) -> Path:
             f"Editor log: {editor_log.relative_to(root)}",
             f"Compile errors: {len(errors)}",
             f"Build status: {'passed' if passed else 'failed'}",
-            f"Build output: builds/mac-dev/ChannelPlay.app",
+            f"Build output: {relative_output.as_posix()}",
             f"Build output exists: {output_exists}",
             "",
             "## Build Markers",

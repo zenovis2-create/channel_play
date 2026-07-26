@@ -384,6 +384,10 @@ class WorkspaceServerTests(unittest.TestCase):
             [str(self.root / "tools" / "channelctl"), "unity", "playtest"],
         )
         self.assertEqual(
+            build_command(self.root, "unity.build.windows", {}),
+            [str(self.root / "tools" / "channelctl"), "unity", "build", "windows-dev"],
+        )
+        self.assertEqual(
             build_command(self.root, "unity.build.mac", {}),
             [str(self.root / "tools" / "channelctl"), "unity", "build", "mac-dev"],
         )

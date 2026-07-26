@@ -4,6 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from tools.studio.company.capture import PNG_SIGNATURE
 from tools.studio.company.game_production import game_production_state, render_game_production_status
 
 
@@ -46,13 +47,68 @@ class GameProductionTests(unittest.TestCase):
         self._write_run("gdx-probe-001", "gdx_probe.md", "Status: ok\nusable\n")
         capture_dir = self.root / "reviews" / "captures"
         capture_dir.mkdir(parents=True)
-        (capture_dir / "screen.png").write_bytes(b"png")
+        (capture_dir / "screen.png").write_bytes(PNG_SIGNATURE + b"test")
 
         state = game_production_state(self.root)
 
         self.assertEqual(state["readiness"], {"passed": 6, "total": 6, "status": "ready"})
         self.assertEqual(state["unity"]["compile"]["path"], "runs/unity-check-001/unity_check.md")
         self.assertEqual(state["gdx"]["path"], "runs/gdx-probe-001/gdx_probe.md")
+
+    def test_state_accepts_windows_development_build_receipt(self) -> None:
+        self._write_run("unity-check-001", "unity_check.md", "Exit code: 0\nCompile errors: 0\n")
+        self._write_run("unity-playtest-001", "unity_playtest.md", "Exit code: 0\nPlaytest smoke: passed\n")
+        self._write_run(
+            "unity-build-windows-dev-001",
+            "unity_build.md",
+            "Exit code: 0\nBuild status: passed\nBuild output exists: True\n",
+        )
+        self._write_run("gdx-probe-001", "gdx_probe.md", "Status: ok\n")
+        capture_dir = self.root / "reviews" / "captures"
+        capture_dir.mkdir(parents=True)
+        (capture_dir / "screen.png").write_bytes(PNG_SIGNATURE + b"test")
+
+        state = game_production_state(self.root)
+
+        self.assertEqual(state["readiness"], {"passed": 6, "total": 6, "status": "ready"})
+        self.assertIn("unity-build-windows-dev-001", state["unity"]["build"]["path"])
+
+    def test_blocked_gdx_probe_is_recorded_without_blocking_local_readiness(self) -> None:
+        self._write_ready_receipts()
+        probe = self.root / "runs" / "gdx-probe-001" / "gdx_probe.md"
+        probe.write_text(
+            "# gdx1 Probe\n\n"
+            "SSH exit: 255\n"
+            "SSH stderr: Host key verification failed.\n\n"
+            "## Result\n\n"
+            "blocked: SSH authentication or host access failed\n",
+            encoding="utf-8",
+        )
+
+        state = game_production_state(self.root)
+
+        self.assertEqual(state["readiness"], {"passed": 6, "total": 6, "status": "ready"})
+        probe_check = next(
+            check
+            for check in state["checks"]
+            if check["label"] == "gdx1 probe evidence"
+        )
+        self.assertTrue(probe_check["passed"])
+        self.assertEqual(state["remote"]["status"], "server_blocked")
+
+    def test_state_rejects_text_file_with_png_extension(self) -> None:
+        capture_dir = self.root / "reviews" / "captures"
+        capture_dir.mkdir(parents=True)
+        (capture_dir / "screen.png").write_text("capture failed\n", encoding="utf-8")
+
+        state = game_production_state(self.root)
+
+        capture_check = next(
+            check
+            for check in state["checks"]
+            if check["label"] == "Capture evidence"
+        )
+        self.assertFalse(capture_check["passed"])
 
     def test_quick_unity_check_does_not_replace_valid_compile_evidence(self) -> None:
         self._write_ready_receipts()
@@ -158,7 +214,7 @@ class GameProductionTests(unittest.TestCase):
         self._write_run("gdx-probe-001", "gdx_probe.md", "Status: ok\nusable\n")
         capture_dir = self.root / "reviews" / "captures"
         capture_dir.mkdir(parents=True)
-        (capture_dir / "screen.png").write_bytes(b"png")
+        (capture_dir / "screen.png").write_bytes(PNG_SIGNATURE + b"test")
 
     def _write_asset_index(self) -> None:
         asset_index = self.root / "asset_pipeline" / "index.json"

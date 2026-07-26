@@ -108,6 +108,7 @@ const commandText = {
   "unity.simReviewLatest": "시뮬레이션 리뷰",
   "unity.simReplayLatest": "시뮬레이션 리플레이",
   "unity.simCompare": "시뮬레이션 비교",
+  "unity.build.windows": "Windows 개발 빌드",
   "unity.build.mac": "Mac 개발 빌드",
   "unity.build.linuxServer": "Linux 서버 빌드",
   "game.status": "게임 제작 상태",
