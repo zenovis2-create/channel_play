@@ -76,7 +76,7 @@ def stub_git(
         prewrite,
         "committed_paths_since_baseline",
         lambda _root: (
-            set(prewrite.PHASE1_ALLOWED_PATHS)
+            set(prewrite.PREWRITE_COMMITTED_ALLOWED_PATHS)
             if committed_paths is None
             else committed_paths
         ),
@@ -149,7 +149,7 @@ def test_disallowed_committed_path_fails(
     root = contract_root(tmp_path)
     stub_git(monkeypatch, committed_paths={prewrite.SCENE.as_posix()})
     result = prewrite.validate(root)
-    assert any("exceed the Phase 1 allowlist" in error for error in result.errors)
+    assert any("exceed the prewrite allowlist" in error for error in result.errors)
 
 
 def test_disallowed_uncommitted_unity_path_fails(

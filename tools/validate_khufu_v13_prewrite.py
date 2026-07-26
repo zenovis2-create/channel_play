@@ -59,6 +59,18 @@ PREWRITE_AUDIT_ALLOWED_PATHS = frozenset(
         ),
     }
 )
+PREWRITE_EVIDENCE_ALLOWED_PATHS = frozenset(
+    {
+        "runs/khufu-v13-subterranean-threshold/prewrite-audit.json",
+        "runs/khufu-v13-subterranean-threshold/prewrite-audit.md",
+        "runs/khufu-v13-subterranean-threshold/prewrite-validation.md",
+    }
+)
+PREWRITE_COMMITTED_ALLOWED_PATHS = (
+    PHASE1_ALLOWED_PATHS
+    | PREWRITE_AUDIT_ALLOWED_PATHS
+    | PREWRITE_EVIDENCE_ALLOWED_PATHS
+)
 
 EXPECTED_SEGMENTS = (
     ("V10_Branch_Transition", "FACT/HYBRID", False, True),
@@ -551,10 +563,12 @@ def validate(root: Path) -> Result:
         result.errors.append("V12 baseline is not an ancestor of HEAD")
     if baseline_scene_hash != SCENE_SHA256:
         result.errors.append("V12 baseline scene blob SHA256 drifted")
-    unexpected_committed = sorted(committed_paths - PHASE1_ALLOWED_PATHS)
+    unexpected_committed = sorted(
+        committed_paths - PREWRITE_COMMITTED_ALLOWED_PATHS
+    )
     if unexpected_committed:
         result.errors.append(
-            "committed paths since V12 exceed the Phase 1 allowlist: "
+            "committed paths since V12 exceed the prewrite allowlist: "
             + ", ".join(unexpected_committed)
         )
     unexpected_unity = sorted(unity_paths - PREWRITE_AUDIT_ALLOWED_PATHS)
