@@ -1,10 +1,10 @@
 # Current Brief
 
-Generated: 2026-07-26T18:11:37+09:00
+Generated: 2026-07-26T18:17:44+09:00
 Repo: channel_play
-Git: 20cab31c
+Git: a96c0002
 Dirty files: 0
-Current session: none
+Current session: 20260726-181451-truth-pen
 Open tasks: 1
 Active locks: 0
 gdx1: online_via_tailscale / auth_blocked
@@ -139,7 +139,7 @@ Generated: 2026-07-26T16:33:49+09:00
 
 ## Latest Session
 
-- 20260726-163349-process-feedback-md: memory/sessions/20260726-163349-process-feedback-md/summary.md
+- 20260726-181451-truth-pen: memory/sessions/20260726-181451-truth-pen/summary.md
 
 ## Memory Freshness
 
@@ -154,4 +154,4 @@ Generated: 2026-07-26T16:33:49+09:00
 
 ## Next Recommended Action
 
-- Assign `task-0009` with `tools/channelctl company assign task-0009 <agent-id>`.
+- Continue `task-0009` and attach its required evidence before verification.
