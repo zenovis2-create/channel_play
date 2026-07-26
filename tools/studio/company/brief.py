@@ -5,6 +5,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from pathlib import Path
 
+from .brain import ensure_brain_files
 from .git_info import git_head, git_short_status
 from .state import CompanyPaths, load_company_state
 
@@ -17,6 +18,7 @@ def build_brief(root: Path) -> str:
     gdx = state.get("gdx1", {})
     open_tasks = [task for task in data["tasks"] if task.get("status") not in {"closed", "closed_blocked"}]
     generated = datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
+    brain = ensure_brain_files(root)
 
     lines = [
         "# Current Brief",
@@ -33,6 +35,14 @@ def build_brief(root: Path) -> str:
         "## Current Context",
         "",
         data["context"] or "No current context recorded.",
+        "",
+        "## Project Brain",
+        "",
+        _excerpt(brain["projectBrain"], 1600),
+        "",
+        "## Standards Registry",
+        "",
+        *[f"- {standard['title']}: {standard['path']}" for standard in brain["standards"]],
         "",
         "## Registered Agents",
         "",
@@ -125,3 +135,10 @@ def _guard_size(text: str, max_lines: int = 220) -> str:
     kept = lines[:max_lines]
     kept.extend(["", "## Truncated", "", f"Brief exceeded {max_lines} lines. Regenerate with narrower scope."])
     return "\n".join(kept)
+
+
+def _excerpt(text: str, limit: int) -> str:
+    clean = text.strip()
+    if len(clean) <= limit:
+        return clean
+    return clean[:limit].rstrip() + "\n\n[truncated]"

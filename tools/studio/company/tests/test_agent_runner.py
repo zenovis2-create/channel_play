@@ -1,14 +1,20 @@
 from __future__ import annotations
 
 import json
+import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
-from tools.studio.company.agent_runner import collect_agent_adapter_state, run_agent_task
+import tools.studio.company.agent_runner as agent_runner_module
+from tools.studio.company.agent_runner import collect_agent_adapter_state, run_agent_task, run_agent_task_full_approval
 from tools.studio.company.planner import assign_task, plan_task
+from tools.studio.company.reports import create_review_checkpoint
 from tools.studio.company.sessions import start_session
 from tools.studio.company.state import load_task_board
+from tools.studio.company.verify import verify_task
+from tools.studio.company.workflow import run_orchestrator_workflow
 
 
 class AgentRunnerTests(unittest.TestCase):
@@ -79,7 +85,60 @@ class AgentRunnerTests(unittest.TestCase):
         task = load_task_board(self.root)["tasks"][0]
         self.assertEqual(task["last_tool"], "agy")
         self.assertEqual(task["agent_status"], "dry_run")
+        self.assertEqual(task["status"], "needs_review")
+        self.assertEqual(task["report"], report.relative_to(self.root).as_posix())
         self.assertEqual(task["agent_runs"][0]["mode"], "run")
+
+    def test_review_dry_run_moves_to_evidence_step(self) -> None:
+        start_session(self.root, "review smoke")
+        plan_task(self.root, "fix player movement")
+        assign_task(self.root, "task-0001", "unity_gameplay")
+
+        run_agent_task(self.root, "task-0001", dry_run=True)
+        report = run_agent_task(self.root, "task-0001", mode="review", dry_run=True)
+
+        task = load_task_board(self.root)["tasks"][0]
+        self.assertEqual(task["status"], "needs_evidence")
+        self.assertEqual(task["report"], report.relative_to(self.root).as_posix())
+        self.assertEqual(task["agent_runs"][-1]["mode"], "review")
+
+    def test_fast_workflow_closes_without_manual_evidence_attachment(self) -> None:
+        start_session(self.root, "full smoke")
+        plan_task(self.root, "fix player movement")
+        assign_task(self.root, "task-0001", "unity_gameplay")
+
+        run_agent_task(self.root, "task-0001", dry_run=True)
+        create_review_checkpoint(self.root, "task-0001")
+        verify_task(self.root, "task-0001")
+
+        task = load_task_board(self.root)["tasks"][0]
+        self.assertEqual(task["status"], "closed")
+        self.assertEqual(task["verification_status"], "passed")
+        self.assertTrue(task["evidence"])
+
+    def test_full_approval_agent_run_closes_task(self) -> None:
+        start_session(self.root, "full approval")
+        plan_task(self.root, "fix player movement")
+        assign_task(self.root, "task-0001", "unity_gameplay")
+
+        report, advance = run_agent_task_full_approval(self.root, "task-0001", dry_run=True)
+
+        task = load_task_board(self.root)["tasks"][0]
+        self.assertTrue(report.exists())
+        self.assertIsNotNone(advance)
+        self.assertEqual(task["status"], "closed")
+        self.assertEqual(task["verification_status"], "passed")
+        self.assertEqual(task["review_status"], "reviewed")
+
+    def test_orchestrator_workflow_runs_end_to_end(self) -> None:
+        report = run_orchestrator_workflow(self.root, "fix player movement", dry_run=True)
+
+        task = load_task_board(self.root)["tasks"][0]
+        self.assertTrue(report.exists())
+        self.assertEqual(task["status"], "closed")
+        self.assertEqual(task["verification_status"], "passed")
+        self.assertEqual(task["agent_runs"][0]["mode"], "run")
+        self.assertEqual(task["agent_runs"][-1]["mode"], "review")
 
     def test_adapter_state_creates_default_config(self) -> None:
         state = collect_agent_adapter_state(self.root)
@@ -88,9 +147,157 @@ class AgentRunnerTests(unittest.TestCase):
         self.assertTrue((self.root / "memory" / "company" / "tool_adapters.json").exists())
 
         config = json.loads((self.root / "memory" / "company" / "tool_adapters.json").read_text(encoding="utf-8"))
-        self.assertEqual(config["tools"]["claude"]["stdin"], "{prompt}")
+        self.assertNotIn("claude", config["tools"])
+        self.assertIn("claude", config["excluded_tools"])
+        self.assertEqual(config["review_tool"], "codex")
+        self.assertEqual(config["role_defaults"]["game_director"], "hermes")
+        self.assertEqual(config["role_defaults"]["critic_reviewer"], "codex")
+        self.assertEqual(config["role_defaults"]["production_planner"], "codex")
+        self.assertEqual(config["role_defaults"]["coding_specialist"], "codex")
+        self.assertEqual(config["role_defaults"]["toolchain_integrator"], "codex")
+        self.assertEqual(config["role_defaults"]["operator_broadcast_designer"], "hermes")
+        self.assertEqual(config["tools"]["codex"]["execution"], "codex_auto")
+        self.assertEqual(config["tools"]["codex"]["sdk_package"], "openai_codex")
+        self.assertIn("status", state["tools"]["codex"])
+        self.assertIn("defaultRoles", state["tools"]["codex"])
+        self.assertIn("primaryExecutor", state["tools"]["codex"])
         agy_argv = config["tools"]["agy"]["argv"]
         self.assertLess(agy_argv.index("--print-timeout"), agy_argv.index("--print"))
+
+    def test_codex_adapter_uses_python_sdk_when_available(self) -> None:
+        start_session(self.root, "sdk smoke")
+        plan_task(self.root, "fix player movement")
+        assign_task(self.root, "task-0001", "unity_gameplay")
+        sdk_status = {
+            "available": True,
+            "status": "available",
+            "package": "openai_codex",
+            "version": "0.1.0",
+            "origin": "/sdk",
+            "last_error": "",
+        }
+
+        with (
+            patch.object(agent_runner_module, "codex_sdk_status", return_value=sdk_status),
+            patch.object(
+                agent_runner_module,
+                "run_codex_sdk_turn",
+                return_value={
+                    "status": "ok",
+                    "exit": 0,
+                    "stdout": "SDK completed the task.\n",
+                    "stderr": "",
+                    "executor": "codex_sdk",
+                    "sdk": sdk_status,
+                },
+            ) as run_sdk,
+        ):
+            report = run_agent_task(self.root, "task-0001", tool_name="codex")
+
+        run_sdk.assert_called_once()
+        command = json.loads((report.parent / "command.json").read_text(encoding="utf-8"))
+        self.assertEqual(command["executor"], "codex_sdk")
+        self.assertEqual(command["sdk"]["package"], "openai_codex")
+        self.assertIn("SDK completed", (report.parent / "stdout.txt").read_text(encoding="utf-8"))
+        task = load_task_board(self.root)["tasks"][0]
+        self.assertEqual(task["last_tool"], "codex")
+        self.assertEqual(task["agent_status"], "ok")
+        self.assertEqual(task["status"], "needs_review")
+
+    def test_codex_adapter_falls_back_to_cli_when_sdk_auth_fails(self) -> None:
+        fake = self.root / "fake_codex.py"
+        fake.write_text(
+            "print('CLI fallback completed.')\n",
+            encoding="utf-8",
+        )
+        collect_agent_adapter_state(self.root)
+        adapter_config = json.loads((self.root / "memory" / "company" / "tool_adapters.json").read_text(encoding="utf-8"))
+        adapter_config["tools"]["codex"]["argv"] = [sys.executable, str(fake), "{prompt}"]
+        adapter_config["tools"]["codex"]["version_command"] = [sys.executable, str(fake), "--version"]
+        (self.root / "memory" / "company" / "tool_adapters.json").write_text(
+            json.dumps(adapter_config),
+            encoding="utf-8",
+        )
+        start_session(self.root, "sdk fallback")
+        plan_task(self.root, "fix player movement")
+        assign_task(self.root, "task-0001", "unity_gameplay")
+        sdk_status = {
+            "available": True,
+            "status": "available",
+            "package": "openai_codex",
+            "version": "0.1.0",
+            "origin": "/sdk",
+            "last_error": "",
+        }
+
+        with (
+            patch.object(agent_runner_module, "codex_sdk_status", return_value=sdk_status),
+            patch.object(
+                agent_runner_module,
+                "run_codex_sdk_turn",
+                return_value={
+                    "status": "auth_missing",
+                    "exit": 1,
+                    "stdout": "",
+                    "stderr": "Access token is unavailable.\n",
+                    "executor": "codex_sdk",
+                    "sdk": sdk_status,
+                },
+            ),
+        ):
+            report = run_agent_task(self.root, "task-0001", tool_name="codex")
+
+        command = json.loads((report.parent / "command.json").read_text(encoding="utf-8"))
+        self.assertEqual(command["executor"], "cli_fallback")
+        self.assertIn("CLI fallback completed", (report.parent / "stdout.txt").read_text(encoding="utf-8"))
+        task = load_task_board(self.root)["tasks"][0]
+        self.assertEqual(task["agent_status"], "ok")
+
+    def test_adapter_health_matrix_reports_version_path_and_roles(self) -> None:
+        fake = self.root / "fake_agent.py"
+        fake.write_text(
+            "import sys\n"
+            "if '--version' in sys.argv:\n"
+            "    print('fake-agent 1.0')\n",
+            encoding="utf-8",
+        )
+        (self.root / "memory" / "company" / "tool_adapters.json").write_text(
+            json.dumps(
+                {
+                    "version": 1,
+                    "default_tool": "fake",
+                    "review_tool": "fake",
+                    "default_timeout_seconds": 30,
+                    "role_defaults": {"unity_gameplay": "fake"},
+                    "tools": {
+                        "fake": {
+                            "enabled": True,
+                            "description": "Fake adapter",
+                            "argv": [sys.executable, str(fake), "{prompt}"],
+                            "timeout_seconds": 30,
+                            "version_command": [sys.executable, str(fake), "--version"],
+                        },
+                        "disabled_tool": {
+                            "enabled": False,
+                            "description": "Disabled adapter",
+                            "argv": [sys.executable, str(fake), "{prompt}"],
+                            "disabled_reason": "not used",
+                        },
+                    },
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        state = collect_agent_adapter_state(self.root)
+
+        fake_state = state["tools"]["fake"]
+        self.assertEqual(fake_state["status"], "available")
+        self.assertEqual(fake_state["version"], "fake-agent 1.0")
+        self.assertEqual(Path(fake_state["resolvedPath"]).resolve(), Path(sys.executable).resolve())
+        self.assertEqual(fake_state["defaultRoles"], ["unity_gameplay"])
+        self.assertEqual(state["tools"]["disabled_tool"]["status"], "disabled")
+        self.assertGreaterEqual(state["summary"]["available"], 1)
 
 
 if __name__ == "__main__":

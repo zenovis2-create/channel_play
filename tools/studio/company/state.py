@@ -39,6 +39,10 @@ class CompanyPaths:
         return self.memory_dir / "task_board.json"
 
     @property
+    def goals_json(self) -> Path:
+        return self.memory_dir / "goals.json"
+
+    @property
     def locks_json(self) -> Path:
         return self.memory_dir / "locks.json"
 
