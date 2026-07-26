@@ -19,7 +19,6 @@ namespace ChannelPlay.Gameplay
         private const string ExpectedCallback = "OnControllerColliderHit";
         private const float NormalStep = 0.16f;
         private const float ControlStep = 0.08f;
-        private const float FloorOffset = 0.08f;
         private const double RuntimeResolveTimeoutSeconds = 25d;
         private const double AnchorTimeoutSeconds = 15d;
         private const double OverallProofTimeoutSeconds = 90d;
@@ -502,8 +501,16 @@ namespace ChannelPlay.Gameplay
 
         private Vector3 PlayerPoint(Vector3 floorPoint)
         {
-            var halfHeight = controller == null ? 1f : controller.height * 0.5f;
-            return floorPoint + Vector3.up * (halfHeight + FloorOffset);
+            if (controller == null)
+                return floorPoint +
+                       Vector3.up *
+                       KhufuV13SubterraneanRouteContract.TraversalFloorOffset;
+            var scaleY = Mathf.Abs(controller.transform.lossyScale.y);
+            var bottomFromOrigin =
+                (controller.center.y - controller.height * 0.5f) * scaleY;
+            return floorPoint + Vector3.up *
+                (KhufuV13SubterraneanRouteContract.TraversalFloorOffset -
+                 bottomFromOrigin);
         }
 
         private void Teleport(Transform player, Vector3 position)

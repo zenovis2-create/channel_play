@@ -590,13 +590,33 @@ public static class ChannelPlayKhufuV13SubterraneanThresholdValidator
             result.Failures.Add("V13 passage clearance dimensions drifted.");
 
         Physics.SyncTransforms();
+        var playerController =
+            GameObject.Find("MVP_Player")?.GetComponent<CharacterController>();
+        if (playerController == null)
+            result.Failures.Add(
+                "V13 traversal CharacterController contract is missing.");
+        var playerScale = playerController == null
+            ? Vector3.one
+            : playerController.transform.lossyScale;
+        var playerRadius = playerController == null
+            ? 0.45f
+            : playerController.radius *
+              Mathf.Max(Mathf.Abs(playerScale.x), Mathf.Abs(playerScale.z));
+        var playerHeight = playerController == null
+            ? 2f
+            : Mathf.Max(playerController.height * Mathf.Abs(playerScale.y),
+                playerRadius * 2f);
         foreach (var point in ClearanceSamples(
                      KhufuV13SubterraneanRouteContract.RoundTripRoute(), 0.25f))
         {
             var hits = Physics.OverlapCapsule(
-                point + Vector3.up * 0.35f,
-                point + Vector3.up * 1.75f,
-                0.30f, ~0, QueryTriggerInteraction.Ignore);
+                point + Vector3.up *
+                (KhufuV13SubterraneanRouteContract.TraversalFloorOffset +
+                 playerRadius),
+                point + Vector3.up *
+                (KhufuV13SubterraneanRouteContract.TraversalFloorOffset +
+                 playerHeight - playerRadius),
+                playerRadius, ~0, QueryTriggerInteraction.Ignore);
             var owned = hits.Where(hit => hit.transform.IsChildOf(root))
                 .Select(hit => hit.name).Distinct(StringComparer.Ordinal)
                 .ToArray();

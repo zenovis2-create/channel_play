@@ -10,6 +10,7 @@ namespace ChannelPlay.Gameplay
         public const float JunctionTransitionEndRelease = 1.45f;
         public const float JunctionInnerWallRelease = 1.80f;
         public const float LandingRoofEndRelease = 1.55f;
+        public const float TraversalFloorOffset = 0.08f;
         public const float MaximumAnchorError = 0.40f;
         public const float MinimumGroundedRatio = 0.90f;
         public const float BoundaryStartDistance = 1.50f;
