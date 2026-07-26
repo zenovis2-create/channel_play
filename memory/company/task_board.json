@@ -230,7 +230,7 @@
     {
       "id": "task-0009",
       "request": "Truth Pen 원본 또는 명시적 라이선스 콘셉트 소스 준비 및 출처 기록",
-      "status": "assigned",
+      "status": "needs_review",
       "suggested_agent": "research_librarian",
       "suggested_reviewer": "critic_reviewer",
       "assigned_agent": "research_librarian",
@@ -242,11 +242,37 @@
       ],
       "required_evidence": "NotebookLM/Maru cited research brief",
       "created_at": "2026-07-26T18:07:35+09:00",
-      "updated_at": "2026-07-26T18:16:09+09:00",
+      "updated_at": "2026-07-26T18:32:14+09:00",
       "work_order": "memory/sessions/20260726-181451-truth-pen/work_orders/task-0009-research_librarian.md",
-      "report": null,
+      "report": "memory/sessions/20260726-181451-truth-pen/agent_reports/task-0009-research_librarian.md",
       "verification": null,
-      "session": "20260726-181451-truth-pen"
+      "session": "20260726-181451-truth-pen",
+      "agent_runs": [
+        {
+          "tool": "notebooklm",
+          "mode": "run",
+          "status": "failed",
+          "path": "runs/agent-notebooklm-task-0009-2026-07-26t18-20-46-09-00/agent_run.md",
+          "created_at": "2026-07-26T18:20:56+09:00"
+        },
+        {
+          "tool": "agy",
+          "mode": "run",
+          "status": "failed",
+          "path": "runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md",
+          "created_at": "2026-07-26T18:24:38+09:00"
+        }
+      ],
+      "last_tool": "agy",
+      "last_agent_run": "runs/agent-agy-task-0009-2026-07-26t18-23-47-09-00/agent_run.md",
+      "agent_status": "failed",
+      "evidence": [
+        {
+          "path": "docs/research/truth_pen_source_license_brief.md",
+          "note": "Official OpenAI and CC0 controlling terms; retrieved 2026-07-26; fail-closed source strategy for critic review",
+          "attached_at": "2026-07-26T18:32:10+09:00"
+        }
+      ]
     }
   ]
 }

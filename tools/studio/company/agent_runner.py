@@ -356,6 +356,8 @@ def _probe_adapter_version(adapter: dict[str, Any], resolved_path: str) -> tuple
             command,
             capture_output=True,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             check=False,
             timeout=timeout,
         )
@@ -605,6 +607,8 @@ def _execute(command: list[str], root: Path, stdin: str | None, timeout: int, dr
             input=stdin,
             capture_output=True,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             check=False,
             timeout=timeout,
             env=env,
@@ -617,7 +621,7 @@ def _execute(command: list[str], root: Path, stdin: str | None, timeout: int, dr
             "stderr": _coerce_output(exc.stderr) + f"\nTimed out after {timeout}s.\n",
             "executor": "cli",
         }
-    status = "ok" if completed.returncode == 0 else "failed"
+    status = _process_status(completed.returncode, completed.stdout, completed.stderr)
     return {
         "status": status,
         "exit": completed.returncode,
@@ -625,6 +629,23 @@ def _execute(command: list[str], root: Path, stdin: str | None, timeout: int, dr
         "stderr": completed.stderr,
         "executor": "cli",
     }
+
+
+def _process_status(returncode: int, stdout: str, stderr: str) -> str:
+    if returncode != 0:
+        return "failed"
+    if stdout.strip():
+        return "ok"
+
+    error_text = stderr.casefold()
+    no_output_failures = (
+        "no output produced",
+        "auto-denied",
+        "permission denied",
+    )
+    if any(marker in error_text for marker in no_output_failures):
+        return "failed"
+    return "ok"
 
 
 def _write_run_report(
