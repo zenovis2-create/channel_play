@@ -1,6 +1,6 @@
 # Session Summary
 
-Status: ready_for_critic_review
+Status: critic_changes_required
 
 ## Result
 
@@ -15,5 +15,7 @@ Status: ready_for_critic_review
 
 ## Next Handoff
 
-Run `critic_reviewer` on `task-0009`. If accepted, pass the reviewed brief and
-completed provenance record to `asset_factory`.
+Return `task-0009` to `research_librarian` for remediation. Resolve or formally
+replace the NotebookLM/Maru evidence requirement, document the actual rights
+chain, split pre-generation and pre-import gates, and narrow provider-policy
+claims. `asset_factory` remains blocked until a new critic approval.

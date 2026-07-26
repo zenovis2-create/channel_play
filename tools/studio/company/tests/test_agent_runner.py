@@ -310,7 +310,7 @@ class AgentRunnerTests(unittest.TestCase):
             patch.object(
                 agent_runner_module.shutil,
                 "which",
-                return_value="fake-agent",
+                return_value=r"C:\Tools\fake-agent.cmd",
             ),
             patch.object(
                 agent_runner_module.subprocess,
@@ -328,6 +328,7 @@ class AgentRunnerTests(unittest.TestCase):
 
         self.assertEqual(result["status"], "ok")
         self.assertIn("✓", result["stdout"])
+        self.assertEqual(run.call_args.args[0][0], r"C:\Tools\fake-agent.cmd")
         self.assertEqual(run.call_args.kwargs["encoding"], "utf-8")
         self.assertEqual(run.call_args.kwargs["errors"], "replace")
 
@@ -363,6 +364,91 @@ class AgentRunnerTests(unittest.TestCase):
 
         self.assertEqual(result["status"], "failed")
         self.assertEqual(result["exit"], 0)
+
+    def test_changes_required_review_blocks_task(self) -> None:
+        start_session(self.root, "review verdict")
+        plan_task(self.root, "review source licensing")
+        assign_task(self.root, "task-0001", "unity_gameplay")
+        task = load_task_board(self.root)["tasks"][0]
+        report = self.root / "runs" / "review" / "agent_run.md"
+        report.parent.mkdir(parents=True)
+        report.write_text("# Agent Run\n", encoding="utf-8")
+
+        agent_runner_module._update_task_after_run(
+            self.root,
+            task,
+            "codex",
+            "review",
+            {
+                "status": "ok",
+                "exit": 0,
+                "stdout": "Verdict: CHANGES REQUIRED\nAsset gate: blocked.",
+                "stderr": "",
+            },
+            report,
+        )
+
+        updated = load_task_board(self.root)["tasks"][0]
+        self.assertEqual(updated["status"], "blocked")
+        self.assertEqual(updated["review_status"], "changes_required")
+        self.assertEqual(updated["reviewer"], "critic_reviewer")
+        self.assertIn("Critic review requested changes", updated["blocked_reason"])
+
+    def test_review_outcome_requires_explicit_verdict(self) -> None:
+        self.assertEqual(
+            agent_runner_module._review_outcome("Verdict: APPROVED"),
+            "approved",
+        )
+        self.assertEqual(
+            agent_runner_module._review_outcome("Review completed without a verdict."),
+            "unresolved",
+        )
+        self.assertEqual(
+            agent_runner_module._review_outcome(
+                "The reviewer must choose APPROVED or CHANGES REQUIRED."
+            ),
+            "unresolved",
+        )
+
+    def test_full_approval_stops_on_changes_required_review(self) -> None:
+        start_session(self.root, "review auto-advance guard")
+        plan_task(self.root, "review source licensing")
+        assign_task(self.root, "task-0001", "unity_gameplay")
+        task = load_task_board(self.root)["tasks"][0]
+        report = self.root / "runs" / "review" / "agent_run.md"
+        report.parent.mkdir(parents=True)
+        report.write_text("# Agent Run\n", encoding="utf-8")
+        agent_runner_module._update_task_after_run(
+            self.root,
+            task,
+            "codex",
+            "review",
+            {
+                "status": "ok",
+                "exit": 0,
+                "stdout": "Verdict: CHANGES REQUIRED",
+                "stderr": "",
+            },
+            report,
+        )
+
+        with (
+            patch.object(
+                agent_runner_module,
+                "run_agent_task",
+                return_value=report,
+            ),
+            patch.object(agent_runner_module, "advance_task") as advance_task,
+        ):
+            actual_report, advance = run_agent_task_full_approval(
+                self.root,
+                "task-0001",
+                mode="review",
+            )
+
+        self.assertEqual(actual_report, report)
+        self.assertIsNone(advance)
+        advance_task.assert_not_called()
 
 
 if __name__ == "__main__":

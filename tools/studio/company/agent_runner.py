@@ -509,6 +509,8 @@ def run_agent_task_full_approval(
     task = find_task(root, task_id)
     if task.get("agent_status") not in {"ok", "dry_run"}:
         return report, None
+    if mode == "review" and task.get("agent_status") == "ok" and task.get("review_status") != "approved":
+        return report, None
     advance = advance_task(root, task_id)
     return report, advance
 
@@ -580,7 +582,8 @@ def _execute(command: list[str], root: Path, stdin: str | None, timeout: int, dr
     if not command:
         raise CompanyError("Adapter argv is empty.")
     executable = command[0]
-    available = shutil.which(executable) is not None
+    resolved_executable = shutil.which(executable)
+    available = resolved_executable is not None
     if dry_run:
         return {
             "status": "dry_run",
@@ -600,9 +603,10 @@ def _execute(command: list[str], root: Path, stdin: str | None, timeout: int, dr
 
     env = os.environ.copy()
     env["CHANNEL_PLAY_ROOT"] = str(root)
+    resolved_command = [str(resolved_executable), *command[1:]]
     try:
         completed = subprocess.run(
-            command,
+            resolved_command,
             cwd=root,
             input=stdin,
             capture_output=True,
@@ -648,6 +652,20 @@ def _process_status(returncode: int, stdout: str, stderr: str) -> str:
     return "ok"
 
 
+def _review_outcome(stdout: str) -> str:
+    verdict_prefixes = ("verdict:", "판정:", "review outcome:")
+    for raw_line in stdout.splitlines():
+        line = raw_line.strip().casefold()
+        if not line.startswith(verdict_prefixes):
+            continue
+        verdict = line.split(":", 1)[1].replace("*", "").replace("`", "").strip()
+        if verdict.startswith(("changes required", "changes requested", "changes_requested", "변경 필요", "수정 필요")):
+            return "changes_required"
+        if verdict.startswith(("approved", "approve", "승인", "no changes required")):
+            return "approved"
+    return "unresolved"
+
+
 def _write_run_report(
     root: Path,
     run_dir: Path,
@@ -666,6 +684,11 @@ def _write_run_report(
         f"Executor: {result.get('executor', 'cli')}",
         f"Mode: {mode}",
         f"Status: {result['status']}",
+        *(
+            [f"Review outcome: {_review_outcome(result['stdout'])}"]
+            if mode == "review" and result["status"] == "ok"
+            else []
+        ),
         f"Exit: {result['exit']}",
         f"Created: {now_iso()}",
         "",
@@ -715,6 +738,11 @@ def _write_session_report(
                 f"Executor: {result.get('executor', 'cli')}",
                 f"Mode: {mode}",
                 f"Status: {result['status']}",
+                *(
+                    [f"Review outcome: {_review_outcome(result['stdout'])}"]
+                    if mode == "review" and result["status"] == "ok"
+                    else []
+                ),
                 f"Created: {now_iso()}",
                 "",
                 "## Summary",
@@ -757,7 +785,19 @@ def _update_task_after_run(root: Path, task: dict[str, Any], tool: str, mode: st
         "agent_status": result["status"],
     }
     if result["status"] in {"ok", "dry_run"}:
-        updates["status"] = "needs_evidence" if mode == "review" else "needs_review"
+        if mode == "review" and result["status"] == "ok":
+            review_outcome = _review_outcome(result["stdout"])
+            updates["review_status"] = review_outcome
+            updates["reviewer"] = str(task.get("suggested_reviewer") or "critic_reviewer")
+            if review_outcome == "approved":
+                updates["status"] = "needs_evidence"
+            elif review_outcome == "changes_required":
+                updates["status"] = "blocked"
+                updates["blocked_reason"] = f"Critic review requested changes; see {rel(root, report)}."
+            else:
+                updates["status"] = "needs_review"
+        else:
+            updates["status"] = "needs_evidence" if mode == "review" else "needs_review"
         updates["report"] = rel(root, report)
     elif result["status"] in {"failed", "blocked", "timeout", "auth_missing"}:
         updates["status"] = "blocked"
