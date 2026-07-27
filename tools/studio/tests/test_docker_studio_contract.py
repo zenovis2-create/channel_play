@@ -146,6 +146,10 @@ class DockerStudioContractTests(unittest.TestCase):
             "data-procurement-answer-apply-panel",
             checklist,
         )
+        self.assertIn(
+            "data-procurement-change-summary",
+            checklist,
+        )
         self.assertIn("data-procurement-apply-owner-check", checklist)
         self.assertIn("data-procurement-apply-contact-check", checklist)
         self.assertIn(
@@ -164,6 +168,7 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn(".game-procurement-answer-preview", self.style)
         self.assertIn(".game-procurement-answer-result", self.style)
         self.assertIn(".game-procurement-answer-apply", self.style)
+        self.assertIn(".game-procurement-change-summary", self.style)
         self.assertIn(
             ".game-procurement-answer-apply[hidden]",
             self.style,
@@ -260,6 +265,10 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn("resultNode.replaceChildren()", helper)
         self.assertIn('document.createElement("strong")', helper)
         self.assertIn('document.createElement("li")', helper)
+        self.assertIn("preview.changedFields", helper)
+        self.assertIn("preview.unchangedFields", helper)
+        self.assertIn("preview.protectedStatePreserved", helper)
+        self.assertIn("item.textContent = field", helper)
         self.assertIn("item.textContent = String(error", helper)
         self.assertIn('"연락 허가 아님"', helper)
         self.assertIn('"영수증 생성 안 함"', helper)
@@ -292,6 +301,10 @@ class DockerStudioContractTests(unittest.TestCase):
         )
         self.assertIn("preview.applyGrant", helper)
         self.assertIn("preview.applyGrantExpiresInSeconds", helper)
+        self.assertIn("summary.changeCount > 0", helper)
+        self.assertIn("summary.changedFields.length", helper)
+        self.assertIn("summary.unchangedFields.length", helper)
+        self.assertIn("controls.changeSummary", helper)
         self.assertIn("window.setTimeout(() =>", helper)
         self.assertIn("window.clearTimeout", helper)
         self.assertIn("Date.now() < procurementApplyGrant.expiresAt", helper)

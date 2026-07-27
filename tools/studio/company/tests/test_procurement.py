@@ -103,6 +103,14 @@ class ProcurementTests(unittest.TestCase):
         self.assertEqual(result["expectedAnswerCount"], 16)
         self.assertEqual(result["acceptedFields"], list(OWNER_DECISION_FIELDS))
         self.assertEqual(result["missingFields"], [])
+        self.assertEqual(result["changeCount"], 16)
+        self.assertEqual(result["unchangedCount"], 0)
+        self.assertEqual(
+            result["changedFields"],
+            list(OWNER_DECISION_FIELDS),
+        )
+        self.assertEqual(result["unchangedFields"], [])
+        self.assertTrue(result["protectedStatePreserved"])
         self.assertEqual(result["errors"], [])
         self.assertEqual(manifest.read_bytes(), before)
         self.assertFalse((self.root / "runs").exists())
@@ -127,10 +135,93 @@ class ProcurementTests(unittest.TestCase):
             "owner.governing_jurisdiction",
             result["missingFields"],
         )
+        self.assertEqual(result["changeCount"], 1)
+        self.assertEqual(result["unchangedCount"], 0)
+        self.assertEqual(
+            result["changedFields"],
+            ["owner.governing_jurisdiction"],
+        )
+        self.assertEqual(result["unchangedFields"], [])
+        self.assertTrue(result["protectedStatePreserved"])
         self.assertIn(
             "decision_status must be approved_for_proposal_outreach",
             result["errors"],
         )
+        self.assertEqual(manifest.read_bytes(), before)
+        self.assertFalse((self.root / "runs").exists())
+
+    def test_answer_preview_reports_unchanged_fields_without_values(
+        self,
+    ) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        before = manifest.read_bytes()
+
+        result = preview_procurement_answers(
+            self.root,
+            "truth_pen",
+            {"outreach.authorized": False},
+        )
+
+        self.assertFalse(result["valid"])
+        self.assertEqual(result["changeCount"], 0)
+        self.assertEqual(result["unchangedCount"], 1)
+        self.assertEqual(result["changedFields"], [])
+        self.assertEqual(
+            result["unchangedFields"],
+            ["outreach.authorized"],
+        )
+        self.assertTrue(result["protectedStatePreserved"])
+        self.assertEqual(manifest.read_bytes(), before)
+        self.assertFalse((self.root / "runs").exists())
+
+    def test_answer_preview_change_summary_is_json_type_aware(self) -> None:
+        procurement_decision_init(self.root, "truth_pen")
+
+        result = preview_procurement_answers(
+            self.root,
+            "truth_pen",
+            {"outreach.authorized": 0},
+        )
+
+        self.assertFalse(result["valid"])
+        self.assertEqual(result["changeCount"], 1)
+        self.assertEqual(result["unchangedCount"], 0)
+        self.assertEqual(
+            result["changedFields"],
+            ["outreach.authorized"],
+        )
+
+    def test_answer_preview_noop_is_valid_but_redacts_all_values(
+        self,
+    ) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        complete = self._complete_decision(manifest)
+        complete["owner"]["secure_record_id"] = (
+            "vault:123e4567-e89b-42d3-a456-426614174000"
+        )
+        self._write(manifest, complete)
+        answers = self._owner_answers(complete)
+        before = manifest.read_bytes()
+
+        result = preview_procurement_answers(
+            self.root,
+            "truth_pen",
+            answers,
+        )
+        encoded = json.dumps(result, ensure_ascii=False)
+
+        self.assertTrue(result["valid"], result["errors"])
+        self.assertEqual(result["changeCount"], 0)
+        self.assertEqual(result["unchangedCount"], 16)
+        self.assertEqual(result["changedFields"], [])
+        self.assertEqual(
+            result["unchangedFields"],
+            list(OWNER_DECISION_FIELDS),
+        )
+        self.assertTrue(result["protectedStatePreserved"])
+        self.assertNotIn("123e4567-e89b-42d3-a456-426614174000", encoded)
+        self.assertNotIn("project_owner", encoded)
+        self.assertNotIn("cynthia_ignacio", encoded)
         self.assertEqual(manifest.read_bytes(), before)
         self.assertFalse((self.root / "runs").exists())
 
@@ -269,6 +360,33 @@ class ProcurementTests(unittest.TestCase):
                 "0" * 64,
             )
 
+        self.assertEqual(manifest.read_bytes(), before)
+        self.assertFalse((self.root / "runs").exists())
+
+    def test_apply_answers_rejects_noop_without_writing(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        complete = self._complete_decision(manifest)
+        self._write(manifest, complete)
+        answers = self._owner_answers(complete)
+        preview = preview_procurement_answers(
+            self.root,
+            "truth_pen",
+            answers,
+        )
+        before = manifest.read_bytes()
+
+        with patch(
+            "tools.studio.company.procurement.os.replace",
+        ) as replace:
+            with self.assertRaisesRegex(CompanyError, "do not change"):
+                apply_procurement_answers(
+                    self.root,
+                    "truth_pen",
+                    answers,
+                    preview["manifestSha256"],
+                )
+
+        replace.assert_not_called()
         self.assertEqual(manifest.read_bytes(), before)
         self.assertFalse((self.root / "runs").exists())
 

@@ -446,6 +446,8 @@ def _handler(
                         result["valid"]
                         and result["answerCount"]
                         == result["expectedAnswerCount"]
+                        and result["changeCount"] > 0
+                        and result["protectedStatePreserved"]
                     ):
                         answer_digest = procurement_answer_digest(answers)
                         result["applyGrant"] = procurement_grants.mint(
@@ -496,6 +498,8 @@ def _handler(
                             not preview["valid"]
                             or preview["answerCount"]
                             != preview["expectedAnswerCount"]
+                            or preview["changeCount"] <= 0
+                            or not preview["protectedStatePreserved"]
                             or preview["manifestSha256"]
                             != expected_digest
                         ):

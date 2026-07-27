@@ -103,6 +103,15 @@ OWNER_DECISION_FIELDS = (
     "outreach.candidate_ids",
     "privacy.sensitive_data_stored_outside_repo",
 )
+_FIXED_SAFETY_FIELDS = (
+    "outreach.proposal_only",
+    "outreach.source_creation_blocked_until_signed_agreement_and_gate_a_pass",
+    "privacy.private_identity_documents_in_repo",
+    "privacy.tax_data_in_repo",
+    "privacy.banking_data_in_repo",
+    "privacy.payment_credentials_in_repo",
+)
+_MISSING_DECISION_VALUE = object()
 
 
 def procurement_decision_init(root: Path, asset_id: str) -> Path:
@@ -177,12 +186,17 @@ def preview_procurement_answers(
     """Validate owner answers in memory without changing authorization."""
     clean = clean_asset_id(asset_id)
     _require_supported_tracked_asset(root, clean)
-    current, accepted_fields, _, errors = _prepare_answer_candidate(
+    current, accepted_fields, candidate, errors = _prepare_answer_candidate(
         root,
         clean,
         answers,
     )
-    return _preview_result(current, accepted_fields, errors)
+    return _preview_result(
+        current,
+        accepted_fields,
+        candidate,
+        errors,
+    )
 
 
 def procurement_answer_digest(answers: object) -> str:
@@ -236,6 +250,19 @@ def apply_procurement_answers(
     ):
         raise CompanyError(
             "Owner answers must pass a complete preview before saving."
+        )
+    changed_fields, _, protected_state_preserved = _answer_change_summary(
+        current,
+        accepted_fields,
+        candidate,
+    )
+    if not protected_state_preserved:
+        raise CompanyError(
+            "Protected procurement state must remain unchanged."
+        )
+    if not changed_fields:
+        raise CompanyError(
+            "Owner answers do not change the current manifest."
         )
 
     current_digest = str(current.get("manifest_sha256") or "")
@@ -627,6 +654,72 @@ def _set_decision_field(data: dict, field: str, value: object) -> None:
     target[key] = value
 
 
+def _decision_field_value(data: dict, field: str) -> object:
+    if "." not in field:
+        return data.get(field, _MISSING_DECISION_VALUE)
+    section, key = field.split(".", 1)
+    target = data.get(section)
+    if not isinstance(target, dict):
+        return _MISSING_DECISION_VALUE
+    return target.get(key, _MISSING_DECISION_VALUE)
+
+
+def _json_values_equal(left: object, right: object) -> bool:
+    if type(left) is not type(right):
+        return False
+    if isinstance(left, dict):
+        return (
+            left.keys() == right.keys()
+            and all(
+                _json_values_equal(left[key], right[key])
+                for key in left
+            )
+        )
+    if isinstance(left, list):
+        return (
+            len(left) == len(right)
+            and all(
+                _json_values_equal(left_item, right_item)
+                for left_item, right_item in zip(left, right)
+            )
+        )
+    return left == right
+
+
+def _answer_change_summary(
+    current: dict,
+    accepted_fields: list[str],
+    candidate: dict,
+) -> tuple[list[str], list[str], bool]:
+    current_data = current.get("data")
+    if not isinstance(current_data, dict) or not candidate:
+        return [], [], False
+
+    changed_fields = [
+        field
+        for field in accepted_fields
+        if not _json_values_equal(
+            _decision_field_value(current_data, field),
+            _decision_field_value(candidate, field),
+        )
+    ]
+    unchanged_fields = [
+        field
+        for field in accepted_fields
+        if field not in changed_fields
+    ]
+    protected_state_preserved = (
+        current_data.get("records", _MISSING_DECISION_VALUE)
+        == candidate.get("records", _MISSING_DECISION_VALUE)
+        and all(
+            _decision_field_value(current_data, field)
+            == _decision_field_value(candidate, field)
+            for field in _FIXED_SAFETY_FIELDS
+        )
+    )
+    return changed_fields, unchanged_fields, protected_state_preserved
+
+
 def _redact_preview_error(error: str) -> str:
     if error.startswith(
         "outreach.candidate_ids contains unknown candidates:"
@@ -638,6 +731,7 @@ def _redact_preview_error(error: str) -> str:
 def _preview_result(
     current: dict,
     accepted_fields: list[str],
+    candidate: dict,
     errors: list[str],
 ) -> dict:
     missing_fields = [
@@ -645,6 +739,15 @@ def _preview_result(
         for field in OWNER_DECISION_FIELDS
         if field not in accepted_fields
     ]
+    (
+        changed_fields,
+        unchanged_fields,
+        protected_state_preserved,
+    ) = _answer_change_summary(
+        current,
+        accepted_fields,
+        candidate,
+    )
     return {
         "previewOnly": True,
         "valid": not errors,
@@ -654,6 +757,11 @@ def _preview_result(
         "expectedAnswerCount": len(OWNER_DECISION_FIELDS),
         "acceptedFields": accepted_fields,
         "missingFields": missing_fields,
+        "changeCount": len(changed_fields),
+        "unchangedCount": len(unchanged_fields),
+        "changedFields": changed_fields,
+        "unchangedFields": unchanged_fields,
+        "protectedStatePreserved": protected_state_preserved,
         "errorCount": len(errors),
         "errors": errors,
         "manifestSha256": str(current.get("manifest_sha256") or ""),

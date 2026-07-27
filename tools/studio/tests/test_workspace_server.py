@@ -625,7 +625,56 @@ class WorkspaceServerTests(unittest.TestCase):
             self.assertFalse(result["contactAuthorized"])
             self.assertFalse(result["receiptCreated"])
             self.assertEqual(result["answerCount"], 1)
+            self.assertEqual(result["changeCount"], 1)
+            self.assertEqual(result["unchangedCount"], 0)
+            self.assertEqual(
+                result["changedFields"],
+                ["owner.governing_jurisdiction"],
+            )
+            self.assertTrue(result["protectedStatePreserved"])
             self.assertNotIn("applyGrant", result)
+            self.assertEqual(manifest.read_bytes(), before)
+            self.assertFalse((self.root / "runs").exists())
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=2)
+
+    def test_procurement_noop_preview_does_not_mint_apply_grant(
+        self,
+    ) -> None:
+        manifest = self._write_procurement_fixture()
+        answers = self._complete_procurement_answers()
+        self._write_procurement_answers(manifest, answers)
+        before = manifest.read_bytes()
+        server, thread, base = self._start_server("test-token")
+        try:
+            result = self._post_procurement_preview(
+                base,
+                token="test-token",
+                answers=answers,
+            )
+            encoded = json.dumps(result, ensure_ascii=False)
+
+            self.assertTrue(result["valid"], result["errors"])
+            self.assertEqual(result["changeCount"], 0)
+            self.assertEqual(result["unchangedCount"], 16)
+            self.assertEqual(result["changedFields"], [])
+            self.assertTrue(result["protectedStatePreserved"])
+            self.assertNotIn("applyGrant", result)
+            self.assertNotIn("550e8400-e29b-41d4-a716-446655440000", encoded)
+            self.assertNotIn("cynthia_ignacio", encoded)
+
+            with self.assertRaises(urllib.error.HTTPError) as noop:
+                self._post_procurement_apply(
+                    base,
+                    token="test-token",
+                    answers=answers,
+                    grant="not-issued",
+                    manifest_sha256=result["manifestSha256"],
+                )
+            self.assertEqual(noop.exception.code, 400)
+            noop.exception.close()
             self.assertEqual(manifest.read_bytes(), before)
             self.assertFalse((self.root / "runs").exists())
         finally:
@@ -986,6 +1035,23 @@ class WorkspaceServerTests(unittest.TestCase):
             / "truth_pen_artist_procurement_packet.md"
         ).write_text("# Packet\n", encoding="utf-8")
         return procurement_decision_init(self.root, "truth_pen")
+
+    @staticmethod
+    def _write_procurement_answers(
+        manifest: Path,
+        answers: dict,
+    ) -> None:
+        data = json.loads(manifest.read_text(encoding="utf-8"))
+        for field, value in answers.items():
+            if "." not in field:
+                data[field] = value
+                continue
+            section, key = field.split(".", 1)
+            data[section][key] = value
+        manifest.write_text(
+            json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
 
     @staticmethod
     def _complete_procurement_answers() -> dict:
