@@ -2,9 +2,13 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import math
+import os
 import re
+import stat
+import tempfile
 from copy import deepcopy
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -173,47 +177,94 @@ def preview_procurement_answers(
     """Validate owner answers in memory without changing authorization."""
     clean = clean_asset_id(asset_id)
     _require_supported_tracked_asset(root, clean)
-    if not isinstance(answers, dict):
-        raise CompanyError("Procurement preview answers must be a JSON object.")
-
-    current = evaluate_procurement_outreach(root, clean)
-    current_data = current.get("data")
-    if not isinstance(current_data, dict) or not current_data:
-        return _preview_result(
-            current,
-            [],
-            [
-                "current procurement manifest must be valid JSON before "
-                "answer preview"
-            ],
-        )
-
-    allowed = set(OWNER_DECISION_FIELDS)
-    accepted_fields = [
-        field for field in OWNER_DECISION_FIELDS if field in answers
-    ]
-    unsupported_count = sum(
-        1
-        for field in answers
-        if not isinstance(field, str) or field not in allowed
+    current, accepted_fields, _, errors = _prepare_answer_candidate(
+        root,
+        clean,
+        answers,
     )
-    errors: list[str] = []
-    if unsupported_count:
-        errors.append(
-            "answers contain "
-            f"{unsupported_count} unsupported field(s); only canonical owner "
-            "decision fields are allowed"
-        )
-    if _contains_nonfinite(answers):
-        errors.append("answers contain a non-finite numeric value")
-
-    candidate = deepcopy(current_data)
-    for field in accepted_fields:
-        _set_decision_field(candidate, field, deepcopy(answers[field]))
-    validation_errors: list[str] = []
-    _validate_decision(root, clean, candidate, validation_errors)
-    errors.extend(_redact_preview_error(error) for error in validation_errors)
     return _preview_result(current, accepted_fields, errors)
+
+
+def procurement_answer_digest(answers: object) -> str:
+    """Hash exactly the canonical owner answers without retaining them."""
+    if not isinstance(answers, dict):
+        raise CompanyError("Procurement answers must be a JSON object.")
+    if (
+        len(answers) != len(OWNER_DECISION_FIELDS)
+        or set(answers) != set(OWNER_DECISION_FIELDS)
+    ):
+        raise CompanyError(
+            "Procurement answers must contain every canonical owner field."
+        )
+    canonical = {
+        field: answers[field]
+        for field in OWNER_DECISION_FIELDS
+    }
+    try:
+        encoded = json.dumps(
+            canonical,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+            allow_nan=False,
+        ).encode("utf-8")
+    except (TypeError, ValueError) as exc:
+        raise CompanyError(
+            "Procurement answers must use finite JSON values."
+        ) from exc
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def apply_procurement_answers(
+    root: Path,
+    asset_id: str,
+    answers: object,
+    expected_manifest_sha256: str,
+) -> dict:
+    """Atomically save validated owner answers without creating a receipt."""
+    clean = clean_asset_id(asset_id)
+    _require_supported_tracked_asset(root, clean)
+    current, accepted_fields, candidate, errors = _prepare_answer_candidate(
+        root,
+        clean,
+        answers,
+    )
+    if (
+        errors
+        or len(accepted_fields) != len(OWNER_DECISION_FIELDS)
+        or not candidate
+    ):
+        raise CompanyError(
+            "Owner answers must pass a complete preview before saving."
+        )
+
+    current_digest = str(current.get("manifest_sha256") or "")
+    if (
+        not expected_manifest_sha256
+        or current_digest != expected_manifest_sha256
+    ):
+        raise CompanyError(
+            "Procurement manifest changed; run the preview again."
+        )
+    manifest = procurement_manifest_path(root, clean)
+    if (
+        not manifest.is_file()
+        or sha256_gate_manifest(manifest) != expected_manifest_sha256
+    ):
+        raise CompanyError(
+            "Procurement manifest changed; run the preview again."
+        )
+
+    _write_json_atomic(manifest, candidate)
+    saved_digest = sha256_gate_manifest(manifest)
+    return {
+        "saved": True,
+        "contactAuthorized": False,
+        "receiptCreated": False,
+        "manifest": manifest.relative_to(root).as_posix(),
+        "manifestSha256": saved_digest,
+        "nextCommand": "asset.procurementCheck",
+    }
 
 
 def procurement_manifest_path(root: Path, asset_id: str) -> Path:
@@ -515,6 +566,55 @@ def _contains_nonfinite(value: object) -> bool:
     return False
 
 
+def _prepare_answer_candidate(
+    root: Path,
+    asset_id: str,
+    answers: object,
+) -> tuple[dict, list[str], dict, list[str]]:
+    if not isinstance(answers, dict):
+        raise CompanyError("Procurement preview answers must be a JSON object.")
+
+    current = evaluate_procurement_outreach(root, asset_id)
+    current_data = current.get("data")
+    if not isinstance(current_data, dict) or not current_data:
+        return (
+            current,
+            [],
+            {},
+            [
+                "current procurement manifest must be valid JSON before "
+                "answer preview"
+            ],
+        )
+
+    allowed = set(OWNER_DECISION_FIELDS)
+    accepted_fields = [
+        field for field in OWNER_DECISION_FIELDS if field in answers
+    ]
+    unsupported_count = sum(
+        1
+        for field in answers
+        if not isinstance(field, str) or field not in allowed
+    )
+    errors: list[str] = []
+    if unsupported_count:
+        errors.append(
+            "answers contain "
+            f"{unsupported_count} unsupported field(s); only canonical owner "
+            "decision fields are allowed"
+        )
+    if _contains_nonfinite(answers):
+        errors.append("answers contain a non-finite numeric value")
+
+    candidate = deepcopy(current_data)
+    for field in accepted_fields:
+        _set_decision_field(candidate, field, deepcopy(answers[field]))
+    validation_errors: list[str] = []
+    _validate_decision(root, asset_id, candidate, validation_errors)
+    errors.extend(_redact_preview_error(error) for error in validation_errors)
+    return current, accepted_fields, candidate, errors
+
+
 def _set_decision_field(data: dict, field: str, value: object) -> None:
     if "." not in field:
         data[field] = value
@@ -637,6 +737,38 @@ def _write_json(path: Path, data: dict) -> None:
         json.dumps(data, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
+
+
+def _write_json_atomic(path: Path, data: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+    original_mode = (
+        stat.S_IMODE(path.stat().st_mode)
+        if path.exists()
+        else None
+    )
+    temporary_path: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            newline="\n",
+            prefix=f".{path.name}.",
+            suffix=".tmp",
+            dir=path.parent,
+            delete=False,
+        ) as handle:
+            temporary_path = Path(handle.name)
+            handle.write(payload)
+            handle.flush()
+            os.fsync(handle.fileno())
+        if original_mode is not None:
+            os.chmod(temporary_path, original_mode)
+        os.replace(temporary_path, path)
+        temporary_path = None
+    finally:
+        if temporary_path is not None:
+            temporary_path.unlink(missing_ok=True)
 
 
 def _result(

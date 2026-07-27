@@ -1007,6 +1007,90 @@ main {
   padding-left: 20px;
 }
 
+.game-procurement-answer-apply[hidden] {
+  display: none;
+}
+
+.game-procurement-answer-apply {
+  background: #ffffff;
+  border: 1px dashed var(--line-strong);
+  border-radius: calc(var(--radius) - 4px);
+  display: grid;
+  gap: 9px;
+  padding: 10px;
+}
+
+.game-procurement-answer-apply-head {
+  display: grid;
+  gap: 3px;
+}
+
+.game-procurement-answer-apply-head span {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.game-procurement-answer-apply-head strong {
+  font-size: 13px;
+}
+
+.game-procurement-answer-apply-head small,
+.game-procurement-answer-apply label,
+.game-procurement-answer-apply-actions span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.game-procurement-answer-apply-head em {
+  color: #47586d;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.game-procurement-answer-apply > label:not(
+  .game-procurement-answer-confirmation
+) {
+  align-items: start;
+  display: flex;
+  gap: 7px;
+}
+
+.game-procurement-answer-apply input[type="checkbox"] {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  width: auto;
+}
+
+.game-procurement-answer-confirmation {
+  display: grid;
+  gap: 5px;
+}
+
+.game-procurement-answer-confirmation code {
+  color: #33445a;
+  font-size: 12px;
+}
+
+.game-procurement-answer-confirmation input {
+  max-width: 360px;
+}
+
+.game-procurement-answer-apply-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.game-procurement-answer-apply-actions span {
+  flex-basis: 100%;
+  min-height: 1.35em;
+}
+
 .game-procurement-progress {
   background: #ffffff;
   border: 1px solid var(--line);

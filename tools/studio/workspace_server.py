@@ -7,6 +7,7 @@ import mimetypes
 import os
 import secrets
 import threading
+import time
 import urllib.error
 import urllib.request
 import webbrowser
@@ -26,7 +27,11 @@ from tools.studio.company.goal_engine import goal_state
 from tools.studio.company.image_to_blender import image3d_state
 from tools.studio.company.model_cookbook import ensure_model_cookbook
 from tools.studio.company.paths import find_repo_root, rel
-from tools.studio.company.procurement import preview_procurement_answers
+from tools.studio.company.procurement import (
+    apply_procurement_answers,
+    preview_procurement_answers,
+    procurement_answer_digest,
+)
 from tools.studio.company.search import search_sessions
 from tools.studio.company.state import CompanyPaths, load_company_state, read_json, read_text
 from tools.studio.company.worker_fleet import ensure_worker_fleet
@@ -42,6 +47,9 @@ from tools.studio.jobs import create_job, get_job, list_jobs, start_job
 APP_DIR = Path(__file__).resolve().parent / "app"
 MAX_FILE_BYTES = 120_000
 MAX_PROCUREMENT_PREVIEW_BYTES = 20_000
+PROCUREMENT_APPLY_GRANT_TTL_SECONDS = 300
+PROCUREMENT_APPLY_MAX_GRANTS = 64
+PROCUREMENT_APPLY_CONFIRMATION = "소유자 승인값 저장"
 ALLOWED_READ_PREFIXES = (
     "Assets/_Project",
     "agents",
@@ -55,6 +63,93 @@ ALLOWED_READ_PREFIXES = (
 LOOPBACK_HOSTS = {"127.0.0.1", "localhost", "::1"}
 ALLOW_REMOTE_ENV = "CHANNEL_PLAY_STUDIO_ALLOW_REMOTE"
 TOKEN_HEADER = "X-Channel-Play-Token"
+
+
+class ProcurementApplyGrantStore:
+    """Short-lived one-time grants bound to answers and manifest state."""
+
+    def __init__(
+        self,
+        ttl_seconds: int = PROCUREMENT_APPLY_GRANT_TTL_SECONDS,
+        clock=None,
+        max_grants: int = PROCUREMENT_APPLY_MAX_GRANTS,
+    ) -> None:
+        if ttl_seconds <= 0:
+            raise ValueError("grant TTL must be positive")
+        if max_grants <= 0:
+            raise ValueError("grant capacity must be positive")
+        self.ttl_seconds = ttl_seconds
+        self.max_grants = max_grants
+        self._clock = clock or time.monotonic
+        self._grants: dict[str, dict[str, object]] = {}
+        self._lock = threading.Lock()
+
+    def mint(
+        self,
+        asset_id: str,
+        answer_digest: str,
+        manifest_sha256: str,
+    ) -> str:
+        now = float(self._clock())
+        grant_id = secrets.token_urlsafe(32)
+        with self._lock:
+            self._purge_expired(now)
+            if len(self._grants) >= self.max_grants:
+                oldest = min(
+                    self._grants,
+                    key=lambda current: float(
+                        self._grants[current].get("expiresAt") or 0
+                    ),
+                )
+                del self._grants[oldest]
+            self._grants[grant_id] = {
+                "assetId": asset_id,
+                "answerDigest": answer_digest,
+                "manifestSha256": manifest_sha256,
+                "expiresAt": now + self.ttl_seconds,
+            }
+        return grant_id
+
+    def consume(
+        self,
+        grant_id: object,
+        asset_id: str,
+        answer_digest: str,
+        manifest_sha256: str,
+    ) -> None:
+        if not isinstance(grant_id, str) or not grant_id:
+            raise CompanyError("Apply grant is invalid or expired.")
+        now = float(self._clock())
+        with self._lock:
+            self._purge_expired(now)
+            grant = self._grants.get(grant_id)
+            if grant is None:
+                raise CompanyError("Apply grant is invalid or expired.")
+            matches = (
+                grant.get("assetId") == asset_id
+                and secrets.compare_digest(
+                    str(grant.get("answerDigest") or ""),
+                    answer_digest,
+                )
+                and secrets.compare_digest(
+                    str(grant.get("manifestSha256") or ""),
+                    manifest_sha256,
+                )
+            )
+            if not matches:
+                raise CompanyError(
+                    "Apply grant does not match the current preview."
+                )
+            del self._grants[grant_id]
+
+    def _purge_expired(self, now: float) -> None:
+        expired = [
+            grant_id
+            for grant_id, grant in self._grants.items()
+            if float(grant.get("expiresAt") or 0) <= now
+        ]
+        for grant_id in expired:
+            del self._grants[grant_id]
 
 
 def serve(host: str = "127.0.0.1", port: int = 8766, open_browser: bool = False) -> None:
@@ -258,7 +353,23 @@ def read_workspace_file(root: Path, raw_path: str) -> dict:
     return {"path": rel(root, path), "content": path.read_text(encoding="utf-8", errors="replace")}
 
 
-def _handler(root: Path, *, token: str = "", host: str = "127.0.0.1", port: int = 8766):
+def _handler(
+    root: Path,
+    *,
+    token: str = "",
+    host: str = "127.0.0.1",
+    port: int = 8766,
+    procurement_grant_ttl_seconds: int = (
+        PROCUREMENT_APPLY_GRANT_TTL_SECONDS
+    ),
+    procurement_grant_clock=None,
+):
+    procurement_grants = ProcurementApplyGrantStore(
+        procurement_grant_ttl_seconds,
+        procurement_grant_clock,
+    )
+    procurement_apply_lock = threading.Lock()
+
     class StudioHandler(BaseHTTPRequestHandler):
         def do_GET(self) -> None:
             parsed = urlparse(self.path)
@@ -308,6 +419,7 @@ def _handler(root: Path, *, token: str = "", host: str = "127.0.0.1", port: int 
             try:
                 if parsed.path not in {
                     "/api/command",
+                    "/api/procurement/apply",
                     "/api/procurement/preview",
                 }:
                     self._json({"ok": False, "error": "Unknown API path"}, status=HTTPStatus.NOT_FOUND)
@@ -318,11 +430,92 @@ def _handler(root: Path, *, token: str = "", host: str = "127.0.0.1", port: int 
                         MAX_PROCUREMENT_PREVIEW_BYTES,
                         strict=True,
                     )
+                    _require_request_fields(
+                        data,
+                        {"assetId", "answers"},
+                        "Procurement preview",
+                    )
+                    asset_id = str(data.get("assetId") or "")
+                    answers = data.get("answers")
                     result = preview_procurement_answers(
                         root,
-                        str(data.get("assetId") or ""),
-                        data.get("answers"),
+                        asset_id,
+                        answers,
                     )
+                    if (
+                        result["valid"]
+                        and result["answerCount"]
+                        == result["expectedAnswerCount"]
+                    ):
+                        answer_digest = procurement_answer_digest(answers)
+                        result["applyGrant"] = procurement_grants.mint(
+                            asset_id,
+                            answer_digest,
+                            result["manifestSha256"],
+                        )
+                        result["applyGrantExpiresInSeconds"] = (
+                            procurement_grants.ttl_seconds
+                        )
+                    self._json({"ok": True, **result})
+                    return
+                if parsed.path == "/api/procurement/apply":
+                    data = self._read_json_body(
+                        MAX_PROCUREMENT_PREVIEW_BYTES,
+                        strict=True,
+                    )
+                    _require_request_fields(
+                        data,
+                        {
+                            "assetId",
+                            "answers",
+                            "applyGrant",
+                            "confirmation",
+                            "expectedManifestSha256",
+                        },
+                        "Procurement apply",
+                    )
+                    if (
+                        data.get("confirmation")
+                        != PROCUREMENT_APPLY_CONFIRMATION
+                    ):
+                        raise CompanyError(
+                            "Explicit owner-save confirmation is required."
+                        )
+                    asset_id = str(data.get("assetId") or "")
+                    answers = data.get("answers")
+                    expected_digest = str(
+                        data.get("expectedManifestSha256") or ""
+                    )
+                    with procurement_apply_lock:
+                        preview = preview_procurement_answers(
+                            root,
+                            asset_id,
+                            answers,
+                        )
+                        if (
+                            not preview["valid"]
+                            or preview["answerCount"]
+                            != preview["expectedAnswerCount"]
+                            or preview["manifestSha256"]
+                            != expected_digest
+                        ):
+                            raise CompanyError(
+                                "Owner answers or manifest changed; "
+                                "run the preview again."
+                            )
+                        answer_digest = procurement_answer_digest(answers)
+                        procurement_grants.consume(
+                            data.get("applyGrant"),
+                            asset_id,
+                            answer_digest,
+                            expected_digest,
+                        )
+                        result = apply_procurement_answers(
+                            root,
+                            asset_id,
+                            answers,
+                            expected_digest,
+                        )
                     self._json({"ok": True, **result})
                     return
                 data = self._read_json_body()
@@ -401,7 +594,7 @@ def _handler(root: Path, *, token: str = "", host: str = "127.0.0.1", port: int 
                 raise CompanyError("Request Content-Length is invalid.")
             if max_bytes is not None and length > max_bytes:
                 raise CompanyError(
-                    "Procurement preview request exceeds "
+                    "Procurement request exceeds "
                     f"{max_bytes} bytes."
                 )
             try:
@@ -447,6 +640,15 @@ def _reject_preview_json_constant(value: str) -> None:
     raise ValueError(
         f"non-standard numeric constant is prohibited: {value}"
     )
+
+
+def _require_request_fields(
+    data: dict,
+    expected: set[str],
+    label: str,
+) -> None:
+    if set(data) != expected:
+        raise CompanyError(f"{label} request fields are invalid.")
 
 
 def _remote_allowed() -> bool:

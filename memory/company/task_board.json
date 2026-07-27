@@ -1212,6 +1212,66 @@
       "last_agent_run": "memory/company/reviews/task-0023-review.md",
       "verification_status": "passed",
       "closed_at": "2026-07-27T15:11:00+09:00"
+    },
+    {
+      "id": "task-0024",
+      "request": "Add a two-step, loopback-token-protected Studio apply flow for the 16 canonical Truth Pen owner answers. A valid memory-only preview must mint a short-lived one-time in-memory grant bound to the canonical answer digest and current normalized manifest SHA-256. Applying must require the same complete answers, the grant, an exact explicit Korean confirmation phrase, and the expected current manifest hash; revalidate server-side, consume grants once, reject expired/replayed/stale grants, atomically replace only the Truth Pen procurement manifest, never create a receipt or authorize contact in the response, and leave the existing procurement-check as the separate PASS-receipt gate. Add fail-closed UI, API/security/replay/stale-write tests, Chrome proof without applying fake values to the real manifest, unchanged real manifest/receipt hashes, full-suite evidence, docs, and findings-first review.",
+      "status": "closed",
+      "suggested_agent": "coding_specialist",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": "coding_specialist",
+      "allowed_write_paths": [
+        "tools/studio/company/procurement.py",
+        "tools/studio/workspace_server.py",
+        "tools/studio/app",
+        "tools/studio/company/tests",
+        "tools/studio/tests",
+        "docs",
+        "memory/company",
+        "memory/sessions",
+        "reviews",
+        "runs"
+      ],
+      "required_evidence": "one-time grant unit tests, expired/replayed/stale/hash-mismatch API tests, atomic-write and no-receipt tests, fail-closed UI contract tests, JavaScript syntax check, Chrome preview-and-confirmation proof without applying, unchanged real manifest and receipt hashes, full Python suite, and findings-first review",
+      "created_at": "2026-07-27T15:17:41+09:00",
+      "updated_at": "2026-07-27T15:42:24+09:00",
+      "work_order": "memory/sessions/20260727-151741-persist-validated-truth-pen-owner-answer/work_orders/task-0024-coding_specialist.md",
+      "report": "memory/company/reviews/task-0024-review.md",
+      "verification": "memory/sessions/20260727-151741-persist-validated-truth-pen-owner-answer/verification/task-0024-verification.md",
+      "session": "20260727-151741-persist-validated-truth-pen-owner-answer",
+      "evidence": [
+        {
+          "path": "runs/task-0024-procurement-owner-apply/runtime_status.md",
+          "note": "Chrome no-apply proof, grant security, unchanged real hashes, focused and full suites",
+          "attached_at": "2026-07-27T15:41:22+09:00"
+        },
+        {
+          "path": "memory/sessions/20260727-151741-persist-validated-truth-pen-owner-answer/agent_reports/task-0024-coding_specialist.md",
+          "note": "Implementation report and security verification summary",
+          "attached_at": "2026-07-27T15:42:24+09:00"
+        },
+        {
+          "path": "memory/company/reviews/task-0024-review.md",
+          "note": "Findings-first security review",
+          "attached_at": "2026-07-27T15:42:24+09:00"
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer": "critic_reviewer",
+      "agent_runs": [
+        {
+          "tool": "studio",
+          "mode": "review",
+          "status": "reviewed",
+          "path": "memory/company/reviews/task-0024-review.md",
+          "created_at": "2026-07-27T15:41:22+09:00"
+        }
+      ],
+      "agent_status": "reviewed",
+      "last_tool": "studio",
+      "last_agent_run": "memory/company/reviews/task-0024-review.md",
+      "verification_status": "passed",
+      "closed_at": "2026-07-27T15:42:24+09:00"
     }
   ]
 }

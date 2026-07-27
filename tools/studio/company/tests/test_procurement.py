@@ -1,18 +1,22 @@
 from __future__ import annotations
 
 import json
+import os
 import tempfile
 import unittest
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+from unittest.mock import patch
 
 from tools.studio.company.errors import CompanyError
 from tools.studio.company.procurement import (
     OWNER_DECISION_FIELDS,
     PROCUREMENT_DECISION_SCHEMA,
     TRUTH_PEN_CANDIDATES,
+    apply_procurement_answers,
     evaluate_procurement_outreach,
     preview_procurement_answers,
+    procurement_answer_digest,
     procurement_decision_init,
     procurement_outreach_check,
 )
@@ -197,6 +201,76 @@ class ProcurementTests(unittest.TestCase):
                 "truth_pen",
                 ["not", "an", "object"],
             )
+
+    def test_answer_digest_requires_exact_canonical_fields(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        answers = self._owner_answers(self._complete_decision(manifest))
+
+        digest = procurement_answer_digest(answers)
+
+        self.assertRegex(digest, r"^[0-9a-f]{64}$")
+        answers.pop("decision_status")
+        with self.assertRaisesRegex(CompanyError, "every canonical"):
+            procurement_answer_digest(answers)
+
+    def test_apply_answers_atomically_saves_without_receipt(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        answers = self._owner_answers(self._complete_decision(manifest))
+        preview = preview_procurement_answers(
+            self.root,
+            "truth_pen",
+            answers,
+        )
+        real_replace = os.replace
+        replace_calls = []
+
+        def record_replace(source, target) -> None:
+            replace_calls.append((Path(source), Path(target)))
+            real_replace(source, target)
+
+        with patch(
+            "tools.studio.company.procurement.os.replace",
+            side_effect=record_replace,
+        ):
+            result = apply_procurement_answers(
+                self.root,
+                "truth_pen",
+                answers,
+                preview["manifestSha256"],
+            )
+
+        self.assertTrue(result["saved"])
+        self.assertFalse(result["contactAuthorized"])
+        self.assertFalse(result["receiptCreated"])
+        self.assertEqual(result["nextCommand"], "asset.procurementCheck")
+        self.assertEqual(len(replace_calls), 1)
+        temporary, target = replace_calls[0]
+        self.assertEqual(temporary.parent, manifest.parent)
+        self.assertEqual(target, manifest)
+        self.assertFalse(temporary.exists())
+        self.assertTrue(
+            evaluate_procurement_outreach(
+                self.root,
+                "truth_pen",
+            )["passed"]
+        )
+        self.assertFalse((self.root / "runs").exists())
+
+    def test_apply_answers_rejects_stale_manifest_without_writing(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        answers = self._owner_answers(self._complete_decision(manifest))
+        before = manifest.read_bytes()
+
+        with self.assertRaisesRegex(CompanyError, "changed"):
+            apply_procurement_answers(
+                self.root,
+                "truth_pen",
+                answers,
+                "0" * 64,
+            )
+
+        self.assertEqual(manifest.read_bytes(), before)
+        self.assertFalse((self.root / "runs").exists())
 
     def test_sensitive_fields_and_privacy_flags_fail(self) -> None:
         manifest = procurement_decision_init(self.root, "truth_pen")
