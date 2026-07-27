@@ -1035,6 +1035,43 @@ main {
   padding-left: 20px;
 }
 
+.game-procurement-save-verification[hidden] {
+  display: none;
+}
+
+.game-procurement-save-verification {
+  background: #f7fafc;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--line-strong);
+  border-radius: calc(var(--radius) - 4px);
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+}
+
+.game-procurement-save-verification.good {
+  border-left-color: var(--good);
+}
+
+.game-procurement-save-verification.warn {
+  border-left-color: var(--warn);
+}
+
+.game-procurement-save-verification small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.game-procurement-save-verification ul {
+  color: #47586d;
+  display: grid;
+  font-size: 11px;
+  gap: 4px;
+  margin: 2px 0 0;
+  padding-left: 20px;
+}
+
 .game-procurement-answer-apply[hidden] {
   display: none;
 }

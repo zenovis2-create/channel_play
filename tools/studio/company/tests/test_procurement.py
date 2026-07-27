@@ -8,6 +8,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from unittest.mock import patch
 
+from tools.studio.company import procurement as procurement_module
 from tools.studio.company.errors import CompanyError
 from tools.studio.company.procurement import (
     OWNER_DECISION_FIELDS,
@@ -331,8 +332,23 @@ class ProcurementTests(unittest.TestCase):
             )
 
         self.assertTrue(result["saved"])
+        self.assertTrue(result["savedVerified"])
         self.assertFalse(result["contactAuthorized"])
         self.assertFalse(result["receiptCreated"])
+        self.assertEqual(result["savedChangeCount"], 16)
+        self.assertEqual(
+            result["savedChangedFields"],
+            list(OWNER_DECISION_FIELDS),
+        )
+        self.assertTrue(result["protectedStatePreserved"])
+        self.assertNotIn(
+            "550e8400-e29b-41d4-a716-446655440000",
+            json.dumps(result, ensure_ascii=False),
+        )
+        self.assertNotIn(
+            "cynthia_ignacio",
+            json.dumps(result, ensure_ascii=False),
+        )
         self.assertEqual(result["nextCommand"], "asset.procurementCheck")
         self.assertEqual(len(replace_calls), 1)
         temporary, target = replace_calls[0]
@@ -345,6 +361,62 @@ class ProcurementTests(unittest.TestCase):
                 "truth_pen",
             )["passed"]
         )
+        self.assertFalse((self.root / "runs").exists())
+
+    def test_apply_answers_reports_post_write_tampering_without_values(
+        self,
+    ) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        complete = self._complete_decision(manifest)
+        answers = self._owner_answers(complete)
+        preview = preview_procurement_answers(
+            self.root,
+            "truth_pen",
+            answers,
+        )
+        real_atomic_write = procurement_module._write_json_atomic
+
+        def write_then_tamper(path: Path, data: dict) -> None:
+            real_atomic_write(path, data)
+            stored = json.loads(path.read_text(encoding="utf-8"))
+            stored["task_id"] = "task-0099"
+            path.write_text(
+                json.dumps(stored, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+
+        with patch(
+            "tools.studio.company.procurement._write_json_atomic",
+            side_effect=write_then_tamper,
+        ):
+            result = apply_procurement_answers(
+                self.root,
+                "truth_pen",
+                answers,
+                preview["manifestSha256"],
+            )
+        encoded = json.dumps(result, ensure_ascii=False)
+
+        self.assertTrue(result["saved"])
+        self.assertFalse(result["savedVerified"])
+        self.assertFalse(result["contactAuthorized"])
+        self.assertFalse(result["receiptCreated"])
+        self.assertEqual(result["savedChangeCount"], 16)
+        self.assertEqual(
+            result["savedChangedFields"],
+            list(OWNER_DECISION_FIELDS),
+        )
+        self.assertTrue(result["protectedStatePreserved"])
+        self.assertRegex(result["manifestSha256"], r"^[0-9a-f]{64}$")
+        self.assertEqual(
+            result["manifestSha256"],
+            evaluate_procurement_outreach(
+                self.root,
+                "truth_pen",
+            )["manifest_sha256"],
+        )
+        self.assertNotIn("550e8400-e29b-41d4-a716-446655440000", encoded)
+        self.assertNotIn("cynthia_ignacio", encoded)
         self.assertFalse((self.root / "runs").exists())
 
     def test_apply_answers_rejects_stale_manifest_without_writing(self) -> None:

@@ -150,6 +150,10 @@ class DockerStudioContractTests(unittest.TestCase):
             "data-procurement-change-summary",
             checklist,
         )
+        self.assertIn(
+            "data-procurement-save-verification",
+            checklist,
+        )
         self.assertIn("data-procurement-apply-owner-check", checklist)
         self.assertIn("data-procurement-apply-contact-check", checklist)
         self.assertIn(
@@ -169,6 +173,7 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn(".game-procurement-answer-result", self.style)
         self.assertIn(".game-procurement-answer-apply", self.style)
         self.assertIn(".game-procurement-change-summary", self.style)
+        self.assertIn(".game-procurement-save-verification", self.style)
         self.assertIn(
             ".game-procurement-answer-apply[hidden]",
             self.style,
@@ -301,6 +306,7 @@ class DockerStudioContractTests(unittest.TestCase):
         )
         self.assertIn("preview.applyGrant", helper)
         self.assertIn("preview.applyGrantExpiresInSeconds", helper)
+        self.assertIn("changedFields: [...summary.changedFields]", helper)
         self.assertIn("summary.changeCount > 0", helper)
         self.assertIn("summary.changedFields.length", helper)
         self.assertIn("summary.unchangedFields.length", helper)
@@ -323,6 +329,20 @@ class DockerStudioContractTests(unittest.TestCase):
         )
         self.assertIn("result.contactAuthorized !== false", helper)
         self.assertIn("result.receiptCreated !== false", helper)
+        self.assertIn("result.savedVerified", helper)
+        self.assertIn("result.savedChangedFields", helper)
+        self.assertIn("result.savedChangeCount", helper)
+        self.assertIn("result.protectedStatePreserved", helper)
+        self.assertIn("grant.changedFields", helper)
+        self.assertIn("item.textContent = field", helper)
+        self.assertIn(
+            "저장되었을 수 있으므로 재시도하지 말고",
+            helper,
+        )
+        self.assertIn(
+            "renderProcurementSaveVerification",
+            helper,
+        )
         self.assertIn("await loadState()", helper)
         self.assertNotIn("runCommand(", helper)
         self.assertNotIn("localStorage", helper)

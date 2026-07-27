@@ -561,6 +561,13 @@ function renderGameProduction() {
           ></span>
         </div>
       </div>
+      <div
+        class="game-procurement-save-verification"
+        data-procurement-save-verification
+        role="status"
+        aria-live="polite"
+        hidden
+      ></div>
     </section>
     ${procurementProgressTotal ? `
       <div class="game-procurement-progress ${procurementProgressIndeterminate ? "warn" : procurementProgressCompleted === procurementProgressTotal ? "good" : "active"}">
@@ -2627,6 +2634,8 @@ function showProcurementApplyGrant(preview) {
   procurementApplyGrant = {
     grant,
     manifestSha256,
+    changeCount: summary.changeCount,
+    changedFields: [...summary.changedFields],
     expiresAt: Date.now() + (expiresInSeconds * 1000),
   };
   procurementApplyGrantTimer = window.setTimeout(() => {
@@ -2782,6 +2791,89 @@ function renderProcurementChangeSummary(container, preview) {
   return true;
 }
 
+function normalizedProcurementSaveVerification(result, grant) {
+  const savedChangedFields = Array.isArray(result.savedChangedFields)
+    ? result.savedChangedFields
+    : null;
+  const manifestSha256 = typeof result.manifestSha256 === "string"
+    ? result.manifestSha256
+    : "";
+  if (
+    result.saved !== true
+    || typeof result.savedVerified !== "boolean"
+    || result.contactAuthorized !== false
+    || result.receiptCreated !== false
+    || result.protectedStatePreserved !== true
+    || !savedChangedFields
+    || !Number.isInteger(result.savedChangeCount)
+    || result.savedChangeCount <= 0
+    || result.savedChangeCount !== savedChangedFields.length
+    || !/^[0-9a-f]{64}$/.test(manifestSha256)
+    || !Array.isArray(grant.changedFields)
+    || grant.changeCount !== result.savedChangeCount
+    || grant.changedFields.length !== savedChangedFields.length
+    || !grant.changedFields.every(
+      (field, index) => field === savedChangedFields[index],
+    )
+    || savedChangedFields.some(
+      (field) => (
+        typeof field !== "string"
+        || !/^[a-z][a-z0-9_]*(?:\.[a-z][a-z0-9_]*)?$/.test(field)
+      ),
+    )
+  ) {
+    return null;
+  }
+  return {
+    verified: result.savedVerified,
+    changeCount: result.savedChangeCount,
+    changedFields: savedChangedFields,
+    manifestSha256,
+  };
+}
+
+function clearProcurementSaveVerification() {
+  const container = document.querySelector(
+    "[data-procurement-save-verification]",
+  );
+  if (!container) return;
+  container.replaceChildren();
+  container.hidden = true;
+}
+
+function renderProcurementSaveVerification(summary) {
+  const container = document.querySelector(
+    "[data-procurement-save-verification]",
+  );
+  if (!container || !summary) return false;
+  container.replaceChildren();
+  container.className = [
+    "game-procurement-save-verification",
+    summary.verified ? "good" : "warn",
+  ].join(" ");
+
+  const title = document.createElement("strong");
+  title.textContent = summary.verified
+    ? "정규화 저장 내용 확인 완료"
+    : "저장 후 무결성 확인 실패";
+  const detail = document.createElement("small");
+  detail.textContent = [
+    `${summary.changeCount}개 canonical 필드`,
+    `manifest ${summary.manifestSha256.slice(0, 12)}…`,
+    "저장값은 표시하지 않음",
+    "연락 허가 아님",
+  ].join(" · ");
+  const list = document.createElement("ul");
+  for (const field of summary.changedFields) {
+    const item = document.createElement("li");
+    item.textContent = field;
+    list.appendChild(item);
+  }
+  container.append(title, detail, list);
+  container.hidden = false;
+  return true;
+}
+
 async function previewProcurementAnswers(button) {
   const input = document.getElementById("gameProcurementAnswerInput");
   const resultNode = document.querySelector(
@@ -2792,6 +2884,7 @@ async function previewProcurementAnswers(button) {
   );
   const procurement = state?.gameProduction?.procurement || {};
   if (!input || !resultNode || !statusNode || !procurement.assetId) return;
+  clearProcurementSaveVerification();
   invalidateProcurementApplyGrant();
   const inputText = input.value;
 
@@ -2911,6 +3004,7 @@ async function applyProcurementAnswers(button) {
   if (controls.status) {
     controls.status.textContent = "승인값을 원자적으로 저장하는 중…";
   }
+  let saveSummary = null;
   try {
     const result = await api("/api/procurement/apply", {
       method: "POST",
@@ -2923,36 +3017,46 @@ async function applyProcurementAnswers(button) {
         expectedManifestSha256: grant.manifestSha256,
       }),
     });
-    if (
-      result.saved !== true
-      || result.contactAuthorized !== false
-      || result.receiptCreated !== false
-    ) {
+    saveSummary = normalizedProcurementSaveVerification(result, grant);
+    if (!saveSummary) {
       throw new Error("unsafe apply response");
     }
     input.value = input.defaultValue;
     invalidateProcurementApplyGrant();
+    renderProcurementSaveVerification(saveSummary);
   } catch (_error) {
     invalidateProcurementApplyGrant();
     resultNode.replaceChildren();
-    statusNode.textContent = "저장하지 못했습니다. 다시 사전검증하세요.";
+    statusNode.textContent = [
+      "저장 결과를 확인하지 못했습니다.",
+      "저장되었을 수 있으므로 재시도하지 말고 상태 새로고침 후",
+      "manifest를 확인하세요.",
+    ].join(" ");
     return;
   }
 
   try {
     await loadState();
   } catch (_error) {
-    statusNode.textContent = [
+    renderProcurementSaveVerification(saveSummary);
+    $("#console").textContent = [
       "저장은 완료되었지만 화면을 갱신하지 못했습니다.",
       "중복 저장하지 말고 상태 새로고침을 사용하세요.",
     ].join(" ");
     return;
   }
-  $("#console").textContent = [
-    "소유자 승인값을 저장했습니다.",
-    "연락 허가 아님 · 영수증 생성 안 함",
-    "별도의 procurement check가 필요합니다.",
-  ].join(" ");
+  renderProcurementSaveVerification(saveSummary);
+  $("#console").textContent = saveSummary.verified
+    ? [
+        "소유자 승인값 저장과 정규화 내용 확인을 완료했습니다.",
+        "연락 허가 아님 · 영수증 생성 안 함",
+        "별도의 procurement check가 필요합니다.",
+      ].join(" ")
+    : [
+        "저장은 실행되었지만 저장 직후 해시가 일치하지 않습니다.",
+        "재저장하지 말고 manifest diff를 확인하세요.",
+        "연락 허가 아님 · 영수증 생성 안 함",
+      ].join(" ");
 }
 
 function bind() {

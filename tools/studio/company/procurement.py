@@ -7,6 +7,7 @@ import json
 import math
 import os
 import re
+import secrets
 import stat
 import tempfile
 from copy import deepcopy
@@ -282,10 +283,18 @@ def apply_procurement_answers(
             "Procurement manifest changed; run the preview again."
         )
 
+    expected_saved_digest = _json_payload_sha256(candidate)
     _write_json_atomic(manifest, candidate)
     saved_digest = sha256_gate_manifest(manifest)
     return {
         "saved": True,
+        "savedVerified": secrets.compare_digest(
+            expected_saved_digest,
+            saved_digest,
+        ),
+        "savedChangeCount": len(changed_fields),
+        "savedChangedFields": changed_fields,
+        "protectedStatePreserved": protected_state_preserved,
         "contactAuthorized": False,
         "receiptCreated": False,
         "manifest": manifest.relative_to(root).as_posix(),
@@ -842,14 +851,14 @@ def _write_receipt(root: Path, asset_id: str, result: dict) -> Path:
 def _write_json(path: Path, data: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
-        json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+        _json_payload(data),
         encoding="utf-8",
     )
 
 
 def _write_json_atomic(path: Path, data: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    payload = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+    payload = _json_payload(data)
     original_mode = (
         stat.S_IMODE(path.stat().st_mode)
         if path.exists()
@@ -877,6 +886,14 @@ def _write_json_atomic(path: Path, data: dict) -> None:
     finally:
         if temporary_path is not None:
             temporary_path.unlink(missing_ok=True)
+
+
+def _json_payload(data: dict) -> str:
+    return json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+
+
+def _json_payload_sha256(data: dict) -> str:
+    return hashlib.sha256(_json_payload(data).encode("utf-8")).hexdigest()
 
 
 def _result(

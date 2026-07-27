@@ -114,6 +114,15 @@ saved diff, run `python tools/channelctl asset procurement-check truth_pen`
 separately. Artist contact remains blocked until that command creates a current
 matching `PASS` receipt. Never use sample or agent-invented values for saving.
 
+Before replacement, the server hashes the exact normalized candidate JSON.
+Immediately after replacement it hashes the stored manifest again and returns
+only the verification result, final manifest hash, and canonical changed field
+names/count. Studio accepts a confirmed result only when those fields match the
+previewed scope and the hashes match. If the response is missing, malformed, or
+reports a post-write mismatch, assume the save may have occurred: do not retry,
+refresh state, and inspect the manifest diff. No current or proposed value is
+included in this verification summary.
+
 The browser limits the answer text to 16,000 characters and the API rejects
 requests over 20,000 bytes, non-standard JSON values such as `NaN`, arrays,
 and unsupported fields. Validation results never echo unsupported field values
