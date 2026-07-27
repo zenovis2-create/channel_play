@@ -142,6 +142,20 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn("data-procurement-answer-clear", checklist)
         self.assertIn("data-procurement-answer-status", checklist)
         self.assertIn("data-procurement-answer-result", checklist)
+        self.assertIn(
+            "data-procurement-answer-apply-panel",
+            checklist,
+        )
+        self.assertIn("data-procurement-apply-owner-check", checklist)
+        self.assertIn("data-procurement-apply-contact-check", checklist)
+        self.assertIn(
+            "data-procurement-apply-confirmation",
+            checklist,
+        )
+        self.assertIn("data-procurement-answer-apply", checklist)
+        self.assertIn("PROCUREMENT_APPLY_CONFIRMATION", checklist)
+        self.assertIn("승인값 저장", checklist)
+        self.assertIn("PASS 영수증 전에는", checklist)
         self.assertIn('role="region"', checklist)
         self.assertIn(
             'aria-label="소유자 답변 사전검증 결과"',
@@ -149,6 +163,11 @@ class DockerStudioContractTests(unittest.TestCase):
         )
         self.assertIn(".game-procurement-answer-preview", self.style)
         self.assertIn(".game-procurement-answer-result", self.style)
+        self.assertIn(".game-procurement-answer-apply", self.style)
+        self.assertIn(
+            ".game-procurement-answer-apply[hidden]",
+            self.style,
+        )
 
     def test_procurement_progress_counts_are_finite_and_bounded(self) -> None:
         start = self.app.index("function boundedCount")
@@ -256,6 +275,52 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn(
             'event.target.closest(\n      '
             '"[data-procurement-answer-preview]"',
+            self.app,
+        )
+
+    def test_procurement_answer_apply_requires_grant_and_confirmation(
+        self,
+    ) -> None:
+        start = self.app.index("function procurementApplyControls")
+        end = self.app.index("function bind", start)
+        helper = self.app[start:end]
+
+        self.assertIn("let procurementApplyGrant = null", self.app)
+        self.assertIn(
+            'const PROCUREMENT_APPLY_CONFIRMATION = "소유자 승인값 저장"',
+            self.app,
+        )
+        self.assertIn("preview.applyGrant", helper)
+        self.assertIn("preview.applyGrantExpiresInSeconds", helper)
+        self.assertIn("window.setTimeout(() =>", helper)
+        self.assertIn("window.clearTimeout", helper)
+        self.assertIn("Date.now() < procurementApplyGrant.expiresAt", helper)
+        self.assertIn("manifestSha256.slice(0, 12)", helper)
+        self.assertIn("updateProcurementApplyButton()", helper)
+        self.assertIn(
+            "controls.confirmation?.value "
+            "=== PROCUREMENT_APPLY_CONFIRMATION",
+            helper,
+        )
+        self.assertIn('api("/api/procurement/apply"', helper)
+        self.assertIn("applyGrant: grant.grant", helper)
+        self.assertIn(
+            "expectedManifestSha256: grant.manifestSha256",
+            helper,
+        )
+        self.assertIn("result.contactAuthorized !== false", helper)
+        self.assertIn("result.receiptCreated !== false", helper)
+        self.assertIn("await loadState()", helper)
+        self.assertNotIn("runCommand(", helper)
+        self.assertNotIn("localStorage", helper)
+        self.assertNotIn("sessionStorage", helper)
+        self.assertNotIn(".innerHTML", helper)
+        self.assertIn(
+            'event.target.matches("#gameProcurementAnswerInput")',
+            self.app,
+        )
+        self.assertIn(
+            "invalidateProcurementApplyGrant()",
             self.app,
         )
 

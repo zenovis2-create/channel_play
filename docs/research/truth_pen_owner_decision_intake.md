@@ -93,6 +93,20 @@ current decision, and runs the existing validator without writing a manifest
 or receipt. A valid preview still reports `연락 허가 아님`; the approved values
 must be deliberately applied and checked again before outreach.
 
+After a complete valid preview, Studio exposes a separate `2단계 저장 승인`
+panel. The preview creates a five-minute, one-time in-memory grant bound to the
+canonical answer digest and the current normalized manifest SHA-256. Saving
+requires both owner/contact-boundary checkboxes and the exact confirmation
+phrase `소유자 승인값 저장`. Editing any answer invalidates the browser grant;
+expired, replayed, mismatched, or stale-manifest requests fail closed.
+
+The save endpoint revalidates every answer and atomically replaces only
+`asset_pipeline/manifests/truth_pen_procurement_decision.json`. It does not
+create an outreach receipt and returns `연락 허가 아님`. After reviewing the
+saved diff, run `python tools/channelctl asset procurement-check truth_pen`
+separately. Artist contact remains blocked until that command creates a current
+matching `PASS` receipt. Never use sample or agent-invented values for saving.
+
 The browser limits the answer text to 16,000 characters and the API rejects
 requests over 20,000 bytes, non-standard JSON values such as `NaN`, arrays,
 and unsupported fields. Validation results never echo unsupported field values

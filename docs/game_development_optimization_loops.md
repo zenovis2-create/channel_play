@@ -101,3 +101,5 @@ Priority order:
 
 External dependency rule: a missing x86_64 runner must not trap the user in a dead-end next action if local Unity, feedback, or agent work can continue.
 Procurement rule: a blocked readiness check is actionable validation, not authorization to contact an artist or request artwork.
+Owner-save rule: preview grants are short-lived and one-time; saving validated
+answers never substitutes for the separate current `PASS` procurement receipt.

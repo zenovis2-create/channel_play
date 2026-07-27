@@ -11,9 +11,12 @@ let jobPollTimer = null;
 let executionToken = "";
 let executionTokenHeader = "X-Channel-Play-Token";
 let searchState = null;
+let procurementApplyGrant = null;
+let procurementApplyGrantTimer = null;
 let activeStudioView = localStorage.getItem("channelPlayStudioView") || "focus";
 
 const ORCHESTRATOR_MIN_VISIBLE_MS = 1200;
+const PROCUREMENT_APPLY_CONFIRMATION = "소유자 승인값 저장";
 const studioViews = {
   focus: "작업",
   board: "팀",
@@ -246,6 +249,7 @@ function renderMissionDock() {
 }
 
 function renderGameProduction() {
+  invalidateProcurementApplyGrant();
   const game = state.gameProduction || {};
   const readiness = game.readiness || {};
   const checks = game.checks || [];
@@ -501,6 +505,57 @@ function renderGameProduction() {
         role="region"
         aria-label="소유자 답변 사전검증 결과"
       ></div>
+      <div
+        class="game-procurement-answer-apply"
+        data-procurement-answer-apply-panel
+        hidden
+      >
+        <div class="game-procurement-answer-apply-head">
+          <span>2단계 저장 승인</span>
+          <strong>검증된 소유자 승인값만 manifest에 저장</strong>
+          <small>
+            저장해도 연락은 허가되지 않으며 영수증도 생성되지 않습니다.
+            이후 별도의 procurement check와 현재 PASS 영수증이 필요합니다.
+          </small>
+          <em data-procurement-apply-grant-status></em>
+        </div>
+        <label>
+          <input
+            type="checkbox"
+            data-procurement-apply-owner-check
+          >
+          입력값이 소유자가 승인한 repository-safe 값임을 확인했습니다.
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            data-procurement-apply-contact-check
+          >
+          저장 후에도 PASS 영수증 전에는 작가에게 연락하지 않습니다.
+        </label>
+        <label class="game-procurement-answer-confirmation">
+          확인 문구
+          <code>${esc(PROCUREMENT_APPLY_CONFIRMATION)}</code>
+          <input
+            type="text"
+            maxlength="32"
+            autocomplete="off"
+            data-procurement-apply-confirmation
+          >
+        </label>
+        <div class="game-procurement-answer-apply-actions">
+          <button
+            type="button"
+            data-procurement-answer-apply
+            disabled
+          >승인값 저장</button>
+          <span
+            data-procurement-apply-status
+            role="status"
+            aria-live="polite"
+          ></span>
+        </div>
+      </div>
     </section>
     ${procurementProgressTotal ? `
       <div class="game-procurement-progress ${procurementProgressIndeterminate ? "warn" : procurementProgressCompleted === procurementProgressTotal ? "good" : "active"}">
@@ -2488,6 +2543,123 @@ function downloadProcurementWorksheet(button) {
   }
 }
 
+function procurementApplyControls() {
+  return {
+    panel: document.querySelector(
+      "[data-procurement-answer-apply-panel]",
+    ),
+    ownerCheck: document.querySelector(
+      "[data-procurement-apply-owner-check]",
+    ),
+    contactCheck: document.querySelector(
+      "[data-procurement-apply-contact-check]",
+    ),
+    confirmation: document.querySelector(
+      "[data-procurement-apply-confirmation]",
+    ),
+    button: document.querySelector(
+      "[data-procurement-answer-apply]",
+    ),
+    grantStatus: document.querySelector(
+      "[data-procurement-apply-grant-status]",
+    ),
+    status: document.querySelector(
+      "[data-procurement-apply-status]",
+    ),
+  };
+}
+
+function invalidateProcurementApplyGrant(answerMessage = "") {
+  procurementApplyGrant = null;
+  if (procurementApplyGrantTimer) {
+    window.clearTimeout(procurementApplyGrantTimer);
+    procurementApplyGrantTimer = null;
+  }
+  const controls = procurementApplyControls();
+  if (controls.panel) controls.panel.hidden = true;
+  if (controls.ownerCheck) controls.ownerCheck.checked = false;
+  if (controls.contactCheck) controls.contactCheck.checked = false;
+  if (controls.confirmation) controls.confirmation.value = "";
+  if (controls.button) controls.button.disabled = true;
+  if (controls.grantStatus) controls.grantStatus.textContent = "";
+  if (controls.status) controls.status.textContent = "";
+  const answerStatus = document.querySelector(
+    "[data-procurement-answer-status]",
+  );
+  if (answerStatus && answerMessage) {
+    answerStatus.textContent = answerMessage;
+  }
+}
+
+function showProcurementApplyGrant(preview) {
+  const grant = typeof preview.applyGrant === "string"
+    ? preview.applyGrant
+    : "";
+  const manifestSha256 = typeof preview.manifestSha256 === "string"
+    ? preview.manifestSha256
+    : "";
+  const expiresInSeconds = boundedCount(
+    preview.applyGrantExpiresInSeconds,
+    3600,
+  );
+  if (
+    !grant
+    || !/^[0-9a-f]{64}$/.test(manifestSha256)
+    || !expiresInSeconds
+  ) {
+    invalidateProcurementApplyGrant();
+    return false;
+  }
+  procurementApplyGrant = {
+    grant,
+    manifestSha256,
+    expiresAt: Date.now() + (expiresInSeconds * 1000),
+  };
+  procurementApplyGrantTimer = window.setTimeout(() => {
+    invalidateProcurementApplyGrant(
+      "저장 grant가 만료되었습니다. 다시 사전검증하세요.",
+    );
+  }, expiresInSeconds * 1000);
+  const controls = procurementApplyControls();
+  if (!controls.panel) {
+    procurementApplyGrant = null;
+    return false;
+  }
+  controls.panel.hidden = false;
+  if (controls.ownerCheck) controls.ownerCheck.checked = false;
+  if (controls.contactCheck) controls.contactCheck.checked = false;
+  if (controls.confirmation) controls.confirmation.value = "";
+  if (controls.grantStatus) {
+    controls.grantStatus.textContent = [
+      `manifest ${manifestSha256.slice(0, 12)}…`,
+      `${Math.ceil(expiresInSeconds / 60)}분 내 1회`,
+    ].join(" · ");
+  }
+  if (controls.status) {
+    controls.status.textContent = "두 확인 항목과 정확한 확인 문구가 필요합니다.";
+  }
+  updateProcurementApplyButton();
+  return true;
+}
+
+function updateProcurementApplyButton() {
+  const controls = procurementApplyControls();
+  if (!controls.button) return;
+  const ready = Boolean(
+    procurementApplyGrant
+    && Date.now() < procurementApplyGrant.expiresAt
+    && controls.ownerCheck?.checked
+    && controls.contactCheck?.checked
+    && controls.confirmation?.value === PROCUREMENT_APPLY_CONFIRMATION
+  );
+  controls.button.disabled = !ready;
+  if (controls.status && procurementApplyGrant) {
+    controls.status.textContent = ready
+      ? "모든 확인이 완료되었습니다. 한 번만 저장할 수 있습니다."
+      : "두 확인 항목과 정확한 확인 문구가 필요합니다.";
+  }
+}
+
 function renderProcurementAnswerPreview(resultNode, preview) {
   resultNode.replaceChildren();
   const summary = document.createElement("div");
@@ -2529,6 +2701,8 @@ async function previewProcurementAnswers(button) {
   );
   const procurement = state?.gameProduction?.procurement || {};
   if (!input || !resultNode || !statusNode || !procurement.assetId) return;
+  invalidateProcurementApplyGrant();
+  const inputText = input.value;
 
   let answers;
   try {
@@ -2557,11 +2731,21 @@ async function previewProcurementAnswers(button) {
         answers,
       }),
     });
+    if (input.value !== inputText) {
+      resultNode.replaceChildren();
+      statusNode.textContent = "입력이 변경되었습니다. 다시 사전검증하세요.";
+      return;
+    }
     renderProcurementAnswerPreview(resultNode, preview);
-    statusNode.textContent = preview.valid
-      ? "형식 검증을 통과했습니다. 아직 저장되거나 승인되지 않았습니다."
-      : "저장 전에 표시된 항목을 수정하세요.";
+    const grantReady = preview.valid
+      && showProcurementApplyGrant(preview);
+    statusNode.textContent = grantReady
+      ? "형식 검증 통과. 2단계 저장 승인을 진행할 수 있습니다."
+      : preview.valid
+        ? "형식은 통과했지만 저장 grant를 발급하지 못했습니다."
+        : "저장 전에 표시된 항목을 수정하세요.";
   } catch (_error) {
+    invalidateProcurementApplyGrant();
     resultNode.replaceChildren();
     statusNode.textContent = "사전검증 요청을 처리하지 못했습니다.";
   } finally {
@@ -2577,9 +2761,103 @@ function clearProcurementAnswerPreview() {
   const statusNode = document.querySelector(
     "[data-procurement-answer-status]",
   );
+  invalidateProcurementApplyGrant();
   if (input) input.value = input.defaultValue;
   if (resultNode) resultNode.replaceChildren();
   if (statusNode) statusNode.textContent = "입력을 빈 템플릿으로 초기화했습니다.";
+}
+
+async function applyProcurementAnswers(button) {
+  const input = document.getElementById("gameProcurementAnswerInput");
+  const resultNode = document.querySelector(
+    "[data-procurement-answer-result]",
+  );
+  const statusNode = document.querySelector(
+    "[data-procurement-answer-status]",
+  );
+  const controls = procurementApplyControls();
+  const procurement = state?.gameProduction?.procurement || {};
+  if (
+    !input
+    || !resultNode
+    || !statusNode
+    || !procurement.assetId
+    || !procurementApplyGrant
+  ) return;
+
+  let answers;
+  try {
+    answers = JSON.parse(input.value);
+    if (
+      !answers
+      || typeof answers !== "object"
+      || Array.isArray(answers)
+    ) {
+      throw new Error("object required");
+    }
+  } catch (_error) {
+    invalidateProcurementApplyGrant();
+    resultNode.replaceChildren();
+    statusNode.textContent = "입력이 변경되었습니다. 다시 사전검증하세요.";
+    return;
+  }
+  updateProcurementApplyButton();
+  if (button.disabled) return;
+
+  const grant = procurementApplyGrant;
+  if (Date.now() >= grant.expiresAt) {
+    invalidateProcurementApplyGrant(
+      "저장 grant가 만료되었습니다. 다시 사전검증하세요.",
+    );
+    return;
+  }
+  procurementApplyGrant = null;
+  button.disabled = true;
+  if (controls.status) {
+    controls.status.textContent = "승인값을 원자적으로 저장하는 중…";
+  }
+  try {
+    const result = await api("/api/procurement/apply", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        assetId: procurement.assetId,
+        answers,
+        applyGrant: grant.grant,
+        confirmation: controls.confirmation?.value || "",
+        expectedManifestSha256: grant.manifestSha256,
+      }),
+    });
+    if (
+      result.saved !== true
+      || result.contactAuthorized !== false
+      || result.receiptCreated !== false
+    ) {
+      throw new Error("unsafe apply response");
+    }
+    input.value = input.defaultValue;
+    invalidateProcurementApplyGrant();
+  } catch (_error) {
+    invalidateProcurementApplyGrant();
+    resultNode.replaceChildren();
+    statusNode.textContent = "저장하지 못했습니다. 다시 사전검증하세요.";
+    return;
+  }
+
+  try {
+    await loadState();
+  } catch (_error) {
+    statusNode.textContent = [
+      "저장은 완료되었지만 화면을 갱신하지 못했습니다.",
+      "중복 저장하지 말고 상태 새로고침을 사용하세요.",
+    ].join(" ");
+    return;
+  }
+  $("#console").textContent = [
+    "소유자 승인값을 저장했습니다.",
+    "연락 허가 아님 · 영수증 생성 안 함",
+    "별도의 procurement check가 필요합니다.",
+  ].join(" ");
 }
 
 function bind() {
@@ -2816,6 +3094,13 @@ function bind() {
     renderTaskTracker();
   });
   $("#game-cockpit").addEventListener("click", (event) => {
+    const answerApplyButton = event.target.closest(
+      "[data-procurement-answer-apply]",
+    );
+    if (answerApplyButton) {
+      applyProcurementAnswers(answerApplyButton);
+      return;
+    }
     const answerPreviewButton = event.target.closest(
       "[data-procurement-answer-preview]",
     );
@@ -2858,6 +3143,25 @@ function bind() {
     $("#filePath").value = path;
     loadFile();
     setStudioView("library", { target: "#memory" });
+  });
+  $("#game-cockpit").addEventListener("input", (event) => {
+    if (event.target.matches("#gameProcurementAnswerInput")) {
+      invalidateProcurementApplyGrant(
+        "입력이 변경되었습니다. 다시 사전검증하세요.",
+      );
+      return;
+    }
+    if (event.target.matches("[data-procurement-apply-confirmation]")) {
+      updateProcurementApplyButton();
+    }
+  });
+  $("#game-cockpit").addEventListener("change", (event) => {
+    if (
+      event.target.matches("[data-procurement-apply-owner-check]")
+      || event.target.matches("[data-procurement-apply-contact-check]")
+    ) {
+      updateProcurementApplyButton();
+    }
   });
   $("#gameNextAction").addEventListener("click", (event) => {
     const button = event.target.closest("[data-command]");

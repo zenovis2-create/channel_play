@@ -9,14 +9,20 @@ import time
 import unittest
 import urllib.error
 import urllib.request
+from datetime import date, datetime, timedelta, timezone
 from http.server import ThreadingHTTPServer
 from pathlib import Path
 from unittest.mock import patch
 
 from tools.studio.jobs import get_job
-from tools.studio.company.procurement import procurement_decision_init
+from tools.studio.company.procurement import (
+    TRUTH_PEN_CANDIDATES,
+    procurement_decision_init,
+)
 from tools.studio.workspace_server import (
     MAX_PROCUREMENT_PREVIEW_BYTES,
+    PROCUREMENT_APPLY_CONFIRMATION,
+    ProcurementApplyGrantStore,
     build_command,
     collect_runtime_adapter_state,
     collect_workspace_state,
@@ -619,6 +625,7 @@ class WorkspaceServerTests(unittest.TestCase):
             self.assertFalse(result["contactAuthorized"])
             self.assertFalse(result["receiptCreated"])
             self.assertEqual(result["answerCount"], 1)
+            self.assertNotIn("applyGrant", result)
             self.assertEqual(manifest.read_bytes(), before)
             self.assertFalse((self.root / "runs").exists())
         finally:
@@ -668,6 +675,179 @@ class WorkspaceServerTests(unittest.TestCase):
             server.server_close()
             thread.join(timeout=2)
 
+    def test_procurement_apply_grant_is_bound_and_one_time(self) -> None:
+        clock = [100.0]
+        grants = ProcurementApplyGrantStore(10, lambda: clock[0])
+        grant = grants.mint("truth_pen", "a" * 64, "b" * 64)
+
+        with self.assertRaisesRegex(CompanyError, "does not match"):
+            grants.consume(
+                grant,
+                "truth_pen",
+                "c" * 64,
+                "b" * 64,
+            )
+
+        grants.consume(grant, "truth_pen", "a" * 64, "b" * 64)
+        with self.assertRaisesRegex(CompanyError, "invalid or expired"):
+            grants.consume(grant, "truth_pen", "a" * 64, "b" * 64)
+
+        limited = ProcurementApplyGrantStore(
+            10,
+            lambda: clock[0],
+            max_grants=1,
+        )
+        evicted = limited.mint("truth_pen", "a" * 64, "b" * 64)
+        retained = limited.mint("truth_pen", "c" * 64, "d" * 64)
+        with self.assertRaisesRegex(CompanyError, "invalid or expired"):
+            limited.consume(
+                evicted,
+                "truth_pen",
+                "a" * 64,
+                "b" * 64,
+            )
+        limited.consume(
+            retained,
+            "truth_pen",
+            "c" * 64,
+            "d" * 64,
+        )
+
+    def test_procurement_apply_api_requires_confirmation_and_is_one_time(
+        self,
+    ) -> None:
+        manifest = self._write_procurement_fixture()
+        answers = self._complete_procurement_answers()
+        before = manifest.read_bytes()
+        server, thread, base = self._start_server("test-token")
+        try:
+            preview = self._post_procurement_preview(
+                base,
+                token="test-token",
+                answers=answers,
+            )
+            self.assertTrue(preview["valid"])
+            self.assertTrue(preview["applyGrant"])
+
+            with self.assertRaises(urllib.error.HTTPError) as missing_token:
+                self._post_procurement_apply(
+                    base,
+                    token="",
+                    answers=answers,
+                    grant=preview["applyGrant"],
+                    manifest_sha256=preview["manifestSha256"],
+                )
+            self.assertEqual(missing_token.exception.code, 400)
+            missing_token.exception.close()
+
+            with self.assertRaises(urllib.error.HTTPError) as confirmation:
+                self._post_procurement_apply(
+                    base,
+                    token="test-token",
+                    answers=answers,
+                    grant=preview["applyGrant"],
+                    manifest_sha256=preview["manifestSha256"],
+                    confirmation="not-confirmed",
+                )
+            self.assertEqual(confirmation.exception.code, 400)
+            confirmation.exception.close()
+            self.assertEqual(manifest.read_bytes(), before)
+
+            result = self._post_procurement_apply(
+                base,
+                token="test-token",
+                answers=answers,
+                grant=preview["applyGrant"],
+                manifest_sha256=preview["manifestSha256"],
+            )
+            self.assertTrue(result["saved"])
+            self.assertFalse(result["contactAuthorized"])
+            self.assertFalse(result["receiptCreated"])
+            self.assertEqual(
+                result["nextCommand"],
+                "asset.procurementCheck",
+            )
+            saved = manifest.read_bytes()
+            self.assertNotEqual(saved, before)
+            self.assertFalse((self.root / "runs").exists())
+
+            with self.assertRaises(urllib.error.HTTPError) as replay:
+                self._post_procurement_apply(
+                    base,
+                    token="test-token",
+                    answers=answers,
+                    grant=preview["applyGrant"],
+                    manifest_sha256=result["manifestSha256"],
+                )
+            self.assertEqual(replay.exception.code, 400)
+            replay.exception.close()
+            self.assertEqual(manifest.read_bytes(), saved)
+            self.assertFalse((self.root / "runs").exists())
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=2)
+
+    def test_procurement_apply_api_rejects_stale_and_expired_grants(
+        self,
+    ) -> None:
+        manifest = self._write_procurement_fixture()
+        answers = self._complete_procurement_answers()
+        clock = [100.0]
+        server, thread, base = self._start_server(
+            "test-token",
+            procurement_grant_ttl_seconds=1,
+            procurement_grant_clock=lambda: clock[0],
+        )
+        try:
+            expired_preview = self._post_procurement_preview(
+                base,
+                token="test-token",
+                answers=answers,
+            )
+            clock[0] = 102.0
+            with self.assertRaises(urllib.error.HTTPError) as expired:
+                self._post_procurement_apply(
+                    base,
+                    token="test-token",
+                    answers=answers,
+                    grant=expired_preview["applyGrant"],
+                    manifest_sha256=expired_preview["manifestSha256"],
+                )
+            self.assertEqual(expired.exception.code, 400)
+            expired.exception.close()
+
+            clock[0] = 103.0
+            stale_preview = self._post_procurement_preview(
+                base,
+                token="test-token",
+                answers=answers,
+            )
+            decision = json.loads(manifest.read_text(encoding="utf-8"))
+            decision["task_id"] = "task-0099"
+            manifest.write_text(
+                json.dumps(decision, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            stale_bytes = manifest.read_bytes()
+
+            with self.assertRaises(urllib.error.HTTPError) as stale:
+                self._post_procurement_apply(
+                    base,
+                    token="test-token",
+                    answers=answers,
+                    grant=stale_preview["applyGrant"],
+                    manifest_sha256=stale_preview["manifestSha256"],
+                )
+            self.assertEqual(stale.exception.code, 400)
+            stale.exception.close()
+            self.assertEqual(manifest.read_bytes(), stale_bytes)
+            self.assertFalse((self.root / "runs").exists())
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=2)
+
     def test_search_api_returns_source_type_and_preview(self) -> None:
         (self.root / "memory" / "sessions" / "session-a").mkdir(parents=True)
         (self.root / "memory" / "sessions" / "session-a" / "summary.md").write_text(
@@ -693,9 +873,18 @@ class WorkspaceServerTests(unittest.TestCase):
             time.sleep(0.05)
         self.fail(f"Job did not finish: {job_id}")
 
-    def _start_server(self, token: str):
+    def _start_server(self, token: str, **handler_kwargs):
         port = _free_port()
-        server = ThreadingHTTPServer(("127.0.0.1", port), _handler(self.root, token=token, host="127.0.0.1", port=port))
+        server = ThreadingHTTPServer(
+            ("127.0.0.1", port),
+            _handler(
+                self.root,
+                token=token,
+                host="127.0.0.1",
+                port=port,
+                **handler_kwargs,
+            ),
+        )
         thread = threading.Thread(target=server.serve_forever, daemon=True)
         thread.start()
         return server, thread, f"http://127.0.0.1:{port}"
@@ -740,6 +929,37 @@ class WorkspaceServerTests(unittest.TestCase):
         with urllib.request.urlopen(request, timeout=5) as response:
             return json.loads(response.read().decode("utf-8"))
 
+    def _post_procurement_apply(
+        self,
+        base: str,
+        token: str,
+        *,
+        answers: dict,
+        grant: str,
+        manifest_sha256: str,
+        confirmation: str = PROCUREMENT_APPLY_CONFIRMATION,
+    ) -> dict:
+        body = json.dumps(
+            {
+                "assetId": "truth_pen",
+                "answers": answers,
+                "applyGrant": grant,
+                "confirmation": confirmation,
+                "expectedManifestSha256": manifest_sha256,
+            }
+        ).encode("utf-8")
+        headers = {"Content-Type": "application/json"}
+        if token:
+            headers["X-Channel-Play-Token"] = token
+        request = urllib.request.Request(
+            f"{base}/api/procurement/apply",
+            data=body,
+            headers=headers,
+            method="POST",
+        )
+        with urllib.request.urlopen(request, timeout=5) as response:
+            return json.loads(response.read().decode("utf-8"))
+
     def _write_procurement_fixture(self) -> Path:
         (self.root / "asset_pipeline" / "briefs").mkdir(parents=True)
         (self.root / "asset_pipeline" / "index.json").write_text(
@@ -766,6 +986,33 @@ class WorkspaceServerTests(unittest.TestCase):
             / "truth_pen_artist_procurement_packet.md"
         ).write_text("# Packet\n", encoding="utf-8")
         return procurement_decision_init(self.root, "truth_pen")
+
+    @staticmethod
+    def _complete_procurement_answers() -> dict:
+        proposal = date.today() + timedelta(days=14)
+        delivery = proposal + timedelta(days=21)
+        return {
+            "decision_status": "approved_for_proposal_outreach",
+            "owner.secure_record_id": (
+                "vault:550e8400-e29b-41d4-a716-446655440000"
+            ),
+            "owner.authorized_signer_role": "project_owner",
+            "owner.governing_jurisdiction": "KR",
+            "commercial.budget_ceiling": 1500,
+            "commercial.currency": "USD",
+            "commercial.payment_route": "upwork",
+            "commercial.tax_vendor_process_confirmed_securely": True,
+            "schedule.proposal_deadline": proposal.isoformat(),
+            "schedule.desired_delivery_date": delivery.isoformat(),
+            "schedule.revision_limit": 2,
+            "outreach.authorized": True,
+            "outreach.authorized_at": datetime.now(
+                timezone.utc,
+            ).isoformat(),
+            "outreach.scope": "all",
+            "outreach.candidate_ids": sorted(TRUTH_PEN_CANDIDATES),
+            "privacy.sensitive_data_stored_outside_repo": True,
+        }
 
     def _get_json(self, url: str) -> dict:
         with urllib.request.urlopen(url, timeout=5) as response:
