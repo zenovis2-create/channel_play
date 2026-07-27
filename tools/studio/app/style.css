@@ -855,6 +855,44 @@ main {
   text-align: right;
 }
 
+.game-procurement-worksheet-preview {
+  background: #f6f9fc;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 2px);
+  display: grid;
+  gap: 9px;
+  padding: 11px;
+}
+
+.game-procurement-worksheet-preview[hidden] {
+  display: none;
+}
+
+.game-procurement-worksheet-preview > div {
+  display: grid;
+  gap: 3px;
+}
+
+.game-procurement-worksheet-preview strong {
+  font-size: 13px;
+}
+
+.game-procurement-worksheet-preview small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.game-procurement-worksheet-preview pre {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  margin: 0;
+  max-height: 360px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 .game-procurement-progress {
   background: #ffffff;
   border: 1px solid var(--line);

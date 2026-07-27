@@ -84,9 +84,17 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn("추가 검증을 먼저 해결", checklist)
         self.assertIn("game-procurement-item", checklist)
         self.assertIn("data-procurement-worksheet", checklist)
+        self.assertIn("data-procurement-worksheet-preview", checklist)
+        self.assertIn("data-procurement-worksheet-download", checklist)
         self.assertIn(
             'procurementWorksheetAvailable ? "" : "disabled"',
             checklist,
+        )
+        self.assertGreaterEqual(
+            checklist.count(
+                'procurementWorksheetAvailable ? "" : "disabled"'
+            ),
+            3,
         )
         self.assertIn(
             'procurementWorksheet.reason === "complete"',
@@ -98,6 +106,19 @@ class DockerStudioContractTests(unittest.TestCase):
         )
         self.assertIn('role="status"', checklist)
         self.assertIn('aria-live="polite"', checklist)
+        self.assertIn(
+            'aria-controls="gameProcurementWorksheetPreview"',
+            checklist,
+        )
+        self.assertIn('aria-expanded="false"', checklist)
+        self.assertIn(
+            '<pre tabindex="0">${esc(procurementWorksheetText)}</pre>',
+            checklist,
+        )
+        self.assertNotIn(
+            '<pre tabindex="0">${procurementWorksheetText}</pre>',
+            checklist,
+        )
         self.assertIn('role="listitem"', checklist)
         self.assertIn(
             'class="game-procurement-empty" role="listitem"',
@@ -109,6 +130,11 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn(".game-procurement-progress", self.style)
         self.assertIn(".game-procurement-actions", self.style)
         self.assertIn(".game-procurement-copy-status", self.style)
+        self.assertIn(".game-procurement-worksheet-preview", self.style)
+        self.assertIn(
+            ".game-procurement-worksheet-preview[hidden]",
+            self.style,
+        )
 
     def test_procurement_progress_counts_are_finite_and_bounded(self) -> None:
         start = self.app.index("function boundedCount")
@@ -144,6 +170,50 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertNotIn("item.message", helper)
         self.assertIn(
             'event.target.closest(\n      "[data-procurement-worksheet]"',
+            self.app,
+        )
+        self.assertIn(
+            "Markdown 다운로드를 사용하세요",
+            helper,
+        )
+
+    def test_procurement_worksheet_preview_is_escaped_and_local(self) -> None:
+        start = self.app.index("function toggleProcurementWorksheetPreview")
+        end = self.app.index("function procurementWorksheetFilename", start)
+        helper = self.app[start:end]
+
+        self.assertIn(
+            "state?.gameProduction?.procurement?.decisionWorksheet",
+            helper,
+        )
+        self.assertIn("if (!worksheet.available || !worksheet.text", helper)
+        self.assertIn("preview.hidden = !willOpen", helper)
+        self.assertIn('button.setAttribute("aria-expanded"', helper)
+        self.assertNotIn("runCommand(", helper)
+        self.assertNotIn("fetch(", helper)
+
+    def test_procurement_worksheet_download_revokes_local_url(self) -> None:
+        start = self.app.index("function procurementWorksheetFilename")
+        end = self.app.index("function bind()", start)
+        helper = self.app[start:end]
+
+        self.assertIn('.replace(/[^a-z0-9_-]+/g, "-")', helper)
+        self.assertIn(".slice(0, 64)", helper)
+        self.assertIn("new Blob([text]", helper)
+        self.assertIn('"text/markdown;charset=utf-8"', helper)
+        self.assertIn("URL.createObjectURL(blob)", helper)
+        self.assertIn("document.createElement(\"a\")", helper)
+        self.assertIn("link.download = procurementWorksheetFilename", helper)
+        self.assertIn("link.remove()", helper)
+        self.assertIn(
+            "window.setTimeout(() => URL.revokeObjectURL(objectUrl), 0)",
+            helper,
+        )
+        self.assertNotIn("runCommand(", helper)
+        self.assertNotIn("fetch(", helper)
+        self.assertIn(
+            'event.target.closest(\n      '
+            '"[data-procurement-worksheet-download]"',
             self.app,
         )
 

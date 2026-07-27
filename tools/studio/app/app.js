@@ -401,6 +401,19 @@ function renderGameProduction() {
                 ? "검증 확인 후 복사"
                 : "답변 양식 없음",
         )}</button>
+        <button
+          type="button"
+          data-procurement-worksheet-preview
+          aria-controls="gameProcurementWorksheetPreview"
+          aria-expanded="false"
+          ${procurementWorksheetAvailable ? "" : "disabled"}
+        >양식 미리보기</button>
+        <button
+          type="button"
+          data-procurement-worksheet-download
+          aria-describedby="gameProcurementCopyStatus"
+          ${procurementWorksheetAvailable ? "" : "disabled"}
+        >Markdown 다운로드</button>
         <span
           id="gameProcurementCopyStatus"
           class="game-procurement-copy-status"
@@ -410,6 +423,20 @@ function renderGameProduction() {
         ></span>
       </div>
     </div>
+    <section
+      id="gameProcurementWorksheetPreview"
+      class="game-procurement-worksheet-preview"
+      aria-label="소유자 답변 양식 미리보기"
+      hidden
+    >
+      ${procurementWorksheetAvailable ? `
+        <div>
+          <strong>${esc(`${procurementWorksheetCount}개 미결정 항목`)}</strong>
+          <small>현재 저장값과 검증 메시지를 제외한 복사·다운로드 내용입니다.</small>
+        </div>
+        <pre tabindex="0">${esc(procurementWorksheetText)}</pre>
+      ` : ""}
+    </section>
     ${procurementProgressTotal ? `
       <div class="game-procurement-progress ${procurementProgressIndeterminate ? "warn" : procurementProgressCompleted === procurementProgressTotal ? "good" : "active"}">
         <div class="game-procurement-progress-copy">
@@ -2331,10 +2358,68 @@ async function copyProcurementWorksheet(button) {
     }
   } catch (_error) {
     if (statusNode) {
-      statusNode.textContent = "클립보드에 복사하지 못했습니다. 브라우저 권한을 확인하세요.";
+      statusNode.textContent = "클립보드 권한을 확인하거나 Markdown 다운로드를 사용하세요.";
     }
   } finally {
     button.disabled = false;
+  }
+}
+
+function toggleProcurementWorksheetPreview(button) {
+  const worksheet = state?.gameProduction?.procurement?.decisionWorksheet || {};
+  const preview = document.getElementById("gameProcurementWorksheetPreview");
+  if (!worksheet.available || !worksheet.text || !preview) return;
+
+  const willOpen = preview.hidden;
+  preview.hidden = !willOpen;
+  button.setAttribute("aria-expanded", willOpen ? "true" : "false");
+  button.textContent = willOpen ? "미리보기 닫기" : "양식 미리보기";
+}
+
+function procurementWorksheetFilename(assetId) {
+  const safeAssetId = String(assetId || "asset")
+    .toLowerCase()
+    .replace(/[^a-z0-9_-]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 64) || "asset";
+  return `${safeAssetId}-owner-decision-worksheet.md`;
+}
+
+function downloadProcurementWorksheet(button) {
+  const procurement = state?.gameProduction?.procurement || {};
+  const worksheet = procurement.decisionWorksheet || {};
+  const text = typeof worksheet.text === "string" ? worksheet.text : "";
+  const statusNode = button
+    .closest(".game-procurement-actions")
+    ?.querySelector("[data-procurement-copy-status]");
+  if (!worksheet.available || !text) {
+    if (statusNode) statusNode.textContent = "다운로드 가능한 미결정 항목이 없습니다.";
+    return;
+  }
+
+  let objectUrl = "";
+  let link = null;
+  try {
+    const blob = new Blob([text], { type: "text/markdown;charset=utf-8" });
+    objectUrl = URL.createObjectURL(blob);
+    link = document.createElement("a");
+    link.href = objectUrl;
+    link.download = procurementWorksheetFilename(procurement.assetId);
+    link.hidden = true;
+    document.body.appendChild(link);
+    link.click();
+    if (statusNode) {
+      statusNode.textContent = `${boundedCount(worksheet.itemCount)}개 미결정 항목 양식을 내려받았습니다.`;
+    }
+  } catch (_error) {
+    if (statusNode) {
+      statusNode.textContent = "Markdown 파일을 만들지 못했습니다.";
+    }
+  } finally {
+    if (link) link.remove();
+    if (objectUrl) {
+      window.setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
+    }
   }
 }
 
@@ -2572,6 +2657,20 @@ function bind() {
     renderTaskTracker();
   });
   $("#game-cockpit").addEventListener("click", (event) => {
+    const previewButton = event.target.closest(
+      "[data-procurement-worksheet-preview]",
+    );
+    if (previewButton) {
+      toggleProcurementWorksheetPreview(previewButton);
+      return;
+    }
+    const downloadButton = event.target.closest(
+      "[data-procurement-worksheet-download]",
+    );
+    if (downloadButton) {
+      downloadProcurementWorksheet(downloadButton);
+      return;
+    }
     const worksheetButton = event.target.closest(
       "[data-procurement-worksheet]",
     );

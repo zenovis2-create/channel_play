@@ -53,6 +53,9 @@ Current constraint: gdx1 is ARM/aarch64 and should be used for AI/ops, repo sync
 - Can copy a blank response worksheet containing only unresolved canonical
   field names and repository-safe guidance. Stored values and validator
   messages are omitted; complete or indeterminate states disable the action.
+- Shows the exact sanitized worksheet in a collapsed read-only preview and can
+  download the same text as a browser-local Markdown file when clipboard
+  permission is unavailable.
 - Keeps all artist contact blocked until the check passes.
 - Runs the check when no current receipt exists. When a matching FAIL receipt
   already exists, the next action opens the owner decision intake guide instead
