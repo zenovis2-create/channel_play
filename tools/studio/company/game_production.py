@@ -810,6 +810,17 @@ def _optimization_loops(
         if latest_job
         else verified_task.get("progressEvidence", "")
     )
+    linux_server_ready = (
+        "Build status: passed"
+        in str(linux_server_build.get("text") or "")
+        and "Build output exists: True"
+        in str(linux_server_build.get("text") or "")
+    )
+    runner_handoff_ready = (
+        "Status: waiting_for_x86_64_runner"
+        in str(server_handoff.get("text") or "")
+    )
+    server_soak_ready = linux_server_ready and runner_handoff_ready
     loops = [
         {
             "id": "play_feedback",
@@ -832,11 +843,32 @@ def _optimization_loops(
         {
             "id": "server_soak",
             "label": "x86_64 Server Soak",
-            "status": "handoff_ready" if server_handoff else "worker_blocked",
+            "status": (
+                "handoff_ready"
+                if server_soak_ready
+                else "worker_blocked"
+            ),
             "summary": linux_server_build.get("summary") or "Linux server build 대기",
-            "evidence": server_handoff.get("path") or linux_server_build.get("path", ""),
-            "nextAction": "x86_64 runner 연결 전까지 handoff receipt 유지",
-            "command": "game.serverHandoff",
+            "evidence": (
+                server_handoff.get("path")
+                if server_soak_ready
+                else linux_server_build.get("path", "")
+                or server_handoff.get("path", "")
+            ),
+            "nextAction": (
+                "x86_64 runner 연결 전까지 handoff receipt 유지"
+                if server_soak_ready
+                else (
+                    "Linux 서버 빌드 차단을 해소하고 최신 handoff를 생성"
+                    if not linux_server_ready
+                    else "통과 빌드를 참조하는 최신 handoff를 생성"
+                )
+            ),
+            "command": (
+                "game.serverHandoff"
+                if linux_server_ready
+                else "unity.build.linuxServer"
+            ),
         },
         {
             "id": "game_work_queue",
@@ -971,11 +1003,26 @@ def _next_best_action(
             "status": "needs_asset",
         }
     server = by_id.get("server_soak", {})
-    if server.get("status") == "worker_blocked" and not server_handoff:
+    if server.get("status") == "worker_blocked":
+        command = str(server.get("command") or "game.serverHandoff")
+        if command == "unity.build.linuxServer":
+            return {
+                "label": "Linux 서버 빌드 차단 해소",
+                "command": command,
+                "reason": (
+                    "최신 Linux 서버 빌드 receipt가 통과하지 않았습니다. "
+                    "빌드 지원 모듈 또는 실패 원인을 해소한 뒤 handoff를 "
+                    "갱신해야 합니다."
+                ),
+                "status": "worker_blocked",
+            }
         return {
             "label": "서버 소크 핸드오프 유지",
-            "command": "game.serverHandoff",
-            "reason": "현재 남은 구조적 병목은 x86_64 Linux runner입니다. 연결 전까지 handoff receipt가 기준입니다.",
+            "command": command,
+            "reason": (
+                "통과한 Linux 서버 빌드는 있지만 최신 x86_64 handoff가 "
+                "필요합니다."
+            ),
             "status": "worker_blocked",
         }
     return {
@@ -1155,7 +1202,9 @@ def _perfection_gate(
         _gate_check("Asset pipeline loop", loop_by_id.get("asset_factory", {}).get("status") == "ready", loop_by_id.get("asset_factory", {}).get("summary", "")),
         _gate_check(
             "Server dependency isolated",
-            loop_by_id.get("server_soak", {}).get("status") == "handoff_ready" and bool(server_handoff),
+            loop_by_id.get("server_soak", {}).get("status")
+            in {"handoff_ready", "worker_blocked"}
+            and bool(server_handoff),
             loop_by_id.get("server_soak", {}).get("evidence", ""),
         ),
         _gate_check(

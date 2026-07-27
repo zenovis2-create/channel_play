@@ -490,7 +490,7 @@
       "id": "task-0012",
       "request": "prepare a Truth Pen commissioned-artist shortlist, fixed-price RFP, evaluation scorecard, and rights-first owner handoff without contacting or hiring anyone",
       "status": "closed",
-      "suggested_agent": "production_planner",
+      "suggested_agent": "coding_specialist",
       "suggested_reviewer": "critic_reviewer",
       "assigned_agent": "production_planner",
       "allowed_write_paths": [
@@ -1508,6 +1508,69 @@
       ],
       "verification_status": "passed",
       "closed_at": "2026-07-27T17:45:43+09:00"
+    },
+    {
+      "id": "task-0029",
+      "request": "Fix the Unity Linux dedicated-server build preflight so Windows, macOS, and Linux editor layouts resolve the installed PlaybackEngines/LinuxStandaloneSupport module correctly; fail clearly when the active Unity editor is missing; replace stale Mac-only and unimplemented-method guidance with host-specific Unity Hub module instructions and the exact rerun command; add path and blocked-receipt regression tests; run the real local linux-server build preflight without installing modules or changing system configuration; refresh the x86_64 server handoff so it references the current receipt; preserve builds as ignored artifacts and commit only scoped source, tests, task records, and receipts.",
+      "status": "closed",
+      "suggested_agent": "production_planner",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": "coding_specialist",
+      "allowed_write_paths": [
+        "tools/studio/company/unity.py",
+        "tools/studio/company/game_loops.py",
+        "tools/studio/company/game_production.py",
+        "tools/studio/company/tests",
+        "memory/company",
+        "memory/sessions",
+        "docs",
+        "runs"
+      ],
+      "required_evidence": "cross-platform path tests, missing-editor and blocked-receipt tests, real local preflight receipt, refreshed server-handoff receipt, focused/full suites, syntax and diff checks, runtime receipt, and findings-first review",
+      "created_at": "2026-07-27T17:51:37+09:00",
+      "updated_at": "2026-07-27T18:01:48+09:00",
+      "work_order": "memory/sessions/20260727-175137-cross-platform-linux-server-build-prefli/work_orders/task-0029-coding_specialist.md",
+      "report": "memory/company/reviews/task-0029-review.md",
+      "verification": "memory/sessions/20260727-175137-cross-platform-linux-server-build-prefli/verification/task-0029-verification.md",
+      "session": "20260727-175137-cross-platform-linux-server-build-prefli",
+      "review_status": "reviewed",
+      "reviewer": "critic_reviewer",
+      "agent_runs": [
+        {
+          "tool": "studio",
+          "mode": "review",
+          "status": "reviewed",
+          "path": "memory/company/reviews/task-0029-review.md",
+          "created_at": "2026-07-27T18:00:56+09:00"
+        }
+      ],
+      "agent_status": "reviewed",
+      "last_tool": "studio",
+      "last_agent_run": "memory/company/reviews/task-0029-review.md",
+      "evidence": [
+        {
+          "path": "runs/task-0029/runtime_status.md",
+          "note": "Cross-platform preflight, focused/full tests, and real blocked runtime receipt",
+          "attached_at": "2026-07-27T18:01:47+09:00"
+        },
+        {
+          "path": "runs/unity-build-linux-server-2026-07-27t17-53-42-09-00/unity_build.md",
+          "note": "Real local missing-module preflight with exact active editor path",
+          "attached_at": "2026-07-27T18:01:47+09:00"
+        },
+        {
+          "path": "runs/game-server-handoff-2026-07-27t17-57-48-09-00/server_handoff.md",
+          "note": "Fail-closed handoff bound to current Linux build receipt",
+          "attached_at": "2026-07-27T18:01:47+09:00"
+        },
+        {
+          "path": "memory/company/reviews/task-0029-review.md",
+          "note": "Findings-first reliability review",
+          "attached_at": "2026-07-27T18:01:47+09:00"
+        }
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-07-27T18:01:48+09:00"
     }
   ]
 }

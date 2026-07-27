@@ -136,6 +136,11 @@ class GameProductionTests(unittest.TestCase):
     def test_state_reports_feedback_asset_and_server_handoff_loops(self) -> None:
         self._write_run("game-feedback-loop-001", "game_feedback_loop.md", "Status: ready_for_review\n")
         self._write_run("game-server-handoff-001", "server_handoff.md", "Status: waiting_for_x86_64_runner\n")
+        self._write_run(
+            "unity-build-linux-server-001",
+            "unity_build.md",
+            "Build status: passed\nBuild output exists: True\n",
+        )
         feedback = self.root / "reviews" / "2026-06-03" / "feedback-0001" / "feedback.md"
         feedback.parent.mkdir(parents=True)
         feedback.write_text("Status: open\n", encoding="utf-8")
@@ -154,6 +159,34 @@ class GameProductionTests(unittest.TestCase):
         self.assertEqual(loops["server_soak"]["status"], "handoff_ready")
         self.assertIn("game-server-handoff-001", loops["server_soak"]["evidence"])
         self.assertEqual(state["nextBestAction"]["command"], "game.productionCheck")
+
+    def test_server_soak_stays_blocked_until_linux_build_passes(
+        self,
+    ) -> None:
+        self._write_run(
+            "game-server-handoff-001",
+            "server_handoff.md",
+            "Status: waiting_for_linux_server_build\n",
+        )
+        self._write_run(
+            "unity-build-linux-server-001",
+            "unity_build.md",
+            "Status: blocked\nLinux build support exists: False\n",
+        )
+
+        state = game_production_state(self.root)
+        server = next(
+            loop
+            for loop in state["optimizationLoops"]
+            if loop["id"] == "server_soak"
+        )
+
+        self.assertEqual(server["status"], "worker_blocked")
+        self.assertEqual(server["command"], "unity.build.linuxServer")
+        self.assertIn(
+            "unity-build-linux-server-001",
+            server["evidence"],
+        )
 
     def test_next_action_routes_open_feedback_before_external_server_blocker(self) -> None:
         self._write_ready_receipts()
