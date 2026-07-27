@@ -1272,6 +1272,66 @@
       "last_agent_run": "memory/company/reviews/task-0024-review.md",
       "verification_status": "passed",
       "closed_at": "2026-07-27T15:42:24+09:00"
+    },
+    {
+      "id": "task-0025",
+      "request": "Add a value-redacted, canonical field-level change summary to the Truth Pen owner-answer preview before any save. The preview response and Studio UI may expose only canonical field names, changed/unchanged counts, and the invariant that records and fixed safety flags remain preserved; never echo current or proposed values. Mint an apply grant only when all 16 canonical answers validate and at least one field changes. Reject no-op apply attempts without writing the manifest, creating a receipt, or authorizing contact. Preserve the existing short-lived one-time grant, exact confirmation phrase, two-checkbox UI, separate procurement-check receipt gate, and input-edit invalidation. Add pure, API, UI contract, no-value-echo, no-op, JavaScript syntax, Chrome preview-without-apply, unchanged real hash, full-suite, documentation, and findings-first review evidence.",
+      "status": "closed",
+      "suggested_agent": "coding_specialist",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": "coding_specialist",
+      "allowed_write_paths": [
+        "tools/studio/company/procurement.py",
+        "tools/studio/workspace_server.py",
+        "tools/studio/app",
+        "tools/studio/company/tests",
+        "tools/studio/tests",
+        "docs",
+        "memory/company",
+        "memory/sessions",
+        "reviews",
+        "runs"
+      ],
+      "required_evidence": "redacted change-summary and no-op unit/API tests, Studio UI contract tests, JavaScript syntax check, Chrome preview-without-apply proof, unchanged real manifest and receipt hashes, focused and full Python suites, runtime receipt, and findings-first security review",
+      "created_at": "2026-07-27T15:48:32+09:00",
+      "updated_at": "2026-07-27T16:07:01+09:00",
+      "work_order": "memory/sessions/20260727-154832-show-a-redacted-truth-pen-manifest-chang/work_orders/task-0025-coding_specialist.md",
+      "report": "memory/company/reviews/task-0025-review.md",
+      "verification": "memory/sessions/20260727-154832-show-a-redacted-truth-pen-manifest-chang/verification/task-0025-verification.md",
+      "session": "20260727-154832-show-a-redacted-truth-pen-manifest-chang",
+      "evidence": [
+        {
+          "path": "runs/task-0025-procurement-change-summary/runtime_status.md",
+          "note": "Chrome value-redaction proof, zero apply requests, unchanged real hashes, focused and full suites",
+          "attached_at": "2026-07-27T16:06:01+09:00"
+        },
+        {
+          "path": "memory/sessions/20260727-154832-show-a-redacted-truth-pen-manifest-chang/agent_reports/task-0025-coding_specialist.md",
+          "note": "Implementation report and security verification summary",
+          "attached_at": "2026-07-27T16:07:01+09:00"
+        },
+        {
+          "path": "memory/company/reviews/task-0025-review.md",
+          "note": "Findings-first security review",
+          "attached_at": "2026-07-27T16:07:01+09:00"
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer": "critic_reviewer",
+      "agent_runs": [
+        {
+          "tool": "studio",
+          "mode": "review",
+          "status": "reviewed",
+          "path": "memory/company/reviews/task-0025-review.md",
+          "created_at": "2026-07-27T16:06:01+09:00"
+        }
+      ],
+      "agent_status": "reviewed",
+      "last_tool": "studio",
+      "last_agent_run": "memory/company/reviews/task-0025-review.md",
+      "verification_status": "passed",
+      "closed_at": "2026-07-27T16:07:01+09:00"
     }
   ]
 }

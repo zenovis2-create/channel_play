@@ -519,6 +519,11 @@ function renderGameProduction() {
           </small>
           <em data-procurement-apply-grant-status></em>
         </div>
+        <div
+          class="game-procurement-change-summary"
+          data-procurement-change-summary
+          aria-label="저장 전 변경 범위"
+        ></div>
         <label>
           <input
             type="checkbox"
@@ -2548,6 +2553,9 @@ function procurementApplyControls() {
     panel: document.querySelector(
       "[data-procurement-answer-apply-panel]",
     ),
+    changeSummary: document.querySelector(
+      "[data-procurement-change-summary]",
+    ),
     ownerCheck: document.querySelector(
       "[data-procurement-apply-owner-check]",
     ),
@@ -2583,6 +2591,7 @@ function invalidateProcurementApplyGrant(answerMessage = "") {
   if (controls.button) controls.button.disabled = true;
   if (controls.grantStatus) controls.grantStatus.textContent = "";
   if (controls.status) controls.status.textContent = "";
+  if (controls.changeSummary) controls.changeSummary.replaceChildren();
   const answerStatus = document.querySelector(
     "[data-procurement-answer-status]",
   );
@@ -2602,10 +2611,15 @@ function showProcurementApplyGrant(preview) {
     preview.applyGrantExpiresInSeconds,
     3600,
   );
+  const summary = normalizedProcurementChangeSummary(preview);
   if (
     !grant
     || !/^[0-9a-f]{64}$/.test(manifestSha256)
     || !expiresInSeconds
+    || !summary
+    || !(summary.changeCount > 0)
+    || summary.changeCount !== summary.changedFields.length
+    || summary.unchangedCount !== summary.unchangedFields.length
   ) {
     invalidateProcurementApplyGrant();
     return false;
@@ -2621,11 +2635,12 @@ function showProcurementApplyGrant(preview) {
     );
   }, expiresInSeconds * 1000);
   const controls = procurementApplyControls();
-  if (!controls.panel) {
+  if (!controls.panel || !controls.changeSummary) {
     procurementApplyGrant = null;
     return false;
   }
   controls.panel.hidden = false;
+  renderProcurementChangeSummary(controls.changeSummary, preview);
   if (controls.ownerCheck) controls.ownerCheck.checked = false;
   if (controls.contactCheck) controls.contactCheck.checked = false;
   if (controls.confirmation) controls.confirmation.value = "";
@@ -2676,6 +2691,10 @@ function renderProcurementAnswerPreview(resultNode, preview) {
   ].join(" · ");
   summary.append(title, detail);
   resultNode.appendChild(summary);
+  const changeSummary = document.createElement("div");
+  changeSummary.className = "game-procurement-change-summary";
+  resultNode.appendChild(changeSummary);
+  renderProcurementChangeSummary(changeSummary, preview);
 
   const errors = Array.isArray(preview.errors)
     ? preview.errors.slice(0, 20)
@@ -2689,6 +2708,78 @@ function renderProcurementAnswerPreview(resultNode, preview) {
     }
     resultNode.appendChild(list);
   }
+}
+
+function normalizedProcurementChangeSummary(preview) {
+  const changedFields = Array.isArray(preview.changedFields)
+    ? preview.changedFields
+    : null;
+  const unchangedFields = Array.isArray(preview.unchangedFields)
+    ? preview.unchangedFields
+    : null;
+  if (
+    !changedFields
+    || !unchangedFields
+    || preview.protectedStatePreserved !== true
+  ) {
+    return null;
+  }
+  const answerCount = boundedCount(preview.answerCount, 100);
+  const changeCount = boundedCount(preview.changeCount, answerCount);
+  const unchangedCount = boundedCount(
+    preview.unchangedCount,
+    answerCount,
+  );
+  const fields = [...changedFields, ...unchangedFields];
+  if (
+    changeCount !== changedFields.length
+    || unchangedCount !== unchangedFields.length
+    || changeCount + unchangedCount !== answerCount
+    || fields.some(
+      (field) => (
+        typeof field !== "string"
+        || !/^[a-z][a-z0-9_]*(?:\.[a-z][a-z0-9_]*)?$/.test(field)
+      ),
+    )
+    || new Set(fields).size !== fields.length
+  ) {
+    return null;
+  }
+  return {
+    changeCount,
+    unchangedCount,
+    changedFields,
+    unchangedFields,
+  };
+}
+
+function renderProcurementChangeSummary(container, preview) {
+  container.replaceChildren();
+  const summary = normalizedProcurementChangeSummary(preview);
+  if (!summary) return false;
+
+  const title = document.createElement("strong");
+  title.textContent = [
+    `${summary.changeCount}개 필드 변경`,
+    `${summary.unchangedCount}개 동일`,
+  ].join(" · ");
+  const boundary = document.createElement("small");
+  boundary.textContent = [
+    "현재값과 제안값은 표시하지 않음",
+    "records와 고정 안전 플래그 유지",
+  ].join(" · ");
+  container.append(title, boundary);
+
+  if (summary.changedFields.length) {
+    const list = document.createElement("ul");
+    for (const field of summary.changedFields) {
+      const item = document.createElement("li");
+      item.textContent = field;
+      list.appendChild(item);
+    }
+    container.appendChild(list);
+  }
+  return true;
 }
 
 async function previewProcurementAnswers(button) {
@@ -2739,9 +2830,13 @@ async function previewProcurementAnswers(button) {
     renderProcurementAnswerPreview(resultNode, preview);
     const grantReady = preview.valid
       && showProcurementApplyGrant(preview);
+    const noChanges = preview.valid
+      && boundedCount(preview.changeCount, 16) === 0;
     statusNode.textContent = grantReady
       ? "형식 검증 통과. 2단계 저장 승인을 진행할 수 있습니다."
-      : preview.valid
+      : noChanges
+        ? "현재 manifest와 동일하여 저장할 변경이 없습니다."
+        : preview.valid
         ? "형식은 통과했지만 저장 grant를 발급하지 못했습니다."
         : "저장 전에 표시된 항목을 수정하세요.";
   } catch (_error) {

@@ -93,12 +93,19 @@ current decision, and runs the existing validator without writing a manifest
 or receipt. A valid preview still reports `연락 허가 아님`; the approved values
 must be deliberately applied and checked again before outreach.
 
+The preview also shows the canonical fields that would change and reports how
+many submitted fields are unchanged. It never returns or renders current or
+proposed values. The summary confirms that `records` and fixed outreach/privacy
+safety flags are preserved. Review this value-redacted scope before saving.
+
 After a complete valid preview, Studio exposes a separate `2단계 저장 승인`
 panel. The preview creates a five-minute, one-time in-memory grant bound to the
 canonical answer digest and the current normalized manifest SHA-256. Saving
 requires both owner/contact-boundary checkboxes and the exact confirmation
 phrase `소유자 승인값 저장`. Editing any answer invalidates the browser grant;
-expired, replayed, mismatched, or stale-manifest requests fail closed.
+expired, replayed, mismatched, or stale-manifest requests fail closed. If all
+16 submitted answers already match the manifest, Studio reports no changes,
+does not issue a grant, and rejects any apply attempt without writing.
 
 The save endpoint revalidates every answer and atomically replaces only
 `asset_pipeline/manifests/truth_pen_procurement_decision.json`. It does not
