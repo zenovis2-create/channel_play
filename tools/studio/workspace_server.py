@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+from copy import deepcopy
 import json
 import mimetypes
 import os
+import re
 import secrets
 import threading
 import time
@@ -28,6 +30,7 @@ from tools.studio.company.image_to_blender import image3d_state
 from tools.studio.company.model_cookbook import ensure_model_cookbook
 from tools.studio.company.paths import find_repo_root, rel
 from tools.studio.company.procurement import (
+    OWNER_DECISION_FIELDS,
     apply_procurement_answers,
     preview_procurement_answers,
     procurement_answer_digest,
@@ -47,8 +50,12 @@ from tools.studio.jobs import create_job, get_job, list_jobs, start_job
 APP_DIR = Path(__file__).resolve().parent / "app"
 MAX_FILE_BYTES = 120_000
 MAX_PROCUREMENT_PREVIEW_BYTES = 20_000
+MAX_PROCUREMENT_STATUS_BYTES = 1_000
 PROCUREMENT_APPLY_GRANT_TTL_SECONDS = 300
 PROCUREMENT_APPLY_MAX_GRANTS = 64
+PROCUREMENT_APPLY_RESULT_TTL_SECONDS = 300
+PROCUREMENT_APPLY_MAX_RESULTS = 64
+PROCUREMENT_APPLY_ATTEMPT_ID_PATTERN = re.compile(r"^[0-9a-f]{32}$")
 PROCUREMENT_APPLY_CONFIRMATION = "소유자 승인값 저장"
 ALLOWED_READ_PREFIXES = (
     "Assets/_Project",
@@ -150,6 +157,147 @@ class ProcurementApplyGrantStore:
         ]
         for grant_id in expired:
             del self._grants[grant_id]
+
+
+class ProcurementApplyResultStore:
+    """Bounded value-redacted results for ambiguous apply responses."""
+
+    SAFE_RESULT_FIELDS = (
+        "saved",
+        "savedVerified",
+        "savedChangeCount",
+        "savedChangedFields",
+        "protectedStatePreserved",
+        "contactAuthorized",
+        "receiptCreated",
+        "manifest",
+        "manifestSha256",
+        "nextCommand",
+    )
+
+    def __init__(
+        self,
+        ttl_seconds: int = PROCUREMENT_APPLY_RESULT_TTL_SECONDS,
+        clock=None,
+        max_results: int = PROCUREMENT_APPLY_MAX_RESULTS,
+    ) -> None:
+        if ttl_seconds <= 0:
+            raise ValueError("result TTL must be positive")
+        if max_results <= 0:
+            raise ValueError("result capacity must be positive")
+        self.ttl_seconds = ttl_seconds
+        self.max_results = max_results
+        self._clock = clock or time.monotonic
+        self._results: dict[str, dict[str, object]] = {}
+        self._lock = threading.Lock()
+
+    def reserve(self, attempt_id: object, asset_id: str) -> None:
+        clean_attempt_id = _require_procurement_apply_attempt_id(attempt_id)
+        now = float(self._clock())
+        with self._lock:
+            self._purge_expired(now)
+            if clean_attempt_id in self._results:
+                raise CompanyError("Apply attempt ID has already been used.")
+            if len(self._results) >= self.max_results:
+                oldest = min(
+                    self._results,
+                    key=lambda current: float(
+                        self._results[current].get("expiresAt") or 0
+                    ),
+                )
+                del self._results[oldest]
+            self._results[clean_attempt_id] = {
+                "assetId": asset_id,
+                "expiresAt": now + self.ttl_seconds,
+                "result": None,
+            }
+
+    def complete(
+        self,
+        attempt_id: object,
+        asset_id: str,
+        result: dict,
+    ) -> None:
+        clean_attempt_id = _require_procurement_apply_attempt_id(attempt_id)
+        safe_result = self._safe_result(asset_id, result)
+        now = float(self._clock())
+        with self._lock:
+            self._purge_expired(now)
+            record = self._results.get(clean_attempt_id)
+            if (
+                record is None
+                or record.get("assetId") != asset_id
+                or record.get("result") is not None
+            ):
+                raise CompanyError("Apply attempt is invalid or expired.")
+            record["result"] = safe_result
+
+    def lookup(self, attempt_id: object, asset_id: str) -> dict:
+        if (
+            not isinstance(attempt_id, str)
+            or not PROCUREMENT_APPLY_ATTEMPT_ID_PATTERN.fullmatch(attempt_id)
+        ):
+            return {"found": False, "pending": False}
+        now = float(self._clock())
+        with self._lock:
+            self._purge_expired(now)
+            record = self._results.get(attempt_id)
+            if record is None or record.get("assetId") != asset_id:
+                return {"found": False, "pending": False}
+            result = record.get("result")
+            if result is None:
+                return {"found": False, "pending": True}
+            return {
+                "found": True,
+                "pending": False,
+                **deepcopy(result),
+            }
+
+    def _safe_result(self, asset_id: str, result: dict) -> dict:
+        safe = {
+            field: deepcopy(result.get(field))
+            for field in self.SAFE_RESULT_FIELDS
+        }
+        changed_fields = safe["savedChangedFields"]
+        canonical_fields = [
+            field
+            for field in OWNER_DECISION_FIELDS
+            if isinstance(changed_fields, list) and field in changed_fields
+        ]
+        expected_manifest = (
+            f"asset_pipeline/manifests/"
+            f"{asset_id}_procurement_decision.json"
+        )
+        valid = (
+            safe["saved"] is True
+            and isinstance(safe["savedVerified"], bool)
+            and type(safe["savedChangeCount"]) is int
+            and safe["savedChangeCount"] > 0
+            and isinstance(changed_fields, list)
+            and safe["savedChangeCount"] == len(changed_fields)
+            and changed_fields == canonical_fields
+            and safe["protectedStatePreserved"] is True
+            and safe["contactAuthorized"] is False
+            and safe["receiptCreated"] is False
+            and safe["manifest"] == expected_manifest
+            and isinstance(safe["manifestSha256"], str)
+            and bool(re.fullmatch(r"[0-9a-f]{64}", safe["manifestSha256"]))
+            and safe["nextCommand"] == "asset.procurementCheck"
+        )
+        if not valid:
+            raise CompanyError(
+                "Apply result could not be retained safely."
+            )
+        return safe
+
+    def _purge_expired(self, now: float) -> None:
+        expired = [
+            attempt_id
+            for attempt_id, record in self._results.items()
+            if float(record.get("expiresAt") or 0) <= now
+        ]
+        for attempt_id in expired:
+            del self._results[attempt_id]
 
 
 def serve(host: str = "127.0.0.1", port: int = 8766, open_browser: bool = False) -> None:
@@ -363,10 +511,22 @@ def _handler(
         PROCUREMENT_APPLY_GRANT_TTL_SECONDS
     ),
     procurement_grant_clock=None,
+    procurement_result_ttl_seconds: int = (
+        PROCUREMENT_APPLY_RESULT_TTL_SECONDS
+    ),
+    procurement_result_clock=None,
+    procurement_result_store: ProcurementApplyResultStore | None = None,
 ):
     procurement_grants = ProcurementApplyGrantStore(
         procurement_grant_ttl_seconds,
         procurement_grant_clock,
+    )
+    procurement_results = (
+        procurement_result_store
+        or ProcurementApplyResultStore(
+            procurement_result_ttl_seconds,
+            procurement_result_clock,
+        )
     )
     procurement_apply_lock = threading.Lock()
 
@@ -420,6 +580,7 @@ def _handler(
                 if parsed.path not in {
                     "/api/command",
                     "/api/procurement/apply",
+                    "/api/procurement/apply-status",
                     "/api/procurement/preview",
                 }:
                     self._json({"ok": False, "error": "Unknown API path"}, status=HTTPStatus.NOT_FOUND)
@@ -460,6 +621,26 @@ def _handler(
                         )
                     self._json({"ok": True, **result})
                     return
+                if parsed.path == "/api/procurement/apply-status":
+                    data = self._read_json_body(
+                        MAX_PROCUREMENT_STATUS_BYTES,
+                        strict=True,
+                    )
+                    _require_request_fields(
+                        data,
+                        {"assetId", "applyAttemptId"},
+                        "Procurement apply status",
+                    )
+                    asset_id = str(data.get("assetId") or "")
+                    attempt_id = _require_procurement_apply_attempt_id(
+                        data.get("applyAttemptId")
+                    )
+                    result = procurement_results.lookup(
+                        attempt_id,
+                        asset_id,
+                    )
+                    self._json({"ok": True, **result})
+                    return
                 if parsed.path == "/api/procurement/apply":
                     data = self._read_json_body(
                         MAX_PROCUREMENT_PREVIEW_BYTES,
@@ -470,6 +651,7 @@ def _handler(
                         {
                             "assetId",
                             "answers",
+                            "applyAttemptId",
                             "applyGrant",
                             "confirmation",
                             "expectedManifestSha256",
@@ -484,6 +666,9 @@ def _handler(
                             "Explicit owner-save confirmation is required."
                         )
                     asset_id = str(data.get("assetId") or "")
+                    attempt_id = _require_procurement_apply_attempt_id(
+                        data.get("applyAttemptId")
+                    )
                     answers = data.get("answers")
                     expected_digest = str(
                         data.get("expectedManifestSha256") or ""
@@ -507,6 +692,10 @@ def _handler(
                                 "Owner answers or manifest changed; "
                                 "run the preview again."
                             )
+                        procurement_results.reserve(
+                            attempt_id,
+                            asset_id,
+                        )
                         answer_digest = procurement_answer_digest(answers)
                         procurement_grants.consume(
                             data.get("applyGrant"),
@@ -519,6 +708,11 @@ def _handler(
                             asset_id,
                             answers,
                             expected_digest,
+                        )
+                        procurement_results.complete(
+                            attempt_id,
+                            asset_id,
+                            result,
                         )
                     self._json({"ok": True, **result})
                     return
@@ -644,6 +838,15 @@ def _reject_preview_json_constant(value: str) -> None:
     raise ValueError(
         f"non-standard numeric constant is prohibited: {value}"
     )
+
+
+def _require_procurement_apply_attempt_id(value: object) -> str:
+    if (
+        not isinstance(value, str)
+        or not PROCUREMENT_APPLY_ATTEMPT_ID_PATTERN.fullmatch(value)
+    ):
+        raise CompanyError("Apply attempt ID is invalid.")
+    return value
 
 
 def _require_request_fields(

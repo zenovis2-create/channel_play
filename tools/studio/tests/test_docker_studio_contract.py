@@ -322,6 +322,23 @@ class DockerStudioContractTests(unittest.TestCase):
             helper,
         )
         self.assertIn('api("/api/procurement/apply"', helper)
+        self.assertEqual(
+            helper.count('api("/api/procurement/apply"'),
+            1,
+        )
+        self.assertIn('api("/api/procurement/apply-status"', helper)
+        self.assertIn("createProcurementApplyAttemptId()", helper)
+        self.assertIn("new Uint8Array(16)", helper)
+        self.assertIn("crypto.getRandomValues(bytes)", helper)
+        self.assertIn('padStart(2, "0")', helper)
+        self.assertIn("applyAttemptId,", helper)
+        self.assertIn("result.found !== true", helper)
+        self.assertIn("result.pending !== false", helper)
+        self.assertIn(
+            "recoverProcurementSaveVerification(",
+            helper,
+        )
+        self.assertIn("saveRecovered = true", helper)
         self.assertIn("applyGrant: grant.grant", helper)
         self.assertIn(
             "expectedManifestSha256: grant.manifestSha256",
