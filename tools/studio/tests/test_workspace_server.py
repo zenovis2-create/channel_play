@@ -637,6 +637,10 @@ class WorkspaceServerTests(unittest.TestCase):
             )
             self.assertTrue(result["protectedStatePreserved"])
             self.assertNotIn("applyGrant", result)
+            self.assertNotIn(
+                "applyResultRecoveryExpiresInSeconds",
+                result,
+            )
             self.assertEqual(manifest.read_bytes(), before)
             self.assertFalse((self.root / "runs").exists())
         finally:
@@ -666,6 +670,10 @@ class WorkspaceServerTests(unittest.TestCase):
             self.assertEqual(result["changedFields"], [])
             self.assertTrue(result["protectedStatePreserved"])
             self.assertNotIn("applyGrant", result)
+            self.assertNotIn(
+                "applyResultRecoveryExpiresInSeconds",
+                result,
+            )
             self.assertNotIn("550e8400-e29b-41d4-a716-446655440000", encoded)
             self.assertNotIn("cynthia_ignacio", encoded)
 
@@ -850,7 +858,10 @@ class WorkspaceServerTests(unittest.TestCase):
         manifest = self._write_procurement_fixture()
         answers = self._complete_procurement_answers()
         before = manifest.read_bytes()
-        server, thread, base = self._start_server("test-token")
+        server, thread, base = self._start_server(
+            "test-token",
+            procurement_result_ttl_seconds=17,
+        )
         try:
             preview = self._post_procurement_preview(
                 base,
@@ -859,6 +870,10 @@ class WorkspaceServerTests(unittest.TestCase):
             )
             self.assertTrue(preview["valid"])
             self.assertTrue(preview["applyGrant"])
+            self.assertEqual(
+                preview["applyResultRecoveryExpiresInSeconds"],
+                17,
+            )
 
             with self.assertRaises(urllib.error.HTTPError) as missing_token:
                 self._post_procurement_apply(

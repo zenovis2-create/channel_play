@@ -1072,6 +1072,31 @@ main {
   padding-left: 20px;
 }
 
+.game-procurement-save-recovery[hidden] {
+  display: none;
+}
+
+.game-procurement-save-recovery {
+  background: #fffaf0;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--warn);
+  border-radius: calc(var(--radius) - 4px);
+  display: grid;
+  gap: 7px;
+  padding: 10px;
+}
+
+.game-procurement-save-recovery small,
+.game-procurement-save-recovery span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.game-procurement-save-recovery button {
+  justify-self: start;
+}
+
 .game-procurement-answer-apply[hidden] {
   display: none;
 }

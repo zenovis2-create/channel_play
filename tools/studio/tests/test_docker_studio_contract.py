@@ -154,6 +154,11 @@ class DockerStudioContractTests(unittest.TestCase):
             "data-procurement-save-verification",
             checklist,
         )
+        self.assertIn(
+            "data-procurement-save-recovery",
+            checklist,
+        )
+        self.assertIn('aria-label="저장 결과 복구"', checklist)
         self.assertIn("data-procurement-apply-owner-check", checklist)
         self.assertIn("data-procurement-apply-contact-check", checklist)
         self.assertIn(
@@ -174,8 +179,13 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn(".game-procurement-answer-apply", self.style)
         self.assertIn(".game-procurement-change-summary", self.style)
         self.assertIn(".game-procurement-save-verification", self.style)
+        self.assertIn(".game-procurement-save-recovery", self.style)
         self.assertIn(
             ".game-procurement-answer-apply[hidden]",
+            self.style,
+        )
+        self.assertIn(
+            ".game-procurement-save-recovery[hidden]",
             self.style,
         )
 
@@ -264,8 +274,22 @@ class DockerStudioContractTests(unittest.TestCase):
         self,
     ) -> None:
         start = self.app.index("function renderProcurementAnswerPreview")
-        end = self.app.index("function clearProcurementAnswerPreview", start)
-        helper = self.app[start:end]
+        end = self.app.index(
+            "function procurementSaveRecoveryContainer",
+            start,
+        )
+        request_start = self.app.index(
+            "async function previewProcurementAnswers",
+            end,
+        )
+        request_end = self.app.index(
+            "function clearProcurementAnswerPreview",
+            request_start,
+        )
+        helper = (
+            self.app[start:end]
+            + self.app[request_start:request_end]
+        )
 
         self.assertIn("resultNode.replaceChildren()", helper)
         self.assertIn('document.createElement("strong")', helper)
@@ -300,12 +324,18 @@ class DockerStudioContractTests(unittest.TestCase):
         helper = self.app[start:end]
 
         self.assertIn("let procurementApplyGrant = null", self.app)
+        self.assertIn("let procurementSaveRecovery = null", self.app)
+        self.assertIn("let procurementSaveRecoveryTimer = null", self.app)
         self.assertIn(
             'const PROCUREMENT_APPLY_CONFIRMATION = "소유자 승인값 저장"',
             self.app,
         )
         self.assertIn("preview.applyGrant", helper)
         self.assertIn("preview.applyGrantExpiresInSeconds", helper)
+        self.assertIn(
+            "preview.applyResultRecoveryExpiresInSeconds",
+            helper,
+        )
         self.assertIn("changedFields: [...summary.changedFields]", helper)
         self.assertIn("summary.changeCount > 0", helper)
         self.assertIn("summary.changedFields.length", helper)
@@ -332,12 +362,14 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn("crypto.getRandomValues(bytes)", helper)
         self.assertIn('padStart(2, "0")', helper)
         self.assertIn("applyAttemptId,", helper)
+        self.assertIn("grant.recoveryExpiresInSeconds * 1000", helper)
         self.assertIn("result.found !== true", helper)
         self.assertIn("result.pending !== false", helper)
         self.assertIn(
             "recoverProcurementSaveVerification(",
             helper,
         )
+        self.assertIn("showProcurementSaveRecovery(", helper)
         self.assertIn("saveRecovered = true", helper)
         self.assertIn("applyGrant: grant.grant", helper)
         self.assertIn(
@@ -372,6 +404,94 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn(
             "invalidateProcurementApplyGrant()",
             self.app,
+        )
+
+    def test_procurement_manual_save_recovery_is_status_only_and_ephemeral(
+        self,
+    ) -> None:
+        start = self.app.index("function clearProcurementSaveRecovery")
+        end = self.app.index(
+            "async function previewProcurementAnswers",
+            start,
+        )
+        recovery_helper = self.app[start:end]
+        status_start = self.app.index(
+            "async function recoverProcurementSaveVerification",
+        )
+        status_end = self.app.index(
+            "function clearProcurementSaveVerification",
+            status_start,
+        )
+        status_helper = self.app[status_start:status_end]
+
+        self.assertIn("assetId,", recovery_helper)
+        self.assertIn("applyAttemptId,", recovery_helper)
+        self.assertIn(
+            "manifestSha256: grant.manifestSha256",
+            recovery_helper,
+        )
+        self.assertIn("changeCount: grant.changeCount", recovery_helper)
+        self.assertIn("changedFields: [...changedFields]", recovery_helper)
+        self.assertIn("expiresAt,", recovery_helper)
+        record_start = recovery_helper.index(
+            "procurementSaveRecovery = {",
+        )
+        record_end = recovery_helper.index("};", record_start)
+        retained_record = recovery_helper[record_start:record_end]
+        self.assertEqual(retained_record.count("\n    "), 6)
+        self.assertNotIn("answers", retained_record)
+        self.assertNotIn("grant,", retained_record)
+        self.assertNotIn("confirmation", retained_record)
+        self.assertIn(
+            "expiresAt > Date.now() + (3600 * 1000)",
+            recovery_helper,
+        )
+        self.assertIn("window.setTimeout(", recovery_helper)
+        self.assertIn("window.clearTimeout", recovery_helper)
+        self.assertIn("Date.now() >= recovery.expiresAt", recovery_helper)
+        self.assertIn(
+            "data-procurement-save-recovery-check",
+            self.app,
+        )
+        self.assertIn(
+            "retryProcurementSaveRecovery(saveRecoveryButton)",
+            self.app,
+        )
+        self.assertIn(
+            "recoverProcurementSaveVerification(",
+            recovery_helper,
+        )
+        self.assertIn(
+            "아직 확정된 결과가 없습니다.",
+            recovery_helper,
+        )
+        self.assertIn(
+            "네트워크 오류로 결과를 확인하지 못했습니다.",
+            recovery_helper,
+        )
+        self.assertIn(
+            "저장 결과 조회 시간이 만료되었습니다.",
+            recovery_helper,
+        )
+        self.assertIn("clearProcurementSaveRecovery()", recovery_helper)
+        self.assertIn("input.value = input.defaultValue", recovery_helper)
+        self.assertIn("await loadState()", recovery_helper)
+        self.assertIn(
+            'api("/api/procurement/apply-status"',
+            status_helper,
+        )
+        self.assertIn("assetId,", status_helper)
+        self.assertIn("applyAttemptId,", status_helper)
+        self.assertNotIn("answers", status_helper)
+        self.assertNotIn("applyGrant", status_helper)
+        self.assertNotIn("confirmation", status_helper)
+        self.assertNotIn("/api/procurement/apply\"", recovery_helper)
+        self.assertNotIn("localStorage", recovery_helper)
+        self.assertNotIn("sessionStorage", recovery_helper)
+        self.assertNotIn(".innerHTML", recovery_helper)
+        self.assertEqual(
+            self.app.count('api("/api/procurement/apply"'),
+            1,
         )
 
 
