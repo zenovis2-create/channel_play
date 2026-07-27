@@ -79,6 +79,11 @@ blank placeholders only; it deliberately omits stored values and validator
 messages. The copy action is disabled when progress is complete or when
 malformed or unsupported data makes progress indeterminate. Copying the
 worksheet does not edit the manifest, authorize contact, or create a receipt.
+Before copying, the same sanitized text can be expanded in a read-only preview.
+If clipboard permission is unavailable, `Markdown 다운로드` saves that exact
+text as a local `.md` file. The download is created in the browser, is not
+uploaded or written into the repository, and remains unavailable for complete
+or indeterminate states.
 
 Candidate IDs are `cynthia_ignacio`, `marisol_griffiths`, and
 `natalie_lewis`. Use only the IDs the owner explicitly authorizes.
