@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import math
 import re
+from copy import deepcopy
 from datetime import date, datetime, timezone
 from pathlib import Path
 from uuid import UUID
@@ -80,6 +81,24 @@ EXPECTED_RECORDS = {
         "procurement_packet": "docs/research/truth_pen_artist_procurement_packet.md",
     }
 }
+OWNER_DECISION_FIELDS = (
+    "decision_status",
+    "owner.secure_record_id",
+    "owner.authorized_signer_role",
+    "owner.governing_jurisdiction",
+    "commercial.budget_ceiling",
+    "commercial.currency",
+    "commercial.payment_route",
+    "commercial.tax_vendor_process_confirmed_securely",
+    "schedule.proposal_deadline",
+    "schedule.desired_delivery_date",
+    "schedule.revision_limit",
+    "outreach.authorized",
+    "outreach.authorized_at",
+    "outreach.scope",
+    "outreach.candidate_ids",
+    "privacy.sensitive_data_stored_outside_repo",
+)
 
 
 def procurement_decision_init(root: Path, asset_id: str) -> Path:
@@ -144,6 +163,57 @@ def evaluate_procurement_outreach(root: Path, asset_id: str) -> dict:
     digest = sha256_gate_manifest(manifest)
     _validate_decision(root, clean, data, errors)
     return _result(clean, manifest, data, digest, errors)
+
+
+def preview_procurement_answers(
+    root: Path,
+    asset_id: str,
+    answers: object,
+) -> dict:
+    """Validate owner answers in memory without changing authorization."""
+    clean = clean_asset_id(asset_id)
+    _require_supported_tracked_asset(root, clean)
+    if not isinstance(answers, dict):
+        raise CompanyError("Procurement preview answers must be a JSON object.")
+
+    current = evaluate_procurement_outreach(root, clean)
+    current_data = current.get("data")
+    if not isinstance(current_data, dict) or not current_data:
+        return _preview_result(
+            current,
+            [],
+            [
+                "current procurement manifest must be valid JSON before "
+                "answer preview"
+            ],
+        )
+
+    allowed = set(OWNER_DECISION_FIELDS)
+    accepted_fields = [
+        field for field in OWNER_DECISION_FIELDS if field in answers
+    ]
+    unsupported_count = sum(
+        1
+        for field in answers
+        if not isinstance(field, str) or field not in allowed
+    )
+    errors: list[str] = []
+    if unsupported_count:
+        errors.append(
+            "answers contain "
+            f"{unsupported_count} unsupported field(s); only canonical owner "
+            "decision fields are allowed"
+        )
+    if _contains_nonfinite(answers):
+        errors.append("answers contain a non-finite numeric value")
+
+    candidate = deepcopy(current_data)
+    for field in accepted_fields:
+        _set_decision_field(candidate, field, deepcopy(answers[field]))
+    validation_errors: list[str] = []
+    _validate_decision(root, clean, candidate, validation_errors)
+    errors.extend(_redact_preview_error(error) for error in validation_errors)
+    return _preview_result(current, accepted_fields, errors)
 
 
 def procurement_manifest_path(root: Path, asset_id: str) -> Path:
@@ -433,6 +503,61 @@ def _is_canonical_vault_id(value: str) -> bool:
 
 def _reject_nonfinite_json(value: str) -> None:
     raise ValueError(f"non-standard numeric constant is prohibited: {value}")
+
+
+def _contains_nonfinite(value: object) -> bool:
+    if isinstance(value, float):
+        return not math.isfinite(value)
+    if isinstance(value, dict):
+        return any(_contains_nonfinite(item) for item in value.values())
+    if isinstance(value, (list, tuple)):
+        return any(_contains_nonfinite(item) for item in value)
+    return False
+
+
+def _set_decision_field(data: dict, field: str, value: object) -> None:
+    if "." not in field:
+        data[field] = value
+        return
+    section, key = field.split(".", 1)
+    target = data.get(section)
+    if not isinstance(target, dict):
+        target = {}
+        data[section] = target
+    target[key] = value
+
+
+def _redact_preview_error(error: str) -> str:
+    if error.startswith(
+        "outreach.candidate_ids contains unknown candidates:"
+    ):
+        return "outreach.candidate_ids contains unsupported candidate IDs"
+    return error
+
+
+def _preview_result(
+    current: dict,
+    accepted_fields: list[str],
+    errors: list[str],
+) -> dict:
+    missing_fields = [
+        field
+        for field in OWNER_DECISION_FIELDS
+        if field not in accepted_fields
+    ]
+    return {
+        "previewOnly": True,
+        "valid": not errors,
+        "contactAuthorized": False,
+        "receiptCreated": False,
+        "answerCount": len(accepted_fields),
+        "expectedAnswerCount": len(OWNER_DECISION_FIELDS),
+        "acceptedFields": accepted_fields,
+        "missingFields": missing_fields,
+        "errorCount": len(errors),
+        "errors": errors,
+        "manifestSha256": str(current.get("manifest_sha256") or ""),
+    }
 
 
 def _require_supported_tracked_asset(root: Path, asset_id: str) -> None:

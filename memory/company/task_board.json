@@ -1152,6 +1152,66 @@
       ],
       "verification_status": "passed",
       "closed_at": "2026-07-27T13:39:32+09:00"
+    },
+    {
+      "id": "task-0023",
+      "request": "Add a loopback-token-protected Studio preview endpoint and UI for validating dotted-key JSON answers for the 16 canonical Truth Pen owner decisions entirely in memory. Allow only canonical owner answer fields, merge into a deep copy of the current manifest, reuse the existing validator, cap request size, escape all results, return previewOnly true and contactAuthorized false even when valid, never write a manifest or receipt, and add API, security, UI, runtime, and full-suite evidence.",
+      "status": "closed",
+      "suggested_agent": "coding_specialist",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": "coding_specialist",
+      "allowed_write_paths": [
+        "tools/studio/company/procurement.py",
+        "tools/studio/workspace_server.py",
+        "tools/studio/app",
+        "tools/studio/company/tests",
+        "tools/studio/tests",
+        "docs",
+        "memory/company",
+        "memory/sessions",
+        "reviews",
+        "runs"
+      ],
+      "required_evidence": "pure in-memory validator tests, canonical-field and nonfinite rejection tests, token/origin/body-size API tests, escaped Studio UI contract tests, JavaScript syntax check, Chrome runtime proof, full Python suite, unchanged manifest and receipt hashes, and findings-first review",
+      "created_at": "2026-07-27T14:53:15+09:00",
+      "updated_at": "2026-07-27T15:11:00+09:00",
+      "work_order": "memory/sessions/20260727-145315-validate-truth-pen-owner-answers-in-memo/work_orders/task-0023-coding_specialist.md",
+      "report": "memory/company/reviews/task-0023-review.md",
+      "verification": "memory/sessions/20260727-145315-validate-truth-pen-owner-answers-in-memo/verification/task-0023-verification.md",
+      "session": "20260727-145315-validate-truth-pen-owner-answers-in-memo",
+      "evidence": [
+        {
+          "path": "runs/task-0023-procurement-answer-preview/runtime_status.md",
+          "note": "Chrome preflight, unchanged hashes, focused and full suites",
+          "attached_at": "2026-07-27T15:10:24+09:00"
+        },
+        {
+          "path": "memory/sessions/20260727-145315-validate-truth-pen-owner-answers-in-memo/agent_reports/task-0023-coding_specialist.md",
+          "note": "Implementation report and verification summary",
+          "attached_at": "2026-07-27T15:11:00+09:00"
+        },
+        {
+          "path": "memory/company/reviews/task-0023-review.md",
+          "note": "Findings-first critic review",
+          "attached_at": "2026-07-27T15:11:00+09:00"
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer": "critic_reviewer",
+      "agent_runs": [
+        {
+          "tool": "studio",
+          "mode": "review",
+          "status": "reviewed",
+          "path": "memory/company/reviews/task-0023-review.md",
+          "created_at": "2026-07-27T15:10:24+09:00"
+        }
+      ],
+      "agent_status": "reviewed",
+      "last_tool": "studio",
+      "last_agent_run": "memory/company/reviews/task-0023-review.md",
+      "verification_status": "passed",
+      "closed_at": "2026-07-27T15:11:00+09:00"
     }
   ]
 }
