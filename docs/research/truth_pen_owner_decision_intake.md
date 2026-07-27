@@ -123,6 +123,16 @@ reports a post-write mismatch, assume the save may have occurred: do not retry,
 refresh state, and inspect the manifest diff. No current or proposed value is
 included in this verification summary.
 
+Each save uses a browser-generated 128-bit random attempt ID. The server
+reserves that ID before consuming the one-time grant and keeps the completed,
+value-redacted verification result in process memory for at most five minutes
+and 64 attempts. If the primary response is lost or malformed, Studio looks up
+that ID once and applies the same preview-bound response checks; it never
+repeats the save request. Pending, missing, expired, wrong-asset, or invalid
+results retain the possibly-saved/no-retry warning. This recovery state is not
+written to disk or browser storage, and a server restart or TTL expiry requires
+manual manifest diff inspection.
+
 The browser limits the answer text to 16,000 characters and the API rejects
 requests over 20,000 bytes, non-standard JSON values such as `NaN`, arrays,
 and unsupported fields. Validation results never echo unsupported field values

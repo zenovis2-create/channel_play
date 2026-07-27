@@ -2832,6 +2832,34 @@ function normalizedProcurementSaveVerification(result, grant) {
   };
 }
 
+function createProcurementApplyAttemptId() {
+  const bytes = new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  return Array.from(
+    bytes,
+    (value) => value.toString(16).padStart(2, "0"),
+  ).join("");
+}
+
+async function recoverProcurementSaveVerification(
+  assetId,
+  applyAttemptId,
+  grant,
+) {
+  const result = await api("/api/procurement/apply-status", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      assetId,
+      applyAttemptId,
+    }),
+  });
+  if (result.found !== true || result.pending !== false) {
+    return null;
+  }
+  return normalizedProcurementSaveVerification(result, grant);
+}
+
 function clearProcurementSaveVerification() {
   const container = document.querySelector(
     "[data-procurement-save-verification]",
@@ -2993,6 +3021,16 @@ async function applyProcurementAnswers(button) {
   if (button.disabled) return;
 
   const grant = procurementApplyGrant;
+  let applyAttemptId;
+  try {
+    applyAttemptId = createProcurementApplyAttemptId();
+  } catch (_error) {
+    statusNode.textContent = [
+      "\uc548\uc804\ud55c \uc800\uc7a5 \uc2dc\ub3c4 ID\ub97c \uc0dd\uc131\ud558\uc9c0 \ubabb\ud588\uc2b5\ub2c8\ub2e4.",
+      "\uc544\uc9c1 \uc800\uc7a5 \uc694\uccad\uc740 \uc804\uc1a1\ub418\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4.",
+    ].join(" ");
+    return;
+  }
   if (Date.now() >= grant.expiresAt) {
     invalidateProcurementApplyGrant(
       "저장 grant가 만료되었습니다. 다시 사전검증하세요.",
@@ -3005,6 +3043,7 @@ async function applyProcurementAnswers(button) {
     controls.status.textContent = "승인값을 원자적으로 저장하는 중…";
   }
   let saveSummary = null;
+  let saveRecovered = false;
   try {
     const result = await api("/api/procurement/apply", {
       method: "POST",
@@ -3012,6 +3051,7 @@ async function applyProcurementAnswers(button) {
       body: JSON.stringify({
         assetId: procurement.assetId,
         answers,
+        applyAttemptId,
         applyGrant: grant.grant,
         confirmation: controls.confirmation?.value || "",
         expectedManifestSha256: grant.manifestSha256,
@@ -3021,19 +3061,31 @@ async function applyProcurementAnswers(button) {
     if (!saveSummary) {
       throw new Error("unsafe apply response");
     }
-    input.value = input.defaultValue;
-    invalidateProcurementApplyGrant();
-    renderProcurementSaveVerification(saveSummary);
   } catch (_error) {
-    invalidateProcurementApplyGrant();
-    resultNode.replaceChildren();
-    statusNode.textContent = [
-      "저장 결과를 확인하지 못했습니다.",
-      "저장되었을 수 있으므로 재시도하지 말고 상태 새로고침 후",
-      "manifest를 확인하세요.",
-    ].join(" ");
-    return;
+    try {
+      saveSummary = await recoverProcurementSaveVerification(
+        procurement.assetId,
+        applyAttemptId,
+        grant,
+      );
+      if (!saveSummary) {
+        throw new Error("apply result unavailable");
+      }
+      saveRecovered = true;
+    } catch (_recoveryError) {
+      invalidateProcurementApplyGrant();
+      resultNode.replaceChildren();
+      statusNode.textContent = [
+        "저장 결과를 확인하지 못했습니다.",
+        "저장되었을 수 있으므로 재시도하지 말고 상태 새로고침 후",
+        "manifest를 확인하세요.",
+      ].join(" ");
+      return;
+    }
   }
+  input.value = input.defaultValue;
+  invalidateProcurementApplyGrant();
+  renderProcurementSaveVerification(saveSummary);
 
   try {
     await loadState();
@@ -3057,6 +3109,12 @@ async function applyProcurementAnswers(button) {
         "재저장하지 말고 manifest diff를 확인하세요.",
         "연락 허가 아님 · 영수증 생성 안 함",
       ].join(" ");
+  if (saveRecovered) {
+    $("#console").textContent = [
+      "\uc800\uc7a5 \uc751\ub2f5\uc744 \uc11c\ubc84 \uba54\ubaa8\ub9ac\uc5d0\uc11c \ubcf5\uad6c\ud588\uc2b5\ub2c8\ub2e4.",
+      $("#console").textContent,
+    ].join(" ");
+  }
 }
 
 function bind() {

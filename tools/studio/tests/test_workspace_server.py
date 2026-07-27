@@ -17,13 +17,16 @@ from unittest.mock import patch
 from tools.studio.company import procurement as procurement_module
 from tools.studio.jobs import get_job
 from tools.studio.company.procurement import (
+    OWNER_DECISION_FIELDS,
     TRUTH_PEN_CANDIDATES,
     procurement_decision_init,
 )
 from tools.studio.workspace_server import (
     MAX_PROCUREMENT_PREVIEW_BYTES,
+    MAX_PROCUREMENT_STATUS_BYTES,
     PROCUREMENT_APPLY_CONFIRMATION,
     ProcurementApplyGrantStore,
+    ProcurementApplyResultStore,
     build_command,
     collect_runtime_adapter_state,
     collect_workspace_state,
@@ -763,6 +766,84 @@ class WorkspaceServerTests(unittest.TestCase):
             "d" * 64,
         )
 
+    def test_procurement_apply_result_store_is_bounded_and_redacted(
+        self,
+    ) -> None:
+        clock = [100.0]
+        store = ProcurementApplyResultStore(
+            10,
+            lambda: clock[0],
+            max_results=2,
+        )
+        attempt_a = "a" * 32
+        attempt_b = "b" * 32
+        attempt_c = "c" * 32
+        safe_result = {
+            "saved": True,
+            "savedVerified": True,
+            "savedChangeCount": len(OWNER_DECISION_FIELDS),
+            "savedChangedFields": list(OWNER_DECISION_FIELDS),
+            "protectedStatePreserved": True,
+            "contactAuthorized": False,
+            "receiptCreated": False,
+            "manifest": (
+                "asset_pipeline/manifests/"
+                "truth_pen_procurement_decision.json"
+            ),
+            "manifestSha256": "d" * 64,
+            "nextCommand": "asset.procurementCheck",
+            "answers": {"owner.secure_record_id": "vault:secret"},
+        }
+
+        store.reserve(attempt_a, "truth_pen")
+        self.assertEqual(
+            store.lookup(attempt_a, "truth_pen"),
+            {"found": False, "pending": True},
+        )
+        with self.assertRaisesRegex(CompanyError, "already been used"):
+            store.reserve(attempt_a, "truth_pen")
+        store.complete(attempt_a, "truth_pen", safe_result)
+        safe_result["savedChangedFields"].append("owner.secret")
+        recovered = store.lookup(attempt_a, "truth_pen")
+        self.assertTrue(recovered["found"])
+        self.assertFalse(recovered["pending"])
+        self.assertNotIn("answers", recovered)
+        self.assertNotIn("vault:secret", json.dumps(recovered))
+        self.assertEqual(
+            recovered["savedChangedFields"],
+            list(OWNER_DECISION_FIELDS),
+        )
+        recovered["savedChangedFields"].append("owner.secret")
+        self.assertEqual(
+            store.lookup(attempt_a, "truth_pen")["savedChangedFields"],
+            list(OWNER_DECISION_FIELDS),
+        )
+        self.assertEqual(
+            store.lookup(attempt_a, "other_asset"),
+            {"found": False, "pending": False},
+        )
+
+        clock[0] = 101.0
+        store.reserve(attempt_b, "truth_pen")
+        clock[0] = 102.0
+        store.reserve(attempt_c, "truth_pen")
+        self.assertFalse(store.lookup(attempt_a, "truth_pen")["found"])
+        self.assertTrue(store.lookup(attempt_c, "truth_pen")["pending"])
+        clock[0] = 112.0
+        self.assertEqual(
+            store.lookup(attempt_c, "truth_pen"),
+            {"found": False, "pending": False},
+        )
+
+        with self.assertRaisesRegex(CompanyError, "invalid"):
+            store.reserve("not-random", "truth_pen")
+        store.reserve("e" * 32, "truth_pen")
+        unsafe = dict(safe_result)
+        unsafe["savedChangedFields"] = list(OWNER_DECISION_FIELDS)
+        unsafe["contactAuthorized"] = True
+        with self.assertRaisesRegex(CompanyError, "retained safely"):
+            store.complete("e" * 32, "truth_pen", unsafe)
+
     def test_procurement_apply_api_requires_confirmation_and_is_one_time(
         self,
     ) -> None:
@@ -803,6 +884,19 @@ class WorkspaceServerTests(unittest.TestCase):
             confirmation.exception.close()
             self.assertEqual(manifest.read_bytes(), before)
 
+            with self.assertRaises(urllib.error.HTTPError) as invalid_attempt:
+                self._post_procurement_apply(
+                    base,
+                    token="test-token",
+                    answers=answers,
+                    grant=preview["applyGrant"],
+                    manifest_sha256=preview["manifestSha256"],
+                    attempt_id="predictable",
+                )
+            self.assertEqual(invalid_attempt.exception.code, 400)
+            invalid_attempt.exception.close()
+            self.assertEqual(manifest.read_bytes(), before)
+
             result = self._post_procurement_apply(
                 base,
                 token="test-token",
@@ -828,6 +922,20 @@ class WorkspaceServerTests(unittest.TestCase):
             self.assertNotEqual(saved, before)
             self.assertFalse((self.root / "runs").exists())
 
+            recovered = self._post_procurement_status(
+                base,
+                token="test-token",
+                attempt_id="a" * 32,
+            )
+            self.assertTrue(recovered["found"])
+            self.assertFalse(recovered["pending"])
+            self.assertTrue(recovered["saved"])
+            self.assertTrue(recovered["savedVerified"])
+            self.assertNotIn(
+                "550e8400-e29b-41d4-a716-446655440000",
+                json.dumps(recovered),
+            )
+
             with self.assertRaises(urllib.error.HTTPError) as replay:
                 self._post_procurement_apply(
                     base,
@@ -840,6 +948,96 @@ class WorkspaceServerTests(unittest.TestCase):
             replay.exception.close()
             self.assertEqual(manifest.read_bytes(), saved)
             self.assertFalse((self.root / "runs").exists())
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=2)
+
+    def test_procurement_apply_status_is_protected_strict_and_expires(
+        self,
+    ) -> None:
+        clock = [100.0]
+        store = ProcurementApplyResultStore(1, lambda: clock[0])
+        store.reserve("f" * 32, "truth_pen")
+        server, thread, base = self._start_server(
+            "test-token",
+            procurement_result_store=store,
+        )
+        try:
+            pending = self._post_procurement_status(
+                base,
+                token="test-token",
+                attempt_id="f" * 32,
+            )
+            self.assertEqual(
+                pending,
+                {"ok": True, "found": False, "pending": True},
+            )
+            wrong_asset = self._post_procurement_status(
+                base,
+                token="test-token",
+                attempt_id="f" * 32,
+                asset_id="other_asset",
+            )
+            self.assertEqual(
+                wrong_asset,
+                {"ok": True, "found": False, "pending": False},
+            )
+
+            with self.assertRaises(urllib.error.HTTPError) as missing_token:
+                self._post_procurement_status(
+                    base,
+                    token="",
+                    attempt_id="f" * 32,
+                )
+            self.assertEqual(missing_token.exception.code, 400)
+            missing_token.exception.close()
+
+            with self.assertRaises(urllib.error.HTTPError) as invalid_id:
+                self._post_procurement_status(
+                    base,
+                    token="test-token",
+                    attempt_id="not-random",
+                )
+            self.assertEqual(invalid_id.exception.code, 400)
+            invalid_id.exception.close()
+
+            with self.assertRaises(urllib.error.HTTPError) as extra_field:
+                self._post_procurement_status(
+                    base,
+                    token="test-token",
+                    attempt_id="f" * 32,
+                    raw_body=json.dumps(
+                        {
+                            "assetId": "truth_pen",
+                            "applyAttemptId": "f" * 32,
+                            "answers": {},
+                        }
+                    ).encode("utf-8"),
+                )
+            self.assertEqual(extra_field.exception.code, 400)
+            extra_field.exception.close()
+
+            with self.assertRaises(urllib.error.HTTPError) as too_large:
+                self._post_procurement_status(
+                    base,
+                    token="test-token",
+                    attempt_id="f" * 32,
+                    raw_body=b"{" + b" " * MAX_PROCUREMENT_STATUS_BYTES,
+                )
+            self.assertEqual(too_large.exception.code, 400)
+            too_large.exception.close()
+
+            clock[0] = 102.0
+            expired = self._post_procurement_status(
+                base,
+                token="test-token",
+                attempt_id="f" * 32,
+            )
+            self.assertEqual(
+                expired,
+                {"ok": True, "found": False, "pending": False},
+            )
         finally:
             server.shutdown()
             server.server_close()
@@ -891,6 +1089,13 @@ class WorkspaceServerTests(unittest.TestCase):
             self.assertTrue(result["protectedStatePreserved"])
             self.assertFalse(result["contactAuthorized"])
             self.assertFalse(result["receiptCreated"])
+            recovered = self._post_procurement_status(
+                base,
+                token="test-token",
+                attempt_id="a" * 32,
+            )
+            self.assertTrue(recovered["found"])
+            self.assertFalse(recovered["savedVerified"])
             self.assertNotIn(
                 "550e8400-e29b-41d4-a716-446655440000",
                 encoded,
@@ -1052,11 +1257,13 @@ class WorkspaceServerTests(unittest.TestCase):
         grant: str,
         manifest_sha256: str,
         confirmation: str = PROCUREMENT_APPLY_CONFIRMATION,
+        attempt_id: str = "a" * 32,
     ) -> dict:
         body = json.dumps(
             {
                 "assetId": "truth_pen",
                 "answers": answers,
+                "applyAttemptId": attempt_id,
                 "applyGrant": grant,
                 "confirmation": confirmation,
                 "expectedManifestSha256": manifest_sha256,
@@ -1067,6 +1274,33 @@ class WorkspaceServerTests(unittest.TestCase):
             headers["X-Channel-Play-Token"] = token
         request = urllib.request.Request(
             f"{base}/api/procurement/apply",
+            data=body,
+            headers=headers,
+            method="POST",
+        )
+        with urllib.request.urlopen(request, timeout=5) as response:
+            return json.loads(response.read().decode("utf-8"))
+
+    def _post_procurement_status(
+        self,
+        base: str,
+        token: str,
+        *,
+        attempt_id: str,
+        asset_id: str = "truth_pen",
+        raw_body: bytes | None = None,
+    ) -> dict:
+        body = raw_body or json.dumps(
+            {
+                "assetId": asset_id,
+                "applyAttemptId": attempt_id,
+            }
+        ).encode("utf-8")
+        headers = {"Content-Type": "application/json"}
+        if token:
+            headers["X-Channel-Play-Token"] = token
+        request = urllib.request.Request(
+            f"{base}/api/procurement/apply-status",
             data=body,
             headers=headers,
             method="POST",

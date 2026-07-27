@@ -1392,6 +1392,64 @@
       "last_agent_run": "memory/company/reviews/task-0026-review.md",
       "verification_status": "passed",
       "closed_at": "2026-07-27T16:23:50+09:00"
+    },
+    {
+      "id": "task-0027",
+      "request": "Recover an ambiguous Truth Pen owner-save response without automatically retrying the write. Generate a cryptographically random apply-attempt ID in the browser, reserve it before the atomic save, and retain only a bounded, short-lived, value-redacted result in server memory. Expose a protected strict-schema status endpoint so the browser can recover a completed result after a lost or malformed primary response. Preserve the existing one-time preview grant, exact confirmation phrase, two checkboxes, no-op block, atomic write, post-write verification, and separate PASS-receipt gate. Never persist answer values, authorize contact, create a receipt, use browser storage, or weaken execution gates. Add result-store and protected API tests, UI response-loss recovery contracts, JavaScript syntax, Chrome preview-only proof with zero apply/status calls, unchanged real hashes, focused/full suites, runtime receipt, and findings-first security review.",
+      "status": "closed",
+      "suggested_agent": "coding_specialist",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": "coding_specialist",
+      "allowed_write_paths": [
+        "tools/studio/workspace_server.py",
+        "tools/studio/app",
+        "tools/studio/tests",
+        "docs",
+        "memory/company",
+        "memory/sessions",
+        "reviews",
+        "runs"
+      ],
+      "required_evidence": "bounded and redacted result-store tests, protected exact-schema status API tests, response-loss recovery UI contracts, JavaScript syntax, Chrome preview-only proof with zero apply/status requests, unchanged real manifest and receipt hashes, focused and full Python suites, runtime receipt, and findings-first security review",
+      "created_at": "2026-07-27T16:48:26+09:00",
+      "updated_at": "2026-07-27T17:06:50+09:00",
+      "work_order": "memory/sessions/20260727-164826-help/work_orders/task-0027-coding_specialist.md",
+      "report": "memory/company/reviews/task-0027-review.md",
+      "verification": "memory/sessions/20260727-164826-help/verification/task-0027-verification.md",
+      "session": "20260727-164826-help",
+      "review_status": "reviewed",
+      "reviewer": "critic_reviewer",
+      "agent_runs": [
+        {
+          "tool": "studio",
+          "mode": "review",
+          "status": "reviewed",
+          "path": "memory/company/reviews/task-0027-review.md",
+          "created_at": "2026-07-27T17:05:52+09:00"
+        }
+      ],
+      "agent_status": "reviewed",
+      "last_tool": "studio",
+      "last_agent_run": "memory/company/reviews/task-0027-review.md",
+      "evidence": [
+        {
+          "path": "runs/task-0027-procurement-apply-recovery/runtime_status.md",
+          "note": "Store/API/UI tests, Chrome zero-apply/status proof, unchanged real hashes, focused and full suites",
+          "attached_at": "2026-07-27T17:06:49+09:00"
+        },
+        {
+          "path": "memory/sessions/20260727-164826-help/agent_reports/task-0027-coding_specialist.md",
+          "note": "Implementation report and recovery security summary",
+          "attached_at": "2026-07-27T17:06:49+09:00"
+        },
+        {
+          "path": "memory/company/reviews/task-0027-review.md",
+          "note": "Findings-first apply recovery security review",
+          "attached_at": "2026-07-27T17:06:49+09:00"
+        }
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-07-27T17:06:50+09:00"
     }
   ]
 }
