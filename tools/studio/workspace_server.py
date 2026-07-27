@@ -619,6 +619,9 @@ def _handler(
                         result["applyGrantExpiresInSeconds"] = (
                             procurement_grants.ttl_seconds
                         )
+                        result[
+                            "applyResultRecoveryExpiresInSeconds"
+                        ] = procurement_results.ttl_seconds
                     self._json({"ok": True, **result})
                     return
                 if parsed.path == "/api/procurement/apply-status":

@@ -13,6 +13,8 @@ let executionTokenHeader = "X-Channel-Play-Token";
 let searchState = null;
 let procurementApplyGrant = null;
 let procurementApplyGrantTimer = null;
+let procurementSaveRecovery = null;
+let procurementSaveRecoveryTimer = null;
 let activeStudioView = localStorage.getItem("channelPlayStudioView") || "focus";
 
 const ORCHESTRATOR_MIN_VISIBLE_MS = 1200;
@@ -568,6 +570,13 @@ function renderGameProduction() {
         aria-live="polite"
         hidden
       ></div>
+      <div
+        class="game-procurement-save-recovery"
+        data-procurement-save-recovery
+        role="region"
+        aria-label="저장 결과 복구"
+        hidden
+      ></div>
     </section>
     ${procurementProgressTotal ? `
       <div class="game-procurement-progress ${procurementProgressIndeterminate ? "warn" : procurementProgressCompleted === procurementProgressTotal ? "good" : "active"}">
@@ -665,6 +674,7 @@ function renderGameProduction() {
       <strong>${esc(path)}</strong>
     </button>
   `).join("") || empty("아직 표시할 제작 증거가 없습니다.");
+  renderProcurementSaveRecovery();
 }
 
 function gameMetric(label, value, detail) {
@@ -2618,11 +2628,19 @@ function showProcurementApplyGrant(preview) {
     preview.applyGrantExpiresInSeconds,
     3600,
   );
+  const recoveryExpiresInSeconds = (
+    Number.isInteger(preview.applyResultRecoveryExpiresInSeconds)
+    && preview.applyResultRecoveryExpiresInSeconds > 0
+    && preview.applyResultRecoveryExpiresInSeconds <= 3600
+  )
+    ? preview.applyResultRecoveryExpiresInSeconds
+    : 0;
   const summary = normalizedProcurementChangeSummary(preview);
   if (
     !grant
     || !/^[0-9a-f]{64}$/.test(manifestSha256)
     || !expiresInSeconds
+    || !recoveryExpiresInSeconds
     || !summary
     || !(summary.changeCount > 0)
     || summary.changeCount !== summary.changedFields.length
@@ -2637,6 +2655,7 @@ function showProcurementApplyGrant(preview) {
     changeCount: summary.changeCount,
     changedFields: [...summary.changedFields],
     expiresAt: Date.now() + (expiresInSeconds * 1000),
+    recoveryExpiresInSeconds,
   };
   procurementApplyGrantTimer = window.setTimeout(() => {
     invalidateProcurementApplyGrant(
@@ -2902,6 +2921,209 @@ function renderProcurementSaveVerification(summary) {
   return true;
 }
 
+function procurementSaveRecoveryContainer() {
+  return document.querySelector("[data-procurement-save-recovery]");
+}
+
+function clearProcurementSaveRecovery() {
+  procurementSaveRecovery = null;
+  if (procurementSaveRecoveryTimer) {
+    window.clearTimeout(procurementSaveRecoveryTimer);
+    procurementSaveRecoveryTimer = null;
+  }
+  const container = procurementSaveRecoveryContainer();
+  if (!container) return;
+  container.replaceChildren();
+  container.hidden = true;
+}
+
+function expireProcurementSaveRecovery() {
+  procurementSaveRecovery = null;
+  if (procurementSaveRecoveryTimer) {
+    window.clearTimeout(procurementSaveRecoveryTimer);
+    procurementSaveRecoveryTimer = null;
+  }
+  const container = procurementSaveRecoveryContainer();
+  if (!container) return;
+  container.replaceChildren();
+  container.className = "game-procurement-save-recovery warn";
+  const title = document.createElement("strong");
+  title.textContent = "저장 결과 조회 시간이 만료되었습니다.";
+  const detail = document.createElement("small");
+  detail.textContent = [
+    "저장을 다시 실행하지 마세요.",
+    "manifest diff를 직접 확인해야 합니다.",
+  ].join(" ");
+  container.append(title, detail);
+  container.hidden = false;
+}
+
+function renderProcurementSaveRecovery(message = "") {
+  const container = procurementSaveRecoveryContainer();
+  if (!container || !procurementSaveRecovery) return false;
+  if (Date.now() >= procurementSaveRecovery.expiresAt) {
+    expireProcurementSaveRecovery();
+    return false;
+  }
+  container.replaceChildren();
+  container.className = "game-procurement-save-recovery warn";
+
+  const title = document.createElement("strong");
+  title.textContent = "저장되었을 수 있습니다 · 저장 재시도 금지";
+  const detail = document.createElement("small");
+  detail.textContent = [
+    message || "아래 버튼은 저장하지 않고 서버의 기존 결과만 조회합니다.",
+    `${procurementSaveRecovery.changeCount}개 canonical 필드`,
+    `manifest ${procurementSaveRecovery.manifestSha256.slice(0, 12)}…`,
+    `${Math.max(
+      1,
+      Math.ceil(
+        (procurementSaveRecovery.expiresAt - Date.now()) / 60000,
+      ),
+    )}분 이내`,
+  ].join(" · ");
+  const button = document.createElement("button");
+  button.type = "button";
+  button.dataset.procurementSaveRecoveryCheck = "";
+  button.textContent = "저장 결과만 다시 확인";
+  const status = document.createElement("span");
+  status.dataset.procurementSaveRecoveryStatus = "";
+  status.setAttribute("role", "status");
+  status.setAttribute("aria-live", "polite");
+  container.append(title, detail, button, status);
+  container.hidden = false;
+  return true;
+}
+
+function showProcurementSaveRecovery(
+  assetId,
+  applyAttemptId,
+  grant,
+  expiresAt,
+) {
+  const changedFields = Array.isArray(grant.changedFields)
+    ? grant.changedFields
+    : null;
+  if (
+    typeof assetId !== "string"
+    || !/^[a-z0-9][a-z0-9_-]{0,63}$/.test(assetId)
+    || typeof applyAttemptId !== "string"
+    || !/^[0-9a-f]{32}$/.test(applyAttemptId)
+    || typeof grant.manifestSha256 !== "string"
+    || !/^[0-9a-f]{64}$/.test(grant.manifestSha256)
+    || !Number.isInteger(grant.changeCount)
+    || grant.changeCount <= 0
+    || !changedFields
+    || grant.changeCount !== changedFields.length
+    || changedFields.some(
+      (field) => (
+        typeof field !== "string"
+        || !/^[a-z][a-z0-9_]*(?:\.[a-z][a-z0-9_]*)?$/.test(field)
+      ),
+    )
+    || new Set(changedFields).size !== changedFields.length
+    || !Number.isFinite(expiresAt)
+    || expiresAt > Date.now() + (3600 * 1000)
+  ) {
+    expireProcurementSaveRecovery();
+    return false;
+  }
+  clearProcurementSaveRecovery();
+  if (Date.now() >= expiresAt) {
+    expireProcurementSaveRecovery();
+    return false;
+  }
+  procurementSaveRecovery = {
+    assetId,
+    applyAttemptId,
+    manifestSha256: grant.manifestSha256,
+    changeCount: grant.changeCount,
+    changedFields: [...changedFields],
+    expiresAt,
+  };
+  procurementSaveRecoveryTimer = window.setTimeout(
+    expireProcurementSaveRecovery,
+    Math.max(0, expiresAt - Date.now()),
+  );
+  return renderProcurementSaveRecovery();
+}
+
+async function retryProcurementSaveRecovery(button) {
+  const recovery = procurementSaveRecovery;
+  if (!recovery) return;
+  if (Date.now() >= recovery.expiresAt) {
+    expireProcurementSaveRecovery();
+    return;
+  }
+  const status = document.querySelector(
+    "[data-procurement-save-recovery-status]",
+  );
+  button.disabled = true;
+  if (status) status.textContent = "저장 결과만 조회하는 중…";
+
+  let saveSummary = null;
+  try {
+    saveSummary = await recoverProcurementSaveVerification(
+      recovery.assetId,
+      recovery.applyAttemptId,
+      recovery,
+    );
+  } catch (_error) {
+    if (
+      procurementSaveRecovery?.applyAttemptId === recovery.applyAttemptId
+      && Date.now() < recovery.expiresAt
+    ) {
+      renderProcurementSaveRecovery(
+        "네트워크 오류로 결과를 확인하지 못했습니다. 저장을 재시도하지 마세요.",
+      );
+    } else {
+      expireProcurementSaveRecovery();
+    }
+    return;
+  }
+  if (
+    procurementSaveRecovery?.applyAttemptId !== recovery.applyAttemptId
+    || Date.now() >= recovery.expiresAt
+  ) {
+    expireProcurementSaveRecovery();
+    return;
+  }
+  if (!saveSummary) {
+    renderProcurementSaveRecovery(
+      "아직 확정된 결과가 없습니다. 저장을 재시도하지 마세요.",
+    );
+    return;
+  }
+
+  clearProcurementSaveRecovery();
+  const input = document.getElementById("gameProcurementAnswerInput");
+  if (input) input.value = input.defaultValue;
+  invalidateProcurementApplyGrant();
+  renderProcurementSaveVerification(saveSummary);
+  try {
+    await loadState();
+  } catch (_error) {
+    renderProcurementSaveVerification(saveSummary);
+    $("#console").textContent = [
+      "저장 결과는 복구했지만 화면을 갱신하지 못했습니다.",
+      "중복 저장하지 말고 상태 새로고침을 사용하세요.",
+    ].join(" ");
+    return;
+  }
+  renderProcurementSaveVerification(saveSummary);
+  $("#console").textContent = saveSummary.verified
+    ? [
+        "서버 메모리에서 저장 결과와 정규화 내용을 확인했습니다.",
+        "연락 허가 아님 · 영수증 생성 안 함",
+        "별도의 procurement check가 필요합니다.",
+      ].join(" ")
+    : [
+        "저장 결과는 확인했지만 저장 직후 해시가 일치하지 않습니다.",
+        "재저장하지 말고 manifest diff를 확인하세요.",
+        "연락 허가 아님 · 영수증 생성 안 함",
+      ].join(" ");
+}
+
 async function previewProcurementAnswers(button) {
   const input = document.getElementById("gameProcurementAnswerInput");
   const resultNode = document.querySelector(
@@ -2912,6 +3134,19 @@ async function previewProcurementAnswers(button) {
   );
   const procurement = state?.gameProduction?.procurement || {};
   if (!input || !resultNode || !statusNode || !procurement.assetId) return;
+  if (
+    procurementSaveRecovery
+    && Date.now() < procurementSaveRecovery.expiresAt
+  ) {
+    renderProcurementSaveRecovery(
+      "먼저 기존 저장 결과를 확인하세요. 새 저장 사전검증은 잠시 차단됩니다.",
+    );
+    statusNode.textContent = [
+      "저장 결과가 모호한 동안 새 저장을 준비할 수 없습니다.",
+      "결과 조회 버튼을 사용하고 저장을 재시도하지 마세요.",
+    ].join(" ");
+    return;
+  }
   clearProcurementSaveVerification();
   invalidateProcurementApplyGrant();
   const inputText = input.value;
@@ -3021,6 +3256,9 @@ async function applyProcurementAnswers(button) {
   if (button.disabled) return;
 
   const grant = procurementApplyGrant;
+  const recoveryExpiresAt = (
+    Date.now() + (grant.recoveryExpiresInSeconds * 1000)
+  );
   let applyAttemptId;
   try {
     applyAttemptId = createProcurementApplyAttemptId();
@@ -3075,15 +3313,22 @@ async function applyProcurementAnswers(button) {
     } catch (_recoveryError) {
       invalidateProcurementApplyGrant();
       resultNode.replaceChildren();
+      showProcurementSaveRecovery(
+        procurement.assetId,
+        applyAttemptId,
+        grant,
+        recoveryExpiresAt,
+      );
       statusNode.textContent = [
         "저장 결과를 확인하지 못했습니다.",
-        "저장되었을 수 있으므로 재시도하지 말고 상태 새로고침 후",
-        "manifest를 확인하세요.",
+        "저장되었을 수 있으므로 재시도하지 말고",
+        "아래 결과 조회 버튼을 사용하고, 만료되면 manifest를 확인하세요.",
       ].join(" ");
       return;
     }
   }
   input.value = input.defaultValue;
+  clearProcurementSaveRecovery();
   invalidateProcurementApplyGrant();
   renderProcurementSaveVerification(saveSummary);
 
@@ -3351,6 +3596,13 @@ function bind() {
     renderTaskTracker();
   });
   $("#game-cockpit").addEventListener("click", (event) => {
+    const saveRecoveryButton = event.target.closest(
+      "[data-procurement-save-recovery-check]",
+    );
+    if (saveRecoveryButton) {
+      retryProcurementSaveRecovery(saveRecoveryButton);
+      return;
+    }
     const answerApplyButton = event.target.closest(
       "[data-procurement-answer-apply]",
     );

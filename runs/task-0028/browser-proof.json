@@ -1,0 +1,54 @@
+{
+  "task_id": "task-0028",
+  "captured_at": "2026-07-27T17:31:59+09:00",
+  "browser": "Google Chrome via Playwright",
+  "server": "http://127.0.0.1:8878/",
+  "preview_only": {
+    "valid": true,
+    "preview_only": true,
+    "change_count": 16,
+    "apply_grant_ttl_seconds": 300,
+    "apply_result_recovery_ttl_seconds": 300,
+    "contact_authorized": false,
+    "receipt_created": false,
+    "preview_calls": 3,
+    "apply_calls": 0,
+    "apply_status_calls": 0,
+    "apply_panel_visible": true,
+    "recovery_panel_visible": false
+  },
+  "controlled_manual_recovery_checks": {
+    "network_note": "The browser recovery helper was stubbed at its status boundary; no apply or apply-status request was sent.",
+    "retained_record_keys": [
+      "applyAttemptId",
+      "assetId",
+      "changeCount",
+      "changedFields",
+      "expiresAt",
+      "manifestSha256"
+    ],
+    "pending": {
+      "record_retained": true,
+      "button_retained": true,
+      "no_retry_warning_visible": true
+    },
+    "success": {
+      "record_cleared": true,
+      "input_cleared": true,
+      "verification_visible": true
+    },
+    "expiry": {
+      "record_cleared": true,
+      "button_removed": true,
+      "manual_manifest_warning_visible": true
+    },
+    "apply_calls": 0,
+    "apply_status_calls": 0
+  },
+  "protected_artifacts": {
+    "manifest_sha256_before": "0367A1EF176C51C76F7DCB7F2A966563BB1B9736DFD1633D4A7BDB21F7FD1648",
+    "manifest_sha256_after": "0367A1EF176C51C76F7DCB7F2A966563BB1B9736DFD1633D4A7BDB21F7FD1648",
+    "receipt_sha256_before": "2E95792C850AF6E82B4236DDD4EC0ADEB578B6226188586BE3B9BEBF4870BC77",
+    "receipt_sha256_after": "2E95792C850AF6E82B4236DDD4EC0ADEB578B6226188586BE3B9BEBF4870BC77"
+  }
+}

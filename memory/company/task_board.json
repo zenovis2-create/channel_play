@@ -1450,6 +1450,64 @@
       ],
       "verification_status": "passed",
       "closed_at": "2026-07-27T17:06:50+09:00"
+    },
+    {
+      "id": "task-0028",
+      "request": "Add a user-triggered result-only recovery affordance for ambiguous Truth Pen owner saves. Return the server result-store TTL with valid preview grants. After the existing automatic status lookup is pending, unavailable, or temporarily fails, retain only asset ID, random apply-attempt ID, preview manifest hash, canonical changed field names/count, and expiry in browser memory; never retain answer values or use browser storage. Render a clearly labeled button that only calls the protected apply-status endpoint and never calls apply. Keep it available until the server-aligned TTL expires, then clear it and require manual manifest inspection. A recovered result must pass the existing preview-bound verification before clearing the input and refreshing state; pending, missing, malformed, mismatched, or network-failed results keep the possibly-saved/no-retry warning. Preserve the one-time preview grant, explicit owner confirmation, atomic save, separate PASS-receipt gate, and zero contact or receipt side effects. Add server/UI contract tests, manual recovery success/pending/expiry coverage, JavaScript syntax, Chrome preview-only proof with zero apply/status calls, unchanged real manifest and receipt hashes, focused/full suites, runtime receipt, and findings-first security review.",
+      "status": "closed",
+      "suggested_agent": "coding_specialist",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": "coding_specialist",
+      "allowed_write_paths": [
+        "tools/studio/workspace_server.py",
+        "tools/studio/app",
+        "tools/studio/tests",
+        "docs",
+        "memory/company",
+        "memory/sessions",
+        "reviews",
+        "runs"
+      ],
+      "required_evidence": "preview TTL contract, memory-only manual recovery state tests, status-only retry UI contracts, pending/success/expiry coverage, JavaScript syntax, Chrome preview-only proof with zero apply/status requests, unchanged real manifest and receipt hashes, focused and full Python suites, runtime receipt, and findings-first security review",
+      "created_at": "2026-07-27T17:16:28+09:00",
+      "updated_at": "2026-07-27T17:45:43+09:00",
+      "work_order": "memory/sessions/20260727-171628-manual-truth-pen-save-result-recovery-wi/work_orders/task-0028-coding_specialist.md",
+      "report": "memory/company/reviews/task-0028-review.md",
+      "verification": "memory/sessions/20260727-171628-manual-truth-pen-save-result-recovery-wi/verification/task-0028-verification.md",
+      "session": "20260727-171628-manual-truth-pen-save-result-recovery-wi",
+      "review_status": "reviewed",
+      "reviewer": "critic_reviewer",
+      "agent_runs": [
+        {
+          "tool": "studio",
+          "mode": "review",
+          "status": "reviewed",
+          "path": "memory/company/reviews/task-0028-review.md",
+          "created_at": "2026-07-27T17:41:45+09:00"
+        }
+      ],
+      "agent_status": "reviewed",
+      "last_tool": "studio",
+      "last_agent_run": "memory/company/reviews/task-0028-review.md",
+      "evidence": [
+        {
+          "path": "runs/task-0028/runtime_status.md",
+          "note": "Focused/full tests, syntax, Chrome safety, and unchanged hash receipt",
+          "attached_at": "2026-07-27T17:45:42+09:00"
+        },
+        {
+          "path": "runs/task-0028/browser-proof.json",
+          "note": "Chrome preview-only and controlled manual recovery proof",
+          "attached_at": "2026-07-27T17:45:43+09:00"
+        },
+        {
+          "path": "memory/company/reviews/task-0028-review.md",
+          "note": "Findings-first security review",
+          "attached_at": "2026-07-27T17:45:43+09:00"
+        }
+      ],
+      "verification_status": "passed",
+      "closed_at": "2026-07-27T17:45:43+09:00"
     }
   ]
 }
