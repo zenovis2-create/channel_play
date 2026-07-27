@@ -256,6 +256,8 @@ def unity_build(root: Path, args: list[str]) -> Path:
         )
 
     unity = _resolve_unity_editor(root)
+    if not unity.exists():
+        raise CompanyError(f"Unity editor not found: {unity}")
     run_dir = root / "runs" / f"unity-build-{target}-{slugify(now_iso())}"
     run_dir.mkdir(parents=True, exist_ok=True)
     log_path = run_dir / "unity_build.md"
@@ -297,18 +299,20 @@ def unity_build(root: Path, args: list[str]) -> Path:
         lines.extend(
             [
                 "Status: blocked",
+                f"Host platform: {_host_platform_label()}",
                 f"Linux build support checked: {linux_support}",
                 f"Linux build support exists: {linux_support.exists()}",
-                "Reason: Unity Linux Build Support is not installed for the active Unity editor on this Mac.",
-                "Next: add Linux Build Support / Dedicated Server Support in Unity Hub, then implement ChannelPlayProductionValidator.BuildLinuxServer.",
+                "Reason: Unity Linux Build Support is not installed for the "
+                f"active Unity editor on this {_host_platform_label()} host.",
+                "Next: in Unity Hub, open Installs > the active editor > "
+                "Add modules, then install Linux Build Support (Mono) and "
+                "Dedicated Server Build Support when offered.",
+                "Rerun: python tools/channelctl unity build linux-server",
             ]
         )
         log_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
         print(f"Wrote {log_path.relative_to(root)}")
         return log_path
-
-    if not unity.exists():
-        raise CompanyError(f"Unity editor not found: {unity}")
 
     development_builds = {
         "windows-dev": (
@@ -1303,8 +1307,29 @@ def _unity_batch_lock(root: Path):
 
 
 def _linux_build_support_path(unity: Path) -> Path:
-    editor_root = unity.parents[3]
-    return editor_root / "PlaybackEngines" / "LinuxStandaloneSupport"
+    app_bundle = next(
+        (
+            parent
+            for parent in unity.parents
+            if parent.name.casefold() == "unity.app"
+        ),
+        None,
+    )
+    if app_bundle is not None:
+        playback_engines = app_bundle / "Contents" / "PlaybackEngines"
+    else:
+        playback_engines = unity.parent / "Data" / "PlaybackEngines"
+    return playback_engines / "LinuxStandaloneSupport"
+
+
+def _host_platform_label() -> str:
+    if sys.platform == "win32":
+        return "Windows"
+    if sys.platform == "darwin":
+        return "macOS"
+    if sys.platform.startswith("linux"):
+        return "Linux"
+    return sys.platform
 
 
 def _matching_lines(log_path: Path, marker: str) -> list[str]:

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -7,7 +8,10 @@ from unittest.mock import Mock, patch
 
 from tools.studio.company.capture import PNG_SIGNATURE
 from tools.studio.company.errors import CompanyError
-from tools.studio.company.game_loops import game_feedback_loop
+from tools.studio.company.game_loops import (
+    game_feedback_loop,
+    game_server_handoff,
+)
 
 
 class GameFeedbackLoopTests(unittest.TestCase):
@@ -98,6 +102,73 @@ class GameFeedbackLoopTests(unittest.TestCase):
             )
         )
         self.assertEqual(receipts, [])
+
+    def test_server_handoff_references_latest_linux_build_receipt(
+        self,
+    ) -> None:
+        old_receipt = (
+            self.root
+            / "runs"
+            / "unity-build-linux-server-old"
+            / "unity_build.md"
+        )
+        latest_receipt = (
+            self.root
+            / "runs"
+            / "unity-build-linux-server-latest"
+            / "unity_build.md"
+        )
+        old_receipt.parent.mkdir(parents=True)
+        latest_receipt.parent.mkdir(parents=True)
+        old_receipt.write_text("Status: blocked\n", encoding="utf-8")
+        latest_receipt.write_text(
+            "Build status: passed\nBuild output exists: True\n",
+            encoding="utf-8",
+        )
+        os.utime(old_receipt.parent, (100, 100))
+        os.utime(latest_receipt.parent, (200, 200))
+
+        receipt = game_server_handoff(self.root)
+
+        text = receipt.read_text(encoding="utf-8")
+        self.assertIn(
+            "runs/unity-build-linux-server-latest/unity_build.md",
+            text,
+        )
+        self.assertNotIn(
+            "runs/unity-build-linux-server-old/unity_build.md",
+            text,
+        )
+        self.assertIn("Status: waiting_for_x86_64_runner", text)
+        self.assertIn("Attach an x86_64 Linux runner", text)
+
+    def test_server_handoff_keeps_blocked_build_before_runner(self) -> None:
+        blocked_receipt = (
+            self.root
+            / "runs"
+            / "unity-build-linux-server-blocked"
+            / "unity_build.md"
+        )
+        blocked_receipt.parent.mkdir(parents=True)
+        blocked_receipt.write_text(
+            "Status: blocked\n"
+            "Linux build support exists: False\n",
+            encoding="utf-8",
+        )
+
+        receipt = game_server_handoff(self.root)
+
+        text = receipt.read_text(encoding="utf-8")
+        self.assertIn("Status: waiting_for_linux_server_build", text)
+        self.assertIn(
+            "runs/unity-build-linux-server-blocked/unity_build.md",
+            text,
+        )
+        self.assertIn(
+            "python tools/channelctl unity build linux-server",
+            text,
+        )
+        self.assertNotIn("Attach an x86_64 Linux runner", text)
 
 
 if __name__ == "__main__":

@@ -4,13 +4,15 @@ import os
 import subprocess
 import tempfile
 import unittest
-from pathlib import Path
-from unittest.mock import patch
+from pathlib import Path, PurePosixPath, PureWindowsPath
+from unittest.mock import Mock, patch
 
 from tools.studio.company import unity as unity_module
 from tools.studio.company.capture import PNG_SIGNATURE
+from tools.studio.company.errors import CompanyError
 from tools.studio.company.unity import (
     resolve_unity_editor,
+    unity_build,
     unity_feedback_capture,
 )
 
@@ -50,6 +52,115 @@ class UnityPathTests(unittest.TestCase):
                 patch.object(unity_module.Path, "home", return_value=fake_home),
             ):
                 self.assertEqual(resolve_unity_editor(root), unity)
+
+    def test_linux_build_support_path_matches_editor_layouts(self) -> None:
+        windows = PureWindowsPath(
+            r"C:\Unity\Hub\Editor\6000.0.76f1\Editor\Unity.exe"
+        )
+        linux = PurePosixPath(
+            "/opt/unity/Hub/Editor/6000.0.76f1/Editor/Unity"
+        )
+        mac = PurePosixPath(
+            "/Applications/Unity/Hub/Editor/6000.0.76f1/"
+            "Unity.app/Contents/MacOS/Unity"
+        )
+
+        self.assertEqual(
+            unity_module._linux_build_support_path(windows),
+            windows.parent
+            / "Data"
+            / "PlaybackEngines"
+            / "LinuxStandaloneSupport",
+        )
+        self.assertEqual(
+            unity_module._linux_build_support_path(linux),
+            linux.parent
+            / "Data"
+            / "PlaybackEngines"
+            / "LinuxStandaloneSupport",
+        )
+        self.assertEqual(
+            unity_module._linux_build_support_path(mac),
+            PurePosixPath(
+                "/Applications/Unity/Hub/Editor/6000.0.76f1/"
+                "Unity.app/Contents/PlaybackEngines/"
+                "LinuxStandaloneSupport"
+            ),
+        )
+
+    def test_linux_build_missing_editor_fails_before_receipt(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            missing = root / "Unity" / "Editor" / "Unity.exe"
+            with patch.object(
+                unity_module,
+                "_resolve_unity_editor",
+                return_value=missing,
+            ):
+                with self.assertRaisesRegex(
+                    CompanyError,
+                    "Unity editor not found",
+                ):
+                    unity_build(root, ["linux-server"])
+
+            self.assertFalse((root / "runs").exists())
+
+    def test_linux_build_missing_module_writes_windows_instructions(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            unity = (
+                root
+                / "Unity"
+                / "Hub"
+                / "Editor"
+                / "6000.0.76f1"
+                / "Editor"
+                / "Unity.exe"
+            )
+            unity.parent.mkdir(parents=True)
+            unity.touch()
+            run_batch = Mock()
+
+            with (
+                patch.object(
+                    unity_module,
+                    "_resolve_unity_editor",
+                    return_value=unity,
+                ),
+                patch.object(unity_module.sys, "platform", "win32"),
+                patch.object(
+                    unity_module,
+                    "_run_unity_batch",
+                    run_batch,
+                ),
+            ):
+                receipt = unity_build(root, ["linux-server"])
+
+            text = receipt.read_text(encoding="utf-8")
+            expected_support = (
+                unity.parent
+                / "Data"
+                / "PlaybackEngines"
+                / "LinuxStandaloneSupport"
+            )
+            self.assertIn("Status: blocked", text)
+            self.assertIn("Host platform: Windows", text)
+            self.assertIn(f"Unity editor: {unity}", text)
+            self.assertIn(
+                f"Linux build support checked: {expected_support}",
+                text,
+            )
+            self.assertIn("Linux Build Support (Mono)", text)
+            self.assertIn("Dedicated Server Build Support", text)
+            self.assertIn(
+                "Rerun: python tools/channelctl unity build linux-server",
+                text,
+            )
+            self.assertNotIn("this Mac", text)
+            self.assertNotIn("then implement", text)
+            run_batch.assert_not_called()
 
     def test_feedback_capture_requires_unity_marker_and_png(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

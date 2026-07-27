@@ -1,6 +1,6 @@
 # Channel Play Workstation Topology
 
-Updated: 2026-06-03
+Updated: 2026-07-27
 
 ## Decision
 
@@ -20,12 +20,20 @@ Use gdx1 as an ARM/aarch64 AI/ops worker, not as the default Unity server runner
 
 - gdx1 architecture: `aarch64`
 - Unity Linux dedicated server output: `x86-64`
-- Current gdx1 server-run receipt: `runs/gdx-run-server-2026-06-03t20-36-52-09-00/gdx_run-server.md`
-- Linux server build receipt: `runs/unity-build-linux-server-2026-06-03t20-33-36-09-00/unity_build.md`
+- Current gdx1 server-run receipt:
+  `runs/gdx-run-server-2026-06-01t14-51-42-09-00/gdx_run-server.md`
+- Current Linux server build preflight:
+  `runs/unity-build-linux-server-2026-07-27t17-53-42-09-00/unity_build.md`
+- Current x86_64 handoff:
+  `runs/game-server-handoff-2026-07-27t17-57-48-09-00/server_handoff.md`
+- The Windows Unity editor currently lacks Linux Build Support, so no current
+  Linux server binary exists yet.
 
 ## Operating Rules
 
 - Do Unity work on Mac Studio first.
+- Install Linux Build Support for the active build-authority editor before
+  rerunning `python tools/channelctl unity build linux-server`.
 - Do not route critical Unity runtime execution to gdx1.
 - gdx1 tasks must be AI/ops/log/research oriented unless a compatible runner script exists.
 - Real remote Unity server soak requires an x86_64 Linux host.

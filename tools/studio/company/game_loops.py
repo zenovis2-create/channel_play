@@ -65,13 +65,39 @@ def game_server_handoff(root: Path) -> Path:
     run_dir.mkdir(parents=True, exist_ok=True)
     path = run_dir / "server_handoff.md"
     linux_build = _latest_linux_build(root)
-    build_line = rel(root, linux_build) if linux_build else "missing; run tools/channelctl unity build linux-server"
+    linux_build_ready = _linux_build_passed(linux_build)
+    build_line = (
+        rel(root, linux_build)
+        if linux_build
+        else "missing; run python tools/channelctl unity build linux-server"
+    )
+    status = (
+        "waiting_for_x86_64_runner"
+        if linux_build_ready
+        else "waiting_for_linux_server_build"
+    )
+    if linux_build_ready:
+        next_action = (
+            "- Attach an x86_64 Linux runner or cloud host, then map "
+            "gdx.runServer/gdx.runBots to that runner."
+        )
+    elif linux_build:
+        next_action = (
+            "- Resolve the blocked or failed Linux server build receipt above, "
+            "rerun `python tools/channelctl unity build linux-server`, then "
+            "regenerate this handoff."
+        )
+    else:
+        next_action = (
+            "- Run `python tools/channelctl unity build linux-server` on the "
+            "build-authority editor, then regenerate this handoff."
+        )
 
     lines = [
         "# x86_64 Server Soak Handoff",
         "",
         f"Checked: {now_iso()}",
-        "Status: waiting_for_x86_64_runner",
+        f"Status: {status}",
         "",
         "## Current Topology",
         "",
@@ -92,7 +118,7 @@ def game_server_handoff(root: Path) -> Path:
         "",
         "## Next Action",
         "",
-        "- Attach an x86_64 Linux runner or cloud host, then map gdx.runServer/gdx.runBots to that runner.",
+        next_action,
         "",
     ]
     path.write_text("\n".join(lines), encoding="utf-8")
@@ -110,3 +136,13 @@ def _latest_linux_build(root: Path) -> Path | None:
         if path.exists():
             return path
     return None
+
+
+def _linux_build_passed(path: Path | None) -> bool:
+    if path is None or not path.is_file():
+        return False
+    text = path.read_text(encoding="utf-8", errors="replace")
+    return (
+        "Build status: passed" in text
+        and "Build output exists: True" in text
+    )
