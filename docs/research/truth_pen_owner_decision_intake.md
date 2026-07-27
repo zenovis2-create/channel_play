@@ -85,6 +85,20 @@ text as a local `.md` file. The download is created in the browser, is not
 uploaded or written into the repository, and remains unavailable for complete
 or indeterminate states.
 
+Studio also provides a `canonical dotted-key JSON` form for preflight
+validation. Replace each `null` with an owner-approved repository-safe value
+and select `메모리에서 사전검증`. The loopback- and token-protected endpoint
+accepts only the 16 canonical fields, merges them into a deep copy of the
+current decision, and runs the existing validator without writing a manifest
+or receipt. A valid preview still reports `연락 허가 아님`; the approved values
+must be deliberately applied and checked again before outreach.
+
+The browser limits the answer text to 16,000 characters and the API rejects
+requests over 20,000 bytes, non-standard JSON values such as `NaN`, arrays,
+and unsupported fields. Validation results never echo unsupported field values
+or unknown candidate values. Do not enter prohibited sensitive data even for
+a preview.
+
 Candidate IDs are `cynthia_ignacio`, `marisol_griffiths`, and
 `natalie_lewis`. Use only the IDs the owner explicitly authorizes.
 

@@ -14,7 +14,9 @@ from pathlib import Path
 from unittest.mock import patch
 
 from tools.studio.jobs import get_job
+from tools.studio.company.procurement import procurement_decision_init
 from tools.studio.workspace_server import (
+    MAX_PROCUREMENT_PREVIEW_BYTES,
     build_command,
     collect_runtime_adapter_state,
     collect_workspace_state,
@@ -580,6 +582,92 @@ class WorkspaceServerTests(unittest.TestCase):
         self.assertFalse(_host_header_allowed("evil.example:8778", "0.0.0.0", 8776))
         self.assertFalse(_origin_allowed("http://evil.example:8778", "0.0.0.0", 8776))
 
+    def test_procurement_preview_api_is_protected_and_side_effect_free(
+        self,
+    ) -> None:
+        manifest = self._write_procurement_fixture()
+        before = manifest.read_bytes()
+        server, thread, base = self._start_server("test-token")
+        try:
+            with self.assertRaises(urllib.error.HTTPError) as missing:
+                self._post_procurement_preview(
+                    base,
+                    token="",
+                    answers={"owner.governing_jurisdiction": "KR"},
+                )
+            self.assertEqual(missing.exception.code, 400)
+            missing.exception.close()
+
+            with self.assertRaises(urllib.error.HTTPError) as wrong_origin:
+                self._post_procurement_preview(
+                    base,
+                    token="test-token",
+                    origin="http://evil.example",
+                    answers={"owner.governing_jurisdiction": "KR"},
+                )
+            self.assertEqual(wrong_origin.exception.code, 400)
+            wrong_origin.exception.close()
+
+            result = self._post_procurement_preview(
+                base,
+                token="test-token",
+                answers={"owner.governing_jurisdiction": "KR"},
+            )
+            self.assertTrue(result["ok"])
+            self.assertTrue(result["previewOnly"])
+            self.assertFalse(result["valid"])
+            self.assertFalse(result["contactAuthorized"])
+            self.assertFalse(result["receiptCreated"])
+            self.assertEqual(result["answerCount"], 1)
+            self.assertEqual(manifest.read_bytes(), before)
+            self.assertFalse((self.root / "runs").exists())
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=2)
+
+    def test_procurement_preview_api_rejects_oversize_and_nonfinite_json(
+        self,
+    ) -> None:
+        self._write_procurement_fixture()
+        server, thread, base = self._start_server("test-token")
+        try:
+            oversized = json.dumps(
+                {
+                    "assetId": "truth_pen",
+                    "answers": {
+                        "decision_status": (
+                            "x" * MAX_PROCUREMENT_PREVIEW_BYTES
+                        )
+                    },
+                }
+            ).encode("utf-8")
+            with self.assertRaises(urllib.error.HTTPError) as too_large:
+                self._post_procurement_preview(
+                    base,
+                    token="test-token",
+                    raw_body=oversized,
+                )
+            self.assertEqual(too_large.exception.code, 400)
+            too_large.exception.close()
+
+            with self.assertRaises(urllib.error.HTTPError) as nonfinite:
+                self._post_procurement_preview(
+                    base,
+                    token="test-token",
+                    raw_body=(
+                        b'{"assetId":"truth_pen","answers":'
+                        b'{"commercial.budget_ceiling":NaN}}'
+                    ),
+                )
+            self.assertEqual(nonfinite.exception.code, 400)
+            nonfinite.exception.close()
+            self.assertFalse((self.root / "runs").exists())
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=2)
+
     def test_search_api_returns_source_type_and_preview(self) -> None:
         (self.root / "memory" / "sessions" / "session-a").mkdir(parents=True)
         (self.root / "memory" / "sessions" / "session-a" / "summary.md").write_text(
@@ -622,6 +710,62 @@ class WorkspaceServerTests(unittest.TestCase):
         request = urllib.request.Request(f"{base}/api/command", data=body, headers=headers, method="POST")
         with urllib.request.urlopen(request, timeout=5) as response:
             return json.loads(response.read().decode("utf-8"))
+
+    def _post_procurement_preview(
+        self,
+        base: str,
+        token: str,
+        *,
+        answers: dict | None = None,
+        origin: str = "",
+        raw_body: bytes | None = None,
+    ) -> dict:
+        body = raw_body or json.dumps(
+            {
+                "assetId": "truth_pen",
+                "answers": answers if answers is not None else {},
+            }
+        ).encode("utf-8")
+        headers = {"Content-Type": "application/json"}
+        if token:
+            headers["X-Channel-Play-Token"] = token
+        if origin:
+            headers["Origin"] = origin
+        request = urllib.request.Request(
+            f"{base}/api/procurement/preview",
+            data=body,
+            headers=headers,
+            method="POST",
+        )
+        with urllib.request.urlopen(request, timeout=5) as response:
+            return json.loads(response.read().decode("utf-8"))
+
+    def _write_procurement_fixture(self) -> Path:
+        (self.root / "asset_pipeline" / "briefs").mkdir(parents=True)
+        (self.root / "asset_pipeline" / "index.json").write_text(
+            json.dumps(
+                {"assets": [{"id": "truth_pen", "status": "briefed"}]}
+            ),
+            encoding="utf-8",
+        )
+        (
+            self.root
+            / "asset_pipeline"
+            / "briefs"
+            / "truth_pen_commission_rfp.md"
+        ).write_text("# RFP\n", encoding="utf-8")
+        (
+            self.root
+            / "docs"
+            / "research"
+        ).mkdir(parents=True, exist_ok=True)
+        (
+            self.root
+            / "docs"
+            / "research"
+            / "truth_pen_artist_procurement_packet.md"
+        ).write_text("# Packet\n", encoding="utf-8")
+        return procurement_decision_init(self.root, "truth_pen")
 
     def _get_json(self, url: str) -> dict:
         with urllib.request.urlopen(url, timeout=5) as response:

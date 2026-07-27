@@ -135,6 +135,20 @@ class DockerStudioContractTests(unittest.TestCase):
             ".game-procurement-worksheet-preview[hidden]",
             self.style,
         )
+        self.assertIn('id="gameProcurementAnswerInput"', checklist)
+        self.assertIn('maxlength="16000"', checklist)
+        self.assertIn("procurementAnswerPreviewAvailable", checklist)
+        self.assertIn("data-procurement-answer-preview", checklist)
+        self.assertIn("data-procurement-answer-clear", checklist)
+        self.assertIn("data-procurement-answer-status", checklist)
+        self.assertIn("data-procurement-answer-result", checklist)
+        self.assertIn('role="region"', checklist)
+        self.assertIn(
+            'aria-label="소유자 답변 사전검증 결과"',
+            checklist,
+        )
+        self.assertIn(".game-procurement-answer-preview", self.style)
+        self.assertIn(".game-procurement-answer-result", self.style)
 
     def test_procurement_progress_counts_are_finite_and_bounded(self) -> None:
         start = self.app.index("function boundedCount")
@@ -214,6 +228,34 @@ class DockerStudioContractTests(unittest.TestCase):
         self.assertIn(
             'event.target.closest(\n      '
             '"[data-procurement-worksheet-download]"',
+            self.app,
+        )
+
+    def test_procurement_answer_preview_is_memory_only_and_escaped(
+        self,
+    ) -> None:
+        start = self.app.index("function renderProcurementAnswerPreview")
+        end = self.app.index("function clearProcurementAnswerPreview", start)
+        helper = self.app[start:end]
+
+        self.assertIn("resultNode.replaceChildren()", helper)
+        self.assertIn('document.createElement("strong")', helper)
+        self.assertIn('document.createElement("li")', helper)
+        self.assertIn("item.textContent = String(error", helper)
+        self.assertIn('"연락 허가 아님"', helper)
+        self.assertIn('"영수증 생성 안 함"', helper)
+        self.assertIn("JSON.parse(input.value)", helper)
+        self.assertIn("Array.isArray(answers)", helper)
+        self.assertIn('api("/api/procurement/preview"', helper)
+        self.assertIn("JSON.stringify({", helper)
+        self.assertNotIn("runCommand(", helper)
+        self.assertNotIn("loadState(", helper)
+        self.assertNotIn("localStorage", helper)
+        self.assertNotIn("sessionStorage", helper)
+        self.assertNotIn(".innerHTML", helper)
+        self.assertIn(
+            'event.target.closest(\n      '
+            '"[data-procurement-answer-preview]"',
             self.app,
         )
 

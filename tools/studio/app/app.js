@@ -319,6 +319,27 @@ function renderGameProduction() {
     procurementWorksheet.itemCount,
     procurementProgressTotal,
   );
+  const procurementAnswerFields = [
+    ...new Set(
+      procurementChecklistGroups.flatMap((group) => (
+        Array.isArray(group.items)
+          ? group.items.map((item) => String(item.field || ""))
+          : []
+      )).filter(Boolean),
+    ),
+  ];
+  const procurementAnswerTemplateText = JSON.stringify(
+    Object.fromEntries(
+      procurementAnswerFields.map((field) => [field, null]),
+    ),
+    null,
+    2,
+  );
+  const procurementAnswerPreviewAvailable = Boolean(
+    procurementWorksheetAvailable
+      && procurementAnswerFields.length
+      && procurementAnswerFields.length === procurementWorksheetCount,
+  );
   const procurementContactReady = procurement.passed
     && Boolean(procurement.receipt);
   const procurementTone = procurementContactReady
@@ -436,6 +457,50 @@ function renderGameProduction() {
         </div>
         <pre tabindex="0">${esc(procurementWorksheetText)}</pre>
       ` : ""}
+    </section>
+    <section class="game-procurement-answer-preview">
+      <div class="game-procurement-answer-preview-head">
+        <div>
+          <span>저장 전 소유자 답변 사전검증</span>
+          <strong>canonical dotted-key JSON</strong>
+          <small>로컬 Studio 메모리에서만 검사하며 manifest·영수증·연락 상태를 변경하지 않습니다.</small>
+        </div>
+        <em>${esc(procurementAnswerPreviewAvailable ? `${procurementAnswerFields.length}개 필드` : "검증 대기")}</em>
+      </div>
+      <textarea
+        id="gameProcurementAnswerInput"
+        rows="14"
+        maxlength="16000"
+        spellcheck="false"
+        aria-describedby="gameProcurementAnswerHelp"
+        ${procurementAnswerPreviewAvailable ? "" : "disabled"}
+      >${esc(procurementAnswerTemplateText)}</textarea>
+      <small id="gameProcurementAnswerHelp">
+        null을 소유자가 승인한 저장소 안전 값으로 교체하세요. 개인정보·세무·계좌·결제 자격증명·서명·비공개 메시지는 입력하지 마세요.
+      </small>
+      <div class="game-procurement-answer-actions">
+        <button
+          type="button"
+          data-procurement-answer-preview
+          ${procurementAnswerPreviewAvailable ? "" : "disabled"}
+        >메모리에서 사전검증</button>
+        <button
+          type="button"
+          data-procurement-answer-clear
+          ${procurementAnswerPreviewAvailable ? "" : "disabled"}
+        >입력 초기화</button>
+        <span
+          data-procurement-answer-status
+          role="status"
+          aria-live="polite"
+        ></span>
+      </div>
+      <div
+        class="game-procurement-answer-result"
+        data-procurement-answer-result
+        role="region"
+        aria-label="소유자 답변 사전검증 결과"
+      ></div>
     </section>
     ${procurementProgressTotal ? `
       <div class="game-procurement-progress ${procurementProgressIndeterminate ? "warn" : procurementProgressCompleted === procurementProgressTotal ? "good" : "active"}">
@@ -2423,6 +2488,100 @@ function downloadProcurementWorksheet(button) {
   }
 }
 
+function renderProcurementAnswerPreview(resultNode, preview) {
+  resultNode.replaceChildren();
+  const summary = document.createElement("div");
+  summary.className = preview.valid ? "good" : "warn";
+  const title = document.createElement("strong");
+  title.textContent = preview.valid
+    ? "형식 검증 통과 · 저장되지 않음"
+    : `${boundedCount(preview.errorCount)}개 수정 필요`;
+  const detail = document.createElement("small");
+  detail.textContent = [
+    `${boundedCount(preview.answerCount)}/${boundedCount(preview.expectedAnswerCount)}개 답변 검사`,
+    "연락 허가 아님",
+    "영수증 생성 안 함",
+  ].join(" · ");
+  summary.append(title, detail);
+  resultNode.appendChild(summary);
+
+  const errors = Array.isArray(preview.errors)
+    ? preview.errors.slice(0, 20)
+    : [];
+  if (errors.length) {
+    const list = document.createElement("ul");
+    for (const error of errors) {
+      const item = document.createElement("li");
+      item.textContent = String(error || "검증 오류");
+      list.appendChild(item);
+    }
+    resultNode.appendChild(list);
+  }
+}
+
+async function previewProcurementAnswers(button) {
+  const input = document.getElementById("gameProcurementAnswerInput");
+  const resultNode = document.querySelector(
+    "[data-procurement-answer-result]",
+  );
+  const statusNode = document.querySelector(
+    "[data-procurement-answer-status]",
+  );
+  const procurement = state?.gameProduction?.procurement || {};
+  if (!input || !resultNode || !statusNode || !procurement.assetId) return;
+
+  let answers;
+  try {
+    answers = JSON.parse(input.value);
+    if (
+      !answers
+      || typeof answers !== "object"
+      || Array.isArray(answers)
+    ) {
+      throw new Error("object required");
+    }
+  } catch (_error) {
+    resultNode.replaceChildren();
+    statusNode.textContent = "답변은 dotted-key JSON 객체여야 합니다.";
+    return;
+  }
+
+  button.disabled = true;
+  statusNode.textContent = "메모리 사전검증 중…";
+  try {
+    const preview = await api("/api/procurement/preview", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        assetId: procurement.assetId,
+        answers,
+      }),
+    });
+    renderProcurementAnswerPreview(resultNode, preview);
+    statusNode.textContent = preview.valid
+      ? "형식 검증을 통과했습니다. 아직 저장되거나 승인되지 않았습니다."
+      : "저장 전에 표시된 항목을 수정하세요.";
+  } catch (_error) {
+    resultNode.replaceChildren();
+    statusNode.textContent = "사전검증 요청을 처리하지 못했습니다.";
+  } finally {
+    button.disabled = false;
+  }
+}
+
+function clearProcurementAnswerPreview() {
+  const input = document.getElementById("gameProcurementAnswerInput");
+  const resultNode = document.querySelector(
+    "[data-procurement-answer-result]",
+  );
+  const statusNode = document.querySelector(
+    "[data-procurement-answer-status]",
+  );
+  if (input) input.value = input.defaultValue;
+  if (resultNode) resultNode.replaceChildren();
+  if (statusNode) statusNode.textContent = "입력을 빈 템플릿으로 초기화했습니다.";
+}
+
 function bind() {
   document.querySelectorAll("[data-studio-view-button]").forEach((button) => {
     button.addEventListener("click", () => setStudioView(button.dataset.studioViewButton || "focus"));
@@ -2657,6 +2816,20 @@ function bind() {
     renderTaskTracker();
   });
   $("#game-cockpit").addEventListener("click", (event) => {
+    const answerPreviewButton = event.target.closest(
+      "[data-procurement-answer-preview]",
+    );
+    if (answerPreviewButton) {
+      previewProcurementAnswers(answerPreviewButton);
+      return;
+    }
+    const answerClearButton = event.target.closest(
+      "[data-procurement-answer-clear]",
+    );
+    if (answerClearButton) {
+      clearProcurementAnswerPreview();
+      return;
+    }
     const previewButton = event.target.closest(
       "[data-procurement-worksheet-preview]",
     );

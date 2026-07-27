@@ -26,6 +26,7 @@ from tools.studio.company.goal_engine import goal_state
 from tools.studio.company.image_to_blender import image3d_state
 from tools.studio.company.model_cookbook import ensure_model_cookbook
 from tools.studio.company.paths import find_repo_root, rel
+from tools.studio.company.procurement import preview_procurement_answers
 from tools.studio.company.search import search_sessions
 from tools.studio.company.state import CompanyPaths, load_company_state, read_json, read_text
 from tools.studio.company.worker_fleet import ensure_worker_fleet
@@ -40,6 +41,7 @@ from tools.studio.jobs import create_job, get_job, list_jobs, start_job
 
 APP_DIR = Path(__file__).resolve().parent / "app"
 MAX_FILE_BYTES = 120_000
+MAX_PROCUREMENT_PREVIEW_BYTES = 20_000
 ALLOWED_READ_PREFIXES = (
     "Assets/_Project",
     "agents",
@@ -304,13 +306,26 @@ def _handler(root: Path, *, token: str = "", host: str = "127.0.0.1", port: int 
         def do_POST(self) -> None:
             parsed = urlparse(self.path)
             try:
-                if parsed.path != "/api/command":
+                if parsed.path not in {
+                    "/api/command",
+                    "/api/procurement/preview",
+                }:
                     self._json({"ok": False, "error": "Unknown API path"}, status=HTTPStatus.NOT_FOUND)
                     return
                 self._require_execution_gate()
-                length = int(self.headers.get("Content-Length", "0"))
-                body = self.rfile.read(length).decode("utf-8")
-                data = json.loads(body or "{}")
+                if parsed.path == "/api/procurement/preview":
+                    data = self._read_json_body(
+                        MAX_PROCUREMENT_PREVIEW_BYTES,
+                        strict=True,
+                    )
+                    result = preview_procurement_answers(
+                        root,
+                        str(data.get("assetId") or ""),
+                        data.get("answers"),
+                    )
+                    self._json({"ok": True, **result})
+                    return
+                data = self._read_json_body()
                 self._json(run_command(root, str(data.get("command", "")), data.get("payload") or {}))
             except CompanyError as exc:
                 self._json({"ok": False, "error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
@@ -372,6 +387,40 @@ def _handler(root: Path, *, token: str = "", host: str = "127.0.0.1", port: int 
             if content_type != "application/json":
                 raise CompanyError("Execution API requires application/json.")
 
+        def _read_json_body(
+            self,
+            max_bytes: int | None = None,
+            *,
+            strict: bool = False,
+        ) -> dict:
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+            except ValueError as exc:
+                raise CompanyError("Request Content-Length is invalid.") from exc
+            if length < 0:
+                raise CompanyError("Request Content-Length is invalid.")
+            if max_bytes is not None and length > max_bytes:
+                raise CompanyError(
+                    "Procurement preview request exceeds "
+                    f"{max_bytes} bytes."
+                )
+            try:
+                body = self.rfile.read(length).decode("utf-8")
+                if strict:
+                    data = json.loads(
+                        body or "{}",
+                        parse_constant=_reject_preview_json_constant,
+                    )
+                else:
+                    data = json.loads(body or "{}")
+            except (UnicodeDecodeError, ValueError) as exc:
+                raise CompanyError(
+                    "Request body must be valid UTF-8 JSON."
+                ) from exc
+            if not isinstance(data, dict):
+                raise CompanyError("Request body must be a JSON object.")
+            return data
+
         def _security_state(self) -> dict:
             return {
                 "executionToken": token,
@@ -391,6 +440,12 @@ def _ensure_safe_bind(host: str) -> None:
     raise CompanyError(
         f"Refusing to bind Channel Play Studio to non-loopback host {host!r}. "
         f"Set {ALLOW_REMOTE_ENV}=1 only for a trusted network."
+    )
+
+
+def _reject_preview_json_constant(value: str) -> None:
+    raise ValueError(
+        f"non-standard numeric constant is prohibited: {value}"
     )
 
 

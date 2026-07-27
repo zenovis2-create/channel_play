@@ -893,6 +893,120 @@ main {
   word-break: break-word;
 }
 
+.game-procurement-answer-preview {
+  background: #f8fbfd;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) - 2px);
+  display: grid;
+  gap: 9px;
+  padding: 11px;
+}
+
+.game-procurement-answer-preview-head {
+  align-items: start;
+  display: grid;
+  gap: 9px;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.game-procurement-answer-preview-head > div {
+  display: grid;
+  gap: 3px;
+}
+
+.game-procurement-answer-preview-head span {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.game-procurement-answer-preview-head strong {
+  font-size: 13px;
+}
+
+.game-procurement-answer-preview-head small,
+.game-procurement-answer-preview > small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.game-procurement-answer-preview-head em {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 900;
+  padding: 5px 8px;
+  white-space: nowrap;
+}
+
+.game-procurement-answer-preview textarea {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.45;
+  min-height: 240px;
+  resize: vertical;
+}
+
+.game-procurement-answer-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.game-procurement-answer-actions span {
+  color: var(--muted);
+  flex-basis: 100%;
+  font-size: 11px;
+  font-weight: 800;
+  min-height: 1.35em;
+}
+
+.game-procurement-answer-result:empty {
+  display: none;
+}
+
+.game-procurement-answer-result {
+  display: grid;
+  gap: 8px;
+}
+
+.game-procurement-answer-result > div {
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--line-strong);
+  border-radius: calc(var(--radius) - 4px);
+  display: grid;
+  gap: 3px;
+  padding: 9px;
+}
+
+.game-procurement-answer-result > div.good {
+  border-left-color: var(--good);
+}
+
+.game-procurement-answer-result > div.warn {
+  border-left-color: var(--warn);
+}
+
+.game-procurement-answer-result small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.game-procurement-answer-result ul {
+  color: #47586d;
+  display: grid;
+  font-size: 11px;
+  gap: 5px;
+  margin: 0;
+  padding-left: 20px;
+}
+
 .game-procurement-progress {
   background: #ffffff;
   border: 1px solid var(--line);
@@ -3772,6 +3886,14 @@ pre {
 
   .game-procurement-copy-status {
     text-align: left;
+  }
+
+  .game-procurement-answer-preview-head {
+    grid-template-columns: 1fr;
+  }
+
+  .game-procurement-answer-preview-head em {
+    justify-self: start;
   }
 
   .adapter-card-head,

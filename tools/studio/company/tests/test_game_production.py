@@ -8,6 +8,7 @@ from pathlib import Path
 from tools.studio.company.capture import PNG_SIGNATURE
 from tools.studio.company.errors import CompanyError
 from tools.studio.company.game_production import (
+    PROCUREMENT_FIELD_GUIDANCE,
     _procurement_decision_progress,
     _procurement_issue_groups,
     _procurement_owner_worksheet,
@@ -15,6 +16,7 @@ from tools.studio.company.game_production import (
     render_game_production_status,
 )
 from tools.studio.company.procurement import (
+    OWNER_DECISION_FIELDS,
     procurement_decision_init,
     procurement_outreach_check,
 )
@@ -458,6 +460,12 @@ class GameProductionTests(unittest.TestCase):
                 {"indeterminate": False},
             )["reason"],
             "indeterminate",
+        )
+
+    def test_owner_answer_contract_matches_progress_guidance(self) -> None:
+        self.assertEqual(
+            tuple(PROCUREMENT_FIELD_GUIDANCE),
+            OWNER_DECISION_FIELDS,
         )
 
     def test_procurement_progress_deduplicates_known_field_errors(self) -> None:

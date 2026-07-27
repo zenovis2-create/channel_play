@@ -8,9 +8,11 @@ from pathlib import Path
 
 from tools.studio.company.errors import CompanyError
 from tools.studio.company.procurement import (
+    OWNER_DECISION_FIELDS,
     PROCUREMENT_DECISION_SCHEMA,
     TRUTH_PEN_CANDIDATES,
     evaluate_procurement_outreach,
+    preview_procurement_answers,
     procurement_decision_init,
     procurement_outreach_check,
 )
@@ -77,6 +79,124 @@ class ProcurementTests(unittest.TestCase):
         self.assertIn("Result: **PASS**", text)
         self.assertIn("Proposal-only outreach is authorized", text)
         self.assertIn("Artwork and source-file requests remain blocked", text)
+
+    def test_answer_preview_validates_in_memory_without_authorizing(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        answers = self._owner_answers(self._complete_decision(manifest))
+        before = manifest.read_bytes()
+
+        result = preview_procurement_answers(
+            self.root,
+            "truth_pen",
+            answers,
+        )
+
+        self.assertTrue(result["previewOnly"])
+        self.assertTrue(result["valid"], result["errors"])
+        self.assertFalse(result["contactAuthorized"])
+        self.assertFalse(result["receiptCreated"])
+        self.assertEqual(result["answerCount"], 16)
+        self.assertEqual(result["expectedAnswerCount"], 16)
+        self.assertEqual(result["acceptedFields"], list(OWNER_DECISION_FIELDS))
+        self.assertEqual(result["missingFields"], [])
+        self.assertEqual(result["errors"], [])
+        self.assertEqual(manifest.read_bytes(), before)
+        self.assertFalse((self.root / "runs").exists())
+
+    def test_answer_preview_reports_partial_fields_without_writing(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        before = manifest.read_bytes()
+
+        result = preview_procurement_answers(
+            self.root,
+            "truth_pen",
+            {"owner.governing_jurisdiction": "KR"},
+        )
+
+        self.assertFalse(result["valid"])
+        self.assertEqual(result["answerCount"], 1)
+        self.assertEqual(
+            result["acceptedFields"],
+            ["owner.governing_jurisdiction"],
+        )
+        self.assertNotIn(
+            "owner.governing_jurisdiction",
+            result["missingFields"],
+        )
+        self.assertIn(
+            "decision_status must be approved_for_proposal_outreach",
+            result["errors"],
+        )
+        self.assertEqual(manifest.read_bytes(), before)
+        self.assertFalse((self.root / "runs").exists())
+
+    def test_answer_preview_rejects_unknown_fields_without_echoing_values(
+        self,
+    ) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        answers = self._owner_answers(self._complete_decision(manifest))
+        answers["owner.private_message"] = "must-not-be-echoed"
+
+        result = preview_procurement_answers(
+            self.root,
+            "truth_pen",
+            answers,
+        )
+        encoded = json.dumps(result, ensure_ascii=False)
+
+        self.assertFalse(result["valid"])
+        self.assertTrue(
+            any("1 unsupported field" in error for error in result["errors"])
+        )
+        self.assertNotIn("private_message", encoded)
+        self.assertNotIn("must-not-be-echoed", encoded)
+
+    def test_answer_preview_redacts_unknown_candidate_values(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        answers = self._owner_answers(self._complete_decision(manifest))
+        answers["outreach.candidate_ids"] = ["private-person-name"]
+
+        result = preview_procurement_answers(
+            self.root,
+            "truth_pen",
+            answers,
+        )
+        encoded = json.dumps(result, ensure_ascii=False)
+
+        self.assertFalse(result["valid"])
+        self.assertIn(
+            "outreach.candidate_ids contains unsupported candidate IDs",
+            result["errors"],
+        )
+        self.assertNotIn("private-person-name", encoded)
+
+    def test_answer_preview_rejects_nonfinite_values(self) -> None:
+        manifest = procurement_decision_init(self.root, "truth_pen")
+        answers = self._owner_answers(self._complete_decision(manifest))
+        answers["commercial.budget_ceiling"] = float("nan")
+
+        result = preview_procurement_answers(
+            self.root,
+            "truth_pen",
+            answers,
+        )
+
+        self.assertFalse(result["valid"])
+        self.assertIn(
+            "answers contain a non-finite numeric value",
+            result["errors"],
+        )
+        self.assertFalse((self.root / "runs").exists())
+
+    def test_answer_preview_requires_an_object(self) -> None:
+        procurement_decision_init(self.root, "truth_pen")
+
+        with self.assertRaisesRegex(CompanyError, "must be a JSON object"):
+            preview_procurement_answers(
+                self.root,
+                "truth_pen",
+                ["not", "an", "object"],
+            )
 
     def test_sensitive_fields_and_privacy_flags_fail(self) -> None:
         manifest = procurement_decision_init(self.root, "truth_pen")
@@ -310,6 +430,17 @@ class ProcurementTests(unittest.TestCase):
             }
         )
         return data
+
+    @staticmethod
+    def _owner_answers(data: dict) -> dict:
+        answers = {}
+        for field in OWNER_DECISION_FIELDS:
+            if "." not in field:
+                answers[field] = data[field]
+                continue
+            section, key = field.split(".", 1)
+            answers[field] = data[section][key]
+        return answers
 
     @staticmethod
     def _read(path: Path) -> dict:
