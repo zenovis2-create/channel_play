@@ -1332,6 +1332,66 @@
       "last_agent_run": "memory/company/reviews/task-0025-review.md",
       "verification_status": "passed",
       "closed_at": "2026-07-27T16:07:01+09:00"
+    },
+    {
+      "id": "task-0026",
+      "request": "Add a value-redacted post-write verification contract to the Truth Pen owner-answer save flow. Before atomic replacement, compute the normalized SHA-256 of the exact candidate JSON payload; immediately after replacement, hash the stored manifest and return whether it matches. Return only saved verification state, canonical changed field names/count, the final manifest hash, and existing contact/receipt safety booleans; never echo current or proposed values. Bind the browser's apply expectation to the previewed changed field summary, validate the apply response shape and hash, show a transient post-save verification summary with DOM textContent, and treat any ambiguous/network/malformed response as possibly saved with an explicit no-retry/state-refresh warning. Preserve the existing one-time grant, exact confirmation phrase, two checkboxes, no-op block, atomic write, and separate PASS-receipt gate. Add pure verified/tampered-write tests, API response tests, UI fail-closed contract tests, JavaScript syntax, Chrome preview-only proof with zero apply requests, unchanged real hashes, full-suite evidence, docs, and findings-first security review.",
+      "status": "closed",
+      "suggested_agent": "coding_specialist",
+      "suggested_reviewer": "critic_reviewer",
+      "assigned_agent": "coding_specialist",
+      "allowed_write_paths": [
+        "tools/studio/company/procurement.py",
+        "tools/studio/workspace_server.py",
+        "tools/studio/app",
+        "tools/studio/company/tests",
+        "tools/studio/tests",
+        "docs",
+        "memory/company",
+        "memory/sessions",
+        "reviews",
+        "runs"
+      ],
+      "required_evidence": "verified and tampered post-write unit/API tests, value-redacted response and ambiguous-result UI contract tests, JavaScript syntax check, Chrome preview-without-apply proof, unchanged real manifest and receipt hashes, focused and full Python suites, runtime receipt, and findings-first security review",
+      "created_at": "2026-07-27T16:13:43+09:00",
+      "updated_at": "2026-07-27T16:23:50+09:00",
+      "work_order": "memory/sessions/20260727-161343-verify-truth-pen-owner-saves-after-atomi/work_orders/task-0026-coding_specialist.md",
+      "report": "memory/company/reviews/task-0026-review.md",
+      "verification": "memory/sessions/20260727-161343-verify-truth-pen-owner-saves-after-atomi/verification/task-0026-verification.md",
+      "session": "20260727-161343-verify-truth-pen-owner-saves-after-atomi",
+      "evidence": [
+        {
+          "path": "runs/task-0026-procurement-post-write-verification/runtime_status.md",
+          "note": "Verified/tampered post-write tests, Chrome zero-apply proof, unchanged real hashes, focused and full suites",
+          "attached_at": "2026-07-27T16:23:03+09:00"
+        },
+        {
+          "path": "memory/sessions/20260727-161343-verify-truth-pen-owner-saves-after-atomi/agent_reports/task-0026-coding_specialist.md",
+          "note": "Implementation report and post-write security verification summary",
+          "attached_at": "2026-07-27T16:23:49+09:00"
+        },
+        {
+          "path": "memory/company/reviews/task-0026-review.md",
+          "note": "Findings-first post-write security review",
+          "attached_at": "2026-07-27T16:23:49+09:00"
+        }
+      ],
+      "review_status": "reviewed",
+      "reviewer": "critic_reviewer",
+      "agent_runs": [
+        {
+          "tool": "studio",
+          "mode": "review",
+          "status": "reviewed",
+          "path": "memory/company/reviews/task-0026-review.md",
+          "created_at": "2026-07-27T16:23:03+09:00"
+        }
+      ],
+      "agent_status": "reviewed",
+      "last_tool": "studio",
+      "last_agent_run": "memory/company/reviews/task-0026-review.md",
+      "verification_status": "passed",
+      "closed_at": "2026-07-27T16:23:50+09:00"
     }
   ]
 }

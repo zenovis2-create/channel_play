@@ -14,6 +14,7 @@ from http.server import ThreadingHTTPServer
 from pathlib import Path
 from unittest.mock import patch
 
+from tools.studio.company import procurement as procurement_module
 from tools.studio.jobs import get_job
 from tools.studio.company.procurement import (
     TRUTH_PEN_CANDIDATES,
@@ -810,8 +811,15 @@ class WorkspaceServerTests(unittest.TestCase):
                 manifest_sha256=preview["manifestSha256"],
             )
             self.assertTrue(result["saved"])
+            self.assertTrue(result["savedVerified"])
             self.assertFalse(result["contactAuthorized"])
             self.assertFalse(result["receiptCreated"])
+            self.assertEqual(result["savedChangeCount"], 16)
+            self.assertEqual(
+                result["savedChangedFields"],
+                list(answers),
+            )
+            self.assertTrue(result["protectedStatePreserved"])
             self.assertEqual(
                 result["nextCommand"],
                 "asset.procurementCheck",
@@ -831,6 +839,63 @@ class WorkspaceServerTests(unittest.TestCase):
             self.assertEqual(replay.exception.code, 400)
             replay.exception.close()
             self.assertEqual(manifest.read_bytes(), saved)
+            self.assertFalse((self.root / "runs").exists())
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=2)
+
+    def test_procurement_apply_api_reports_post_write_mismatch(
+        self,
+    ) -> None:
+        manifest = self._write_procurement_fixture()
+        answers = self._complete_procurement_answers()
+        server, thread, base = self._start_server("test-token")
+        real_atomic_write = procurement_module._write_json_atomic
+
+        def write_then_tamper(path: Path, data: dict) -> None:
+            real_atomic_write(path, data)
+            stored = json.loads(path.read_text(encoding="utf-8"))
+            stored["task_id"] = "task-0099"
+            path.write_text(
+                json.dumps(stored, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+
+        try:
+            preview = self._post_procurement_preview(
+                base,
+                token="test-token",
+                answers=answers,
+            )
+            with patch(
+                "tools.studio.company.procurement._write_json_atomic",
+                side_effect=write_then_tamper,
+            ):
+                result = self._post_procurement_apply(
+                    base,
+                    token="test-token",
+                    answers=answers,
+                    grant=preview["applyGrant"],
+                    manifest_sha256=preview["manifestSha256"],
+                )
+            encoded = json.dumps(result, ensure_ascii=False)
+
+            self.assertTrue(result["saved"])
+            self.assertFalse(result["savedVerified"])
+            self.assertEqual(result["savedChangeCount"], 16)
+            self.assertEqual(
+                result["savedChangedFields"],
+                list(answers),
+            )
+            self.assertTrue(result["protectedStatePreserved"])
+            self.assertFalse(result["contactAuthorized"])
+            self.assertFalse(result["receiptCreated"])
+            self.assertNotIn(
+                "550e8400-e29b-41d4-a716-446655440000",
+                encoded,
+            )
+            self.assertNotIn("cynthia_ignacio", encoded)
             self.assertFalse((self.root / "runs").exists())
         finally:
             server.shutdown()
